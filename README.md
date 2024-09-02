@@ -15,6 +15,10 @@ Welcome to my GitHub profile! I'm a passionate software engineer specializing in
     A [tauri](https://github.com/tauri-apps) based billing and business management application.
   - **Query Llama**:
     A [electron](https://github.com/electron) based database querying app with natural language processing.
+- 📖 Currently learning:
+  - Rust
+  - Electron
+  - Tauri
 
 ## 🛠️ Tech Stack
 
