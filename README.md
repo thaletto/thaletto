@@ -66,11 +66,6 @@ An AI-powered image processing tool designed to enhance and analyze images with 
 ### [Parkinsons Disease Detection](https://github.com/thaletto/Parkinson-Disease-Detection)
 A machine learning model focused on early detection of Parkinson's disease using voice and movement data, aiming to improve diagnosis accuracy.
 
-## 📈 GitHub Stats
-
-![Laxman's GitHub stats](https://github-readme-stats.vercel.app/api?username=thaletto&show_icons=true&theme=radical)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thaletto&layout=compact&theme=radical)
-
 ## 🌐 Let's Connect
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/laxmanramesh)
