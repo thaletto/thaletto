@@ -5,7 +5,7 @@
 🧠 AI & Image Processing: Passionate about leveraging LLMs and image processing in innovative projects.<br>
 💡 Currently working on:
 - Vendora: A tauri based billing and business management application.
-- Query Llama: A electron based database querying app with natural language processing.
+- Query Llama: A electron based database querying app with NLP capabilities.
 
 📖 Currently learning:
 - Rust
