@@ -5,7 +5,7 @@
 🧠 AI & Image Processing: Passionate about leveraging LLMs and image processing in innovative projects.<br>
 💡 Currently working on:
 - Vendora: A tauri based billing and business management application.
-- Pencil: A electron based journal app which understands user emotions and reacts to it using AI
+- Pencil: A based journal app which understands user emotions and reacts to it using AI
 
 📖 Currently learning:
 - Rust
