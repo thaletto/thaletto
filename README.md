@@ -3,9 +3,12 @@
 🌐 Front-End Enthusiast: Skilled in React.js, Next.js, and Tailwind CSS.<br>
 🔧 Back-End Developer: Experienced with Node.js, Express.js, and Java.<br>
 🧠 AI & Image Processing: Passionate about leveraging LLMs and image processing in innovative projects.<br>
+🤵🏻 **Portfolio**: [thaletto.vercel.app](https://thaletto.vercel.app)<br>
 💡 Currently working on:
-- Vendora: A cross-platform billing and business management application.
-- Pencil: A based journal app which understands user emotions and reacts to it using AI
+- E-commerce and business management suite:
+  Made with Next.js SSR capabilites for a client.
+- Vendora:
+  A cross-platform billing and business management application.
 
 📖 Currently learning:
 - Rust
