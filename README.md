@@ -7,8 +7,6 @@
 💡 Currently working on:
 - E-commerce and business management suite:
   Made with Next.js SSR capabilites for a client.
-- Vendora:
-  A cross-platform billing and business management application.
 
 📖 Currently learning:
 - Rust
