@@ -14,9 +14,8 @@
 - Currently working on
   - Vendora
 - Currently learning
+  - React Native
   - Rust
-  - Electron
-  - Tauri
 
 ## Portfolio
 [thaletto.vercel.app](https://thaletto.vercel.app)
