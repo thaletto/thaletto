@@ -21,39 +21,10 @@
 [thaletto.vercel.app](https://thaletto.vercel.app)
 
 # Tech Stack
-
-<div align="start">
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="40" height="40"/> 
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/javascript/javascript-original.svg" alt="JavaScript" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/tailwindcss/tailwindcss-original.svg" alt="TailwindCSS" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/react/react-original.svg" alt="React" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/nextjs/nextjs-original.svg" alt="Next.js" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/nodejs/nodejs-original.svg" alt="Node.js" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/mysql/mysql-original.svg" alt="MySQL" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/firebase/firebase-original.svg" alt="Firebase" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/mongodb/mongodb-original.svg" alt="MongoDB" width="40" height="40"/>
-</div>
-
-<div align="start">
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/cplusplus/cplusplus-original.svg" alt="C++" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/c/c-original.svg" alt="C" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/kotlin/kotlin-original.svg" alt="Kotlin" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/pytorch/pytorch-original.svg" alt="PyTorch" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/pandas/pandas-original.svg" alt="Pandas" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/refs/heads/master/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" width="40" height="40"/>
-</div>
-
-
-# Socials
-<div align="start">
-<a href="https://instagram.com/thaletto" target="_blank"><img src="https://raw.githubusercontent.com/dheereshagrwal/colored-icons/refs/heads/master/public/logos/instagram/instagram.svg" alt="Instagram" width="40" height="40"/></a>
-<a href="https://linkedin.com/in/laxmanramesh" target="_blank"><img src="https://raw.githubusercontent.com/dheereshagrwal/colored-icons/refs/heads/master/public/logos/linkedin/linkedin.svg" alt="LinkedIn" width="40" height="40"/></a>
-<a href="https://x.com/thaletto" target="_blank"><img src="https://raw.githubusercontent.com/dheereshagrwal/colored-icons/refs/heads/master/public/logos/twitter/twitter-circle.svg" alt="X" width="40" height="40"/></a>
-<a href="https://t.me/thaletto" target="_blank"><img src="https://raw.githubusercontent.com/dheereshagrwal/colored-icons/refs/heads/master/public/logos/telegram/telegram.svg" alt="Telegram" width="40" height="40"/></a>
-</div>
+<img src="https://skillicons.dev/icons?i=typescript,javascript,react,nextjs,nodejs" />
+<img src="https://skillicons.dev/icons?i=flask,django,python,tensorflow,pytorch" />
+<img src="https://skillicons.dev/icons?i=mongodb,postgresql,mysql,firebase,sqlite" />
+<img src="https://skillicons.dev/icons?i=c,cpp,java,kotlin,androidstudio" />
 
 <br>
 <div align="start">
