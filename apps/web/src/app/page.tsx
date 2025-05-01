@@ -19,7 +19,9 @@ const TITLE_TEXT = `
  `;
 
 export default function Home() {
-  const healthCheck = useQuery(trpc.healthCheck.queryOptions());
+  const healthCheck = useQuery(trpc.test.healthCheck.queryOptions());
+  const greet = useQuery(trpc.test.greet.queryOptions({ name: "Laxman" }));
+  const currentTime = useQuery(trpc.test.currentTime.queryOptions())
   
   return (
     <div className="container mx-auto max-w-3xl px-4 py-2">
@@ -38,6 +40,24 @@ export default function Home() {
                   ? "Connected"
                   : "Disconnected"}
             </span>
+          </div>
+        </section>
+        <section className="rounded-lg border p-4">
+          <h2 className="mb-2 font-medium">Greet API</h2>
+          <div>
+            {greet.isLoading
+              ? "Loading..."
+              : greet.data
+                ? greet.data
+                : "No greeting"}
+          </div>
+          <div>
+            <strong>Current Time: </strong>
+            {currentTime.isLoading
+              ? "Loading..."
+              : currentTime.data
+                ? currentTime.data
+                : "No time available"}
           </div>
         </section>
       </div>

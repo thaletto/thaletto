@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+name: Add API Guide
+description: Dynamically checks the routers folder and gives API creation instructions.
+author: thaletto
+version: 1.0.0
+---
+
+```python
+import os
+
+def run():
+    router_path = "apps/server/src/routers"
+
+    if not os.path.exists(router_path):
+        return f"❌ Folder not found: `{router_path}`. Check your project structure."
+
+    files = [
+        f for f in os.listdir(router_path)
+        if f.endswith(".ts") or f.endswith(".js")
+    ]
+
+    output = "## 🛠 Steps to create API in backend\n\n"
+    output += f"1. Look for related router files in `{router_path}`\n"
+
+    if files:
+        output += "2. Existing router files:\n"
+        for file in files:
+            output += f"   - {file}\n"
+        output += "3. If one is related, add the API in that file.\n"
+    else:
+        output += "2. No existing router files found.\n"
+
+    output += "4. Else, create a new file and define your API inside it.\n"
+
+    return output
+
