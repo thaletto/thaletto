@@ -1,0 +1,13 @@
+{
+    "explorer.excludeGitIgnore": true,
+    "files.exclude": {
+        ".cursor": true,
+        ".vscode": true,
+        "apps/server/*.*": true,
+        "apps/server/src/*.*": true,
+        "apps/server/src/app/": true,
+        "apps/server/src/lib/": true,
+        "apps/web/*.*": true
+    },
+    "editor.fontSize": 16
+}
