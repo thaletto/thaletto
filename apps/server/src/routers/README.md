@@ -1,8 +1,14 @@
-# Organizing Routers and APIs
+# Full Guide: API Creation and Usage
 
-## 1. Creating Multiple APIs in a Single File
+---
 
-You can group related API endpoints in a single router file. For example, in `test.ts`:
+## Backend
+
+### 1. How to Create an API
+
+**a. Create a Router File**
+
+Each API group should have its own router file in `apps/server/src/routers/`.
 
 ```ts
 // apps/server/src/routers/test.ts
@@ -17,43 +23,139 @@ export const testRouter = router({
 });
 ```
 
-## 2. Registering Routers in `index.ts`
+**b. Register Routers in `index.ts`**
 
-Import your router(s) and add them to the main `appRouter`:
+Combine all routers in `apps/server/src/routers/index.ts`:
 
 ```ts
-// apps/server/src/routers/index.ts
 import { router } from "../lib/trpc";
 import { testRouter } from "./test";
 
 export const appRouter = router({
   test: testRouter,
+  // Add more routers here
 });
 export type AppRouter = typeof appRouter;
 ```
 
-This will namespace your endpoints as `test.healthCheck` and `test.greet`.
+---
 
-## 3. Calling APIs from the Frontend
+### 2. How to Call the API (Server-side Fetch)
 
-Assuming you use tRPC on the frontend, you can call these endpoints like this:
+**a. Using tRPC Client (Recommended for Type Safety)**
+
+If you need to call your own API from the backend (e.g., for SSR or internal jobs), use the tRPC client:
 
 ```ts
-// Example using @trpc/react-query
-import { trpc } from "../utils/trpc";
+import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
+import type { AppRouter } from './routers';
 
-// Query healthCheck
-const healthCheck = useQuery(trpc.test.healthCheck.queryOptions());
+const trpc = createTRPCProxyClient<AppRouter>({
+  links: [
+    httpBatchLink({ url: 'http://localhost:3000/api/trpc' }),
+  ],
+});
 
-// Query greet
-const greet = useQuery(trpc.test.greet.queryOptions({ name: "Laxman" }));
+const result = await trpc.test.greet.query({ name: "Laxman" });
 ```
 
-Make sure your frontend is set up to use the tRPC client and points to your backend's tRPC handler.
+**b. Using Fetch API (Raw HTTP Call)**
+
+You can also call your API endpoints using the native `fetch`:
+
+```ts
+const response = await fetch('http://localhost:3000/api/trpc/test.greet?input=' + encodeURIComponent(JSON.stringify({ name: "Laxman" })));
+const data = await response.json();
+```
+
+**Options Available:**
+- **tRPC Client:** Type-safe, supports batching, error handling, and middleware.
+- **Fetch API:** Universal, but you must handle serialization, errors, and batching manually.
 
 ---
 
-**Summary:**
-- Group related endpoints in their own router files.
-- Register them in `index.ts` for namespacing.
-- Call them from the frontend using the namespaced path (e.g., `test.greet`). 
+## Frontend
+
+### 1. Calling the API
+
+```ts
+import { trpc } from "../utils/trpc";
+
+// Query example
+const greet = useQuery({
+  ...trpc.test.greet.queryOptions({ name: "Laxman" }),
+  refetchOnMount: false,
+  refetchOnWindowFocus: false,
+  refetchInterval: false,
+  });
+```
+
+### 2. Batching
+
+tRPC supports request batching out of the box. To enable batching, ensure your tRPC client is set up with `httpBatchLink`:
+
+```ts
+import { httpBatchLink } from '@trpc/client';
+
+const trpc = createTRPCProxyClient<AppRouter>({
+  links: [
+    httpBatchLink({ url: '/api/trpc' }),
+  ],
+});
+```
+
+React Query hooks will automatically batch requests made in the same tick.
+
+**Skip Batching**
+
+```ts
+const currentTime = useQuery({
+    ...trpc.test.currentTime.queryOptions(undefined, {
+      meta: { context: { skipBatch: true } }
+    }),
+    refetchInterval: 5000,
+  });
+```
+
+---
+
+### 3. Refetching
+
+
+**Automatic Refetch (Polling)**
+
+```ts
+const { data } = trpc.test.greet.useQuery(
+  { name: "Laxman" },
+  { refetchInterval: 5000 } // Refetch every 5 seconds
+);
+```
+
+**Refetch on Window Focus**
+
+```ts
+const { data } = trpc.test.greet.useQuery(
+  { name: "Laxman" },
+  { refetchOnWindowFocus: true }
+);
+```
+
+---
+
+## Summary Table
+
+| Task                | Backend (tRPC)         | Frontend (tRPC)         |
+|---------------------|------------------------|-------------------------|
+| Create API          | `router` + `procedure` | N/A                     |
+| Call API            | `trpcClient.query()`   | `useQuery()`            |
+| Batching            | `httpBatchLink`        | `httpBatchLink`         |                   |
+| Refetch             | N/A                    | `refetch()`, polling    |                   |
+
+---
+
+## Best Practices
+
+- Use tRPC client for type safety and batching.
+- Use React Query hooks for frontend data fetching, caching, and refetching.
+- Use fetch only for non-tRPC endpoints or when you need full control.
+- Group related endpoints in routers and register them in `index.ts`. 
