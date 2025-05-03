@@ -3,11 +3,15 @@
     "files.exclude": {
         ".cursor": true,
         ".vscode": true,
+        "*.*": true,
+        "apps/*.*": true,
         "apps/server/*.*": true,
         "apps/server/src/*.*": true,
         "apps/server/src/app/": true,
         "apps/server/src/lib/": true,
-        "apps/web/*.*": true
+        "apps/web/*.*": true,
+        "assets/": true,
+        "packages/": true
     },
     "editor.fontSize": 16
 }
