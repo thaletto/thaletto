@@ -12,5 +12,9 @@
     "dev:web": "bun run --filter web dev",
     "dev:server": "bun run --filter server dev"
   },
-  "packageManager": "bun@1.2.11"
+  "packageManager": "bun@1.2.11",
+  "trustedDependencies": [
+    "@tailwindcss/oxide",
+    "sharp"
+  ]
 }
