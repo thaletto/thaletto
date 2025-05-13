@@ -7,7 +7,7 @@ interface HomeBackgroundProps {
 
 export default function HomeBackground({ children }: HomeBackgroundProps) {
   return (
-    <div className="relative min-w-full min-h-screen w-screen h-screen overflow-x-none overflow-y-auto">
+    <div className="relative min-w-full min-h-screen w-screen h-screen overflow-x-none overflow-y-auto px-4 py-2">
       <AnimatedGridPattern
         numSquares={90}
         maxOpacity={0.1}
