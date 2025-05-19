@@ -1,15 +1,22 @@
 import HomeBackground from "@/components/home-background";
-import Intro from "@/components/Intro";
+import Intro from "@/components/intro";
 import ShineCard from "@/components/shine-card";
+import Skills from "@/components/skills";
 
 export default function Home() {
   return (
-    <div className="container">
+    <div className="container overflow-x-none">
       <HomeBackground>
+        <div className="min-h-screen w-full flex items-center justify-center">
+          <ShineCard>
+            <Intro />
+          </ShineCard>
+        </div>
+
         <ShineCard>
-          <Intro />
+          <Skills />
         </ShineCard>
-      </HomeBackground>   
+      </HomeBackground>
     </div>
   );
 }

@@ -16,5 +16,8 @@
   "trustedDependencies": [
     "@tailwindcss/oxide",
     "sharp"
-  ]
+  ],
+  "devDependencies": {
+    "trpc-ui": "^1.0.15"
+  }
 }

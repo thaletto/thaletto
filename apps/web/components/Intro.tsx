@@ -26,7 +26,7 @@ export default function Intro() {
             startOnView={true}
             className="font-mono text-sm md:text-xl lg:text-2xl"
           >
-            A full(time) stack AI developer, part time cinephile.
+            A full stack AI developer, part time cinephile.
           </TypingAnimation>
         </div>
 

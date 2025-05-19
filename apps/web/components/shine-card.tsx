@@ -10,7 +10,7 @@ interface ShineCardProps {
 export default function ShineCard({ children, className }: ShineCardProps) {
   return (
     <NeonGradientCard
-      className="max-w-[80%] max-h-[60%] flex items-center justify-center"
+      className="max-w-[80%] max-h-[60%] min-w-[40%] min-h-[30%] flex items-center justify-center"
       borderRadius={20}
       borderSize={4}
     >
