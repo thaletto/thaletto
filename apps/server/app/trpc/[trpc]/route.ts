@@ -2,11 +2,13 @@ import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "@/routers";
 import { createContext } from "@/lib/context";
 import { NextRequest, NextResponse } from "next/server";
-
-const CORS_ORIGIN = process.env.NEXT_PUBLIC_CORS_ORIGIN || "*";
+import nextConfig from "@/next.config";
 
 function setCorsHeaders(response: Response) {
-  response.headers.set("Access-Control-Allow-Origin", CORS_ORIGIN);
+  response.headers.set(
+    "Access-Control-Allow-Origin",
+    nextConfig.env?.CORS_ORIGIN ?? "*"
+  );
   response.headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
   response.headers.set(
     "Access-Control-Allow-Headers",
