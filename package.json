@@ -19,5 +19,8 @@
   ],
   "devDependencies": {
     "trpc-ui": "^1.0.15"
+  },
+  "dependencies": {
+    "@notionhq/client": "^3.1.1"
   }
 }
