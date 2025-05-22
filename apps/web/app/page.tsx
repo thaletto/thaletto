@@ -1,5 +1,5 @@
 import HomeBackground from "@/components/home-background";
-import Intro from "@/components/intro";
+import Intro from "@/components/Intro";
 import ShineCard from "@/components/shine-card";
 import Skills from "@/components/skills";
 

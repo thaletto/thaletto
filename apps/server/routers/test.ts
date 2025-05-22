@@ -12,9 +12,11 @@ export const testRouter = router({
   listDatabases: publicProcedure.query(async () => {
     const response = await notion.search({});
 
-    return response.results.map((db: any) => ({
-      id: db.id,
-      title: db.title?.[0]?.plain_text || "Untitled",
-    }));
+    return response.results
+      .map((db: any) => ({
+        id: db.id,
+        title: db.title?.[0]?.plain_text,
+      }))
+      .filter((db) => db.title && db.title.trim() !== "");
   }),
 });

@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   env: {
-    CORS_ORIGIN: process.env.NODE_ENV == "development" ? 'http://localhost:300': 'https://www.thaletto.dev',
+    CORS_ORIGIN: process.env.NODE_ENV == "development" ? 'http://localhost:3000': 'https://www.thaletto.dev',
 
     // Notion
     NOTION_TOKEN: process.env.NOTION_TOKEN || "",
