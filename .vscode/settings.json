@@ -1,4 +1,9 @@
 {
-  "explorer.excludeGitIgnore": false,
-  "editor.fontSize": 16
+  "explorer.excludeGitIgnore": true,
+  "editor.fontSize": 16,
+  "files.exclude": {
+    ".*/": true,
+    "bun.*": true,
+    "postcss.*": true
+  }
 }
