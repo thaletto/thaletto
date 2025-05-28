@@ -7,13 +7,13 @@ import {
   httpBatchLink,
 } from "@trpc/client";
 import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
-import type { AppRouter } from "../../server/routers";
+import type { AppRouter } from "@/routers/index";
 import { toast } from "sonner";
 import nextConfig from "@/next.config";
 
 // 1. Create custom batchLink with batchGroup support
 const customBatchLink = httpBatchLink({
-  url: `${nextConfig.env?.NEXT_PUBLIC_SERVER_URL}/trpc`,
+  url: `${nextConfig.env?.NEXT_PUBLIC_SERVER_URL}/api/trpc`,
   headers() {
     return {};
   },
@@ -21,7 +21,7 @@ const customBatchLink = httpBatchLink({
 });
 
 // 2. Compose link using splitLink for conditional batching
-const url = `${nextConfig.env?.NEXT_PUBLIC_SERVER_URL}/trpc`;
+const url = `${nextConfig.env?.NEXT_PUBLIC_SERVER_URL}/api/trpc`;
 
 const trpcClient = createTRPCClient<AppRouter>({
   links: [
