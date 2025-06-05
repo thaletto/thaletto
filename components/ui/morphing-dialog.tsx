@@ -15,7 +15,7 @@ import {
   MotionConfig,
   Transition,
   Variant,
-} from 'motion/react'
+} from 'framer-motion'
 import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
 import { XIcon } from 'lucide-react'

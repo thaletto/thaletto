@@ -6,7 +6,7 @@ import {
   Transition,
   Variants,
   AnimatePresenceProps,
-} from 'motion/react'
+} from 'framer-motion'
 import { useState, useEffect, Children } from 'react'
 
 export type TextLoopProps = {
