@@ -1,6 +1,6 @@
 'use client'
 import React, { useRef, useState, useCallback, useEffect } from 'react'
-import { motion, useSpring, useTransform, SpringOptions } from 'motion/react'
+import { motion, useSpring, useTransform, SpringOptions } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export type SpotlightProps = {
@@ -68,12 +68,18 @@ export function Spotlight({
         isHovered ? 'opacity-100' : 'opacity-0',
         className,
       )}
-      style={{
-        width: size,
-        height: size,
-        left: spotlightLeft,
-        top: spotlightTop,
+      variants={{
+        default: {
+          width: `${size}px`,
+          height: `${size}px`,
+        },
       }}
+      animate={
+        {
+          left: spotlightLeft,
+          top: spotlightTop,
+        } as any
+      }
     />
   )
 }
