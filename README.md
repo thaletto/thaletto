@@ -1,40 +1,37 @@
-<img src="/public/cover.jpg" alt="Cover image representing Nim, a personal website template" width="100%" />
+![GitHub Banner](https://github.com/thaletto/thaletto/raw/main/public/GitHub%20Banner.png)
 
-Nim is a free and open-source personal website template built with Next.js 15, React 19, Tailwind CSS v4, and Motion. Designed for developers, designers, and founders, it combines minimalism with delightful animated components powered by [Motion-Primitives](https://motion-primitives.com).
+[![](https://visitcount.itsvg.in/api?style=for-the-badge&id=thaletto&icon=5&color=4)](https://visitcount.itsvg.in)
 
-Live demo: [https://nim-fawn.vercel.app](https://nim-fawn.vercel.app)
+# About Me
+- B.Tech in Computer Science and Engineering from Amrita School of Computing.
+- Projects
+  - E-commerce and CMS for a client
+  - Lung Nodule Detection
+  - Lense (Kotlin Android App)
+  - News Writer (LLM Application)
+  - Parkinsons Disease Detection (ML Models)
+  - Leave Management System
+- Currently working on
+  - Vendora
+- Currently learning
+  - React Native
+  - Rust
 
-## Features
+## Portfolio
+[thaletto.vercel.app](https://thaletto.vercel.app)
 
-- Minimal one-page portfolio layout.
-- Blog support with MDX.
-- Responsive and accessible design.
-- Easy to use
-- [Motion-Primitives](https://motion-primitives.com) for animated components.
+# Tech Stack
+<img src="https://skillicons.dev/icons?i=typescript,javascript,react,nextjs,nodejs" />
+<img src="https://skillicons.dev/icons?i=flask,django,python,tensorflow,pytorch" />
+<img src="https://skillicons.dev/icons?i=mongodb,postgresql,mysql,firebase,sqlite" />
+<img src="https://skillicons.dev/icons?i=c,cpp,java,kotlin,androidstudio" />
 
-## Getting Started
-
-For detailed setup instructions, refer to the [Installation Guide](./INSTALLATION.md).
-
-```bash
-git clone https://github.com/ibelick/nim.git
-cd nim
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests to improve Nim.
-
-## Deployment
-
-You can deploy your site to any hosting platform that supports Next.js. For the easiest deployment experience, consider using Vercel:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fibelick%2Fnim&env=NEXT_PUBLIC_SITE_URL&project-name=nim&repository-name=nim&redirect-url=https%3A%2F%2Ftwitter.com%2Fibelick&demo-title=Nim&demo-description=Nim%20is%20a%20free%20and%20open-source%20minimal%20personal%20website%20template%20built%20with%20Next.js%2015%2C%20React%2019%2C%20and%20Motion-Primitives.&demo-url=https%3A%2F%2Fnim.vercel.app&demo-image=https%3A%2F%2Fraw.githubusercontent.com%2Fibelick%2Fnim%2Frefs%2Fheads%2Fmain%2F.github%2Fassets%2Freadme.png&teamSlug=ibelick)
-
-## About
-
-Nim is designed to make personal branding effortless and beautiful. If you enjoy it, consider sharing it and exploring [Motion-Primitives Pro](https://pro.motion-primitives.com/).
+<br>
+<div align="start">
+  <a href="https://github.com/sponsors/thaletto">
+    <img src="https://img.shields.io/badge/Sponsor-DB61A2?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="GitHub Sponsor"/>
+  </a>
+  <a href="https://buymeacoffee.com/thaletto">
+    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee"/>
+  </a>
+</div>
