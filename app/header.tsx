@@ -10,12 +10,12 @@ export function Header() {
           href="/"
           className="text-3xl font-medium text-black dark:text-white"
         >
-          Laxman K R{' '}
-          <Link href="#contact">
-            <span className="text-lg font-normal text-zinc-600 dark:text-zinc-500">
-              @thaletto
-            </span>
-          </Link>
+          Laxman K R
+        </Link>
+        <Link href="#contact">
+          <span className="text-lg font-normal text-zinc-600 dark:text-zinc-500">
+            {' '}@thaletto
+          </span>
         </Link>
         <TextEffect
           as="p"
