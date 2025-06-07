@@ -56,14 +56,20 @@ function ProjectCard({ project }: { project: Project }) {
         <ProjectImage image={project.image} name={project.name} />
       </div>
       <div className="px-1">
-        <Link
-          href={project.link}
-          target="_blank"
-          className="font-base group relative inline-block text-lg text-zinc-900 dark:text-zinc-50"
-        >
-          {project.name}
-          <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
-        </Link>
+        {project.link ? (
+          <Link
+            href={project.link}
+            target="_blank"
+            className="font-base group relative inline-block text-lg text-zinc-900 dark:text-zinc-50"
+          >
+            {project.name}
+            <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
+          </Link>
+        ) : (
+          <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">
+            {project.name}
+          </span>
+        )}
         <p className="text-base text-zinc-600 dark:text-zinc-400">
           {project.description}
         </p>
