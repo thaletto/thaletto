@@ -9,7 +9,7 @@ export function Skills() {
           return (
             <div
               key={skill.id}
-              className="group relative overflow-hidden rounded-lg px-2 py-4 transition-all hover:bg-zinc-50/40 dark:hover:border-zinc-800 dark:hover:bg-zinc-900/80"
+              className="group relative overflow-hidden rounded-lg px-2 py-4"
             >
               <div className="relative flex items-center gap-2">
                 {<skill.icon className='h-5 w-5'/>}
