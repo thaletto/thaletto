@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { Header } from './header'
-import { Footer } from './footer'
+import { Header } from '../components/header'
+import { Footer } from '../components/footer'
 import { ThemeProvider } from 'next-themes'
 
 export const viewport: Viewport = {
@@ -14,11 +14,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://thaletto.vercel.app/'),
   alternates: {
-    canonical: '/'
+    canonical: '/',
   },
   title: 'Laxman K R @thaletto',
-  description:  'Full Stack AI Developer',
-};
+  description: 'Full Stack AI Developer',
+}
 
 const geist = Geist({
   variable: '--font-geist',
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
+        className={`${geist.variable} ${geistMono.variable} tracking-tight antialiased dark:bg-zinc-950`}
       >
         <ThemeProvider
           enableSystem={true}

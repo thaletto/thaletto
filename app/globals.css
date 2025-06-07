@@ -18,8 +18,48 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+  }
+
+  .dark {
+    --background: 180 100% 25%;
+    --foreground: 180 100% 95%;
+    --muted: 180 100% 20%;
+    --muted-foreground: 180 100% 80%;
+  }
 }
 
+body {
+  background-image:
+    linear-gradient(rgb(242, 237, 234) 100px, rgba(242, 237, 234, 0) 360px),
+    linear-gradient(
+      rgba(41, 37, 114, 0.5) 25%,
+      rgba(100, 103, 140, 0.5) 66%,
+      rgba(100, 100, 100, 0.5) 100%
+    ),
+    url('/noise.png');
+  background-blend-mode: overlay;
+  background-color: rgba(217, 217, 217, 0.5);
+}
+
+.dark body {
+  background-image:
+    linear-gradient(rgb(0, 64, 64) 100px, rgba(0, 192, 192, 0) 360px),
+    linear-gradient(
+      rgba(0, 128, 128, 0.5) 25%,
+      rgba(0, 160, 160, 0.5) 66%,
+      rgba(0, 96, 96, 0.5) 100%
+    ),
+    url('/noise.png');
+  background-blend-mode: overlay;
+  background-color: rgba(38, 38, 38, 0.5);
+}
+
+
+/* Syntax Highlighting for Code Blocks in MDX */
 :root {
   --sh-class: #7aa2f7;
   --sh-sign: #89ddff;
