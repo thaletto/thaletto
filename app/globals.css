@@ -47,15 +47,15 @@ body {
 
 .dark body {
   background-image:
-    linear-gradient(rgb(0, 128, 128) 100px, rgba(0, 128, 128, 0) 360px),
+    linear-gradient(rgb(0, 64, 64) 100px, rgba(0, 192, 192, 0) 360px),
     linear-gradient(
-      rgba(0, 128, 128, 0.3) 25%,
-      rgba(0, 128, 128, 0.2) 66%,
-      rgba(0, 128, 128, 0.1) 100%
+      rgba(0, 128, 128, 0.5) 25%,
+      rgba(0, 160, 160, 0.5) 66%,
+      rgba(0, 96, 96, 0.5) 100%
     ),
     url('/noise.png');
   background-blend-mode: overlay;
-  background-color: rgba(24, 24, 27, 0.8);
+  background-color: rgba(38, 38, 38, 0.5);
 }
 
 :root {
