@@ -8,20 +8,21 @@ export function Header() {
       <div>
         <Link
           href="/"
-          className="text-3xl font-medium text-black dark:text-white"
+          className="text-3xl font-medium"
         >
           Laxman K R
         </Link>
         <Link href="#contact">
-          <span className="text-lg font-normal text-zinc-600 dark:text-zinc-500">
-            {' '}@thaletto
+          <span className="text-lg font-normal text-zinc-600 dark:text-zinc-400">
+            {' '}
+            @thaletto
           </span>
         </Link>
         <TextEffect
           as="p"
           preset="fade"
           per="char"
-          className="text-zinc-600 dark:text-zinc-500"
+          className="text-zinc-600 dark:text-zinc-400"
           delay={0.5}
         >
           Full Stack AI Developer

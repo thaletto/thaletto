@@ -140,6 +140,11 @@ export default function Personal() {
             Focused on creating intuitive and performant web experiences.
             Bridging the gap between design and development.
           </p>
+          <p className="mt-4 text-zinc-600 italic dark:text-zinc-400">
+            Do not go gentle into that good night.
+            <br />
+            Rage, rage against the dying of the light
+          </p>
         </div>
       </motion.section>
 
@@ -180,7 +185,7 @@ export default function Personal() {
         <div className="flex flex-col space-y-2">
           {WORK_EXPERIENCE.map((job) => (
             <a
-              className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
+              className="relative overflow-hidden rounded-2xl p-[1px]"
               href={job.link}
               target="_blank"
               rel="noopener noreferrer"
@@ -190,7 +195,7 @@ export default function Personal() {
                 className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
                 size={64}
               />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
+              <div className="relative h-full w-full rounded-[15px]">
                 <div className="relative flex w-full flex-row justify-between">
                   <div>
                     <h4 className="font-normal dark:text-zinc-100">
@@ -218,7 +223,7 @@ export default function Personal() {
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
-            className="h-full w-full rounded-lg bg-zinc-100 dark:bg-zinc-900/80"
+            className="h-full w-full rounded-lg bg-zinc-50/40 dark:bg-zinc-900/80"
             transition={{
               type: 'spring',
               bounce: 0,

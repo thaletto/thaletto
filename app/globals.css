@@ -18,6 +18,44 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+  }
+
+  .dark {
+    --background: 180 100% 25%;
+    --foreground: 180 100% 95%;
+    --muted: 180 100% 20%;
+    --muted-foreground: 180 100% 80%;
+  }
+}
+
+body {
+  background-image:
+    linear-gradient(rgb(242, 237, 234) 100px, rgba(242, 237, 234, 0) 360px),
+    linear-gradient(
+      rgba(41, 37, 114, 0.5) 25%,
+      rgba(100, 103, 140, 0.5) 66%,
+      rgba(43, 32, 59, 0.5) 100%
+    ),
+    url('/noise.png');
+  background-blend-mode: overlay;
+  background-color: rgba(217, 217, 217, 0.5);
+}
+
+.dark body {
+  background-image:
+    linear-gradient(rgb(0, 128, 128) 100px, rgba(0, 128, 128, 0) 360px),
+    linear-gradient(
+      rgba(0, 128, 128, 0.3) 25%,
+      rgba(0, 128, 128, 0.2) 66%,
+      rgba(0, 128, 128, 0.1) 100%
+    ),
+    url('/noise.png');
+  background-blend-mode: overlay;
+  background-color: rgba(24, 24, 27, 0.8);
 }
 
 :root {
