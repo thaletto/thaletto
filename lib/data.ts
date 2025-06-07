@@ -1,10 +1,17 @@
-import { Project, WorkExperience, BlogPost, SocialLink } from './types'
+import {
+  Project,
+  WorkExperience,
+  BlogPost,
+  SocialLink,
+  Education,
+} from './types'
 import { generateId } from './utils'
 
 export const PROJECTS: Project[] = [
   {
     name: 'E-Commerce website & CMS',
-    description: 'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
+    description:
+      'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
     link: 'https://krcrackers.co',
     image: '/projects/krcrackers.png',
     id: generateId(),
@@ -26,6 +33,36 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: 'Present',
     id: generateId('work'),
   },
+]
+
+export const EDUCATION: Education[] = [
+  {
+    typeofEducation: 'university',
+    institution: 'Amrita School of Computing',
+    degree: 'B.Tech Computer Science and Engineering',
+    start: new Date('2020-09'),
+    end: new Date('2024-05-06'),
+    cgpa: 7.02,
+    id: generateId('edu'),
+  },
+  {
+    typeofEducation: 'school',
+    marks: 88.6,
+    institution: 'Maharishi International Residential School',
+    degree: 'CBSE XII',
+    start: new Date('2019'),
+    end: new Date('2020'),
+    id: generateId('edu')
+  },
+  {
+    typeofEducation: 'school',
+    marks: 82.6,
+    institution: 'Maharishi International Residential School',
+    degree: 'CBSE X',
+    start: new Date('2017'),
+    end: new Date('2018'),
+    id: generateId('edu')
+  }
 ]
 
 export const BLOG_POSTS: BlogPost[] = [

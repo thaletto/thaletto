@@ -5,6 +5,7 @@ import { ProjectList } from '@/components/project'
 import { WorkExperience } from '@/components/work'
 import { Blogs } from '@/components/blogs'
 import { Contact } from '@/components/contact'
+import { Education } from '@/components/education'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -28,7 +29,7 @@ const TRANSITION_SECTION = {
 export default function Personal() {
   return (
     <motion.main
-      className="space-y-24"
+      className="space-y-12"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
@@ -52,6 +53,13 @@ export default function Personal() {
         transition={TRANSITION_SECTION}
       >
         <WorkExperience />
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <Education />
       </motion.section>
 
       <motion.section

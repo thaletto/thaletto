@@ -59,7 +59,7 @@ function ProjectCard({ project }: { project: Project }) {
         <Link
           href={project.link}
           target="_blank"
-          className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
+          className="font-base group relative inline-block text-lg text-zinc-900 dark:text-zinc-50"
         >
           {project.name}
           <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
