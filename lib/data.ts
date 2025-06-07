@@ -4,8 +4,26 @@ import {
   BlogPost,
   SocialLink,
   Education,
+  Skill,
 } from './types'
 import { generateId } from './utils'
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiTrpc,
+  SiReactquery,
+  SiPython,
+  SiFastapi,
+  SiFlask,
+  SiPandas,
+  SiTensorflow,
+  SiGit,
+  SiJenkins,
+  SiLangchain,
+} from 'react-icons/si'
+import { FaCode } from 'react-icons/fa'
 
 export const PROJECTS: Project[] = [
   {
@@ -52,7 +70,7 @@ export const EDUCATION: Education[] = [
     degree: 'CBSE XII',
     start: new Date('2019'),
     end: new Date('2020'),
-    id: generateId('edu')
+    id: generateId('edu'),
   },
   {
     typeofEducation: 'school',
@@ -61,8 +79,26 @@ export const EDUCATION: Education[] = [
     degree: 'CBSE X',
     start: new Date('2017'),
     end: new Date('2018'),
-    id: generateId('edu')
-  }
+    id: generateId('edu'),
+  },
+]
+
+export const SKILLS: Skill[] = [
+  { name: 'Next.js', id: generateId('skill'), icon: SiNextdotjs },
+  { name: 'React', id: generateId('skill'), icon: SiReact },
+  { name: 'TS/JS', id: generateId('skill'), icon: SiTypescript },
+  { name: 'TailwindCSS', id: generateId('skill'), icon: SiTailwindcss },
+  { name: 'tRPC', id: generateId('skill'), icon: SiTrpc },
+  { name: 'React Query', id: generateId('skill'), icon: SiReactquery },
+  { name: 'REST API', id: generateId('skill'), icon: FaCode },
+  { name: 'Python', id: generateId('skill'), icon: SiPython },
+  { name: 'LangChain', id: generateId('skill'), icon: SiLangchain },
+  { name: 'FastAPI', id: generateId('skill'), icon: SiFastapi },
+  { name: 'Flask', id: generateId('skill'), icon: SiFlask },
+  { name: 'Pandas', id: generateId('skill'), icon: SiPandas },
+  { name: 'TensorFlow', id: generateId('skill'), icon: SiTensorflow },
+  { name: 'Git', id: generateId('skill'), icon: SiGit },
+  { name: 'Jenkins', id: generateId('skill'), icon: SiJenkins },
 ]
 
 export const BLOG_POSTS: BlogPost[] = [

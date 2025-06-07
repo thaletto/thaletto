@@ -6,6 +6,7 @@ import { WorkExperience } from '@/components/work'
 import { Blogs } from '@/components/blogs'
 import { Contact } from '@/components/contact'
 import { Education } from '@/components/education'
+import { Skills } from '@/components/skills'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -60,6 +61,13 @@ export default function Personal() {
         transition={TRANSITION_SECTION}
       >
         <Education />
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
+        <Skills />
       </motion.section>
 
       <motion.section
