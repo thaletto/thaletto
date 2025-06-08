@@ -44,13 +44,15 @@ export function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      setAlign(window.innerWidth >= 1024 ? 'center' : 'end');
+      if (typeof window !== 'undefined') {
+        setAlign(window.innerWidth >= 1024 ? 'center' : 'end');
+      }
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [window.innerWidth]);
+  }, []);
 
   return (
     <header className="mb-8 flex items-start justify-between">
