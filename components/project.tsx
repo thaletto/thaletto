@@ -10,42 +10,60 @@ import Image from 'next/image'
 import { XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { PROJECTS } from '@/lib/data'
+import { SiGithub } from 'react-icons/si'
+import { ExternalLink } from 'lucide-react'
 
-function ProjectImage({ image, name }: { image: string; name: string }) {
+function ProjectImage({
+  image,
+  name,
+  link,
+  github,
+}: {
+  image: string
+  name: string
+  link?: string
+  github?: string
+}) {
+  const handleClick = () => {
+    if (link) {
+      window.open(link, '_blank')
+    } else if (github) {
+      window.open(github, '_blank')
+    }
+  }
+
   return (
-    <MorphingDialog
-      transition={{
-        type: 'spring',
-        bounce: 0,
-        duration: 0.3,
-      }}
+    <div
+      className="group relative aspect-video w-full cursor-pointer"
+      onClick={handleClick}
     >
-      <MorphingDialogTrigger>
-        <div className="relative aspect-video w-full">
-          <Image
-            src={image}
-            alt={name}
-            fill={true}
-            className="cursor-zoom-in rounded-xl object-cover"
-          />
-        </div>
-      </MorphingDialogTrigger>
-      <MorphingDialogContainer className="min-h-[90vh] min-w-[90vw]">
-        <MorphingDialogContent className="relative h-full w-full rounded-2xl p-4 ring-1 ring-zinc-200/50 ring-inset dark:ring-zinc-800/50">
-          <div className="relative h-full w-full">
-            <Image
-              src={image}
-              alt={name}
-              fill={true}
-              className="object-contain"
-            />
-          </div>
-        </MorphingDialogContent>
-        <MorphingDialogClose className="fixed top-6 right-6 h-fit w-fit rounded-full bg-white p-1">
-          <XIcon className="h-5 w-5 text-zinc-500" />
-        </MorphingDialogClose>
-      </MorphingDialogContainer>
-    </MorphingDialog>
+      <Image
+        src={image}
+        alt={name}
+        fill={true}
+        className="rounded-xl object-cover"
+      />
+      <div className="absolute inset-0 flex items-center justify-center gap-8 rounded-xl bg-zinc-900/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        {link && (
+          <Link
+            href={link}
+            target="_blank"
+            className="text-white transition-colors hover:text-zinc-200"
+          >
+            <ExternalLink className="h-6 w-6" />
+          </Link>
+        )}
+        {github && (
+          <Link
+            href={github}
+            target="_blank"
+            className="text-white transition-colors hover:text-zinc-200"
+          >
+            <SiGithub className="h-6 w-6" />
+          </Link>
+        )}
+      </div>
+    </div>
   )
 }
 
@@ -53,23 +71,17 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <div key={project.id} className="space-y-2">
       <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-        <ProjectImage image={project.image} name={project.name} />
+        <ProjectImage
+          image={project.image}
+          name={project.name}
+          link={project.link}
+          github={project.github}
+        />
       </div>
       <div className="px-1">
-        {project.link ? (
-          <Link
-            href={project.link}
-            target="_blank"
-            className="font-base group relative inline-block text-lg text-zinc-900 dark:text-zinc-50"
-          >
-            {project.name}
-            <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
-          </Link>
-        ) : (
-          <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">
-            {project.name}
-          </span>
-        )}
+        <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">
+          {project.name}
+        </span>
         <p className="text-base text-zinc-600 dark:text-zinc-400">
           {project.description}
         </p>

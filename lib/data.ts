@@ -40,6 +40,7 @@ export const PROJECTS: Project[] = [
     description:
       'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
     link: 'https://krcrackers.co',
+    github: 'https://krcrackers.co',
     image: '/projects/krcrackers.png',
     id: generateId(),
   },

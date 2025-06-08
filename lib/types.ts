@@ -4,6 +4,7 @@ export type Project = {
   name: string
   description: string
   link?: string
+  github?: string
   image: string
   id: string
 }
@@ -51,7 +52,7 @@ export type SocialLink = {
   userid: string
   link: string
   icon: IconType
-  id: string,
+  id: string
 }
 
 export type Skill = {
