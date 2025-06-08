@@ -48,8 +48,10 @@ export type BlogPost = {
 }
 
 export type SocialLink = {
-  label: string
+  userid: string
   link: string
+  icon: IconType
+  id: string,
 }
 
 export type Skill = {

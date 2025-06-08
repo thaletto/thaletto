@@ -28,6 +28,10 @@ import {
   SiPrisma,
   SiDocker,
   SiNodedotjs,
+  SiGithub,
+  SiX,
+  SiLinkedin,
+  SiInstagram,
 } from 'react-icons/si'
 
 export const PROJECTS: Project[] = [
@@ -147,20 +151,28 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: 'Github',
+    userid: 'thaletto',
     link: 'https://github.com/thaletto',
+    icon: SiGithub,
+    id: generateId('social'),
   },
   {
-    label: 'Twitter',
+    userid: 'thaletto',
     link: 'https://x.com/thaletto',
+    icon: SiX,
+    id: generateId('social'),
   },
   {
-    label: 'LinkedIn',
+    userid: 'laxmanramesh',
     link: 'https://www.linkedin.com/in/laxmanramesh',
+    icon: SiLinkedin,
+    id: generateId('social'),
   },
   {
-    label: 'Instagram',
+    userid: 'thaletto',
     link: 'https://www.instagram.com/thaletto',
+    icon: SiInstagram,
+    id: generateId('social'),
   },
 ]
 
