@@ -13,7 +13,7 @@ export function Skills() {
                 index % 2 === 0 ? 'justify-self-start' : 'justify-self-end'
               } sm:${index % 3 === 0 ? 'justify-self-start' : index % 3 === 2 ? 'justify-self-end' : 'justify-self-center'} md:${index % 4 === 0 ? 'justify-self-start' : index % 4 === 3 ? 'justify-self-end' : 'justify-self-center'}`}
             >
-              <div className="relative flex items-center gap-2">
+              <div className="relative flex items-center p-1 gap-2">
                 {<skill.icon className="h-5 w-5" />}
                 <h4 className="font-medium text-zinc-900 dark:text-zinc-100">
                   {skill.name}
