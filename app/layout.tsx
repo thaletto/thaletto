@@ -11,13 +11,33 @@ export const viewport: Viewport = {
   themeColor: '#ffffff',
 }
 
+const baseURL = new URL('https://thaletto.vercel.app');
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://thaletto.vercel.app/'),
-  alternates: {
-    canonical: '/',
+  title: {
+    template: '%s - @thaletto',
+    default: 'Laxman K R - @thaletto'
   },
-  title: 'Laxman K R @thaletto',
   description: 'Full Stack AI Developer',
+  metadataBase: baseURL,
+
+  twitter: {
+    card: 'summary_large_image',
+    site: 'thaletto.vercel.app',
+    creator: '@thaletto',
+    title: 'thaletto Portfolio & Blog',
+    description: 'Portfolio & Blog website of Laxman K R, a full stack developer',
+    images: ['opengraph-image.jpg'],
+  },
+
+  openGraph: {
+    images: ['opengraph-image.jpg'],
+    title: 'Laxman K R @thaletto',
+    description: 'Full Stack AI Developer',
+    type: 'website',
+    siteName: 'thaletto.vercel.app',
+    url: baseURL
+  },
 }
 
 const geist = Geist({

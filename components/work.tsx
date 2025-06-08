@@ -18,7 +18,7 @@ export function WorkExperience() {
                   <h4 className="font-normal dark:text-zinc-100">
                     {job.title}
                   </h4>
-                  <p className="text-zinc-500 dark:text-zinc-400">
+                  <p className="text-zinc-600 dark:text-zinc-400">
                     {job.company}
                   </p>
                 </div>

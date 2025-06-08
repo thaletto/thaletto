@@ -13,18 +13,18 @@ export function Education() {
               size={64}
             />
             <div className="relative h-full w-full">
-              <div className="relative flex w-full flex-row justify-between">
+              <div className="relative flex w-full flex-col sm:flex-row sm:justify-between">
                 <div>
                   <h4 className="font-normal dark:text-zinc-100">
                     {edu.institution}
                   </h4>
-                  <p className="text-zinc-500 dark:text-zinc-400">
+                  <p className="text-zinc-600 dark:text-zinc-400">
                     {edu.degree}
                     {edu.cgpa && ` • CGPA: ${edu.cgpa}/10`}
                     {edu.marks && ` • Marks: ${edu.marks}%`}
                   </p>
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-400">
+                <p className="mt-1 text-zinc-600 sm:mt-0 dark:text-zinc-400">
                   {edu.start.toLocaleDateString('en-GB', {
                     year: 'numeric',
                   })}{' '}

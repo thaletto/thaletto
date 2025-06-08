@@ -22,8 +22,17 @@ import {
   SiGit,
   SiJenkins,
   SiLangchain,
+  SiMongodb,
+  SiPostgresql,
+  SiMysql,
+  SiPrisma,
+  SiDocker,
+  SiNodedotjs,
+  SiGithub,
+  SiX,
+  SiLinkedin,
+  SiInstagram,
 } from 'react-icons/si'
-import { FaCode } from 'react-icons/fa'
 
 export const PROJECTS: Project[] = [
   {
@@ -31,6 +40,7 @@ export const PROJECTS: Project[] = [
     description:
       'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
     link: 'https://krcrackers.co',
+    github: 'https://krcrackers.co',
     image: '/projects/krcrackers.png',
     id: generateId(),
   },
@@ -90,13 +100,18 @@ export const SKILLS: Skill[] = [
   { name: 'TailwindCSS', id: generateId('skill'), icon: SiTailwindcss },
   { name: 'tRPC', id: generateId('skill'), icon: SiTrpc },
   { name: 'React Query', id: generateId('skill'), icon: SiReactquery },
-  { name: 'REST API', id: generateId('skill'), icon: FaCode },
+  { name: 'Node.js', id: generateId('skill'), icon: SiNodedotjs },
   { name: 'Python', id: generateId('skill'), icon: SiPython },
   { name: 'LangChain', id: generateId('skill'), icon: SiLangchain },
   { name: 'FastAPI', id: generateId('skill'), icon: SiFastapi },
   { name: 'Flask', id: generateId('skill'), icon: SiFlask },
   { name: 'Pandas', id: generateId('skill'), icon: SiPandas },
   { name: 'TensorFlow', id: generateId('skill'), icon: SiTensorflow },
+  { name: 'MongoDB', id: generateId('skill'), icon: SiMongodb },
+  { name: 'PostgreSQL', id: generateId('skill'), icon: SiPostgresql },
+  { name: 'MySQL', id: generateId('skill'), icon: SiMysql },
+  { name: 'Prisma', id: generateId('skill'), icon: SiPrisma },
+  { name: 'Docker', id: generateId('skill'), icon: SiDocker },
   { name: 'Git', id: generateId('skill'), icon: SiGit },
   { name: 'Jenkins', id: generateId('skill'), icon: SiJenkins },
 ]
@@ -137,20 +152,28 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: 'Github',
+    userid: 'thaletto',
     link: 'https://github.com/thaletto',
+    icon: SiGithub,
+    id: generateId('social'),
   },
   {
-    label: 'Twitter',
+    userid: 'thaletto',
     link: 'https://x.com/thaletto',
+    icon: SiX,
+    id: generateId('social'),
   },
   {
-    label: 'LinkedIn',
+    userid: 'laxmanramesh',
     link: 'https://www.linkedin.com/in/laxmanramesh',
+    icon: SiLinkedin,
+    id: generateId('social'),
   },
   {
-    label: 'Instagram',
+    userid: 'thaletto',
     link: 'https://www.instagram.com/thaletto',
+    icon: SiInstagram,
+    id: generateId('social'),
   },
 ]
 
