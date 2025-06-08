@@ -40,6 +40,17 @@ export function Header() {
   const showBackButton = pathname !== '/';
   const isBlogPage = pathname.startsWith('/blog');
   const [isOpen, setIsOpen] = useState(false);
+  const [align, setAlign] = useState<'end' | 'center'>('end');
+
+  useEffect(() => {
+    const handleResize = () => {
+      setAlign(window.innerWidth >= 1024 ? 'center' : 'end');
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [window.innerWidth]);
 
   return (
     <header className="mb-8 flex items-start justify-between">
@@ -82,7 +93,10 @@ export function Header() {
               @thaletto
             </Button>
           </HoverCardTrigger>
-          <HoverCardContent className="shadow-lg border-0 text-zinc-600 dark:text-zinc-300 bg-zinc-900 dark:bg-zinc-50 w-full">
+          <HoverCardContent
+            align={align}
+            className="shadow-lg border-0 text-zinc-600 dark:text-zinc-300 bg-zinc-900 dark:bg-zinc-50 w-full"
+          >
             <div className="flex items-start gap-4">
               <img src={'/adc.png'} width={50} height={50} />
               <div className="flex flex-col gap-1">
