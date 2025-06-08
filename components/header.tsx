@@ -7,6 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { TextMorph } from './ui/text-morph';
+import { Button } from './ui/button';
 
 function CopyButton() {
   const [text, setText] = useState('Copy');
@@ -25,7 +26,7 @@ function CopyButton() {
         setText('Copied');
         navigator.clipboard.writeText(currentUrl);
       }}
-      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400"
+      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-300"
       type="button"
     >
       <TextMorph>{text}</TextMorph>
@@ -38,6 +39,7 @@ export function Header() {
   const pathname = usePathname();
   const showBackButton = pathname !== '/';
   const isBlogPage = pathname.startsWith('/blog');
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="mb-8 flex items-start justify-between">
@@ -46,7 +48,7 @@ export function Header() {
           Laxman K R
         </Link>
 
-        <div className="text-zinc-600 dark:text-zinc-400">
+        <div className="text-zinc-600 dark:text-zinc-300">
           <TextEffect as="div" preset="fade" per="char" delay={0.5}>
             Full Stack AI Developer
           </TextEffect>
@@ -55,7 +57,7 @@ export function Header() {
         {showBackButton && (
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
+            className="inline-flex items-center gap-1 text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
           >
             <ArrowLeft className="h-5 w-5" /> Back
           </Link>
@@ -69,12 +71,18 @@ export function Header() {
             LKR
           </AvatarFallback>
         </Avatar>
-        
-        <HoverCard>
-          <HoverCardTrigger className="text-zinc-600 dark:text-zinc-400">
-            @thaletto
+
+        <HoverCard open={isOpen} onOpenChange={setIsOpen}>
+          <HoverCardTrigger asChild>
+            <Button
+              variant="ghost"
+              className="text-zinc-600 dark:text-zinc-300 font-normal p-0 h-auto hover:bg-transparent"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              @thaletto
+            </Button>
           </HoverCardTrigger>
-          <HoverCardContent className="shadow-lg border-0 text-zinc-600 dark:text-zinc-400 bg-zinc-900 dark:bg-zinc-50 w-full">
+          <HoverCardContent className="shadow-lg border-0 text-zinc-600 dark:text-zinc-300 bg-zinc-900 dark:bg-zinc-50 w-full">
             <div className="flex items-start gap-4">
               <img src={'/adc.png'} width={50} height={50} />
               <div className="flex flex-col gap-1">

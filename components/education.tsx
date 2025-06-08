@@ -15,8 +15,8 @@ export function Education() {
             <div className="relative h-full w-full">
               <div className="relative flex w-full flex-col sm:flex-row sm:justify-between">
                 <div>
-                  <h4 className="font-normal dark:text-zinc-100">{edu.institution}</h4>
-                  <p className="text-zinc-600 dark:text-zinc-400">
+                  <h4 className="font-normal dark:text-zinc-50">{edu.institution}</h4>
+                  <p className="text-zinc-600 dark:text-zinc-300">
                     {edu.degree}
                     <span className="hidden sm:inline">
                       {edu.cgpa && ` • CGPA: ${edu.cgpa}/10`}
@@ -24,14 +24,14 @@ export function Education() {
                     </span>
                   </p>
                   {(edu.cgpa || edu.marks) && (
-                    <p className="text-zinc-600 dark:text-zinc-400 sm:hidden">
+                    <p className="text-zinc-600 dark:text-zinc-300 sm:hidden">
                       {edu.cgpa && `CGPA: ${edu.cgpa}/10`}
                       {edu.cgpa && edu.marks && ' • '}
                       {edu.marks && `Marks: ${edu.marks}%`}
                     </p>
                   )}
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-400">
+                <p className="text-zinc-600 dark:text-zinc-300">
                   {edu.start.toLocaleDateString('en-GB', {
                     year: 'numeric',
                   })}{' '}

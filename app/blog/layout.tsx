@@ -19,7 +19,7 @@ function CopyButton() {
         setText('Copied');
         navigator.clipboard.writeText(currentUrl);
       }}
-      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400"
+      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-300"
       type="button"
     >
       <TextMorph>{text}</TextMorph>

@@ -1,4 +1,4 @@
-import { SKILLS } from '@/lib/data'
+import { SKILLS } from '@/lib/data';
 
 export function Skills() {
   return (
@@ -15,14 +15,12 @@ export function Skills() {
             >
               <div className="relative flex items-center p-1 gap-2">
                 {<skill.icon className="h-5 w-5" />}
-                <h4 className="font-medium text-zinc-900 dark:text-zinc-100">
-                  {skill.name}
-                </h4>
+                <h4 className="font-medium text-zinc-900 dark:text-zinc-50">{skill.name}</h4>
               </div>
             </div>
-          )
+          );
         })}
       </div>
     </>
-  )
+  );
 }

@@ -1,16 +1,16 @@
-import { EMAIL, SOCIAL_LINKS } from '@/lib/data'
-import { Spotlight } from './ui/spotlight'
-import { Magnetic } from './ui/magnetic'
-import { IconType } from 'react-icons'
+import { EMAIL, SOCIAL_LINKS } from '@/lib/data';
+import { Spotlight } from './ui/spotlight';
+import { Magnetic } from './ui/magnetic';
+import { IconType } from 'react-icons';
 
 function MagneticSocialLink({
   icon: Icon,
   userid,
   link,
 }: {
-  icon: IconType
-  userid: string
-  link: string
+  icon: IconType;
+  userid: string;
+  link: string;
 }) {
   return (
     <Magnetic springOptions={{ bounce: 0 }} intensity={0.3}>
@@ -18,7 +18,7 @@ function MagneticSocialLink({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700"
       >
         <Icon className="h-4 w-4" />
         <span className="ml-1">{userid}</span>
@@ -39,7 +39,7 @@ function MagneticSocialLink({
         </svg>
       </a>
     </Magnetic>
-  )
+  );
 }
 
 export function Contact() {
@@ -53,7 +53,7 @@ export function Contact() {
         <h3 className="mb-5 text-xl font-medium" id="contact">
           Connect
         </h3>
-        <p className="mb-5 text-zinc-600 dark:text-zinc-400">
+        <p className="mb-5 text-zinc-600 dark:text-zinc-300">
           Feel free to contact me at{' '}
           <a
             className="font-medium text-black underline-offset-4 hover:underline dark:text-white"
@@ -63,7 +63,7 @@ export function Contact() {
           </a>
         </p>
         <div className="flex flex-col items-start justify-start space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
-          {SOCIAL_LINKS.map((link) => (
+          {SOCIAL_LINKS.map(link => (
             <MagneticSocialLink
               key={link.id}
               icon={link.icon}
@@ -74,5 +74,5 @@ export function Contact() {
         </div>
       </div>
     </>
-  )
+  );
 }
