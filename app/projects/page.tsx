@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { ProjectCard } from '@/components/project';
 import { PROJECTS } from '@/lib/data';
-import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_SECTION } from '@/app/page';
+import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_SECTION } from '@/components/ui/motion';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
