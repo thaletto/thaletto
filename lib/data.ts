@@ -22,8 +22,13 @@ import {
   SiGit,
   SiJenkins,
   SiLangchain,
+  SiMongodb,
+  SiPostgresql,
+  SiMysql,
+  SiPrisma,
+  SiDocker,
+  SiNodedotjs,
 } from 'react-icons/si'
-import { FaCode } from 'react-icons/fa'
 
 export const PROJECTS: Project[] = [
   {
@@ -90,13 +95,18 @@ export const SKILLS: Skill[] = [
   { name: 'TailwindCSS', id: generateId('skill'), icon: SiTailwindcss },
   { name: 'tRPC', id: generateId('skill'), icon: SiTrpc },
   { name: 'React Query', id: generateId('skill'), icon: SiReactquery },
-  { name: 'REST API', id: generateId('skill'), icon: FaCode },
+  { name: 'Node.js', id: generateId('skill'), icon: SiNodedotjs },
   { name: 'Python', id: generateId('skill'), icon: SiPython },
   { name: 'LangChain', id: generateId('skill'), icon: SiLangchain },
   { name: 'FastAPI', id: generateId('skill'), icon: SiFastapi },
   { name: 'Flask', id: generateId('skill'), icon: SiFlask },
   { name: 'Pandas', id: generateId('skill'), icon: SiPandas },
   { name: 'TensorFlow', id: generateId('skill'), icon: SiTensorflow },
+  { name: 'MongoDB', id: generateId('skill'), icon: SiMongodb },
+  { name: 'PostgreSQL', id: generateId('skill'), icon: SiPostgresql },
+  { name: 'MySQL', id: generateId('skill'), icon: SiMysql },
+  { name: 'Prisma', id: generateId('skill'), icon: SiPrisma },
+  { name: 'Docker', id: generateId('skill'), icon: SiDocker },
   { name: 'Git', id: generateId('skill'), icon: SiGit },
   { name: 'Jenkins', id: generateId('skill'), icon: SiJenkins },
 ]
