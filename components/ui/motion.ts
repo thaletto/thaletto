@@ -16,3 +16,7 @@ export const VARIANTS_SECTION = {
 export const TRANSITION_SECTION = {
   duration: 0.3,
 };
+
+export const TRANSITION_IMAGE = {
+  duration: 0.6,
+};
