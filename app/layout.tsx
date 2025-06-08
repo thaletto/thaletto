@@ -13,6 +13,7 @@ export const viewport: Viewport = {
 };
 
 const baseURL = new URL('https://thaletto.vercel.app');
+const ogURL = 'https://ihyabdqqn0nd2hvz.public.blob.vercel-storage.com/images/opengraph/opengraph-image.jpg'
 
 export const metadata: Metadata = {
   title: {
@@ -28,11 +29,18 @@ export const metadata: Metadata = {
     creator: '@thaletto',
     title: 'thaletto Portfolio & Blog',
     description: 'Portfolio & Blog website of Laxman K R, a full stack developer',
-    images: ['opengraph-image.jpg'],
+    images: [ogURL],
   },
 
   openGraph: {
-    images: ['opengraph-image.jpg'],
+    images: [
+      {
+        url: ogURL,
+        width: 1200,
+        height: 630,
+        alt: 'Laxman K R @thaletto'
+      },
+    ],
     title: 'Laxman K R @thaletto',
     description: 'Full Stack AI Developer',
     type: 'website',
