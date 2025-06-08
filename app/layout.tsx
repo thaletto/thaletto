@@ -59,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} tracking-tight antialiased dark:bg-zinc-950`}
+        className={`${geist.variable} ${geistMono.variable} tracking-tight antialiased`}
       >
         <ThemeProvider
           enableSystem={true}
@@ -67,6 +67,43 @@ export default function RootLayout({
           storageKey="theme"
           defaultTheme="system"
         >
+          {/* Themed Background Layer */}
+          <div>
+            {/* Light Mode Background */}
+            <div
+              className="fixed inset-0 -z-50 bg-cover bg-no-repeat bg-blend-overlay dark:hidden"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgb(242, 237, 234) 100px, rgba(242, 237, 234, 0) 360px),
+                  linear-gradient(
+                    rgba(41, 37, 114, 0.9) 25%,
+                    rgba(100, 103, 150, 0.9) 66%,
+                    rgba(100, 90, 145, 0.9) 100%
+                  ),
+                  url('/noise.png')
+                `,
+                backgroundColor: 'rgba(217, 217, 217, 0.9)',
+              }}
+            />
+
+            {/* Dark Mode Background */}
+            <div
+              className="fixed inset-0 -z-50 bg-cover bg-no-repeat bg-blend-overlay hidden dark:block"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgb(0, 64, 64) 100px, rgba(0, 192, 192, 0) 360px),
+                  linear-gradient(
+                    rgba(0, 128, 128, 0.9) 25%,
+                    rgba(0, 160, 160, 0.9) 66%,
+                    rgba(0, 96, 96, 0.9) 100%
+                  ),
+                  url('/noise.png')
+                `,
+                backgroundColor: 'rgba(38, 38, 38, 0.9)',
+              }}
+            />
+          </div>
+
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
             <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-20">
               <Header />
@@ -80,3 +117,4 @@ export default function RootLayout({
     </html>
   );
 }
+
