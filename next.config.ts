@@ -4,9 +4,6 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  env: {
-    WEBSITE_URL: 'https://thaletto.vercel.app',
-  },
 }
 
 const withMDX = createMDX({

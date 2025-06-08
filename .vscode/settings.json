@@ -1,14 +1,11 @@
 {
   "explorer.excludeGitIgnore": true,
   "files.exclude": {
-    ".github": true,
-    ".vscode": true,
-    "*.json": true,
-    "*.lockb": true,
-    "*.mjs": true,
-    "app/*.ico": true,
-    "app/*.jpg": true,
-    "app/*.png": true,
-    "app/*.ts": true
+    // "": true,
+    // "*.json": true,
+    // "*.lockb": true,
+    // "*.mjs": true,
+    // "app/*.ico": true,
+    // "app/*.jpg": true
   }
 }

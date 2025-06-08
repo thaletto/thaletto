@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: `${(nextConfig as { env: { WEBSITE_URL: string } }).env.WEBSITE_URL}/sitemap.xml`,
+    sitemap: `https://thaletto.vercel.app/sitemap.xml`,
   }
 }
