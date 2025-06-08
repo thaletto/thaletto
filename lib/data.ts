@@ -125,22 +125,6 @@ export const BLOG_POSTS: BlogPost[] = [
     id: generateId('blog'),
   },
   {
-    title: 'Why I left my job to start my own company',
-    description:
-      'A deep dive into my decision to leave my job and start my own company',
-    link: '/blog/why-i-left-my-job',
-    published: new Date('2024-03-10'),
-    id: generateId('blog'),
-  },
-  {
-    title: 'What I learned from my first year of freelancing',
-    description:
-      'A look back at my first year of freelancing and what I learned',
-    link: '/blog/first-year-freelancing',
-    published: new Date('2024-03-05'),
-    id: generateId('blog'),
-  },
-  {
     title: 'How to Export Metadata from MDX for Next.js SEO',
     description:
       'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
