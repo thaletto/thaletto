@@ -19,7 +19,7 @@ function CopyButton() {
         setText('Copied');
         navigator.clipboard.writeText(currentUrl);
       }}
-      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-400"
+      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-300"
       type="button"
     >
       <TextMorph>{text}</TextMorph>
@@ -38,11 +38,49 @@ export default function LayoutBlogPost({ children }: { children: React.ReactNode
           bounce: 0,
         }}
       />
+      <div
+        className="
+        prose 
+        prose-gray 
+        dark:prose-invert
 
-      <div className="absolute top-40 right-4">
-        <CopyButton />
-      </div>
-      <div className="prose prose-gray prose-h4:prose-base dark:prose-invert prose-h1:text-xl prose-h1:font-medium prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-lg prose-h2:font-medium prose-h3:text-base prose-h3:font-medium prose-h4:font-medium prose-h5:text-base prose-h5:font-medium prose-h6:text-base prose-h6:font-medium prose-strong:font-medium prose-hr:border-zinc-500 prose-hr:dark:border-zinc-400 mt-24 w-full max-w-none pb-20">
+        prose-h1:text-xl 
+        prose-h1:font-medium 
+        
+        prose-h2:mt-12 
+        prose-h2:scroll-m-20 
+        prose-h2:text-lg 
+        prose-h2:font-medium 
+        
+        prose-h3:text-base 
+        prose-h3:font-medium 
+        
+        prose-h4:font-medium
+        prose-h4:prose-base 
+        
+        prose-h5:text-base 
+        prose-h5:font-medium 
+        
+        prose-h6:text-base 
+        prose-h6:font-medium 
+        
+        prose-strong:font-medium 
+        
+        prose-hr:border-zinc-500 
+        prose-hr:dark:border-zinc-400 
+        
+        prose-ul:marker:text-zinc-600
+        prose-ul:dark:marker:text-zinc-400
+
+        prose-li:marker:text-zinc-600
+        prose-li:dark:marker:text-zinc-400
+        
+        prose-blockquote:border-l-zinc-600 
+        w-full 
+        max-w-none 
+        py-12
+        "
+      >
         {children}
       </div>
     </>

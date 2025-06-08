@@ -1,6 +1,6 @@
-import { BLOG_POSTS } from '@/lib/data'
-import { AnimatedBackground } from './ui/animated-background'
-import Link from 'next/link'
+import { BLOG_POSTS } from '@/lib/data';
+import { AnimatedBackground } from './ui/animated-background';
+import Link from 'next/link';
 
 export function Blogs() {
   return (
@@ -16,7 +16,7 @@ export function Blogs() {
             duration: 0.2,
           }}
         >
-          {BLOG_POSTS.map((post) => (
+          {BLOG_POSTS.map(post => (
             <Link
               key={post.id}
               className="-mx-3 rounded-xl px-3 py-3"
@@ -24,15 +24,13 @@ export function Blogs() {
               data-id={post.id}
             >
               <div className="flex flex-col space-y-1">
-                <h4 className="font-normal dark:text-zinc-100">{post.title}</h4>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  {post.description}
-                </p>
+                <h4 className="font-normal dark:text-zinc-50">{post.title}</h4>
+                <p className="text-zinc-600 dark:text-zinc-300">{post.description}</p>
               </div>
             </Link>
           ))}
         </AnimatedBackground>
       </div>
     </>
-  )
+  );
 }

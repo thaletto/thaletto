@@ -64,7 +64,7 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
       <div className="px-1">
         <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">{project.name}</span>
-        <p className="text-base text-zinc-600 dark:text-zinc-400">{project.description}</p>
+        <p className="text-base text-zinc-600 dark:text-zinc-300">{project.description}</p>
       </div>
     </div>
   );
@@ -74,12 +74,12 @@ export function ProjectList() {
   return (
     <>
       <div className="mb-5 flex items-center gap-1">
-        <h3 className="text-xl font-medium">Selected Projects</h3>
         <Link
           href="/projects"
-          className="flex items-center gap-1 text-sm  text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
+          className="flex items-center gap-1 text-sm  text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
         >
-          <ChevronRight className='mt-1'/>
+          <h3 className="text-xl font-medium text-zinc-900 dark:text-zinc-50">Selected Projects</h3>
+          <ChevronRight className="mt-1" />
         </Link>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">

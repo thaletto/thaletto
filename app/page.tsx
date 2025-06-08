@@ -7,7 +7,7 @@ import { Blogs } from '@/components/blogs';
 import { Contact } from '@/components/contact';
 import { Education } from '@/components/education';
 import { Skills } from '@/components/skills';
-import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_SECTION } from '@/components/ui/motion';
+import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_SECTION, TRANSITION_IMAGE } from '@/components/ui/motion';
 
 export default function Personal() {
   return (
@@ -21,7 +21,7 @@ export default function Personal() {
         <About />
       </motion.section>
 
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_IMAGE}>
         <ProjectList />
       </motion.section>
 
