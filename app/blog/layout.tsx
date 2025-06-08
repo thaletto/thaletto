@@ -38,15 +38,12 @@ export default function LayoutBlogPost({ children }: { children: React.ReactNode
           bounce: 0,
         }}
       />
-
-      <div className="absolute top-40 right-4">
-        <CopyButton />
-      </div>
-      <div className="
+      <div
+        className="
         prose 
         prose-gray 
-        prose-h4:prose-base 
-        dark:prose-invert 
+        dark:prose-invert
+
         prose-h1:text-xl 
         prose-h1:font-medium 
         
@@ -58,7 +55,8 @@ export default function LayoutBlogPost({ children }: { children: React.ReactNode
         prose-h3:text-base 
         prose-h3:font-medium 
         
-        prose-h4:font-medium 
+        prose-h4:font-medium
+        prose-h4:prose-base 
         
         prose-h5:text-base 
         prose-h5:font-medium 
@@ -77,7 +75,12 @@ export default function LayoutBlogPost({ children }: { children: React.ReactNode
         prose-li:marker:text-zinc-600
         prose-li:dark:marker:text-zinc-400
         
-        prose-blockquote:border-l-zinc-600 mt-24 w-full max-w-none pb-20">
+        prose-blockquote:border-l-zinc-600 
+        w-full 
+        max-w-none 
+        py-12
+        "
+      >
         {children}
       </div>
     </>
