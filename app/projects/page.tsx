@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { ProjectCard } from '@/components/project';
 import { PROJECTS } from '@/lib/data';
-import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_SECTION } from '@/components/ui/motion';
+import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_IMAGE } from '@/components/ui/motion';
 
 export default function ProjectsPage() {
   return (
@@ -12,7 +12,7 @@ export default function ProjectsPage() {
       initial="hidden"
       animate="visible"
     >
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_IMAGE}>
         <h3 className="mb-5 text-2xl font-medium">
           <span className="italic">All</span> Projects
         </h3>
