@@ -86,7 +86,7 @@ export function ProjectList() {
         </Link>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {PROJECTS.slice(0, 2).map(project => (
+        {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 2).map(project => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
