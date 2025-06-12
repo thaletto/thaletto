@@ -37,7 +37,7 @@ export function Blogs() {
             duration: 0.2,
           }}
         >
-          {BLOG_POSTS.slice(0, 4).map(post => (
+          {BLOG_POSTS.sort((a, b) => b.published.getTime() - a.published.getTime()).slice(0, 4).map(post => (
             <Link
               key={post.id}
               className="-mx-3 rounded-xl px-3 py-3"

@@ -27,7 +27,7 @@ export default function BlogPage() {
               duration: 0.2,
             }}
           >
-            {BLOG_POSTS.map(post => (
+            {BLOG_POSTS.sort((a, b) => b.published.getTime() - a.published.getTime()).map(post => (
               <Link
                 key={post.id}
                 className="-mx-3 rounded-xl px-3 py-3"

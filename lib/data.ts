@@ -127,18 +127,10 @@ export const SKILLS: Skill[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Exploring the Intersection of Design, AI, and Design Engineering',
-    description: 'How AI is changing the way we design',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    published: new Date('2024-03-15'),
-    id: generateId('blog'),
-  },
-  {
-    title: 'How to Export Metadata from MDX for Next.js SEO',
-    description:
-      'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
-    link: '/blog/example-mdx-metadata',
-    published: new Date('2024-03-01'),
+    title: 'How I stole the design of my portfolio',
+    description: 'Reflecting on the making process of this website',
+    link: '/blog/how-i-stole-the-design-of-my-portfolio',
+    published: new Date('2025-06-12'),
     id: generateId('blog'),
   },
 ]
