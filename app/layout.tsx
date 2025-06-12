@@ -5,6 +5,7 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/next';
+import { list } from '@vercel/blob';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -13,7 +14,20 @@ export const viewport: Viewport = {
 };
 
 const baseURL = new URL('https://thaletto.vercel.app');
-const ogURL = 'https://ihyabdqqn0nd2hvz.public.blob.vercel-storage.com/images/opengraph/opengraph-image.jpg'
+
+async function getBlobURL() {
+  try {
+    const { blobs } = await list({ prefix: 'images/opengraph/' });
+    const imageBlob = blobs.find(blob => blob.pathname === 'images/opengraph/opengraph-image.jpg');
+    return imageBlob?.url || null;
+  } catch (error) {
+    console.error('Error fetching blob URL:', error);
+    return null;
+  }
+}
+
+// Get the blob URL
+const ogURL = await getBlobURL();
 
 export const metadata: Metadata = {
   title: {
@@ -29,18 +43,20 @@ export const metadata: Metadata = {
     creator: '@thaletto',
     title: 'thaletto Portfolio & Blog',
     description: 'Portfolio & Blog website of Laxman K R, a full stack developer',
-    images: [ogURL],
+    images: ogURL ? [ogURL] : [],
   },
 
   openGraph: {
-    images: [
-      {
-        url: ogURL,
-        width: 1200,
-        height: 630,
-        alt: 'Laxman K R @thaletto'
-      },
-    ],
+    images: ogURL
+      ? [
+          {
+            url: ogURL,
+            width: 1200,
+            height: 630,
+            alt: 'Laxman K R @thaletto',
+          },
+        ]
+      : [],
     title: 'Laxman K R @thaletto',
     description: 'Full Stack AI Developer',
     type: 'website',
