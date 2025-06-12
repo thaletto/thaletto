@@ -7,6 +7,7 @@ export type Project = {
   github?: string
   image: string
   id: string
+  date: Date
 }
 
 export type WorkExperience = {

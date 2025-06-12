@@ -40,10 +40,19 @@ export const PROJECTS: Project[] = [
     description:
       'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
     link: 'https://krcrackers.co',
-    github: 'https://krcrackers.co',
     image: '/projects/krcrackers.png',
     id: generateId(),
+    date: new Date('2024-08'),
   },
+  {
+    name: 'Lung nodule detection',
+    description: 
+      'Complex & irregular lung nodule detection using YOLO, V-Net & DETR',
+    link: 'https://drive.google.com/file/d/1_XcKu5bFmmrTHHc4nxXetIZbXwiMjkj3/view?usp=sharing',
+    image: '/projects/lungnodule.png',
+    id: generateId(),
+    date: new Date('2024-05'),
+  } 
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
@@ -57,7 +66,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'Freelance',
     title: 'Full Stack Developer',
-    start: new Date('2024'),
+    start: new Date('2024-08-19'),
     end: 'Present',
     id: generateId('work'),
   },

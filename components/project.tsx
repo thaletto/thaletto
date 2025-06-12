@@ -65,6 +65,9 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="px-1">
         <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">{project.name}</span>
         <p className="text-base text-zinc-600 dark:text-zinc-300">{project.description}</p>
+        <p className="italic text-base text-zinc-600 dark:text-zinc-300">
+          {project.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+        </p>
       </div>
     </div>
   );
