@@ -9,10 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: 'https://thaletto.verce.app/blog',
+      url: 'https://thaletto.verce.app/blogs',
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.5,
+      priority: 0.7,
     },
   ];
 }

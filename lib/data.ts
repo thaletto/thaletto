@@ -40,10 +40,19 @@ export const PROJECTS: Project[] = [
     description:
       'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
     link: 'https://krcrackers.co',
-    github: 'https://krcrackers.co',
     image: '/projects/krcrackers.png',
     id: generateId(),
+    date: new Date('2024-08'),
   },
+  {
+    name: 'Lung nodule detection',
+    description: 
+      'Complex & irregular lung nodule detection using YOLO, V-Net & DETR',
+    link: 'https://drive.google.com/file/d/1_XcKu5bFmmrTHHc4nxXetIZbXwiMjkj3/view?usp=sharing',
+    image: '/projects/lungnodule.png',
+    id: generateId(),
+    date: new Date('2024-05'),
+  } 
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
@@ -57,7 +66,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
   {
     company: 'Freelance',
     title: 'Full Stack Developer',
-    start: new Date('2024'),
+    start: new Date('2024-08-19'),
     end: 'Present',
     id: generateId('work'),
   },
@@ -118,18 +127,10 @@ export const SKILLS: Skill[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Exploring the Intersection of Design, AI, and Design Engineering',
-    description: 'How AI is changing the way we design',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
-    published: new Date('2024-03-15'),
-    id: generateId('blog'),
-  },
-  {
-    title: 'How to Export Metadata from MDX for Next.js SEO',
-    description:
-      'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
-    link: '/blog/example-mdx-metadata',
-    published: new Date('2024-03-01'),
+    title: 'How I stole the design of my portfolio',
+    description: 'Reflecting on the making process of this website',
+    link: '/blog/how-i-stole-the-design-of-my-portfolio',
+    published: new Date('2025-06-12'),
     id: generateId('blog'),
   },
 ]

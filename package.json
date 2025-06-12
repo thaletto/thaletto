@@ -18,18 +18,18 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/mdx": "^2.0.13",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/blob": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.16.0",
-    "lucide-react": "^0.513.0",
-    "motion": "^12.16.0",
+    "lucide-react": "^0.514.0",
+    "motion": "^12.17.3",
     "next": "15.3.3",
     "next-themes": "^0.4.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "sugar-high": "^0.9.3",
-    "tailwind-merge": "^3.3.0"
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
@@ -50,6 +50,7 @@
   },
   "trustedDependencies": [
     "@tailwindcss/oxide",
+    "sharp",
     "unrs-resolver"
   ]
 }

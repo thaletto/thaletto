@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ProjectCard } from '@/components/project';
 import { PROJECTS } from '@/lib/data';
 import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_IMAGE } from '@/components/ui/motion';
@@ -17,7 +17,7 @@ export default function ProjectsPage() {
           <span className="italic">All</span> Projects
         </h3>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {PROJECTS.map(project => (
+          {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime()).map(project => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
