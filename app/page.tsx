@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { About } from '@/components/about';
 import { ProjectList } from '@/components/project';
 import { WorkExperience } from '@/components/work';
@@ -7,7 +7,12 @@ import { Blogs } from '@/components/blogs';
 import { Contact } from '@/components/contact';
 import { Education } from '@/components/education';
 import { Skills } from '@/components/skills';
-import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_SECTION, TRANSITION_IMAGE } from '@/components/ui/motion';
+import {
+  VARIANTS_CONTAINER,
+  VARIANTS_SECTION,
+  TRANSITION_SECTION,
+  TRANSITION_IMAGE,
+} from '@/components/ui/motion';
 
 export default function Personal() {
   return (

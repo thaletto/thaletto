@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { BLOG_POSTS } from '@/lib/data';
 import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_IMAGE } from '@/components/ui/motion';
 import { AnimatedBackground } from '@/components/ui/animated-background';
