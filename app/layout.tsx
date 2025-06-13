@@ -18,7 +18,9 @@ const baseURL = new URL('https://thaletto.vercel.app');
 async function getBlobURL() {
   try {
     const { blobs } = await list({ prefix: 'images/opengraph/' });
-    const imageBlob = blobs.find(blob => blob.pathname === 'images/opengraph/opengraph-image.jpg');
+    const imageBlob = blobs.find(
+      (blob) => blob.pathname === 'images/opengraph/opengraph-image.jpg'
+    );
     return imageBlob?.url || null;
   } catch (error) {
     console.error('Error fetching blob URL:', error);
@@ -42,7 +44,8 @@ export const metadata: Metadata = {
     site: 'thaletto.vercel.app',
     creator: '@thaletto',
     title: 'thaletto Portfolio & Blog',
-    description: 'Portfolio & Blog website of Laxman K R, a full stack developer',
+    description:
+      'Portfolio & Blog website of Laxman K R, a full stack developer',
     images: ogURL ? [ogURL] : [],
   },
 
@@ -82,7 +85,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geist.variable} ${geistMono.variable} tracking-tight antialiased`}>
+      <body
+        className={`${geist.variable} ${geistMono.variable} tracking-tight antialiased`}
+      >
         <ThemeProvider
           enableSystem={true}
           attribute="class"
@@ -110,7 +115,7 @@ export default function RootLayout({
 
             {/* Dark Mode Background */}
             <div
-              className="fixed inset-0 -z-50 bg-cover bg-no-repeat bg-blend-overlay hidden dark:block"
+              className="fixed inset-0 -z-50 hidden bg-cover bg-no-repeat bg-blend-overlay dark:block"
               style={{
                 backgroundImage: `
                   linear-gradient(rgb(0, 96, 96) 100px, rgba(0, 224, 224, 0) 360px),

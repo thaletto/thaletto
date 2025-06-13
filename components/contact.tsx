@@ -63,7 +63,7 @@ export function Contact() {
           </a>
         </p>
         <div className="flex flex-col items-start justify-start space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
-          {SOCIAL_LINKS.map(link => (
+          {SOCIAL_LINKS.map((link) => (
             <MagneticSocialLink
               key={link.id}
               icon={link.icon}

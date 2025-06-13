@@ -1,6 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card';
 import { Badge } from '@/components/ui/badge';
 
 export default function ShadcnDemo() {
@@ -68,7 +72,9 @@ export default function ShadcnDemo() {
                     The creator of shadcn/ui. Building beautiful components.
                   </p>
                   <div className="flex items-center pt-2">
-                    <span className="text-xs text-muted-foreground">Joined December 2021</span>
+                    <span className="text-muted-foreground text-xs">
+                      Joined December 2021
+                    </span>
                   </div>
                 </div>
               </div>

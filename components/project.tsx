@@ -25,8 +25,16 @@ function ProjectImage({
   };
 
   return (
-    <div className="group relative aspect-video w-full cursor-pointer" onClick={handleClick}>
-      <Image src={image} alt={name} fill={true} className="rounded-xl object-cover" />
+    <div
+      className="group relative aspect-video w-full cursor-pointer"
+      onClick={handleClick}
+    >
+      <Image
+        src={image}
+        alt={name}
+        fill={true}
+        className="rounded-xl object-cover"
+      />
       <div className="absolute inset-0 flex items-center justify-center gap-8 rounded-xl bg-zinc-900/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         {link && (
           <Link
@@ -63,10 +71,17 @@ export function ProjectCard({ project }: { project: Project }) {
         />
       </div>
       <div className="px-1">
-        <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">{project.name}</span>
-        <p className="text-base text-zinc-600 dark:text-zinc-300">{project.description}</p>
-        <p className="italic text-base text-zinc-600 dark:text-zinc-300">
-          {project.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+        <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">
+          {project.name}
+        </span>
+        <p className="text-base text-zinc-600 dark:text-zinc-300">
+          {project.description}
+        </p>
+        <p className="text-base text-zinc-600 italic dark:text-zinc-300">
+          {project.date.toLocaleDateString('en-US', {
+            month: 'long',
+            year: 'numeric',
+          })}
         </p>
       </div>
     </div>
@@ -79,16 +94,20 @@ export function ProjectList() {
       <div className="mb-5 flex items-center gap-1">
         <Link
           href="/projects"
-          className="flex items-center gap-1 text-sm  text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
+          className="flex items-center gap-1 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
         >
-          <h3 className="text-xl font-medium text-zinc-900 dark:text-zinc-50">Selected Projects</h3>
+          <h3 className="text-xl font-medium text-zinc-900 dark:text-zinc-50">
+            Selected Projects
+          </h3>
           <ChevronRight className="mt-1" />
         </Link>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 2).map(project => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime())
+          .slice(0, 2)
+          .map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
       </div>
     </>
   );

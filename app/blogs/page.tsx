@@ -1,14 +1,18 @@
 'use client';
 import { motion } from 'motion/react';
 import { BLOG_POSTS } from '@/lib/data';
-import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_IMAGE } from '@/components/ui/motion';
+import {
+  VARIANTS_CONTAINER,
+  VARIANTS_SECTION,
+  TRANSITION_IMAGE,
+} from '@/components/ui/motion';
 import { AnimatedBackground } from '@/components/ui/animated-background';
 import Link from 'next/link';
 
 export default function BlogPage() {
   return (
     <motion.main
-      className="container min-h-screen mx-auto py-4"
+      className="container mx-auto min-h-screen py-4"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
@@ -27,7 +31,9 @@ export default function BlogPage() {
               duration: 0.2,
             }}
           >
-            {BLOG_POSTS.sort((a, b) => b.published.getTime() - a.published.getTime()).map(post => (
+            {BLOG_POSTS.sort(
+              (a, b) => b.published.getTime() - a.published.getTime()
+            ).map((post) => (
               <Link
                 key={post.id}
                 className="-mx-3 rounded-xl px-3 py-3"
@@ -35,20 +41,25 @@ export default function BlogPage() {
                 data-id={post.id}
               >
                 <div className="flex flex-col space-y-1">
-                  <h4 className="font-normal dark:text-zinc-50">{post.title}</h4>
+                  <h4 className="font-normal dark:text-zinc-50">
+                    {post.title}
+                  </h4>
                   <p className="text-zinc-600 dark:text-zinc-300">
                     {post.description}
                     <span className="hidden sm:inline">
                       {post.published &&
-                        ` • Published on ${post.published.toLocaleDateString('en-GB', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })}`}
+                        ` • Published on ${post.published.toLocaleDateString(
+                          'en-GB',
+                          {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          }
+                        )}`}
                     </span>
                   </p>
                   {post.published && (
-                    <p className="text-zinc-600 dark:text-zinc-300 sm:hidden">
+                    <p className="text-zinc-600 sm:hidden dark:text-zinc-300">
                       Published on{' '}
                       {post.published.toLocaleDateString('en-GB', {
                         year: 'numeric',

@@ -2,12 +2,16 @@
 import { motion } from 'motion/react';
 import { ProjectCard } from '@/components/project';
 import { PROJECTS } from '@/lib/data';
-import { VARIANTS_CONTAINER, VARIANTS_SECTION, TRANSITION_IMAGE } from '@/components/ui/motion';
+import {
+  VARIANTS_CONTAINER,
+  VARIANTS_SECTION,
+  TRANSITION_IMAGE,
+} from '@/components/ui/motion';
 
 export default function ProjectsPage() {
   return (
     <motion.main
-      className="container min-h-screen mx-auto py-4"
+      className="container mx-auto min-h-screen py-4"
       variants={VARIANTS_CONTAINER}
       initial="hidden"
       animate="visible"
@@ -17,9 +21,11 @@ export default function ProjectsPage() {
           <span className="italic">All</span> Projects
         </h3>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime()).map(project => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime()).map(
+            (project) => (
+              <ProjectCard key={project.id} project={project} />
+            )
+          )}
         </div>
       </motion.section>
     </motion.main>
