@@ -5,8 +5,8 @@ import {
   SocialLink,
   Education,
   Skill,
-} from './types'
-import { generateId } from './utils'
+} from './types';
+import { generateId } from './utils';
 import {
   SiNextdotjs,
   SiReact,
@@ -32,7 +32,7 @@ import {
   SiX,
   SiLinkedin,
   SiInstagram,
-} from 'react-icons/si'
+} from 'react-icons/si';
 
 export const PROJECTS: Project[] = [
   {
@@ -46,14 +46,14 @@ export const PROJECTS: Project[] = [
   },
   {
     name: 'Lung nodule detection',
-    description: 
+    description:
       'Complex & irregular lung nodule detection using YOLO, V-Net & DETR',
     link: 'https://drive.google.com/file/d/1_XcKu5bFmmrTHHc4nxXetIZbXwiMjkj3/view?usp=sharing',
     image: '/projects/lungnodule.png',
     id: generateId(),
     date: new Date('2024-05'),
-  } 
-]
+  },
+];
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
@@ -70,7 +70,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     end: 'Present',
     id: generateId('work'),
   },
-]
+];
 
 export const EDUCATION: Education[] = [
   {
@@ -100,7 +100,7 @@ export const EDUCATION: Education[] = [
     end: new Date('2018'),
     id: generateId('edu'),
   },
-]
+];
 
 export const SKILLS: Skill[] = [
   { name: 'Next.js', id: generateId('skill'), icon: SiNextdotjs },
@@ -123,7 +123,7 @@ export const SKILLS: Skill[] = [
   { name: 'Docker', id: generateId('skill'), icon: SiDocker },
   { name: 'Git', id: generateId('skill'), icon: SiGit },
   { name: 'Jenkins', id: generateId('skill'), icon: SiJenkins },
-]
+];
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -133,7 +133,7 @@ export const BLOG_POSTS: BlogPost[] = [
     published: new Date('2025-06-12'),
     id: generateId('blog'),
   },
-]
+];
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
@@ -160,6 +160,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
     icon: SiInstagram,
     id: generateId('social'),
   },
-]
+];
 
-export const EMAIL = 'krlaxman@gmail.com'
+export const EMAIL = 'krlaxman@gmail.com';

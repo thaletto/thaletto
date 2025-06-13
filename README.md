@@ -14,7 +14,8 @@
 - Currently working on
   - Vendora
 - Currently learning
-  - React Native
+  - React Native (Expo)
+  - Go
   - Rust
 
 ## Portfolio

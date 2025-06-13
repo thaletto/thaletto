@@ -22,7 +22,10 @@ export default function Personal() {
       initial="hidden"
       animate="visible"
     >
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <About />
       </motion.section>
 
@@ -30,23 +33,38 @@ export default function Personal() {
         <ProjectList />
       </motion.section>
 
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <WorkExperience />
       </motion.section>
 
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <Education />
       </motion.section>
 
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <Skills />
       </motion.section>
 
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <Blogs />
       </motion.section>
 
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <Contact />
       </motion.section>
     </motion.main>

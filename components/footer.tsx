@@ -45,11 +45,11 @@ function ThemeSwitch() {
         duration: 0.2,
       }}
       enableHover={false}
-      onValueChange={id => {
+      onValueChange={(id) => {
         setTheme(id as string);
       }}
     >
-      {THEMES_OPTIONS.map(theme => {
+      {THEMES_OPTIONS.map((theme) => {
         return (
           <button
             key={theme.id}

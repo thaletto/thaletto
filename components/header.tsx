@@ -12,7 +12,8 @@ import { Button } from './ui/button';
 function CopyButton() {
   const [text, setText] = useState('Copy');
   const pathname = usePathname();
-  const currentUrl = typeof window !== 'undefined' ? window.location.origin + pathname : '';
+  const currentUrl =
+    typeof window !== 'undefined' ? window.location.origin + pathname : '';
 
   useEffect(() => {
     setTimeout(() => {
@@ -58,7 +59,9 @@ export function Header() {
     <header className="mb-8 flex items-start justify-between">
       <div className="flex flex-col gap-2">
         <Link href="/" className="text-3xl font-medium">
-          Laxman K R
+          <TextEffect as="div" preset="fade" per="char" delay={0.5}>
+            Laxman K R
+          </TextEffect>
         </Link>
 
         <div className="text-zinc-600 dark:text-zinc-300">
@@ -80,7 +83,7 @@ export function Header() {
       <div className="flex flex-col items-end gap-2">
         <Avatar className="size-10">
           <AvatarImage src="https://github.com/thaletto.png" />
-          <AvatarFallback className="bg-zinc-600 dark:bg-zinc-400 text-zinc-100 dark:text-zinc-900 text-xl">
+          <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100 dark:bg-zinc-400 dark:text-zinc-900">
             LKR
           </AvatarFallback>
         </Avatar>
@@ -89,7 +92,7 @@ export function Header() {
           <HoverCardTrigger asChild>
             <Button
               variant="ghost"
-              className="text-zinc-600 dark:text-zinc-300 font-normal p-0 h-auto hover:bg-transparent"
+              className="h-auto p-0 font-normal text-zinc-600 hover:bg-transparent dark:text-zinc-300"
               onClick={() => setIsOpen(!isOpen)}
             >
               @thaletto
@@ -97,13 +100,17 @@ export function Header() {
           </HoverCardTrigger>
           <HoverCardContent
             align={align}
-            className="shadow-lg border-0 text-zinc-600 dark:text-zinc-300 bg-zinc-900 dark:bg-zinc-50 w-full"
+            className="w-full border-0 bg-zinc-900 text-zinc-600 shadow-lg dark:bg-zinc-50 dark:text-zinc-300"
           >
             <div className="flex items-start gap-4">
               <img src={'/adc.png'} width={50} height={50} />
               <div className="flex flex-col gap-1">
-                <p className="text-zinc-50 dark:text-zinc-900 font-medium">A Developer Company</p>
-                <p className="text-zinc-400 dark:text-zinc-600">Founder & CEO</p>
+                <p className="font-medium text-zinc-50 dark:text-zinc-900">
+                  A Developer Company
+                </p>
+                <p className="text-zinc-400 dark:text-zinc-600">
+                  Founder & CEO
+                </p>
               </div>
             </div>
           </HoverCardContent>
