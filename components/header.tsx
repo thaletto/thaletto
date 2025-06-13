@@ -58,7 +58,9 @@ export function Header() {
     <header className="mb-8 flex items-start justify-between">
       <div className="flex flex-col gap-2">
         <Link href="/" className="text-3xl font-medium">
-          Laxman K R
+          <TextEffect as="div" preset="fade" per="char" delay={0.5}>
+            Laxman K R
+          </TextEffect>
         </Link>
 
         <div className="text-zinc-600 dark:text-zinc-300">
