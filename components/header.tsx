@@ -16,9 +16,12 @@ function CopyButton() {
     typeof window !== 'undefined' ? window.location.origin + pathname : '';
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setText('Copy');
     }, 2000);
+
+    return () => clearTimeout(timeoutId);
+    
   }, [text]);
 
   return (

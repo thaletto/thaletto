@@ -6,6 +6,7 @@ export type Project = {
   link?: string;
   github?: string;
   image: string;
+  tags: string[];
   id: string;
   date: Date;
 };

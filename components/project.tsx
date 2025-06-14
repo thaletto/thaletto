@@ -4,17 +4,20 @@ import Link from 'next/link';
 import { PROJECTS } from '@/lib/data';
 import { SiGithub } from 'react-icons/si';
 import { ChevronRight, ExternalLink } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 function ProjectImage({
   image,
   name,
   link,
   github,
+  priority,
 }: {
   image: string;
   name: string;
   link?: string;
   github?: string;
+  priority?: boolean;
 }) {
   const handleClick = () => {
     if (link) {
@@ -34,6 +37,7 @@ function ProjectImage({
         alt={name}
         fill={true}
         className="rounded-xl object-cover"
+        priority={priority}
       />
       <div className="absolute inset-0 flex items-center justify-center gap-8 rounded-xl bg-zinc-900/60 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
         {link && (
@@ -59,7 +63,13 @@ function ProjectImage({
   );
 }
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  priority = false,
+}: {
+  project: Project;
+  priority: boolean;
+}) {
   return (
     <div key={project.id} className="space-y-2">
       <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
@@ -68,6 +78,7 @@ export function ProjectCard({ project }: { project: Project }) {
           name={project.name}
           link={project.link}
           github={project.github}
+          priority={priority}
         />
       </div>
       <div className="px-1">
@@ -83,6 +94,17 @@ export function ProjectCard({ project }: { project: Project }) {
             year: 'numeric',
           })}
         </p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <Badge
+              key={tag}
+              variant="secondary"
+              className="border border-zinc-400 dark:border-zinc-700"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -106,7 +128,7 @@ export function ProjectList() {
         {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime())
           .slice(0, 2)
           .map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard key={project.id} project={project} priority={true} />
           ))}
       </div>
     </>
