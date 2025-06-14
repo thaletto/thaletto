@@ -6,6 +6,17 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card';
 import { Badge } from '@/components/ui/badge';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+} from '@/components/ui/dropdown-menu';
 
 export default function ShadcnDemo() {
   return (
@@ -80,6 +91,64 @@ export default function ShadcnDemo() {
               </div>
             </HoverCardContent>
           </HoverCard>
+        </div>
+      </section>
+
+      {/* Dropdown Section */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Dropdowns</h2>
+        <div className="flex flex-wrap gap-4">
+          {/* Basic Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Basic Menu</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem>Help</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Checkbox Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Checkbox Menu</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Preferences</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuCheckboxItem checked>
+                Show Status Bar
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem>
+                Show Line Numbers
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem>Show Minimap</DropdownMenuCheckboxItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Radio Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Radio Menu</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Theme</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup value="light">
+                <DropdownMenuRadioItem value="light">
+                  Light
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="system">
+                  System
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </section>
     </div>

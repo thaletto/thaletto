@@ -1,9 +1,10 @@
 'use client';
 import { AnimatedBackground } from '@/components/ui/animated-background';
-import { TextLoop } from '@/components/ui/text-loop';
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import adc from '@/public/adc.png';
+import Image from 'next/image';
 
 const THEMES_OPTIONS = [
   {
@@ -12,14 +13,14 @@ const THEMES_OPTIONS = [
     icon: <SunIcon className="h-4 w-4" />,
   },
   {
-    label: 'Dark',
-    id: 'dark',
-    icon: <MoonIcon className="h-4 w-4" />,
-  },
-  {
     label: 'System',
     id: 'system',
     icon: <MonitorIcon className="h-4 w-4" />,
+  },
+  {
+    label: 'Dark',
+    id: 'dark',
+    icon: <MoonIcon className="h-4 w-4" />,
   },
 ];
 
@@ -69,13 +70,18 @@ function ThemeSwitch() {
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-zinc-500 px-0 py-4 dark:border-zinc-400">
-      <div className="flex items-center justify-between">
-        <a href="https://github.com/thaletto/thaletto" target="_blank">
-          <TextLoop className="text-xs text-zinc-500 dark:text-zinc-300">
-            <span>© {new Date().getFullYear()} thaletto.</span>
-            <span>Built with Next.js</span>
-            <span>Built with tailwindCSS</span>
-          </TextLoop>
+      <div className="flex flex-row h-auto items-center justify-between">
+        <a href="https://github.com/a-developer-company" target="_blank">
+            <span className="flex items-center gap-2 text-zinc-500 text-sm">
+              © {new Date().getFullYear()}
+              <Image
+                src={adc}
+                alt="A Developer Company"
+                className="h-8 w-8"
+                priority={true}
+              />
+              A Developer Company
+            </span>
         </a>
         <div className="text-xs text-zinc-400">
           <ThemeSwitch />
