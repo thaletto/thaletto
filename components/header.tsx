@@ -21,7 +21,6 @@ function CopyButton() {
     }, 2000);
 
     return () => clearTimeout(timeoutId);
-    
   }, [text]);
 
   return (
@@ -84,12 +83,18 @@ export function Header() {
       </div>
 
       <div className="flex flex-col items-end gap-2">
-        <Avatar className="size-10">
-          <AvatarImage src="https://github.com/thaletto.png" />
-          <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100 dark:bg-zinc-400 dark:text-zinc-900">
-            LKR
-          </AvatarFallback>
-        </Avatar>
+        <Link
+          href="https://github.com/thaletto"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Avatar className="size-10 transition-opacity hover:opacity-90">
+            <AvatarImage src="https://github.com/thaletto.png" />
+            <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100 dark:bg-zinc-400 dark:text-zinc-900">
+              LKR
+            </AvatarFallback>
+          </Avatar>
+        </Link>
 
         <HoverCard open={isOpen} onOpenChange={setIsOpen}>
           <HoverCardTrigger asChild>
