@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { PROJECTS } from '@/lib/data';
 import { SiGithub } from 'react-icons/si';
 import { ChevronRight, ExternalLink } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 function ProjectImage({
   image,
@@ -83,6 +84,13 @@ export function ProjectCard({ project }: { project: Project }) {
             year: 'numeric',
           })}
         </p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <Badge key={tag} variant="secondary" className="border border-zinc-400 dark:border-zinc-700">
+              {tag}
+            </Badge>
+          ))}
+        </div>
       </div>
     </div>
   );
