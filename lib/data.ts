@@ -41,8 +41,9 @@ export const PROJECTS: Project[] = [
       'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
     link: 'https://krcrackers.co',
     image: '/projects/krcrackers.png',
+    tags: ['Next.js', 'SSR', 'PostgreSQL'],
     id: generateId(),
-    date: new Date('2024-08'),
+    date: new Date('2024-09'),
   },
   {
     name: 'Lung nodule detection',
@@ -50,9 +51,28 @@ export const PROJECTS: Project[] = [
       'Complex & irregular lung nodule detection using YOLO, V-Net & DETR',
     link: 'https://drive.google.com/file/d/1_XcKu5bFmmrTHHc4nxXetIZbXwiMjkj3/view?usp=sharing',
     image: '/projects/lungnodule.png',
+    tags: ['CNN', 'Transformers', 'Deep Learning'],
     id: generateId(),
     date: new Date('2024-05'),
   },
+  {
+    name: 'Lense',
+    description: 'AI-powered marketplace for pre-owned products with instant valuation',
+    github: 'https://github.com/thaletto/Lense',
+    image: '/projects/lense.png',
+    tags: ['Android Application', 'Jetpack Compose', 'Kotlin'],
+    id: generateId(),
+    date: new Date('2024-02'),
+  },
+  {
+    name: 'Parkinsons Disease Detection',
+    description: 'Implemented multiple supervised and unsupervised machine learning models for early parkinsons disease detection',
+    github: 'https://github.com/thaletto/Parkinson-Disease-Detection',
+    image: '/projects/parkinsons.png',
+    tags: ['ML', 'Gradient Boost', 'EDA'],
+    id: generateId(),
+    date: new Date('2023-09'),
+  }
 ];
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
