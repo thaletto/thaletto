@@ -1,3 +1,6 @@
+import { RainbowButton } from './ui/rainbow-button';
+import { Handshake } from 'lucide-react';
+
 export function About() {
   return (
     <div className="flex-1">
@@ -10,6 +13,19 @@ export function About() {
         <br />
         Rage, rage against the dying of the light
       </p>
+      <div className="mt-4">
+        <RainbowButton className='rounded-xl' size='default' asChild>
+          <a
+            href="https://twitter.com/messages/compose?recipient_id=1826558389452771328"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-row items-center gap-2"
+          >
+            <Handshake className="h-4 w-4" />
+            Hire me
+          </a>
+        </RainbowButton>
+      </div>
     </div>
   );
 }
