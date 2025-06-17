@@ -15,7 +15,9 @@ function Skills() {
             } sm:${index % 3 === 0 ? 'justify-self-start' : index % 3 === 2 ? 'justify-self-end' : 'justify-self-center'} md:${index % 4 === 0 ? 'justify-self-start' : index % 4 === 3 ? 'justify-self-end' : 'justify-self-center'}`}
           >
             <div className="relative flex items-center gap-2 p-1">
-              {<skill.icon className="h-5 w-5 text-zinc-900 dark:text-zinc-50" />}
+              {
+                <skill.icon className="h-5 w-5 text-zinc-900 dark:text-zinc-50" />
+              }
               <h4 className="font-medium text-zinc-900 dark:text-zinc-50">
                 {skill.name}
               </h4>
@@ -56,26 +58,19 @@ function Certificates() {
                   {certificate.name}
                 </h4>
                 <p className="text-zinc-600 dark:text-zinc-300">
-                  {certificate.issuedBy}
-                  <span className="hidden sm:inline">
-                    {` • Issued on ${certificate.issuedDate.toLocaleDateString(
-                      'en-GB',
-                      {
-                        year: 'numeric',
-                        month: 'long',
-                      }
-                    )}`}
-                  </span>
+                  Issued by {certificate.issuedBy}
+                  {certificate.issuedDate && (
+                    <span>
+                      {` in ${certificate.issuedDate.toLocaleDateString(
+                        'en-GB',
+                        {
+                          year: 'numeric',
+                          month: 'short',
+                        }
+                      )}`}
+                    </span>
+                  )}
                 </p>
-                {certificate.issuedDate && (
-                  <p className="text-zinc-600 sm:hidden dark:text-zinc-300">
-                    Issued on{' '}
-                    {certificate.issuedDate.toLocaleDateString('en-GB', {
-                      year: 'numeric',
-                      month: 'long',
-                    })}
-                  </p>
-                )}
               </div>
             </div>
           </a>
@@ -88,13 +83,9 @@ export function SkillsAndCertificate() {
   return (
     <>
       <Tabs defaultValue="skills" className="w-full">
-        <TabsList className="grid w-full h-10 grid-cols-2">
-          <TabsTrigger value="skills">
-            Skills
-          </TabsTrigger>
-          <TabsTrigger value="certificates">
-            Certificates
-          </TabsTrigger>
+        <TabsList className="grid h-10 w-full grid-cols-2">
+          <TabsTrigger value="skills">Skills</TabsTrigger>
+          <TabsTrigger value="certificates">Certificates</TabsTrigger>
         </TabsList>
         <TabsContent value="skills">
           <Skills />

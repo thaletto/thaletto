@@ -154,7 +154,7 @@ export const SKILLS: Skill[] = [
 export const CERTIFICATES: Certificate[] = [
   {
     name: 'MCP for Production Automation',
-    issuedBy: 'HuggingFace',
+    issuedBy: 'Hugging Face',
     issuedDate: new Date('2025-06-18'),
     link: 'https://github.com/thaletto/mcp',
     icon: SiHuggingface,
