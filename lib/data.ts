@@ -34,6 +34,7 @@ import {
   SiLinkedin,
   SiInstagram,
   SiMeta,
+  SiHuggingface,
 } from 'react-icons/si';
 import { FaUniversity } from 'react-icons/fa';
 
@@ -151,6 +152,14 @@ export const SKILLS: Skill[] = [
 ];
 
 export const CERTIFICATES: Certificate[] = [
+  {
+    name: 'MCP for Production Automation',
+    issuedBy: 'Hugging Face',
+    issuedDate: new Date('2025-06-18'),
+    link: 'https://github.com/thaletto/mcp',
+    icon: SiHuggingface,
+    id: generateId('certificate'),
+  },
   {
     name: 'Advanced React',
     issuedBy: 'Meta',
