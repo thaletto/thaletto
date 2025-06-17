@@ -17,6 +17,16 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
 } from '@/components/ui/dropdown-menu';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  CardAction,
+} from '@/components/ui/card';
 
 export default function ShadcnDemo() {
   return (
@@ -149,6 +159,110 @@ export default function ShadcnDemo() {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+        </div>
+      </section>
+
+      {/* Card Section */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Cards</h2>
+        <div className="flex flex-wrap gap-4">
+          <Card className="w-[350px]">
+            <CardHeader>
+              <CardTitle>Card Title</CardTitle>
+              <CardDescription>Card Description</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>
+                This is the main content of the card. You can put any content
+                here.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Button variant="outline">Cancel</Button>
+              <Button className="ml-2">Submit</Button>
+            </CardFooter>
+          </Card>
+
+          <Card className="w-[350px]">
+            <CardHeader>
+              <CardTitle>Card with Action</CardTitle>
+              <CardDescription>
+                This card has an action button in the header
+              </CardDescription>
+              <CardAction>
+                <Button variant="ghost" size="sm">
+                  Action
+                </Button>
+              </CardAction>
+            </CardHeader>
+            <CardContent>
+              <p>
+                This card demonstrates the CardAction component in the header.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Tabs Section */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Tabs</h2>
+        <div className="flex flex-wrap gap-4">
+          <Tabs defaultValue="account" className="w-[400px]">
+            <TabsList>
+              <TabsTrigger value="account">Account</TabsTrigger>
+              <TabsTrigger value="password">Password</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+            </TabsList>
+            <TabsContent value="account" className="mt-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Account Settings</CardTitle>
+                  <CardDescription>
+                    Manage your account settings and preferences.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">
+                    Here you can manage your account details, email preferences,
+                    and notification settings.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="password" className="mt-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Password Settings</CardTitle>
+                  <CardDescription>
+                    Change your password and security settings.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">
+                    Update your password and configure two-factor authentication
+                    settings.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="settings" className="mt-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>General Settings</CardTitle>
+                  <CardDescription>
+                    Configure your general application settings.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm">
+                    Customize your application preferences, language, and
+                    display settings.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
     </div>

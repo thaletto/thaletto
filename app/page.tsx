@@ -6,7 +6,7 @@ import { WorkExperience } from '@/components/work';
 import { Blogs } from '@/components/blogs';
 import { Contact } from '@/components/contact';
 import { Education } from '@/components/education';
-import { Skills } from '@/components/skills';
+import { SkillsAndCertificate } from '@/components/skills';
 import {
   VARIANTS_CONTAINER,
   VARIANTS_SECTION,
@@ -51,7 +51,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <Skills />
+        <SkillsAndCertificate />
       </motion.section>
 
       <motion.section
