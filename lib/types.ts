@@ -62,3 +62,12 @@ export type Skill = {
   id: string;
   icon: IconType;
 };
+
+export type Certificate = {
+  name: string;
+  issuedDate: Date;
+  issuedBy: string;
+  id: string;
+  icon: IconType;
+  link: string;
+};

@@ -5,6 +5,7 @@ import {
   SocialLink,
   Education,
   Skill,
+  Certificate,
 } from './types';
 import { generateId } from './utils';
 import {
@@ -32,7 +33,9 @@ import {
   SiX,
   SiLinkedin,
   SiInstagram,
+  SiMeta,
 } from 'react-icons/si';
+import { FaUniversity } from 'react-icons/fa';
 
 export const PROJECTS: Project[] = [
   {
@@ -57,7 +60,8 @@ export const PROJECTS: Project[] = [
   },
   {
     name: 'Lense',
-    description: 'AI-powered marketplace for pre-owned products with instant valuation',
+    description:
+      'AI-powered marketplace for pre-owned products with instant valuation',
     github: 'https://github.com/thaletto/Lense',
     image: '/projects/lense.png',
     tags: ['Android Application', 'Jetpack Compose', 'Kotlin'],
@@ -66,13 +70,14 @@ export const PROJECTS: Project[] = [
   },
   {
     name: 'Parkinsons Disease Detection',
-    description: 'Implemented multiple supervised and unsupervised machine learning models for early parkinsons disease detection',
+    description:
+      'Implemented multiple supervised and unsupervised machine learning models for early parkinsons disease detection',
     github: 'https://github.com/thaletto/Parkinson-Disease-Detection',
     image: '/projects/parkinsons.png',
     tags: ['ML', 'Gradient Boost', 'EDA'],
     id: generateId(),
     date: new Date('2023-09'),
-  }
+  },
 ];
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
@@ -143,6 +148,33 @@ export const SKILLS: Skill[] = [
   { name: 'Docker', id: generateId('skill'), icon: SiDocker },
   { name: 'Git', id: generateId('skill'), icon: SiGit },
   { name: 'Jenkins', id: generateId('skill'), icon: SiJenkins },
+];
+
+export const CERTIFICATES: Certificate[] = [
+  {
+    name: 'Advanced React',
+    issuedBy: 'Meta',
+    issuedDate: new Date('2024-02'),
+    link: 'https://www.coursera.org/verify/GVQDTDYQVGJ6',
+    icon: SiMeta,
+    id: generateId('certificate'),
+  },
+  {
+    name: 'Programming Fundamentals in Kotlin',
+    issuedBy: 'Meta',
+    issuedDate: new Date('2023-08'),
+    link: 'https://www.coursera.org/verify/W36X2TYW38KV',
+    icon: SiMeta,
+    id: generateId('certificate'),
+  },
+  {
+    name: 'Fundamentals of Visualization',
+    issuedBy: 'University of California, Davis',
+    issuedDate: new Date('2023-02'),
+    link: 'https://www.coursera.org/verify/V7N46QJQCNBY',
+    icon: FaUniversity,
+    id: generateId('certificate'),
+  },
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
