@@ -58,7 +58,7 @@ export function Header() {
   }, []);
 
   const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (window?.document?.startViewTransition) {
+    if (typeof window.document.startViewTransition === 'function') {
       e.preventDefault();
       document.body.classList.add('slide-right');
       document

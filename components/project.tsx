@@ -113,7 +113,7 @@ export function ProjectCard({
 export function ProjectList() {
   // Slide transition handler for navigation
   function handleProjectsClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    if (window?.document?.startViewTransition) {
+    if (typeof window.document.startViewTransition === 'function') {
       e.preventDefault();
       document.body.classList.add('slide-left');
       document

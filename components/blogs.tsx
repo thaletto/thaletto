@@ -24,7 +24,7 @@ export function BlogItem({ post }: { post: BlogPost }) {
 export function Blogs() {
   // Slide transition handler for navigation
   function handleBlogsClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    if (window?.document?.startViewTransition) {
+    if (typeof window.document.startViewTransition === 'function') {
       e.preventDefault();
       document.body.classList.add('slide-left');
       document
