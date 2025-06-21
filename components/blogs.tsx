@@ -22,6 +22,22 @@ export function BlogItem({ post }: { post: BlogPost }) {
 }
 
 export function Blogs() {
+  // Slide transition handler for navigation
+  function handleBlogsClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (window?.document?.startViewTransition) {
+      e.preventDefault();
+      document.body.classList.add('slide-left');
+      document
+        .startViewTransition(() => {
+          window.location.href = '/blogs';
+        })
+        .finished.finally(() => {
+          document.body.classList.remove('slide-left');
+        });
+    }
+    // else, default navigation
+  }
+
   return (
     <>
       <div className="mb-5 flex items-center gap-1">
@@ -29,6 +45,7 @@ export function Blogs() {
           href="/blogs"
           className="flex items-center gap-1 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
           scroll={false}
+          onClick={handleBlogsClick}
         >
           <h3 className="text-xl font-medium text-zinc-900 dark:text-zinc-50">
             Blogs
