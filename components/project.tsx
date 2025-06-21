@@ -111,12 +111,29 @@ export function ProjectCard({
 }
 
 export function ProjectList() {
+  // Slide transition handler for navigation
+  function handleProjectsClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (window?.document?.startViewTransition) {
+      e.preventDefault();
+      document.body.classList.add('slide-left');
+      document
+        .startViewTransition(() => {
+          window.location.href = '/projects';
+        })
+        .finished.finally(() => {
+          document.body.classList.remove('slide-left');
+        });
+    }
+    // else, default navigation
+  }
+
   return (
     <>
       <div className="mb-5 flex items-center gap-1">
         <Link
           href="/projects"
           className="flex items-center gap-1 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
+          onClick={handleProjectsClick}
         >
           <h3 className="text-xl font-medium text-zinc-900 dark:text-zinc-50">
             Selected Projects

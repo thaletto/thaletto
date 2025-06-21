@@ -57,6 +57,21 @@ export function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window?.document?.startViewTransition) {
+      e.preventDefault();
+      document.body.classList.add('slide-right');
+      document
+        .startViewTransition(() => {
+          window.location.href = '/';
+        })
+        .finished.finally(() => {
+          document.body.classList.remove('slide-right');
+        });
+    }
+    // else, default navigation
+  };
+
   return (
     <header className="mb-8 flex items-start justify-between">
       <div className="flex flex-col gap-2">
@@ -76,6 +91,7 @@ export function Header() {
           <Link
             href="/"
             className="inline-flex items-center gap-1 text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
+            onClick={handleBackClick}
           >
             <ArrowLeft className="h-5 w-5" /> Back
           </Link>
