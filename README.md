@@ -3,22 +3,9 @@
 [![](https://visitcount.itsvg.in/api?style=for-the-badge&id=thaletto&icon=5&color=4)](https://visitcount.itsvg.in)
 
 # About Me
-- B.Tech in Computer Science and Engineering from Amrita School of Computing.
-- Projects
-  - E-commerce and CMS for a client
-  - Lung Nodule Detection
-  - Lense (Kotlin Android App)
-  - News Writer (LLM Application)
-  - Parkinsons Disease Detection (ML Models)
-  - Leave Management System
-- Currently working on
-  - Vendora
-- Currently learning
-  - React Native (Expo)
-  - Go
-  - Rust
+I'm a passionate React.js and Next.js developer with experience building a variety of web applications using TypeScript and JavaScript, including e-commerce platforms, content management systems, and data-driven solutions.
 
-## Portfolio
+# Portfolio
 [thaletto.vercel.app](https://thaletto.vercel.app)
 
 # Tech Stack
