@@ -3,7 +3,7 @@
 [![](https://visitcount.itsvg.in/api?style=for-the-badge&id=thaletto&icon=5&color=4)](https://visitcount.itsvg.in)
 
 # About Me
-I'm a passionate React.js and Next.js developer with experience building a variety of web applications using TypeScript and JavaScript, including e-commerce platforms, content management systems, and data-driven solutions.
+I'm a passionate React.js and Next.js developer with experience building a variety of web applications using TypeScript and JavaScript, including e-commerce platforms
 
 # Portfolio
 [thaletto.vercel.app](https://thaletto.vercel.app)
