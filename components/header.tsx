@@ -8,6 +8,8 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { TextMorph } from './ui/text-morph';
 import { Button } from './ui/button';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 function CopyButton() {
   const [text, setText] = useState('Copy');
@@ -44,6 +46,8 @@ export function Header() {
   const isBlogPage = pathname.startsWith('/blog');
   const [isOpen, setIsOpen] = useState(false);
   const [align, setAlign] = useState<'end' | 'center'>('end');
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,6 +60,17 @@ export function Header() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const iconSrc =
+    theme === 'dark'
+      ? (process.env.ICON_LIGHT_URL ?? '')
+      : (process.env.ICON_DARK_URL ?? '');
 
   const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (typeof window.document.startViewTransition === 'function') {
@@ -127,7 +142,12 @@ export function Header() {
             className="w-full border-0 bg-zinc-900 text-zinc-600 shadow-lg dark:bg-zinc-50 dark:text-zinc-300"
           >
             <div className="flex items-start gap-4">
-              <img src={'/adc.png'} width={50} height={50} />
+              <Image
+                src={iconSrc}
+                width={50}
+                height={50}
+                alt="A Developer Company"
+              />
               <div className="flex flex-col gap-1">
                 <p className="font-medium text-zinc-50 dark:text-zinc-900">
                   A Developer Company

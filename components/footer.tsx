@@ -68,20 +68,37 @@ function ThemeSwitch() {
 }
 
 export function Footer() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent hydration mismatch
+  if (!mounted) return null;
+
+  // Determine which icon to use
+  const iconSrc =
+    theme === 'dark'
+      ? (process.env.ICON_LIGHT_URL ?? '')
+      : (process.env.ICON_DARK_URL ?? '');
+
   return (
     <footer className="mt-24 border-t border-zinc-500 px-0 py-4 dark:border-zinc-400">
-      <div className="flex flex-row h-auto items-center justify-between">
+      <div className="flex h-auto flex-row items-center justify-between">
         <a href="https://github.com/a-developer-company" target="_blank">
-            <span className="flex items-center gap-2 text-zinc-500 text-sm">
-              © {new Date().getFullYear()}
-              <Image
-                src={adc}
-                alt="A Developer Company"
-                className="h-8 w-8"
-                priority={true}
-              />
-              A Developer Company
-            </span>
+          <span className="flex items-center gap-2 text-sm text-zinc-500">
+            © {new Date().getFullYear()}
+            <Image
+              src={iconSrc}
+              alt="A Developer Company"
+              className="h-8 w-8"
+              priority={true}
+              width={32}
+              height={32}
+            />
+            A Developer Company
+          </span>
         </a>
         <div className="text-xs text-zinc-400">
           <ThemeSwitch />
