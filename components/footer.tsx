@@ -5,6 +5,8 @@ import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import adc from '@/public/adc.png';
 import Image from 'next/image';
+import iconLight from '@/public/Icon light.png';
+import iconDark from '@/public/Icon dark.png';
 
 const THEMES_OPTIONS = [
   {
@@ -26,7 +28,7 @@ const THEMES_OPTIONS = [
 
 function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -68,20 +70,33 @@ function ThemeSwitch() {
 }
 
 export function Footer() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent hydration mismatch
+  if (!mounted) return null;
+
+  // Determine which icon to use
+  const iconSrc = resolvedTheme === 'dark' ? iconLight : iconDark;
+
   return (
-    <footer className="mt-24 border-t border-zinc-500 px-0 py-4 dark:border-zinc-400">
-      <div className="flex flex-row h-auto items-center justify-between">
+    <footer className="mt-24 border-t border-zinc-500 px-0 py-2 dark:border-zinc-400">
+      <div className="flex h-auto flex-row items-center justify-between">
         <a href="https://github.com/a-developer-company" target="_blank">
-            <span className="flex items-center gap-2 text-zinc-500 text-sm">
-              © {new Date().getFullYear()}
-              <Image
-                src={adc}
-                alt="A Developer Company"
-                className="h-8 w-8"
-                priority={true}
-              />
-              A Developer Company
-            </span>
+          <span className="flex items-center gap-2 text-sm text-black dark:text-white">
+            © {new Date().getFullYear()}
+            <Image
+              src={iconSrc}
+              alt="A Developer Company"
+              priority={true}
+              width={16}
+              height={16}
+            />
+            A Developer Company
+          </span>
         </a>
         <div className="text-xs text-zinc-400">
           <ThemeSwitch />
