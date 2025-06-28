@@ -10,6 +10,8 @@ import { TextMorph } from './ui/text-morph';
 import { Button } from './ui/button';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import iconLight from '@/public/Icon light.png';
+import iconDark from '@/public/Icon dark.png';
 
 function CopyButton() {
   const [text, setText] = useState('Copy');
@@ -46,7 +48,7 @@ export function Header() {
   const isBlogPage = pathname.startsWith('/blog');
   const [isOpen, setIsOpen] = useState(false);
   const [align, setAlign] = useState<'end' | 'center'>('end');
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -67,10 +69,7 @@ export function Header() {
 
   if (!mounted) return null;
 
-  const iconSrc =
-    theme === 'dark'
-      ? (process.env.ICON_LIGHT_URL ?? '')
-      : (process.env.ICON_DARK_URL ?? '');
+  const iconSrc = resolvedTheme === 'light' ? iconLight : iconDark;
 
   const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (typeof window.document.startViewTransition === 'function') {
@@ -141,15 +140,15 @@ export function Header() {
             align={align}
             className="w-full border-0 bg-zinc-900 text-zinc-600 shadow-lg dark:bg-zinc-50 dark:text-zinc-300"
           >
-            <div className="flex items-start gap-4">
+            <div className="flex items-center gap-2">
               <Image
                 src={iconSrc}
-                width={50}
-                height={50}
+                width={32}
+                height={32}
                 alt="A Developer Company"
               />
-              <div className="flex flex-col gap-1">
-                <p className="font-medium text-zinc-50 dark:text-zinc-900">
+              <div className="flex flex-col items-start gap-1">
+                <p className="font-medium text-white dark:text-black">
                   A Developer Company
                 </p>
                 <p className="text-zinc-400 dark:text-zinc-600">
