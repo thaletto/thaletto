@@ -1,5 +1,5 @@
 import { RainbowButton } from './ui/rainbow-button';
-import { Handshake } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 export function About() {
   return (
@@ -21,8 +21,8 @@ export function About() {
             rel="noopener noreferrer"
             className="flex flex-row items-center gap-2"
           >
-            <Handshake className="h-4 w-4" />
-            Hire me
+            <MessageCircle className="h-4 w-4" />
+            Chat with me
           </a>
         </RainbowButton>
       </div>
