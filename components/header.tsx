@@ -2,13 +2,10 @@
 import { TextEffect } from '@/components/ui/text-effect';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card';
 import { ArrowLeft } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { TextMorph } from './ui/text-morph';
-import { Button } from './ui/button';
-import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import iconLight from '@/public/Icon light.png';
 import iconDark from '@/public/Icon dark.png';
@@ -125,39 +122,8 @@ export function Header() {
             </AvatarFallback>
           </Avatar>
         </Link>
-
-        <HoverCard open={isOpen} onOpenChange={setIsOpen}>
-          <HoverCardTrigger asChild>
-            <Button
-              variant="ghost"
-              className="h-auto p-0 font-normal text-zinc-600 hover:bg-transparent dark:text-zinc-300"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              @thaletto
-            </Button>
-          </HoverCardTrigger>
-          <HoverCardContent
-            align={align}
-            className="w-full border-0 bg-zinc-900 text-zinc-600 shadow-lg dark:bg-zinc-50 dark:text-zinc-300"
-          >
-            <div className="flex items-center gap-2">
-              <Image
-                src={iconSrc}
-                width={32}
-                height={32}
-                alt="A Developer Company"
-              />
-              <div className="flex flex-col items-start gap-1">
-                <p className="font-medium text-white dark:text-black">
-                  A Developer Company
-                </p>
-                <p className="text-zinc-400 dark:text-zinc-600">
-                  Founder & CEO
-                </p>
-              </div>
-            </div>
-          </HoverCardContent>
-        </HoverCard>
+      
+        <p className='h-auto p-0 font-normal text-zinc-600 hover:bg-transparent dark:text-zinc-300'>@thaletto</p>
         {isBlogPage && <CopyButton />}
       </div>
     </header>

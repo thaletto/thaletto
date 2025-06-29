@@ -83,19 +83,12 @@ export function Footer() {
   const iconSrc = resolvedTheme === 'dark' ? iconLight : iconDark;
 
   return (
-    <footer className="mt-24 border-t border-zinc-500 px-0 py-2 dark:border-zinc-400">
+    <footer className="mt-24 px-0 py-4">
       <div className="flex h-auto flex-row items-center justify-between">
         <a href="https://github.com/a-developer-company" target="_blank">
-          <span className="flex items-center gap-2 text-sm text-black dark:text-white">
+          <span className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
             © {new Date().getFullYear()}
-            <Image
-              src={iconSrc}
-              alt="A Developer Company"
-              priority={true}
-              width={16}
-              height={16}
-            />
-            A Developer Company
+            <p>Laxman K R</p>
           </span>
         </a>
         <div className="text-xs text-zinc-400">
