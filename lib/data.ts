@@ -93,7 +93,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     company: 'Freelance',
     title: 'Full Stack Developer',
     start: new Date('2024-08-19'),
-    end: 'Present',
+    end: new Date('2024-10-28'),
     id: generateId('work'),
   },
 ];
