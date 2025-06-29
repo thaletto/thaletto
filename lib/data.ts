@@ -36,7 +36,7 @@ import {
   SiMeta,
   SiHuggingface,
 } from 'react-icons/si';
-import { FaUniversity } from 'react-icons/fa';
+import { FaJava, FaUniversity } from 'react-icons/fa';
 
 export const PROJECTS: Project[] = [
   {
@@ -136,6 +136,7 @@ export const SKILLS: Skill[] = [
   { name: 'tRPC', id: generateId('skill'), icon: SiTrpc },
   { name: 'React Query', id: generateId('skill'), icon: SiReactquery },
   { name: 'Node.js', id: generateId('skill'), icon: SiNodedotjs },
+  { name: 'Java', id: generateId('skill'), icon: FaJava },
   { name: 'Python', id: generateId('skill'), icon: SiPython },
   { name: 'LangChain', id: generateId('skill'), icon: SiLangchain },
   { name: 'FastAPI', id: generateId('skill'), icon: SiFastapi },
@@ -145,7 +146,6 @@ export const SKILLS: Skill[] = [
   { name: 'MongoDB', id: generateId('skill'), icon: SiMongodb },
   { name: 'PostgreSQL', id: generateId('skill'), icon: SiPostgresql },
   { name: 'MySQL', id: generateId('skill'), icon: SiMysql },
-  { name: 'Prisma', id: generateId('skill'), icon: SiPrisma },
   { name: 'Docker', id: generateId('skill'), icon: SiDocker },
   { name: 'Git', id: generateId('skill'), icon: SiGit },
   { name: 'Jenkins', id: generateId('skill'), icon: SiJenkins },
