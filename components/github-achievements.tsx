@@ -95,7 +95,7 @@ function AchievementBadge({
       {level >= 2 && (
         <div
           className={cn(
-            'absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white text-xs font-bold text-white',
+            'absolute right-[3px] bottom-[0.5px] flex h-5 w-7 items-center justify-center rounded-full font-medium text-xs text-[#010409]',
             BADGE_COLORS[level] || ''
           )}
         >
