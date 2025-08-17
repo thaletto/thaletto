@@ -1,3 +1,4 @@
+import { GitHubAchievements } from './github-achievements';
 import { RainbowButton } from './ui/rainbow-button';
 import { MessageCircle } from 'lucide-react';
 
@@ -13,6 +14,7 @@ export function About() {
         <br />
         Rage, rage against the dying of the light
       </p>
+      <GitHubAchievements className='mt-4' pairExtraordinaire={1} yolo={1} pullShark={2} quickDraw={1}/>
       <div className="mt-4">
         <RainbowButton className='rounded-xl' size='default' asChild>
           <a
