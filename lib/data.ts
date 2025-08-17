@@ -40,6 +40,15 @@ import { FaJava, FaUniversity } from 'react-icons/fa';
 
 export const PROJECTS: Project[] = [
   {
+    name: 'MathGPT',
+    description:'ChatGPT alternative specialised in math, data analytics and statistics, with ability to create interactive charts.',
+    link: 'https://mathgpt-thaletto.vercel.app',
+    image: '/projects/mathgpt.png',
+    tags: ['AI SDK', 'AI Agents', 'Tools'],
+    id: generateId(),
+    date: new Date('2025-08'),
+  },
+  {
     name: 'E-Commerce website & CMS',
     description:
       'E-Commerce website with a custom CMS for managing products, orders, and customers for a client.',
