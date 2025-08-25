@@ -1,4 +1,3 @@
-![GitHub Banner](https://github.com/thaletto/thaletto/raw/main/public/GitHub%20Banner.png)
 
 [![](https://visitcount.itsvg.in/api?style=for-the-badge&id=thaletto&icon=5&color=4)](https://visitcount.itsvg.in)
 
