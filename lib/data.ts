@@ -6,7 +6,7 @@ import {
   Education,
   Skill,
   Certificate,
-} from './types';
+} from '@/types';
 import { generateId } from './utils';
 import {
   SiNextdotjs,
@@ -41,7 +41,8 @@ import { FaJava, FaUniversity } from 'react-icons/fa';
 export const PROJECTS: Project[] = [
   {
     name: 'MathGPT',
-    description:'ChatGPT alternative specialised in math, data analytics and statistics, with ability to create interactive charts.',
+    description:
+      'ChatGPT alternative specialised in math, data analytics and statistics, with ability to create interactive charts.',
     link: 'https://mathgpt-thaletto.vercel.app',
     image: '/projects/mathgpt.png',
     tags: ['AI SDK', 'AI Agents', 'Tools'],

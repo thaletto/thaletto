@@ -1,4 +1,4 @@
-import { Project } from '@/lib/types';
+import { Project } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS } from '@/lib/data';
@@ -82,12 +82,8 @@ export function ProjectCard({
         />
       </div>
       <div className="px-1">
-        <span className="font-base text-lg text-zinc-900">
-          {project.name}
-        </span>
-        <p className="text-base text-zinc-600">
-          {project.description}
-        </p>
+        <span className="font-base text-lg text-zinc-900">{project.name}</span>
+        <p className="text-base text-zinc-600">{project.description}</p>
         <p className="text-base text-zinc-600 italic">
           {project.date.toLocaleDateString('en-US', {
             month: 'long',

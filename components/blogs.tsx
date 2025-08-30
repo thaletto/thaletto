@@ -1,7 +1,7 @@
 import { BLOG_POSTS } from '@/lib/data';
 import { AnimatedBackground } from './ui/animated-background';
 import Link from 'next/link';
-import { BlogPost } from '@/lib/types';
+import { BlogPost } from '@/types';
 import { ChevronRight } from 'lucide-react';
 
 export function BlogItem({ post }: { post: BlogPost }) {
@@ -47,9 +47,7 @@ export function Blogs() {
           scroll={false}
           onClick={handleBlogsClick}
         >
-          <h3 className="text-xl font-medium text-zinc-900">
-            Blogs
-          </h3>
+          <h3 className="text-xl font-medium text-zinc-900">Blogs</h3>
           <ChevronRight className="mt-1" />
         </Link>
       </div>
@@ -76,9 +74,7 @@ export function Blogs() {
                 scroll={true}
               >
                 <div className="flex flex-col space-y-1">
-                  <h4 className="font-normal">
-                    {post.title}
-                  </h4>
+                  <h4 className="font-normal">{post.title}</h4>
                   <p className="text-zinc-600">
                     {post.description}
                     <span className="hidden sm:inline">
