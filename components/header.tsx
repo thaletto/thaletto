@@ -1,38 +1,47 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { TextEffect } from '@/components/magicui/text-effect';
+import { TextMorph } from '@/components/magicui/text-morph';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check, Copy } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { TextMorph } from './magicui/text-morph';
 
 function CopyButton() {
-  const [text, setText] = useState('Copy');
+  const [copied, setCopied] = useState(false);
+  const [animate, setAnimate] = useState(false);
   const pathname = usePathname();
   const currentUrl =
     typeof window !== 'undefined' ? window.location.origin + pathname : '';
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setText('Copy');
-    }, 2000);
+    let timeoutId;
+    if (copied) {
+      setAnimate(true);
+      const timeoutId = setTimeout(() => {
+        setCopied(false);
+        setAnimate(false);
+      }, 2000);
+    }
 
     return () => clearTimeout(timeoutId);
-  }, [text]);
+  }, [copied]);
 
   return (
-    <button
+    <Button
       onClick={() => {
-        setText('Copied');
+        setCopied(true);
         navigator.clipboard.writeText(currentUrl);
       }}
-      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors"
-      type="button"
+      variant="outline"
+      className={`font-base flex cursor-pointer items-center gap-2 bg-transparent text-center text-sm text-zinc-500 transition-transform duration-200 ${animate ? 'scale-110' : 'scale-100'} ${copied && 'text-green-500 hover:text-green-500'} `}
     >
-      <TextMorph>{text}</TextMorph>
-      <span>URL</span>
-    </button>
+      <span className="transition-all duration-300">
+        {copied ? <Check /> : <Copy />}
+      </span>
+      <TextMorph>{copied ? 'Copied URL' : 'Copy URL'}</TextMorph>
+    </Button>
   );
 }
 
@@ -56,50 +65,51 @@ export function Header() {
   };
 
   return (
-    <header className="mb-8 flex items-start justify-between">
-      <div className="flex flex-col gap-2">
-        <Link href="/" className="text-3xl font-medium">
-          <TextEffect as="div" preset="fade" per="char" delay={0.5}>
-            Laxman K R
-          </TextEffect>
-        </Link>
+    <header className="mb-8 flex flex-col">
+      <div className="flex items-start justify-between">
+        <div className="flex flex-row gap-2">
+          <Link
+            href="https://github.com/thaletto"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Avatar className="size-16 transition-opacity hover:opacity-90">
+              <AvatarImage src="https://github.com/thaletto.png" />
+              <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100">
+                LKR
+              </AvatarFallback>
+            </Avatar>
+          </Link>
+          <div className="flex flex-col gap-1">
+            <Link href="/" className="text-3xl font-medium">
+              <TextEffect as="text" preset="fade" per="char" delay={0.5}>
+                Laxman K R
+              </TextEffect>
+            </Link>
 
-        <div className="text-zinc-600">
-          <TextEffect as="div" preset="fade" per="char" delay={0.5}>
-            Full Stack AI Developer
-          </TextEffect>
+            <div className="text-zinc-600">
+              <TextEffect as="text" preset="fade" per="char" delay={0.5}>
+                @thaletto | Full Stack AI Developer
+              </TextEffect>
+            </div>
+          </div>
         </div>
 
-        {showBackButton && (
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1 text-zinc-600 transition-colors hover:text-zinc-900"
-            onClick={handleBackClick}
-          >
+        <div className="flex flex-col items-end gap-2">
+          {isBlogPage && <CopyButton />}
+        </div>
+      </div>
+      {showBackButton && (
+        <Button
+          asChild
+          variant="ghost"
+          className="mt-8 mr-auto inline-flex items-center justify-center text-zinc-600 transition-colors hover:bg-transparent hover:text-zinc-900"
+        >
+          <Link href="/" onClick={handleBackClick}>
             <ArrowLeft className="h-5 w-5" /> Back
           </Link>
-        )}
-      </div>
-
-      <div className="flex flex-col items-end gap-2">
-        <Link
-          href="https://github.com/thaletto"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Avatar className="size-12 transition-opacity hover:opacity-90">
-            <AvatarImage src="https://github.com/thaletto.png" />
-            <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100">
-              LKR
-            </AvatarFallback>
-          </Avatar>
-        </Link>
-
-        <p className="h-auto p-0 font-normal text-zinc-600 hover:bg-transparent">
-          @thaletto
-        </p>
-        {isBlogPage && <CopyButton />}
-      </div>
+        </Button>
+      )}
     </header>
   );
 }
