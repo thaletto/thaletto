@@ -1,5 +1,5 @@
 import { EDUCATION } from '@/lib/data';
-import { Spotlight } from './ui/spotlight';
+import { Spotlight } from './magicui/spotlight';
 
 export function Education() {
   return (

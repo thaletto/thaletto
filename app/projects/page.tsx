@@ -6,7 +6,7 @@ import {
   VARIANTS_CONTAINER,
   VARIANTS_SECTION,
   TRANSITION_IMAGE,
-} from '@/components/ui/motion';
+} from '@/components/magicui/motion';
 
 export default function ProjectsPage() {
   return (
@@ -23,7 +23,11 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.sort((a, b) => b.date.getTime() - a.date.getTime()).map(
             (project) => (
-              <ProjectCard key={project.id} project={project} priority={false} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                priority={false}
+              />
             )
           )}
         </div>

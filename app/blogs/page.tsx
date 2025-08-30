@@ -5,7 +5,7 @@ import {
   VARIANTS_CONTAINER,
   VARIANTS_SECTION,
   TRANSITION_IMAGE,
-} from '@/components/ui/motion';
+} from '@/components/magicui/motion';
 import { AnimatedBackground } from '@/components/ui/animated-background';
 import Link from 'next/link';
 

@@ -1,11 +1,11 @@
 'use client';
-import { TextEffect } from '@/components/ui/text-effect';
+import { TextEffect } from '@/components/magicui/text-effect';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { ArrowLeft } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { TextMorph } from './ui/text-morph';
+import { TextMorph } from './magicui/text-morph';
 import { useTheme } from 'next-themes';
 import iconLight from '@/public/Icon light.png';
 import iconDark from '@/public/Icon dark.png';
@@ -122,8 +122,10 @@ export function Header() {
             </AvatarFallback>
           </Avatar>
         </Link>
-      
-        <p className='h-auto p-0 font-normal text-zinc-600 hover:bg-transparent dark:text-zinc-300'>@thaletto</p>
+
+        <p className="h-auto p-0 font-normal text-zinc-600 hover:bg-transparent dark:text-zinc-300">
+          @thaletto
+        </p>
         {isBlogPage && <CopyButton />}
       </div>
     </header>

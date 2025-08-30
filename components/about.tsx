@@ -1,5 +1,5 @@
 import { GitHubAchievements } from './github-achievements';
-import { RainbowButton } from './ui/rainbow-button';
+import { RainbowButton } from './magicui/rainbow-button';
 import { MessageCircle } from 'lucide-react';
 
 export function About() {

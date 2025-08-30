@@ -1,5 +1,5 @@
 import { EMAIL, SOCIAL_LINKS } from '@/lib/data';
-import { Spotlight } from './ui/spotlight';
+import { Spotlight } from './magicui/spotlight';
 import { Magnetic } from './ui/magnetic';
 import { IconType } from 'react-icons';
 

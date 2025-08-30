@@ -1,5 +1,5 @@
 import { WORK_EXPERIENCE } from '@/lib/data';
-import { Spotlight } from './ui/spotlight';
+import { Spotlight } from './magicui/spotlight';
 
 export function WorkExperience() {
   return (

@@ -12,7 +12,7 @@ import {
   VARIANTS_SECTION,
   TRANSITION_SECTION,
   TRANSITION_IMAGE,
-} from '@/components/ui/motion';
+} from '@/components/magicui/motion';
 
 export default function Personal() {
   return (
