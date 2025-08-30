@@ -1,7 +1,11 @@
-import { EDUCATION } from '@/lib/data';
 import { Spotlight } from './magicui/spotlight';
+import type { Education } from '@/types';
 
-export function Education() {
+interface Props {
+  EDUCATION: Education[];
+}
+
+export function Education({ EDUCATION }: Props) {
   return (
     <>
       <h3 className="mb-5 text-xl font-medium">Education</h3>
@@ -15,9 +19,7 @@ export function Education() {
             <div className="relative h-full w-full">
               <div className="relative flex w-full flex-col sm:flex-row sm:justify-between">
                 <div>
-                  <h4 className="font-normal">
-                    {edu.institution}
-                  </h4>
+                  <h4 className="font-normal">{edu.institution}</h4>
                   <p className="text-zinc-600">
                     {edu.degree}
                     <span className="hidden sm:inline">
@@ -34,12 +36,12 @@ export function Education() {
                   )}
                 </div>
                 <p className="text-zinc-600">
-                  {edu.start.toLocaleDateString('en-GB', {
+                  {new Date(edu.start).toLocaleDateString('en-GB', {
                     year: 'numeric',
                   })}{' '}
                   -{' '}
-                  {edu.end instanceof Date
-                    ? edu.end.toLocaleDateString('en-GB', {
+                  {typeof edu.end === 'string' && edu.end !== 'Present'
+                    ? new Date(edu.end).toLocaleDateString('en-GB', {
                         year: 'numeric',
                       })
                     : edu.end}

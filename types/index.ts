@@ -8,22 +8,22 @@ export type Project = {
   image: string;
   tags: string[];
   id: string;
-  date: Date;
+  date: string;
 };
 
 export type WorkExperience = {
   company: string;
   title: string;
-  start: Date;
-  end: Date | 'Present';
+  start: string;
+  end: string;
   id: string;
 };
 
 type BaseEducation = {
   institution: string;
   degree: string;
-  start: Date;
-  end: Date | 'Present';
+  start: string;
+  end: string;
   id: string;
 };
 
@@ -65,9 +65,16 @@ export type Skill = {
 
 export type Certificate = {
   name: string;
-  issuedDate: Date;
+  issuedDate: string;
   issuedBy: string;
   id: string;
-  icon: IconType;
+  icon: string;
   link: string;
+};
+
+export type PortfolioData = {
+  PROJECTS: Project[];
+  WORK_EXPERIENCE: WorkExperience[];
+  EDUCATION: Education[];
+  CERTIFICATES: Certificate[];
 };

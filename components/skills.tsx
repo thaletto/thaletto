@@ -1,7 +1,9 @@
-import { SKILLS, CERTIFICATES } from '@/lib/data';
+import { SKILLS } from '@/lib/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink } from 'lucide-react';
 import { AnimatedBackground } from '@/components/ui/animated-background';
+import { Certificate } from '@/types';
+import { SiMeta, SiHuggingface } from 'react-icons/si';
+import { FaUniversity } from 'react-icons/fa';
 
 function Skills() {
   return (
@@ -15,12 +17,10 @@ function Skills() {
             } sm:${index % 3 === 0 ? 'justify-self-start' : index % 3 === 2 ? 'justify-self-end' : 'justify-self-center'} md:${index % 4 === 0 ? 'justify-self-start' : index % 4 === 3 ? 'justify-self-end' : 'justify-self-center'}`}
           >
             <div className="relative flex items-center gap-2 p-1">
-              {
+              {skill.icon ? (
                 <skill.icon className="h-5 w-5 text-zinc-900" />
-              }
-              <h4 className="font-medium text-zinc-900">
-                {skill.name}
-              </h4>
+              ) : null}
+              <h4 className="font-medium text-zinc-900">{skill.name}</h4>
             </div>
           </div>
         );
@@ -29,7 +29,11 @@ function Skills() {
   );
 }
 
-function Certificates() {
+interface Props {
+  CERTIFICATES: Certificate[];
+}
+
+function Certificates({ CERTIFICATES }: Props) {
   return (
     <AnimatedBackground
       enableHover
@@ -41,45 +45,60 @@ function Certificates() {
       }}
     >
       {[...CERTIFICATES]
-        .sort((a, b) => b.issuedDate.getTime() - a.issuedDate.getTime())
-        .map((certificate) => (
-          <a
-            key={certificate.id}
-            href={certificate.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="-mx-3 flex flex-row items-center justify-between rounded-xl px-3 py-3"
-            data-id={certificate.id}
-          >
-            <div className="flex items-center gap-3">
-              <certificate.icon className="h-6 w-6 md:h-8 md:w-8" />
-              <div className="flex flex-col space-y-1">
-                <h4 className="font-normal">
-                  {certificate.name}
-                </h4>
-                <p className="text-zinc-600">
-                  Issued by {certificate.issuedBy}
-                  {certificate.issuedDate && (
-                    <span>
-                      {` in ${certificate.issuedDate.toLocaleDateString(
-                        'en-GB',
-                        {
+        .sort(
+          (a, b) =>
+            new Date(b.issuedDate).getTime() - new Date(a.issuedDate).getTime()
+        )
+        .map((certificate) => {
+          let IconComponent;
+          switch (certificate.icon) {
+            case 'SiMeta':
+              IconComponent = SiMeta;
+              break;
+            case 'SiHuggingface':
+              IconComponent = SiHuggingface;
+              break;
+            default:
+              IconComponent = FaUniversity;
+          }
+          return (
+            <a
+              key={certificate.id}
+              href={certificate.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="-mx-3 flex flex-row items-center justify-between rounded-xl px-3 py-3"
+              data-id={certificate.id}
+            >
+              <div className="flex items-center gap-3">
+                {IconComponent ? (
+                  <IconComponent className="h-6 w-6 md:h-8 md:w-8" />
+                ) : null}
+                <div className="flex flex-col space-y-1">
+                  <h4 className="font-normal">{certificate.name}</h4>
+                  <p className="text-zinc-600">
+                    Issued by {certificate.issuedBy}
+                    {certificate.issuedDate && (
+                      <span>
+                        {` in ${new Date(
+                          certificate.issuedDate
+                        ).toLocaleDateString('en-GB', {
                           year: 'numeric',
                           month: 'short',
-                        }
-                      )}`}
-                    </span>
-                  )}
-                </p>
+                        })}`}
+                      </span>
+                    )}
+                  </p>
+                </div>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          );
+        })}
     </AnimatedBackground>
   );
 }
 
-export function SkillsAndCertificate() {
+export function SkillsAndCertificate({ CERTIFICATES }: Props) {
   return (
     <>
       <Tabs defaultValue="skills" className="w-full">
@@ -91,7 +110,7 @@ export function SkillsAndCertificate() {
           <Skills />
         </TabsContent>
         <TabsContent value="certificates">
-          <Certificates />
+          <Certificates CERTIFICATES={CERTIFICATES} />
         </TabsContent>
       </Tabs>
     </>

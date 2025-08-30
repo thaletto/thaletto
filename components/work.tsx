@@ -1,7 +1,11 @@
-import { WORK_EXPERIENCE } from '@/lib/data';
 import { Spotlight } from './magicui/spotlight';
+import type { WorkExperience } from '@/types';
 
-export function WorkExperience() {
+interface Props {
+  WORK_EXPERIENCE: WorkExperience[];
+}
+
+export function WorkExperience({ WORK_EXPERIENCE }: Props) {
   return (
     <>
       <h3 className="mb-5 text-xl font-medium">Work Experience</h3>
@@ -16,19 +20,17 @@ export function WorkExperience() {
               <div className="relative flex w-full flex-row justify-between">
                 <div>
                   <h4 className="font-normal">{job.title}</h4>
-                  <p className="text-zinc-600">
-                    {job.company}
-                  </p>
+                  <p className="text-zinc-600">{job.company}</p>
                 </div>
                 <p className="text-zinc-600">
-                  {job.start.toLocaleDateString('en-GB', {
+                  {new Date(job.start).toLocaleDateString('en-GB', {
                     day: '2-digit',
                     month: 'short',
                     year: 'numeric',
-                  })}{' '}
-                  -{' '}
-                  {job.end instanceof Date
-                    ? job.end.toLocaleDateString('en-GB', {
+                  })}
+                  {job.end !== '' && ' - '}
+                  {job.end !== ''
+                    ? new Date(job.end).toLocaleDateString('en-GB', {
                         day: '2-digit',
                         month: 'short',
                         year: 'numeric',
