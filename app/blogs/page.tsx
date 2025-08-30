@@ -24,7 +24,7 @@ export default function BlogPage() {
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
-            className="h-full w-full rounded-lg bg-zinc-50/40 dark:bg-zinc-900/80"
+            className="h-full w-full rounded-lg bg-zinc-50/40"
             transition={{
               type: 'spring',
               bounce: 0,
@@ -41,10 +41,10 @@ export default function BlogPage() {
                 data-id={post.id}
               >
                 <div className="flex flex-col space-y-1">
-                  <h4 className="font-normal dark:text-zinc-50">
+                  <h4 className="font-normal">
                     {post.title}
                   </h4>
-                  <p className="text-zinc-600 dark:text-zinc-300">
+                  <p className="text-zinc-600">
                     {post.description}
                     <span className="hidden sm:inline">
                       {post.published &&
@@ -59,7 +59,7 @@ export default function BlogPage() {
                     </span>
                   </p>
                   {post.published && (
-                    <p className="text-zinc-600 sm:hidden dark:text-zinc-300">
+                    <p className="text-zinc-600 sm:hidden">
                       Published on{' '}
                       {post.published.toLocaleDateString('en-GB', {
                         year: 'numeric',

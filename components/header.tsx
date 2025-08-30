@@ -30,7 +30,7 @@ function CopyButton() {
         setText('Copied');
         navigator.clipboard.writeText(currentUrl);
       }}
-      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors dark:text-zinc-300"
+      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors"
       type="button"
     >
       <TextMorph>{text}</TextMorph>
@@ -92,7 +92,7 @@ export function Header() {
           </TextEffect>
         </Link>
 
-        <div className="text-zinc-600 dark:text-zinc-300">
+        <div className="text-zinc-600">
           <TextEffect as="div" preset="fade" per="char" delay={0.5}>
             Full Stack AI Developer
           </TextEffect>
@@ -101,7 +101,7 @@ export function Header() {
         {showBackButton && (
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
+            className="inline-flex items-center gap-1 text-zinc-600 transition-colors hover:text-zinc-900"
             onClick={handleBackClick}
           >
             <ArrowLeft className="h-5 w-5" /> Back
@@ -117,13 +117,13 @@ export function Header() {
         >
           <Avatar className="size-10 transition-opacity hover:opacity-90">
             <AvatarImage src="https://github.com/thaletto.png" />
-            <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100 dark:bg-zinc-400 dark:text-zinc-900">
+            <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100">
               LKR
             </AvatarFallback>
           </Avatar>
         </Link>
 
-        <p className="h-auto p-0 font-normal text-zinc-600 hover:bg-transparent dark:text-zinc-300">
+        <p className="h-auto p-0 font-normal text-zinc-600 hover:bg-transparent">
           @thaletto
         </p>
         {isBlogPage && <CopyButton />}

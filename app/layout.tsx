@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import './global.css';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
@@ -69,12 +69,7 @@ export const metadata: Metadata = {
 };
 
 const geist = Geist({
-  variable: '--font-geist',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+  variable: '--font-sans',
   subsets: ['latin'],
 });
 
@@ -86,7 +81,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} tracking-tight antialiased`}
+        className={`${geist.variable} font-sans tracking-tight antialiased`}
       >
         <ThemeProvider
           enableSystem={true}
@@ -95,48 +90,32 @@ export default function RootLayout({
           defaultTheme="system"
         >
           {/* Themed Background Layer */}
-          <div>
-            {/* Light Mode Background */}
+          <div className="relative min-h-screen w-full">
             <div
-              className="fixed inset-0 -z-50 bg-cover bg-no-repeat bg-blend-overlay dark:hidden"
+              className="absolute inset-0 z-0"
               style={{
-                backgroundImage: `
-                  linear-gradient(rgb(242, 237, 234) 100px, rgba(242, 237, 234, 0) 360px),
-                  linear-gradient(
-                    rgba(41, 37, 114, 0.9) 25%,
-                    rgba(100, 103, 150, 0.9) 66%,
-                    rgba(100, 90, 145, 0.9) 100%
-                  ),
-                  url('/noise.png')
+                background: `
+                  url('/noise.png'),
+                  radial-gradient(ellipse 80% 60% at 5% 40%, rgba(175, 109, 255, 0.48), transparent 67%),
+                  radial-gradient(ellipse 70% 60% at 45% 45%, rgba(255, 100, 180, 0.41), transparent 67%),
+                  radial-gradient(ellipse 62% 52% at 83% 76%, rgba(255, 235, 170, 0.44), transparent 63%),
+                  radial-gradient(ellipse 60% 48% at 75% 20%, rgba(120, 190, 255, 0.36), transparent 66%),
+                  linear-gradient(45deg, #f7eaff 0%, #fde2ea 100%)
                 `,
-                backgroundColor: 'rgba(217, 217, 217, 0.9)',
+                backgroundBlendMode: 'overlay, normal',
+                backgroundSize: 'cover',
+                backgroundRepeat: "no-repeat",
+                backgroundAttachment: "fixed"
               }}
             />
 
-            {/* Dark Mode Background */}
-            <div
-              className="fixed inset-0 -z-50 hidden bg-cover bg-no-repeat bg-blend-overlay dark:block"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgb(0, 96, 96) 100px, rgba(0, 224, 224, 0) 360px),
-                  linear-gradient(
-                    rgba(0, 160, 160, 0.9) 25%,
-                    rgba(0, 192, 192, 0.9) 66%,
-                    rgba(0, 128, 128, 0.9) 100%
-                  ),
-                  url('/noise.png')
-                `,
-                backgroundColor: 'rgba(48, 48, 48, 0.9)',
-              }}
-            />
-          </div>
-
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-20">
-              <Header />
-              {children}
-              <Analytics />
-              <Footer />
+            <div className="flex min-h-screen w-full flex-col">
+              <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-20">
+                <Header />
+                {children}
+                <Analytics />
+                <Footer />
+              </div>
             </div>
           </div>
         </ThemeProvider>

@@ -72,7 +72,7 @@ export function ProjectCard({
 }) {
   return (
     <div key={project.id} className="space-y-2">
-      <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
+      <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset">
         <ProjectImage
           image={project.image}
           name={project.name}
@@ -82,13 +82,13 @@ export function ProjectCard({
         />
       </div>
       <div className="px-1">
-        <span className="font-base text-lg text-zinc-900 dark:text-zinc-50">
+        <span className="font-base text-lg text-zinc-900">
           {project.name}
         </span>
-        <p className="text-base text-zinc-600 dark:text-zinc-300">
+        <p className="text-base text-zinc-600">
           {project.description}
         </p>
-        <p className="text-base text-zinc-600 italic dark:text-zinc-300">
+        <p className="text-base text-zinc-600 italic">
           {project.date.toLocaleDateString('en-US', {
             month: 'long',
             year: 'numeric',
@@ -99,7 +99,7 @@ export function ProjectCard({
             <Badge
               key={tag}
               variant="secondary"
-              className="border border-zinc-400 dark:border-zinc-700"
+              className="border border-zinc-400"
             >
               {tag}
             </Badge>
@@ -132,10 +132,10 @@ export function ProjectList() {
       <div className="mb-5 flex items-center gap-1">
         <Link
           href="/projects"
-          className="flex items-center gap-1 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
+          className="flex items-center gap-1 text-sm text-zinc-600 transition-colors hover:text-zinc-900"
           onClick={handleProjectsClick}
         >
-          <h3 className="text-xl font-medium text-zinc-900 dark:text-zinc-50">
+          <h3 className="text-xl font-medium text-zinc-900">
             Selected Projects
           </h3>
           <ChevronRight className="mt-1" />

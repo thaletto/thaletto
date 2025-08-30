@@ -18,7 +18,7 @@ function MagneticSocialLink({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700"
+        className="group relative inline-flex shrink-0 items-center gap-[1px] rounded-full bg-zinc-100 px-2.5 py-1 text-sm text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50"
       >
         <Icon className="h-4 w-4" />
         <span className="ml-1">{userid}</span>
@@ -46,17 +46,17 @@ export function Contact() {
   return (
     <>
       <Spotlight
-        className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+        className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl"
         size={64}
       />
       <div className="relative">
         <h3 className="mb-5 text-xl font-medium" id="contact">
           Connect
         </h3>
-        <p className="mb-5 text-zinc-600 dark:text-zinc-300">
+        <p className="mb-5 text-zinc-600">
           Feel free to contact me at{' '}
           <a
-            className="font-medium text-black underline-offset-4 hover:underline dark:text-white"
+            className="font-medium text-black underline-offset-4 hover:underline"
             href={`mailto:${EMAIL}`}
           >
             {EMAIL}
