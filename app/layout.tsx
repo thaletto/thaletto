@@ -3,7 +3,6 @@ import { Geist } from 'next/font/google';
 import './global.css';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
-import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/next';
 import { list } from '@vercel/blob';
 
@@ -83,18 +82,12 @@ export default function RootLayout({
       <body
         className={`${geist.variable} font-sans tracking-tight antialiased`}
       >
-        <ThemeProvider
-          enableSystem={true}
-          attribute="class"
-          storageKey="theme"
-          defaultTheme="system"
-        >
-          {/* Themed Background Layer */}
-          <div className="relative min-h-screen w-full">
-            <div
-              className="absolute inset-0 z-0"
-              style={{
-                background: `
+        {/* Themed Background Layer */}
+        <div className="relative min-h-screen w-full">
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              background: `
                   url('/noise.png'),
                   radial-gradient(ellipse 80% 60% at 5% 40%, rgba(175, 109, 255, 0.48), transparent 67%),
                   radial-gradient(ellipse 70% 60% at 45% 45%, rgba(255, 100, 180, 0.41), transparent 67%),
@@ -102,23 +95,22 @@ export default function RootLayout({
                   radial-gradient(ellipse 60% 48% at 75% 20%, rgba(120, 190, 255, 0.36), transparent 66%),
                   linear-gradient(45deg, #f7eaff 0%, #fde2ea 100%)
                 `,
-                backgroundBlendMode: 'overlay, normal',
-                backgroundSize: 'cover',
-                backgroundRepeat: "no-repeat",
-                backgroundAttachment: "fixed"
-              }}
-            />
+              backgroundBlendMode: 'overlay, normal',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundAttachment: 'fixed',
+            }}
+          />
 
-            <div className="flex min-h-screen w-full flex-col">
-              <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-20">
-                <Header />
-                {children}
-                <Analytics />
-                <Footer />
-              </div>
+          <div className="flex min-h-screen w-full flex-col">
+            <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-20">
+              <Header />
+              {children}
+              <Analytics />
+              <Footer />
             </div>
           </div>
-        </ThemeProvider>
+        </div>
       </body>
     </html>
   );
