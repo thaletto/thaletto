@@ -1,5 +1,5 @@
 # About Me
-I'm a passionate React.js and Next.js developer with experience building a variety of web applications using TypeScript and JavaScript, including e-commerce platforms
+Focused on creating intuitive and performant web experiences. Bridging the gap between design and development.
 
 # Portfolio
 [thaletto.vercel.app](https://thaletto.vercel.app)
