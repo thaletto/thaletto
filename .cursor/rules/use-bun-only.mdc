@@ -1,0 +1,7 @@
+---
+description: Always use bun over npm or pnpm
+globs:
+alwaysApply: true
+---
+
+YOU MUST USE BUN AS THE PACKAGE MANAGER

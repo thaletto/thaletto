@@ -1,0 +1,25 @@
+---
+description: Nomenclature of functions, hooks etc....
+globs:
+alwaysApply: true
+---
+
+
+**Functions**:
+
+- Function name should be always PascalCase
+- Handler Functions inside a function should always be camelCase
+- Use named function only over arrow functions. Example: `function Name() {}`
+- Use async function if fetch call are made in the function. Example: `async function Name() {}`
+- Must export default function in `page.tsx`. Example: `export default function ExamplePage() {}`
+
+**hooks**:
+- hooks must be defined inside `hooks` folder
+- hook file must named in camelCase
+- hooks must start with `use`
+
+**Server Functions**
+
+- Server function which does one specific job and is not dependent on any page are declared in a folder `functions`
+- Server functions are grouped into files. Example `db.ts` contains all database related server functions
+- Server functions name must be in camelCase

@@ -1,0 +1,14 @@
+---
+description: Rules regarding TypeScript
+globs:
+alwaysApply: true
+---
+
+- Never use `any` type (use `unknown` or proper generics instead).
+- Always prefer types/interfaces provided by libraries/packages instead of writing your own.
+- All custom types must be declared inside the `types/` folder (no inline type declarations except for quick utility cases).
+- Do not create redundant types; reuse existing ones via `typeof`, `keyof`, `ReturnType<>`, `Parameters<>`, `Awaited<>`, or `infer`.
+- Use `interface` for objects and `type` for unions, utility compositions, and generics.
+- Always export shared types from a central `index.ts` inside `types/` for easy imports.
+- Component props must be declared as an `interface` in the same file; if additional shape is needed, import the external type and extend the interface.
+- Do not use `React.FC`; instead, declare props explicitly and use a **named function** component.

@@ -1,0 +1,9 @@
+---
+description: Use only shadcn ui components
+globs:
+alwaysApply: true
+---
+
+YOU MUST USE SHADCN COMPONENTS OVER NATIVE HTML TAGS LIKE <button>
+
+If the user instructs you to use components from shadcn registries use that component
