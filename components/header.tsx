@@ -42,7 +42,7 @@ function CopyButton() {
 export function Header() {
   const pathname = usePathname();
   const showBackButton = pathname !== '/';
-  const isBlogPage = pathname.startsWith('/blog');
+  const isBlogPage = pathname.startsWith('/blogs');
   const [isOpen, setIsOpen] = useState(false);
   const [align, setAlign] = useState<'end' | 'center'>('end');
   const { resolvedTheme } = useTheme();

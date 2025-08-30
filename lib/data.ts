@@ -199,7 +199,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     title: 'How I stole the design of my portfolio',
     description: 'Reflecting on the making process of this website',
-    link: '/blog/how-i-stole-the-design-of-my-portfolio',
+    link: '/blogs/how-i-stole-the-design-of-my-portfolio',
     published: new Date('2025-06-12'),
     id: generateId('blog'),
   },
