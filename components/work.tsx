@@ -28,14 +28,14 @@ export function WorkExperience({ WORK_EXPERIENCE }: Props) {
                     month: 'short',
                     year: 'numeric',
                   })}
-                  {job.end !== '' && ' - '}
+                  {' - '}
                   {job.end !== ''
                     ? new Date(job.end).toLocaleDateString('en-GB', {
                         day: '2-digit',
                         month: 'short',
                         year: 'numeric',
                       })
-                    : job.end}
+                    : 'Present'}
                 </p>
               </div>
             </div>
