@@ -1,13 +1,12 @@
 {
-  "explorer.excludeGitIgnore": true,
+  "explorer.excludeGitIgnore": false,
   "files.exclude": {
     ".*": true,
-    "*.json": false,
-    ".*.json": true,
-    "*.lockb": true,
-    "*.mjs": true,
-    "app/*.ico": true,
-    "app/*.jpg": true,
-    "app/*.png": true
+    "app/*.{png,jpg,ico,ts,css}": true,
+    "*.d.ts": true,
+    "*.{mjs,js,lock,tsx}": true,
+    "components.json": true,
+    "components/ui/": true,
+    "components/magicui": true,
   }
 }
