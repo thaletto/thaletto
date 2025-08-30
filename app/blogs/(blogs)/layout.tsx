@@ -1,32 +1,4 @@
-'use client';
-import { TextMorph } from '@/components/magicui/text-morph';
 import { ScrollProgress } from '@/components/magicui/scroll-progress';
-import { useEffect, useState } from 'react';
-
-function CopyButton() {
-  const [text, setText] = useState('Copy');
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-
-  useEffect(() => {
-    setTimeout(() => {
-      setText('Copy');
-    }, 2000);
-  }, [text]);
-
-  return (
-    <button
-      onClick={() => {
-        setText('Copied');
-        navigator.clipboard.writeText(currentUrl);
-      }}
-      className="font-base flex items-center gap-1 text-center text-sm text-zinc-500 transition-colors"
-      type="button"
-    >
-      <TextMorph>{text}</TextMorph>
-      <span>URL</span>
-    </button>
-  );
-}
 
 export default function LayoutBlogPost({
   children,
