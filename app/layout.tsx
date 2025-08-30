@@ -103,7 +103,7 @@ export default function RootLayout({
           />
 
           <div className="flex min-h-screen w-full flex-col">
-            <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-20">
+            <div className="relative mx-auto w-full max-w-screen-lg flex-1 px-4 pt-10 md:pt-20">
               <Header />
               {children}
               <Analytics />

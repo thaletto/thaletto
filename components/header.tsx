@@ -1,19 +1,19 @@
-'use client';
-import { Button } from '@/components/ui/button';
-import { TextEffect } from '@/components/magicui/text-effect';
-import { TextMorph } from '@/components/magicui/text-morph';
-import Link from 'next/link';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { ArrowLeft, Check, Copy } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+"use client";
+import { Button } from "@/components/ui/button";
+import { TextEffect } from "@/components/magicui/text-effect";
+import { TextMorph } from "@/components/magicui/text-morph";
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ArrowLeft, Check, Copy } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 function CopyButton() {
   const [copied, setCopied] = useState(false);
   const [animate, setAnimate] = useState(false);
   const pathname = usePathname();
   const currentUrl =
-    typeof window !== 'undefined' ? window.location.origin + pathname : '';
+    typeof window !== "undefined" ? window.location.origin + pathname : "";
 
   useEffect(() => {
     let timeoutId;
@@ -35,31 +35,33 @@ function CopyButton() {
         navigator.clipboard.writeText(currentUrl);
       }}
       variant="outline"
-      className={`font-base flex cursor-pointer items-center gap-2 bg-transparent text-center text-sm text-zinc-500 transition-transform duration-200 ${animate ? 'scale-110' : 'scale-100'} ${copied && 'text-green-500 hover:text-green-500'} `}
+      className={`font-base flex cursor-pointer items-center gap-2 bg-transparent text-center text-sm text-zinc-500 transition-transform duration-200 ${animate ? "scale-110" : "scale-100"} ${copied && "text-green-500 hover:text-green-500"} `}
     >
       <span className="transition-all duration-300">
         {copied ? <Check /> : <Copy />}
       </span>
-      <TextMorph>{copied ? 'Copied URL' : 'Copy URL'}</TextMorph>
+      <TextMorph>
+        {copied ? "Copied URL" : "Copy URL"}
+      </TextMorph>
     </Button>
   );
 }
 
 export function Header() {
   const pathname = usePathname();
-  const showBackButton = pathname !== '/';
-  const isBlogPage = pathname.startsWith('/blogs');
+  const showBackButton = pathname !== "/";
+  const isBlogPage = pathname.startsWith("/blogs");
 
   const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (typeof window.document.startViewTransition === 'function') {
+    if (typeof window.document.startViewTransition === "function") {
       e.preventDefault();
-      document.body.classList.add('slide-right');
+      document.body.classList.add("slide-right");
       document
         .startViewTransition(() => {
-          window.location.href = '/';
+          window.location.href = "/";
         })
         .finished.finally(() => {
-          document.body.classList.remove('slide-right');
+          document.body.classList.remove("slide-right");
         });
     }
   };
@@ -94,22 +96,21 @@ export function Header() {
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col items-end gap-2">
-          {isBlogPage && <CopyButton />}
-        </div>
       </div>
-      {showBackButton && (
-        <Button
-          asChild
-          variant="ghost"
-          className="mt-8 mr-auto inline-flex items-center justify-center text-zinc-600 transition-colors hover:bg-transparent hover:text-zinc-900"
-        >
-          <Link href="/" onClick={handleBackClick}>
-            <ArrowLeft className="h-5 w-5" /> Back
-          </Link>
-        </Button>
-      )}
+      <div className="flex flex-row justify-between items-center mt-8">
+        {showBackButton && (
+          <Button
+            asChild
+            variant="ghost"
+            className="mr-auto inline-flex items-center justify-center text-zinc-600 transition-colors hover:bg-transparent hover:text-zinc-900"
+          >
+            <Link href="/" onClick={handleBackClick}>
+              <ArrowLeft className="h-5 w-5" /> Back
+            </Link>
+          </Button>
+        )}
+        {isBlogPage && <CopyButton />}
+      </div>
     </header>
   );
 }
