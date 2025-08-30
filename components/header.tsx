@@ -6,9 +6,6 @@ import { ArrowLeft } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { TextMorph } from './magicui/text-morph';
-import { useTheme } from 'next-themes';
-import iconLight from '@/public/Icon light.png';
-import iconDark from '@/public/Icon dark.png';
 
 function CopyButton() {
   const [text, setText] = useState('Copy');
@@ -43,30 +40,6 @@ export function Header() {
   const pathname = usePathname();
   const showBackButton = pathname !== '/';
   const isBlogPage = pathname.startsWith('/blogs');
-  const [isOpen, setIsOpen] = useState(false);
-  const [align, setAlign] = useState<'end' | 'center'>('end');
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (typeof window !== 'undefined') {
-        setAlign(window.innerWidth >= 1024 ? 'center' : 'end');
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const iconSrc = resolvedTheme === 'light' ? iconLight : iconDark;
 
   const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (typeof window.document.startViewTransition === 'function') {
@@ -80,7 +53,6 @@ export function Header() {
           document.body.classList.remove('slide-right');
         });
     }
-    // else, default navigation
   };
 
   return (
@@ -115,7 +87,7 @@ export function Header() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Avatar className="size-10 transition-opacity hover:opacity-90">
+          <Avatar className="size-12 transition-opacity hover:opacity-90">
             <AvatarImage src="https://github.com/thaletto.png" />
             <AvatarFallback className="bg-zinc-600 text-xl text-zinc-100">
               LKR
