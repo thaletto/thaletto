@@ -2,7 +2,7 @@
 import type { PortfolioData } from "@/types";
 
 const PORTFOLIO_JSON_URL =
-  "https://raw.githubusercontent.com/thaletto/portfolio-data/refs/heads/main/portfolio_data.json";
+  "https://raw.githubusercontent.com/thaletto/static/refs/heads/main/portfolio.json";
 
 export async function getPortfolioData(): Promise<PortfolioData> {
   const response = await fetch(PORTFOLIO_JSON_URL, {
