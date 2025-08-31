@@ -40,9 +40,7 @@ function CopyButton() {
       <span className="transition-all duration-300">
         {copied ? <Check /> : <Copy />}
       </span>
-      <TextMorph>
-        {copied ? "Copied URL" : "Copy URL"}
-      </TextMorph>
+      <TextMorph>{copied ? "Copied URL" : "Copy URL"}</TextMorph>
     </Button>
   );
 }
@@ -67,7 +65,7 @@ export function Header() {
   };
 
   return (
-    <header className="mb-8 flex flex-col">
+    <header className="flex flex-col">
       <div className="flex items-start justify-between">
         <div className="flex flex-row gap-2">
           <Link
@@ -97,20 +95,22 @@ export function Header() {
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-between items-center mt-8">
-        {showBackButton && (
-          <Button
-            asChild
-            variant="ghost"
-            className="mr-auto inline-flex items-center justify-center text-zinc-600 transition-colors hover:bg-transparent hover:text-zinc-900"
-          >
-            <Link href="/" onClick={handleBackClick}>
-              <ArrowLeft className="h-5 w-5" /> Back
-            </Link>
-          </Button>
-        )}
-        {isBlogPage && <CopyButton />}
-      </div>
+      {(showBackButton || isBlogPage) && (
+        <div className="flex flex-row justify-between items-center mt-8">
+          {showBackButton && (
+            <Button
+              asChild
+              variant="ghost"
+              className="mr-auto inline-flex items-center justify-center text-zinc-600 transition-colors hover:bg-transparent hover:text-zinc-900"
+            >
+              <Link href="/" onClick={handleBackClick}>
+                <ArrowLeft className="h-5 w-5" /> Back
+              </Link>
+            </Button>
+          )}
+          {isBlogPage && <CopyButton />}
+        </div>
+      )}
     </header>
   );
 }

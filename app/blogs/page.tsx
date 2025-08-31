@@ -18,7 +18,7 @@ export default function BlogPage() {
       animate="visible"
     >
       <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_IMAGE}>
-        <h3 className="mb-5 text-2xl font-medium">
+        <h3 className="mb-2 text-2xl font-medium">
           <span className="italic">All</span> Blogs
         </h3>
         <div className="flex flex-col space-y-0">
