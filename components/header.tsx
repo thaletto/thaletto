@@ -96,7 +96,7 @@ export function Header() {
         </div>
       </div>
       {(showBackButton || isBlogPage) && (
-        <div className="flex flex-row justify-between items-center mt-8">
+        <div className="flex flex-row justify-between items-center mt-4">
           {showBackButton && (
             <Button
               asChild

@@ -5,7 +5,7 @@ import { TextEffect } from "./magicui/text-effect";
 
 export function About() {
   return (
-    <div className="flex-1">
+    <div className="flex-1 mt-4">
       <div className="flex flex-col text-zinc-600">
         <TextEffect
           as="text"

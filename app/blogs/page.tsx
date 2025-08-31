@@ -1,13 +1,13 @@
-'use client';
-import { motion } from 'motion/react';
-import { BLOG_POSTS } from '@/lib/data';
+"use client";
+import { motion } from "motion/react";
+import { BLOG_POSTS } from "@/lib/data";
 import {
   VARIANTS_CONTAINER,
   VARIANTS_SECTION,
   TRANSITION_IMAGE,
-} from '@/components/magicui/motion';
-import { AnimatedBackground } from '@/components/ui/animated-background';
-import Link from 'next/link';
+} from "@/components/motion/constants";
+import { AnimatedBackground } from "@/components/ui/animated-background";
+import Link from "next/link";
 
 export default function BlogPage() {
   return (
@@ -26,7 +26,7 @@ export default function BlogPage() {
             enableHover
             className="h-full w-full rounded-lg bg-zinc-50/40"
             transition={{
-              type: 'spring',
+              type: "spring",
               bounce: 0,
               duration: 0.2,
             }}
@@ -41,30 +41,28 @@ export default function BlogPage() {
                 data-id={post.id}
               >
                 <div className="flex flex-col space-y-1">
-                  <h4 className="font-normal">
-                    {post.title}
-                  </h4>
+                  <h4 className="font-normal">{post.title}</h4>
                   <p className="text-zinc-600">
                     {post.description}
                     <span className="hidden sm:inline">
                       {post.published &&
                         ` • Published on ${post.published.toLocaleDateString(
-                          'en-GB',
+                          "en-GB",
                           {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
                           }
                         )}`}
                     </span>
                   </p>
                   {post.published && (
                     <p className="text-zinc-600 sm:hidden">
-                      Published on{' '}
-                      {post.published.toLocaleDateString('en-GB', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
+                      Published on{" "}
+                      {post.published.toLocaleDateString("en-GB", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                     </p>
                   )}
