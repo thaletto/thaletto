@@ -1,21 +1,57 @@
-# About Me
-Focused on creating intuitive and performant web experiences. Bridging the gap between design and development.
+# Thaletto ![](https://komarev.com/ghpvc/?username=thaletto&base=1908&style=for-the-badge)
 
-# Portfolio
-[thaletto.vercel.app](https://thaletto.vercel.app)
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=thaletto&show=prs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&show_icons=true&theme=ambient_gradient&hide_border=true&include_all_commits=false&rank_icon=github" width="50%" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thaletto&layout=donut&theme=ambient_gradient&hide_border=true&exclude_repo=Parkinson-Disease-Detection" width="49%" />
+</p>
 
-# Tech Stack
-<img src="https://skillicons.dev/icons?i=typescript,javascript,react,nextjs,nodejs" />
-<img src="https://skillicons.dev/icons?i=flask,django,python,tensorflow,pytorch" />
-<img src="https://skillicons.dev/icons?i=mongodb,postgresql,mysql,firebase,sqlite" />
-<img src="https://skillicons.dev/icons?i=c,cpp,java,kotlin,androidstudio" />
 
-<br>
+
+---
+
+### Languages
+<p align="start">
+  <img src="https://skillicons.dev/icons?i=ts,js,py,java,kotlin,rust,c,cpp" alt="Languages" />
+</p>
+
+### Frontend
+<p align="start">
+  <img src="https://skillicons.dev/icons?i=nextjs,react,remix,tailwindcss,mui,vite,electron,tauri" alt="Frontend" />
+</p>
+
+### Backend
+<p align="start">
+  <img src="https://skillicons.dev/icons?i=fastapi,flask,nodejs,express,elysia" alt="Backend" />
+</p>
+
+### Database
+<p align="start">
+  <img src="https://skillicons.dev/icons?i=postgres,mysql,sqlite,redis,dynamodb,mongodb" alt="Database" />
+</p>
+
+### Package Managers / Runtimes
+<p align="start">
+  <img src="https://skillicons.dev/icons?i=npm,pnpm,yarn,bun,deno" alt="Package Managers" />
+</p>
+
+### Tools / IDE
+<p align="start">
+  <img src="https://skillicons.dev/icons?i=figma,postman,git,jenkins,docker,kubernetes,prisma,bash,powershell,vscode,androidstudio" alt="tools" />
+</p>
+
+### Providers / Cloud
+<p align="start">
+  <img src="https://skillicons.dev/icons?i=vercel,netlify,cloudflare,supabase,planetscale,aws,gcp,azure" alt="Providers and Cloud" />
+</p>
+
+---
+
+##  Support My Work  
 <div align="start">
   <a href="https://github.com/sponsors/thaletto">
-    <img src="https://img.shields.io/badge/Sponsor-DB61A2?style=for-the-badge&logo=github-sponsors&logoColor=white" alt="GitHub Sponsor"/>
+    <img src="https://badgen.net/badge/sponsor/thaletto?icon=github" alt="GitHub Sponsor"/>
   </a>
   <a href="https://buymeacoffee.com/thaletto">
-    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee"/>
+    <img src="https://badgen.net/badge/Buy me a Coffee/thaletto?icon=buymeacoffee" alt="Buy me a Cofee"/>
   </a>
 </div>
