@@ -43,15 +43,3 @@
 <p align="start">
   <img src="https://skillicons.dev/icons?i=vercel,netlify,cloudflare,supabase,planetscale,aws,gcp,azure" alt="Providers and Cloud" />
 </p>
-
----
-
-##  Support My Work  
-<div align="start">
-  <a href="https://github.com/sponsors/thaletto">
-    <img src="https://badgen.net/badge/sponsor/thaletto?icon=github" alt="GitHub Sponsor"/>
-  </a>
-  <a href="https://buymeacoffee.com/thaletto">
-    <img src="https://badgen.net/badge/Buy me a Coffee/thaletto?icon=buymeacoffee" alt="Buy me a Cofee"/>
-  </a>
-</div>
