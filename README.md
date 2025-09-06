@@ -1,8 +1,8 @@
 # Thaletto ![](https://komarev.com/ghpvc/?username=thaletto&base=1908&style=for-the-badge)
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=thaletto&show=prs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&show_icons=true&theme=ambient_gradient&hide_border=true&include_all_commits=false&rank_icon=github" width="50%" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thaletto&layout=donut&theme=ambient_gradient&hide_border=true&exclude_repo=Parkinson-Disease-Detection" width="49%" />
+  <img src="https://github-readme-stats.vercel.app/api?username=thaletto&show=prs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage&show_icons=true&theme=ambient_gradient&hide_border=true&include_all_commits=false&rank_icon=github" width="44.8%" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=thaletto&layout=donut&theme=ambient_gradient&hide_border=true&exclude_repo=Parkinson-Disease-Detection" width="50%" />
 </p>
 
 
