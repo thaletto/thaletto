@@ -7,13 +7,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { ArrowLeft, Check, Copy } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import {
-  OpenIn,
-  OpenInChatGPT,
-  OpenInClaude,
-  OpenInContent,
-  OpenInTrigger,
-} from "@/components/ai-elements/open-in-chat";
 
 function CopyButton() {
   const [copied, setCopied] = useState(false);
@@ -101,13 +94,7 @@ export function Header() {
             </div>
           </div>
         </div>
-        <OpenIn query="Analyse Laxman K R aka @thaletto profile, his portfolio is https://thaletto.vercel.app">
-          <OpenInTrigger />
-          <OpenInContent>
-            <OpenInChatGPT />
-            <OpenInClaude />
-          </OpenInContent>
-        </OpenIn>
+        
       </div>
       {(showBackButton || isBlogPage) && (
         <div className="flex flex-row justify-between items-center mt-4">
