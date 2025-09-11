@@ -28,8 +28,10 @@ import {
   SiX,
   SiLinkedin,
   SiInstagram,
+  SiNotion,
 } from 'react-icons/si';
 import { FaJava, FaUniversity } from 'react-icons/fa';
+import { STUDY_NOTES_SITE_URL } from '@/config';
 
 export const SKILLS: Skill[] = [
   { name: 'Next.js', id: generateId('skill'), icon: SiNextdotjs },
@@ -89,6 +91,12 @@ export const SOCIAL_LINKS: SocialLink[] = [
     icon: SiInstagram,
     id: generateId('social'),
   },
+  {
+    userid: 'laxmankr',
+    link: STUDY_NOTES_SITE_URL,
+    icon: SiNotion,
+    id: generateId('social')
+  }
 ];
 
 export const EMAIL = 'krlaxman@gmail.com';

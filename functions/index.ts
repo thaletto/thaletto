@@ -1,8 +1,6 @@
 "use server";
+import { PORTFOLIO_JSON_URL } from "@/config";
 import type { PortfolioData } from "@/types";
-
-const PORTFOLIO_JSON_URL =
-  "https://raw.githubusercontent.com/thaletto/static/refs/heads/main/portfolio.json";
 
 export async function getPortfolioData(): Promise<PortfolioData> {
   const response = await fetch(PORTFOLIO_JSON_URL, {

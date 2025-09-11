@@ -9,6 +9,8 @@ import {
   OpenInContent,
   OpenInTrigger,
 } from "@/components/ai-elements/open-in-chat";
+import { Download } from "lucide-react";
+import { RESUME_URL } from "@/config";
 
 export function About() {
   return (
@@ -46,6 +48,17 @@ export function About() {
           >
             <FaXTwitter />
             Chat
+          </a>
+        </RainbowButton>
+        <RainbowButton className="rounded-xl" size="default" asChild>
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-row items-center gap-2"
+          >
+            <Download />
+            Resume
           </a>
         </RainbowButton>
         <OpenIn query="Analyse Laxman K R aka @thaletto profile, his portfolio is https://thaletto.vercel.app">
