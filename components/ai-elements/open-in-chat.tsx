@@ -12,6 +12,7 @@ import {
   ChevronDownIcon,
   ExternalLinkIcon,
   MessageCircleIcon,
+  Sparkle,
 } from "lucide-react";
 import { type ComponentProps, createContext, useContext } from "react";
 
@@ -210,7 +211,8 @@ export const OpenInTrigger = ({ children, ...props }: OpenInTriggerProps) => (
   <DropdownMenuTrigger {...props} asChild>
     {children ?? (
       <Button type="button" variant="outline">
-        Open in chat
+        <Sparkle />
+        Ask AI
         <ChevronDownIcon className="ml-2 size-4" />
       </Button>
     )}
