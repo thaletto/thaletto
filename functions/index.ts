@@ -4,7 +4,6 @@ import type { PortfolioData } from "@/types";
 
 export async function getPortfolioData(): Promise<PortfolioData> {
   const response = await fetch(PORTFOLIO_JSON_URL, {
-    cache: "force-cache",
     next: { revalidate: 3600 },
   });
   if (!response.ok) {

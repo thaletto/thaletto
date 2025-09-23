@@ -1,9 +1,16 @@
+export const revalidate = 3600;         // ensures page segment revalidates every hour
+export const dynamic = "force-dynamic"; // optional: ensures always dynamic for this route
 import { About } from "@/components/about";
 import { Blogs } from "@/components/blogs";
 import { Contact } from "@/components/contact";
 import { Education } from "@/components/education";
 import { MotionMain, MotionSection } from "@/components/motion";
-import { TRANSITION_IMAGE, TRANSITION_SECTION, VARIANTS_CONTAINER, VARIANTS_SECTION } from "@/components/motion/constants";
+import {
+  TRANSITION_IMAGE,
+  TRANSITION_SECTION,
+  VARIANTS_CONTAINER,
+  VARIANTS_SECTION,
+} from "@/components/motion/constants";
 import { ProjectList } from "@/components/projects-list";
 import { SkillsAndCertificate } from "@/components/skills";
 import { WorkExperience } from "@/components/work";
