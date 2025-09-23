@@ -4,7 +4,7 @@ import { BLOG_POSTS } from "@/lib/data";
 import {
   VARIANTS_CONTAINER,
   VARIANTS_SECTION,
-  TRANSITION_IMAGE,
+  TRANSITION_SECTION,
 } from "@/components/motion/constants";
 import { AnimatedBackground } from "@/components/magicui/animated-background";
 import Link from "next/link";
@@ -17,10 +17,12 @@ export default function BlogPage() {
       initial="hidden"
       animate="visible"
     >
-      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_IMAGE}>
+      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
         <h3 className="mb-2 text-2xl font-medium">
           <span className="italic">All</span> Blogs
         </h3>
+      </motion.section>
+      <motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
