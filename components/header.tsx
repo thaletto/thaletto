@@ -48,7 +48,7 @@ function CopyButton() {
 export function Header() {
   const pathname = usePathname();
   const showBackButton = pathname !== "/";
-  const isBlogPage = pathname.startsWith("/blogs");
+  const isBlogPage = pathname.startsWith("/blog/");
 
   const handleBackClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (typeof window.document.startViewTransition === "function") {
