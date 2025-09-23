@@ -1,6 +1,6 @@
 import { SKILLS } from '@/lib/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { AnimatedBackground } from '@/components/ui/animated-background';
+import { AnimatedBackground } from '@/components/magicui/animated-background';
 import { Certificate } from '@/types';
 import { SiMeta, SiHuggingface } from 'react-icons/si';
 import { FaUniversity } from 'react-icons/fa';

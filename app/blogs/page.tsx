@@ -6,7 +6,7 @@ import {
   VARIANTS_SECTION,
   TRANSITION_IMAGE,
 } from "@/components/motion/constants";
-import { AnimatedBackground } from "@/components/ui/animated-background";
+import { AnimatedBackground } from "@/components/magicui/animated-background";
 import Link from "next/link";
 
 export default function BlogPage() {

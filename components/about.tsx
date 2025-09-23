@@ -10,7 +10,7 @@ import {
   OpenInTrigger,
 } from "@/components/ai-elements/open-in-chat";
 import { Download } from "lucide-react";
-import { RESUME_URL } from "@/config";
+import { RESUME_URL } from "@/lib/data";
 
 export function About() {
   return (

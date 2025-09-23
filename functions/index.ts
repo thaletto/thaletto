@@ -1,5 +1,5 @@
 "use server";
-import { PORTFOLIO_JSON_URL } from "@/config";
+import { PORTFOLIO_JSON_URL } from "@/lib/data";
 import type { PortfolioData } from "@/types";
 
 export async function getPortfolioData(): Promise<PortfolioData> {

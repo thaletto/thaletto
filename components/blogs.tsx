@@ -1,6 +1,6 @@
 'use client';
 import { BLOG_POSTS } from '@/lib/data';
-import { AnimatedBackground } from './ui/animated-background';
+import { AnimatedBackground } from './magicui/animated-background';
 import Link from 'next/link';
 import { BlogPost } from '@/types';
 import { ChevronRight } from 'lucide-react';

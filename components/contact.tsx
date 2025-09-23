@@ -1,6 +1,6 @@
 import { EMAIL, SOCIAL_LINKS } from '@/lib/data';
 import { Spotlight } from './magicui/spotlight';
-import { Magnetic } from './ui/magnetic';
+import { Magnetic } from './magicui/magnetic';
 import { IconType } from 'react-icons';
 
 function MagneticSocialLink({
