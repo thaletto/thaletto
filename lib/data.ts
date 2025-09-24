@@ -57,9 +57,6 @@ export const STUDY_NOTES_SITE_URL =
 export const PORTFOLIO_JSON_URL =
   "https://raw.githubusercontent.com/thaletto/static/refs/heads/main/portfolio.json";
 
-export const RESUME_URL =
-  "https://drive.google.com/file/d/1ICfI0bDb44GPHw5ZQKcSYHj7mIpFlMIu/view?usp=sharing";
-
 export const BLOG_POSTS: BlogPost[] = [
   {
     title: "How I stole the design of my portfolio",

@@ -77,4 +77,5 @@ export type PortfolioData = {
   WORK_EXPERIENCE: WorkExperience[];
   EDUCATION: Education[];
   CERTIFICATES: Certificate[];
+  RESUME_URL: string;
 };

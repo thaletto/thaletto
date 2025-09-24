@@ -10,9 +10,12 @@ import {
   OpenInTrigger,
 } from "@/components/ai-elements/open-in-chat";
 import { Download } from "lucide-react";
-import { RESUME_URL } from "@/lib/data";
 
-export function About() {
+interface Props {
+  RESUME_URL: string
+}
+
+export function About({ RESUME_URL }: Props) {
   return (
     <div className="flex-1 mt-4">
       <div className="flex flex-col text-zinc-600">
@@ -63,7 +66,7 @@ export function About() {
         </RainbowButton>
         <OpenIn query="Analyse Laxman K R aka @thaletto profile, his portfolio is https://thaletto.vercel.app">
           <RainbowButton asChild>
-            <OpenInTrigger className="rounded-xl"/>
+            <OpenInTrigger className="rounded-xl" />
           </RainbowButton>
           <OpenInContent>
             <OpenInChatGPT />

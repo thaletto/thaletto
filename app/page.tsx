@@ -27,7 +27,7 @@ export default async function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <About />
+        <About RESUME_URL={data.RESUME_URL} />
       </MotionSection>
 
       <MotionSection variants={VARIANTS_SECTION} transition={TRANSITION_IMAGE}>
