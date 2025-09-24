@@ -1,5 +1,3 @@
-export const revalidate = 3600;         // ensures page segment revalidates every hour
-export const dynamic = "force-dynamic"; // optional: ensures always dynamic for this route
 import { About } from "@/components/about";
 import { Blogs } from "@/components/blogs";
 import { Contact } from "@/components/contact";

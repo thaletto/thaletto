@@ -1,6 +1,4 @@
-export const revalidate = 3600;         // ensures page segment revalidates every hour
-export const dynamic = "force-dynamic"; // optional: ensures always dynamic for this route
-import ProjectsBrowser from "@/components/projects-page";
+import ProjectsPage from "@/components/projects-page";
 import { MotionMain, MotionSection } from "@/components/motion";
 import {
   TRANSITION_SECTION,
@@ -9,7 +7,7 @@ import {
 } from "@/components/motion/constants";
 import { getPortfolioData } from "@/functions";
 
-export default async function ProjectsPage() {
+export default async function Projects() {
   const data = await getPortfolioData();
   const projects = data.PROJECTS;
 
@@ -28,7 +26,7 @@ export default async function ProjectsPage() {
           <span className="italic">All</span> Projects
         </h3>
       </MotionSection>
-      <ProjectsBrowser projects={projects} />
+      <ProjectsPage projects={projects} />
     </MotionMain>
   );
 }
