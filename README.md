@@ -1,5 +1,4 @@
 # Thaletto ![](https://komarev.com/ghpvc/?username=thaletto&base=1908&style=for-the-badge)
----
 
 ### Languages
 <p align="start">
