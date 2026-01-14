@@ -1,0 +1,17 @@
+# Ignore node_modules everywhere
+**/node_modules/
+
+# Common
+.DS_Store
+**/.DS_Store
+**/dist/
+**/dist-ssr/
+*.local
+.env
+**/.nitro/
+**/.tanstack/
+**/.wrangler/
+**/.output/
+**/.vinxi/
+
+.content-collections/
