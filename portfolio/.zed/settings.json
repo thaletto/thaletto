@@ -1,0 +1,11 @@
+{
+  "file_scan_exclusions": [
+    "node_modules/",
+    ".tanstack/",
+    ".content-collections/",
+    "bun.lock",
+    "biome.json",
+    ".vscode/",
+    ".zed/",
+  ],
+}
