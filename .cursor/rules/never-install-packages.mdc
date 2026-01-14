@@ -1,7 +1,0 @@
----
-description: Never install packages on your own
-globs:
-alwaysApply: true
----
-
-YOU MUST NEVER INSTALL PACKAGES ON YOUR OWN, EVEN FOR FIXING TYPESCRIPT ERRORS
