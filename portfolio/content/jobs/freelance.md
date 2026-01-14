@@ -1,13 +1,12 @@
 ---
-jobTitle: Frontend Development Consultant
+jobTitle: Web Developer
 company: Freelance
 location: Remote
-startDate: 2020-01-01
-endDate: 2020-12-31
-summary: Independent frontend development consultant working with multiple clients on web applications and sites
-description:
+startDate: 2024-08-01
+endDate: 2024-11-06
+summary: Independent web developer working with multiple clients on web applications and sites
 tags:
-  ["React", "TypeScript", "Frontend Development", "JavaScript", "CSS", "HTML"]
+  ["React", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"]
 ---
 
 Provided expert frontend development services to various clients, specializing in React, TypeScript, and modern web technologies. Delivered responsive and performant web applications while maintaining high code quality and best practices.
