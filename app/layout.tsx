@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
+import { list } from "@vercel/blob";
 
 // @ts-expect-error types are not available yet?
 import { ViewTransition } from "react";
@@ -29,10 +30,58 @@ const mono = localFont({
     variable: "--mono",
 });
 
+const baseURL = new URL("https://thaletto.vercel.app");
+
+async function getBlobURL() {
+    try {
+        const { blobs } = await list({ prefix: "images/opengraph/" });
+        const imageBlob = blobs.find(
+            (blob) => blob.pathname === "images/opengraph/opengraph-image.jpg",
+        );
+        return imageBlob?.url || null;
+    } catch (error) {
+        console.error("Error fetching blob URL:", error);
+        return null;
+    }
+}
+
+// Get the blob URL
+const ogURL = await getBlobURL();
+
 export const metadata: Metadata = {
     title: {
-        template: "%s - Laxman K R",
-        default: "Laxman K R",
+        template: "%s - @thaletto",
+        default: "Laxman K R - @thaletto",
+    },
+    description: "Full Stack AI Developer",
+    metadataBase: baseURL,
+
+    twitter: {
+        card: "summary_large_image",
+        site: "thaletto.vercel.app",
+        creator: "@thaletto",
+        title: "thaletto Portfolio & Blog",
+        description:
+            "Portfolio & Blog website of Laxman K R, a full stack developer",
+        images: ogURL ? [ogURL] : [],
+    },
+
+    openGraph: {
+        images: ogURL
+            ? [
+                  {
+                      url: ogURL,
+                      width: 1200,
+                      height: 630,
+                      alt: "Laxman K R @thaletto",
+                  },
+              ]
+            : [],
+        title: "Laxman K R @thaletto",
+        description: "Full Stack AI Developer",
+        type: "website",
+        siteName: "thaletto.vercel.app",
+        url: baseURL,
     },
 };
 

@@ -17,6 +17,7 @@
     "@tailwindcss/postcss": "4.0.15",
     "@types/mdx": "^2.0.12",
     "@vercel/analytics": "^1.6.1",
+    "@vercel/blob": "^2.0.0",
     "clsx": "^2.1.1",
     "katex": "^0.16.11",
     "next": "^16.1.2",
