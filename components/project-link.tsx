@@ -11,7 +11,7 @@ type ProjectLinkProps = {
 export default function ProjectLink({ icon, label, link }: ProjectLinkProps) {
     return (
         <>
-            <br/>
+            <br />
             <Link
                 href={link}
                 target="_blank"

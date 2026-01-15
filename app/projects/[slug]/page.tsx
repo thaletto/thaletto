@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
-import path from "path";
 import { Metadata } from "next";
+import path from "path";
 
 export default async function Page(props: {
     params: Promise<{
@@ -15,7 +15,7 @@ export default async function Page(props: {
     return <MDXContent />;
 }
 
-export async function generateStaticParams() {
+export async function generStaticParams() {
     const projects = await fs.readdir(
         path.join(process.cwd(), "app", "projects", "_projects"),
     );

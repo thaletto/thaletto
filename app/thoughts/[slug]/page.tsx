@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
-import path from "path";
 import { Metadata } from "next";
+import path from "path";
 
 export default async function Page(props: {
     params: Promise<{
