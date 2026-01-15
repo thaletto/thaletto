@@ -1,0 +1,12 @@
+{
+  "file_scan_exclusions": [
+    "node_modules",
+    "bun.lock",
+    ".next",
+    ".git",
+    "next-env.d.ts",
+    "postcss.config.mjs",
+    ".gitignore",
+    ".zed"
+  ]
+}
