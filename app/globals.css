@@ -53,8 +53,6 @@
     'Times New Roman', Times, serif;
   --font-mono: var(--mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, 'Liberation Mono', 'Courier New', monospace;
-  --font-zh: var(--zh), var(--sans), -apple-system, ui-sans-serif, system-ui,
-    'PingFang SC', 'Hiragino Sans GB', 'Source Han Sans CN', sans-serif;
 
   --breakpoint-text: 1220px;
   --breakpoint-mobile: 420px;

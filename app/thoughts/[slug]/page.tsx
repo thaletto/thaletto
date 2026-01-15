@@ -1,6 +1,5 @@
 import { promises as fs } from "fs";
 import path from "path";
-import cn from "clsx";
 import { Metadata } from "next";
 
 export default async function Page(props: {
@@ -13,14 +12,7 @@ export default async function Page(props: {
         "../_articles/" + `${params.slug}.mdx`
     );
 
-    return (
-        <div
-            className={cn(metadata.chinese && "text-justify font-zh")}
-            lang={metadata.chinese ? "zh-Hans" : "en"}
-        >
-            <MDXContent />
-        </div>
-    );
+    return <MDXContent />;
 }
 
 export async function generateStaticParams() {

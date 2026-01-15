@@ -1,12 +1,12 @@
-import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import type { Metadata, Viewport } from 'next'
 
 // @ts-expect-error types are not available yet?
 import { ViewTransition } from 'react'
 
 import cn from 'clsx'
-import localFont from 'next/font/local'
 import 'katex/dist/katex.min.css'
+import localFont from 'next/font/local'
 
 import Navbar from '@/components/navbar'
 import './globals.css'
@@ -31,8 +31,8 @@ const mono = localFont({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Shu Ding',
-    default: 'Shu Ding',
+    template: '%s - Laxman K R',
+    default: 'Laxman K R',
   },
 }
 
