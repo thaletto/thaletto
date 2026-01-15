@@ -1,8 +1,9 @@
 import { promises as fs } from 'fs'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import path from 'path'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Thoughts',
 }
 
