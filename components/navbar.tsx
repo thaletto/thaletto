@@ -38,18 +38,8 @@ function Item(props: React.ComponentProps<typeof Link>) {
 
 export default function Navbar() {
     return (
-        <nav className="w-full md:w-auto">
-            <ul
-                className="lowercase
-                    /* mobile */
-                    flex justify-end gap-4
-                    sticky pb-4
-        
-                    /* desktop */
-                    md:flex-col md:items-end md:top-14
-                    md:static md:pr-4 md:pb-0
-                "
-            >
+        <nav className="mobile:mr-6 sm:mr-10 md:mr-14 w-full mobile:w-16 md:w-auto">
+            <ul className="lowercase text-right mobile:sticky top-6 sm:top-10 md:top-14 mb-6 mobile:mb-0 flex gap-2 justify-end mobile:block">
                 <Item href="/">About</Item>
                 <Item href="/projects">Projects</Item>
                 <Item href="/thoughts">Thoughts</Item>
