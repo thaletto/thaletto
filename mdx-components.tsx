@@ -20,35 +20,35 @@ export const components: Record<
 > = {
     h1: (props) => (
         <h1
-            className="font-semibold text-xl md:text-3xl mb-7 text-rurikon-600 text-balance"
+            className="font-semibold text-xl md:text-3xl mb-8 text-rurikon-600 text-balance"
             {...props}
         />
     ),
     h2: (props) => (
         <h2
-            className="font-semibold text-lg md:text-2xl mt-14 mb-7 text-rurikon-600 text-balance"
+            className="font-semibold text-lg md:text-2xl mt-8 text-rurikon-600 text-balance"
             {...props}
         />
     ),
     h3: (props) => (
         <h3
-            className="font-semibold text-base md:text-xl mt-14 mb-7 text-rurikon-600 text-balance"
+            className="font-semibold text-base md:text-xl mt-8 text-rurikon-600 text-balance"
             {...props}
         />
     ),
     ul: (props) => (
         <ul
-            className="mt-7 list-disc list-outside marker:text-rurikon-200 pl-5"
+            className="mt-2 list-disc list-outside marker:text-rurikon-200 pl-5"
             {...props}
         />
     ),
     ol: (props) => (
         <ol
-            className="mt-7 list-decimal list-outside marker:text-rurikon-200 pl-5"
+            className="mt-2 list-decimal list-outside marker:text-rurikon-200 pl-5"
             {...props}
         />
     ),
-    li: (props) => <li className="pl-1.5" {...props} />,
+    li: (props) => <li className="pl-1.5 [&>p]:mt-0" {...props} />,
     a: ({ href, ...props }) => {
         return (
             <Link
@@ -69,7 +69,7 @@ export const components: Record<
         );
     },
     strong: (props) => <strong className="font-bold" {...props} />,
-    p: (props) => <p className="mt-7" {...props} />,
+    p: (props) => <p className="mt-4" {...props} />,
     blockquote: (props) => (
         <blockquote
             className="pl-6 -ml-6 sm:pl-10 sm:-ml-10 md:pl-14 md:-ml-14 not-mobile:text-rurikon-400"
@@ -78,7 +78,7 @@ export const components: Record<
     ),
     pre: (props) => (
         <pre
-            className="mt-7 whitespace-pre md:whitespace-pre-wrap"
+            className="mt-4 whitespace-pre md:whitespace-pre-wrap"
             {...props}
         />
     ),
@@ -137,7 +137,7 @@ export const components: Record<
         if (src.startsWith("https://")) {
             img = (
                 <Image
-                    className="mt-7"
+                    className="mt-4"
                     src={src}
                     alt={alt}
                     quality={95}
@@ -149,7 +149,7 @@ export const components: Record<
             const image = await import(src);
             img = (
                 <Image
-                    className="mt-7"
+                    className="mt-4"
                     src={image.default}
                     alt={alt}
                     quality={95}
