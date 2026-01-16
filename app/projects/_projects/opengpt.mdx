@@ -1,0 +1,37 @@
+export const metadata = {
+    title: `OpenGPT`,
+    date: "2025.08",
+};
+
+# OpenGPT
+
+<Card image="/projects/opengpt.webp" />
+
+> OpenGPT is a modern, responsive ChatGPT clone built for the web. It brings AI-powered conversations with advanced reasoning and tool calls while ensuring a smooth user experience through streaming and real-time updates.
+
+## Features
+
+<img src="/projects/opengpt-ss.png" className="my-2 border border-rurikon-200 rounded-lg" />
+
+- **AI Chat:** Engage in intelligent conversations powered by OpenRouter and AI SDK.
+- **Streaming Responses:** Messages from the AI are streamed in real-time for a natural chat experience.
+- **Markdown Correction:** Uses Streamdown to automatically correct and format Markdown responses.
+- **Tool Calls & Reasoning:** Execute tools and get reasoning-based answers directly in the chat.
+- **Rate Limiting:** New users can interact with the app up to 3 times before signing in, ensuring controlled access.
+- **Authentication:** Secure Google OAuth login for registered users.
+- **Responsive Design:** Works seamlessly across desktop and mobile devices.
+
+## Tech Stack
+
+- **Frontend & Backend:** Next.js, AI Elements, Streamdown, Shadcn, TailwindCSS, Framer Motion
+- **AI & Chat:** AI SDK, AI Gateway, OpenRouter
+- **Database:** Neon (PostgreSQL) with Drizzle ORM
+- **Authentication:** Google OAuth and E-mail login using BetterAuth
+- **Markdown Correction:** Streamdown
+- **Deployment:** Vercel
+
+OpenGPT is built with a focus on scalability, performance, and user experience, combining cutting-edge AI tools with modern web technologies.
+
+<br />
+<LinkChip icon="globe" link="https://thalettoai.vercel.app" label="Website" />
+<LinkChip icon="github" link="https://github.com/thaletto/ThalettoAI" label="Source Code" />
