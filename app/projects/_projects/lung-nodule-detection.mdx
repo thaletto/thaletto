@@ -1,0 +1,116 @@
+export const metadata = {
+    title: `Complex or Irregular Lung Nodule Detection from CT Scans`,
+    date: "2024.05",
+};
+
+# Complex or Irregular Lung Nodule Detection from CT Scans
+
+<Card image="/projects/lungnodule.webp" />
+
+> ## Abstract
+>
+> Lung cancer is a leading cause of cancer-related deaths, with a low survival rate. Early detection using medical imaging is crucial. However, CT scans often fail to detect irregular or complex nodules. This project leverages deep learning V-Net, YOLOv5s, and DETR models combined with a shape modeling algorithm to accurately detect lung nodules and reduce misinterpretation.
+
+## Problem Statement
+
+Detecting lung nodules manually in CT scans is time-consuming and prone to errors. Nodules vary in size, shape, and location, which leads to high false-positive rates. Automated detection can improve radiologist efficiency, assist treatment planning, and enable remote diagnostics.
+
+### Applications
+
+- **Research & Clinical Studies:** Evaluate new treatments.
+- **Treatment Planning:** Personalize care based on nodule growth and location.
+- **Radiologist Assistance:** Improve workflow by handling routine detection tasks.
+- **Telemedicine:** Enable remote, timely consultations.
+- **AI Integration:** Combine with other AI models for comprehensive diagnosis.
+
+### Challenges
+
+- Variability in nodule characteristics (size, shape, density).
+- High false positives causing unnecessary tests.
+- Adapting models to new datasets from different scanners or hospitals.
+
+## Proposed System
+
+We designed a multi-model system:
+
+### V-Net
+
+A 3D convolutional neural network for volumetric segmentation.
+
+- Accurately segments lung nodules of varying shapes and sizes.
+- Uses residual functions and weighted learning for complex patterns.
+- Input: CT scan images with corresponding masks.
+- Output: Precise nodule segmentation.
+
+### YOLOv5s
+
+Real-time object detection model for nodule localization.
+
+- Processes each CT slice as an individual image.
+- Assigns probabilities to detected nodules in N×N grids.
+- Integrates with V-Net for improved detection accuracy.
+
+### YOLOv5s + Shape Modeling Algorithm
+
+- Captures local shape features: compactness, eccentricity, solidity.
+- Helps classify nodules as solid or ground-glass opacity.
+- Reduces false positives by analyzing shape and intensity.
+
+### DETR (Detection Transformer)
+
+- Transformer-based model for refined object detection.
+- Uses queries to detect nodules in images.
+- Outputs class labels and bounding boxes using a Multi-Layer Perceptron (MLP).
+
+## Implementation
+
+### Data Preparation
+
+- **Resizing:** Images resized to 256×256 pixels to balance detail and computational efficiency.
+- **Diagnosis Mapping:** Masks analyzed to mark presence of nodules (1 if present, 0 otherwise).
+- **Data Splitting:** Train, validation, and test sets created using `train_test_split`.
+- **Data Augmentation:** Rotations, flips, shear, zoom applied to improve generalization.
+
+### Model Training
+
+- **V-Net:** Encoder-decoder architecture with convolutional blocks, batch normalization, ReLU activations, and fully connected layers for feature extraction.
+- **YOLOv5s:** Single-pass object detection for bounding box prediction.
+- **DETR:** Transformer encoder-decoder for enhanced detection and localization.
+
+## Results
+
+<BlockSideTitle title="Sample detections by YOLOv5s">
+    <img src="/projects/_yolo_prediction.png" />
+</BlockSideTitle>
+
+- **V-Net:** High accuracy in nodule segmentation using Dice coefficient and IoU metrics.
+- **YOLOv5s:** Accurate detection of multiple nodules per CT slice, real-time inference.
+- **DETR:** Refined detection, reducing false positives.
+
+## Conclusion
+
+The multi-model approach combining V-Net, YOLOv5s, DETR, and shape modeling successfully detects complex lung nodules from CT scans. This system improves early detection, reduces misinterpretation, and supports radiologists in clinical settings.
+
+## Future Enhancements
+
+- Integrate with clinical workflow for real-time detection.
+- Expand dataset for better generalization across hospitals.
+- Explore advanced transformers for improved feature representation.
+
+## Tools & Libraries
+
+- Python, TensorFlow, Keras
+- Scikit-learn, Numpy, Matplotlib
+- Ultralytics YOLOv5s package
+
+## Dataset
+
+- Lung Image Database Consortium (LIDC-IDRI)
+- CT scans with annotated lung nodules
+
+<br />
+<LinkChip
+    icon="gdrive"
+    link="https://drive.google.com/file/d/1_XcKu5bFmmrTHHc4nxXetIZbXwiMjkj3/view"
+    label="View PDF"
+/>
