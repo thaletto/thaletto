@@ -115,7 +115,13 @@ export const components: Record<
 
             return (
                 <code
-                    className="inline shiki css-variables text-[0.805rem] sm:text-[13.8px] md:text-[0.92rem]"
+                    className="
+                      inline shiki css-variables
+                      rounded-md px-1.5 py-0.5
+                      bg-rurikon-50
+                      text-rurikon-700
+                      text-[0.805rem] sm:text-[13.8px] md:text-[0.92rem]
+                    "
                     dangerouslySetInnerHTML={{ __html: code }}
                 />
             );
@@ -166,7 +172,7 @@ export const components: Record<
     InlineMath,
     BlockMath,
     LinkChip,
-    About
+    About,
 };
 
 export function useMDXComponents(inherited: MDXComponents): MDXComponents {
