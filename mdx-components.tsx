@@ -146,7 +146,7 @@ export const components: Record<
                 />
             );
         } else {
-            const image = await import("./assets/images/" + src);
+            const image = await import(src);
             img = (
                 <Image
                     className="mt-7"
