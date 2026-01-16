@@ -10,6 +10,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import { BlockSideTitle } from "@/components/common/block-sidetitle";
 import { Card } from "@/components/common/card";
 import LinkChip from "@/components/common/link-chip";
+import About from "@/components/about";
 
 const cssVariablesTheme = createCssVariablesTheme({});
 
@@ -19,19 +20,19 @@ export const components: Record<
 > = {
     h1: (props) => (
         <h1
-            className="font-semibold mb-7 text-rurikon-600 text-balance"
+            className="font-semibold text-xl md:text-3xl mb-7 text-rurikon-600 text-balance"
             {...props}
         />
     ),
     h2: (props) => (
         <h2
-            className="font-semibold mt-14 mb-7 text-rurikon-600 text-balance"
+            className="font-semibold text-lg md:text-2xl mt-14 mb-7 text-rurikon-600 text-balance"
             {...props}
         />
     ),
     h3: (props) => (
         <h3
-            className="font-semibold mt-14 mb-7 text-rurikon-600 text-balance"
+            className="font-semibold text-base md:text-xl mt-14 mb-7 text-rurikon-600 text-balance"
             {...props}
         />
     ),
@@ -164,7 +165,8 @@ export const components: Record<
     BlockSideTitle,
     InlineMath,
     BlockMath,
-    LinkChip
+    LinkChip,
+    About
 };
 
 export function useMDXComponents(inherited: MDXComponents): MDXComponents {
