@@ -1,3 +1,5 @@
+'use client';
+import { formatDate } from "@/lib/date";
 import { GitHubCalendar } from "react-github-calendar";
 
 export default function GithubActivityCalendar() {
@@ -9,11 +11,23 @@ export default function GithubActivityCalendar() {
             blockSize={8}
             colorScheme="light"
             fontSize={12}
-            maxLevel={10}
             showMonthLabels={false}
             showTotalCount={true}
             showWeekdayLabels={false}
             showColorLegend={true}
+            maxLevel={10}
+            tooltips={{
+                activity: {
+                    text: (activity) => `${activity.count} contribution on ${formatDate(activity.date, 'DDMMM', ' ')}`,
+                    placement: "right",
+                    offset: 6,
+                    hoverRestMs: 300,
+                    transitionStyles: {
+                        duration: 100,
+                    },
+                    withArrow: true,
+                },
+            }}
         />
     );
 }
