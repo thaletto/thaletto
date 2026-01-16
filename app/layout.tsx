@@ -50,8 +50,8 @@ const ogURL = await getBlobURL();
 
 export const metadata: Metadata = {
     title: {
-        template: "%s - @thaletto",
-        default: "Laxman K R - @thaletto",
+        template: "%s - Laxman K R",
+        default: "Laxman K R - Full Stack AI Developer",
     },
     description: "Full Stack AI Developer",
     metadataBase: baseURL,
