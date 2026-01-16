@@ -7,9 +7,9 @@ import { codeToHtml, createCssVariablesTheme } from "shiki";
 // @ts-ignore
 import { BlockMath, InlineMath } from "react-katex";
 
-import { BlockSideTitle } from "@/components/block-sidetitle";
-import { Card } from "@/components/card";
-import ProjectLink from "@/components/project-link";
+import { BlockSideTitle } from "@/components/common/block-sidetitle";
+import { Card } from "@/components/common/card";
+import LinkChip from "@/components/common/link-chip";
 
 const cssVariablesTheme = createCssVariablesTheme({});
 
@@ -164,7 +164,7 @@ export const components: Record<
     BlockSideTitle,
     InlineMath,
     BlockMath,
-    ProjectLink
+    LinkChip
 };
 
 export function useMDXComponents(inherited: MDXComponents): MDXComponents {
