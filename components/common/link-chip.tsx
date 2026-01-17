@@ -10,6 +10,7 @@ import {
     FaGoogleDrive,
 } from "react-icons/fa6";
 import { SiNotion } from "react-icons/si";
+import { Badge } from "../ui/badge";
 
 type LinkProps = {
     icon?:
@@ -31,7 +32,7 @@ export default function LinkChip({ icon, label, link }: LinkProps) {
     const renderIcon = () => {
         switch (icon) {
             case "github":
-                return <FaGithub className="w-4 h-4" />;
+                return <FaGithub size={32}/>;
             case "globe":
                 return <FaGlobe className="w-4 h-4" />;
             case "instagram":
@@ -54,14 +55,10 @@ export default function LinkChip({ icon, label, link }: LinkProps) {
     };
 
     return (
-        <Link
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex p-2 rounded items-center gap-2 text-sm font-medium border hover:bg-rurikon-600 hover:text-rurikon-50 transition-colors duration-300 ease-in-out"
-        >
-            {renderIcon()}
-            <span>{label}</span>
+        <Link href={link} target="_blank" rel="noopener noreferrer">
+            <Badge variant="outline" className="px-2 py-4 text-sm rounded">
+                {renderIcon()} {label}
+            </Badge>
         </Link>
     );
 }
