@@ -60,7 +60,7 @@ export function ProjectListItem({
                                 <Badge
                                     key={tag}
                                     variant="ghost"
-                                    className="text-[11px] px-2 py-0.5 rounded-sm border border-rurikon-100 text-rurikon-300 group-hover:border-rurikon-500 group-hover:text-rurikon-500"
+                                    className="text-xs px-2 py-0.5 rounded-sm border border-rurikon-100 text-rurikon-300 group-hover:border-rurikon-500 group-hover:text-rurikon-500"
                                 >
                                     {tag}
                                 </Badge>
