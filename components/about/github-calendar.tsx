@@ -8,7 +8,7 @@ export default function GithubActivityCalendar() {
             username="thaletto"
             blockMargin={2}
             blockRadius={20}
-            blockSize={8}
+            blockSize={9.5}
             colorScheme="light"
             fontSize={12}
             showMonthLabels={false}
