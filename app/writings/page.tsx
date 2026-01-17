@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const articlesDirectory = path.join(
     process.cwd(),
     "app",
-    "(writings)",
+    "writings",
     "_articles",
 );
 
@@ -21,7 +21,7 @@ export default async function Page() {
     const items = [];
     for (const article of articles) {
         if (!article.endsWith(".mdx")) continue;
-        const module = await import("../_articles/" + article);
+        const module = await import("./_articles/" + article);
 
         if (!module.metadata)
             throw new Error("Missing `metadata` in " + article);
@@ -42,7 +42,7 @@ export default async function Page() {
                 {items.map((item) => (
                     <li key={item.slug} className="font-medium">
                         <Link
-                            href={`/${item.slug}`}
+                            href={`/writings/${item.slug}`}
                             className="group flex gap-1 -mx-2 px-2 justify-between items-center focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted focus-visible:text-rurikon-600"
                             draggable={false}
                         >
