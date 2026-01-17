@@ -19,6 +19,7 @@
     "@types/mdx": "^2.0.13",
     "@vercel/analytics": "^1.6.1",
     "@vercel/blob": "^2.0.0",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "katex": "^0.16.27",
     "next": "^16.1.2",

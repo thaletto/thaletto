@@ -1,11 +1,20 @@
 export const metadata = {
     title: `Parksinson's Disease Detection`,
-    date: "2023.09",
+    endDate: "2023.09",
+    tags: [
+        "Machine Learning",
+        "SVM",
+        "Random Forrest",
+        "Logistic Regression",
+        "Gradient Boost"
+    ],
+    image: "/projects/parkinsons.webp",
+    imageLabel: "Not the Neurons in ML models"
 };
 
 # Parkinsons's Disease Detection
 
-<Card image='/projects/parkinsons.webp' title="Not the Neurons in ML models"/>
+<Card image={metadata.image} title={metadata.imageLabel} />
 
 Parkinson’s Disease Detection is a machine learning project focused on identifying Parkinson’s disease using voice-based biomedical features. The objective is to train and evaluate multiple supervised and unsupervised learning models and compare their performance in predicting the disease.
 
