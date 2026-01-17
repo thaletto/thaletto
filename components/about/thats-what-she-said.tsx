@@ -15,7 +15,7 @@ export default function ThatsWhatSheSaid() {
     const isMobile = useIsMobile();
 
     const Trigger = (
-        <span className="underline cursor-pointer">
+        <span className="font-serif underline cursor-pointer">
             that's what she said
         </span>
     );
