@@ -1,0 +1,106 @@
+export const metadata = {
+    title: `Ascendant`,
+    endDate: "2026.01",
+    tags: ["Python", "FastAPI", "PyTest", "PostgreSQL"],
+    image: "/projects/ascendant.png",
+};
+
+> Python Library for Astrological Calculations, a full-featured computational astrology engine with REST API support, built for precision, testability, and scalable data storage.
+
+## Summary
+
+Ascendant is a Python library that performs advanced astrological calculations including birth chart generation, planetary dasha, and classical yoga detection using the high-precision Swiss Ephemeris dataset (sourced from Astrodienst and derived from NASA ephemeris data). It is exposed as a backend API via FastAPI, with persistent storage in PostgreSQL (and SQLite for local development). Once a user generates a chart, it is cached for faster subsequent retrieval. The codebase comprises 10,000+ lines of Python with production-grade testing powered by Pytest.
+
+## Core Features
+
+- **Birth Chart Generation**: Compute natal charts from date, time, and location with high astronomical accuracy
+- **Dasha Systems**: Calculate planetary period sequences (dasha) for predictive astrology
+- **Yoga Identification**: Detect classical astrological yogas, key planetary configurations
+- **Geographical & Astrological Configuration**: Supports various house systems, sign systems, western and sideral planetary positions, ayanamsa.
+- **REST API Interface**: Exposes calculation and retrieval endpoints via FastAPI
+- **Data Persistence & Caching**: Store charts and metadata in PostgreSQL; generated charts are cached for faster retrieval
+
+## Tech Stack
+
+- **Language**: Python (modern, type-annotated)
+- **API**: RESTful APIs backed by FastAPI
+- **Database**: PostgreSQL for production; SQLite for local/dev
+- **ORM**: SQLAlchemy
+- **Astrology Engine**: In house ***Ascendant*** engine which uses SWISS Ephemeris for precise astronomical calculations
+- **Testing**: Pytest suite with broad coverage
+- **Deployment**: Container-ready with Docker
+
+## Codebase Overview
+
+```
+ascendant/
+├── Dockerfile
+├── api/
+│   ├── chart/
+│   │   └── routes.py
+│   ├── dasha/
+│   │   └── routes.py
+│   ├── database.py
+│   ├── log.py
+│   ├── main.py
+│   ├── models.py
+│   ├── schemas.py
+│   └── user/
+│       └── routes.py
+├── ascendant/
+│   ├── __init__.py
+│   ├── chart/
+│   │   ├── __init__.py
+│   │   └── utils.py
+│   ├── const.py
+│   ├── dasha/
+│   │   └── __init__.py
+│   ├── types.py
+│   ├── utils.py
+│   └── yoga/
+│       ├── __init__.py
+│       ├── base.py
+│       └── registry/
+│           ├── R1.py
+│           ├── R2.py
+│           ├── R3.py
+│           └── __init__.py
+├── tests/
+│   ├── chart.py
+│   ├── dasha.py
+│   ├── helpers.py
+│   ├── horoscope.py
+│   ├── planets.py
+│   └── yoga.py
+└── utils/
+    └── __init__.py
+```
+
+**Description**
+
+- `api/` handles FastAPI endpoints and routing for charts, dasha, and user management
+- `ascendant/` contains the core astrology calculations and utility modules
+- `tests/` contains Pytest test suites for core functionality
+- `utils/` holds helper functions used across the project
+
+## Code Stats
+
+- ~10,363 lines of Python
+- Methods/Functions: 400+
+- Code Traceability: Logging implemented to track application flow and data operations
+- Error Handling: Comprehensive error handling across API and core calculations
+- Clean module separation: Core astro logic, API, DB models, tests, utilities
+- Docker support for consistent environment setup
+
+## Quality & Testing
+
+- Comprehensive Pytest tests ensuring correctness of calculations
+- CLI-friendly test scripts
+- Modular codebase enabling feature extension or integration in larger systems
+
+<br />
+<LinkChip
+    link="https://github.com/thaletto/ascendant"
+    icon="github"
+    label="Source Code"
+/>

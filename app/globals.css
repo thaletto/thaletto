@@ -167,14 +167,13 @@ main {
 }
 
 pre {
-    background-color: #f7f7f7;
+    background-color: #f0f0f0;
     contain: paint;
-    /* margin: 1.75rem 0; */
     overflow-x: auto;
-    /* border-radius: 0.75rem; */
-    /* background-color: var(--color-rurikon-50); */
     padding: 0.875rem 1.25rem;
     -webkit-font-smoothing: auto;
+    --shiki-foreground: #414141;
+    --shiki-background: transparent;
 }
 
 pre code {
@@ -188,13 +187,8 @@ code {
         var(--mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
     word-spacing: -0.15em;
-
-    /* background: var(--color-rurikon-50); */
-    padding: 0.15em 0.2em;
-    /* margin: 0 1px; */
-    /* border-radius: 2px; */
-    /* -webkit-box-decoration-break: clone;
-  box-decoration-break: clone; */
+    background-color: #f0f0f0;
+    padding: 0.2em 0.2em;
 
     /* color: hsl(215deg 32% 37%); */
     --shiki-token-comment: hsl(215deg 32% 37% / 45%);
@@ -206,11 +200,6 @@ code {
     --shiki-token-constant: hsl(215deg 32% 26%);
     --shiki-token-link: #0fb359;
     --shiki-token-parameter: #ff9800;
-}
-
-pre {
-    --shiki-foreground: #414141;
-    --shiki-background: transparent;
 }
 
 code span {
