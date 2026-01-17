@@ -1,4 +1,3 @@
-// app/writings/[slug]/layout.tsx
 import { ReactNode } from "react";
 
 export default async function Layout({
