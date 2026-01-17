@@ -3,14 +3,11 @@ import { Metadata } from "next";
 import path from "path";
 
 export default async function Page(props: {
-    params: Promise<{
-        slug: string;
-    }>;
+    params: Promise<{ slug: string }>;
 }) {
-    const params = await props.params;
-    const { default: MDXContent, metadata } = await import(
-        "../_articles/" + `${params.slug}.mdx`
-    );
+    const { slug } = await props.params;
+
+    const { default: MDXContent } = await import(`../_articles/${slug}.mdx`);
 
     return <MDXContent />;
 }
