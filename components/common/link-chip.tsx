@@ -58,7 +58,7 @@ export default function LinkChip({ icon, label, link }: LinkProps) {
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex p-2 rounded-full items-center gap-2 text-sm font-medium hover:bg-rurikon-600 hover:text-rurikon-50 transition-colors duration-300 ease-in-out"
+            className="inline-flex p-2 rounded items-center gap-2 text-sm font-medium border hover:bg-rurikon-600 hover:text-rurikon-50 transition-colors duration-300 ease-in-out"
         >
             {renderIcon()}
             <span>{label}</span>
