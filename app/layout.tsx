@@ -95,12 +95,17 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="overflow-x-hidden touch-manipulation">
+        <html
+            lang="en"
+            className={cn(
+                "overflow-x-hidden touch-manipulation",
+                sans.variable,
+                serif.variable,
+                mono.variable,
+            )}
+        >
             <body
                 className={cn(
-                    sans.variable,
-                    serif.variable,
-                    mono.variable,
                     "w-full p-6 sm:p-10 md:p-14",
                     "text-sm leading-6 sm:text-[15px] sm:leading-7 md:text-base md:leading-7",
                     "text-rurikon-500",
