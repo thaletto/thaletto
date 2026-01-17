@@ -11,6 +11,7 @@ import { BlockSideTitle } from "@/components/common/block-sidetitle";
 import { Card } from "@/components/common/card";
 import LinkChip from "@/components/common/link-chip";
 import About from "@/components/about";
+import ThatsWhatSheSaid from "@/components/about/thats-what-she-said";
 
 const cssVariablesTheme = createCssVariablesTheme({});
 
@@ -173,6 +174,7 @@ export const components: Record<
     BlockMath,
     LinkChip,
     About,
+    ThatsWhatSheSaid
 };
 
 export function useMDXComponents(inherited: MDXComponents): MDXComponents {

@@ -1,8 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { list } from "@vercel/blob";
-
-// @ts-expect-error types are not available yet?
 import { ViewTransition } from "react";
 
 import cn from "clsx";
