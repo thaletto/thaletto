@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { promises as fs } from "fs";
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import path from "path";
 
