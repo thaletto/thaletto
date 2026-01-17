@@ -3,15 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { codeToHtml, createCssVariablesTheme } from "shiki";
-
-// @ts-ignore
-import { BlockMath, InlineMath } from "react-katex";
-
-import { BlockSideTitle } from "@/components/common/block-sidetitle";
-import { Card } from "@/components/common/card";
-import LinkChip from "@/components/common/link-chip";
 import About from "@/components/about";
 import ThatsWhatSheSaid from "@/components/about/thats-what-she-said";
+import { BlockSideTitle } from "@/components/common/block-sidetitle";
+import { Callout } from "@/components/common/callout";
+import { Card } from "@/components/common/card";
+import LinkChip from "@/components/common/link-chip";
+// @ts-ignore
+import { BlockMath, InlineMath } from "react-katex";
 
 const cssVariablesTheme = createCssVariablesTheme({});
 
@@ -170,6 +169,7 @@ export const components: Record<
         <hr className="my-14 w-24 border-rurikon-border" {...props} />
     ),
     BlockSideTitle,
+    Callout,
     InlineMath,
     BlockMath,
     LinkChip,
