@@ -19,7 +19,7 @@ export default function GithubActivityCalendar() {
             tooltips={{
                 activity: {
                     text: (activity) => `${activity.count} contribution on ${formatDate(activity.date, 'DDMMM', ' ')}`,
-                    placement: "right",
+                    placement: "top",
                     offset: 6,
                     hoverRestMs: 300,
                     transitionStyles: {
