@@ -19,7 +19,7 @@ export default async function Layout({
                     {metadata.title}
                 </h1>
                 <p className="text-sm font-serif">
-                    {metadata.authors.name} · {metadata.date}
+                    {metadata.authors.name} &bull; {metadata.date}
                 </p>
             </header>
             {children}
