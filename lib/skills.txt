@@ -1,0 +1,19 @@
+TypeScript
+JavaScript
+Python
+Next.js
+React
+Bun
+Node.js
+TailwindCSS
+Material UI
+AI SDK
+Google ADK
+Autogen
+Langchain
+Java
+Kotlin
+FastAPI
+PostgreSQL
+Jenkins
+Docker

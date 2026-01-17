@@ -1,5 +1,6 @@
 import { GitHubAchievements } from "./github-achievements";
 import GithubActivityCalendar from "./github-calendar";
+import Skills from "./skills";
 
 export default function About() {
     return (
@@ -12,6 +13,7 @@ export default function About() {
                 quickDraw={1}
                 className="mt-2"
             />
+            <Skills className="mt-8" />
         </div>
     );
 }
