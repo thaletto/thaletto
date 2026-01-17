@@ -93,7 +93,7 @@ function AchievementBadge({
                             className="h-full w-full object-cover"
                         />
                     </TooltipTrigger>
-                    <TooltipContent className="bg-rurikon-800 text-rurikon-100">
+                    <TooltipContent side="bottom" className="bg-rurikon-800 text-rurikon-100">
                         {description}
                     </TooltipContent>
                 </Tooltip>
