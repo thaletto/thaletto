@@ -6,15 +6,14 @@ export type TimelineColor = 'primary' | 'secondary' | 'muted' | 'accent' | 'dest
 
 export interface TimelineElement {
   id: number;
+  startDate: string;
+  endDate: string;
   date: string;
   title: string;
-  description: string;
-  icon?: ReactNode | (() => ReactNode);
-  status?: TimelineStatus;
-  color?: TimelineColor;
-  size?: TimelineSize;
-  loading?: boolean;
-  error?: string;
+  description?: string;
+  content?: React.ReactNode;
+  image?: string;
+  slug?: string;
 }
 
 export interface TimelineProps {

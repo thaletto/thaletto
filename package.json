@@ -20,6 +20,7 @@
     "@vercel/blob": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.26.2",
     "katex": "^0.16.27",
     "next": "^16.1.2",
     "react": "^19.2.3",

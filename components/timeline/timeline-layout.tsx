@@ -24,9 +24,11 @@ export const TimelineLayout = ({
   connectorColor,
   className,
 }: TimelineLayoutProps) => {
+  const reversedItems = [...items].reverse();
+
   return (
-    <Timeline size={size} className={className}>
-      {[...items].reverse().map((item, index) => (
+    <Timeline className={className}>
+      {reversedItems.map((item, index) => (
         <motion.div
           key={index}
           initial={animate ? { opacity: 0, y: 20 } : false}
@@ -38,12 +40,14 @@ export const TimelineLayout = ({
           }}
         >
           <TimelineItem
-            date={item.date}
+            startDate={item.startDate}
+            endDate={item.endDate}
+            nextEndDate={reversedItems[index + 1]?.endDate}
             title={item.title}
             description={item.description}
-            icon={typeof item.icon === 'function' ? item.icon() : item.icon || customIcon}
-            iconColor={item.color || iconColor}
-            connectorColor={item.color || connectorColor}
+            content={item.content}
+            image={item.image}
+            slug={item.slug}
             showConnector={index !== items.length - 1}
           />
         </motion.div>
