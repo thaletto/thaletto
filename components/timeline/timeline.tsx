@@ -9,6 +9,7 @@ import React, { useMemo } from "react";
 /* ---------------------------------------------
  * Config
  * -------------------------------------------- */
+const PIXELS_PER_MONTH = 10;
 const MIN_DURATION_HEIGHT = 150;
 const MIN_GAP_HEIGHT = 48; // Minimum space between items
 
@@ -102,7 +103,6 @@ export function TimelineItem({
     showConnector?: boolean;
 }) {
     const isMobile = useIsMobile();
-    const PIXELS_PER_MONTH = isMobile ? 10 : 14;
 
     // Calculate heights
     const { durationHeight, gapHeight } = useMemo(() => {
