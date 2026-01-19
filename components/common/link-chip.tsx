@@ -12,7 +12,7 @@ import {
 import { SiNotion } from "react-icons/si";
 import { Badge } from "../ui/badge";
 
-type LinkProps = {
+export type LinkProps = {
     icon?:
         | "gdrive"
         | "github"
@@ -26,13 +26,27 @@ type LinkProps = {
         | null;
     label: string;
     link: string;
+    variant?:
+        | "outline"
+        | "link"
+        | "default"
+        | "secondary"
+        | "destructive"
+        | "ghost"
+        | null
+        | undefined;
 };
 
-export default function LinkChip({ icon, label, link }: LinkProps) {
+export default function LinkChip({
+    icon,
+    label,
+    link,
+    variant = "outline",
+}: LinkProps) {
     const renderIcon = () => {
         switch (icon) {
             case "github":
-                return <FaGithub size={32}/>;
+                return <FaGithub size={32} />;
             case "globe":
                 return <FaGlobe className="w-4 h-4" />;
             case "instagram":
@@ -56,7 +70,7 @@ export default function LinkChip({ icon, label, link }: LinkProps) {
 
     return (
         <Link href={link} target="_blank" rel="noopener noreferrer">
-            <Badge variant="outline" className="px-2 py-4 text-sm rounded">
+            <Badge variant={variant} className="px-2 py-4 text-sm rounded">
                 {renderIcon()} {label}
             </Badge>
         </Link>
