@@ -1,13 +1,12 @@
+import KeyboardShortcuts from "@/components/KeyboardShortcuts";
+import Navbar from "@/components/navbar";
 import { Analytics } from "@vercel/analytics/next";
-import type { Metadata, Viewport } from "next";
 import { list } from "@vercel/blob";
-import { ViewTransition } from "react";
-
 import cn from "clsx";
 import "katex/dist/katex.min.css";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-
-import Navbar from "@/components/navbar";
+import { ViewTransition } from "react";
 import "./globals.css";
 
 const sans = localFont({
@@ -112,6 +111,7 @@ export default function RootLayout({
                     "antialiased",
                 )}
             >
+                <KeyboardShortcuts />
                 <div className="fixed sm:hidden h-6 sm:h-10 md:h-14 w-full top-0 left-0 z-30 pointer-events-none content-fade-out" />
                 <div className="flex flex-col mobile:flex-row">
                     <Navbar />
