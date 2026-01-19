@@ -1,9 +1,17 @@
-import { cn } from "@/lib/utils";
+"use client";
+
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 import {
     Tooltip,
-    TooltipContent,
     TooltipTrigger,
+    TooltipContent,
 } from "@/components/ui/tooltip";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 const BADGE_COLORS: Record<number, string> = {
     2: "bg-[#F9BFA7]",
@@ -12,13 +20,6 @@ const BADGE_COLORS: Record<number, string> = {
 };
 
 type AchievementLevel = 0 | 1 | 2 | 3 | 4;
-
-interface Achievement {
-    name: string;
-    description: string;
-    src: string;
-    maxLevel?: AchievementLevel; // if provided, caps max
-}
 
 const ACHIEVEMENTS = {
     starStruck: {
@@ -75,6 +76,44 @@ interface AchievementBadgeProps {
     className?: string;
 }
 
+function TooltipOrPopover({
+    Trigger,
+    Content,
+}: {
+    Trigger: React.ReactNode;
+    Content: React.ReactNode;
+}) {
+    const isMobile = useIsMobile();
+
+    if (isMobile) {
+        return (
+            <Popover>
+                <PopoverTrigger>{Trigger}</PopoverTrigger>
+                <PopoverContent
+                    side="bottom"
+                    sideOffset={8}
+                    className="p-2 max-w-xs bg-rurikon-800 text-rurikon-100 text-sm"
+                >
+                    {Content}
+                </PopoverContent>
+            </Popover>
+        );
+    }
+
+    return (
+        <Tooltip>
+            <TooltipTrigger>{Trigger}</TooltipTrigger>
+            <TooltipContent
+                side="bottom"
+                sideOffset={8}
+                className="p-2 bg-rurikon-800 text-rurikon-100 text-sm"
+            >
+                {Content}
+            </TooltipContent>
+        </Tooltip>
+    );
+}
+
 function AchievementBadge({
     name,
     src,
@@ -84,24 +123,21 @@ function AchievementBadge({
 }: AchievementBadgeProps) {
     return (
         <div className={cn("relative shrink-0", className)}>
-            <div className="h-16 w-16 overflow-hidden rounded-full">
-                <Tooltip>
-                    <TooltipTrigger>
-                        <img
-                            src={src}
-                            alt={name}
-                            className="h-full w-full object-cover"
-                        />
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom" className="bg-rurikon-800 text-rurikon-100">
-                        {description}
-                    </TooltipContent>
-                </Tooltip>
-            </div>
+            <TooltipOrPopover
+                Trigger={
+                    <img
+                        src={src}
+                        alt={name}
+                        className="h-16 w-16 rounded-full object-cover"
+                    />
+                }
+                Content={<span>{description}</span>}
+            />
+
             {level >= 2 && (
                 <div
                     className={cn(
-                        "absolute right-0.75 bottom-[0.5px] flex h-5 w-7 items-center justify-center rounded-full font-medium text-xs text-[#010409]",
+                        "absolute right-0.75 bottom-[0.5px] flex h-5 w-7 items-center justify-center rounded-full text-xs font-medium text-[#010409]",
                         BADGE_COLORS[level] || "",
                     )}
                 >
