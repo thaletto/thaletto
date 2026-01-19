@@ -25,6 +25,7 @@ export default function ThatsWhatSheSaid() {
             src="/thats-what-she-said.gif"
             className="rounded-lg"
             alt="that's what she said"
+            loading="eager"
         />
     );
 
