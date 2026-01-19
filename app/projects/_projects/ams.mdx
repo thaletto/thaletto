@@ -1,0 +1,52 @@
+export const metadata = {
+    title: `Agentic AMS Framework`,
+    endDate: "2026.01",
+    tags: ["Google ADK", "Autogen", "LangChain", "MCP", "RAG"],
+    image: "/projects/ams.png",
+    company: "TCS"
+};
+
+> An **Agentic Application Management Services (AMS) Framework** designed to autonomously detect, analyze, and resolve production incidents using AI agents, while maintaining human oversight for critical actions.
+
+## Problem Statement
+Traditional incident management workflows rely heavily on manual triage, repetitive SOP execution, and delayed escalations, leading to higher MTTR and operational overhead.
+
+## Solution Overview
+The framework integrates **observability, ITSM, and agentic orchestration** to automate the complete incident lifecycle.
+
+## Architecture & Flow
+- **Grafana** monitors production systems and logs failures or anomalies  
+- Alerts automatically create **ServiceNow incidents**  
+- An **AI agent** listens to incoming ServiceNow tickets and ingests incident metadata  
+- The agent follows predefined **SOPs or historical incident resolution good known steps**  
+- Sensitive operations require **human-in-the-loop approval**, configurable per incident
+- **Dynamic, real-time UI** synchronized with agent execution steps, providing full transparency and debugging
+- Incidents are either **auto-resolved** or **escalated to L2 teams** when necessary by agent
+- Also provides platform and tools for manual resolution
+
+### Key Features
+- End-to-end **agentic incident handling** from detection to resolution  
+- Configurable **human approval gates** before executing production actions  
+- Intelligent **fallback and escalation mechanisms**  
+- Automated generation of:
+  - **Post-incident reports**
+  - **Leadership and executive summaries**
+- Reduced MTTR by eliminating manual triage and repetitive operational tasks  
+
+## Impact
+- Improved operational efficiency and platform reliability  
+- Faster incident resolution with consistent SOP execution  
+- Enhanced visibility for leadership through automated reporting  
+
+## Tech Stack
+- AI & Orchestration: **Google ADK**, **Autogen**, **Langchain**, **AzureOpenAI**
+- Backend & Integrations: FastAPI, Qdrant, MongoDB, Redis
+- UI: Next.js, Material UI
+- Monitoring: Grafana
+- ITSM: ServiceNow
+- Deployment: Jenkins, Docker
+- Cloud Provider: Google Cloud  
+
+This project demonstrates strong expertise in **agentic systems**, **production scale automation**, and **AI-powered operations engineering**.
+
+

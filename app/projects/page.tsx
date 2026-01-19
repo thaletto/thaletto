@@ -1,3 +1,4 @@
+import SvgIcon from "@/components/common/logo";
 import { Badge } from "@/components/ui/badge";
 import { promises as fs } from "fs";
 import { Metadata } from "next";
@@ -21,14 +22,29 @@ type ProjectListItemProps = {
     title: string;
     date: string;
     tags?: string[];
+    company?: string;
 };
+
+function getCompanyLogoSrc(company?: string) {
+    if (!company) return null;
+
+    switch (company.toLowerCase()) {
+        case "tcs":
+            return "/company/tcs.svg";
+        default:
+            return "/company/office.svg";
+    }
+}
 
 export function ProjectListItem({
     slug,
     title,
     date,
     tags = [],
+    company,
 }: ProjectListItemProps) {
+    const companyIcon = getCompanyLogoSrc(company);
+
     return (
         <li className="font-medium my-4">
             <Link
@@ -36,11 +52,16 @@ export function ProjectListItem({
                 className="group flex items-start gap-3 -mx-2 px-2 focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted"
                 draggable={false}
             >
-
-                {/* Content */}
                 <div className="flex flex-col gap-1 min-w-0 flex-1">
-                    {/* Title + Dot leaders + Date */}
-                    <div className="flex items-baseline gap-2 min-w-0">
+                    <div className="flex items-center gap-2">
+                        {companyIcon && (
+                            <SvgIcon
+                                src={companyIcon}
+                                name={company ?? ""}
+                                className="size-6 shrink-0 text-rurikon-400 group-hover:text-rurikon-600"
+                            />
+                        )}
+
                         <span className="text-rurikon-500 group-hover:text-rurikon-700 truncate">
                             {title}
                         </span>
@@ -52,7 +73,6 @@ export function ProjectListItem({
                         </time>
                     </div>
 
-                    {/* Tags */}
                     {tags.length > 0 && (
                         <div className="flex flex-wrap gap-1">
                             {tags.map((tag) => (
@@ -81,6 +101,7 @@ export default async function Page() {
         date: string;
         sort: number;
         tags?: string[];
+        company: string;
     }[] = [];
 
     for (const project of projects) {
@@ -98,6 +119,7 @@ export default async function Page() {
             date: module.metadata.endDate || "Present",
             sort: Number(module.metadata.endDate?.replaceAll(".", "") || 0),
             tags: module.metadata.tags ?? [],
+            company: module.metadata.company,
         });
     }
 
@@ -113,6 +135,7 @@ export default async function Page() {
                         title={item.title}
                         date={item.date}
                         tags={item.tags}
+                        company={item.company}
                     />
                 ))}
             </ul>

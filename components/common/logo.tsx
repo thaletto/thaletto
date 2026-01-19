@@ -1,5 +1,6 @@
 type SvgIconProps = {
     name: string;
+    src: string;
     width?: number | string;
     height?: number | string;
     className?: string;
@@ -7,16 +8,16 @@ type SvgIconProps = {
 
 export default function SvgIcon({
     name,
+    src,
     width = 24,
-    height = 24,
     className,
 }: SvgIconProps) {
     return (
         <img
-            src={`/${name}.svg`}
+            src={src}
             alt={name}
             width={width}
-            height={height}
+            
             className={className}
             loading="lazy"
         />
