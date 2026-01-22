@@ -1,4 +1,4 @@
-import KeyboardShortcuts from "@/components/KeyboardShortcuts";
+import KeyboardShortcuts from "@/components/keyboard-shortcuts";
 import Navbar from "@/components/navbar";
 import { Analytics } from "@vercel/analytics/next";
 import cn from "clsx";
