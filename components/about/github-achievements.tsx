@@ -106,7 +106,7 @@ function TooltipOrPopover({
             <TooltipContent
                 side="bottom"
                 sideOffset={8}
-                className="p-2 bg-rurikon-800 text-rurikon-100 text-sm"
+                className="p-2 text-sm"
             >
                 {Content}
             </TooltipContent>
