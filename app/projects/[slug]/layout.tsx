@@ -2,8 +2,6 @@ import { ReactNode } from "react";
 import { Card } from "@/components/common/card";
 import { Badge } from "@/components/ui/badge";
 import SvgIcon from "@/components/common/logo";
-import { m } from "framer-motion";
-
 
 function getCompanyLogoSrc(company?: string) {
     if (!company) return null;
