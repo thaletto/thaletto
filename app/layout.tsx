@@ -7,6 +7,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { ViewTransition } from "react";
 import "./globals.css";
+import ViewIncrement from "@/components/view-increment";
 
 const sans = localFont({
     src: "./_fonts/InterVariable.woff2",
@@ -77,6 +78,7 @@ export default function RootLayout({
                 )}
             >
                 <KeyboardShortcuts />
+                <ViewIncrement />
                 <div className="fixed sm:hidden h-6 sm:h-10 md:h-14 w-full top-0 left-0 z-30 pointer-events-none content-fade-out" />
                 <div className="flex flex-col mobile:flex-row">
                     <Navbar />
