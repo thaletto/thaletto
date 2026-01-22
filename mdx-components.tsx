@@ -1,14 +1,16 @@
+import About from "@/components/about";
+import Hero from "@/components/about/hero";
+import ThatsWhatSheSaid from "@/components/about/thats-what-she-said";
+import ViewCount from "@/components/about/view-count";
+import { BlockSideTitle } from "@/components/common/block-sidetitle";
+import { Callout } from "@/components/common/callout";
+import { Card } from "@/components/common/card";
+import LinkChip from "@/components/common/link-chip";
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { codeToHtml, createCssVariablesTheme } from "shiki";
-import About from "@/components/about";
-import ThatsWhatSheSaid from "@/components/about/thats-what-she-said";
-import { BlockSideTitle } from "@/components/common/block-sidetitle";
-import { Callout } from "@/components/common/callout";
-import { Card } from "@/components/common/card";
-import LinkChip from "@/components/common/link-chip";
 // @ts-ignore
 import { BlockMath, InlineMath } from "react-katex";
 
@@ -172,7 +174,9 @@ export const components: Record<
     Callout,
     InlineMath,
     BlockMath,
+    ViewCount,
     LinkChip,
+    Hero,
     About,
     ThatsWhatSheSaid
 };

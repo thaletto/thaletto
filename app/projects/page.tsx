@@ -58,11 +58,11 @@ export function ProjectListItem({
                             <SvgIcon
                                 src={companyIcon}
                                 name={company ?? ""}
-                                className="size-6 shrink-0 text-rurikon-400 group-hover:text-rurikon-600"
+                                className="size-6 shrink-0"
                             />
                         )}
 
-                        <span className="text-rurikon-500 group-hover:text-rurikon-700 truncate">
+                        <span className="text-rurikon-500 truncate">
                             {title}
                         </span>
 
