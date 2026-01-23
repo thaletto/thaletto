@@ -48,7 +48,7 @@ export default function Navbar() {
                         <TooltipContent
                             side="right"
                             sideOffset={12}
-                            className="flex items-center gap-2"
+                            className="hidden md:flex items-center gap-2"
                         >
                             Press <Kbd>A</Kbd>
                         </TooltipContent>
@@ -63,7 +63,7 @@ export default function Navbar() {
                         <TooltipContent
                             side="right"
                             sideOffset={12}
-                            className="flex items-center gap-2"
+                            className="hidden md:flex items-center gap-2"
                         >
                             Press <Kbd>P</Kbd>
                         </TooltipContent>
@@ -78,7 +78,7 @@ export default function Navbar() {
                         <TooltipContent
                             side="right"
                             sideOffset={12}
-                            className="flex items-center gap-2"
+                            className="hidden md:flex items-center gap-2"
                         >
                             Press <Kbd>T</Kbd>
                         </TooltipContent>
@@ -93,7 +93,7 @@ export default function Navbar() {
                         <TooltipContent
                             side="right"
                             sideOffset={12}
-                            className="flex items-center gap-2"
+                            className="hidden md:flex items-center gap-2"
                         >
                             Press <Kbd>W</Kbd>
                         </TooltipContent>
