@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
     return {
         name: "Laxman K R | @thaletto Portfolio & Blogs",
         short_name: "Laxman K R | @thaletto Portfolio & Blogs",
-        description: "Portfolio and blog website of a fullstack developer",
+        description: "Portfolio and blog website of a AI Engineer",
         start_url: "/",
         display: "standalone",
         background_color: "#fcfcfc",
