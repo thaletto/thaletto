@@ -35,7 +35,7 @@ export type LinkProps = {
         | "ghost"
         | null
         | undefined;
-    className: string;
+    className?: string;
 };
 
 export default function LinkChip({
