@@ -1,28 +1,26 @@
 import KeyboardShortcuts from "@/components/keyboard-shortcuts";
 import Navbar from "@/components/navbar";
+import ViewIncrement from "@/components/view-increment";
 import { Analytics } from "@vercel/analytics/next";
 import cn from "clsx";
 import "katex/dist/katex.min.css";
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+import { Geist_Mono, Inter, Lora } from "next/font/google";
 import { ViewTransition } from "react";
 import "./globals.css";
-import ViewIncrement from "@/components/view-increment";
 
-const sans = localFont({
-    src: "./_fonts/InterVariable.woff2",
+const sans = Inter({
     preload: true,
     variable: "--sans",
 });
 
-const serif = localFont({
-    src: "./_fonts/LoraItalicVariable.woff2",
+const serif = Lora({
     preload: true,
     variable: "--serif",
+    style: "italic",
 });
 
-const mono = localFont({
-    src: "./_fonts/IosevkaFixedCurly-ExtendedMedium.woff2",
+const mono = Geist_Mono({
     preload: true,
     variable: "--mono",
 });
