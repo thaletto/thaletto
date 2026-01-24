@@ -34,7 +34,7 @@ export default function Hero() {
                 <h1 className="font-semibold text-xl md:text-3xl text-rurikon-600 text-balance">
                     Laxman K R
                     <br />
-                    <span className="text-sm md:text-lg text-rurikon-200 hover:text-rurikon-500 transition-colors duration-300 ease-in-out">
+                    <span className="text-sm md:text-lg text-rurikon-400 transition-colors duration-300 ease-in-out">
                         Full Stack AI Developer
                     </span>
                 </h1>
