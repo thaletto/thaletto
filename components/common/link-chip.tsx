@@ -1,13 +1,13 @@
 import Link from "next/link";
+import { FaFilePdf } from "react-icons/fa";
 import {
-    FaFilePdf,
     FaFileWord,
-    FaGlobe,
     FaGithub,
-    FaXTwitter,
-    FaLinkedin,
-    FaInstagram,
+    FaGlobe,
     FaGoogleDrive,
+    FaInstagram,
+    FaLinkedin,
+    FaXTwitter,
 } from "react-icons/fa6";
 import { SiNotion } from "react-icons/si";
 import { Badge } from "../ui/badge";
