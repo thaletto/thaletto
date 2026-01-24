@@ -35,7 +35,7 @@ export default function Hero() {
                     Laxman K R
                     <br />
                     <span className="text-sm md:text-lg text-rurikon-400 transition-colors duration-300 ease-in-out">
-                        Full Stack AI Developer
+                        AI Engineer
                     </span>
                 </h1>
 

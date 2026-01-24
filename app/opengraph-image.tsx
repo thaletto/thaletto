@@ -44,7 +44,7 @@ export default function OpenGraphImage({ title }: { title?: string }) {
                     maxWidth: 1000,
                 }}
             >
-                Full Stack AI Developer
+                AI Engineer
             </h2>
         </div>,
         size,

@@ -32,9 +32,9 @@ const baseURL = new URL("https://thaletto.vercel.app");
 export const metadata: Metadata = {
     title: {
         template: "%s - Laxman K R",
-        default: "Laxman K R - Full Stack AI Developer",
+        default: "Laxman K R - AI Engineer",
     },
-    description: "Full Stack AI Developer",
+    description: "AI Engineer",
     metadataBase: baseURL,
 
     openGraph: {

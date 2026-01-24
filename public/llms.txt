@@ -1,6 +1,6 @@
 # Laxman K R
 
-Full Stack AI Developer
+AI Engineeer
 
 ## Bio
 Hey, I’m Laxman, a full-stack developer who enjoys building modern, well structured apps where things just feel right from how the UI looks to how the code is organized under the hood.
