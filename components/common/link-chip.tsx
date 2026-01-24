@@ -35,6 +35,7 @@ export type LinkProps = {
         | "ghost"
         | null
         | undefined;
+    className: string;
 };
 
 export default function LinkChip({
@@ -42,6 +43,7 @@ export default function LinkChip({
     label,
     link,
     variant = "outline",
+    className,
 }: LinkProps) {
     const renderIcon = () => {
         switch (icon) {
@@ -67,10 +69,10 @@ export default function LinkChip({
                 return <FaGlobe className="w-4 h-4" />;
         }
     };
-
+    const px = variant === "link" ? "px-0" : "px-2";
     return (
         <Link href={link} target="_blank" rel="noopener noreferrer">
-            <Badge variant={variant} className="px-2 py-4 text-sm rounded">
+            <Badge variant={variant} className={`py-4 text-sm rounded ${px} ${className}`}>
                 {renderIcon()} {label}
             </Badge>
         </Link>

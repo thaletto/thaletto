@@ -43,7 +43,9 @@ export default function Navbar() {
                 <Item href="/">
                     <Tooltip>
                         <TooltipTrigger>
-                            <span className="lowercase cursor-pointer">About</span>
+                            <span className="lowercase cursor-pointer">
+                                About
+                            </span>
                         </TooltipTrigger>
                         <TooltipContent
                             side="right"
@@ -58,7 +60,9 @@ export default function Navbar() {
                 <Item href="/projects">
                     <Tooltip>
                         <TooltipTrigger>
-                            <span className="lowercase cursor-pointer">Projects</span>
+                            <span className="lowercase cursor-pointer">
+                                Projects
+                            </span>
                         </TooltipTrigger>
                         <TooltipContent
                             side="right"
@@ -73,7 +77,9 @@ export default function Navbar() {
                 <Item href="/timeline">
                     <Tooltip>
                         <TooltipTrigger>
-                            <span className="lowercase cursor-pointer">Timeline</span>
+                            <span className="lowercase cursor-pointer">
+                                Timeline
+                            </span>
                         </TooltipTrigger>
                         <TooltipContent
                             side="right"
@@ -88,7 +94,9 @@ export default function Navbar() {
                 <Item href="/writings">
                     <Tooltip>
                         <TooltipTrigger>
-                            <span className="lowercase cursor-pointer">Writings</span>
+                            <span className="lowercase cursor-pointer">
+                                Writings
+                            </span>
                         </TooltipTrigger>
                         <TooltipContent
                             side="right"

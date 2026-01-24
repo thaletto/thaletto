@@ -49,7 +49,7 @@ export default function About() {
                 className="mt-2"
             />
             <Skills className="mt-8" />
-            <div className="flex flex-wrap gap-1 mt-8">
+            <div className="flex flex-wrap gap-4 mt-8">
                 {SOCIAL_LINKS.map((item) => (
                     <LinkChip variant='link' key={item.name} link={item.link} label={item.name} icon={item.icon}  />
                 ))}
