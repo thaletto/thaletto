@@ -1,24 +1,24 @@
 export const metadata = {
-    title: `Agentic AMS Framework`,
-    endDate: "2026.01",
-    tags: ["Microsoft Autogen", "MCP", "RAG"],
-    image: "/projects/ams.png",
-    company: "TCS",
+  title: `Agentic AMS Framework`,
+  endDate: "2026.01",
+  tags: ["Microsoft Autogen", "MCP", "RAG"],
+  image: "/projects/ams.png",
+  company: "TCS",
 };
 
 > An **Agentic Application Management Services (AMS) Framework** designed to autonomously detect, analyze, and resolve production incidents using AI agents, while maintaining human oversight for critical actions.
 
 <BlockSideTitle title="AMS Architecture">
-    <img src="/projects/ams_architecture.png" />
+  <img src="/projects/ams_architecture.png" />
 </BlockSideTitle>
 
 ## The Problem
 
-Traditional AMS operations rely heavily on L1 support engineers manually triaging alerts, looking up runbooks, and executing remediation steps — a slow, repetitive, and error-prone cycle that becomes unsustainable at scale. Incidents that could be resolved in minutes often sit in a queue, degrading system reliability and burning on-call bandwidth.
+Traditional AMS operations rely heavily on L1 support engineers manually triaging alerts, looking up runbooks, and executing remediation steps a slow, repetitive, and error-prone cycle that becomes unsustainable at scale. Incidents that could be resolved in minutes often sit in a queue, degrading system reliability and burning on-call bandwidth.
 
 ## What We Built
 
-A multi-agent framework that takes an incident from detection all the way to resolution — autonomously — with no human in the loop for routine fixes, and a clean escalation path when it can't.
+A multi-agent framework that takes an incident from detection all the way to resolution autonomously with no human in the loop for routine fixes, and a clean escalation path when it can't.
 
 The system is surfaced through an **AMS Dashboard**, which acts as the operator's control plane and the entry point for both agent pipelines via WebSocket connections.
 
@@ -26,9 +26,9 @@ The system is surfaced through an **AMS Dashboard**, which acts as the operator'
 
 **Detection** starts with application logs streaming into Grafana, where Loki continuously scans for error patterns and keywords. When a threshold is crossed, an alert fires.
 
-The **Observability Agent** picks up that alert, cross-references ServiceNow to avoid creating duplicate tickets, and raises a fresh incident when needed — all in real time.
+The **Observability Agent** picks up that alert, cross-references ServiceNow to avoid creating duplicate tickets, and raises a fresh incident when needed all in real time.
 
-A second pipeline, the **Main Agent**, polls ServiceNow on a short interval and processes new incidents one by one. It hands each one to an **Agent Orchestrator**, which retrieves the relevant Standard Operating Procedure from a vector database — Confluence runbooks, chunked and embedded into Qdrant — so the right context is always at hand.
+A second pipeline, the **Main Agent**, polls ServiceNow on a short interval and processes new incidents one by one. It hands each one to an **Agent Orchestrator**, which retrieves the relevant Standard Operating Procedure from a vector database Confluence runbooks, chunked and embedded into Qdrant so the right context is always at hand.
 
 With the incident details and SOP in context, a **Planning Agent** breaks the problem down into a concrete, step-by-step remediation plan. An **Executor Agent** then carries it out using a set of operational tools: HTTP requests to internal APIs, Jenkins job triggers, and Kubernetes pod status checks.
 
@@ -40,6 +40,6 @@ Every step is verified by a **Validator Agent** before moving on. If the fix hol
 
 **Deduplication at the gate.** The Observability Agent checks ServiceNow before creating any ticket, preventing alert storms from flooding the incident queue.
 
-**Validation at every step.** Rather than running a plan to completion and checking the outcome, the Validator Agent reviews each action individually — catching failures early and preventing compounding errors.
+**Validation at every step.** Rather than running a plan to completion and checking the outcome, the Validator Agent reviews each action individually catching failures early and preventing compounding errors.
 
 **Graceful escalation.** The framework doesn't try to resolve everything. Unresolvable or ambiguous incidents are handed off cleanly to human engineers, with full context attached.
