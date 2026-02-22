@@ -27,33 +27,7 @@ I’m drawn to system design, application structure, and different programming p
 
 ## Projects
 
-### Agentic AMS Framework (TCS)
-An Agentic Application Management Services (AMS) Framework designed to autonomously detect, analyze, and resolve production incidents using AI agents, while maintaining human oversight for critical actions.
-- **Tech Stack:** Google ADK, Autogen, Langchain, AzureOpenAI, FastAPI, Qdrant, MongoDB, Redis, Next.js, Material UI, Grafana, ServiceNow, Jenkins, Docker, Google Cloud.
-
-### Ascendant
-Python Library for Astrological Calculations, a full-featured computational astrology engine with REST API support, built for precision, testability, and scalable data storage.
-- **Tech Stack:** Python, FastAPI, PyTest, PostgreSQL, SQLAlchemy, Docker.
-
-### OpenGPT
-A modern, responsive ChatGPT clone built for the web. It brings AI-powered conversations with advanced reasoning and tool calls while ensuring a smooth user experience through streaming and real-time updates.
-- **Tech Stack:** Next.js, AI SDK, Streamdown, Shadcn, TailwindCSS, Neon (PostgreSQL), Drizzle ORM, Google OAuth.
-
-### E-Commerce Store
-A modern, responsive e-commerce web application featuring dynamic product listing, a fully functional shopping cart, and a clean, mobile-friendly interface.
-- **Tech Stack:** Next.js, React, Tailwind CSS, Supabase, Prisma ORM.
-
-### Lense
-An Android application for selling pre-owned products with AI-powered value estimation. It simplifies listing items by automatically generating descriptions and estimating product value using image classification and captioning models.
-- **Tech Stack:** Kotlin, Jetpack Compose, TensorFlow Lite 4, GPT-2 Image Captioning.
-
-### Complex or Irregular Lung Nodule Detection from CT Scans
-A research project leveraging deep learning models (V-Net, YOLOv5s, DETR) combined with a shape modeling algorithm to accurately detect lung nodules and reduce misinterpretation in CT scans.
-- **Tech Stack:** Python, TensorFlow, Keras, Scikit-learn, YOLOv5s.
-
-### Parkinson's Disease Detection
-A machine learning project focused on identifying Parkinson’s disease using voice-based biomedical features using supervised learning models like SVM.
-- **Tech Stack:** Machine Learning, SVM, Random Forrest, Logistic Regression, Gradient Boost.
+Visit `https://thaletto.vercel.app/projects`
 
 ## Education
 
