@@ -4,7 +4,6 @@ import { NextConfig } from "next";
 export default withMDX()({
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   turbopack: {},
-  cacheComponents: true,
   redirects: async () => [
     {
       source: "/posts/:slug",
