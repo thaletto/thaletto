@@ -6,40 +6,48 @@ export const metadata = {
   company: "TCS",
 };
 
-> An **Agentic Application Management Services (AMS) Framework** designed to autonomously detect, analyze, and resolve production incidents using AI agents, while maintaining human oversight for critical actions.
+> An autonomous multi-agent system that detects, diagnoses, and resolves production incidents end-to-end, with a human kept firmly in the loop and a vector-indexed brain consulted at every step.
 
 <BlockSideTitle title="AMS Architecture">
   <img src="/projects/ams_architecture.png" />
 </BlockSideTitle>
 
-## The Problem
+## The Problem With Watching Dashboards
 
-Traditional AMS operations rely heavily on L1 support engineers manually triaging alerts, looking up runbooks, and executing remediation steps a slow, repetitive, and error-prone cycle that becomes unsustainable at scale. Incidents that could be resolved in minutes often sit in a queue, degrading system reliability and burning on-call bandwidth.
+There is a particular species of misery, well known to the on-call engineer, that consists of being woken at three in the morning by a Grafana alert, of squinting at a wall of logs that have no obvious intention of confessing their guilt, and of then spending the better part of an hour tracing a thread of causation through services that were designed, in a previous era of optimism, to be entirely independent of one another. The alert told you something was wrong. It did not tell you what, or why, or what to do about it, and it certainly did not volunteer to fix it.
 
-## What We Built
+The Agentic AMS Framework was built as a sincere attempt to address this state of affairs. The ambition is precise: to construct a system that not only detects anomalies in a production environment, but reasons about them, retrieves the relevant remediation procedures from an organizational knowledge base, executes a remediation plan through real infrastructure tooling, and validates that the execution actually worked. All of this, with a human given every opportunity to intervene before anything irreversible occurs.
 
-A multi-agent framework that takes an incident from detection all the way to resolution autonomously with no human in the loop for routine fixes, and a clean escalation path when it can't.
+## The Observability Layer
 
-The system is surfaced through an **AMS Dashboard**, which acts as the operator's control plane and the entry point for both agent pipelines via WebSocket connections.
+The system begins, as all honest incident management must, by watching the application's own testimony. Application logs flow into Grafana Loki, which subjects them to keyword-based alerting rules. When a rule fires, Grafana Alerts becomes aware of a problem. This is, in itself, unremarkable infrastructure.
 
-## How It Works
+What is more interesting is what happens next. The Observability Agent, which connects to the dashboard over a persistent WebSocket connection, reads these alerts as they arrive. It then consults ServiceNow to determine whether the incident has already been acknowledged, creating a ticket if none exists and declining to create a duplicate if one does. The deduplication logic, which sounds trivially obvious and yet is conspicuously absent from a surprising number of incident pipelines, prevents the downstream agents from being sent into a frenzy by the same alert arriving seventeen times during a flapping event.
 
-**Detection** starts with application logs streaming into Grafana, where Loki continuously scans for error patterns and keywords. When a threshold is crossed, an alert fires.
+## The Knowledge Problem, and How Qdrant Solves It
 
-The **Observability Agent** picks up that alert, cross-references ServiceNow to avoid creating duplicate tickets, and raises a fresh incident when needed all in real time.
+An agent that knows how to detect a problem but not how to remedy it is, at best, a very expensive pager. The framework addresses this through a RAG pipeline backed by Qdrant, a vector database that holds the organization's Standard Operating Procedures, sourced from Confluence via a batch ingestion job.
 
-A second pipeline, the **Main Agent**, polls ServiceNow on a short interval and processes new incidents one by one. It hands each one to an **Agent Orchestrator**, which retrieves the relevant Standard Operating Procedure from a vector database Confluence runbooks, chunked and embedded into Qdrant so the right context is always at hand.
+When the Agent Orchestrator receives an incident from the Observability layer, its first act is to fetch the most semantically relevant SOP from Qdrant. This is the moment where the system's memory becomes consequential. An incident concerning a failing pod will surface a runbook written by engineers who have seen that pod fail before. The retrieved procedure is then passed, alongside the raw incident details, into the planning stage, so that the agents are not reasoning in a vacuum but are instead grounded in the accumulated institutional knowledge of the team.
 
-With the incident details and SOP in context, a **Planning Agent** breaks the problem down into a concrete, step-by-step remediation plan. An **Executor Agent** then carries it out using a set of operational tools: HTTP requests to internal APIs, Jenkins job triggers, and Kubernetes pod status checks.
+## The Main Agent Pipeline
 
-Every step is verified by a **Validator Agent** before moving on. If the fix holds, the incident is resolved directly in ServiceNow. If not, it's escalated to the L2 team with a full audit trail.
+The orchestration of the actual remediation is handled by a pipeline of three agents, each with a distinct and non-overlapping responsibility.
 
-## Key Design Decisions
+The Planning Agent receives the incident description and the retrieved SOP and produces an ordered remediation plan. It does not execute anything. Its sole function is to reason about what should be done and in what sequence, producing a plan that is then handed off for review.
 
-**RAG** SOPs live in Confluence and are periodically re-embedded into Qdrant. This means the agents stay current as runbooks evolve, without any code changes.
+The Human-in-the-Loop checkpoint appears at precisely this moment. Before any tool is invoked against the production environment, a human operator is presented with the proposed plan and asked to approve or reject it. This is not a ceremonial gesture. It is the mechanism by which the system earns the right to be trusted with real infrastructure, and it is positioned early enough in the flow that a bad plan can be stopped before it becomes a bad action.
 
-**Deduplication at the gate.** The Observability Agent checks ServiceNow before creating any ticket, preventing alert storms from flooding the incident queue.
+Upon approval, the Executor Agent begins working through the plan step by step, calling the available tools, which include an HttpRequest tool for API interactions, a JenkinsRollback tool for deployment reversions, and a ReadPodStatus tool for querying the state of Kubernetes pods. After each step, the Executor hands control to the Validator Agent, which independently verifies whether the step had its intended effect. If validation fails, the Executor is instructed to retry. If it succeeds, the pipeline advances to the next step and repeats the cycle until the Resolved diamond finally receives a Yes, at which point the ServiceNow ticket is closed and the on-call engineer, who has been watching all of this transpire from the AMS Dashboard, is at liberty to go back to sleep.
 
-**Validation at every step.** Rather than running a plan to completion and checking the outcome, the Validator Agent reviews each action individually catching failures early and preventing compounding errors.
+## On the Architecture of Trust
 
-**Graceful escalation.** The framework doesn't try to resolve everything. Unresolvable or ambiguous incidents are handed off cleanly to human engineers, with full context attached.
+The most deliberate design decision in the system is not technical but philosophical. The human approval gate is placed between planning and execution, not between detection and planning. This placement reflects a considered position about what autonomous agents should and should not be permitted to do unilaterally in an environment where mistakes have real consequences.
+
+The agents are trusted to perceive, to retrieve, to reason, and to validate. The irreversible step, the one that touches production infrastructure, requires a human signature. As the framework matures and as the agents accumulate a track record, the boundaries of that autonomous jurisdiction can be expanded deliberately and with evidence. This is, one submits, a considerably more defensible posture than granting full autonomy on day one and discovering its limits the hard way.
+
+## Technical Stack
+
+The framework is built on Microsoft AutoGen for multi-agent orchestration, giving each agent a defined role, a message-passing interface, and access to a curated set of tools. The retrieval pipeline uses a Model Context Protocol server to mediate between the orchestrator and Qdrant, keeping the vector search concerns cleanly separated from the agent reasoning concerns. The observability infrastructure is standard Grafana and Loki. ServiceNow handles the ticket lifecycle. Confluence, via the batch ingestion job, is the authoritative source of procedural knowledge.
+
+The result is a system that transforms an alert from a notification demanding human attention into a proposal demanding human judgment, which is a distinction that, once you have lived on the receiving end of both, turns out to matter rather a great deal.
