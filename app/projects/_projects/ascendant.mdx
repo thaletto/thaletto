@@ -5,41 +5,43 @@ export const metadata = {
   image: "/projects/ascendant.png",
 };
 
-> Ascendant is a Python library for Vedic Astrology calculations, providing functionalities for charts, dashas, and yogas.
+> A Python library for Vedic astrology calculations, publishing to PyPI the ancient machinery of Jyotish: divisional charts, dasha timelines, and yoga combinations, all computable from a birth moment and a coordinate.
+
+## The Premise
+
+> Millionaires don't use astrology, billionaires do <br/> - J.P. Morgan
+
+Vedic astrology, whatever one's metaphysical disposition toward it, is a system of considerable computational complexity. The Vimshottari Dasha alone, which parcels a human life into a sequence of planetary periods and sub-periods governed by the Moon's natal nakshatra, involves arithmetic that is both precise and deeply inconvenient to perform by hand. The divisional charts, of which the classical literature enumerates sixteen, each require the transformation of planetary longitudes according to their own particular scheme. The yoga combinations, which identify auspicious and inauspicious configurations of planets relative to one another and to the ascendant, number in the hundreds across the canonical texts.
+
+Ascendant is a library that takes the position that all of this ought to be expressible in Python, reproducibly, from a birth date, a birth time, and a geographic coordinate.
 
 ## Installation
-
-Install via pip:
 
 ```bash
 pip install astro-ascendant
 ```
 
-For local development:
+For local development against the source:
 
 ```bash
 pip install .
 ```
 
-To install with test dependencies:
+To include the test suite dependencies:
 
 ```bash
 pip install ".[test]"
 ```
 
-## Documentation
+## What It Computes
 
-For more detailed information, check out the documentation in the [docs](https://github.com/thaletto/ascendant/blob/main/docs/index.md) folder:
+The library exposes three domains of calculation, each corresponding to a major branch of the Jyotish tradition.
 
-- [Divisional Charts (Vargas)](https://github.com/thaletto/ascendant/blob/main/docs/charts.md)
-- [Dasha Systems](https://github.com/thaletto/ascendant/blob/main/docs/dasha.md)
-- [Yoga Combinations](https://github.com/thaletto/ascendant/blob/main/docs/yoga.md)
+**Divisional Charts** (Varga chakras) allow a single natal moment to be examined at multiple resolutions, the Rasi chart offering the broadest view of a life, the Navamsha illuminating the inner nature and the marriage house, the Dashamsha concerning itself with career, and so on through the remaining vargas. Each division is derived by subdividing the zodiacal signs according to a ratio specific to that varga and reassigning planetary positions accordingly.
 
-## Core Functionalities:
+**The Vimshottari Dasha System** maps the planetary periods that, in the Jyotish framework, govern successive phases of life. The starting point is the Moon's position in its birth nakshatra, from which the remaining dasha sequence and its precise duration are calculated. Ascendant produces the full timeline of mahadashas and their antardashas, anchored to the actual birth moment.
 
-- **Chart Calculations**: Compute and analyze divisional astrological charts (Varga chakras).
-- **Dasha System**: Implementation of the Vimshottari Dasha system for planetary periods.
-- **Yoga Combinations**: Identification and interpretation of various Yoga (planetary combinations).
+**Yoga Combinations** are planetary configurations that the classical texts identify as carrying particular significance, the Raj Yogas formed by the conjunction of kendra and trikona lords, the Dhana Yogas indicating accumulation, the Daridra Yogas their unfortunate opposite, and many besides. The library identifies which yogas are present in a given chart and returns them for interpretation.
 
 ## Usage
 
@@ -63,6 +65,14 @@ yogas = astro.get_yogas()
 # Get Dasha Timeline
 dasha = astro.get_dasha_timeline()
 ```
+
+## Documentation
+
+The full documentation lives in the repository and covers each computational domain in detail.
+
+- [Divisional Charts (Vargas)](https://github.com/thaletto/ascendant/blob/main/docs/charts.md)
+- [Dasha Systems](https://github.com/thaletto/ascendant/blob/main/docs/dasha.md)
+- [Yoga Combinations](https://github.com/thaletto/ascendant/blob/main/docs/yoga.md)
 
 <br />
 <LinkChip
