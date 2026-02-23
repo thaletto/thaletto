@@ -1,39 +1,43 @@
 export const metadata = {
-    title: `OpenGPT`,
-    sort: 5,
-    tags: [
-        "AI SDK",
-        "Next.js",
-        "TypeScript"
-    ],
-    image: "/projects/opengpt.webp"
+  title: `OpenGPT`,
+  sort: 5,
+  tags: ["AI SDK", "Next.js", "TypeScript"],
+  image: "/projects/opengpt.webp",
 };
 
-> OpenGPT is a modern, responsive ChatGPT clone built for the web. It brings AI-powered conversations with advanced reasoning and tool calls while ensuring a smooth user experience through streaming and real-time updates.
+> **UPDATE:**
 
-## Features
+<img src="/let-him-cook-meme.webp" />
 
-<img src="/projects/opengpt-ss.png" className="my-2 border border-rurikon-200 rounded-lg" />
+<br />
 
-- **AI Chat:** Engage in intelligent conversations powered by OpenRouter and AI SDK.
-- **Streaming Responses:** Messages from the AI are streamed in real-time for a natural chat experience.
-- **Markdown Correction:** Uses Streamdown to automatically correct and format Markdown responses.
-- **Tool Calls & Reasoning:** Execute tools and get reasoning-based answers directly in the chat.
-- **Rate Limiting:** New users can interact with the app up to 3 times before signing in, ensuring controlled access.
-- **Authentication:** Secure Google OAuth login for registered users.
-- **Responsive Design:** Works seamlessly across desktop and mobile devices.
+> A ChatGPT clone built with Next.js and the AI SDK, featuring streaming responses, tool calls, reasoning outputs, and enough architectural seriousness to survive actual use.
+
+## What It Is and Why It Exists
+
+There is a version of the ChatGPT clone project that exists purely as a portfolio gesture, a thin wrapper around a single API call that streams tokens into a textarea and calls itself done. OpenGPT is not that project. The intent here was to build something that behaves like a production chat application, which is to say something that handles authentication with the appropriate paranoia, rate-limits the unauthenticated public before they exhaust a month's API budget in an afternoon, formats the model's markdown output correctly even when it arrives in a stream of partial tokens, and does all of this without making the user feel that they are operating industrial equipment.
+
+<img
+  src="/projects/opengpt-ss.png"
+  className="my-2 border border-rurikon-200 rounded-lg"
+/>
+
+## The Interesting Parts
+
+Streaming responses are, in principle, straightforward. In practice, streaming markdown is not, because a markdown parser that receives half a code block does not know it is looking at half a code block. Streamdown handles this by correcting and formatting the markdown incrementally as tokens arrive, so the rendered output remains coherent at every intermediate state rather than flickering between valid and broken representations as the stream progresses.
+
+Tool calls and reasoning outputs are surfaced directly in the chat interface, which means the user can observe not just what the model concluded but the intermediate steps and external calls it made along the way. This is, for anyone trying to understand why the model said what it said, considerably more useful than the final answer alone.
+
+New users are permitted three interactions before the application requires a sign-in, a rate limiting strategy that balances the reasonable desire to let someone evaluate the thing before committing to creating an account against the unreasonable alternative of no gate at all. Authenticated users sign in via Google OAuth or email through BetterAuth, and their conversation history is persisted in a Neon PostgreSQL database managed through Drizzle ORM.
 
 ## Tech Stack
 
-- **Frontend & Backend:** Next.js, AI Elements, Streamdown, Shadcn, TailwindCSS, Framer Motion
-- **AI & Chat:** AI SDK, AI Gateway, OpenRouter
-- **Database:** Neon (PostgreSQL) with Drizzle ORM
-- **Authentication:** Google OAuth and E-mail login using BetterAuth
-- **Markdown Correction:** Streamdown
-- **Deployment:** Vercel
-
-OpenGPT is built with a focus on scalability, performance, and user experience, combining cutting-edge AI tools with modern web technologies.
+The frontend and backend both live in Next.js, with Shadcn and TailwindCSS handling the component library and styling, and Framer Motion managing the animations that make the interface feel considered rather than assembled. The AI layer routes through OpenRouter via the AI SDK and AI Gateway, which provides access to a range of models behind a single abstraction. Deployment is on Vercel.
 
 <br />
 <LinkChip icon="globe" link="https://thalettoai.vercel.app" label="Website" />
-<LinkChip icon="github" link="https://github.com/thaletto/ThalettoAI" label="Source Code" />
+<LinkChip
+  icon="github"
+  link="https://github.com/thaletto/ThalettoAI"
+  label="Source Code"
+/>
