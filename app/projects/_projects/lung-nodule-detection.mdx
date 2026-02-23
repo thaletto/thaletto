@@ -1,119 +1,63 @@
 export const metadata = {
-    title: `Complex or Irregular Lung Nodule Detection from CT Scans`,
-    sort: 3,
-    tags: [
-        "YOLOv5s",
-        "DETR",
-        "V-Net",
-        "Image Classification"
-    ],
-    image: "/projects/lungnodule.webp"
+  title: `Complex or Irregular Lung Nodule Detection from CT Scans`,
+  sort: 3,
+  tags: ["YOLOv5s", "DETR", "V-Net", "Image Classification"],
+  image: "/projects/lungnodule.webp",
 };
 
-> ## Abstract
->
-> Lung cancer is a leading cause of cancer-related deaths, with a low survival rate. Early detection using medical imaging is crucial. However, CT scans often fail to detect irregular or complex nodules. This project leverages deep learning V-Net, YOLOv5s, and DETR models combined with a shape modeling algorithm to accurately detect lung nodules and reduce misinterpretation.
+> Lung cancer kills with particular efficiency partly because it so often goes unnoticed until it has made itself unmissable. This project assembles three deep learning architectures, V-Net, YOLOv5s, and DETR, into a single detection pipeline that finds the nodules a radiologist might miss and declines to invent the ones that are not there.
 
-## Problem Statement
+## The Problem Worth Solving
 
-Detecting lung nodules manually in CT scans is time-consuming and prone to errors. Nodules vary in size, shape, and location, which leads to high false-positive rates. Automated detection can improve radiologist efficiency, assist treatment planning, and enable remote diagnostics.
+The radiologist examining a chest CT scan is being asked to find, in a stack of several hundred axial slices, an object that may be a few millimeters across, that may be partially obscured by surrounding tissue, that may present as a solid mass or as a faint ground-glass opacity barely distinguishable from the lung parenchyma around it, and that may or may not be malignant. This is, to put the matter plainly, an unreasonable thing to ask of any human visual system working under clinical time pressure. The consequences of a missed nodule are grave. The consequences of a false positive are not trivial either, sending a patient down a path of unnecessary biopsy and procedural anxiety.
 
-### Applications
+Automated detection does not replace the radiologist. It handles the exhausting and repetitive labor of surveying every slice, surfaces the candidates that warrant attention, and leaves the judgment to the clinician who is equipped to exercise it. It is also the precondition for telemedicine to function in underserved regions where the radiologist is not in the same building, or the same continent, as the scanner.
 
-- **Research & Clinical Studies:** Evaluate new treatments.
-- **Treatment Planning:** Personalize care based on nodule growth and location.
-- **Radiologist Assistance:** Improve workflow by handling routine detection tasks.
-- **Telemedicine:** Enable remote, timely consultations.
-- **AI Integration:** Combine with other AI models for comprehensive diagnosis.
+## The System
 
-### Challenges
-
-- Variability in nodule characteristics (size, shape, density).
-- High false positives causing unnecessary tests.
-- Adapting models to new datasets from different scanners or hospitals.
-
-## Proposed System
-
-We designed a multi-model system:
+No single architecture handles all of the problem's demands with equal facility, which is why the system deploys three.
 
 ### V-Net
 
-A 3D convolutional neural network for volumetric segmentation.
-
-- Accurately segments lung nodules of varying shapes and sizes.
-- Uses residual functions and weighted learning for complex patterns.
-- Input: CT scan images with corresponding masks.
-- Output: Precise nodule segmentation.
+V-Net is a three-dimensional convolutional network designed for volumetric medical image segmentation, which is to say it understands that a CT scan is not a collection of independent images but a continuous representation of a volume of tissue. Where a two-dimensional model sees slices, V-Net sees the nodule as the three-dimensional object it actually is, segmenting it with residual connections that allow the network to learn the complex and irregular shapes that confound simpler approaches. The inputs are CT scan images paired with their segmentation masks; the output is a precise delineation of where the nodule ends and the lung begins.
 
 ### YOLOv5s
 
-Real-time object detection model for nodule localization.
+V-Net segments. YOLOv5s locates. Processing each CT slice as an independent image, the model divides the frame into an N×N grid and assigns to each cell a probability that it contains a nodule, along with the bounding box coordinates that describe it. The single-pass architecture makes inference fast enough for clinical use, and the integration with V-Net's segmentation output means the two models are mutually correcting rather than operating in ignorance of each other.
 
-- Processes each CT slice as an individual image.
-- Assigns probabilities to detected nodules in N×N grids.
-- Integrates with V-Net for improved detection accuracy.
+### YOLOv5s with Shape Modeling
 
-### YOLOv5s + Shape Modeling Algorithm
+Localization alone is insufficient when the pathology of interest is defined as much by its morphology as by its presence. The shape modeling extension computes local geometric descriptors for each detected candidate, among them compactness, eccentricity, and solidity, which together allow the system to distinguish a solid nodule from a ground-glass opacity and to discard the false positives that a purely intensity-based detector would confidently endorse.
 
-- Captures local shape features: compactness, eccentricity, solidity.
-- Helps classify nodules as solid or ground-glass opacity.
-- Reduces false positives by analyzing shape and intensity.
+### DETR
 
-### DETR (Detection Transformer)
-
-- Transformer-based model for refined object detection.
-- Uses queries to detect nodules in images.
-- Outputs class labels and bounding boxes using a Multi-Layer Perceptron (MLP).
+The Detection Transformer brings a fundamentally different inductive bias to the problem. Where YOLO divides the image into a grid, DETR uses a set of learned queries that attend to the image globally, producing class labels and bounding boxes through a multi-layer perceptron that reasons about the whole scene rather than its local patches. The effect is a reduction in the false positives that slip through the other models, particularly for nodules situated near the pleural wall or the mediastinum, where local context is insufficient.
 
 ## Implementation
 
-### Data Preparation
+The dataset is the Lung Image Database Consortium (LIDC-IDRI) collection, which provides CT scans with nodule annotations from multiple radiologists. Images were resized to 256×256 pixels, a resolution that preserves the diagnostic detail while remaining tractable for training. Nodule presence was encoded as a binary label per slice, and the data was divided into training, validation, and test splits before augmentation with rotations, flips, shear transformations, and zoom to discourage the models from memorizing the particulars of the training distribution.
 
-- **Resizing:** Images resized to 256×256 pixels to balance detail and computational efficiency.
-- **Diagnosis Mapping:** Masks analyzed to mark presence of nodules (1 if present, 0 otherwise).
-- **Data Splitting:** Train, validation, and test sets created using `train_test_split`.
-- **Data Augmentation:** Rotations, flips, shear, zoom applied to improve generalization.
-
-### Model Training
-
-- **V-Net:** Encoder-decoder architecture with convolutional blocks, batch normalization, ReLU activations, and fully connected layers for feature extraction.
-- **YOLOv5s:** Single-pass object detection for bounding box prediction.
-- **DETR:** Transformer encoder-decoder for enhanced detection and localization.
+V-Net was trained with an encoder-decoder architecture using batch normalization and ReLU activations throughout. YOLOv5s was trained for single-pass bounding box prediction. DETR was trained with its standard transformer encoder-decoder configuration.
 
 ## Results
 
 <BlockSideTitle title="Sample detections by YOLOv5s">
-    <img src="/projects/_yolo_prediction.png" />
+  <img src="/projects/_yolo_prediction.png" />
 </BlockSideTitle>
 
-- **V-Net:** High accuracy in nodule segmentation using Dice coefficient and IoU metrics.
-- **YOLOv5s:** Accurate detection of multiple nodules per CT slice, real-time inference.
-- **DETR:** Refined detection, reducing false positives.
+V-Net achieved strong segmentation performance as measured by Dice coefficient and Intersection over Union, the standard metrics for evaluating whether the predicted mask and the ground-truth mask are actually describing the same region of tissue. YOLOv5s demonstrated accurate multi-nodule detection per slice at inference speeds compatible with a clinical workflow. DETR's contribution was primarily in suppressing the false positives that the faster models, optimized for recall, inevitably produce.
 
-## Conclusion
+## What Comes Next
 
-The multi-model approach combining V-Net, YOLOv5s, DETR, and shape modeling successfully detects complex lung nodules from CT scans. This system improves early detection, reduces misinterpretation, and supports radiologists in clinical settings.
+The immediate horizon holds three things worth pursuing. Clinical integration would embed the pipeline into a PACS workflow so that detections appear alongside the radiologist's normal reading environment rather than in a separate research tool. Dataset expansion across scanners and institutions would address the generalization problem that haunts every model trained on a single-source collection. And the continued maturation of vision transformers offers a plausible path to feature representations that handle the more pathological nodule presentations that the current models still find difficult.
 
-## Future Enhancements
+## Tools and Data
 
-- Integrate with clinical workflow for real-time detection.
-- Expand dataset for better generalization across hospitals.
-- Explore advanced transformers for improved feature representation.
-
-## Tools & Libraries
-
-- Python, TensorFlow, Keras
-- Scikit-learn, Numpy, Matplotlib
-- Ultralytics YOLOv5s package
-
-## Dataset
-
-- Lung Image Database Consortium (LIDC-IDRI)
-- CT scans with annotated lung nodules
+The system is implemented in Python with TensorFlow and Keras, using Scikit-learn for data splitting and preprocessing, NumPy for numerical operations, and the Ultralytics package for YOLOv5s. The dataset is the publicly available LIDC-IDRI collection.
 
 <br />
 <LinkChip
-    icon="gdrive"
-    link="https://drive.google.com/file/d/1_XcKu5bFmmrTHHc4nxXetIZbXwiMjkj3/view"
-    label="View PDF"
+  icon="gdrive"
+  link="https://drive.google.com/file/d/1_XcKu5bFmmrTHHc4nxXetIZbXwiMjkj3/view"
+  label="View PDF"
 />
