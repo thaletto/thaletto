@@ -1,30 +1,42 @@
 export const metadata = {
-    title: `Parksinson's Disease Detection`,
-    sort: 1,
-    tags: [
-        "Machine Learning",
-        "SVM",
-        "Random Forrest",
-        "Logistic Regression",
-        "Gradient Boost"
-    ],
-    image: "/projects/parkinsons.webp",
-    imageLabel: "Not the Neurons in ML models"
+  title: `Parkinson's Disease Detection`,
+  sort: 1,
+  tags: [
+    "Machine Learning",
+    "SVM",
+    "Random Forrest",
+    "Logistic Regression",
+    "Gradient Boost",
+  ],
+  image: "/projects/parkinsons.webp",
+  imageLabel: "Not the Neurons in ML models",
 };
 
-> Parkinson’s Disease Detection is a machine learning project focused on identifying Parkinson’s disease using voice-based biomedical features. The objective is to train and evaluate multiple supervised and unsupervised learning models and compare their performance in predicting the disease.
+> Parkinson's disease leaves a signature in the voice long before it announces itself in more obvious ways. This project asks whether that signature, extracted as biomedical acoustic features from a voice recording, is legible to a machine learning classifier, and then asks the question of nine different classifiers simultaneously to find out which one reads it best.
 
-The project uses a dataset containing 195 samples and 24 features, where the status column serves as the dependent variable indicating the presence or absence of Parkinson’s disease. The features include frequency, jitter, shimmer, noise ratios, and non-linear measures extracted from voice signals.
+## The Signal in the Voice
 
-Several models were implemented and analyzed. Supervised learning models include Random Forest, Logistic Regression, Decision Tree, K-Nearest Neighbour, Support Vector Machine, Perceptron, Gaussian Naive Bayes, LightGBM, and XGBoost. Unsupervised learning was explored using K-Means Clustering to understand underlying data patterns.
+Parkinson's disease is a neurodegenerative condition, and its effects on motor control extend to the fine musculature of the larynx. The tremor, rigidity, and hypokinesia that the disease imposes on the limbs impose themselves on phonation as well, producing measurable perturbations in frequency, amplitude, and the harmonic structure of sustained vowel sounds. These perturbations are not audible to the untrained ear as pathology, but they are present in the signal, and they are quantifiable.
 
-The best-performing model, Support Vector Machine achieved a maximum accuracy of over 80%, demonstrating the effectiveness of machine learning techniques for Parkinson’s disease detection.
+The dataset consists of 195 voice recordings from 31 subjects, 23 with Parkinson's disease and 8 without, each described by 24 acoustic features. Among these are jitter measures, which capture cycle-to-cycle variation in fundamental frequency; shimmer measures, which capture variation in amplitude; noise-to-harmonics ratios; and several non-linear dynamical measures derived from the theory of chaos and fractal geometry, which have been shown to be sensitive to the kind of subtle signal degradation that neurological conditions produce. The status column, binary, is what the classifiers are asked to predict.
 
-Overall, the project emphasizes model comparison, problem-solving, and practical application of machine learning techniques for healthcare-related prediction tasks, with a focus on feature-driven disease detection.
+## The Models
+
+The comparison spans nine supervised learning algorithms and one unsupervised method, which together represent a reasonable survey of the classical machine learning landscape applied to a tabular biomedical classification problem.
+
+The supervised models are Random Forest, Logistic Regression, Decision Tree, K-Nearest Neighbour, Support Vector Machine, Perceptron, Gaussian Naive Bayes, LightGBM, and XGBoost. The unsupervised element is K-Means Clustering, included not for its predictive performance but for what it reveals about the natural structure of the feature space when no label is provided, which is its own form of useful information about whether the two populations are geometrically separable at all.
+
+The Support Vector Machine achieved the highest accuracy, exceeding 80%, a result that is consistent with the broader literature on SVM applied to the MDVP voice dataset, where the kernel's ability to find a maximum-margin separating hyperplane in a high-dimensional feature space tends to reward the particular geometry that acoustic biomarkers produce.
+
+## What the Comparison Is Actually For
+
+A project that trains a single model and reports its accuracy is not really a machine learning project; it is a demonstration that a library can be imported. The value of training nine models on the same dataset, with the same features and the same evaluation methodology, is that it produces a fair comparison, which in turn produces actual understanding of why some approaches work better than others on this particular class of problem.
+
+The 195-sample dataset is small enough that variance in model performance is meaningful rather than statistical noise, which makes the comparison genuinely informative about the relationship between inductive bias and data structure. An SVM outperforming a neural perceptron on a small, high-dimensional dataset is not a surprise, but observing it directly, with your own training loop, is a different kind of knowledge from reading about it in a textbook.
 
 <br />
 <LinkChip
-    icon="github"
-    label="Source Code"
-    link="https://github.com/thaletto/Parkinson-Disease-Detection"
+  icon="github"
+  label="Source Code"
+  link="https://github.com/thaletto/Parkinson-Disease-Detection"
 />
