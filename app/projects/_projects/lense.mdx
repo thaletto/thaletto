@@ -1,48 +1,48 @@
 export const metadata = {
-    title: `Lense`,
-    endDate: "2024.02",
-    tags: [
-        "Kotlin",
-        "Android Application",
-        "Jetpack Compose",
-        "Image Classification"
-    ],
-    image: "/projects/lense.webp"
+  title: `Lense`,
+  sort: 2,
+  tags: [
+    "Kotlin",
+    "Android Application",
+    "Jetpack Compose",
+    "Image Classification",
+  ],
+  image: "/projects/lense.webp",
 };
 
 > Lense is an Android application for selling pre-owned products with AI-powered value estimation. It simplifies listing items by automatically generating descriptions and estimating product value using image classification and captioning models.
 
 ## Key Features
 
-- Upload a product image and get AI-generated description.  
-- Automatic value estimation for pre-owned products.  
-- Smooth Android experience using **Jetpack Compose**.  
+- Upload a product image and get AI-generated description.
+- Automatic value estimation for pre-owned products.
+- Smooth Android experience using **Jetpack Compose**.
 - Efficient image processing for fast results.
 
 ## How It Works
 
-1. User uploads a product image.  
-2. **EfficientNet (TensorFlow Lite 4)** classifies the product.  
-3. **GPT-2 Image Captioning** generates a descriptive caption.  
+1. User uploads a product image.
+2. **EfficientNet (TensorFlow Lite 4)** classifies the product.
+3. **GPT-2 Image Captioning** generates a descriptive caption.
 4. The app returns the estimated value and a ready-to-post description.
 
 ## Tech Stack
 
-- **Language:** Kotlin  
-- **UI:** Jetpack Compose  
-- **AI Models:**  
-  - [EfficientNet (TensorFlow Lite 4)](https://www.kaggle.com/models/tensorflow/efficientnet/tfLite) via HuggingFace  
-  - [GPT-2 Image Captioning](https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning) via HuggingFace  
+- **Language:** Kotlin
+- **UI:** Jetpack Compose
+- **AI Models:**
+  - [EfficientNet (TensorFlow Lite 4)](https://www.kaggle.com/models/tensorflow/efficientnet/tfLite) via HuggingFace
+  - [GPT-2 Image Captioning](https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning) via HuggingFace
 
 ## Challenges & Learnings
 
-- Integrating TensorFlow Lite with Kotlin for on-device inference.  
-- Generating meaningful product descriptions with GPT-2.  
+- Integrating TensorFlow Lite with Kotlin for on-device inference.
+- Generating meaningful product descriptions with GPT-2.
 - Optimizing image processing for mobile performance.
 
 <br />
 <LinkChip
-    icon="github"
-    label="Source Code"
-    link="https://github.com/thaletto/Lense"
+  icon="github"
+  label="Source Code"
+  link="https://github.com/thaletto/Lense"
 />

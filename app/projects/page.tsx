@@ -20,7 +20,6 @@ const projectsDirectory = path.join(
 type ProjectListItemProps = {
     slug: string;
     title: string;
-    date: string;
     tags?: string[];
     company?: string;
 };
@@ -39,7 +38,6 @@ function getCompanyLogoSrc(company?: string) {
 export function ProjectListItem({
     slug,
     title,
-    date,
     tags = [],
     company,
 }: ProjectListItemProps) {
@@ -67,10 +65,6 @@ export function ProjectListItem({
                         </span>
 
                         <span className="dot-leaders flex-1 text-rurikon-100 group-hover:text-rurikon-500 transition-colors" />
-
-                        <time className="text-sm tabular-nums text-rurikon-300 font-normal tracking-tighter whitespace-nowrap group-hover:text-rurikon-500">
-                            {date}
-                        </time>
                     </div>
 
                     {tags.length > 0 && (
@@ -98,7 +92,6 @@ export default async function Page() {
     const items: {
         slug: string;
         title: string;
-        date: string;
         sort: number;
         tags?: string[];
         company: string;
@@ -116,8 +109,7 @@ export default async function Page() {
         items.push({
             slug: project.replace(/\.mdx$/, ""),
             title: module.metadata.title,
-            date: module.metadata.endDate || "Present",
-            sort: Number(module.metadata.endDate?.replaceAll(".", "") || 0),
+            sort: Number(module.metadata.sort || 0),
             tags: module.metadata.tags ?? [],
             company: module.metadata.company,
         });
@@ -133,7 +125,6 @@ export default async function Page() {
                         key={item.slug}
                         slug={item.slug}
                         title={item.title}
-                        date={item.date}
                         tags={item.tags}
                         company={item.company}
                     />
