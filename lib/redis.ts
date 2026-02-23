@@ -11,6 +11,8 @@ export const redis =
     });
 
 if (!globalForRedis.redis) {
-    redis.connect();
+    if (process.env.REDIS_URL) {
+        redis.connect();
+    }
     globalForRedis.redis = redis;
 }
