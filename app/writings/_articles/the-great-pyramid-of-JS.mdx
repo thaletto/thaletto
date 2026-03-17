@@ -191,8 +191,8 @@ The **Event Loop** is the site manager. The main worker the call stack never idl
 
 ## The Full Pyramid
 
-```mermaid
-flowchart TD
+<Mermaid>
+{`flowchart TD
     A["JS"]
     B["Linter / Formatter"]
     C["Bundler"]
@@ -214,8 +214,8 @@ flowchart TD
     G --> H
     H --> I
     I --> J
-    J --> K
-```
+    J --> K`}
+</Mermaid>
 
 Each layer trusts the one below it entirely, knows nothing of the ones above, and does exactly one job. The linter doesn't bundle. The bundler doesn't optimize. The JIT doesn't manage async. The CPU doesn't parse.
 
