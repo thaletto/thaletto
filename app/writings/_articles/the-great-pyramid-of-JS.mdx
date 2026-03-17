@@ -1,6 +1,6 @@
 export const metadata = {
   title: "The Great Pyramid of JavaScript",
-  date: "2026.03.16",
+  date: "2026.03.17",
   description: "The journey of JavaScript before it is executed.",
   authors: {
     name: "Laxman K R",
@@ -191,28 +191,30 @@ The **Event Loop** is the site manager. The main worker the call stack never idl
 
 ## The Full Pyramid
 
-```
-You write code
-    ↓
-Linter / Formatter     inspector and plasterer before anything moves
-    ↓
-Bundler                traces imports, flattens the city into a street
-    ↓
-Runtime (Node / Bun)   the building site: land, utilities, access roads
-    ↓
-Engine (V8 / JSC)      the crew
-    ↓
-Tokenizer              surveys the land, labels every piece
-    ↓
-Parser / AST           draws the structural blueprint
-    ↓
-Bytecode               translates the drawing into work orders
-    ↓
-JIT / Machine Code     pours the concrete
-    ↓
-Event Loop             the site manager, never lets the worker idle
-    ↓
-CPU                    the ground itself
+```mermaid
+flowchart TD
+    A["JS"]
+    B["Linter / Formatter"]
+    C["Bundler"]
+    D["Runtime — Node / Bun"]
+    E["Engine — V8 / JSC"]
+    F["Tokenizer"]
+    G["Parser / AST"]
+    H["Bytecode"]
+    I["JIT / Machine Code"]
+    J["Event Loop"]
+    K["CPU"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I
+    I --> J
+    J --> K
 ```
 
 Each layer trusts the one below it entirely, knows nothing of the ones above, and does exactly one job. The linter doesn't bundle. The bundler doesn't optimize. The JIT doesn't manage async. The CPU doesn't parse.

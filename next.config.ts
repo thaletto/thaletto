@@ -1,7 +1,13 @@
 import withMDX from "@next/mdx";
+import rehypeMermaid from "rehype-mermaid";
 import { NextConfig } from "next";
 
-export default withMDX()({
+export default withMDX({
+  extension: /\.mdx?$/,
+  options: {
+    rehypePlugins: [rehypeMermaid],
+  },
+})({
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   turbopack: {},
   redirects: async () => [
