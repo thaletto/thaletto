@@ -1,10 +1,9 @@
 # Laxman K R
-
-AI Engineeer
+AI Engineer
 
 ## Bio
-Hey, I’m Laxman, a full-stack developer who enjoys building modern, well structured apps where things just feel right from how the UI looks to how the code is organized under the hood.
-I’m drawn to system design, application structure, and different programming paradigms, with `TypeScript` as my go to language and `Python` for AI-driven work. I prefer exploring new technologies instead of riding the same stack for so long.
+Hey, I'm Laxman, a full-stack developer who enjoys building modern, well structured apps where things just feel right from how the UI looks to how the code is organized under the hood.
+I'm drawn to system design, application structure, and different programming paradigms, with `TypeScript` as my go to language and `Python` for AI-driven work. I prefer exploring new technologies instead of riding the same stack for so long.
 
 ## Skills
 - **Languages:** TypeScript, JavaScript, Python, Java, Kotlin
@@ -15,11 +14,9 @@ I’m drawn to system design, application structure, and different programming p
 - **DevOps/Tools:** Jenkins, Docker
 
 ## Work Experience
-
 ### Tata Consultancy Services
 **AI Engineer & Platform Owner**
 *November 2024 - Present*
-
 - **Agentic AMS Framework**: Engineered an autonomous self-healing system integrating Grafana and ServiceNow. Developed AI agents capable of diagnosing incidents and executing SOP-driven remediations, resulting in a substantial reduction in Mean Time to Recovery (MTTR).
 - **Microfrontend Migration**: Orchestrated the architectural transition of the TCS CBG AI platform to a microfrontend framework. This initiative decoupled core services, enabling independent development cycles and eliminating deployment bottlenecks across workstreams.
 - **Platform Ownership**: Appointed as Deployment Lead for the TCS CBG AI platform, exercising full authority over release management and production environment stability.
@@ -27,10 +24,32 @@ I’m drawn to system design, application structure, and different programming p
 
 ## Projects
 
-Visit `https://thaletto.vercel.app/projects`
+### Agentic Incident Management Framework
+An autonomous self-healing platform built to close the gap between monitoring and remediation. Integrates Grafana for observability and ServiceNow for ITSM, with AI agents that diagnose live incidents, consult SOP libraries, and execute remediations without human intervention. The system reasons over alert context, selects the appropriate remediation path, and logs resolution evidence — compressing MTTR from hours to minutes.
+- **Stack:** Python, Autogen, Grafana, ServiceNow, FastAPI
+- **Category:** AI / Agentic Systems
+
+### Ascendant
+A computational library encapsulating the classical corpus of Vedic (Jyotisha) astrology. Implements planetary position calculations, house system derivations, nakshatra mapping, dasha period computation, and yogas — all derived from traditional Parashari principles and expressed through a clean, documented Python API. Designed for researchers, developers, and practitioners who need programmatic access to chart data without the opacity of commercial software.
+- **Stack:** Python
+- **Category:** Library / Domain Modelling
+
+### Lung Nodule Detection System
+A deep learning pipeline for the automated detection and classification of pulmonary nodules in CT scan imagery. Trained on annotated radiological datasets, the model segments candidate regions and applies a classification head to distinguish benign from malignant nodule profiles. Designed for integration into radiology workflows as a second-reader system, surfacing high-probability findings to clinicians for review.
+- **Stack:** Python, PyTorch, OpenCV
+- **Category:** AI / Medical Imaging
+
+### Kite
+A reference implementation of the AG-UI protocol and A2UI specification — a chat interface whose purpose is not merely to respond, but to make the ordinarily invisible machinery of agent communication legible. Most chat applications hide the structural layer between agent and frontend entirely; Kite exposes it. The AG-UI protocol defines a typed event stream — text deltas, tool invocations, state transitions — each rendered in-place as it arrives, reflecting the agent's actual execution state rather than a tidy retrospective. The A2UI layer extends this further: agents emit typed UI component descriptors that the frontend renders directly, replacing an entire category of bespoke conditional frontend logic with a specification that makes the implicit explicit.
+- **Stack:** TanStack Start, Vite, TypeScript, Netlify
+- **Category:** Web / Agentic Protocol
+
+### Parkinson's Disease Detection
+A machine learning system for early-stage Parkinson's detection using vocal biomarkers. Processes sustained phonation recordings to extract MDVP features — jitter, shimmer, HNR, RPDE, DFA — and trains an ensemble classifier on the resulting feature space. The approach is grounded in clinical research linking dysphonia patterns to basal ganglia deterioration, offering a non-invasive screening method from voice alone.
+- **Stack:** Python, scikit-learn, NumPy, pandas
+- **Category:** AI / Healthcare
 
 ## Education
-
 ### Amrita Vishwa Vidyapeetham
 **B.Tech Computer Science and Engineering**
 *September 2020 - May 2024*
