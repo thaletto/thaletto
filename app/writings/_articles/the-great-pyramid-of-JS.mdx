@@ -14,7 +14,7 @@ export const metadata = {
   <img src="/pyramid-js.png" />
 </BlockSideTitle>
 
-Most developers, when pressed, will admit that they do not know how their code runs. They know that it _does_ run, which they treat as sufficient. They `npm run dev`, a port opens, and they return to the more pressing matter of choosing a font. This post is not to shame them, but to illuminate the multiple-layer pyramid that silently executes their font-laden masterpiece every single time.
+Most developers, when pressed, will admit that they do not know how their code runs. They know that it does run, which they treat as sufficient. They `npm run dev`, a port opens, and they return to the more pressing matter of choosing a font. This post is not to shame them, but to illuminate the multiple-layer pyramid that silently executes their font-laden masterpiece every single time.
 
 Here is the code we'll bury alive and excavate, layer by layer:
 
@@ -36,7 +36,7 @@ Before this code goes anywhere, it is read by a linter. [Eslint](https://eslint.
 
 The linter operates on the same [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) the engine will later produce it just gets there first, reads it, and complains loudly before anything irreversible happens. Its output is not code. It is annotations, warnings, and the quiet satisfaction of a caught mistake.
 
-Closely following the inspector is the **formatter** [Prettier](https://prettier.io/), Biome, the OXC (Oxcfmt) if you're living in the future. The formatter does not care what your code _means_. It cares that your indentation is consistent and that you haven't committed the sin of a 300-character line. Think of it as the plasterer who smooths every surface before the client walks in. The structure was already sound; the plasterer simply ensures it is presentable.
+Closely following the inspector is the **formatter** [Prettier](https://prettier.io/), Biome, the OXC (Oxfmt) if you're living in the future. The formatter does not care what your code means. It cares that your indentation is consistent and that you haven't committed the sin of a 300-character line. Think of it as the plasterer who smooths every surface before the client walks in. The structure was already sound; the plasterer simply ensures it is presentable.
 
 Neither of these tools executes your code. They exist entirely in the pre-execution layer, the planning phase, before a single electron moves in anger.
 
@@ -146,7 +146,7 @@ The foreman on a job site doesn't explain load distribution to the bricklayer. H
 
 ### The Concrete: JIT Compilation
 
-If `getUser` were called once, Ignition would interpret the bytecode line by line adequate, if not fast. But both V8 and JSC watch. They instrument your code, identify the _hot paths_ functions called repeatedly and promote them to an optimizing compiler.
+If `getUser` were called once, Ignition would interpret the bytecode line by line adequate, if not fast. But both V8 and JSC watch. They instrument your code, identify the hot paths functions called repeatedly and promote them to an optimizing compiler.
 
 V8 uses **TurboFan** (and increasingly **Maglev** as a mid-tier). JSC uses **DFG** and **FTL**. All of them output raw **machine code** binary instructions the CPU executes directly, with no interpretation overhead.
 
