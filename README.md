@@ -31,13 +31,3 @@ Hey, I’m Laxman, a full-stack developer who enjoys building modern, well-struc
 <p align="start">
   <img src="https://skillicons.dev/icons?i=npm,pnpm,yarn,bun,deno" alt="Package Managers" />
 </p>
-
-### Tools / IDE
-<p align="start">
-  <img src="https://skillicons.dev/icons?i=figma,postman,git,jenkins,docker,kubernetes,prisma,bash,powershell,vscode,androidstudio" alt="tools" />
-</p>
-
-### Providers / Cloud
-<p align="start">
-  <img src="https://skillicons.dev/icons?i=vercel,netlify,cloudflare,supabase,planetscale,aws,gcp,azure" alt="Providers and Cloud" />
-</p>
