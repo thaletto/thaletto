@@ -1,7 +1,7 @@
 export const metadata = {
-  title: `Agentic AMS Framework`,
+  title: `Agentic Application Management System`,
   sort: 7,
-  tags: ["Microsoft Autogen", "MCP", "RAG"],
+  tags: ["Microsoft Autogen", "FastAPI", "MCP", "RAG"],
   image: "/projects/ams.png",
   company: "TCS",
 };
@@ -22,7 +22,7 @@ The Agentic AMS Framework was built as a sincere attempt to address this state o
 
 The system begins, as all honest incident management must, by watching the application's own testimony. Application logs flow into Grafana Loki, which subjects them to keyword-based alerting rules. When a rule fires, Grafana Alerts becomes aware of a problem. This is, in itself, unremarkable infrastructure.
 
-What is more interesting is what happens next. The Observability Agent, which connects to the dashboard over a persistent WebSocket connection, reads these alerts as they arrive. It then consults ServiceNow to determine whether the incident has already been acknowledged, creating a ticket if none exists and declining to create a duplicate if one does. The deduplication logic, which sounds trivially obvious and yet is conspicuously absent from a surprising number of incident pipelines, prevents the downstream agents from being sent into a frenzy by the same alert arriving seventeen times during a flapping event.
+What is more interesting is what happens next. The Observability Agent, which connects to the dashboard over a persistent `WebSocket` connection, reads these alerts as they arrive. It then consults ServiceNow to determine whether the incident has already been acknowledged, creating a ticket if none exists and declining to create a duplicate if one does. The deduplication logic, which sounds trivially obvious and yet is conspicuously absent from a surprising number of incident pipelines, prevents the downstream agents from being sent into a frenzy by the same alert arriving seventeen times during a flapping event.
 
 ## The Knowledge Problem, and How Qdrant Solves It
 
