@@ -3,9 +3,12 @@ JavaScript
 Python
 Next.js
 React
+FastAPI
 Node.js
 TailwindCSS
-AI SDK
 LangChain
 LangGraph
+Microsoft Autogen
+Google ADK
+AI SDK
 PostgreSQL
