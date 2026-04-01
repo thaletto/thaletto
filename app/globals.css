@@ -113,10 +113,6 @@ body {
     word-spacing: -0.04em;
     background-color: var(--background);
     text-rendering: geometricPrecision;
-
-    /* Debugger */
-    /* background: linear-gradient(to bottom, #ccc, var(--background) 1px);
-  background-size: 100% 1.75rem; */
 }
 
 i,
@@ -138,7 +134,7 @@ blockquote,
 
 nav {
     font-family:
-        var(--mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        var(--serif), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
 }
 
