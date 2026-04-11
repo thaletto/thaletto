@@ -1,11 +1,9 @@
 "use client";
-
 import cn from "clsx";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Kbd } from "./ui/kbd";
-import CardNav from "./CardNav";
 
 const NAV_ITEMS = [
   { href: "/", label: "About", key: "A" },
@@ -13,13 +11,6 @@ const NAV_ITEMS = [
   { href: "/timeline", label: "Timeline", key: "T" },
   { href: "/writings", label: "Writings", key: "W" },
 ];
-
-const items = NAV_ITEMS.map((item) => ({
-  label: item.label,
-  bgColor: "#fcfcfc",
-  textColor: "#111",
-  links: [{ label: item.label, ariaLabel: item.label, href: item.href }],
-}));
 
 function Item(props: React.ComponentProps<typeof Link>) {
   const pathname = usePathname();
@@ -54,50 +45,27 @@ function Item(props: React.ComponentProps<typeof Link>) {
   );
 }
 
-function DesktopNav() {
-  return (
-    <nav className="mr-14 w-auto hidden md:block">
-      <ul className="flex flex-col gap-2 text-right sticky top-14">
-        {NAV_ITEMS.map((item) => (
-          <Item key={item.href} href={item.href}>
-            <Tooltip>
-              <TooltipTrigger>
-                <span className="lowercase cursor-pointer">{item.label}</span>
-              </TooltipTrigger>
-              <TooltipContent
-                side="right"
-                sideOffset={12}
-                className="hidden md:flex items-center gap-2"
-              >
-                Press <Kbd>{item.key}</Kbd>
-              </TooltipContent>
-            </Tooltip>
-          </Item>
-        ))}
-      </ul>
-    </nav>
-  );
-}
-function MobileNav() {
-  return (
-    <div className="relative">
-      <CardNav
-        items={items}
-        baseColor="#fcfcfc"
-        menuColor="#3b4149"
-        ease="power3.out"
-        className="bg-[#fcfcfc]/90"
-      />
-      <div className="h-15" />
-    </div>
-  );
-}
-
 export default function Navbar() {
   return (
-    <>
-      <MobileNav />
-      <DesktopNav />
-    </>
+    <nav className='mobile:mr-6 sm:mr-10 md:mr-14 w-full mobile:w-16'>
+      <ul className='text-left mobile:sticky top-6 sm:top-10 md:top-14 mb-6 mobile:mb-0 flex gap-2 justify-end mobile:block'>
+          {NAV_ITEMS.map((item) => (
+            <Item key={item.href} href={item.href}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <span className="cursor-pointer">{item.label}</span>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="right"
+                  sideOffset={12}
+                  className="hidden md:flex items-center gap-2"
+                >
+                  Press <Kbd>{item.key}</Kbd>
+                </TooltipContent>
+              </Tooltip>
+            </Item>
+          ))}
+              </ul>
+    </nav>
   );
 }
