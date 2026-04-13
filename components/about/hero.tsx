@@ -1,9 +1,9 @@
 "use client";
-
 import { useRef, useState } from "react";
 import Image from "next/image";
 import profile from "@/public/me.jpg";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
 export default function Hero() {
     const [open, setOpen] = useState(false);
@@ -58,7 +58,16 @@ export default function Hero() {
 
             {/* Clean Instagram-style Dialog */}
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className={'border-none max-w-[70vw] sm:max-w-[50vw] md:max-w-[30vw] p-0 rounded-full'} showCloseButton={false}>
+                <DialogContent
+                    className={cn(
+                        "border-none max-w-[70vw] sm:max-w-[50vw] md:max-w-[30vw] p-0 rounded-full",
+                        "data-[state=open]:animate-in data-[state=closed]:animate-out",
+                        "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
+                        "data-[state=open]:zoom-in-90 data-[state=closed]:zoom-out-90",
+                        "duration-300",
+                    )}
+                    showCloseButton={false}
+                >
                     <div className="relative aspect-square rounded-full overflow-hidden">
                         <Image
                             src={profile}
@@ -67,7 +76,7 @@ export default function Hero() {
                             className="object-cover"
                         />
                     </div>
-                </DialogContent>      
+                </DialogContent>
             </Dialog>
         </>
     );
