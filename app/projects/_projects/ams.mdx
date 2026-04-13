@@ -48,6 +48,6 @@ The agents are trusted to perceive, to retrieve, to reason, and to validate. The
 
 ## Technical Stack
 
-The framework is built on Microsoft AutoGen for multi-agent orchestration, giving each agent a defined role, a message-passing interface, and access to a curated set of tools. The retrieval pipeline uses a Model Context Protocol server to mediate between the orchestrator and Qdrant, keeping the vector search concerns cleanly separated from the agent reasoning concerns. The observability infrastructure is standard Grafana and Loki. ServiceNow handles the ticket lifecycle. Confluence, via the batch ingestion job, is the authoritative source of procedural knowledge.
+The framework is built on Microsoft AutoGen for multi-agent orchestration, giving each agent a defined role, a message-passing interface, and access to a curated set of tools. The retrieval pipeline uses a Qdrant Python SDK to mediate between the orchestrator and Qdrant, keeping the vector search concerns cleanly separated from the agent reasoning concerns. The observability infrastructure is standard Grafana and Loki. ServiceNow handles the ticket lifecycle. Confluence, via the batch ingestion job, is the authoritative source of procedural knowledge.
 
 The result is a system that transforms an alert from a notification demanding human attention into a proposal demanding human judgment, which is a distinction that, once you have lived on the receiving end of both, turns out to matter rather a great deal.
