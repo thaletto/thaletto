@@ -5,19 +5,15 @@ import { Analytics } from "@vercel/analytics/next";
 import cn from "clsx";
 import "katex/dist/katex.min.css";
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Inter, Lora } from "next/font/google";
+import localFont from "next/font/local";
+import { Geist_Mono } from "next/font/google";
 import { ViewTransition } from "react";
 import "./globals.css";
 
-const sans = Inter({
+const serif_to_sans = localFont({
+    src: "./fonts/ABCArizona-FlareRegular.otf",
     preload: true,
-    variable: "--sans",
-});
-
-const serif = Lora({
-    preload: true,
-    variable: "--serif",
-    style: "italic",
+    variable: "--serif-to-sans",
 });
 
 const mono = Geist_Mono({
@@ -62,8 +58,7 @@ export default function RootLayout({
             lang="en"
             className={cn(
                 "overflow-x-hidden touch-manipulation",
-                sans.variable,
-                serif.variable,
+                serif_to_sans.variable,
                 mono.variable,
             )}
         >
