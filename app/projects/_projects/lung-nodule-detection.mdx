@@ -1,11 +1,10 @@
 export const metadata = {
-  title: `Complex or Irregular Lung Nodule Detection from CT Scans`,
-  sort: 3,
-  tags: ["YOLOv5s", "DETR", "V-Net", "Image Classification"],
-  image: "/projects/lungnodule.webp",
+    title: `Complex or Irregular Lung Nodule Detection from CT Scans`,
+    sort: 3,
+    tags: ["YOLOv5s", "DETR", "V-Net", "Image Classification"],
+    image: "/projects/lungnodule.webp",
+    description: `Lung cancer kills with particular efficiency partly because it so often goes unnoticed until it has made itself unmissable. This project assembles three deep learning architectures, V-Net, YOLOv5s, and DETR, into a single detection pipeline that finds the nodules a radiologist might miss and declines to invent the ones that are not there.`,
 };
-
-> Lung cancer kills with particular efficiency partly because it so often goes unnoticed until it has made itself unmissable. This project assembles three deep learning architectures, V-Net, YOLOv5s, and DETR, into a single detection pipeline that finds the nodules a radiologist might miss and declines to invent the ones that are not there.
 
 ## The Problem Worth Solving
 
@@ -42,7 +41,7 @@ V-Net was trained with an encoder-decoder architecture using batch normalization
 ## Results
 
 <BlockSideTitle title="Sample detections by YOLOv5s">
-  <img src="/projects/_yolo_prediction.png" />
+    <img src="/projects/_yolo_prediction.png" />
 </BlockSideTitle>
 
 V-Net achieved strong segmentation performance as measured by Dice coefficient and Intersection over Union, the standard metrics for evaluating whether the predicted mask and the ground-truth mask are actually describing the same region of tissue. YOLOv5s demonstrated accurate multi-nodule detection per slice at inference speeds compatible with a clinical workflow. DETR's contribution was primarily in suppressing the false positives that the faster models, optimized for recall, inevitably produce.
@@ -56,8 +55,4 @@ The immediate horizon holds three things worth pursuing. Clinical integration wo
 The system is implemented in Python with TensorFlow and Keras, using Scikit-learn for data splitting and preprocessing, NumPy for numerical operations, and the Ultralytics package for YOLOv5s. The dataset is the publicly available LIDC-IDRI collection.
 
 <br />
-<LinkChip
-  icon="pdf"
-  link="/lung-nodule-detection.pdf"
-  label="View PDF"
-/>
+<LinkChip icon="pdf" link="/lung-nodule-detection.pdf" label="View PDF" />
