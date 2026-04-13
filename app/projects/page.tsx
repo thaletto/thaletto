@@ -1,5 +1,6 @@
 import SvgIcon from "@/components/common/logo";
 import { Badge } from "@/components/ui/badge";
+import { getCompanyLogoSrc } from "@/lib/utils";
 import { promises as fs } from "fs";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -22,24 +23,15 @@ type ProjectListItemProps = {
     title: string;
     tags?: string[];
     company?: string;
+    description?: string;
 };
-
-function getCompanyLogoSrc(company?: string) {
-    if (!company) return null;
-
-    switch (company.toLowerCase()) {
-        case "tcs":
-            return "/company/tcs.svg";
-        default:
-            return "/company/office.svg";
-    }
-}
 
 export function ProjectListItem({
     slug,
     title,
     tags = [],
     company,
+    description,
 }: ProjectListItemProps) {
     const companyIcon = getCompanyLogoSrc(company);
 
@@ -47,10 +39,10 @@ export function ProjectListItem({
         <li className="font-medium my-4">
             <Link
                 href={`/projects/${slug}`}
-                className="group flex items-start gap-3 -mx-2 px-2 focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted"
+                className="group flex items-start -mx-2 px-2 focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted"
                 draggable={false}
             >
-                <div className="flex flex-col gap-1 min-w-0 flex-1">
+                <div className="flex flex-col gap-2 min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                         {companyIcon && (
                             <SvgIcon
@@ -60,12 +52,12 @@ export function ProjectListItem({
                             />
                         )}
 
-                        <span className="text-rurikon-500 truncate">
+                        <h1 className="font-semibold text-base md:text-xl text-rurikon-600 text-balance">
                             {title}
-                        </span>
-
-                        <span className="dot-leaders flex-1 text-rurikon-100 group-hover:text-rurikon-500 transition-colors" />
+                        </h1>
                     </div>
+
+                    <p className="font-normal">{description}</p>
 
                     {tags.length > 0 && (
                         <div className="flex flex-wrap gap-1">
@@ -73,7 +65,7 @@ export function ProjectListItem({
                                 <Badge
                                     key={tag}
                                     variant="ghost"
-                                    className="text-xs px-2 py-0.5 rounded-sm border border-rurikon-100 text-rurikon-300 group-hover:border-rurikon-500 group-hover:text-rurikon-500"
+                                    className="text-xs px-2 py-0.5 rounded-sm border border-rurikon-300 text-rurikon-300"
                                 >
                                     {tag}
                                 </Badge>
@@ -95,6 +87,7 @@ export default async function Page() {
         sort: number;
         tags?: string[];
         company: string;
+        description?: string;
     }[] = [];
 
     for (const project of projects) {
@@ -112,6 +105,7 @@ export default async function Page() {
             sort: Number(module.metadata.sort || 0),
             tags: module.metadata.tags ?? [],
             company: module.metadata.company,
+            description: module.metadata.description,
         });
     }
 
@@ -119,7 +113,7 @@ export default async function Page() {
 
     return (
         <div>
-            <ul>
+            <ul className="flex flex-col gap-y-8 [&>*:first-child]:mt-0 mt-0">
                 {items.map((item) => (
                     <ProjectListItem
                         key={item.slug}
@@ -127,6 +121,7 @@ export default async function Page() {
                         title={item.title}
                         tags={item.tags}
                         company={item.company}
+                        description={item.description}
                     />
                 ))}
             </ul>
