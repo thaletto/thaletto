@@ -65,11 +65,11 @@
     --color-rurikon-border: #d8dbdfb3;
 
     --font-sans:
-        var(--sans), -apple-system, ui-sans-serif, system-ui, sans-serif,
+        var(--serif-to-sans), -apple-system, ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
     --font-serif:
-        var(--serif), ui-serif, Georgia, Cambria, "Times New Roman", Times,
+        var(--serif-to-sans), ui-serif, Georgia, Cambria, "Times New Roman", Times,
         serif;
     --font-mono:
         var(--mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,

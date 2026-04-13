@@ -1,11 +1,10 @@
 export const metadata = {
-  title: `Kite`,
-  sort: 6,
-  tags: ["AG-UI", "A2UI", "Tanstack Start", "Vite", "TypeScript"],
-  image: "/projects/kite.png",
+    title: `Kite`,
+    sort: 6,
+    tags: ["AG-UI", "A2UI", "Tanstack Start", "Vite", "TypeScript"],
+    image: "/projects/kite.png",
+    description: `A reference implementation of the AG-UI protocol and A2UI specification a chat interface whose purpose is not merely to respond, but to make the ordinarily invisible machinery of agent communication legible.`,
 };
-
-> A reference implementation of the AG-UI protocol and A2UI specification a chat interface whose purpose is not merely to respond, but to make the ordinarily invisible machinery of agent communication legible.
 
 ## What It Is and Why It Exists
 
@@ -20,10 +19,16 @@ Kite implements both, which means the interface has something to show you beyond
 ## The Interesting Parts
 
 <BlockSideTitle title="AG-UI Protocol">
-  <img src="/projects/ag-ui.avif" />
+    <img src="/projects/ag-ui.avif" />
 </BlockSideTitle>
 <br />
-Consuming an AG-UI event stream faithfully is, in practice, a question of discipline. The frontend must correctly handle every event type as it arrives text deltas, component render events, tool calls without collapsing the distinction between them or treating any as a special case to be bolted on later. Kite renders each event type in-place as it arrives, so the interface reflects the agent's actual execution state rather than a tidy retrospective summary of it.
+Consuming an AG-UI event stream faithfully is, in practice, a question of
+discipline. The frontend must correctly handle every event type as it arrives
+text deltas, component render events, tool calls without collapsing the
+distinction between them or treating any as a special case to be bolted on
+later. Kite renders each event type in-place as it arrives, so the interface
+reflects the agent's actual execution state rather than a tidy retrospective
+summary of it.
 
 The A2UI layer is where things become genuinely interesting. A component descriptor arrives; the frontend renders it. This sounds almost too simple, until you consider what it replaces: an entire category of bespoke, case-by-case frontend logic, conditionally applied based on what the model happened to say. The specification makes explicit what was previously implicit, and the interface becomes correspondingly more reliable.
 
@@ -36,7 +41,7 @@ Built on TanStack Start with Vite. TypeScript throughout. Deployed on Netlify.
 <br />
 <LinkChip icon="globe" link="https://kite-agui.netlify.app" label="Website" />
 <LinkChip
-  icon="github"
-  link="https://github.com/thaletto/kite"
-  label="Source Code"
+    icon="github"
+    link="https://github.com/thaletto/kite"
+    label="Source Code"
 />

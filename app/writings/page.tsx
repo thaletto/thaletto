@@ -32,27 +32,35 @@ export default async function Page() {
             title: module.metadata.title,
             date: module.metadata.date || "-",
             sort: Number(module.metadata.date?.replaceAll(".", "") || 0),
+            description: module.metadata?.description,
         });
     }
     items.sort((a, b) => b.sort - a.sort);
 
     return (
         <div>
-            <ul>
+            <ul className="flex flex-col gap-y-8 [&>*:first-child]:mt-0 mt-0">
                 {items.map((item) => (
                     <li key={item.slug} className="font-medium">
                         <Link
                             href={`/writings/${item.slug}`}
-                            className="group flex gap-1 -mx-2 px-2 justify-between items-center focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted focus-visible:text-rurikon-600"
                             draggable={false}
+                            className="flex flex-col items-start gap-2"
                         >
-                            <span className="block text-rurikon-500 group-hover:text-rurikon-700 group-focus-visible:text-rurikon-700">
-                                {item.title}
-                            </span>
-                            <span className="text-sm dot-leaders flex-1 text-rurikon-100 font-normal group-hover:text-rurikon-500 group-focus-visible:text-rurikon-500 transition-colors group-hover:transition-none leading-none" />
-                            <time className="block text-rurikon-200 tabular-nums font-normal tracking-tighter group-hover:text-rurikon-500 group-focus-visible:text-rurikon-500 transition-colors group-hover:transition-none self-start">
-                                {item.date}
-                            </time>
+                            <div className="flex flex-row w-full justify-between focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted focus-visible:text-rurikon-600">
+                                <h1 className="font-semibold text-base md:text-xl text-rurikon-600 text-balance">
+                                    {item.title}
+                                </h1>
+                                <time className="font-normal text-rurikon-200 text-balance">
+                                    {item.date}
+                                </time>
+                            </div>
+
+                            {item.description && (
+                                <p className="font-normal">
+                                    {item.description}
+                                </p>
+                            )}
                         </Link>
                     </li>
                 ))}
