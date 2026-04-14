@@ -1,4 +1,3 @@
-import { GitHubAchievements } from "./github-achievements";
 import Skills from "./skills";
 import LinkChip, { LinkProps } from "../common/link-chip";
 import { ContributionGraphClient } from "./contributions-graph";
