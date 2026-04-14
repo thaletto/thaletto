@@ -163,13 +163,11 @@ main {
 }
 
 pre {
-    background-color: #f0f0f0;
+    background-color: #EBEDEF;
     contain: paint;
     overflow-x: auto;
     padding: 0.875rem 1.25rem;
     -webkit-font-smoothing: auto;
-    --shiki-foreground: #414141;
-    --shiki-background: transparent;
 }
 
 pre code {
@@ -183,19 +181,7 @@ code {
         var(--mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
     word-spacing: -0.15em;
-    background-color: #f0f0f0;
     padding: 0.2em 0.2em;
-
-    /* color: hsl(215deg 32% 37%); */
-    --shiki-token-comment: hsl(215deg 32% 37% / 45%);
-    --shiki-token-punctuation: hsl(215deg 32% 37% / 65%);
-    --shiki-token-keyword: hsl(215deg 32% 37% / 85%);
-    --shiki-token-function: hsl(223deg 85% 46%);
-    --shiki-token-string: #0fb359;
-    --shiki-token-string-expression: #0fb359;
-    --shiki-token-constant: hsl(215deg 32% 26%);
-    --shiki-token-link: #0fb359;
-    --shiki-token-parameter: #ff9800;
 }
 
 code span {
