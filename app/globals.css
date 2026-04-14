@@ -163,7 +163,7 @@ main {
 }
 
 pre {
-    background-color: #f0f0f0;
+    background-color: #EBEDEF;
     contain: paint;
     overflow-x: auto;
     padding: 0.875rem 1.25rem;
