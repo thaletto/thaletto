@@ -1,7 +1,8 @@
 import { GitHubAchievements } from "./github-achievements";
-import GithubActivityCalendar from "./github-calendar";
 import Skills from "./skills";
 import LinkChip, { LinkProps } from "../common/link-chip";
+import { ContributionGraphClient } from "./contributions-graph";
+import { getContributionsData } from "@/lib/actions";
 
 type social_link = {
     name: string;
@@ -37,21 +38,35 @@ const SOCIAL_LINKS: social_link[] = [
     },
 ];
 
-export default function About() {
+export default async function About() {
+    const contributionData = await getContributionsData();
     return (
         <div>
-            <GithubActivityCalendar />
-            <GitHubAchievements
-                galaxyBrain={1}
-                pairExtraordinaire={1}
-                pullShark={2}
-                quickDraw={1}
-                className="mt-2"
-            />
-            <Skills className="mt-8" />
+            <div className=" flex flex-col gap-y-2 my-8">
+                <ContributionGraphClient
+                    contributions={contributionData.contributions}
+                    totalCount={contributionData.total}
+                />
+
+                <GitHubAchievements
+                    galaxyBrain={1}
+                    pairExtraordinaire={1}
+                    pullShark={2}
+                    quickDraw={1}
+                />
+            </div>
+
+            <Skills className="my-8" />
+            
             <div className="flex flex-wrap gap-2 md:gap-4 mt-8">
                 {SOCIAL_LINKS.map((item) => (
-                    <LinkChip variant='link' key={item.name} link={item.link} label={item.name} icon={item.icon}  />
+                    <LinkChip
+                        variant="link"
+                        key={item.name}
+                        link={item.link}
+                        label={item.name}
+                        icon={item.icon}
+                    />
                 ))}
             </div>
         </div>
