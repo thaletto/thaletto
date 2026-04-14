@@ -1,32 +1,32 @@
 export const metadata = {
-  title: "The Great Pyramid of JavaScript",
-  date: "2026.03.17",
-  description: `The journey of JavaScript before it is executed.`,
-  authors: {
-    name: "Laxman K R",
-    url: "https://thaletto.vercel.app",
-  },
+    title: "The Great Pyramid of JavaScript",
+    date: "2026.03.17",
+    description: `The journey of JavaScript before it is executed.`,
+    authors: {
+        name: "Laxman K R",
+        url: "https://thaletto.vercel.app",
+    },
 };
 
 > The ancient Egyptians built the Great Pyramid by stacking 2.3 million blocks, each one trusting blindly, permanently, the layer beneath it. JavaScript executes your code the same way. You type one line. Multiple layers later, a CPU twitches. What happens in between is what we're here for.
 
 <BlockSideTitle>
-  <img src="/pyramid-js.png" />
+    <img src="/pyramid-js.png" />
 </BlockSideTitle>
 
 Most developers, when pressed, will admit that they do not know how their code runs. They know that it does run, which they treat as sufficient. They `npm run dev`, a port opens, and they return to the more pressing matter of choosing a font. This post is not to shame them, but to illuminate the multiple-layer pyramid that silently executes their font-laden masterpiece every single time.
 
 Here is the code we'll bury alive and excavate, layer by layer:
 
-```js
-async function getUser() {
-  const res = await fetch("https://api.example.com/user/1");
-  const data = await res.json();
-  console.log(data.name);
+<Code language="js">
+{`async function getUser() {
+    const res = await fetch("https://api.example.com/user/1");
+    const data = await res.json();
+    console.log(data.name);
 }
 
-getUser();
-```
+getUser();`}
+</Code>
 
 Innocent enough. Now let's watch what the world does to it.
 
@@ -101,28 +101,30 @@ A list of tokens is not a program. The **parser** folds them into an **Abstract 
 
 ```json
 {
-  "type": "FunctionDeclaration",
-  "async": true,
-  "id": { "name": "getUser" },
-  "body": [
-    {
-      "type": "VariableDeclaration",
-      "kind": "const",
-      "declarations": [
+    "type": "FunctionDeclaration",
+    "async": true,
+    "id": { "name": "getUser" },
+    "body": [
         {
-          "id": { "name": "res" },
-          "init": {
-            "type": "AwaitExpression",
-            "argument": {
-              "type": "CallExpression",
-              "callee": { "name": "fetch" },
-              "arguments": [{ "value": "https://api.example.com/user/1" }]
-            }
-          }
+            "type": "VariableDeclaration",
+            "kind": "const",
+            "declarations": [
+                {
+                    "id": { "name": "res" },
+                    "init": {
+                        "type": "AwaitExpression",
+                        "argument": {
+                            "type": "CallExpression",
+                            "callee": { "name": "fetch" },
+                            "arguments": [
+                                { "value": "https://api.example.com/user/1" }
+                            ]
+                        }
+                    }
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
 ```
 
@@ -215,6 +217,7 @@ The **Event Loop** is the site manager. The main worker the call stack never idl
     H --> I
     I --> J
     J --> K`}
+
 </Mermaid>
 
 Each layer trusts the one below it entirely, knows nothing of the ones above, and does exactly one job. The linter doesn't bundle. The bundler doesn't optimize. The JIT doesn't manage async. The CPU doesn't parse.
