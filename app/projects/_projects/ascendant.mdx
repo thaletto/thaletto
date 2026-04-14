@@ -16,21 +16,9 @@ Ascendant is a library that takes the position that all of this ought to be expr
 
 ## Installation
 
-```bash
-pip install astro-ascendant
-```
-
-For local development against the source:
-
-```bash
-pip install .
-```
-
-To include the test suite dependencies:
-
-```bash
-pip install ".[test]"
-```
+<Code language="bash" filename="terminal">
+{`pip install astro-ascendant`}
+</Code>
 
 ## What It Computes
 
@@ -44,10 +32,11 @@ The library exposes three domains of calculation, each corresponding to a major 
 
 ## Usage
 
-```python
-from ascendant import Ascendant
+<Code language="python">
+{`from ascendant import Ascendant
 
 # Initialize with birth details
+
 astro = Ascendant(
     year=1990, month=1, day=1,
     hour=12, minute=0, second=0,
@@ -56,14 +45,17 @@ astro = Ascendant(
 )
 
 # Get Rasi Chart (D1)
+
 chart = astro.get_chart(division=1)
 
 # Get Yogas
+
 yogas = astro.get_yogas()
 
 # Get Dasha Timeline
-dasha = astro.get_dasha_timeline()
-```
+
+dasha = astro.get_dasha_timeline()`}
+</Code>
 
 ## Documentation
 
