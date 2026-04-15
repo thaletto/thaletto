@@ -1,9 +1,9 @@
 export const metadata = {
     title: `Kite`,
     sort: 6,
-    tags: ["AG-UI", "A2UI", "Tanstack Start", "Vite", "TypeScript"],
+    tags: ["AG-UI", "Tanstack Start", "Vite", "TypeScript"],
     image: "/projects/kite.png",
-    description: `A reference implementation of the AG-UI protocol and A2UI specification a chat interface whose purpose is not merely to respond, but to make the ordinarily invisible machinery of agent communication legible.`,
+    description: `A reference implementation of the AG-UI protocol a chat interface whose purpose is not merely to respond, but to make the ordinarily invisible machinery of agent communication legible.`,
 };
 
 ## What It Is and Why It Exists
@@ -12,16 +12,11 @@ Most chat applications are, at their architectural core, a polite fiction. The u
 
 Kite is an attempt at otherwise.
 
-The AG-UI protocol defines a standard event stream between an agent backend and a frontend. Not a blob of text, not a stream of raw tokens, but a structured sequence of typed events text deltas, tool invocations, state transitions each one a legible signal rather than an undifferentiated murmur. The A2UI specification extends this further, allowing agents to emit typed UI component descriptors that the frontend renders directly. The agent doesn't describe a table and hope you can picture it. It sends a table.
+The AG-UI protocol defines a standard event stream between an agent backend and a frontend. Not a blob of text, not a stream of raw tokens, but a structured sequence of typed events text deltas, tool invocations, state transitions each one a legible signal rather than an undifferentiated murmur. The agent doesn't describe a table and hope you can picture it. It sends a table.
 
 Kite implements both, which means the interface has something to show you beyond the final answer.
 
 ## The Interesting Parts
-
-<BlockSideTitle title="AG-UI Protocol">
-    <img src="/projects/ag-ui.avif" />
-</BlockSideTitle>
-<br />
 
 Consuming an AG-UI event stream faithfully is, in practice, a question of
 discipline. The frontend must correctly handle every event type as it arrives
