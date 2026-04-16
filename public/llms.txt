@@ -1,5 +1,5 @@
 # Laxman K R
-AI Engineer
+> AI Engineer
 
 ## Bio
 Hey, I'm Laxman, a full-stack developer who enjoys building modern, well structured apps where things just feel right from how the UI looks to how the code is organized under the hood.
@@ -9,71 +9,33 @@ I'm drawn to system design, application structure, and different programming par
 - **Languages:** TypeScript, JavaScript, Python, Java, Kotlin
 - **Frontend:** Next.js, React, TailwindCSS, Material UI
 - **Backend:** Bun, Node.js, FastAPI
-- **AI/ML:** AI SDK, Google ADK, Autogen, Langchain
+- **AI/ML:** AI SDK, Google ADK, Autogen, Langchain, RAG, Qdrant
 - **Database:** PostgreSQL
 - **DevOps/Tools:** Jenkins, Docker
 
-## Work Experience
+## Work Experience & Education
 
-### Tata Consultancy Services
+Fetch all timeline entries from:
 
-AI Engineer & Platform Lead | Nov 2024 - Present
+GET /timeline/metadata
 
-- [**Agentic AMS Framework**](https://thaletto.vercel.app/projects/ams): Engineered an autonomous self-healing system integrating Grafana and ServiceNow. Developed AI agents capable of diagnosing incidents and executing SOP-driven remediations, resulting in a substantial reduction in Mean Time to Recovery (MTTR).
-- [**Google Cloud AI Offerings**](https://thaletto.vercel.app/projects/ai-offerings): Developed an unified platform to showcase AI offerings made across TCS, increasing the discoverability and exposure.
-- **Microfrontend Migration**: Orchestrated the architectural transition of the TCS CBG AI platform to a microfrontend framework. This initiative decoupled core services, enabling independent development cycles and eliminating deployment bottlenecks across workstreams.
-- **Platform Ownership**: Appointed as Deployment Lead for the TCS CBG AI platform, exercising full authority over release management and production environment stability.
-- **Team Leadership**: Led the Platform and Frontend developer teams, synchronizing core development with operational requirements to ensure high-performance delivery and system resilience.
+- Returns an array of objects representing both work experience and education
+- Each item includes a `slug`
+
+To retrieve full details for a specific entry:
+
+GET /timeline/{slug}
+
 
 ## Projects
 
-### Agentic AMS Framework
+Fetch all project entries from:
 
-An autonomous multi-agent system that detects, diagnoses, and resolves production incidents end-to-end, with a human kept firmly in the loop and a vector-indexed brain consulted at every step.
-The framework is built on Microsoft AutoGen for multi-agent orchestration, giving each agent a defined role, a message-passing interface, and access to a curated set of tools. The retrieval pipeline uses a Model Context Protocol server to mediate between the orchestrator and Qdrant, keeping the vector search concerns cleanly separated from the agent reasoning concerns. The observability infrastructure is standard Grafana and Loki. ServiceNow handles the ticket lifecycle. Confluence, via the batch ingestion job, is the authoritative source of procedural knowledge.
-The result is a system that transforms an alert from a notification demanding human attention into a proposal demanding human judgment, which is a distinction that, once you have lived on the receiving end of both, turns out to matter rather a great deal.
-- **Stack:** Python, Autogen, Grafana, ServiceNow, FastAPI
-- **Category:** AI / Agentic Systems
+GET /projects/metadata
 
-### Google Cloud AI Offerings
+- Returns an array of objects with project overview data
+- Each item includes a `slug`
 
-A unified catalog platform built for Google Cloud Next 2026 event, consolidating TCS's AI offerings into a single, searchable surface so that the right solution could be found before the conference badge had time to cool.
-- **Stack:** Next.js, Python, FastAPI
-- **Category:** Platform
+To retrieve full details for a specific project:
 
-### Ascendant
-
-A Python library for Vedic astrology calculations, publishing to PyPI the ancient machinery of Jyotish: divisional charts, dasha timelines, and yoga combinations, all computable from a birth moment and a coordinate.
-- **Stack:** Python
-- **Category:** Library / Domain Modelling
-
-### Lung Nodule Detection System
-
-Lung cancer kills with particular efficiency partly because it so often goes unnoticed until it has made itself unmissable. This project assembles three deep learning architectures, V-Net, YOLOv5s, and DETR, into a single detection pipeline that finds the nodules a radiologist might miss and declines to invent the ones that are not there.
-- **Stack:** Python, PyTorch, OpenCV
-- **Category:** AI / Medical Imaging
-
-### Kite
-
-A reference implementation of the AG-UI protocol and A2UI specification a chat interface whose purpose is not merely to respond, but to make the ordinarily invisible machinery of agent communication legible.
-- **Stack:** AG-UI, A2UI, TanStack Start, Vite, TypeScript, Netlify
-- **Category:** Web / Agentic Protocol
-
-### Parkinson's Disease Detection
-
-Parkinson's disease leaves a signature in the voice long before it announces itself in more obvious ways. This project asks whether that signature, extracted as biomedical acoustic features from a voice recording, is legible to a machine learning classifier, and then asks the question of nine different classifiers simultaneously to find out which one reads it best.
-- **Stack:** Python, scikit-learn, NumPy, pandas
-- **Category:** AI / Healthcare
-
-## Education
-### Amrita Vishwa Vidyapeetham
-**B.Tech Computer Science and Engineering**
-*September 2020 - May 2024*
-- CGPA: 7.02/10
-- Focus: Core AI, ML, Deep Learning, NLP.
-
-### Maharishi International Residential School
-**CBSE XII & X**
-*April 2016 - March 2020*
-- XII: 88.6%
-- X: 82.6%
+GET /projects/{slug}
