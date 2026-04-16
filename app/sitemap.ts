@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         {
             url: "https://thaletto.vercel.app",
             lastModified: new Date(),
-            changeFrequency: "weekly",
+            changeFrequency: "monthly",
             priority: 1,
         },
         {
@@ -15,10 +15,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
-            url: "https://thaletto.verce.app/thoughts",
+            url: "https://thaletto.vercel.app/writings",
             lastModified: new Date(),
             changeFrequency: "weekly",
             priority: 0.7,
+        },
+        {
+            url: "https://thaletto.vercel.app/llms.txt",
+            lastModified: new Date(),
+            changeFrequency: "weekly",
+            priority: 1,
         },
     ];
 }
