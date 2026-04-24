@@ -1,8 +1,13 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-export type TimelineSize = 'sm' | 'md' | 'lg';
-export type TimelineStatus = 'completed' | 'in-progress' | 'pending';
-export type TimelineColor = 'primary' | 'secondary' | 'muted' | 'accent' | 'destructive';
+export type TimelineSize = "sm" | "md" | "lg";
+export type TimelineStatus = "completed" | "in-progress" | "pending";
+export type TimelineColor =
+  | "primary"
+  | "secondary"
+  | "muted"
+  | "accent"
+  | "destructive";
 
 export interface TimelineElement {
   id: number;

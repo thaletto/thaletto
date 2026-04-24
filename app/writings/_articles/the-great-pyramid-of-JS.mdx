@@ -1,17 +1,17 @@
 export const metadata = {
-    title: "The Great Pyramid of JavaScript",
-    date: "2026.03.17",
-    description: `The journey of JavaScript before it is executed.`,
-    authors: {
-        name: "Laxman K R",
-        url: "https://thaletto.vercel.app",
-    },
+  title: "The Great Pyramid of JavaScript",
+  date: "2026.03.17",
+  description: `The journey of JavaScript before it is executed.`,
+  authors: {
+    name: "Laxman K R",
+    url: "https://thaletto.vercel.app",
+  },
 };
 
 > The ancient Egyptians built the Great Pyramid by stacking 2.3 million blocks, each one trusting blindly, permanently, the layer beneath it. JavaScript executes your code the same way. You type one line. Multiple layers later, a CPU twitches. What happens in between is what we're here for.
 
 <BlockSideTitle>
-    <img src="/pyramid-js.webp" />
+  <img src="/pyramid-js.webp" />
 </BlockSideTitle>
 
 Most developers, when pressed, will admit that they do not know how their code runs. They know that it does run, which they treat as sufficient. They `npm run dev`, a port opens, and they return to the more pressing matter of choosing a font. This post is not to shame them, but to illuminate the multiple-layer pyramid that silently executes their font-laden masterpiece every single time.
@@ -26,6 +26,7 @@ Here is the code we'll bury alive and excavate, layer by layer:
 }
 
 getUser();`}
+
 </Code>
 
 Innocent enough. Now let's watch what the world does to it.
@@ -101,30 +102,28 @@ A list of tokens is not a program. The **parser** folds them into an **Abstract 
 
 ```json
 {
-    "type": "FunctionDeclaration",
-    "async": true,
-    "id": { "name": "getUser" },
-    "body": [
+  "type": "FunctionDeclaration",
+  "async": true,
+  "id": { "name": "getUser" },
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
         {
-            "type": "VariableDeclaration",
-            "kind": "const",
-            "declarations": [
-                {
-                    "id": { "name": "res" },
-                    "init": {
-                        "type": "AwaitExpression",
-                        "argument": {
-                            "type": "CallExpression",
-                            "callee": { "name": "fetch" },
-                            "arguments": [
-                                { "value": "https://api.example.com/user/1" }
-                            ]
-                        }
-                    }
-                }
-            ]
+          "id": { "name": "res" },
+          "init": {
+            "type": "AwaitExpression",
+            "argument": {
+              "type": "CallExpression",
+              "callee": { "name": "fetch" },
+              "arguments": [{ "value": "https://api.example.com/user/1" }]
+            }
+          }
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 

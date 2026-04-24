@@ -1,9 +1,9 @@
 export const metadata = {
-    title: `Ascendant`,
-    sort: 5,
-    tags: ["Python SDK", "PyPI"],
-    image: "/projects/ascendant.webp",
-    description: `A Python library for Vedic astrology calculations, publishing to PyPI the ancient machinery of Jyotish: divisional charts, dasha timelines, and yoga combinations, all computable from a birth moment and a coordinate.`,
+  title: `Ascendant`,
+  sort: 5,
+  tags: ["Python SDK", "PyPI"],
+  image: "/projects/ascendant.webp",
+  description: `A Python library for Vedic astrology calculations, publishing to PyPI the ancient machinery of Jyotish: divisional charts, dasha timelines, and yoga combinations, all computable from a birth moment and a coordinate.`,
 };
 
 ## The Premise
@@ -17,7 +17,7 @@ Ascendant is a library that takes the position that all of this ought to be expr
 ## Installation
 
 <Code language="bash" filename="terminal">
-{`pip install astro-ascendant`}
+  {`pip install astro-ascendant`}
 </Code>
 
 ## What It Computes
@@ -38,10 +38,10 @@ The library exposes three domains of calculation, each corresponding to a major 
 # Initialize with birth details
 
 astro = Ascendant(
-    year=1990, month=1, day=1,
-    hour=12, minute=0, second=0,
-    latitude=28.6139, longitude=77.2090,
-    utc="+5:30"
+year=1990, month=1, day=1,
+hour=12, minute=0, second=0,
+latitude=28.6139, longitude=77.2090,
+utc="+5:30"
 )
 
 # Get Rasi Chart (D1)
@@ -55,6 +55,7 @@ yogas = astro.get_yogas()
 # Get Dasha Timeline
 
 dasha = astro.get_dasha_timeline()`}
+
 </Code>
 
 ## Documentation
@@ -67,7 +68,7 @@ The full documentation lives in the repository and covers each computational dom
 
 <br />
 <LinkChip
-    icon="github"
-    label="Source Code"
-    link="https://github.com/thaletto/Ascendant"
+  icon="github"
+  label="Source Code"
+  link="https://github.com/thaletto/Ascendant"
 />
