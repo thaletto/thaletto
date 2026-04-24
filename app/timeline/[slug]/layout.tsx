@@ -22,7 +22,7 @@ export default async function Layout({
   return (
     <article className="max-w-3xl mx-auto">
       <header className="flex flex-col  mb-8 gap-2">
-        <h1 className="font-semibold text-xl md:text-3xl text-rurikon-600 text-balance">
+        <h1 className="font-semibold text-xl md:text-3xl text-balance">
           {metadata.title}
         </h1>
         <p className="text-sm font-serif">

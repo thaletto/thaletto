@@ -46,11 +46,11 @@ export default async function Page() {
               draggable={false}
               className="flex flex-col items-start gap-2"
             >
-              <div className="flex flex-row w-full justify-between focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted focus-visible:text-rurikon-600">
-                <h1 className="font-semibold text-base md:text-xl text-rurikon-600 text-balance">
+              <div className="flex flex-row w-full justify-between focus-visible:outline focus-visible:outline-ring focus-visible:rounded-xs focus-visible:outline-dotted">
+                <h1 className="font-semibold text-base md:text-xl text-balance">
                   {item.title}
                 </h1>
-                <time className="font-normal text-rurikon-200 text-balance">
+                <time className="font-normal text-muted-foreground text-balance">
                   {item.date}
                 </time>
               </div>
