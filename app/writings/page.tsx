@@ -56,7 +56,7 @@ export default async function Page() {
               </div>
 
               {item.description && (
-                <p className="font-normal">{item.description}</p>
+                <p className="font-normal text-muted-foreground">{item.description}</p>
               )}
             </Link>
           </li>

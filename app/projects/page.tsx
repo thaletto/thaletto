@@ -57,15 +57,15 @@ export function ProjectListItem({
             </h1>
           </div>
 
-          <p className="font-normal">{description}</p>
+          <p className="font-normal text-muted-foreground">{description}</p>
 
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {tags.map((tag) => (
                 <Badge
                   key={tag}
-                  variant="ghost"
-                  className="text-xs px-2 py-0.5 rounded-sm border text-muted-foreground"
+                  variant="secondary"
+                  className="text-xs px-2 py-0.5 rounded-sm"
                 >
                   {tag}
                 </Badge>

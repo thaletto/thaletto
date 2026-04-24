@@ -41,7 +41,7 @@ export default async function Layout({
             {metadata?.tags.map((tag: string, index: number) => (
               <Badge
                 key={index}
-                variant="outline"
+                variant="default"
                 className="text-xs px-2 py-0.5 rounded-sm"
               >
                 {tag}

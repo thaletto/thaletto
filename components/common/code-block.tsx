@@ -66,8 +66,9 @@ const CodeInner = ({ children, language, filename }: CodeProps) => {
                                 language={item.language as BundledLanguage}
                                 themes={{
                                     light: "github-light",
-                                    dark: "github-light",
+                                    dark: "github-dark",
                                 }}
+                                syntaxHighlighting
                             >
                                 {item.code}
                             </CodeBlockContent>

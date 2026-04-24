@@ -8,25 +8,25 @@ export function Callout({
     children: React.ReactNode;
     type?: "note" | "tip" | "warning";
 }) {
-    const styles = {
+    const variants = {
         note: {
-            bg: "bg-[#e5f2fc]",
+            styles: "bg-secondary text-secondary-foreground",
             icon: <LuInfo className="w-4 h-4" />,
         },
         tip: {
-            bg: "bg-[#e8f1ec]",
+            styles: "bg-secondary text-secondary-foreground",
             icon: <LuLightbulb className="w-4 h-4" />,
         },
         warning: {
-            bg: "bg-[#f9f3dc]",
+            styles: "bg-destructive text-destructive-foreground",
             icon: <LuTriangleAlert className="w-4 h-4" />,
         },
     };
 
-    const { bg, icon } = styles[type];
+    const { styles, icon } = variants[type];
 
     return (
-        <div className={cn("mt-4 flex gap-3 rounded-lg px-4 py-3 text-foreground", bg)}>
+        <div className={cn("mt-4 flex gap-3 rounded-lg px-4 py-3 text-foreground", styles)}>
             {/* Icon container aligned to first line of text */}
             <div className="shrink-0 mt-1 flex items-start">{icon}</div>
 

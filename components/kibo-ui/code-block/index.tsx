@@ -201,18 +201,6 @@ const lineNumberClassNames = cn(
     "[&_.line]:before:select-none",
 );
 
-const darkModeClassNames = cn(
-    "dark:[&_.shiki]:!text-[var(--shiki-dark)]",
-    // "dark:[&_.shiki]:!bg-[var(--shiki-dark-bg)]",
-    "dark:[&_.shiki]:![font-style:var(--shiki-dark-font-style)]",
-    "dark:[&_.shiki]:![font-weight:var(--shiki-dark-font-weight)]",
-    "dark:[&_.shiki]:![text-decoration:var(--shiki-dark-text-decoration)]",
-    "dark:[&_.shiki_span]:!text-[var(--shiki-dark)]",
-    "dark:[&_.shiki_span]:![font-style:var(--shiki-dark-font-style)]",
-    "dark:[&_.shiki_span]:![font-weight:var(--shiki-dark-font-weight)]",
-    "dark:[&_.shiki_span]:![text-decoration:var(--shiki-dark-text-decoration)]",
-);
-
 const lineHighlightClassNames = cn(
     "[&_.line.highlighted]:bg-blue-50",
     "[&_.line.highlighted]:after:bg-blue-500",
@@ -335,7 +323,7 @@ export const CodeBlock = ({
         <CodeBlockContext.Provider value={{ value, onValueChange, data }}>
             <div
                 className={cn(
-                    "size-full overflow-hidden rounded-md border",
+                    "size-full overflow-hidden rounded-md border border-border",
                     className,
                 )}
                 {...props}
@@ -352,7 +340,7 @@ export const CodeBlockHeader = ({
 }: CodeBlockHeaderProps) => (
     <div
         className={cn(
-            "flex flex-row items-center border-b bg-secondary p-1",
+            "flex flex-row items-center border-b border-border bg-secondary p-1",
             className,
         )}
         {...props}
@@ -581,7 +569,6 @@ export const CodeBlockItem = ({
                 lineDiffClassNames,
                 lineFocusedClassNames,
                 wordHighlightClassNames,
-                darkModeClassNames,
                 lineNumbers && lineNumberClassNames,
                 className,
             )}

@@ -15,7 +15,7 @@ export default async function Skills({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-wrap gap-2", className)}>
       {skills.map((tag) => (
-        <Badge key={tag} variant="outline" className="px-2 py-0.5 rounded-sm">
+        <Badge key={tag} variant="secondary" className="px-2 py-0.5 rounded-sm">
           {tag}
         </Badge>
       ))}

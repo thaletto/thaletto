@@ -163,14 +163,14 @@ export function TimelineItem({
                 {/* Internal Line (Duration) - Changes color on hover */}
                 <span
                     className={cn(
-                        "absolute top-2 bottom-2 left-1/2 w-0.5 -translate-x-1/2 bg-muted-foreground transition-colors duration-300 group-hover/item:bg-foreground",
+                        "absolute top-2 bottom-2 left-1/2 w-0.5 -translate-x-1/2 bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground",
                     )}
                 />
 
                 {/* Gap Line (Connector) - Stays same color */}
                 {showConnector && (
                     <span
-                        className="absolute left-1/2 w-0.5 -translate-x-1/2 bg-muted-foreground"
+                        className="absolute left-1/2 w-0.5 -translate-x-1/2 bg-border"
                         style={{
                             top: "calc(100% - 8px)",
                             height: `${gapHeight + 16}px`,
@@ -243,7 +243,7 @@ function TimelineDot({ status }: { status: Status }) {
     return (
         <span
             className={cn(
-                "relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-primary bg-foreground",
+                "relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-border bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground",
             )}
         />
     );
@@ -266,19 +266,24 @@ function TimelineImage({
     slug?: string;
 }) {
     const cardContent = (
-        <div className="w-full max-w-sm rotate-1 bg-white p-3 shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
+        <div className="w-full max-w-sm rotate-1 bg-card text-card-foreground p-3 shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
             <img src={image} alt={title} className="h-48 w-full object-cover" />
+
             <div className="mt-3 text-center">
                 {title && (
-                    <p className="font-serif text-base font-bold text-gray-900">
+                    <p className="font-serif text-base font-bold text-foreground">
                         {title}
                     </p>
                 )}
+
                 {description && (
-                    <p className="mt-1 text-sm text-gray-600">{description}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                        {description}
+                    </p>
                 )}
+
                 {content && (
-                    <div className="mt-2 border-t border-gray-100 pt-2 text-xs text-gray-600 whitespace-pre-line">
+                    <div className="mt-2 border-t border-border pt-2 text-xs text-muted-foreground whitespace-pre-line">
                         {content}
                     </div>
                 )}
