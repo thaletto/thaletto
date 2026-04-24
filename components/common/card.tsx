@@ -17,7 +17,7 @@ export function Card({
             target="_blank"
             rel="noreferrer"
             draggable={false}
-            className="group block rounded-lg overflow-clip select-none my-7 transition-colors hover:bg-white border border-rurikon-border"
+            className="group block rounded-lg overflow-clip select-none my-7 transition-colors hover:bg-card border"
         >
             <img
                 src={image}
@@ -26,7 +26,7 @@ export function Card({
             {title && <p className="m-2 text-sm">{title}</p>}
             {desc && <p className="m-2 opacity-80 text-xs">{desc}</p>}
             {link && (
-                <p className="m-2 text-rurikon-200 text-xs transition-colors group-hover:text-rurikon-300">
+                <p className="m-2 text-muted-foreground text-xs">
                     {link}
                 </p>
             )}

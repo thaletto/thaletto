@@ -92,7 +92,7 @@ function TooltipOrPopover({
                 <PopoverContent
                     side="bottom"
                     sideOffset={8}
-                    className="p-2 max-w-xs bg-rurikon-800 text-rurikon-100 text-sm"
+                    className="p-2 max-w-xs bg-foreground text-background text-sm"
                 >
                     {Content}
                 </PopoverContent>

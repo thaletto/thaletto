@@ -27,8 +27,8 @@ function Item(props: React.ComponentProps<typeof Link>) {
       className={
         (cn(
           isActive
-            ? "text-rurikon-800"
-            : "text-rurikon-300 hover:text-rurikon-600",
+            ? "text-foreground"
+            : "text-muted-foreground hover:text-foreground",
           "transition-colors hover:transform-none",
           "-mx-2",
         ),
@@ -37,8 +37,8 @@ function Item(props: React.ComponentProps<typeof Link>) {
     >
       <Link
         {...props}
-        className="inline-block lowercase w-full px-2 focus-visible:outline focus-visible:outline-rurikon-400
-                    focus-visible:rounded-xs focus-visible:outline-dotted focus-visible:text-rurikon-600"
+        className="inline-block lowercase w-full px-2 focus-visible:outline focus-visible:outline-ring
+                    focus-visible:rounded-xs focus-visible:outline-dotted"
         draggable={false}
       />
     </li>

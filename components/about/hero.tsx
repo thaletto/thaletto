@@ -31,10 +31,10 @@ export default function Hero() {
     <>
       <section className="flex items-center justify-between gap-6">
         {/* Text */}
-        <h1 className="font-semibold text-xl md:text-3xl text-rurikon-600 text-balance">
+        <h1 className="font-semibold text-xl md:text-3xl text-balance">
           Laxman K R
           <br />
-          <span className="text-sm md:text-lg text-rurikon-400 transition-colors duration-300 ease-in-out">
+          <span className="text-sm md:text-lg text-muted-foreground transition-colors duration-300 ease-in-out">
             AI Engineer
           </span>
         </h1>

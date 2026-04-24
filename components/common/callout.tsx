@@ -26,7 +26,7 @@ export function Callout({
     const { bg, icon } = styles[type];
 
     return (
-        <div className={cn("mt-4 flex gap-3 rounded-lg px-4 py-3 text-rurikon-500", bg)}>
+        <div className={cn("mt-4 flex gap-3 rounded-lg px-4 py-3 text-foreground", bg)}>
             {/* Icon container aligned to first line of text */}
             <div className="shrink-0 mt-1 flex items-start">{icon}</div>
 

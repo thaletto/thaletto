@@ -163,14 +163,14 @@ export function TimelineItem({
                 {/* Internal Line (Duration) - Changes color on hover */}
                 <span
                     className={cn(
-                        "absolute top-2 bottom-2 left-1/2 w-0.5 -translate-x-1/2 bg-rurikon-200 transition-colors duration-300 group-hover/item:bg-rurikon-500",
+                        "absolute top-2 bottom-2 left-1/2 w-0.5 -translate-x-1/2 bg-muted-foreground transition-colors duration-300 group-hover/item:bg-foreground",
                     )}
                 />
 
                 {/* Gap Line (Connector) - Stays same color */}
                 {showConnector && (
                     <span
-                        className="absolute left-1/2 w-0.5 -translate-x-1/2 bg-rurikon-200"
+                        className="absolute left-1/2 w-0.5 -translate-x-1/2 bg-muted-foreground"
                         style={{
                             top: "calc(100% - 8px)",
                             height: `${gapHeight + 16}px`,
@@ -243,7 +243,7 @@ function TimelineDot({ status }: { status: Status }) {
     return (
         <span
             className={cn(
-                "relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-primary bg-rurikon-500",
+                "relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-primary bg-foreground",
             )}
         />
     );
