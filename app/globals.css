@@ -81,6 +81,22 @@
 
 :root {
     --background: #fcfcfc;
+    --foreground: var(--color-rurikon-900);
+    --primary: var(--color-rurikon-800);
+    --primary-foreground: var(--color-rurikon-50);
+    --secondary: var(--color-rurikon-100);
+    --secondary-foreground: var(--color-rurikon-800);
+    --muted: var(--color-rurikon-100);
+    --muted-foreground: var(--color-rurikon-500);
+    --accent: var(--color-rurikon-100);
+    --accent-foreground: var(--color-rurikon-800);
+    --destructive: #dc2626;
+    --destructive-foreground: #fafafa;
+    --border: var(--color-rurikon-border);
+    --input: var(--color-rurikon-200);
+    --ring: var(--color-rurikon-700);
+    --radius: 0.375rem;
+    --chart-1: var(--color-rurikon-600);
     --sans-variation: "opsz" 32;
     --font-features:
         "cpsp" 1, "cv01", "cv03", "cv04", "calt", "ss03", "liga", "ordn";
