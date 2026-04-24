@@ -5,52 +5,52 @@ import SvgIcon from "@/components/common/logo";
 import { getCompanyLogoSrc } from "@/lib/utils";
 
 export default async function Layout({
-  children,
-  params,
+	children,
+	params,
 }: {
-  children: ReactNode;
-  params: Promise<{ slug: string }>;
+	children: ReactNode;
+	params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+	const { slug } = await params;
 
-  const { metadata } = await import(`../_projects/${slug}.mdx`);
-  const companyIcon = getCompanyLogoSrc(metadata?.company);
+	const { metadata } = await import(`../_projects/${slug}.mdx`);
+	const companyIcon = getCompanyLogoSrc(metadata?.company);
 
-  return (
-    <article className="max-w-3xl mx-auto">
-      <header className="flex flex-col">
-        <div className="flex items-center gap-2">
-          {companyIcon && (
-            <SvgIcon
-              src={companyIcon}
-              name={metadata?.company ?? ""}
-              className="size-8 md:size-10 shrink-0 text-muted-foreground group-hover:text-foreground"
-            />
-          )}
-          <h1 className="font-semibold text-xl md:text-3xl text-balance">
-            {metadata.title}
-          </h1>
-        </div>
+	return (
+		<article className="max-w-3xl mx-auto">
+			<header className="flex flex-col">
+				<div className="flex items-center gap-2">
+					{companyIcon && (
+						<SvgIcon
+							src={companyIcon}
+							name={metadata?.company ?? ""}
+							className="size-8 md:size-10 shrink-0 text-muted-foreground group-hover:text-foreground"
+						/>
+					)}
+					<h1 className="font-semibold text-xl md:text-3xl text-balance">
+						{metadata.title}
+					</h1>
+				</div>
 
-        <Card image={metadata.image} title={metadata?.imageLabel} />
+				<Card image={metadata.image} title={metadata?.imageLabel} />
 
-        <p>{metadata?.description}</p>
+				<p>{metadata?.description}</p>
 
-        {metadata?.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-2">
-            {metadata?.tags.map((tag: string, index: number) => (
-              <Badge
-                key={index}
-                variant="default"
-                className="text-xs px-2 py-0.5 rounded-sm"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
-      </header>
-      {children}
-    </article>
-  );
+				{metadata?.tags.length > 0 && (
+					<div className="flex flex-wrap gap-1 mt-2">
+						{metadata?.tags.map((tag: string, index: number) => (
+							<Badge
+								key={index}
+								variant="default"
+								className="text-xs px-2 py-0.5 rounded-sm"
+							>
+								{tag}
+							</Badge>
+						))}
+					</div>
+				)}
+			</header>
+			{children}
+		</article>
+	);
 }
