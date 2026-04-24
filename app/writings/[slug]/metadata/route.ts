@@ -7,7 +7,7 @@ export async function GET(
 	const { slug } = await context.params;
 
 	try {
-		const { metadata } = await import(`@/app/writings/_writings/${slug}.mdx`);
+		const { metadata } = await import(`@/app/writings/_articles/${slug}.mdx`);
 
 		if (!metadata || metadata.draft) {
 			return NextResponse.json({ error: "Not found" }, { status: 404 });

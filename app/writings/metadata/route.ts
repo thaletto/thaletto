@@ -3,7 +3,7 @@ import { promises as fs } from "fs";
 import path from "path";
 
 export async function GET() {
-	const dir = path.join(process.cwd(), "app", "writings", "_writings");
+	const dir = path.join(process.cwd(), "app", "writings", "_articles");
 
 	try {
 		const files = await fs.readdir(dir);
@@ -13,7 +13,7 @@ export async function GET() {
 				.filter((file) => file.endsWith(".mdx"))
 				.map(async (file) => {
 					try {
-						const mod = await import(`@/app/writings/_writings/${file}`);
+						const mod = await import(`@/app/writings/_articles/${file}`);
 
 						if (!mod.metadata || mod.metadata.draft) return null;
 
