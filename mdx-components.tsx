@@ -24,31 +24,31 @@ export const components: Record<
 > = {
   h1: (props) => (
     <h1
-      className="font-semibold text-xl md:text-3xl mb-8 text-rurikon-600 text-balance"
+      className="font-semibold text-xl md:text-3xl mb-8 text-balance"
       {...props}
     />
   ),
   h2: (props) => (
     <h2
-      className="font-semibold text-lg md:text-2xl mt-8 text-rurikon-600 text-balance"
+      className="font-semibold text-lg md:text-2xl mt-8 text-balance"
       {...props}
     />
   ),
   h3: (props) => (
     <h3
-      className="font-semibold text-base md:text-xl mt-8 text-rurikon-600 text-balance"
+      className="font-semibold text-base md:text-xl mt-8 text-balance"
       {...props}
     />
   ),
   ul: (props) => (
     <ul
-      className="mt-2 list-disc list-outside marker:text-rurikon-200 pl-5"
+      className="mt-2 list-disc list-outside marker:text-muted-foreground pl-5"
       {...props}
     />
   ),
   ol: (props) => (
     <ol
-      className="mt-2 list-decimal list-outside marker:text-rurikon-200 pl-5"
+      className="mt-2 list-decimal list-outside marker:text-muted-foreground pl-5"
       {...props}
     />
   ),
@@ -56,10 +56,7 @@ export const components: Record<
   a: ({ href, ...props }) => {
     return (
       <Link
-        className="wrap-break-word decoration-from-font underline underline-offset-2 decoration-rurikon-300 hover:decoration-rurikon-600 focus-visible:outline focus-visible:outline-rurikon-400
-        focus-visible:rounded-xs
-        focus-visible:outline-offset-1
-        focus-visible:outline-dotted"
+        className="wrap-break-word underline underline-offset-2 hover:text-muted-foreground focus-visible:outline focus-visible:outline-ring focus-visible:rounded-xs focus-visible:outline-offset-2"
         href={href}
         draggable={false}
         {...(href?.startsWith("https://")
@@ -76,7 +73,7 @@ export const components: Record<
   p: (props) => <p className="mt-4" {...props} />,
   blockquote: (props) => (
     <blockquote
-      className="pl-6 -ml-6 sm:pl-10 sm:-ml-10 md:pl-14 md:-ml-14 not-mobile:text-rurikon-400"
+      className="pl-6 -ml-6 sm:pl-10 sm:-ml-10 md:pl-14 md:-ml-14 not-mobile:text-muted-foreground"
       {...props}
     />
   ),
@@ -112,7 +109,7 @@ export const components: Record<
 
       return (
         <code
-          className="inline shiki css-variables rounded-md px-1.5 py-0.5 bg-rurikon-50 text-rurikon-700 text-[0.805rem] sm:text-[13.8px] md:text-[0.92rem]"
+          className="inline shiki css-variables rounded-md px-1.5 py-0.5 bg-muted text-foreground text-[0.805rem] sm:text-[13.8px] md:text-[0.92rem]"
           dangerouslySetInnerHTML={{ __html: code }}
         />
       );
@@ -154,7 +151,7 @@ export const components: Record<
 
     return img;
   },
-  hr: (props) => <hr className="my-14 w-24 border-rurikon-border" {...props} />,
+  hr: (props) => <hr className="my-14 w-24 border" {...props} />,
   Card,
   Image,
   Code,
