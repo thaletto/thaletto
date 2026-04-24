@@ -39,7 +39,7 @@ export function ProjectListItem({
     <li className="font-medium my-4">
       <Link
         href={`/projects/${slug}`}
-        className="group flex items-start -mx-2 px-2 focus-visible:outline focus-visible:outline-rurikon-400 focus-visible:rounded-xs focus-visible:outline-dotted"
+        className="group flex items-start -mx-2 px-2 focus-visible:outline focus-visible:outline-ring focus-visible:rounded-xs focus-visible:outline-dotted"
         draggable={false}
       >
         <div className="flex flex-col gap-2 min-w-0 flex-1">
@@ -52,7 +52,7 @@ export function ProjectListItem({
               />
             )}
 
-            <h1 className="font-semibold text-base md:text-xl text-rurikon-600 text-balance">
+            <h1 className="font-semibold text-base md:text-xl text-balance">
               {title}
             </h1>
           </div>
@@ -65,7 +65,7 @@ export function ProjectListItem({
                 <Badge
                   key={tag}
                   variant="ghost"
-                  className="text-xs px-2 py-0.5 rounded-sm border border-rurikon-300 text-rurikon-300"
+                  className="text-xs px-2 py-0.5 rounded-sm border text-muted-foreground"
                 >
                   {tag}
                 </Badge>

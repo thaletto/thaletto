@@ -24,10 +24,10 @@ export default async function Layout({
             <SvgIcon
               src={companyIcon}
               name={metadata?.company ?? ""}
-              className="size-8 md:size-10 shrink-0 text-rurikon-400 group-hover:text-rurikon-600"
+              className="size-8 md:size-10 shrink-0 text-muted-foreground group-hover:text-foreground"
             />
           )}
-          <h1 className="font-semibold text-xl md:text-3xl text-rurikon-600 text-balance">
+          <h1 className="font-semibold text-xl md:text-3xl text-balance">
             {metadata.title}
           </h1>
         </div>
