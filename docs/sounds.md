@@ -14,8 +14,9 @@ bun add tone
 
 ```
 @/lib/sound/
-├── index.ts       # Core playback functions (playNavEnter, playNavExit)
-├── trigger.ts    # NavSoundTrigger component for enter sounds
+├── index.ts       # Core playback functions (playNavEnter, playNavExit, disposeNavSounds)
+├── timing.ts     # Shared timestamp coordination (lastExitAt, markExit)
+├── trigger.ts   # NavSoundTrigger component for enter sounds
 ```
 
 ### Two-Sound Arc
@@ -101,7 +102,7 @@ playNavExit() // fire and forget (async, but no need to await)
 
 ### NavSoundTrigger
 
-Headless component that watches `pathname` and fires `playNavEnter()` on route changes. Skips the initial page load — only fires for actual navigations. Uses a 180ms delay to sync with React's ViewTransition crossfade — the enter sound plays after the visual transition begins, creating a cohesive sonic arc across the page change.
+Headless component that watches `pathname` and fires `playNavEnter()` on route changes. Skips the initial page load — only fires for actual navigations. Uses a 500ms desired gap from exit → enter to sync with React's ViewTransition crossfade — the enter sound plays after the visual transition begins, creating a cohesive sonic arc across the page change.
 
 ```tsx
 <NavSoundTrigger />
@@ -130,6 +131,6 @@ if (process.env.NODE_ENV === "development") {
 ## Design Notes
 
 - **Audio character**: Soft, spatial, ambient — not attention-grabbing. Uses sine oscillators with a long-release reverb tail.
-- **Timing**: The exit sound plays immediately on click; ~300ms later the crossfade begins; once the new page renders, the enter sound fires. This creates a continuous sonic arc across the visual transition.
+- **Timing**: The exit sound plays immediately on click; the enter sound fires after a 500ms gap from exit. This creates a consistent sonic arc regardless of how fast the route resolves — the gap is measured from when the exit sound actually fired, not when the pathname changed.
 - **Browser autoplay**: Tone.js requires user interaction before playing audio. The first link click will initialize the audio context implicitly.
 - **Server-side rendering**: All functions check `typeof window` and no-op on the server — safe to use in SSR contexts.

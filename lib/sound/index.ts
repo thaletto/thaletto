@@ -1,57 +1,36 @@
+/**
+ * Crossfade Navigation Sounds
+ *
+ * Provides enter/exit audio feedback that complements React's ViewTransition API.
+ * Uses Tone.js with sine oscillators, long-release reverb, and layered tonal step +
+ * ripple chord patterns for a soft, spatial, ambient sound character.
+ *
+ * @module
+ * @see {@link https://github.com/anomalyco/thaletto} for usage docs
+ */
+
 "use client";
 
 import * as Tone from "tone";
+import { markExit } from "./timing";
 
 /**
- * Navigation Sound System
- *
- * Provides exit/enter audio feedback for page transitions using Tone.js.
- * Designed to complement React's ViewTransition API with a crossfade effect.
- *
- * @packageDocumentation
- */
-
-/**
- * Reverb effect node for spatial navigation audio.
- * Initialized lazily on first sound playback.
- *
- * @internal
+ * Shared FX nodes, created once and reused across navigations.
+ * - reverb: 3.5s decay, 48% wet — long ambient tail
+ * - vol: -10dB — keeps audio comfortable
+ * - synth: PolySynth with sine oscillators
  */
 let reverb: Tone.Reverb | null = null;
-
-/**
- * Master volume node controlling overall output level.
- * Initialized lazily on first sound playback.
- *
- * @internal
- */
 let vol: Tone.Volume | null = null;
-
-/**
- * Polyphonic synthesizer for playing navigation tones.
- * Initialized lazily on first sound playback.
- *
- * @internal
- */
 let synth: Tone.PolySynth | null = null;
-
-/**
- * Tracks whether the audio context and synth nodes have been initialized.
- *
- * @internal
- */
 let initialized = false;
 
 /**
- * Initializes the Tone.js audio context and creates shared effect nodes.
+ * Initializes the audio context and FX chain on first use.
+ * Handles browser autoplay policy — requires user interaction before playing.
+ * Safe to call on server (noop).
  *
- * Must be called before any playback to ensure the AudioContext is started
- * (required by browser autoplay policies). Creates a reverb with 3.5s decay
- * and a polyphonic synth with sine oscillators.
- *
- * @internal
- *
- * @returns Promise resolving to true if initialization succeeded, false if server-side
+ * @returns True if successfully initialized, false if server-side or failed
  */
 async function ensureReady(): Promise<boolean> {
 	if (typeof window === "undefined") return false;
@@ -73,21 +52,19 @@ async function ensureReady(): Promise<boolean> {
 }
 
 /**
- * Plays the navigation enter sound: an ascending tonal step paired with
- * a layered ripple chord bloom.
+ * Plays the navigation enter sound.
  *
- * The ascending step (D4 → G4) provides immediate directional feedback,
- * while the arpeggiated chord (C4 → E4 → G4) creates an ambient tail that
- * outlasts the crossfade transition. This combination produces a spacious,
- * spatial quality that complements view transitions.
+ * Two-note ascending tonal step (D4 → G4) layered with a slow ripple chord
+ * (C4 → E4 → G4 arpeggiated 55ms apart).
+ * The tonal step gives immediate directional feedback; the chord bloom gives
+ * the ambient tail that outlasts the crossfade.
  *
+ * @async
+ * @returns Promise that resolves when playback begins
  * @example
  * ```ts
- * // Called when a page transition completes (after crossfade)
  * await playNavEnter()
  * ```
- *
- * @returns Promise that resolves when playback finishes
  */
 export async function playNavEnter(): Promise<void> {
 	if (!(await ensureReady())) return;
@@ -105,24 +82,27 @@ export async function playNavEnter(): Promise<void> {
 }
 
 /**
- * Plays the navigation exit sound: a descending tonal step paired with
- * a reversed ripple chord bloom.
+ * Plays the navigation exit sound.
  *
- * Mirror of playNavEnter in reverse — the descending step (G4 → D4) and
- * reversed chord (G4 → E4 → C4) signal the departure from the current view.
- * Played at slightly lower volume and with shorter release to avoid competing
- * with the enter sound that fires ~300ms later during a crossfade.
+ * Mirror image: descending step (G4 → D4) + reversed ripple (G4 → E4 → C4).
+ * Slightly quieter and shorter than the enter sound so it doesn't compete
+ * with the enter sound that fires ~300-500ms later during a crossfade.
+ * Stamps the exit time in shared state so NavSoundTrigger can delay
+ * relative to when the user actually navigated.
  *
+ * @async
+ * @returns Promise that resolves when playback begins
  * @example
  * ```ts
- * // Called in NavLink onClick before navigation
- * playNavExit()
+ * playNavExit() // fire and forget (async, but no need to await)
  * ```
- *
- * @returns Promise that resolves when playback finishes
  */
 export async function playNavExit(): Promise<void> {
 	if (!(await ensureReady())) return;
+
+	// Stamp the moment the user navigated away — NavSoundTrigger
+	// delays relative to this, not relative to when pathname resolved.
+	markExit();
 
 	const now = Tone.now();
 
@@ -137,14 +117,13 @@ export async function playNavExit(): Promise<void> {
 }
 
 /**
- * Disposes all audio nodes and effect chain.
+ * Disposes all Tone.js audio nodes.
  *
- * Cleans up the synth, reverb, and volume nodes to free memory.
- * Call this during development HMR cleanup or when unmounting the sound system.
+ * Call in development HMR cleanup to prevent orphaned nodes.
+ * Safe to call repeatedly — no-ops if already disposed.
  *
  * @example
  * ```ts
- * // In dev HMR cleanup
  * if (process.env.NODE_ENV === "development") {
  *   disposeNavSounds()
  * }

@@ -1,46 +1,53 @@
+/**
+ * Navigation Sound Trigger
+ *
+ * Headless component that watches the pathname and fires the enter sound
+ * on route changes. Skips the initial page load — only fires for actual
+ * navigations. Uses a timing gap relative to when the exit sound fired
+ * to ensure consistent timing regardless of how fast the route resolved.
+ *
+ * @module
+ */
+
 "use client";
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { playNavEnter } from "@/lib/sound/";
-
-/** Delay before playing the enter sound, synced with ViewTransition crossfade duration.
- * @constant @internal
- */
-const ENTER_DELAY_MS = 180;
+import { playNavEnter } from "@/lib/sound";
+import { lastExitAt } from "@/lib/sound/timing";
 
 /**
- * Triggers navigation enter sound on route changes.
+ * Desired gap between exit sound firing and enter sound firing, in ms.
+ * 500ms gives a clear breath between the two sounds.
+ */
+const DESIRED_GAP_MS = 500;
+
+/**
+ * Headless component that triggers the enter sound on route changes.
  *
- * A headless component that watches the current pathname and fires
- * `playNavEnter()` whenever the route changes (excluding initial page load).
- * Uses a 180ms delay to sync with React's ViewTransition crossfade —
- * the enter sound plays after the visual transition begins, creating
- * a cohesive sonic arc across the page change.
- *
- * Place this component anywhere in your RootLayout — below `<TooltipProvider>`
- * is a good location.
- *
- * Note: Exit sounds require more coordination since Next.js App Router
- * doesn't expose a "before navigate" hook to layout components. Two approaches:
- *
- * **Option A (simple)**: Use only `NavSoundTrigger` — the enter sound alone
- * provides sufficient audio feedback without needing to wrap every Link.
- *
- * **Option B (full)**: Wrap your Link components in a custom component that
- * calls `playNavExit()` in onClick before `router.push()`. See `NavLink.tsx`
- * for an example implementation.
+ * Place once in your root layout (below `<TooltipProvider>` is fine).
+ * Watches `pathname` and fires `playNavEnter()` after a computed delay
+ * that ensures consistent timing from exit → enter regardless of how
+ * fast the pathname resolved.
  *
  * @example
  * ```tsx
- * // In app/layout.tsx
- * <TooltipProvider>
- *   <NavSoundTrigger />
- *   {children}
- * </TooltipProvider>
- * ```
+ * // app/layout.tsx
+ * import { NavSoundTrigger } from "@/lib/sound/trigger"
  *
- * @returns null (renders nothing)
+ * export default function RootLayout({ children }) {
+ *   return (
+ *     <html>
+ *       <body>
+ *         <TooltipProvider>
+ *           <NavSoundTrigger />
+ *           {children}
+ *         </TooltipProvider>
+ *       </body>
+ *     </html>
+ *   )
+ * }
+ * ```
  */
 export function NavSoundTrigger() {
 	const pathname = usePathname();
@@ -53,13 +60,18 @@ export function NavSoundTrigger() {
 			return;
 		}
 
-		// Cancel any pending enter sound from a rapid navigation
 		if (timerRef.current) clearTimeout(timerRef.current);
+
+		// How long ago did the exit sound fire?
+		// Compute remaining wait so the total gap from exit → enter = DESIRED_GAP_MS,
+		// regardless of how fast the pathname resolved.
+		const elapsed = Date.now() - lastExitAt;
+		const remaining = Math.max(0, DESIRED_GAP_MS - elapsed);
 
 		timerRef.current = setTimeout(() => {
 			playNavEnter();
 			timerRef.current = null;
-		}, ENTER_DELAY_MS);
+		}, remaining);
 
 		return () => {
 			if (timerRef.current) clearTimeout(timerRef.current);
