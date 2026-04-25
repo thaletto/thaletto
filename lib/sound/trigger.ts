@@ -4,11 +4,20 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { playNavEnter } from "@/lib/sound/";
 
+/** Delay before playing the enter sound, synced with ViewTransition crossfade duration.
+ * @constant @internal
+ */
+const ENTER_DELAY_MS = 180;
+
 /**
  * Triggers navigation enter sound on route changes.
  *
  * A headless component that watches the current pathname and fires
  * `playNavEnter()` whenever the route changes (excluding initial page load).
+ * Uses a 180ms delay to sync with React's ViewTransition crossfade —
+ * the enter sound plays after the visual transition begins, creating
+ * a cohesive sonic arc across the page change.
+ *
  * Place this component anywhere in your RootLayout — below `<TooltipProvider>`
  * is a good location.
  *
@@ -36,14 +45,25 @@ import { playNavEnter } from "@/lib/sound/";
 export function NavSoundTrigger() {
 	const pathname = usePathname();
 	const isFirst = useRef(true);
+	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	useEffect(() => {
-		// Skip the very first render (page load) — no transition has happened.
 		if (isFirst.current) {
 			isFirst.current = false;
 			return;
 		}
-		playNavEnter();
+
+		// Cancel any pending enter sound from a rapid navigation
+		if (timerRef.current) clearTimeout(timerRef.current);
+
+		timerRef.current = setTimeout(() => {
+			playNavEnter();
+			timerRef.current = null;
+		}, ENTER_DELAY_MS);
+
+		return () => {
+			if (timerRef.current) clearTimeout(timerRef.current);
+		};
 	}, [pathname]);
 
 	return null;

@@ -101,7 +101,7 @@ playNavExit() // fire and forget (async, but no need to await)
 
 ### NavSoundTrigger
 
-Headless component that watches `pathname` and fires `playNavEnter()` on route changes. Skips the initial page load — only fires for actual navigations.
+Headless component that watches `pathname` and fires `playNavEnter()` on route changes. Skips the initial page load — only fires for actual navigations. Uses a 180ms delay to sync with React's ViewTransition crossfade — the enter sound plays after the visual transition begins, creating a cohesive sonic arc across the page change.
 
 ```tsx
 <NavSoundTrigger />
