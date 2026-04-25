@@ -1,9 +1,9 @@
 import SvgIcon from "@/components/common/logo";
+import { NavLink } from "@/components/nav-link";
 import { Badge } from "@/components/ui/badge";
 import { getCompanyLogoSrc } from "@/lib/utils";
 import { promises as fs } from "fs";
 import { Metadata } from "next";
-import Link from "next/link";
 import path from "path";
 
 export const metadata: Metadata = {
@@ -37,10 +37,9 @@ export function ProjectListItem({
 
 	return (
 		<li className="font-medium my-4">
-			<Link
+			<NavLink
 				href={`/projects/${slug}`}
 				className="group flex items-start -mx-2 px-2 focus-visible:outline focus-visible:outline-ring focus-visible:rounded-xs focus-visible:outline-dotted"
-				draggable={false}
 			>
 				<div className="flex flex-col gap-2 min-w-0 flex-1">
 					<div className="flex items-center gap-2">
@@ -73,7 +72,7 @@ export function ProjectListItem({
 						</div>
 					)}
 				</div>
-			</Link>
+			</NavLink>
 		</li>
 	);
 }

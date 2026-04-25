@@ -9,6 +9,7 @@ import { Geist_Mono } from "next/font/google";
 import { ViewTransition } from "react";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { NavSoundTrigger } from "@/lib/sound/trigger";
 
 const serif_to_sans = localFont({
 	src: "./fonts/ABCArizona-FlareRegular.otf",
@@ -84,6 +85,7 @@ export default function RootLayout({
 						</main>
 					</div>
 				</TooltipProvider>
+				<NavSoundTrigger />
 				<KeyboardShortcuts />
 				<Analytics />
 			</body>
