@@ -15,27 +15,27 @@ type social_link = {
 const SOCIAL_LINKS: social_link[] = [
 	{
 		name: "GitHub",
-		icon: <FaGithub className="size-5" />,
+		icon: <FaGithub className="size-4 md:size-5" />,
 		link: "https://github.com/thaletto/",
 	},
 	{
 		name: "LinkedIn",
-		icon: <FaLinkedin className="size-5" />,
+		icon: <FaLinkedin className="size-4 md:size-5" />,
 		link: "https://www.linkedin.com/in/laxmanramesh/",
 	},
 	{
 		name: "Twitter",
-		icon: <FaXTwitter className="size-5" />,
+		icon: <FaXTwitter className="size-4 md:size-5" />,
 		link: "https://x.com/thaletto",
 	},
 	{
 		name: "Instagram",
-		icon: <FaInstagram className="size-5" />,
+		icon: <FaInstagram className="size-4 md:size-5" />,
 		link: "https://instagram.com/thaletto",
 	},
 	{
 		name: "Notion",
-		icon: <SiNotion className="size-5" />,
+		icon: <SiNotion className="size-4 md:size-5" />,
 		link: "https://laxmankr.notion.site/54f72abb3cf348a7902c48a41fe0d48a?v=68aa5ecbfa7947609269a0f777fdad7f",
 	},
 ];
