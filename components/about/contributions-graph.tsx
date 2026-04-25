@@ -16,7 +16,7 @@ const HOVER_DELAY_MS = 120;
 
 function formatDate(date: string) {
 	return new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
-		month: "long",
+		month: "short",
 		day: "numeric",
 		year: "numeric",
 	});
