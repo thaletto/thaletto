@@ -165,11 +165,8 @@ export const components: Record<
 		return img;
 	},
 	table: (props) => (
-		<div className="mt-4 overflow-x-auto">
-			<table
-				className="w-full border border-muted text-sm text-muted-foreground rounded-md"
-				{...props}
-			/>
+		<div className="mt-4 overflow-x-auto rounded-md border border-muted overflow-hidden">
+			<table className="w-full text-sm text-muted-foreground" {...props} />
 		</div>
 	),
 
