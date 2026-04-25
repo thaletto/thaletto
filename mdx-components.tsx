@@ -164,6 +164,28 @@ export const components: Record<
 
 		return img;
 	},
+	table: (props) => (
+		<div className="mt-4 overflow-x-auto">
+			<table
+				className="w-full border-collapse text-sm text-muted-foreground"
+				{...props}
+			/>
+		</div>
+	),
+
+	thead: (props) => <thead className="border-b border-muted" {...props} />,
+
+	tbody: (props) => <tbody {...props} />,
+
+	tr: (props) => (
+		<tr className="border-b border-muted/40 last:border-0" {...props} />
+	),
+
+	th: (props) => (
+		<th className="text-left font-semibold p-2 text-foreground" {...props} />
+	),
+
+	td: (props) => <td className="p-2 text-center align-middle" {...props} />,
 	hr: (props) => <hr className="my-14 w-24 border" {...props} />,
 	Card,
 	Image,
