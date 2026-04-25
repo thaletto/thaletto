@@ -167,7 +167,7 @@ export const components: Record<
 	table: (props) => (
 		<div className="mt-4 overflow-x-auto">
 			<table
-				className="w-full border border-muted text-sm text-muted-foreground"
+				className="w-full border border-muted text-sm text-muted-foreground rounded-md"
 				{...props}
 			/>
 		</div>
