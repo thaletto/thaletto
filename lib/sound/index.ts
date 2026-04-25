@@ -1,49 +1,48 @@
-/**
- * Crossfade Navigation Sounds
- *
- * Provides enter/exit audio feedback that complements React's ViewTransition API.
- * Uses Tone.js with sine oscillators, long-release reverb, and layered tonal step +
- * ripple chord patterns for a soft, spatial, ambient sound character.
- *
- * @module
- * @see {@link https://github.com/anomalyco/thaletto} for usage docs
- */
-
 "use client";
 
 import * as Tone from "tone";
-import { markExit } from "./timing";
 
-/**
- * Shared FX nodes, created once and reused across navigations.
- * - reverb: 3.5s decay, 48% wet — long ambient tail
- * - vol: -10dB — keeps audio comfortable
- * - synth: PolySynth with sine oscillators
- */
+/** Shared reverb node for all navigation sounds. Initialized lazily on first playback. */
 let reverb: Tone.Reverb | null = null;
-let vol: Tone.Volume | null = null;
-let synth: Tone.PolySynth | null = null;
+
+/** PolySynth for enter sound — plays ascending melodic arc with arpeggiated chord bloom. */
+let synthEnter: Tone.PolySynth | null = null;
+/** Volume control for enter synth. Set to -12dB to keep sounds ambient. */
+let volEnter: Tone.Volume | null = null;
+
+/** PolySynth for exit sound — plays descending step (G4 → D4) with reversed bloom. */
+let synthExit: Tone.PolySynth | null = null;
+/** Volume control for exit synth. Same level as enter synth. */
+let volExit: Tone.Volume | null = null;
+
+/** Tracks whether Tone.js nodes have been created. Prevents double initialization. */
 let initialized = false;
 
 /**
- * Initializes the audio context and FX chain on first use.
- * Handles browser autoplay policy — requires user interaction before playing.
- * Safe to call on server (noop).
+ * Ensures the Tone.js audio context is started and all synth nodes are created.
+ * Lazy-initializes on first call. Safe to call on the server (returns false).
  *
- * @returns True if successfully initialized, false if server-side or failed
+ * @returns `true` if ready for playback, `false` if running server-side.
  */
 async function ensureReady(): Promise<boolean> {
 	if (typeof window === "undefined") return false;
 	await Tone.start();
 
 	if (!initialized) {
-		vol = new Tone.Volume(-10).toDestination();
-		reverb = new Tone.Reverb({ decay: 3.5, wet: 0.48 }).connect(vol);
-		synth = new Tone.PolySynth(Tone.Synth, {
+		reverb = new Tone.Reverb({ decay: 3.5, wet: 0.48 }).toDestination();
+
+		volEnter = new Tone.Volume(-12).connect(reverb);
+		synthEnter = new Tone.PolySynth(Tone.Synth, {
 			oscillator: { type: "sine" },
 			envelope: { attack: 0.012, decay: 0.35, sustain: 0.06, release: 2.2 },
-		} as Tone.SynthOptions).connect(reverb);
-		// Reverb needs a moment to generate its IR
+		} as Tone.SynthOptions).connect(volEnter);
+
+		volExit = new Tone.Volume(-12).connect(reverb);
+		synthExit = new Tone.PolySynth(Tone.Synth, {
+			oscillator: { type: "sine" },
+			envelope: { attack: 0.008, decay: 0.12, sustain: 0, release: 0.3 },
+		} as Tone.SynthOptions).connect(volExit);
+
 		await reverb.generate();
 		initialized = true;
 	}
@@ -52,89 +51,60 @@ async function ensureReady(): Promise<boolean> {
 }
 
 /**
- * Plays the navigation enter sound.
+ * Plays the navigation enter sound — an ascending melodic step (D4 → G4) layered with
+ * an arpeggiated chord bloom (C4 → E4 → G4). Designed to complement the crossfade transition;
+ * the chord's 2.2s release creates an ambient tail that outlasts the visual transition.
  *
- * Two-note ascending tonal step (D4 → G4) layered with a slow ripple chord
- * (C4 → E4 → G4 arpeggiated 55ms apart).
- * The tonal step gives immediate directional feedback; the chord bloom gives
- * the ambient tail that outlasts the crossfade.
+ * Initializing the audio context on the first call — subsequent calls play immediately.
+ * No-ops if called server-side.
  *
- * @async
- * @returns Promise that resolves when playback begins
- * @example
- * ```ts
- * await playNavEnter()
- * ```
+ * @returns A promise that resolves when the sound has been triggered.
  */
 export async function playNavEnter(): Promise<void> {
 	if (!(await ensureReady())) return;
-
 	const now = Tone.now();
-
-	// Tonal step — ascending
-	synth!.triggerAttackRelease("D4", "16n", now, 0.38);
-	synth!.triggerAttackRelease("G4", "16n", now + 0.09, 0.32);
-
-	// Ripple chord bloom (55 ms between voices)
-	synth!.triggerAttackRelease("C4", "8n", now + 0.04, 0.22);
-	synth!.triggerAttackRelease("E4", "8n", now + 0.095, 0.16);
-	synth!.triggerAttackRelease("G4", "8n", now + 0.15, 0.12);
+	synthEnter!.triggerAttackRelease("D4", "16n", now, 1.0);
+	synthEnter!.triggerAttackRelease("G4", "16n", now + 0.09, 1.0);
+	synthEnter!.triggerAttackRelease("C4", "8n", now + 0.04, 1.0);
+	synthEnter!.triggerAttackRelease("E4", "8n", now + 0.095, 1.0);
+	synthEnter!.triggerAttackRelease("G4", "8n", now + 0.15, 1.0);
 }
 
 /**
- * Plays the navigation exit sound.
+ * Plays the navigation exit sound — a descending step (G4 → D4) with a reversed
+ * chord bloom. Slightly quieter and shorter than the enter sound to avoid competing
+ * with it (~300ms later).
  *
- * Mirror image: descending step (G4 → D4) + reversed ripple (G4 → E4 → C4).
- * Slightly quieter and shorter than the enter sound so it doesn't compete
- * with the enter sound that fires ~300-500ms later during a crossfade.
- * Stamps the exit time in shared state so NavSoundTrigger can delay
- * relative to when the user actually navigated.
+ * Fire-and-forget: does not need to be awaited. No-ops if called server-side.
  *
- * @async
- * @returns Promise that resolves when playback begins
- * @example
- * ```ts
- * playNavExit() // fire and forget (async, but no need to await)
- * ```
+ * @returns A promise that resolves when the sound has been triggered.
  */
 export async function playNavExit(): Promise<void> {
 	if (!(await ensureReady())) return;
-
-	// Stamp the moment the user navigated away — NavSoundTrigger
-	// delays relative to this, not relative to when pathname resolved.
-	markExit();
-
 	const now = Tone.now();
-
-	// Tonal step — descending
-	synth!.triggerAttackRelease("G4", "16n", now, 0.3);
-	synth!.triggerAttackRelease("D4", "16n", now + 0.09, 0.24);
-
-	// Ripple chord bloom (reversed)
-	synth!.triggerAttackRelease("G4", "8n", now + 0.04, 0.16);
-	synth!.triggerAttackRelease("E4", "8n", now + 0.095, 0.12);
-	synth!.triggerAttackRelease("C4", "8n", now + 0.15, 0.09);
+	synthExit!.triggerAttackRelease("G4", "16n", now, 0.25);
+	synthExit!.triggerAttackRelease("D4", "16n", now + 0.08, 0.25);
 }
 
 /**
- * Disposes all Tone.js audio nodes.
- *
- * Call in development HMR cleanup to prevent orphaned nodes.
- * Safe to call repeatedly — no-ops if already disposed.
+ * Disposes all Tone.js nodes created by this module and resets the initialization state.
+ * Call this in dev HMR cleanup if you need to reinitialize the audio context after hot reload.
  *
  * @example
- * ```ts
  * if (process.env.NODE_ENV === "development") {
- *   disposeNavSounds()
+ *   disposeNavSounds();
  * }
- * ```
  */
 export function disposeNavSounds(): void {
-	synth?.dispose();
-	synth = null;
+	synthEnter?.dispose();
+	synthEnter = null;
+	synthExit?.dispose();
+	synthExit = null;
+	volEnter?.dispose();
+	volEnter = null;
+	volExit?.dispose();
+	volExit = null;
 	reverb?.dispose();
 	reverb = null;
-	vol?.dispose();
-	vol = null;
 	initialized = false;
 }

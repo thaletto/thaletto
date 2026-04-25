@@ -15,8 +15,7 @@ bun add tone
 ```
 @/lib/sound/
 ├── index.ts       # Core playback functions (playNavEnter, playNavExit, disposeNavSounds)
-├── timing.ts     # Shared timestamp coordination (lastExitAt, markExit)
-├── trigger.ts   # NavSoundTrigger component for enter sounds
+├── trigger.ts    # NavSoundTrigger component for enter sounds
 ```
 
 ### Two-Sound Arc
@@ -102,7 +101,7 @@ playNavExit() // fire and forget (async, but no need to await)
 
 ### NavSoundTrigger
 
-Headless component that watches `pathname` and fires `playNavEnter()` on route changes. Skips the initial page load — only fires for actual navigations. Uses a 500ms desired gap from exit → enter to sync with React's ViewTransition crossfade — the enter sound plays after the visual transition begins, creating a cohesive sonic arc across the page change.
+Headless component that watches `pathname` and fires `playNavEnter()` on route changes. Skips the initial page load — only fires for actual navigations. Uses a 300ms desired gap from exit → enter to sync with React's ViewTransition crossfade — the enter sound plays after the visual transition begins, creating a cohesive sonic arc across the page change.
 
 ```tsx
 <NavSoundTrigger />

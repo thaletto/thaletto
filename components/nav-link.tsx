@@ -9,7 +9,7 @@ import { playNavExit } from "@/lib/sound";
  * A thin wrapper around Next.js `Link` that fires `playNavExit()` in the
  * onClick handler before navigation proceeds. Use this in your navigation
  * component instead of a plain `<Link>` to enable the full sound arc:
- * exit sound → crossfade → enter sound (~500ms gap).
+ * exit sound → crossfade → enter sound (~300ms gap).
  *
  * @example
  * ```tsx

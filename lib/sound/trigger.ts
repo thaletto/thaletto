@@ -1,53 +1,30 @@
-/**
- * Navigation Sound Trigger
- *
- * Headless component that watches the pathname and fires the enter sound
- * on route changes. Skips the initial page load — only fires for actual
- * navigations. Uses a timing gap relative to when the exit sound fired
- * to ensure consistent timing regardless of how fast the route resolved.
- *
- * @module
- */
-
 "use client";
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { playNavEnter } from "@/lib/sound";
-import { lastExitAt } from "@/lib/sound/timing";
+
+/** @internal */
+const ENTER_DELAY_MS = 300;
 
 /**
- * Desired gap between exit sound firing and enter sound firing, in ms.
- * 500ms gives a clear breath between the two sounds.
- */
-const DESIRED_GAP_MS = 500;
-
-/**
- * Headless component that triggers the enter sound on route changes.
+ * Headless component that watches `pathname` and fires `playNavEnter()` on route changes.
  *
- * Place once in your root layout (below `<TooltipProvider>` is fine).
- * Watches `pathname` and fires `playNavEnter()` after a computed delay
- * that ensures consistent timing from exit → enter regardless of how
- * fast the pathname resolved.
+ * Skips the initial page load — only plays on actual navigations. The enter sound fires
+ * after a 300ms gap from exit, creating a consistent sonic arc regardless of route
+ * resolution speed.
+ *
+ * Place once in your root layout (below `<TooltipProvider>` is fine):
  *
  * @example
- * ```tsx
- * // app/layout.tsx
- * import { NavSoundTrigger } from "@/lib/sound/trigger"
- *
- * export default function RootLayout({ children }) {
- *   return (
- *     <html>
- *       <body>
- *         <TooltipProvider>
- *           <NavSoundTrigger />
- *           {children}
- *         </TooltipProvider>
- *       </body>
- *     </html>
- *   )
- * }
- * ```
+ * <html>
+ *   <body>
+ *     <TooltipProvider>
+ *       <NavSoundTrigger />
+ *       {children}
+ *     </TooltipProvider>
+ *   </body>
+ * </html>
  */
 export function NavSoundTrigger() {
 	const pathname = usePathname();
@@ -62,16 +39,10 @@ export function NavSoundTrigger() {
 
 		if (timerRef.current) clearTimeout(timerRef.current);
 
-		// How long ago did the exit sound fire?
-		// Compute remaining wait so the total gap from exit → enter = DESIRED_GAP_MS,
-		// regardless of how fast the pathname resolved.
-		const elapsed = Date.now() - lastExitAt;
-		const remaining = Math.max(0, DESIRED_GAP_MS - elapsed);
-
 		timerRef.current = setTimeout(() => {
 			playNavEnter();
 			timerRef.current = null;
-		}, remaining);
+		}, ENTER_DELAY_MS);
 
 		return () => {
 			if (timerRef.current) clearTimeout(timerRef.current);
