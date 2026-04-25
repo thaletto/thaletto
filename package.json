@@ -38,7 +38,8 @@
 		"remark-gfm": "^4.0.1",
 		"sharp": "^0.34.5",
 		"shiki": "^4.0.2",
-		"tailwind-merge": "^3.5.0"
+		"tailwind-merge": "^3.5.0",
+		"tone": "^15.1.22"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.13",
