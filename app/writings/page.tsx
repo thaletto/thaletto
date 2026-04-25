@@ -1,6 +1,6 @@
+import { NavLink } from "@/components/nav-link";
 import { promises as fs } from "fs";
 import { Metadata } from "next";
-import Link from "next/link";
 import path from "path";
 
 export const metadata: Metadata = {
@@ -41,9 +41,8 @@ export default async function Page() {
 			<ul className="flex flex-col gap-y-8 [&>*:first-child]:mt-0 mt-0">
 				{items.map((item) => (
 					<li key={item.slug} className="font-medium">
-						<Link
+						<NavLink
 							href={`/writings/${item.slug}`}
-							draggable={false}
 							className="flex flex-col items-start gap-2"
 						>
 							<div className="flex flex-row w-full justify-between focus-visible:outline focus-visible:outline-ring focus-visible:rounded-xs focus-visible:outline-dotted">
@@ -60,7 +59,7 @@ export default async function Page() {
 									{item.description}
 								</p>
 							)}
-						</Link>
+						</NavLink>
 					</li>
 				))}
 			</ul>

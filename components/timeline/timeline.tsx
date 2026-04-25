@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/date";
 import { useIsMobile } from "@/hooks/use-mobile";
 import React, { useMemo } from "react";
+import { NavLink } from "../nav-link";
 
 /* ---------------------------------------------
  * Config
@@ -278,8 +278,8 @@ function TimelineImage({
 	if (!slug) return cardContent;
 
 	return (
-		<Link href={`/timeline/${slug}`} className="block">
+		<NavLink href={`/timeline/${slug}`} className="block">
 			{cardContent}
-		</Link>
+		</NavLink>
 	);
 }

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Kbd } from "./ui/kbd";
+import { NavLink } from "./nav-link";
 
 const NAV_ITEMS = [
 	{ href: "/", label: "About", key: "A" },
@@ -35,11 +36,10 @@ function Item(props: React.ComponentProps<typeof Link>) {
 				props.className)
 			}
 		>
-			<Link
+			<NavLink
 				{...props}
 				className="inline-block lowercase w-full px-2 focus-visible:outline focus-visible:outline-ring
                     focus-visible:rounded-xs focus-visible:outline-dotted"
-				draggable={false}
 			/>
 		</li>
 	);
