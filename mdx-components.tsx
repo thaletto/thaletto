@@ -167,14 +167,15 @@ export const components: Record<
 	table: (props) => (
 		<div className="mt-4 overflow-x-auto">
 			<table
-				className="w-full border-collapse text-sm text-muted-foreground"
+				className="w-full border border-muted text-sm text-muted-foreground"
 				{...props}
 			/>
 		</div>
 	),
 
-	thead: (props) => <thead className="border-b border-muted" {...props} />,
-
+	thead: (props) => (
+		<thead className="bg-secondary border-b border-muted" {...props} />
+	),
 	tbody: (props) => <tbody {...props} />,
 
 	tr: (props) => (
@@ -182,10 +183,18 @@ export const components: Record<
 	),
 
 	th: (props) => (
-		<th className="text-left font-semibold p-2 text-foreground" {...props} />
+		<th
+			className="p-2 text-center font-semibold text-foreground border-r border-muted last:border-r-0"
+			{...props}
+		/>
 	),
 
-	td: (props) => <td className="p-2 text-center align-middle" {...props} />,
+	td: (props) => (
+		<td
+			className="p-2 text-center align-middle border-r border-muted/40 last:border-r-0"
+			{...props}
+		/>
+	),
 	hr: (props) => <hr className="my-14 w-24 border" {...props} />,
 	Card,
 	Image,
