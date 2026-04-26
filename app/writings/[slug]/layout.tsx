@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export default async function Layout({
 	children,
@@ -12,12 +12,12 @@ export default async function Layout({
 	const { metadata } = await import(`../_articles/${slug}.mdx`);
 
 	return (
-		<article className="max-w-3xl mx-auto">
-			<header className="flex flex-col mb-8 gap-2">
-				<h1 className="font-semibold text-xl md:text-3xl text-balance">
+		<article className="mx-auto max-w-3xl">
+			<header className="mb-8 flex flex-col gap-2">
+				<h1 className="text-balance font-semibold text-xl md:text-3xl">
 					{metadata.title}
 				</h1>
-				<p className="text-sm font-serif">
+				<p className="font-serif text-sm">
 					{metadata.authors.name} &bull; {metadata.date}
 				</p>
 			</header>

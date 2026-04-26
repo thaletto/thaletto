@@ -1,5 +1,6 @@
 "use client";
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
+import type { Activity } from "@/components/kibo-ui/contribution-graph";
 import {
 	ContributionGraph,
 	ContributionGraphBlock,
@@ -8,9 +9,8 @@ import {
 	ContributionGraphLegend,
 	ContributionGraphTotalCount,
 } from "@/components/kibo-ui/contribution-graph";
-import type { Activity } from "@/components/kibo-ui/contribution-graph";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 const HOVER_DELAY_MS = 120;
 
@@ -31,35 +31,39 @@ export function ContributionGraphClient({
 }) {
 	const totalContributions = useMemo(
 		() => Object.values(totalCount).reduce((a, b) => a + b, 0),
-		[totalCount],
+		[totalCount]
 	);
 	const defaultText = `${totalContributions} contributions`;
 	const [displayText, setDisplayText] = useState(defaultText);
 	const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	const handleMouseEnter = useCallback((activity: Activity) => {
-		if (hoverTimer.current) clearTimeout(hoverTimer.current);
+		if (hoverTimer.current) {
+			clearTimeout(hoverTimer.current);
+		}
 		hoverTimer.current = setTimeout(() => {
 			const formatted = formatDate(activity.date);
 			setDisplayText(
 				activity.count
 					? `${activity.count} contributions on ${formatted}`
-					: `No contributions on ${formatted}`,
+					: `No contributions on ${formatted}`
 			);
 		}, HOVER_DELAY_MS);
 	}, []);
 
 	const handleMouseLeave = useCallback(() => {
-		if (hoverTimer.current) clearTimeout(hoverTimer.current);
+		if (hoverTimer.current) {
+			clearTimeout(hoverTimer.current);
+		}
 		setDisplayText(defaultText);
 	}, [defaultText]);
 
 	return (
 		<ContributionGraph
-			data={contributions}
-			totalCount={totalContributions}
 			blockSize={10}
+			data={contributions}
 			fontSize={12}
+			totalCount={totalContributions}
 		>
 			<ContributionGraphCalendar className="cursor-pointer">
 				{({ activity, dayIndex, weekIndex }) => (
@@ -69,16 +73,16 @@ export function ContributionGraphClient({
 					>
 						<ContributionGraphBlock
 							activity={activity}
-							dayIndex={dayIndex}
-							weekIndex={weekIndex}
 							className={cn(
 								"cursor-pointer",
 								'data-[level="0"]:fill-[#ebedf0]',
 								'data-[level="1"]:fill-[#9be9a8]',
 								'data-[level="2"]:fill-[#40c463]',
 								'data-[level="3"]:fill-[#30a14e]',
-								'data-[level="4"]:fill-[#216e39]',
+								'data-[level="4"]:fill-[#216e39]'
 							)}
+							dayIndex={dayIndex}
+							weekIndex={weekIndex}
 						/>
 					</g>
 				)}
@@ -97,7 +101,7 @@ export function ContributionGraphClient({
 									'data-[level="1"]:fill-[#9be9a8]',
 									'data-[level="2"]:fill-[#40c463]',
 									'data-[level="3"]:fill-[#30a14e]',
-									'data-[level="4"]:fill-[#216e39]',
+									'data-[level="4"]:fill-[#216e39]'
 								)}
 								data-level={level}
 								height={12}

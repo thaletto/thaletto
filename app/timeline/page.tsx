@@ -1,8 +1,8 @@
 import { promises as fs } from "fs";
+import type { Metadata } from "next";
 import path from "path";
 import { TimelineLayout } from "@/components/timeline/timeline-layout";
 import type { TimelineElement } from "@/types";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Timeline",
@@ -13,7 +13,7 @@ const timelineDirectory = path.join(
 	process.cwd(),
 	"app",
 	"timeline",
-	"_timeline",
+	"_timeline"
 );
 
 function toSortableDate(value: string) {
@@ -30,12 +30,18 @@ export default async function Page() {
 	const items: TimelineElement[] = [];
 
 	for (const file of timelineFiles) {
-		if (!file.endsWith(".mdx")) continue;
+		if (!file.endsWith(".mdx")) {
+			continue;
+		}
 
 		const module = await import("./_timeline/" + file);
 
-		if (!module.metadata) throw new Error("Missing `metadata` in " + file);
-		if (module.metadata.draft) continue;
+		if (!module.metadata) {
+			throw new Error("Missing `metadata` in " + file);
+		}
+		if (module.metadata.draft) {
+			continue;
+		}
 
 		const startDate = module.metadata.startDate;
 		const endDate = module.metadata.endDate ?? "Present";
@@ -54,15 +60,15 @@ export default async function Page() {
 	}
 
 	items.sort(
-		(a, b) => toSortableDate(a.startDate) - toSortableDate(b.startDate),
+		(a, b) => toSortableDate(a.startDate) - toSortableDate(b.startDate)
 	);
 
 	return (
 		<TimelineLayout
+			animate={true}
+			className="mx-auto max-w-6xl"
 			items={items}
 			size="lg"
-			animate={true}
-			className="max-w-6xl mx-auto"
 		/>
 	);
 }

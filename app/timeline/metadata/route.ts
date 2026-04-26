@@ -1,6 +1,6 @@
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 
 export async function GET() {
 	const dir = path.join(process.cwd(), "app", "timeline", "_timeline");
@@ -15,7 +15,9 @@ export async function GET() {
 					try {
 						const mod = await import(`@/app/timeline/_timeline/${file}`);
 
-						if (!mod.metadata || mod.metadata.draft) return null;
+						if (!mod.metadata || mod.metadata.draft) {
+							return null;
+						}
 
 						return {
 							slug: file.replace(/\.mdx$/, ""),
@@ -24,14 +26,14 @@ export async function GET() {
 					} catch {
 						return null;
 					}
-				}),
+				})
 		);
 
 		return NextResponse.json(items);
 	} catch {
 		return NextResponse.json(
 			{ error: "Failed to load timeline item" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

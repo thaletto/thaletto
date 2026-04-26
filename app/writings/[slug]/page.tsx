@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import path from "path";
 
 export default async function Page(props: {
@@ -14,7 +14,7 @@ export default async function Page(props: {
 
 export async function generateStaticParams() {
 	const articles = await fs.readdir(
-		path.join(process.cwd(), "app", "writings", "_articles"),
+		path.join(process.cwd(), "app", "writings", "_articles")
 	);
 
 	return articles

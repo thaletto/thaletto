@@ -40,10 +40,12 @@ export function formatDate(
 	date: DateInput,
 	variant: DateFormatVariant,
 	separator: DateSeparator = " ",
-	locale = "en-IN",
+	locale = "en-IN"
 ): string {
 	const d = date instanceof Date ? date : new Date(date);
-	if (Number.isNaN(d.getTime())) return "";
+	if (Number.isNaN(d.getTime())) {
+		return "";
+	}
 
 	const numericParts = new Intl.DateTimeFormat("en-GB", {
 		year: "numeric",

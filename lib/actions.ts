@@ -1,14 +1,18 @@
 "use server";
-import { redis } from "@/lib/redis";
 import { unstable_cache as cache } from "next/cache";
+import { redis } from "@/lib/redis";
 
 export async function incrementGlobalView(sessionId: string) {
-	if (process.env.NODE_ENV !== "production") return;
+	if (process.env.NODE_ENV !== "production") {
+		return;
+	}
 
 	const dedupeKey = `viewed:global:${sessionId}`;
 	const alreadyViewed = await redis.get(dedupeKey);
 
-	if (alreadyViewed) return;
+	if (alreadyViewed) {
+		return;
+	}
 
 	// Atomic increment + mark session as counted
 	await redis
@@ -19,8 +23,8 @@ export async function incrementGlobalView(sessionId: string) {
 }
 
 interface ContributionsResponse {
-	total: Record<string, number>;
 	contributions: { date: string; count: number; level: number }[];
+	total: Record<string, number>;
 }
 
 const GITHUB_USERNAME = "thaletto";
@@ -29,7 +33,7 @@ export const getContributionsData = cache(
 	async () => {
 		const url = new URL(
 			`/v4/${GITHUB_USERNAME}`,
-			"https://github-contributions-api.jogruber.de",
+			"https://github-contributions-api.jogruber.de"
 		);
 		const response = await fetch(url);
 		const data = (await response.json()) as ContributionsResponse;
@@ -39,10 +43,10 @@ export const getContributionsData = cache(
 			.toISOString()
 			.split("T");
 		const contributions = data.contributions.filter(
-			(c) => c.date >= oneYearAgo && c.date <= today,
+			(c) => c.date >= oneYearAgo && c.date <= today
 		);
 		return { contributions, total };
 	},
 	["github-contributions"],
-	{ revalidate: 60 * 60 * 24 },
+	{ revalidate: 60 * 60 * 24 }
 );

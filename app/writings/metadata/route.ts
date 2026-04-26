@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
+import { NextResponse } from "next/server";
 import path from "path";
 
 export async function GET() {
@@ -15,7 +15,9 @@ export async function GET() {
 					try {
 						const mod = await import(`@/app/writings/_articles/${file}`);
 
-						if (!mod.metadata || mod.metadata.draft) return null;
+						if (!mod.metadata || mod.metadata.draft) {
+							return null;
+						}
 
 						return {
 							slug: file.replace(/\.mdx$/, ""),
@@ -24,14 +26,14 @@ export async function GET() {
 					} catch {
 						return null;
 					}
-				}),
+				})
 		);
 
 		return NextResponse.json(items);
 	} catch {
 		return NextResponse.json(
 			{ error: "Failed to load articles" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }

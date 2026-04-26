@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export type TimelineSize = "sm" | "md" | "lg";
 export type TimelineStatus = "completed" | "in-progress" | "pending";
 export type TimelineColor =
@@ -10,22 +8,22 @@ export type TimelineColor =
 	| "destructive";
 
 export interface TimelineElement {
-	id: number;
-	startDate: string;
-	endDate: string;
-	date: string;
-	title: string;
-	description?: string;
 	content?: React.ReactNode;
+	date: string;
+	description?: string;
+	endDate: string;
+	id: number;
 	image?: string;
 	slug?: string;
+	startDate: string;
+	title: string;
 }
 
 export interface TimelineProps {
+	animate?: boolean;
+	className?: string;
+	connectorColor?: TimelineColor;
+	iconColor?: TimelineColor;
 	items: TimelineElement[];
 	size?: TimelineSize;
-	animate?: boolean;
-	iconColor?: TimelineColor;
-	connectorColor?: TimelineColor;
-	className?: string;
 }

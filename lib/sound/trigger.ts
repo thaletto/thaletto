@@ -48,7 +48,9 @@ export function NavSoundTrigger() {
 			return;
 		}
 
-		if (timerRef.current) clearTimeout(timerRef.current);
+		if (timerRef.current) {
+			clearTimeout(timerRef.current);
+		}
 
 		timerRef.current = setTimeout(() => {
 			sounds.playEnter();
@@ -56,7 +58,9 @@ export function NavSoundTrigger() {
 		}, ENTER_DELAY_MS);
 
 		return () => {
-			if (timerRef.current) clearTimeout(timerRef.current);
+			if (timerRef.current) {
+				clearTimeout(timerRef.current);
+			}
 		};
 	}, [pathname]);
 

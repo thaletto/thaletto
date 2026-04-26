@@ -14,11 +14,11 @@ export default function SvgIcon({
 }: SvgIconProps) {
 	return (
 		<img
-			src={src}
 			alt={name}
-			width={width}
 			className={className}
 			loading="lazy"
+			src={src}
+			width={width}
 		/>
 	);
 }

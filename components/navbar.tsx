@@ -1,10 +1,10 @@
 "use client";
 import cn from "clsx";
+import type Link from "next/link";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { Kbd } from "./ui/kbd";
 import { NavLink } from "./nav-link";
+import { Kbd } from "./ui/kbd";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 const NAV_ITEMS = [
 	{ href: "/", label: "About", key: "A" },
@@ -33,13 +33,12 @@ function Item(props: React.ComponentProps<typeof Link>) {
 					: "text-muted-foreground hover:text-foreground",
 				"transition-colors hover:transform-none",
 				"-mx-2",
-				props.className,
+				props.className
 			)}
 		>
 			<NavLink
 				{...props}
-				className="inline-block lowercase w-full px-2 focus-visible:outline focus-visible:outline-ring
-                    focus-visible:rounded-xs focus-visible:outline-dotted"
+				className="inline-block w-full px-2 lowercase focus-visible:rounded-xs focus-visible:outline focus-visible:outline-dotted focus-visible:outline-ring"
 			/>
 		</li>
 	);
@@ -47,18 +46,18 @@ function Item(props: React.ComponentProps<typeof Link>) {
 
 export default function Navbar() {
 	return (
-		<nav className="mobile:mr-6 sm:mr-10 md:mr-14 w-full mobile:w-16">
-			<ul className="text-left mobile:sticky top-6 sm:top-10 md:top-14 mb-6 mobile:mb-0 flex gap-2 justify-end mobile:block">
+		<nav className="mobile:mr-6 mobile:w-16 w-full sm:mr-10 md:mr-14">
+			<ul className="mobile:sticky top-6 mb-6 mobile:mb-0 mobile:block flex justify-end gap-2 text-left sm:top-10 md:top-14">
 				{NAV_ITEMS.map((item) => (
-					<Item key={item.href} href={item.href}>
+					<Item href={item.href} key={item.href}>
 						<Tooltip>
 							<TooltipTrigger>
 								<span className="cursor-pointer">{item.label}</span>
 							</TooltipTrigger>
 							<TooltipContent
+								className="hidden items-center gap-2 md:flex"
 								side="right"
 								sideOffset={12}
-								className="hidden md:flex items-center gap-2"
 							>
 								Press <Kbd>{item.key}</Kbd>
 							</TooltipContent>

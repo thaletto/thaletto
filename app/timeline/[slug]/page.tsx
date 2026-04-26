@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import path from "path";
 
 export default async function Page(props: {
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 		process.cwd(),
 		"app",
 		"timeline",
-		"_timeline",
+		"_timeline"
 	);
 
 	const timelineFiles = await fs.readdir(timelineDirectory);

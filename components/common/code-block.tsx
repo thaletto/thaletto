@@ -1,8 +1,10 @@
 "use client";
+import { Children, isValidElement, type ReactNode } from "react";
 import type { BundledLanguage } from "@/components/kibo-ui/code-block";
 import {
 	CodeBlock,
 	CodeBlockBody,
+	CodeBlockContent,
 	CodeBlockCopyButton,
 	CodeBlockFilename,
 	CodeBlockFiles,
@@ -13,22 +15,20 @@ import {
 	CodeBlockSelectItem,
 	CodeBlockSelectTrigger,
 	CodeBlockSelectValue,
-	CodeBlockContent,
 } from "@/components/kibo-ui/code-block";
-import { Children, isValidElement, type ReactNode } from "react";
 
 interface TabProps {
-	language: string;
-	filename?: string;
 	children: string;
+	filename?: string;
+	language: string;
 }
 
 const Tab = (_props: TabProps) => null;
 
 interface CodeProps {
 	children: ReactNode;
-	language?: string;
 	filename?: string;
+	language?: string;
 }
 
 const CodeInner = ({ children, language, filename }: CodeProps) => {
@@ -41,7 +41,7 @@ const CodeInner = ({ children, language, filename }: CodeProps) => {
 			},
 		];
 		return (
-			<CodeBlock data={data} defaultValue={language} className="mt-2">
+			<CodeBlock className="mt-2" data={data} defaultValue={language}>
 				<CodeBlockHeader>
 					<CodeBlockFiles>
 						{(item) => (
@@ -56,16 +56,16 @@ const CodeInner = ({ children, language, filename }: CodeProps) => {
 					{(item) => (
 						<CodeBlockItem
 							key={item.language}
-							value={item.language}
 							lineNumbers={false}
+							value={item.language}
 						>
 							<CodeBlockContent
 								language={item.language as BundledLanguage}
+								syntaxHighlighting
 								themes={{
 									light: "github-light",
 									dark: "github-dark",
 								}}
-								syntaxHighlighting
 							>
 								{item.code}
 							</CodeBlockContent>
@@ -91,10 +91,12 @@ const CodeInner = ({ children, language, filename }: CodeProps) => {
 			};
 		});
 
-	if (!tabs.length) return null;
+	if (!tabs.length) {
+		return null;
+	}
 
 	return (
-		<CodeBlock data={tabs} defaultValue={tabs[0].language} className="mt-2">
+		<CodeBlock className="mt-2" data={tabs} defaultValue={tabs[0].language}>
 			<CodeBlockHeader>
 				<CodeBlockFiles>
 					{(item) => (
@@ -121,8 +123,8 @@ const CodeInner = ({ children, language, filename }: CodeProps) => {
 				{(item) => (
 					<CodeBlockItem
 						key={item.language}
-						value={item.language}
 						lineNumbers={false}
+						value={item.language}
 					>
 						<CodeBlockContent language={item.language as BundledLanguage}>
 							{item.code}

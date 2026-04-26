@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useRef } from "react";
 import mermaid from "mermaid";
+import { useEffect, useRef } from "react";
 
 export function Mermaid({ children }: { children: string }) {
 	const ref = useRef<HTMLDivElement>(null);
@@ -11,9 +11,11 @@ export function Mermaid({ children }: { children: string }) {
 			theme: "neutral",
 		});
 		mermaid.render("mermaid-" + Date.now(), children).then(({ svg }) => {
-			if (ref.current) ref.current.innerHTML = svg;
+			if (ref.current) {
+				ref.current.innerHTML = svg;
+			}
 		});
 	}, [children]);
 
-	return <div ref={ref} className="mt-4" />;
+	return <div className="mt-4" ref={ref} />;
 }

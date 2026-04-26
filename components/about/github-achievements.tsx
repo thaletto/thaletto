@@ -7,8 +7,8 @@ import {
 } from "@/components/ui/popover";
 import {
 	Tooltip,
-	TooltipTrigger,
 	TooltipContent,
+	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -69,11 +69,11 @@ interface GitHubAchievementsProps extends Partial<AchievementLevels> {
 }
 
 interface AchievementBadgeProps {
+	className?: string;
+	description: string;
+	level: number;
 	name: string;
 	src: string;
-	level: number;
-	description: string;
-	className?: string;
 }
 
 function TooltipOrPopover({
@@ -90,9 +90,9 @@ function TooltipOrPopover({
 			<Popover>
 				<PopoverTrigger>{Trigger}</PopoverTrigger>
 				<PopoverContent
+					className="max-w-xs bg-foreground p-2 text-background text-sm"
 					side="bottom"
 					sideOffset={8}
-					className="p-2 max-w-xs bg-foreground text-background text-sm"
 				>
 					{Content}
 				</PopoverContent>
@@ -103,7 +103,7 @@ function TooltipOrPopover({
 	return (
 		<Tooltip>
 			<TooltipTrigger>{Trigger}</TooltipTrigger>
-			<TooltipContent side="bottom" sideOffset={8} className="p-2 text-sm">
+			<TooltipContent className="p-2 text-sm" side="bottom" sideOffset={8}>
 				{Content}
 			</TooltipContent>
 		</Tooltip>
@@ -122,19 +122,25 @@ function AchievementBadge({
 			<TooltipOrPopover
 				Trigger={
 					<img
-						src={src}
 						alt={name}
 						className="h-16 w-16 rounded-full object-cover"
+						src={src}
 					/>
 				}
-				Content={<span>{description}</span>}
+				Trigger={
+					<img
+						alt={name}
+						className="h-16 w-16 rounded-full object-cover"
+						src={src}
+					/>
+				}
 			/>
 
 			{level >= 2 && (
 				<div
 					className={cn(
-						"absolute right-0.75 bottom-[0.5px] flex h-5 w-7 items-center justify-center rounded-full text-xs font-medium text-[#010409]",
-						BADGE_COLORS[level] || "",
+						"absolute right-0.75 bottom-[0.5px] flex h-5 w-7 items-center justify-center rounded-full font-medium text-[#010409] text-xs",
+						BADGE_COLORS[level] || ""
 					)}
 				>
 					x{level}
@@ -155,17 +161,19 @@ export function GitHubAchievements({
 		})
 		.filter((a) => a.level > 0);
 
-	if (activeAchievements.length === 0) return null;
+	if (activeAchievements.length === 0) {
+		return null;
+	}
 
 	return (
 		<div className={cn("flex items-center gap-2", className)}>
 			{activeAchievements.map((a) => (
 				<AchievementBadge
+					description={a.description}
 					key={a.key}
+					level={a.level}
 					name={a.name}
 					src={a.src}
-					level={a.level}
-					description={a.description}
 				/>
 			))}
 		</div>

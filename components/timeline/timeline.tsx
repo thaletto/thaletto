@@ -1,9 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { formatDate } from "@/lib/date";
+import type React from "react";
+import { useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import React, { useMemo } from "react";
+import { formatDate } from "@/lib/date";
+import { cn } from "@/lib/utils";
 import { NavLink } from "../nav-link";
 
 /* ---------------------------------------------
@@ -17,12 +18,16 @@ const MIN_GAP_HEIGHT = 48; // Minimum space between items
  * Helpers
  * -------------------------------------------- */
 const parseDate = (dateStr?: string) => {
-	if (!dateStr || dateStr === "Present") return new Date();
+	if (!dateStr || dateStr === "Present") {
+		return new Date();
+	}
 	const parts = dateStr.split(".");
-	if (parts.length === 2)
+	if (parts.length === 2) {
 		return new Date(Number(parts[0]), Number(parts[1]) - 1);
-	if (parts.length === 3)
+	}
+	if (parts.length === 3) {
 		return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+	}
 	return new Date(dateStr);
 };
 
@@ -50,7 +55,7 @@ export function Timeline({
 }) {
 	if (!children) {
 		return (
-			<p className="py-8 text-center text-sm text-muted-foreground">
+			<p className="py-8 text-center text-muted-foreground text-sm">
 				No timeline items
 			</p>
 		);
@@ -102,7 +107,7 @@ export function TimelineItem({
 		const durationMonths = calculateMonthDiff(startDate, endDate);
 		const dHeight = Math.max(
 			durationMonths * PIXELS_PER_MONTH,
-			MIN_DURATION_HEIGHT,
+			MIN_DURATION_HEIGHT
 		);
 
 		// Height of the gap to the next job
@@ -129,7 +134,7 @@ export function TimelineItem({
 		<li
 			className={cn(
 				"group/item relative grid gap-6 last:pb-0",
-				isMobile ? "grid-cols-[24px_1fr]" : "grid-cols-[120px_24px_1fr]",
+				isMobile ? "grid-cols-[24px_1fr]" : "grid-cols-[120px_24px_1fr]"
 			)}
 			style={{
 				minHeight: `${durationHeight}px`,
@@ -139,10 +144,10 @@ export function TimelineItem({
 			{/* Date Column (Desktop) */}
 			{!isMobile && (
 				<div className="flex flex-col justify-between py-1 text-right">
-					<time className="text-xl font-bold leading-none">
+					<time className="font-bold text-xl leading-none">
 						{formattedEndDate}
 					</time>
-					<time className="text-xl font-bold leading-none">
+					<time className="font-bold text-xl leading-none">
 						{formattedStartDate}
 					</time>
 				</div>
@@ -153,7 +158,7 @@ export function TimelineItem({
 				{/* Internal Line (Duration) - Changes color on hover */}
 				<span
 					className={cn(
-						"absolute top-2 bottom-2 left-1/2 w-0.5 -translate-x-1/2 bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground",
+						"absolute top-2 bottom-2 left-1/2 w-0.5 -translate-x-1/2 bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground"
 					)}
 				/>
 
@@ -181,31 +186,31 @@ export function TimelineItem({
 			<div
 				className={cn(
 					"flex flex-col",
-					isMobile ? "justify-between h-full" : "justify-center",
+					isMobile ? "h-full justify-between" : "justify-center"
 				)}
 			>
 				{isMobile && (
-					<time className="mb-4 text-xl font-bold leading-none">
+					<time className="mb-4 font-bold text-xl leading-none">
 						{formattedEndDate}
 					</time>
 				)}
 
 				{image ? (
 					<TimelineImage
-						image={image}
-						title={title}
-						description={description}
 						content={content}
+						description={description}
+						image={image}
 						slug={slug}
+						title={title}
 					/>
 				) : (
 					<div className="flex flex-col gap-2">
-						<h3 className="text-lg font-bold leading-tight">{title}</h3>
+						<h3 className="font-bold text-lg leading-tight">{title}</h3>
 						{description && (
 							<p className="text-base text-muted-foreground">{description}</p>
 						)}
 						{content && (
-							<div className="text-sm text-muted-foreground whitespace-pre-line">
+							<div className="whitespace-pre-line text-muted-foreground text-sm">
 								{content}
 							</div>
 						)}
@@ -213,7 +218,7 @@ export function TimelineItem({
 				)}
 
 				{isMobile && (
-					<time className="mt-4 text-xl font-bold leading-none">
+					<time className="mt-4 font-bold text-xl leading-none">
 						{formattedStartDate}
 					</time>
 				)}
@@ -229,7 +234,7 @@ function TimelineDot({ status }: { status: Status }) {
 	return (
 		<span
 			className={cn(
-				"relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-border bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground",
+				"relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-border bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground"
 			)}
 		/>
 	);
@@ -252,22 +257,22 @@ function TimelineImage({
 	slug?: string;
 }) {
 	const cardContent = (
-		<div className="w-full max-w-sm rotate-1 bg-card text-card-foreground p-3 shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
-			<img src={image} alt={title} className="h-48 w-full object-cover" />
+		<div className="w-full max-w-sm rotate-1 bg-card p-3 text-card-foreground shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
+			<img alt={title} className="h-48 w-full object-cover" src={image} />
 
 			<div className="mt-3 text-center">
 				{title && (
-					<p className="font-serif text-base font-bold text-foreground">
+					<p className="font-bold font-serif text-base text-foreground">
 						{title}
 					</p>
 				)}
 
 				{description && (
-					<p className="mt-1 text-sm text-muted-foreground">{description}</p>
+					<p className="mt-1 text-muted-foreground text-sm">{description}</p>
 				)}
 
 				{content && (
-					<div className="mt-2 border-t border-border pt-2 text-xs text-muted-foreground whitespace-pre-line">
+					<div className="mt-2 whitespace-pre-line border-border border-t pt-2 text-muted-foreground text-xs">
 						{content}
 					</div>
 				)}
@@ -275,10 +280,12 @@ function TimelineImage({
 		</div>
 	);
 
-	if (!slug) return cardContent;
+	if (!slug) {
+		return cardContent;
+	}
 
 	return (
-		<NavLink href={`/timeline/${slug}`} className="block">
+		<NavLink className="block" href={`/timeline/${slug}`}>
 			{cardContent}
 		</NavLink>
 	);

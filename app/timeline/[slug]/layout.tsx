@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Card } from "@/components/common/card";
 import { formatDate } from "@/lib/date";
 
@@ -20,12 +20,12 @@ export default async function Layout({
 		: "Present";
 
 	return (
-		<article className="max-w-3xl mx-auto">
-			<header className="flex flex-col  mb-8 gap-2">
-				<h1 className="font-semibold text-xl md:text-3xl text-balance">
+		<article className="mx-auto max-w-3xl">
+			<header className="mb-8 flex flex-col gap-2">
+				<h1 className="text-balance font-semibold text-xl md:text-3xl">
 					{metadata.title}
 				</h1>
-				<p className="text-sm font-serif">
+				<p className="font-serif text-sm">
 					{startDate} &rarr; {endDate === "Present" ? "Present" : endDate}
 				</p>
 			</header>

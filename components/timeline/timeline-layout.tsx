@@ -1,18 +1,18 @@
 "use client";
 
-import React from "react";
-import { Timeline, TimelineItem } from "./timeline";
 import { motion } from "framer-motion";
+import type React from "react";
 import type { TimelineElement } from "@/types";
+import { Timeline, TimelineItem } from "./timeline";
 
 interface TimelineLayoutProps {
+	animate?: boolean;
+	className?: string;
+	connectorColor?: "primary" | "secondary" | "muted" | "accent";
+	customIcon?: React.ReactNode;
+	iconColor?: "primary" | "secondary" | "muted" | "accent";
 	items: TimelineElement[];
 	size?: "sm" | "md" | "lg";
-	iconColor?: "primary" | "secondary" | "muted" | "accent";
-	customIcon?: React.ReactNode;
-	animate?: boolean;
-	connectorColor?: "primary" | "secondary" | "muted" | "accent";
-	className?: string;
 }
 
 export const TimelineLayout = ({
@@ -30,9 +30,9 @@ export const TimelineLayout = ({
 		<Timeline className={className}>
 			{reversedItems.map((item, index) => (
 				<motion.div
-					key={index}
-					initial={animate ? { opacity: 0, y: 20 } : false}
 					animate={animate ? { opacity: 1, y: 0 } : false}
+					initial={animate ? { opacity: 0, y: 20 } : false}
+					key={index}
 					transition={{
 						duration: 0.5,
 						delay: index * 0.1,
@@ -40,15 +40,15 @@ export const TimelineLayout = ({
 					}}
 				>
 					<TimelineItem
-						startDate={item.startDate}
-						endDate={item.endDate}
-						nextEndDate={reversedItems[index + 1]?.endDate}
-						title={item.title}
-						description={item.description}
 						content={item.content}
+						description={item.description}
+						endDate={item.endDate}
 						image={item.image}
-						slug={item.slug}
+						nextEndDate={reversedItems[index + 1]?.endDate}
 						showConnector={index !== items.length - 1}
+						slug={item.slug}
+						startDate={item.startDate}
+						title={item.title}
 					/>
 				</motion.div>
 			))}

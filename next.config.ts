@@ -1,5 +1,5 @@
 import withMDX from "@next/mdx";
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
 
 export default withMDX()({
 	pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
