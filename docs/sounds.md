@@ -14,7 +14,7 @@ bun add tone
 
 ```
 @/lib/sound/
-├── index.ts       # Core playback functions (playNavEnter, playNavExit, disposeNavSounds)
+├── index.ts       # Core playback functions (playEnter, playExit, dispose)
 ├── trigger.ts    # NavSoundTrigger component for enter sounds
 ```
 
@@ -70,33 +70,61 @@ export function Navbar() {
 
 ### 3. Alternative: Manual Exit Sound
 
-If you can't use `NavLink`, call `playNavExit()` directly in your Link's onClick:
+If you can't use `NavLink`, call `playExit()` directly in your Link's onClick:
 
 ```tsx
 import Link from "next/link"
-import { playNavExit } from "@/lib/sound"
+import { sounds } from "@/lib/sound"
 
-<Link href="/projects" onClick={() => playNavExit()}>
+<Link href="/projects" onClick={() => sounds.playExit()}>
   Projects
 </Link>
 ```
 
 ## API Reference
 
-### playNavEnter()
+### sounds.playEnter()
 
 Plays an ascending tonal step (D4 → G4) layered with an arpeggiated chord bloom (C4 → E4 → G4). Designed to complement the crossfade transition — the chord's 2.2s release creates an ambient tail that outlasts the visual transition.
 
 ```ts
-await playNavEnter()
+await sounds.playEnter()
 ```
 
-### playNavExit()
+### sounds.playExit()
 
-Plays a descending tonal step (G4 → D4) with a reversed chord bloom. Slightly quieter and shorter than the enter sound to avoid competing with it (~300ms later).
+Plays a descending tonal step (G4 → D4) with a reversed chord bloom. Slightly quieter and shorter than the enter sound to avoid competing with it (~200ms later).
 
 ```ts
-playNavExit() // fire and forget (async, but no need to await)
+sounds.playExit() // fire and forget (async, but no need to await)
+```
+
+### sounds.setMuted(muted: boolean)
+
+Enables or disables audio playback entirely. When muted, all `playEnter()` and `playExit()` calls no-op immediately without initializing Tone.js.
+
+```ts
+sounds.setMuted(true) // disable all sounds
+sounds.setMuted(false) // re-enable
+```
+
+### sounds.setVolume(volume: number)
+
+Sets the master volume. Maps linear input (0..1) to decibels. At 0, outputs -Infinity (silent).
+
+```ts
+sounds.setVolume(0.5) // ~-20dB
+sounds.setVolume(0)   // mute
+```
+
+### sounds.dispose()
+
+Disposes all Tone.js nodes and resets state. Call during dev HMR cleanup to prevent orphaning audio nodes.
+
+```ts
+if (process.env.NODE_ENV === "development") {
+  dispose()
+}
 ```
 
 ### NavSoundTrigger
@@ -112,24 +140,15 @@ Headless component that watches `pathname` and fires `playNavEnter()` on route c
 Wrapper around Next.js Link that fires `playNavExit()` in onClick before navigation. Equivalent to:
 
 ```tsx
-<Link href="/path" onClick={() => playNavExit()}>
+<Link href="/path" onClick={() => sounds.playExit()}>
   Label
 </Link>
-```
-
-### disposeNavSounds()
-
-Cleans up all Tone.js nodes. Call in dev HMR cleanup if needed:
-
-```ts
-if (process.env.NODE_ENV === "development") {
-  disposeNavSounds()
-}
 ```
 
 ## Design Notes
 
 - **Audio character**: Soft, spatial, ambient — not attention-grabbing. Uses sine oscillators with a long-release reverb tail.
-- **Timing**: The exit sound plays immediately on click; the enter sound fires after a 500ms gap from exit. This creates a consistent sonic arc regardless of how fast the route resolves — the gap is measured from when the exit sound actually fired, not when the pathname changed.
+- **Timing**: The exit sound plays immediately on click; the enter sound fires after a 300ms gap from exit. This creates a consistent sonic arc regardless of how fast the route resolves — the gap is measured from when the exit sound actually fired, not when the pathname changed.
 - **Browser autoplay**: Tone.js requires user interaction before playing audio. The first link click will initialize the audio context implicitly.
 - **Server-side rendering**: All functions check `typeof window` and no-op on the server — safe to use in SSR contexts.
+- **Scale**: Uses a pentatonic scale (C, D, E, G, A) cycling through adjacent degrees for tight harmony during rapid navigation.

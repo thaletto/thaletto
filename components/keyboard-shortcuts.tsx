@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { playNavExit } from "@/lib/sound";
+import { sounds } from "@/lib/sound";
 
 type ShortcutMap = Record<string, string>;
 
@@ -37,7 +37,7 @@ export function useKeyboardNavigation(shortcuts: ShortcutMap) {
 			if (!route) return;
 
 			e.preventDefault();
-			playNavExit();
+			sounds.playExit();
 			router.push(route);
 		};
 

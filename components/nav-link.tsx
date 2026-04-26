@@ -1,15 +1,15 @@
 "use client";
 
 import Link, { type LinkProps } from "next/link";
-import { playNavExit } from "@/lib/sound";
+import { sounds } from "@/lib/sound";
 
 /**
  * Wraps Next.js Link to provide navigation exit sound feedback.
  *
- * A thin wrapper around Next.js `Link` that fires `playNavExit()` in the
+ * A thin wrapper around Next.js `Link` that fires `sounds.playExit()` in the
  * onClick handler before navigation proceeds. Use this in your navigation
  * component instead of a plain `<Link>` to enable the full sound arc:
- * exit sound → crossfade → enter sound (~300ms gap).
+ * exit sound → crossfade → enter sound (~200ms gap).
  *
  * @example
  * ```tsx
@@ -36,7 +36,7 @@ export function NavLink({
 		<Link
 			{...props}
 			onClick={(e) => {
-				playNavExit();
+				sounds.playExit();
 				onClick?.(e);
 			}}
 		>

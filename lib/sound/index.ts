@@ -1,110 +1,253 @@
-"use client";
-
 import * as Tone from "tone";
 
-/** Shared reverb node for all navigation sounds. Initialized lazily on first playback. */
-let reverb: Tone.Reverb | null = null;
+const PENTATONIC_SCALE = ["C", "D", "E", "G", "A"] as const;
+const BASE_OCTAVE = 3;
 
-/** PolySynth for enter sound — plays ascending melodic arc with arpeggiated chord bloom. */
-let synthEnter: Tone.PolySynth | null = null;
-/** Volume control for enter synth. Set to -12dB to keep sounds ambient. */
-let volEnter: Tone.Volume | null = null;
-
-/** PolySynth for exit sound — plays descending step (G4 → D4) with reversed bloom. */
-let synthExit: Tone.PolySynth | null = null;
-/** Volume control for exit synth. Same level as enter synth. */
-let volExit: Tone.Volume | null = null;
-
-/** Tracks whether Tone.js nodes have been created. Prevents double initialization. */
-let initialized = false;
+const CHORD_WINDOW_MS = 100;
 
 /**
- * Ensures the Tone.js audio context is started and all synth nodes are created.
- * Lazy-initializes on first call. Safe to call on the server (returns false).
+ * Crossfade navigation sound system using Tone.js.
  *
- * @returns `true` if ready for playback, `false` if running server-side.
+ * Provides exit/enter audio feedback that complements React's ViewTransition API.
+ * Manages a pair of polyphonic synths (enter and exit) with shared FX chain
+ * (distortion + reverb → volume → destination).
+ *
+ * Typically used via the `sounds` singleton — prefer `NavLink` and `NavSoundTrigger`
+ * over calling these methods directly.
  */
-async function ensureReady(): Promise<boolean> {
-	if (typeof window === "undefined") return false;
-	await Tone.start();
+class SoundSystem {
+	// Poly synths for entering and exiting
+	private synthEnter: Tone.PolySynth | null = null;
+	private synthExit: Tone.PolySynth | null = null;
 
-	if (!initialized) {
-		reverb = new Tone.Reverb({ decay: 3.5, wet: 0.48 }).toDestination();
+	// Fx / routing
+	private distortion: Tone.Distortion | null = null;
+	private reverb: Tone.Reverb | null = null;
+	private volume: Tone.Volume | null = null;
 
-		volEnter = new Tone.Volume(-12).connect(reverb);
-		synthEnter = new Tone.PolySynth(Tone.Synth, {
-			oscillator: { type: "sine" },
-			envelope: { attack: 0.012, decay: 0.35, sustain: 0.06, release: 2.2 },
-		} as Tone.SynthOptions).connect(volEnter);
+	// Lifecycle management
+	private initialized = false;
+	private initializing: Promise<void> | null = null;
+	private muted = false;
+	private currentNoteIndex = 0;
+	private transport: ReturnType<typeof Tone.getTransport> | null = null;
 
-		volExit = new Tone.Volume(-12).connect(reverb);
-		synthExit = new Tone.PolySynth(Tone.Synth, {
-			oscillator: { type: "sine" },
-			envelope: { attack: 0.008, decay: 0.12, sustain: 0, release: 0.3 },
-		} as Tone.SynthOptions).connect(volExit);
+	// Chord Scheduling
+	private chordWindowStart: number | null = null;
+	private chordStep = 0;
+	private chordBaseIndex = 0;
+	private chordBaseOctave = 0;
 
-		await reverb.generate();
-		initialized = true;
+	// Error management
+	private isPlayingFailure = false;
+	private isPlayingInterrupt = false;
+
+	// Small helpers
+	private inChordWindow(now = Date.now()) {
+		return (
+			this.chordWindowStart !== null &&
+			now - this.chordWindowStart <= CHORD_WINDOW_MS
+		);
 	}
 
-	return true;
+	private async ready() {
+		if (this.muted) return false;
+		await this.initialize();
+		return true;
+	}
+
+	private scheduleOnce(cb: () => void, time: string | number) {
+		const t = this.transport ?? Tone.getTransport();
+		t.scheduleOnce(cb, time);
+	}
+
+	// Initialization
+
+	private async initialize() {
+		if (this.initialized) return;
+		if (this.initializing) return this.initializing;
+
+		this.initializing = (async () => {
+			await Tone.start();
+
+			this.volume = new Tone.Volume(-12).toDestination();
+			this.reverb = new Tone.Reverb({ decay: 2.5, wet: 0.3 }).connect(
+				this.volume,
+			);
+			this.distortion = new Tone.Distortion({
+				distortion: 0.8,
+				wet: 1.0,
+			}).connect(this.volume);
+
+			this.synthEnter = new Tone.PolySynth(Tone.Synth, {
+				oscillator: { type: "triangle" },
+				envelope: { attack: 0.02, decay: 0.3, sustain: 0.1, release: 1.2 },
+			} as Tone.SynthOptions).connect(this.reverb);
+
+			this.synthExit = new Tone.PolySynth(Tone.Synth, {
+				oscillator: { type: "sine" },
+				envelope: { attack: 0.002, decay: 0.08, sustain: 0, release: 0.1 },
+			} as Tone.SynthOptions).connect(this.reverb);
+
+			this.transport = Tone.getTransport();
+			if (this.transport.state !== "started") {
+				this.transport.start();
+			}
+			this.initialized = true;
+		})();
+	}
+
+	// Note Selection
+
+	private getNextNote(octaveOffset: number = 0) {
+		const now = Date.now();
+		const inChordWindow = this.inChordWindow(now);
+
+		if (!inChordWindow) {
+			// Start new chord window
+			this.chordWindowStart = now;
+			this.chordStep = 0;
+			// Root of the chord based on rotating index
+			this.chordBaseIndex = this.currentNoteIndex % PENTATONIC_SCALE.length;
+			this.chordBaseOctave = BASE_OCTAVE + octaveOffset;
+		}
+
+		// Adjacent scale degrees within the same octave for tight harmony
+		const scaleIndex =
+			(this.chordBaseIndex + this.chordStep) % PENTATONIC_SCALE.length;
+		const note = PENTATONIC_SCALE[scaleIndex];
+		const octave = this.chordBaseOctave;
+
+		// Advance counters for next call
+		this.chordStep++;
+		this.currentNoteIndex =
+			(this.currentNoteIndex + 1) % (PENTATONIC_SCALE.length * 2);
+
+		return `${note}${octave}`;
+	}
+
+	// Public API
+
+	/**
+	 * Plays an ascending tonal step layered with an arpeggiated chord bloom.
+	 *
+	 * Cycles through a pentatonic scale with a timing window to keep overlaps consonant.
+	 * The chord's long release (1.2s) creates an ambient tail that outlasts visual
+	 * transition. Called automatically by `NavSoundTrigger` on route changes.
+	 *
+	 * @returns Promise that resolves when sound is scheduled (or no-ops if muted)
+	 */
+	async playEnter() {
+		if (!(await this.ready())) return;
+
+		// Triad cycling within a timing window to keep overlaps consonant
+		const now = Date.now();
+		const inWindow = this.inChordWindow(now);
+
+		if (!inWindow) {
+			this.chordWindowStart = now;
+			this.chordStep = 0;
+			this.chordBaseIndex = this.currentNoteIndex % PENTATONIC_SCALE.length;
+			this.chordBaseOctave = BASE_OCTAVE + 1; // brightness
+		}
+
+		const rootNoteName = PENTATONIC_SCALE[this.chordBaseIndex];
+		const rootNoteStr = `${rootNoteName}${this.chordBaseOctave}`;
+
+		const TRIAD_SEMITONES = [0, 4, 7] as const;
+		const triadIndex = this.chordStep % TRIAD_SEMITONES.length;
+		const semitoneOffset = TRIAD_SEMITONES[triadIndex] ?? 0;
+
+		const note = Tone.Frequency(rootNoteStr).transpose(semitoneOffset).toNote();
+
+		this.chordStep++;
+		this.currentNoteIndex =
+			(this.currentNoteIndex + 1) % (PENTATONIC_SCALE.length * 2);
+
+		this.synthEnter?.triggerAttackRelease(note, "4n");
+	}
+
+	/**
+	 * Plays a descending tonal step with a reversed chord bloom.
+	 *
+	 * Slightly quieter and shorter than the enter sound to avoid competing
+	 * with it (~300ms later). Half an octave higher than base to create downward
+	 * movement perception.
+	 *
+	 * @returns Promise that resolves when sound is scheduled (or no-ops if muted)
+	 */
+	async playExit() {
+		if (!(await this.ready())) return;
+		const note = this.getNextNote(0.5); // half octave higher
+		this.synthExit?.triggerAttackRelease(note, "32n", undefined, 0.25);
+	}
+
+	/**
+	 * Enables or disables audio playback entirely.
+	 *
+	 * When muted, all `playEnter()` and `playExit()` calls no-op immediately without
+	 * initializing Tone.js. Persists across route changes.
+	 *
+	 * @param muted - Whether to prevent sound playback
+	 */
+	setMuted(muted: boolean) {
+		this.muted = muted;
+	}
+
+	/**
+	 * Sets the master volume.
+	 *
+	 * Maps linear input (0..1) to decibels. At 0, outputs -Infinity (silent).
+	 * Default is -12dB for comfortable background levels.
+	 *
+	 * @param volume - Linear volume in range [0, 1]
+	 */
+	setVolume(volume: number) {
+		if (!this.volume) return;
+		// Map 0..1 to -Infinity..0 dB (0 => hard mute)
+		const db = volume === 0 ? -Infinity : -40 + volume * 40;
+		this.volume.volume.value = db;
+	}
+
+	/**
+	 * Disposes all Tone.js nodes and resets state.
+	 *
+	 * Call this during dev HMR cleanup to prevent orphaning audio nodes.
+	 * Sets `initialized` to false so subsequent calls re-initialize properly.
+	 */
+	async dispose() {
+		this.synthEnter?.dispose();
+		this.synthEnter = null;
+		this.synthExit?.dispose();
+		this.synthExit = null;
+
+		this.distortion?.dispose();
+		this.distortion = null;
+		this.reverb?.dispose();
+		this.reverb = null;
+		this.volume?.dispose();
+		this.volume = null;
+
+		this.initialized = false;
+	}
 }
 
 /**
- * Plays the navigation enter sound — an ascending melodic step (D4 → G4) layered with
- * an arpeggiated chord bloom (C4 → E4 → G4). Designed to complement the crossfade transition;
- * the chord's 2.2s release creates an ambient tail that outlasts the visual transition.
+ * Singleton instance of the crossfade navigation sound system.
  *
- * Initializing the audio context on the first call — subsequent calls play immediately.
- * No-ops if called server-side.
- *
- * @returns A promise that resolves when the sound has been triggered.
- */
-export async function playNavEnter(): Promise<void> {
-	if (!(await ensureReady())) return;
-	const now = Tone.now();
-	synthEnter!.triggerAttackRelease("D4", "16n", now, 1.0);
-	synthEnter!.triggerAttackRelease("G4", "16n", now + 0.09, 1.0);
-	synthEnter!.triggerAttackRelease("C4", "8n", now + 0.04, 1.0);
-	synthEnter!.triggerAttackRelease("E4", "8n", now + 0.095, 1.0);
-	synthEnter!.triggerAttackRelease("G4", "8n", now + 0.15, 1.0);
-}
-
-/**
- * Plays the navigation exit sound — a descending step (G4 → D4) with a reversed
- * chord bloom. Slightly quieter and shorter than the enter sound to avoid competing
- * with it (~300ms later).
- *
- * Fire-and-forget: does not need to be awaited. No-ops if called server-side.
- *
- * @returns A promise that resolves when the sound has been triggered.
- */
-export async function playNavExit(): Promise<void> {
-	if (!(await ensureReady())) return;
-	const now = Tone.now();
-	synthExit!.triggerAttackRelease("G4", "16n", now, 0.25);
-	synthExit!.triggerAttackRelease("D4", "16n", now + 0.08, 0.25);
-}
-
-/**
- * Disposes all Tone.js nodes created by this module and resets the initialization state.
- * Call this in dev HMR cleanup if you need to reinitialize the audio context after hot reload.
+ * Use `sounds.playEnter()` and `sounds.playExit()` directly if you need manual
+ * control. Prefer `NavLink` and `NavSoundTrigger` for automatically wired
+ * navigation sounds.
  *
  * @example
- * if (process.env.NODE_ENV === "development") {
- *   disposeNavSounds();
- * }
+ * ```ts
+ * import { sounds } from "@/lib/sound"
+ *
+ * // Fire enter sound via useEffect hook
+ * await sounds.playEnter()
+ *
+ * // Fire exit sound on custom navigation
+ * sounds.playExit()
+ * ```
  */
-export function disposeNavSounds(): void {
-	synthEnter?.dispose();
-	synthEnter = null;
-	synthExit?.dispose();
-	synthExit = null;
-	volEnter?.dispose();
-	volEnter = null;
-	volExit?.dispose();
-	volExit = null;
-	reverb?.dispose();
-	reverb = null;
-	initialized = false;
-}
+export const sounds = new SoundSystem();
