@@ -19,7 +19,7 @@
     }
     .font-normal {
         font-variation-settings:
-            "wght" 440,
+            "wght" 400,
             var(--sans-variation);
     }
     .font-medium {
