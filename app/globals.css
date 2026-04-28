@@ -266,7 +266,7 @@ body {
         sans-serif;
     font-feature-settings: var(--font-features);
     font-variation-settings:
-        "wght" 440,
+        "wght" 400,
         var(--sans-variation);
     font-variant: common-ligatures contextual;
     text-decoration-skip-ink: auto;
