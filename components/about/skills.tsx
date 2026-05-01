@@ -1,7 +1,7 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { readFile } from "fs/promises";
-import path from "path";
 
 export default async function Skills({ className }: { className?: string }) {
 	const filePath = path.join(process.cwd(), "/lib/skills.txt");
@@ -15,7 +15,7 @@ export default async function Skills({ className }: { className?: string }) {
 	return (
 		<div className={cn("flex flex-wrap gap-2", className)}>
 			{skills.map((tag) => (
-				<Badge key={tag} variant="secondary" className="px-2 py-0.5 rounded-sm">
+				<Badge className="rounded-sm px-2 py-0.5" key={tag} variant="secondary">
 					{tag}
 				</Badge>
 			))}

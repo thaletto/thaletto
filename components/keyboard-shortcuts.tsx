@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef } from "react";
 import { sounds } from "@/lib/sound";
 
 type ShortcutMap = Record<string, string>;
@@ -29,12 +29,16 @@ export function useKeyboardNavigation(shortcuts: ShortcutMap) {
 			}
 
 			// no modifiers, no repeats
-			if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey || e.repeat) return;
+			if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey || e.repeat) {
+				return;
+			}
 
 			const key = e.key.toLowerCase();
 			const route = shortcutsRef.current[key];
 
-			if (!route) return;
+			if (!route) {
+				return;
+			}
 
 			e.preventDefault();
 			sounds.playExit();
@@ -55,7 +59,7 @@ export default function KeyboardShortcuts() {
 			w: "/writings",
 			t: "/timeline",
 		}),
-		[],
+		[]
 	);
 
 	useKeyboardNavigation(shortcuts);

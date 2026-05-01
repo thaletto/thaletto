@@ -1,8 +1,9 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import type { Metadata } from "next";
 import { TimelineLayout } from "@/components/timeline/timeline-layout";
+import { MDX_REGEX } from "@/lib/const";
 import type { TimelineElement } from "@/types";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Timeline",
@@ -13,7 +14,7 @@ const timelineDirectory = path.join(
 	process.cwd(),
 	"app",
 	"timeline",
-	"_timeline",
+	"_timeline"
 );
 
 function toSortableDate(value: string) {
@@ -21,7 +22,7 @@ function toSortableDate(value: string) {
 	const normalized = value.replace(".", "-");
 	const date = new Date(normalized);
 
-	return isNaN(date.getTime()) ? 0 : date.getTime();
+	return Number.isNaN(date.getTime()) ? 0 : date.getTime();
 }
 
 export default async function Page() {
@@ -30,12 +31,18 @@ export default async function Page() {
 	const items: TimelineElement[] = [];
 
 	for (const file of timelineFiles) {
-		if (!file.endsWith(".mdx")) continue;
+		if (!file.endsWith(".mdx")) {
+			continue;
+		}
 
-		const module = await import("./_timeline/" + file);
+		const module = await import(`./_timeline/${file}`);
 
-		if (!module.metadata) throw new Error("Missing `metadata` in " + file);
-		if (module.metadata.draft) continue;
+		if (!module.metadata) {
+			throw new Error(`Missing \`metadata\` in ${file}`);
+		}
+		if (module.metadata.draft) {
+			continue;
+		}
 
 		const startDate = module.metadata.startDate;
 		const endDate = module.metadata.endDate ?? "Present";
@@ -49,20 +56,20 @@ export default async function Page() {
 			description: module.metadata.description ?? "",
 			content: module.metadata.content,
 			image: module.metadata.image,
-			slug: file.replace(/\.mdx$/, ""),
+			slug: file.replace(MDX_REGEX, ""),
 		});
 	}
 
 	items.sort(
-		(a, b) => toSortableDate(a.startDate) - toSortableDate(b.startDate),
+		(a, b) => toSortableDate(a.startDate) - toSortableDate(b.startDate)
 	);
 
 	return (
 		<TimelineLayout
+			animate={true}
+			className="mx-auto max-w-6xl"
 			items={items}
 			size="lg"
-			animate={true}
-			className="max-w-6xl mx-auto"
 		/>
 	);
 }

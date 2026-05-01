@@ -12,7 +12,8 @@ import {
 import { SiNotion } from "react-icons/si";
 import { Badge } from "../ui/badge";
 
-export type LinkProps = {
+export interface LinkProps {
+	className?: string;
 	icon?:
 		| "gdrive"
 		| "github"
@@ -35,8 +36,7 @@ export type LinkProps = {
 		| "ghost"
 		| null
 		| undefined;
-	className?: string;
-};
+}
 
 export default function LinkChip({
 	icon,
@@ -50,31 +50,31 @@ export default function LinkChip({
 			case "github":
 				return <FaGithub size={32} />;
 			case "globe":
-				return <FaGlobe className="w-4 h-4" />;
+				return <FaGlobe className="h-4 w-4" />;
 			case "instagram":
-				return <FaInstagram className="w-4 h-4" />;
+				return <FaInstagram className="h-4 w-4" />;
 			case "linkedin":
-				return <FaLinkedin className="w-4 h-4" />;
+				return <FaLinkedin className="h-4 w-4" />;
 			case "notion":
-				return <SiNotion className="w-4 h-4" />;
+				return <SiNotion className="h-4 w-4" />;
 			case "pdf":
-				return <FaFilePdf className="w-4 h-4" />;
+				return <FaFilePdf className="h-4 w-4" />;
 			case "word":
-				return <FaFileWord className="w-4 h-4" />;
+				return <FaFileWord className="h-4 w-4" />;
 			case "X":
-				return <FaXTwitter className="w-4 h-4" />;
+				return <FaXTwitter className="h-4 w-4" />;
 			case "gdrive":
-				return <FaGoogleDrive className="w-4 h-4" />;
+				return <FaGoogleDrive className="h-4 w-4" />;
 			default:
-				return <FaGlobe className="w-4 h-4" />;
+				return <FaGlobe className="h-4 w-4" />;
 		}
 	};
 	const px = variant === "link" ? "px-0" : "px-2";
 	return (
-		<Link href={link} target="_blank" rel="noopener noreferrer">
+		<Link href={link} rel="noopener noreferrer" target="_blank">
 			<Badge
+				className={`rounded py-4 text-sm ${px} ${className}`}
 				variant={variant}
-				className={`py-4 text-sm rounded ${px} ${className}`}
 			>
 				{renderIcon()} {label}
 			</Badge>

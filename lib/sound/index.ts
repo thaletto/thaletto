@@ -38,10 +38,6 @@ class SoundSystem {
 	private chordBaseIndex = 0;
 	private chordBaseOctave = 0;
 
-	// Error management
-	private isPlayingFailure = false;
-	private isPlayingInterrupt = false;
-
 	// Small helpers
 	private inChordWindow(now = Date.now()) {
 		return (
@@ -51,7 +47,9 @@ class SoundSystem {
 	}
 
 	private async ready() {
-		if (this.muted) return false;
+		if (this.muted) {
+			return false;
+		}
 		await this.initialize();
 		return true;
 	}
@@ -64,15 +62,19 @@ class SoundSystem {
 	// Initialization
 
 	private async initialize() {
-		if (this.initialized) return;
-		if (this.initializing) return this.initializing;
+		if (this.initialized) {
+			return;
+		}
+		if (this.initializing) {
+			return this.initializing;
+		}
 
 		this.initializing = (async () => {
 			await Tone.start();
 
 			this.volume = new Tone.Volume(-12).toDestination();
 			this.reverb = new Tone.Reverb({ decay: 2.5, wet: 0.3 }).connect(
-				this.volume,
+				this.volume
 			);
 			this.distortion = new Tone.Distortion({
 				distortion: 0.8,
@@ -99,7 +101,7 @@ class SoundSystem {
 
 	// Note Selection
 
-	private getNextNote(octaveOffset: number = 0) {
+	private getNextNote(octaveOffset = 0) {
 		const now = Date.now();
 		const inChordWindow = this.inChordWindow(now);
 
@@ -138,7 +140,9 @@ class SoundSystem {
 	 * @returns Promise that resolves when sound is scheduled (or no-ops if muted)
 	 */
 	async playEnter() {
-		if (!(await this.ready())) return;
+		if (!(await this.ready())) {
+			return;
+		}
 
 		// Triad cycling within a timing window to keep overlaps consonant
 		const now = Date.now();
@@ -177,7 +181,9 @@ class SoundSystem {
 	 * @returns Promise that resolves when sound is scheduled (or no-ops if muted)
 	 */
 	async playExit() {
-		if (!(await this.ready())) return;
+		if (!(await this.ready())) {
+			return;
+		}
 		const note = this.getNextNote(0.5); // half octave higher
 		this.synthExit?.triggerAttackRelease(note, "32n", undefined, 0.25);
 	}
@@ -203,9 +209,11 @@ class SoundSystem {
 	 * @param volume - Linear volume in range [0, 1]
 	 */
 	setVolume(volume: number) {
-		if (!this.volume) return;
+		if (!this.volume) {
+			return;
+		}
 		// Map 0..1 to -Infinity..0 dB (0 => hard mute)
-		const db = volume === 0 ? -Infinity : -40 + volume * 40;
+		const db = volume === 0 ? Number.NEGATIVE_INFINITY : -40 + volume * 40;
 		this.volume.volume.value = db;
 	}
 

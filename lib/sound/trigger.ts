@@ -38,7 +38,7 @@ const ENTER_DELAY_MS = 200;
  * @returns null (renders nothing — side-effect only)
  */
 export function NavSoundTrigger() {
-	const pathname = usePathname();
+	const _pathname = usePathname();
 	const isFirst = useRef(true);
 	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -48,7 +48,9 @@ export function NavSoundTrigger() {
 			return;
 		}
 
-		if (timerRef.current) clearTimeout(timerRef.current);
+		if (timerRef.current) {
+			clearTimeout(timerRef.current);
+		}
 
 		timerRef.current = setTimeout(() => {
 			sounds.playEnter();
@@ -56,9 +58,11 @@ export function NavSoundTrigger() {
 		}, ENTER_DELAY_MS);
 
 		return () => {
-			if (timerRef.current) clearTimeout(timerRef.current);
+			if (timerRef.current) {
+				clearTimeout(timerRef.current);
+			}
 		};
-	}, [pathname]);
+	}, []);
 
 	return null;
 }

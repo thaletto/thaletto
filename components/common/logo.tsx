@@ -1,10 +1,12 @@
-type SvgIconProps = {
+import Image from "next/image";
+
+interface SvgIconProps {
+	className?: string;
+	height?: number | string;
 	name: string;
 	src: string;
-	width?: number | string;
-	height?: number | string;
-	className?: string;
-};
+	width?: number;
+}
 
 export default function SvgIcon({
 	name,
@@ -13,12 +15,12 @@ export default function SvgIcon({
 	className,
 }: SvgIconProps) {
 	return (
-		<img
-			src={src}
+		<Image
 			alt={name}
-			width={width}
 			className={className}
 			loading="lazy"
+			src={src}
+			width={width}
 		/>
 	);
 }

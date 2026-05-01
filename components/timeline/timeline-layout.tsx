@@ -1,27 +1,27 @@
 "use client";
 
-import React from "react";
-import { Timeline, TimelineItem } from "./timeline";
 import { motion } from "framer-motion";
+import type React from "react";
 import type { TimelineElement } from "@/types";
+import { Timeline, TimelineItem } from "./timeline";
 
 interface TimelineLayoutProps {
-	items: TimelineElement[];
-	size?: "sm" | "md" | "lg";
-	iconColor?: "primary" | "secondary" | "muted" | "accent";
-	customIcon?: React.ReactNode;
+	_connectorColor?: "primary" | "secondary" | "muted" | "accent";
+	_customIcon?: React.ReactNode;
+	_iconColor?: "primary" | "secondary" | "muted" | "accent";
+	_size?: "sm" | "md" | "lg";
 	animate?: boolean;
-	connectorColor?: "primary" | "secondary" | "muted" | "accent";
 	className?: string;
+	items: TimelineElement[];
 }
 
 export const TimelineLayout = ({
 	items,
-	size = "md",
-	iconColor,
-	customIcon,
+	_size = "md",
+	_iconColor,
+	_customIcon,
 	animate = true,
-	connectorColor,
+	_connectorColor,
 	className,
 }: TimelineLayoutProps) => {
 	const reversedItems = [...items].reverse();
@@ -30,9 +30,10 @@ export const TimelineLayout = ({
 		<Timeline className={className}>
 			{reversedItems.map((item, index) => (
 				<motion.div
-					key={index}
-					initial={animate ? { opacity: 0, y: 20 } : false}
 					animate={animate ? { opacity: 1, y: 0 } : false}
+					initial={animate ? { opacity: 0, y: 20 } : false}
+					// biome-ignore lint/suspicious/noArrayIndexKey: fine
+					key={index}
 					transition={{
 						duration: 0.5,
 						delay: index * 0.1,
@@ -40,15 +41,15 @@ export const TimelineLayout = ({
 					}}
 				>
 					<TimelineItem
-						startDate={item.startDate}
-						endDate={item.endDate}
-						nextEndDate={reversedItems[index + 1]?.endDate}
-						title={item.title}
-						description={item.description}
 						content={item.content}
+						description={item.description}
+						endDate={item.endDate}
 						image={item.image}
-						slug={item.slug}
+						nextEndDate={reversedItems[index + 1]?.endDate}
 						showConnector={index !== items.length - 1}
+						slug={item.slug}
+						startDate={item.startDate}
+						title={item.title}
 					/>
 				</motion.div>
 			))}

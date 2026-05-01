@@ -23,28 +23,28 @@ import {
 } from "react";
 import { cn } from "@/lib/utils";
 
-export type Activity = {
-	date: string;
+export interface Activity {
 	count: number;
+	date: string;
 	level: number;
-};
+}
 
 type Week = Array<Activity | undefined>;
 
-export type Labels = {
-	months?: string[];
-	weekdays?: string[];
-	totalCount?: string;
+export interface Labels {
 	legend?: {
 		less?: string;
 		more?: string;
 	};
-};
+	months?: string[];
+	totalCount?: string;
+	weekdays?: string[];
+}
 
-type MonthLabel = {
-	weekIndex: number;
+interface MonthLabel {
 	label: string;
-};
+	weekIndex: number;
+}
 
 const DEFAULT_MONTH_LABELS = [
 	"Jan",
@@ -71,22 +71,22 @@ const DEFAULT_LABELS: Labels = {
 	},
 };
 
-type ContributionGraphContextType = {
-	data: Activity[];
-	weeks: Week[];
+interface ContributionGraphContextType {
 	blockMargin: number;
 	blockRadius: number;
 	blockSize: number;
+	data: Activity[];
 	fontSize: number;
-	labels: Labels;
+	height: number;
 	labelHeight: number;
+	labels: Labels;
 	maxLevel: number;
 	totalCount: number;
 	weekStart: WeekDay;
-	year: number;
+	weeks: Week[];
 	width: number;
-	height: number;
-};
+	year: number;
+}
 
 const ContributionGraphContext =
 	createContext<ContributionGraphContextType | null>(null);
@@ -96,7 +96,7 @@ const useContributionGraph = () => {
 
 	if (!context) {
 		throw new Error(
-			"ContributionGraph components must be used within a ContributionGraph",
+			"ContributionGraph components must be used within a ContributionGraph"
 		);
 	}
 
@@ -110,11 +110,11 @@ const fillHoles = (activities: Activity[]): Activity[] => {
 
 	// Sort activities by date to ensure correct date range
 	const sortedActivities = [...activities].sort((a, b) =>
-		a.date.localeCompare(b.date),
+		a.date.localeCompare(b.date)
 	);
 
 	const calendar = new Map<string, Activity>(
-		activities.map((a) => [a.date, a]),
+		activities.map((a) => [a.date, a])
 	);
 
 	const firstActivity = sortedActivities[0] as Activity;
@@ -144,7 +144,7 @@ const fillHoles = (activities: Activity[]): Activity[] => {
 
 const groupByWeeks = (
 	activities: Activity[],
-	weekStart: WeekDay = 0,
+	weekStart: WeekDay = 0
 ): Week[] => {
 	if (activities.length === 0) {
 		return [];
@@ -160,7 +160,7 @@ const groupByWeeks = (
 
 	const paddedActivities = [
 		...(new Array(differenceInCalendarDays(firstDate, firstCalendarDate)).fill(
-			undefined,
+			undefined
 		) as Activity[]),
 		...normalizedActivities,
 	];
@@ -170,21 +170,21 @@ const groupByWeeks = (
 	return new Array(numberOfWeeks)
 		.fill(undefined)
 		.map((_, weekIndex) =>
-			paddedActivities.slice(weekIndex * 7, weekIndex * 7 + 7),
+			paddedActivities.slice(weekIndex * 7, weekIndex * 7 + 7)
 		);
 };
 
 const getMonthLabels = (
 	weeks: Week[],
-	monthNames: string[] = DEFAULT_MONTH_LABELS,
-): MonthLabel[] => {
-	return weeks
+	monthNames: string[] = DEFAULT_MONTH_LABELS
+): MonthLabel[] =>
+	weeks
 		.reduce<MonthLabel[]>((labels, week, weekIndex) => {
 			const firstActivity = week.find((activity) => activity !== undefined);
 
 			if (!firstActivity) {
 				throw new Error(
-					`Unexpected error: Week ${weekIndex + 1} is empty: [${week}].`,
+					`Unexpected error: Week ${weekIndex + 1} is empty: [${week}].`
 				);
 			}
 
@@ -195,7 +195,7 @@ const getMonthLabels = (
 					month: "short",
 				});
 				throw new Error(
-					`Unexpected error: undefined month label for ${monthName}.`,
+					`Unexpected error: undefined month label for ${monthName}.`
 				);
 			}
 
@@ -220,7 +220,6 @@ const getMonthLabels = (
 
 			return true;
 		});
-};
 
 export type ContributionGraphProps = HTMLAttributes<HTMLDivElement> & {
 	data: Activity[];
@@ -321,7 +320,7 @@ export const ContributionGraphBlock = ({
 
 	if (activity.level < 0 || activity.level > maxLevel) {
 		throw new RangeError(
-			`Provided activity level ${activity.level} for ${activity.date} is out of range. It must be between 0 and ${maxLevel}.`,
+			`Provided activity level ${activity.level} for ${activity.date} is out of range. It must be between 0 and ${maxLevel}.`
 		);
 	}
 
@@ -333,7 +332,7 @@ export const ContributionGraphBlock = ({
 				'data-[level="2"]:fill-muted-foreground/40',
 				'data-[level="3"]:fill-muted-foreground/60',
 				'data-[level="4"]:fill-muted-foreground/80',
-				className,
+				className
 			)}
 			data-count={activity.count}
 			data-date={activity.date}
@@ -373,7 +372,7 @@ export const ContributionGraphCalendar = ({
 
 	const monthLabels = useMemo(
 		() => getMonthLabels(weeks, labels.months),
-		[weeks, labels.months],
+		[weeks, labels.months]
 	);
 
 	return (
@@ -408,11 +407,12 @@ export const ContributionGraphCalendar = ({
 						}
 
 						return (
+							// biome-ignore lint/suspicious/noArrayIndexKey: essential key
 							<Fragment key={`${weekIndex}-${dayIndex}`}>
 								{children({ activity, dayIndex, weekIndex })}
 							</Fragment>
 						);
-					}),
+					})
 				)}
 			</svg>
 		</div>
@@ -428,7 +428,7 @@ export const ContributionGraphFooter = ({
 	<div
 		className={cn(
 			"flex flex-wrap gap-1 whitespace-nowrap sm:gap-x-4",
-			className,
+			className
 		)}
 		{...props}
 	/>
@@ -479,7 +479,7 @@ export const ContributionGraphLegend = ({
 
 	return (
 		<div
-			className={cn("ml-auto flex items-center gap-[3px]", className)}
+			className={cn("ml-auto flex items-center gap-0.75", className)}
 			{...props}
 		>
 			<span className="mr-1 text-muted-foreground">
@@ -487,8 +487,10 @@ export const ContributionGraphLegend = ({
 			</span>
 			{new Array(maxLevel + 1).fill(undefined).map((_, level) =>
 				children ? (
+					// biome-ignore lint/suspicious/noArrayIndexKey: static code lines never reorder
 					<Fragment key={level}>{children({ level })}</Fragment>
 				) : (
+					// biome-ignore lint/suspicious/noArrayIndexKey: static code lines never reorder
 					<svg height={blockSize} key={level} width={blockSize}>
 						<title>{`${level} contributions`}</title>
 						<rect
@@ -498,7 +500,7 @@ export const ContributionGraphLegend = ({
 								'data-[level="1"]:fill-muted-foreground/20',
 								'data-[level="2"]:fill-muted-foreground/40',
 								'data-[level="3"]:fill-muted-foreground/60',
-								'data-[level="4"]:fill-muted-foreground/80',
+								'data-[level="4"]:fill-muted-foreground/80'
 							)}
 							data-level={level}
 							height={blockSize}
@@ -507,7 +509,7 @@ export const ContributionGraphLegend = ({
 							width={blockSize}
 						/>
 					</svg>
-				),
+				)
 			)}
 			<span className="ml-1 text-muted-foreground">
 				{labels.legend?.more || "More"}

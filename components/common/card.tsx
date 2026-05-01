@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 export function Card({
 	image,
@@ -13,15 +14,21 @@ export function Card({
 }) {
 	return (
 		<a
-			href={link}
-			target="_blank"
-			rel="noreferrer"
+			className="group my-7 block select-none overflow-clip rounded-lg border border-border transition-colors hover:bg-secondary"
 			draggable={false}
-			className="group block rounded-lg overflow-clip select-none my-7 transition-colors hover:bg-secondary border border-border"
+			href={link}
+			rel="noreferrer"
+			target="_blank"
 		>
-			<img src={image} className="m-0 w-full aspect-[1.9/1] object-cover" />
+			<Image
+				alt="card image" // or derive from title/desc
+				className="m-0 aspect-[1.9/1] w-full object-cover"
+				height={315}
+				src={image}
+				width={600}
+			/>
 			{title && <p className="m-2 text-sm">{title}</p>}
-			{desc && <p className="m-2 opacity-80 text-xs">{desc}</p>}
+			{desc && <p className="m-2 text-xs opacity-80">{desc}</p>}
 			{link && <p className="m-2 text-muted-foreground text-xs">{link}</p>}
 		</a>
 	);

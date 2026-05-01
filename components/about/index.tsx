@@ -1,16 +1,16 @@
+import Link from "next/link";
+import { FaGithub, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { SiNotion } from "react-icons/si";
+import { getContributionsData } from "@/lib/actions";
+import { ContributionGraphClient } from "./contributions-graph";
 import { GitHubAchievements } from "./github-achievements";
 import Skills from "./skills";
-import { ContributionGraphClient } from "./contributions-graph";
-import { getContributionsData } from "@/lib/actions";
-import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram } from "react-icons/fa6";
-import { SiNotion } from "react-icons/si";
-import Link from "next/link";
 
-type social_link = {
-	name: string;
+interface social_link {
 	icon: React.ReactNode;
 	link: string;
-};
+	name: string;
+}
 
 const SOCIAL_LINKS: social_link[] = [
 	{
@@ -44,7 +44,7 @@ export default async function About() {
 	const contributionData = await getContributionsData();
 	return (
 		<div>
-			<div className=" flex flex-col gap-y-2 my-8">
+			<div className="my-8 flex flex-col gap-y-2">
 				<ContributionGraphClient
 					contributions={contributionData.contributions}
 					totalCount={contributionData.total}
@@ -62,14 +62,14 @@ export default async function About() {
 
 			<div className="screen-line-top screen-line-bottom flex w-full before:z-1 after:z-1">
 				<div className="flex items-center -space-x-px">
-					{SOCIAL_LINKS.map((item, index) => (
+					{SOCIAL_LINKS.map((item, _index) => (
 						<Link
-							key={item.name}
-							className="flex items-center justify-center p-3 text-muted-foreground transition-[color] hover:text-foreground first:rounded-l-md last:rounded-r-md border-y border-r border-border first:border-l"
-							href={item.link}
-							target="_blank"
-							rel="noopener"
 							aria-label={item.name}
+							className="flex items-center justify-center border-border border-y border-r p-3 text-muted-foreground transition-[color] first:rounded-l-md first:border-l last:rounded-r-md hover:text-foreground"
+							href={item.link}
+							key={item.name}
+							rel="noopener"
+							target="_blank"
 						>
 							{item.icon}
 						</Link>

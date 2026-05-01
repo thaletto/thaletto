@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import {
 	HoverCard,
 	HoverCardContent,
@@ -10,25 +11,24 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
-import Image from "next/image";
 import thatswhatshesaid from "@/public/thats-what-she-said.gif";
 
 export default function ThatsWhatSheSaid() {
 	const isMobile = useIsMobile();
 
 	const Trigger = (
-		<span className="font-serif underline cursor-pointer">
+		<span className="cursor-pointer font-serif underline">
 			that's what she said
 		</span>
 	);
 
 	const Content = (
 		<Image
-			src={thatswhatshesaid}
 			alt="that's what she said"
 			className="rounded-lg"
-			unoptimized
 			priority
+			src={thatswhatshesaid}
+			unoptimized
 		/>
 	);
 
@@ -37,9 +37,9 @@ export default function ThatsWhatSheSaid() {
 			<Popover>
 				<PopoverTrigger>{Trigger}</PopoverTrigger>
 				<PopoverContent
+					className="max-w-50 rounded-lg p-0"
 					side="right"
 					sideOffset={8}
-					className="p-0 max-w-50 rounded-lg"
 				>
 					{Content}
 				</PopoverContent>
@@ -50,7 +50,7 @@ export default function ThatsWhatSheSaid() {
 	return (
 		<HoverCard>
 			<HoverCardTrigger>{Trigger}</HoverCardTrigger>
-			<HoverCardContent side="right" sideOffset={8} className="p-0 rounded-lg">
+			<HoverCardContent className="rounded-lg p-0" side="right" sideOffset={8}>
 				{Content}
 			</HoverCardContent>
 		</HoverCard>

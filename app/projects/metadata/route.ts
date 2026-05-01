@@ -1,6 +1,7 @@
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
+import { MDX_REGEX } from "@/lib/const";
 
 export async function GET() {
 	const dir = path.join(process.cwd(), "app", "projects", "_projects");
@@ -15,23 +16,25 @@ export async function GET() {
 					try {
 						const mod = await import(`@/app/projects/_projects/${file}`);
 
-						if (!mod.metadata || mod.metadata.draft) return null;
+						if (!mod.metadata || mod.metadata.draft) {
+							return null;
+						}
 
 						return {
-							slug: file.replace(/\.mdx$/, ""),
+							slug: file.replace(MDX_REGEX, ""),
 							...mod.metadata,
 						};
 					} catch {
 						return null;
 					}
-				}),
+				})
 		);
 
 		return NextResponse.json(items);
 	} catch {
 		return NextResponse.json(
 			{ error: "Failed to load projects" },
-			{ status: 500 },
+			{ status: 500 }
 		);
 	}
 }
