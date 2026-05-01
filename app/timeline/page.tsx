@@ -69,7 +69,6 @@ export default async function Page() {
 			animate={true}
 			className="mx-auto max-w-6xl"
 			items={items}
-			size="lg"
 		/>
 	);
 }
