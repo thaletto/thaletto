@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import {
 	Popover,
 	PopoverContent,
@@ -121,7 +120,7 @@ function AchievementBadge({
 			<TooltipOrPopover
 				Content={<span>{description}</span>}
 				Trigger={
-					<Image
+					<img
 						alt={name}
 						className="h-16 w-16 rounded-full object-cover"
 						height={64}
