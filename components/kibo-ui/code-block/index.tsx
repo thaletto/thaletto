@@ -269,17 +269,17 @@ const highlight = (
 		],
 	});
 
-type CodeBlockData = {
-	language: string;
-	filename: string;
+interface CodeBlockData {
 	code: string;
-};
+	filename: string;
+	language: string;
+}
 
-type CodeBlockContextType = {
-	value: string | undefined;
-	onValueChange: ((value: string) => void) | undefined;
+interface CodeBlockContextType {
 	data: CodeBlockData[];
-};
+	onValueChange: ((value: string) => void) | undefined;
+	value: string | undefined;
+}
 
 const CodeBlockContext = createContext<CodeBlockContextType>({
 	value: undefined,
@@ -510,6 +510,7 @@ const CodeBlockFallback = ({ children, ...props }: CodeBlockFallbackProps) => (
 					?.toString()
 					.split("\n")
 					.map((line, i) => (
+						// biome-ignore lint/suspicious/noArrayIndexKey: static code lines never reorder
 						<span className="line" key={i}>
 							{line}
 						</span>
@@ -591,7 +592,6 @@ export const CodeBlockContent = ({
 
 		highlight(children as string, language, themes)
 			.then(setHtml)
-			// biome-ignore lint/suspicious/noConsole: "it's fine"
 			.catch(console.error);
 	}, [children, themes, syntaxHighlighting, language]);
 

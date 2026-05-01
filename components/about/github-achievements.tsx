@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import {
 	Popover,
 	PopoverContent,
@@ -57,7 +57,6 @@ const ACHIEVEMENTS = {
 } as const;
 
 type AchievementKey = keyof typeof ACHIEVEMENTS;
-
 type AchievementLevels = {
 	[K in AchievementKey]: (typeof ACHIEVEMENTS)[K] extends { maxLevel: 1 }
 		? 0 | 1
@@ -120,22 +119,17 @@ function AchievementBadge({
 	return (
 		<div className={cn("relative shrink-0", className)}>
 			<TooltipOrPopover
+				Content={<span>{description}</span>}
 				Trigger={
-					<img
+					<Image
 						alt={name}
 						className="h-16 w-16 rounded-full object-cover"
+						height={64}
 						src={src}
-					/>
-				}
-				Trigger={
-					<img
-						alt={name}
-						className="h-16 w-16 rounded-full object-cover"
-						src={src}
+						width={64}
 					/>
 				}
 			/>
-
 			{level >= 2 && (
 				<div
 					className={cn(

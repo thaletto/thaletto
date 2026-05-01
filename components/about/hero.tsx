@@ -45,6 +45,7 @@ export default function Hero() {
 					onClick={handleClick}
 					onTouchEnd={handleTouchEnd}
 					onTouchStart={handleTouchStart}
+					type="button"
 				>
 					<Image
 						alt="Laxman K R"

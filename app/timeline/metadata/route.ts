@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { NextResponse } from "next/server";
+import { MDX_REGEX } from "@/lib/const";
 
 export async function GET() {
 	const dir = path.join(process.cwd(), "app", "timeline", "_timeline");
@@ -20,7 +21,7 @@ export async function GET() {
 						}
 
 						return {
-							slug: file.replace(/\.mdx$/, ""),
+							slug: file.replace(MDX_REGEX, ""),
 							...mod.metadata,
 						};
 					} catch {

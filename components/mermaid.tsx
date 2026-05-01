@@ -10,7 +10,7 @@ export function Mermaid({ children }: { children: string }) {
 			startOnLoad: false,
 			theme: "neutral",
 		});
-		mermaid.render("mermaid-" + Date.now(), children).then(({ svg }) => {
+		mermaid.render(`mermaid-${Date.now()}`, children).then(({ svg }) => {
 			if (ref.current) {
 				ref.current.innerHTML = svg;
 			}

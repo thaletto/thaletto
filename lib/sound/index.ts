@@ -38,10 +38,6 @@ class SoundSystem {
 	private chordBaseIndex = 0;
 	private chordBaseOctave = 0;
 
-	// Error management
-	private isPlayingFailure = false;
-	private isPlayingInterrupt = false;
-
 	// Small helpers
 	private inChordWindow(now = Date.now()) {
 		return (

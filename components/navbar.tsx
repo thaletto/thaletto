@@ -24,7 +24,7 @@ function Item(props: React.ComponentProps<typeof Link>) {
 	const isActive =
 		href === "/"
 			? pathname === "/"
-			: pathname === href || pathname.startsWith(href + "/");
+			: pathname === href || pathname.startsWith(`${href}/`);
 	return (
 		<li
 			className={cn(

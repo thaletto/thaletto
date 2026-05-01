@@ -1,5 +1,5 @@
-import { readFile } from "fs/promises";
-import path from "path";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 

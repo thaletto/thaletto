@@ -6,22 +6,22 @@ import type { TimelineElement } from "@/types";
 import { Timeline, TimelineItem } from "./timeline";
 
 interface TimelineLayoutProps {
+	_connectorColor?: "primary" | "secondary" | "muted" | "accent";
+	_customIcon?: React.ReactNode;
+	_iconColor?: "primary" | "secondary" | "muted" | "accent";
+	_size?: "sm" | "md" | "lg";
 	animate?: boolean;
 	className?: string;
-	connectorColor?: "primary" | "secondary" | "muted" | "accent";
-	customIcon?: React.ReactNode;
-	iconColor?: "primary" | "secondary" | "muted" | "accent";
 	items: TimelineElement[];
-	size?: "sm" | "md" | "lg";
 }
 
 export const TimelineLayout = ({
 	items,
-	size = "md",
-	iconColor,
-	customIcon,
+	_size = "md",
+	_iconColor,
+	_customIcon,
 	animate = true,
-	connectorColor,
+	_connectorColor,
 	className,
 }: TimelineLayoutProps) => {
 	const reversedItems = [...items].reverse();
@@ -32,6 +32,7 @@ export const TimelineLayout = ({
 				<motion.div
 					animate={animate ? { opacity: 1, y: 0 } : false}
 					initial={animate ? { opacity: 0, y: 20 } : false}
+					// biome-ignore lint/suspicious/noArrayIndexKey: fine
 					key={index}
 					transition={{
 						duration: 0.5,

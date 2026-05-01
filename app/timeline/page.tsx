@@ -1,7 +1,8 @@
-import { promises as fs } from "fs";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
-import path from "path";
 import { TimelineLayout } from "@/components/timeline/timeline-layout";
+import { MDX_REGEX } from "@/lib/const";
 import type { TimelineElement } from "@/types";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ function toSortableDate(value: string) {
 	const normalized = value.replace(".", "-");
 	const date = new Date(normalized);
 
-	return isNaN(date.getTime()) ? 0 : date.getTime();
+	return Number.isNaN(date.getTime()) ? 0 : date.getTime();
 }
 
 export default async function Page() {
@@ -34,10 +35,10 @@ export default async function Page() {
 			continue;
 		}
 
-		const module = await import("./_timeline/" + file);
+		const module = await import(`./_timeline/${file}`);
 
 		if (!module.metadata) {
-			throw new Error("Missing `metadata` in " + file);
+			throw new Error(`Missing \`metadata\` in ${file}`);
 		}
 		if (module.metadata.draft) {
 			continue;
@@ -55,7 +56,7 @@ export default async function Page() {
 			description: module.metadata.description ?? "",
 			content: module.metadata.content,
 			image: module.metadata.image,
-			slug: file.replace(/\.mdx$/, ""),
+			slug: file.replace(MDX_REGEX, ""),
 		});
 	}
 

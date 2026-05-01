@@ -1,9 +1,10 @@
 import { promises as fs } from "node:fs";
-import type { Metadata } from "next";
 import path from "node:path";
+import type { Metadata } from "next";
 import SvgIcon from "@/components/common/logo";
 import { NavLink } from "@/components/nav-link";
 import { Badge } from "@/components/ui/badge";
+import { MDX_REGEX } from "@/lib/const";
 import { getCompanyLogoSrc } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -18,13 +19,13 @@ const projectsDirectory = path.join(
 	"_projects"
 );
 
-type ProjectListItemProps = {
-	slug: string;
-	title: string;
-	tags?: string[];
+interface ProjectListItemProps {
 	company?: string;
 	description?: string;
-};
+	slug: string;
+	tags?: string[];
+	title: string;
+}
 
 export function ProjectListItem({
 	slug,
@@ -94,17 +95,17 @@ export default async function Page() {
 			continue;
 		}
 
-		const module = await import("./_projects/" + project);
+		const module = await import(`./_projects/${project}`);
 
 		if (!module.metadata) {
-			throw new Error("Missing `metadata` in " + project);
+			throw new Error(`Missing \`metadata\` in ${project}`);
 		}
 		if (module.metadata.draft) {
 			continue;
 		}
 
 		items.push({
-			slug: project.replace(/\.mdx$/, ""),
+			slug: project.replace(MDX_REGEX, ""),
 			title: module.metadata.title,
 			sort: Number(module.metadata.sort || 0),
 			tags: module.metadata.tags ?? [],

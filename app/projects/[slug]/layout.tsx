@@ -38,10 +38,10 @@ export default async function Layout({
 
 				{metadata?.tags.length > 0 && (
 					<div className="mt-2 flex flex-wrap gap-1">
-						{metadata?.tags.map((tag: string, index: number) => (
+						{metadata?.tags.map((tag: string) => (
 							<Badge
 								className="rounded-sm px-2 py-0.5 text-xs"
-								key={index}
+								key={tag}
 								variant="default"
 							>
 								{tag}

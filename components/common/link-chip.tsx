@@ -12,7 +12,8 @@ import {
 import { SiNotion } from "react-icons/si";
 import { Badge } from "../ui/badge";
 
-export type LinkProps = {
+export interface LinkProps {
+	className?: string;
 	icon?:
 		| "gdrive"
 		| "github"
@@ -35,8 +36,7 @@ export type LinkProps = {
 		| "ghost"
 		| null
 		| undefined;
-	className?: string;
-};
+}
 
 export default function LinkChip({
 	icon,

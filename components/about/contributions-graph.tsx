@@ -68,8 +68,10 @@ export function ContributionGraphClient({
 			<ContributionGraphCalendar className="cursor-pointer">
 				{({ activity, dayIndex, weekIndex }) => (
 					<g
+						aria-label="Github contributions made on the day"
 						onMouseEnter={() => handleMouseEnter(activity)}
 						onMouseLeave={handleMouseLeave}
+						tabIndex={0}
 					>
 						<ContributionGraphBlock
 							activity={activity}
@@ -93,7 +95,13 @@ export function ContributionGraphClient({
 				</ContributionGraphTotalCount>
 				<ContributionGraphLegend>
 					{({ level }) => (
-						<svg height={12} width={12}>
+						<svg
+							aria-label={`Contribution level ${level}`}
+							height={12}
+							role="img"
+							width={12}
+						>
+							<title>{`Contribution level ${level}`}</title>
 							<rect
 								className={cn(
 									"stroke-[1px] stroke-border",

@@ -6,11 +6,11 @@ import { ContributionGraphClient } from "./contributions-graph";
 import { GitHubAchievements } from "./github-achievements";
 import Skills from "./skills";
 
-type social_link = {
-	name: string;
+interface social_link {
 	icon: React.ReactNode;
 	link: string;
-};
+	name: string;
+}
 
 const SOCIAL_LINKS: social_link[] = [
 	{
@@ -62,7 +62,7 @@ export default async function About() {
 
 			<div className="screen-line-top screen-line-bottom flex w-full before:z-1 after:z-1">
 				<div className="flex items-center -space-x-px">
-					{SOCIAL_LINKS.map((item, index) => (
+					{SOCIAL_LINKS.map((item, _index) => (
 						<Link
 							aria-label={item.name}
 							className="flex items-center justify-center border-border border-y border-r p-3 text-muted-foreground transition-[color] first:rounded-l-md first:border-l last:rounded-r-md hover:text-foreground"

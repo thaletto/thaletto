@@ -74,7 +74,6 @@ export function Timeline({
 /* ---------------------------------------------
  * TimelineItem
  * -------------------------------------------- */
-type Status = "completed" | "in-progress" | "pending";
 
 export function TimelineItem({
 	startDate,
@@ -85,7 +84,6 @@ export function TimelineItem({
 	content,
 	image,
 	slug,
-	status = "completed",
 	showConnector = true,
 }: {
 	startDate?: string;
@@ -96,7 +94,6 @@ export function TimelineItem({
 	content?: React.ReactNode;
 	image?: string;
 	slug?: string;
-	status?: Status;
 	showConnector?: boolean;
 }) {
 	const isMobile = useIsMobile();
@@ -120,15 +117,17 @@ export function TimelineItem({
 		return { durationHeight: dHeight, gapHeight: gHeight };
 	}, [startDate, endDate, nextEndDate]);
 
-	const formattedStartDate = startDate
-		? formatDate(parseDate(startDate), "MMMYYYY")
-		: "";
-	const formattedEndDate =
-		endDate === "Present"
-			? "Present"
-			: endDate
-				? formatDate(parseDate(endDate), "MMMYYYY")
-				: "";
+	let formattedStartDate = "";
+	if (startDate) {
+		formattedStartDate = formatDate(parseDate(startDate), "MMMYYYY");
+	}
+
+	let formattedEndDate = "";
+	if (endDate === "Present") {
+		formattedEndDate = "Present";
+	} else if (endDate) {
+		formattedEndDate = formatDate(parseDate(endDate), "MMMYYYY");
+	}
 
 	return (
 		<li
@@ -174,11 +173,11 @@ export function TimelineItem({
 				)}
 
 				{/* Top Dot (End Date) */}
-				<TimelineDot status={status} />
+				<TimelineDot />
 
 				{/* Bottom Dot (Start Date) */}
 				<div className="absolute bottom-2 left-1/2 -translate-x-1/2">
-					<TimelineDot status="completed" />
+					<TimelineDot />
 				</div>
 			</div>
 
@@ -230,7 +229,7 @@ export function TimelineItem({
 /* ---------------------------------------------
  * TimelineDot
  * -------------------------------------------- */
-function TimelineDot({ status }: { status: Status }) {
+function TimelineDot() {
 	return (
 		<span
 			className={cn(
@@ -258,7 +257,13 @@ function TimelineImage({
 }) {
 	const cardContent = (
 		<div className="w-full max-w-sm rotate-1 bg-card p-3 text-card-foreground shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
-			<img alt={title} className="h-48 w-full object-cover" src={image} />
+			<img
+				alt={title}
+				className="h-48 w-full object-cover"
+				height={"12rem"}
+				src={image}
+				width={"100%"}
+			/>
 
 			<div className="mt-3 text-center">
 				{title && (

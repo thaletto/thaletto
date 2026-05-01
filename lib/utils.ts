@@ -13,7 +13,7 @@ export function getCompanyLogoSrc(company?: string) {
 	switch (company.toLowerCase()) {
 		case "tcs":
 			return "/company/tcs.svg";
-		case "GCP":
+		case "gcp":
 			return "/company/gcp.svg";
 		default:
 			return "/company/office.svg";

@@ -23,28 +23,28 @@ import {
 } from "react";
 import { cn } from "@/lib/utils";
 
-export type Activity = {
-	date: string;
+export interface Activity {
 	count: number;
+	date: string;
 	level: number;
-};
+}
 
 type Week = Array<Activity | undefined>;
 
-export type Labels = {
-	months?: string[];
-	weekdays?: string[];
-	totalCount?: string;
+export interface Labels {
 	legend?: {
 		less?: string;
 		more?: string;
 	};
-};
+	months?: string[];
+	totalCount?: string;
+	weekdays?: string[];
+}
 
-type MonthLabel = {
-	weekIndex: number;
+interface MonthLabel {
 	label: string;
-};
+	weekIndex: number;
+}
 
 const DEFAULT_MONTH_LABELS = [
 	"Jan",
@@ -71,22 +71,22 @@ const DEFAULT_LABELS: Labels = {
 	},
 };
 
-type ContributionGraphContextType = {
-	data: Activity[];
-	weeks: Week[];
+interface ContributionGraphContextType {
 	blockMargin: number;
 	blockRadius: number;
 	blockSize: number;
+	data: Activity[];
 	fontSize: number;
-	labels: Labels;
+	height: number;
 	labelHeight: number;
+	labels: Labels;
 	maxLevel: number;
 	totalCount: number;
 	weekStart: WeekDay;
-	year: number;
+	weeks: Week[];
 	width: number;
-	height: number;
-};
+	year: number;
+}
 
 const ContributionGraphContext =
 	createContext<ContributionGraphContextType | null>(null);
@@ -407,6 +407,7 @@ export const ContributionGraphCalendar = ({
 						}
 
 						return (
+							// biome-ignore lint/suspicious/noArrayIndexKey: essential key
 							<Fragment key={`${weekIndex}-${dayIndex}`}>
 								{children({ activity, dayIndex, weekIndex })}
 							</Fragment>
@@ -478,7 +479,7 @@ export const ContributionGraphLegend = ({
 
 	return (
 		<div
-			className={cn("ml-auto flex items-center gap-[3px]", className)}
+			className={cn("ml-auto flex items-center gap-0.75", className)}
 			{...props}
 		>
 			<span className="mr-1 text-muted-foreground">
@@ -486,8 +487,10 @@ export const ContributionGraphLegend = ({
 			</span>
 			{new Array(maxLevel + 1).fill(undefined).map((_, level) =>
 				children ? (
+					// biome-ignore lint/suspicious/noArrayIndexKey: static code lines never reorder
 					<Fragment key={level}>{children({ level })}</Fragment>
 				) : (
+					// biome-ignore lint/suspicious/noArrayIndexKey: static code lines never reorder
 					<svg height={blockSize} key={level} width={blockSize}>
 						<title>{`${level} contributions`}</title>
 						<rect

@@ -1,7 +1,8 @@
-import { promises as fs } from "fs";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
-import path from "path";
 import { NavLink } from "@/components/nav-link";
+import { MDX_REGEX } from "@/lib/const";
 
 export const metadata: Metadata = {
 	title: "Writings",
@@ -15,25 +16,33 @@ const articlesDirectory = path.join(
 	"_articles"
 );
 
+interface Item {
+	date: string;
+	description: string;
+	slug: string;
+	sort: number;
+	title: string;
+}
+
 export default async function Page() {
 	const articles = await fs.readdir(articlesDirectory);
 
-	const items = [];
+	const items: Item[] = [];
 	for (const article of articles) {
 		if (!article.endsWith(".mdx")) {
 			continue;
 		}
-		const module = await import("./_articles/" + article);
+		const module = await import(`./_articles/${article}`);
 
 		if (!module.metadata) {
-			throw new Error("Missing `metadata` in " + article);
+			throw new Error(`Missing \`metadata\` in ${article}`);
 		}
 		if (module.metadata.draft) {
 			continue;
 		}
 
 		items.push({
-			slug: article.replace(/\.mdx$/, ""),
+			slug: article.replace(MDX_REGEX, ""),
 			title: module.metadata.title,
 			date: module.metadata.date || "-",
 			sort: Number(module.metadata.date?.replaceAll(".", "") || 0),
