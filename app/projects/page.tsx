@@ -6,6 +6,8 @@ import { NavLink } from "@/components/nav-link";
 import { Badge } from "@/components/ui/badge";
 import { MDX_REGEX } from "@/lib/const";
 import { getCompanyLogoSrc } from "@/lib/utils";
+import { formatDate } from "@/lib/date";
+import { CalendarDays } from "lucide-react";
 
 export const metadata: Metadata = {
 	title: "Projects",
@@ -25,6 +27,8 @@ interface ProjectListItemProps {
 	slug: string;
 	tags?: string[];
 	title: string;
+	startDate: string;
+	endDate: string;
 }
 
 export function ProjectListItem({
@@ -33,8 +37,12 @@ export function ProjectListItem({
 	tags = [],
 	company,
 	description,
+	startDate,
+	endDate,
 }: ProjectListItemProps) {
 	const companyIcon = getCompanyLogoSrc(company);
+	const start = formatDate(startDate, "MMMYYYY");
+	const end = endDate ? formatDate(endDate, "MMMYYYY") : "Present";
 
 	return (
 		<li className="my-4 font-medium">
@@ -43,18 +51,24 @@ export function ProjectListItem({
 				href={`/projects/${slug}`}
 			>
 				<div className="flex min-w-0 flex-1 flex-col gap-2">
-					<div className="flex items-center gap-2">
-						{companyIcon && (
-							<SvgIcon
-								className="size-6 shrink-0"
-								name={company ?? ""}
-								src={companyIcon}
-							/>
-						)}
+					<div className="flex items-center justify-between">
+						<span className="flex items-center gap-2 min-w-0">
+							{companyIcon && (
+								<SvgIcon
+									className="size-6 shrink-0"
+									name={company ?? ""}
+									src={companyIcon}
+								/>
+							)}
 
-						<h1 className="text-balance font-semibold text-base md:text-xl">
-							{title}
-						</h1>
+							<h1 className="text-balance font-semibold text-base md:text-xl truncate">
+								{title}
+							</h1>
+						</span>
+						<Badge variant="outline" className="rounded-sm px-2 py-1 text-sm">
+							<CalendarDays className="size-4 mr-0.5" />
+							{start} &rarr; {end}
+						</Badge>
 					</div>
 
 					<p className="font-normal text-muted-foreground">{description}</p>
@@ -88,6 +102,8 @@ export default async function Page() {
 		tags?: string[];
 		company: string;
 		description?: string;
+		startDate: string;
+		endDate: string;
 	}[] = [];
 
 	for (const project of projects) {
@@ -111,6 +127,8 @@ export default async function Page() {
 			tags: module.metadata.tags ?? [],
 			company: module.metadata.company,
 			description: module.metadata.description,
+			startDate: module.metadata.startDate,
+			endDate: module.metadata.endDate,
 		});
 	}
 
@@ -127,6 +145,8 @@ export default async function Page() {
 						slug={item.slug}
 						tags={item.tags}
 						title={item.title}
+						startDate={item.startDate}
+						endDate={item.endDate}
 					/>
 				))}
 			</ul>
