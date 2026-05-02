@@ -38,7 +38,7 @@ const ENTER_DELAY_MS = 200;
  * @returns null (renders nothing — side-effect only)
  */
 export function NavSoundTrigger() {
-	const _pathname = usePathname();
+	const pathname = usePathname();
 	const isFirst = useRef(true);
 	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -62,7 +62,7 @@ export function NavSoundTrigger() {
 				clearTimeout(timerRef.current);
 			}
 		};
-	}, []);
+	}, [pathname]);
 
 	return null;
 }
