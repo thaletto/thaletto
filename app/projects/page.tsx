@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { MDX_REGEX } from "@/lib/const";
 import { getCompanyLogoSrc } from "@/lib/utils";
 import { formatDate } from "@/lib/date";
-import { CalendarDays } from "lucide-react";
 
 export const metadata: Metadata = {
 	title: "Projects",
@@ -51,25 +50,23 @@ export function ProjectListItem({
 				href={`/projects/${slug}`}
 			>
 				<div className="flex min-w-0 flex-1 flex-col gap-2">
-					<div className="flex items-center justify-between">
-						<span className="flex items-center gap-2 min-w-0">
-							{companyIcon && (
-								<SvgIcon
-									className="size-6 shrink-0"
-									name={company ?? ""}
-									src={companyIcon}
-								/>
-							)}
+					<div className="flex items-center gap-2">
+						{companyIcon && (
+							<SvgIcon
+								className="size-6 shrink-0"
+								name={company ?? ""}
+								src={companyIcon}
+							/>
+						)}
 
-							<h1 className="text-balance font-semibold text-base md:text-xl truncate">
-								{title}
-							</h1>
-						</span>
-						<Badge variant="outline" className="rounded-sm px-2 py-1 text-sm">
-							<CalendarDays className="size-4 mr-0.5" />
-							{start} &rarr; {end}
-						</Badge>
+						<h1 className="text-balance font-semibold text-base md:text-xl">
+							{title}
+						</h1>
 					</div>
+
+					<p className="font-normal text-muted-foreground">
+						{start} &rarr; {end}
+					</p>
 
 					<p className="font-normal text-muted-foreground">{description}</p>
 
