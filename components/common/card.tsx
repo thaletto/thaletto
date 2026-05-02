@@ -14,7 +14,7 @@ export function Card({
 }) {
 	return (
 		<a
-			className="group my-7 block select-none overflow-clip rounded-lg border border-border transition-colors hover:bg-secondary"
+			className="group block select-none overflow-clip rounded-lg border border-border transition-colors hover:bg-secondary"
 			draggable={false}
 			href={link}
 			rel="noreferrer"

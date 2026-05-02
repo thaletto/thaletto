@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 interface SvgIconProps {
 	className?: string;
 	height?: number | string;
@@ -15,7 +13,7 @@ export default function SvgIcon({
 	className,
 }: SvgIconProps) {
 	return (
-		<Image
+		<img
 			alt={name}
 			className={className}
 			loading="lazy"
