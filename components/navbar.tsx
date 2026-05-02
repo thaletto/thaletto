@@ -21,10 +21,13 @@ function Item(props: React.ComponentProps<typeof Link>) {
 		throw new Error("`href` must be a string");
 	}
 
-	const isActive =
-		href === "/"
-			? pathname === "/"
-			: pathname === href || pathname.startsWith(`${href}/`);
+	const normalizedPathname = pathname ?? "/";
+	let isActive: boolean;
+	if (href === "/") {
+		isActive = normalizedPathname === "/";
+	} else {
+		isActive = normalizedPathname.startsWith(href);
+	}
 	return (
 		<li
 			className={cn(
