@@ -28,10 +28,10 @@ export default async function Layout({
 				<p className="font-serif text-sm">
 					{startDate} &rarr; {endDate === "Present" ? "Present" : endDate}
 				</p>
+				{metadata.image && (
+					<Card image={metadata.image} title={metadata?.imageLabel} />
+				)}
 			</header>
-			{metadata.image && (
-				<Card image={metadata.image} title={metadata?.imageLabel} />
-			)}
 			{children}
 		</article>
 	);
