@@ -5,11 +5,14 @@ import SvgIcon from "@/components/common/logo";
 import { NavLink } from "@/components/nav-link";
 import { Badge } from "@/components/ui/badge";
 import { MDX_REGEX } from "@/lib/const";
-import { getCompanyLogoSrc } from "@/lib/utils";
 import { formatDate } from "@/lib/date";
+import { getCompanyLogoSrc } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Projects",
+	openGraph: {
+		images: ["/og/projects.png"],
+	},
 };
 
 // In the future we can have a pagination here e.g. /1/*.mdx
@@ -23,11 +26,11 @@ const projectsDirectory = path.join(
 interface ProjectListItemProps {
 	company?: string;
 	description?: string;
+	endDate?: string;
 	slug: string;
+	startDate: string;
 	tags?: string[];
 	title: string;
-	startDate: string;
-	endDate: string;
 }
 
 export function ProjectListItem({
@@ -138,12 +141,12 @@ export default async function Page() {
 					<ProjectListItem
 						company={item.company}
 						description={item.description}
+						endDate={item.endDate}
 						key={item.slug}
 						slug={item.slug}
+						startDate={item.startDate}
 						tags={item.tags}
 						title={item.title}
-						startDate={item.startDate}
-						endDate={item.endDate}
 					/>
 				))}
 			</ul>

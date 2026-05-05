@@ -7,6 +7,9 @@ import type { TimelineElement } from "@/types";
 
 export const metadata: Metadata = {
 	title: "Timeline",
+	openGraph: {
+		images: ["/og/timeline.png"],
+	},
 };
 
 // Timeline directory

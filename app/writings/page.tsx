@@ -6,6 +6,9 @@ import { MDX_REGEX } from "@/lib/const";
 
 export const metadata: Metadata = {
 	title: "Writings",
+	openGraph: {
+		images: ["/og/writings.png"],
+	},
 };
 
 // In the future we can have a pagination here e.g. /1/*.mdx

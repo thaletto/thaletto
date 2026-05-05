@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { Card } from "@/components/common/card";
 import SvgIcon from "@/components/common/logo";
 import { Badge } from "@/components/ui/badge";
-import { getCompanyLogoSrc } from "@/lib/utils";
 import { formatDate } from "@/lib/date";
+import { getCompanyLogoSrc } from "@/lib/utils";
 
 export default async function Layout({
 	children,

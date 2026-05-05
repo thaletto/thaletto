@@ -40,5 +40,8 @@ export async function generateMetadata(props: {
 	return {
 		title: metadata.title,
 		description: metadata.description,
+		openGraph: {
+			images: [`/og/projects/${params.slug}.png`],
+		},
 	};
 }

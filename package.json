@@ -5,6 +5,7 @@
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.2.4",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
+    "@resvg/resvg-js": "^2.6.2",
     "@shikijs/transformers": "^4.0.2",
     "@tailwindcss/postcss": "4.2.4",
     "@types/mdx": "^2.0.13",
@@ -23,6 +24,7 @@
     "react-katex": "^3.1.0",
     "recharts": "3.8.1",
     "redis": "^5.12.1",
+    "satori": "^0.26.0",
     "sharp": "^0.34.5",
     "shiki": "^4.0.2",
     "tailwind-merge": "^3.5.0",
@@ -42,12 +44,14 @@
   "name": "thaletto",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "bun scripts/generate-og.tsx",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "biome format --write",
-    "check": "ultracite check",
-    "fix": "ultracite fix"
+    "biome:format": "biome format --write",
+    "biome:check": "biome check --write",
+    "ultracite:check": "ultracite check",
+    "ultracite:fix": "ultracite fix"
   },
   "version": "0.1.0",
   "private": true
