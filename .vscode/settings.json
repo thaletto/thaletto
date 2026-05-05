@@ -50,5 +50,18 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",
     "source.organizeImports.biome": "explicit"
+  },
+  "files.exclude": {
+    ".agents": true,
+    ".claude": true,
+    ".github": true,
+    ".opencode": true,
+    ".vscode": true,
+    ".zed": true,
+    "biome.json": true,
+    "LICENSE": true,
+    "next-env.d.ts": true,
+    "components.json": true,
+    "node_modules": true,
   }
 }
