@@ -41,3 +41,6 @@ next-env.d.ts
 
 # v0
 .v0
+
+# Opencode
+.opencode
