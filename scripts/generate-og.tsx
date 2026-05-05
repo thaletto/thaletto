@@ -39,14 +39,9 @@ async function getContentItems() {
 	);
 	try {
 		const files = await fs.readdir(projectsDir);
-		// TEMP: Log files for debugging
-		console.log("Project files:", files);
-
 		for (const file of files.filter((f) => f.endsWith(".mdx"))) {
 			const content = await fs.readFile(path.join(projectsDir, file), "utf-8");
 			const meta = parseMDXMetadata(content);
-			// TEMP: Log metadata for debugging
-			console.log("Project meta:", file, meta);
 
 			if (meta.title) {
 				items.push({
