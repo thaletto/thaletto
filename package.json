@@ -44,7 +44,7 @@
   "name": "thaletto",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "bun scripts/generate-og.tsx",
+    "prebuild": "bun src/scripts/generate-og.tsx",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

@@ -1,0 +1,14 @@
+TypeScript
+JavaScript
+Python
+Next.js
+React
+FastAPI
+Node.js
+TailwindCSS
+LangChain
+LangGraph
+Microsoft Autogen
+Google ADK
+AI SDK
+PostgreSQL
