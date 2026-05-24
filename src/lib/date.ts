@@ -92,3 +92,72 @@ export function formatDate(
 			return join(DD, MM);
 	}
 }
+
+/**
+ * Converts date string into `Date` object
+ *
+ * @param dateStr : `Date` | `string`
+ *
+ * @returns `Date`
+ */
+export function parseDate(dateStr?: Exclude<DateInput, number>) {
+	if (dateStr == null || dateStr === "Present") {
+		return new Date();
+	}
+	if (dateStr instanceof Date) {
+		return dateStr;
+	}
+	const parts = dateStr.split(".");
+	if (parts.length === 2) {
+		return new Date(Number(parts[0]), Number(parts[1]) - 1);
+	}
+	if (parts.length === 3) {
+		return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+	}
+	return new Date(dateStr);
+}
+
+interface Options {
+	format: "days" | "weeks" | "month" | "years";
+}
+
+/**
+ * Returns the difference between two Date
+ *
+ * @param startDate : `Date` | string
+ * @param endDate : `Date` | string
+ * @param options : `Options`
+ *
+ * @returns number
+ */
+export function calculateDateDiff(
+	startDate?: Exclude<DateInput, number>,
+	endDate?: Exclude<DateInput, number>,
+	options: Options = {
+		format: "month",
+	}
+) {
+	const start = parseDate(startDate);
+	const end = parseDate(endDate);
+
+	const diffMs = Math.abs(end.getTime() - start.getTime());
+	const DAY = 1000 * 60 * 60 * 24;
+	switch (options.format) {
+		case "days":
+			return Math.floor(diffMs / DAY);
+		case "weeks":
+			return Math.floor(diffMs / (DAY * 7));
+		case "month":
+			return (
+				(end.getFullYear() - start.getFullYear()) * 12 +
+				(end.getMonth() - start.getMonth())
+			);
+		case "years":
+			return end.getFullYear() - start.getFullYear();
+		default:
+			return (
+				(end.getFullYear() - start.getFullYear()) * 12 +
+				(end.getMonth() - start.getMonth())
+			);
+	}
+}

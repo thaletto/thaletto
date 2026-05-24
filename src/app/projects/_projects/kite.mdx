@@ -5,6 +5,16 @@ export const metadata = {
   image: "/projects/kite.webp",
   startDate: "2026.03",
   endDate: "2026.03",
+  links: [
+    {
+        label: 'Website',
+        url: 'https://kite-agui.netlify.app'
+    },
+    {
+        label: 'GitHub',
+        url: 'https://github.com/thaletto/kite'
+    }
+  ],
   description: `A reference implementation of the AG-UI protocol a chat interface whose purpose is not merely to respond, but to make the ordinarily invisible machinery of agent communication legible.`,
 };
 
@@ -98,11 +108,3 @@ The AI can generate these components via JSON specs:
 **3D**: Scene3D, Sphere, Box, Cone, Torus, Light, Stars, Label3D
 
 Components support data binding via `{ "$state": "/path" }` syntax. The AI stores fetched data in state, then binds components to it.
-
-<br />
-<LinkChip icon="globe" link="https://kite-agui.netlify.app" label="Website" />
-<LinkChip
-  icon="github"
-  link="https://github.com/thaletto/kite"
-  label="Source Code"
-/>

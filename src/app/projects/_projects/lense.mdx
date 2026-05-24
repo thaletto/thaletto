@@ -10,6 +10,12 @@ export const metadata = {
   image: "/projects/lense.webp",
   startDate: "2023.09",
   endDate: "2023.12",
+  links: [
+    {
+        label: 'GitHub',
+        url: 'https://github.com/thaletto/lense'
+    }
+  ],
   description: `Lense is an Android application for selling pre-owned products with AI-powered value estimation. It simplifies listing items by automatically generating descriptions and estimating product value using image classification and captioning models.`,
 };
 
@@ -40,10 +46,3 @@ export const metadata = {
 - Integrating TensorFlow Lite with Kotlin for on-device inference.
 - Generating meaningful product descriptions with GPT-2.
 - Optimizing image processing for mobile performance.
-
-<br />
-<LinkChip
-  icon="github"
-  label="Source Code"
-  link="https://github.com/thaletto/Lense"
-/>

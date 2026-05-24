@@ -1,12 +1,8 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
-import SvgIcon from "@/components/common/logo";
-import { NavLink } from "@/components/nav-link";
-import { Badge } from "@/components/ui/badge";
 import { MDX_REGEX } from "@/lib/const";
-import { formatDate } from "@/lib/date";
-import { getCompanyLogoSrc } from "@/lib/utils";
+import ProjectCard from "@/components/projects/project-card";
 
 export const metadata: Metadata = {
 	title: "Projects",
@@ -15,7 +11,6 @@ export const metadata: Metadata = {
 	},
 };
 
-// In the future we can have a pagination here e.g. /1/*.mdx
 const projectsDirectory = path.join(
 	process.cwd(),
 	"src",
@@ -24,133 +19,72 @@ const projectsDirectory = path.join(
 	"_projects"
 );
 
-interface ProjectListItemProps {
-	company?: string;
-	description?: string;
-	endDate?: string;
-	slug: string;
-	startDate: string;
-	tags?: string[];
-	title: string;
-}
-
-export function ProjectListItem({
-	slug,
-	title,
-	tags = [],
-	company,
-	description,
-	startDate,
-	endDate,
-}: ProjectListItemProps) {
-	const companyIcon = getCompanyLogoSrc(company);
-	const start = formatDate(startDate, "MMMYYYY");
-	const end = endDate ? formatDate(endDate, "MMMYYYY") : "Present";
-
-	return (
-		<li className="my-4 font-medium">
-			<NavLink
-				className="group -mx-2 flex items-start px-2 focus-visible:rounded-xs focus-visible:outline focus-visible:outline-dotted focus-visible:outline-ring"
-				href={`/projects/${slug}`}
-			>
-				<div className="flex min-w-0 flex-1 flex-col gap-2">
-					<div className="flex items-center gap-2">
-						{companyIcon && (
-							<SvgIcon
-								className="size-6 shrink-0"
-								name={company ?? ""}
-								src={companyIcon}
-							/>
-						)}
-
-						<h1 className="text-balance font-semibold text-base md:text-xl">
-							{title}
-						</h1>
-					</div>
-
-					<p className="font-normal text-muted-foreground">
-						{start} &rarr; {end}
-					</p>
-
-					<p className="font-normal text-muted-foreground">{description}</p>
-
-					{tags.length > 0 && (
-						<div className="flex flex-wrap gap-1">
-							{tags.map((tag) => (
-								<Badge
-									className="rounded-sm px-2 py-0.5 text-xs"
-									key={tag}
-									variant="secondary"
-								>
-									{tag}
-								</Badge>
-							))}
-						</div>
-					)}
-				</div>
-			</NavLink>
-		</li>
-	);
-}
+const rotations = [
+	"rotate-1",
+	"-rotate-2",
+	"rotate-[2.5deg]",
+	"-rotate-1",
+	"rotate-2",
+	"-rotate-[2.5deg]",
+];
 
 export default async function Page() {
 	const projects = await fs.readdir(projectsDirectory);
 
-	const items: {
-		slug: string;
-		title: string;
-		sort: number;
-		tags?: string[];
-		company: string;
-		description?: string;
-		startDate: string;
-		endDate: string;
-	}[] = [];
+	const projectFiles = projects.filter((f) => f.endsWith(".mdx"));
 
-	for (const project of projects) {
-		if (!project.endsWith(".mdx")) {
-			continue;
-		}
+	const items = (
+		await Promise.all(
+			projectFiles.map(async (project) => {
+				const module = await import(`./_projects/${project}`);
 
-		const module = await import(`./_projects/${project}`);
+				if (!module.metadata) {
+					throw new Error(`Missing \`metadata\` in ${project}`);
+				}
+				if (module.metadata.draft) {
+					return null;
+				}
 
-		if (!module.metadata) {
-			throw new Error(`Missing \`metadata\` in ${project}`);
-		}
-		if (module.metadata.draft) {
-			continue;
-		}
-
-		items.push({
-			slug: project.replace(MDX_REGEX, ""),
-			title: module.metadata.title,
-			sort: Number(module.metadata.sort || 0),
-			tags: module.metadata.tags ?? [],
-			company: module.metadata.company,
-			description: module.metadata.description,
-			startDate: module.metadata.startDate,
-			endDate: module.metadata.endDate,
-		});
-	}
+				return {
+					slug: project.replace(MDX_REGEX, ""),
+					title: module.metadata.title,
+					sort: Number(module.metadata.sort || 0),
+					tags: module.metadata.tags ?? [],
+					company: module.metadata.company,
+					description: module.metadata.description,
+					startDate: module.metadata.startDate,
+					endDate: module.metadata.endDate,
+					image: module.metadata.image,
+				};
+			})
+		)
+	).filter((item): item is NonNullable<typeof item> => item !== null);
 
 	items.sort((a, b) => b.sort - a.sort);
 
 	return (
-		<div>
-			<ul className="mt-0 flex flex-col gap-y-8 [&>*:first-child]:mt-0">
-				{items.map((item) => (
-					<ProjectListItem
-						company={item.company}
-						description={item.description}
-						endDate={item.endDate}
-						key={item.slug}
-						slug={item.slug}
-						startDate={item.startDate}
-						tags={item.tags}
-						title={item.title}
-					/>
-				))}
-			</ul>
+		<div className="mx-auto max-w-4xl py-8">
+			<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 justify-items-center">
+				{items.map((item, index) => {
+					const rotationClass = rotations[index % rotations.length];
+					return (
+						<div
+							key={item.slug}
+							className="group/item w-full flex justify-center"
+						>
+							<ProjectCard
+								className={rotationClass}
+								endDate={item.endDate}
+								image={item.image}
+								slug={item.slug}
+								startDate={item.startDate}
+								tags={item.tags}
+								title={item.title}
+							/>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }
