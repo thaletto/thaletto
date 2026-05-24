@@ -161,30 +161,30 @@ export const components: Record<
 		return img;
 	},
 	table: (props) => (
-		<div className="mt-4 overflow-hidden overflow-x-auto rounded-md border border-muted">
+		<div className="mt-4 overflow-hidden overflow-x-auto rounded-md border border-border">
 			<table className="w-full text-muted-foreground text-sm" {...props} />
 		</div>
 	),
 
 	thead: (props) => (
-		<thead className="border-muted border-b bg-secondary" {...props} />
+		<thead className="border-border border-b bg-secondary" {...props} />
 	),
 	tbody: (props) => <tbody {...props} />,
 
 	tr: (props) => (
-		<tr className="border-muted/40 border-b last:border-0" {...props} />
+		<tr className="border-border border-b last:border-0" {...props} />
 	),
 
 	th: (props) => (
 		<th
-			className="border-muted border-r p-2 text-center font-semibold text-foreground last:border-r-0"
+			className="border-border border-r p-2 text-center font-semibold text-foreground last:border-r-0"
 			{...props}
 		/>
 	),
 
 	td: (props) => (
 		<td
-			className="border-muted/40 border-r p-2 text-center align-middle last:border-r-0"
+			className="border-border border-r p-2 text-center align-middle last:border-r-0"
 			{...props}
 		/>
 	),
