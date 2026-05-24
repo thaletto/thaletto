@@ -1,6 +1,11 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, Transition, motion } from "motion/react";
+import {
+	AnimatePresence,
+	Transition,
+	LazyMotion,
+	domAnimation,
+} from "motion/react";
 import {
 	Children,
 	cloneElement,
@@ -67,23 +72,25 @@ export function AnimatedBackground({
 				...interactionProps,
 			},
 			<>
-				<AnimatePresence initial={false}>
-					{activeId === id && (
-						<motion.div
-							layoutId={`background-${uniqueId}`}
-							className={cn("absolute inset-0", className)}
-							transition={transition}
-							initial={{ opacity: defaultValue ? 1 : 0 }}
-							animate={{
-								opacity: 1,
-							}}
-							exit={{
-								opacity: 0,
-							}}
-						/>
-					)}
-				</AnimatePresence>
-				<div className="z-10">{child.props.children}</div>
+				<LazyMotion features={domAnimation}>
+					<AnimatePresence initial={false}>
+						{activeId === id && (
+							<motion.div
+								layoutId={`background-${uniqueId}`}
+								className={cn("absolute inset-0", className)}
+								transition={transition}
+								initial={{ opacity: defaultValue ? 1 : 0 }}
+								animate={{
+									opacity: 1,
+								}}
+								exit={{
+									opacity: 0,
+								}}
+							/>
+						)}
+					</AnimatePresence>
+					<div className="z-10">{child.props.children}</div>
+				</LazyMotion>
 			</>
 		);
 	});

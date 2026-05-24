@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "motion/react";
+import { LazyMotion, domAnimation } from "motion/react";
 import type React from "react";
 import type { TimelineElement } from "@/types";
 import { Timeline, TimelineItem } from "./timeline";
+import * as motion from "motion/react-m";
 
 interface TimelineLayoutProps {
 	animate?: boolean;
@@ -19,32 +20,34 @@ export const TimelineLayout = ({
 	const reversedItems = [...items].reverse();
 
 	return (
-		<Timeline className={className}>
-			{reversedItems.map((item, index) => (
-				<motion.div
-					animate={animate ? { opacity: 1, y: 0 } : false}
-					initial={animate ? { opacity: 0, y: 20 } : false}
-					// biome-ignore lint/suspicious/noArrayIndexKey: fine
-					key={index}
-					transition={{
-						duration: 0.5,
-						delay: index * 0.1,
-						ease: "easeOut",
-					}}
-				>
-					<TimelineItem
-						content={item.content}
-						description={item.description}
-						endDate={item.endDate}
-						image={item.image}
-						nextEndDate={reversedItems[index + 1]?.endDate}
-						showConnector={index !== items.length - 1}
-						slug={item.slug}
-						startDate={item.startDate}
-						title={item.title}
-					/>
-				</motion.div>
-			))}
-		</Timeline>
+		<LazyMotion features={domAnimation}>
+			<Timeline className={className}>
+				{reversedItems.map((item, index) => (
+					<motion.div
+						animate={animate ? { opacity: 1, y: 0 } : false}
+						initial={animate ? { opacity: 0, y: 20 } : false}
+						// biome-ignore lint/suspicious/noArrayIndexKey: fine
+						key={index}
+						transition={{
+							duration: 0.5,
+							delay: index * 0.1,
+							ease: "easeOut",
+						}}
+					>
+						<TimelineItem
+							content={item.content}
+							description={item.description}
+							endDate={item.endDate}
+							image={item.image}
+							nextEndDate={reversedItems[index + 1]?.endDate}
+							showConnector={index !== items.length - 1}
+							slug={item.slug}
+							startDate={item.startDate}
+							title={item.title}
+						/>
+					</motion.div>
+				))}
+			</Timeline>
+		</LazyMotion>
 	);
 };
