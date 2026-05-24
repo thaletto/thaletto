@@ -78,7 +78,10 @@ export default async function Page() {
 				{items.map((item, index) => {
 					const rotationClass = rotations[index % rotations.length];
 					return (
-						<div key={item.slug} className="group/item w-full flex justify-center">
+						<div
+							key={item.slug}
+							className="group/item w-full flex justify-center"
+						>
 							<ProjectCard
 								className={rotationClass}
 								endDate={item.endDate}

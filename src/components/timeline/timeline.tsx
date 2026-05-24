@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 export { TimelineItem } from "./timeline-item";
 
 interface TimelineProps {
-    /** Children elements (typically TimelineItem components) to render inside the timeline container. */
-    children: React.ReactNode;
-    /** Optional additional CSS classes for custom styling. */
-    className?: string;
+	/** Children elements (typically TimelineItem components) to render inside the timeline container. */
+	children: React.ReactNode;
+	/** Optional additional CSS classes for custom styling. */
+	className?: string;
 }
 
 /**
@@ -20,26 +20,23 @@ interface TimelineProps {
  * @returns {React.JSX.Element} The rendered timeline container.
  */
 export function Timeline({
-    children,
-    className,
+	children,
+	className,
 }: TimelineProps): React.JSX.Element {
-    if (!children) {
-        return (
-            <p className="py-8 text-center text-muted-foreground text-sm">
-                No timeline items
-            </p>
-        );
-    }
+	if (!children) {
+		return (
+			<p className="py-8 text-center text-muted-foreground text-sm">
+				No timeline items
+			</p>
+		);
+	}
 
-    return (
-        <ol
-            aria-label="Timeline"
-            className={cn(
-                "relative mx-auto flex max-w-2xl flex-col py-8",
-                className,
-            )}
-        >
-            {children}
-        </ol>
-    );
+	return (
+		<ol
+			aria-label="Timeline"
+			className={cn("relative mx-auto flex max-w-2xl flex-col py-8", className)}
+		>
+			{children}
+		</ol>
+	);
 }
