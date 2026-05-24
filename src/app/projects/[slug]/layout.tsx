@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/date";
 import { getCompanyLogoSrc } from "@/lib/utils";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function Layout({
 	children,
@@ -73,15 +74,17 @@ export default async function Layout({
 							<div className="flex flex-wrap gap-2 mt-2">
 								{metadata?.links?.map(
 									(link: { label: string; url: string }) => (
-										<Button
-											key={link.url}
-											variant="default"
-											size="lg"
-											className="cursor-pointer"
-										>
-											<ExternalLink className="size-4" />
-											{link.label}
-										</Button>
+										<Link href={link.url} target="_blank">
+											<Button
+												key={link.url}
+												variant="default"
+												size="lg"
+												className="cursor-pointer"
+											>
+												<ExternalLink className="size-4" />
+												{link.label}
+											</Button>
+										</Link>
 									)
 								)}
 							</div>
