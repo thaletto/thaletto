@@ -74,12 +74,10 @@ export default async function Page() {
 						>
 							<ProjectCard
 								className={rotationClass}
-								endDate={item.endDate}
 								image={item.image}
 								slug={item.slug}
-								startDate={item.startDate}
 								tags={item.tags}
-								title={item.title}
+                                title={item.title}
 							/>
 						</div>
 					);

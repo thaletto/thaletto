@@ -13,9 +13,6 @@ export interface ProjectCardProps {
 	/** Title of the project. */
 	title: string;
 	/** Start date of the project (e.g., "2024.07"). */
-	startDate: string;
-	/** End date of the project (e.g., "2024.09" or "Present"). */
-	endDate?: string;
 	/** Optional tags of the project. */
 	tags?: string[];
 	/** Optional URL slug for navigating to a detailed project page. */
@@ -39,16 +36,11 @@ const EMPTY_TAGS: string[] = [];
 export default function ProjectCard({
 	image,
 	title,
-	startDate,
-	endDate,
 	tags = EMPTY_TAGS,
 	slug,
 	content,
 	className,
 }: ProjectCardProps): React.JSX.Element {
-	const start = formatDate(startDate, "MMMYYYY");
-	const end = endDate ? formatDate(endDate, "MMMYYYY") : "Present";
-
 	const cardContent = (
 		<div
 			className={`${cn(
@@ -68,10 +60,6 @@ export default function ProjectCard({
 			<div className="mt-3 text-center">
 				<p className="font-bold font-serif text-base text-foreground">
 					{title}
-				</p>
-
-				<p className="mt-1 text-muted-foreground text-sm">
-					{start} &rarr; {end}
 				</p>
 
 				{tags.length > 0 && (
