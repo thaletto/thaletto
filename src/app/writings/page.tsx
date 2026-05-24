@@ -29,25 +29,27 @@ export interface WritingItem {
 
 export default async function Page() {
 	const articles = await fs.readdir(articlesDirectory);
-	const items: WritingItem[] = [];
+	const articleFiles = articles.filter((f) => f.endsWith(".mdx"));
 
-	for (const article of articles) {
-		if (!article.endsWith(".mdx")) continue;
+	const items = (
+		await Promise.all(
+			articleFiles.map(async (article) => {
+				const module = await import(`./_articles/${article}`);
+				if (!module.metadata) {
+					throw new Error(`Missing \`metadata\` in ${article}`);
+				}
+				if (module.metadata.draft) return null;
 
-		const module = await import(`./_articles/${article}`);
-		if (!module.metadata) {
-			throw new Error(`Missing \`metadata\` in ${article}`);
-		}
-		if (module.metadata.draft) continue;
-
-		items.push({
-			slug: article.replace(MDX_REGEX, ""),
-			title: module.metadata.title,
-			date: module.metadata.date || "-",
-			sort: Number(module.metadata.date?.replaceAll(".", "") || 0),
-			description: module.metadata?.description,
-		});
-	}
+				return {
+					slug: article.replace(MDX_REGEX, ""),
+					title: module.metadata.title,
+					date: module.metadata.date || "-",
+					sort: Number(module.metadata.date?.replaceAll(".", "") || 0),
+					description: module.metadata?.description,
+				};
+			})
+		)
+	).filter((item): item is NonNullable<typeof item> => item !== null);
 
 	items.sort((a, b) => b.sort - a.sort);
 

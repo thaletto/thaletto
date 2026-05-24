@@ -5,22 +5,16 @@ import {
 	Transition,
 	LazyMotion,
 	domAnimation,
+	m,
 } from "motion/react";
-import {
-	Children,
-	cloneElement,
-	ReactElement,
-	useEffect,
-	useState,
-	useId,
-} from "react";
+import { Children, cloneElement, ReactElement, useState, useId } from "react";
 
 export type AnimatedBackgroundProps = {
 	children:
 		| ReactElement<{ "data-id": string }>[]
 		| ReactElement<{ "data-id": string }>;
 	defaultValue?: string;
-	onValueChange?: (newActiveId: string | null) => void;
+	onValueChangeAction?: (newActiveId: string | null) => void;
 	className?: string;
 	transition?: Transition;
 	enableHover?: boolean;
@@ -29,27 +23,21 @@ export type AnimatedBackgroundProps = {
 export function AnimatedBackground({
 	children,
 	defaultValue,
-	onValueChange,
+	onValueChangeAction,
 	className,
 	transition,
 	enableHover = false,
 }: AnimatedBackgroundProps) {
-	const [activeId, setActiveId] = useState<string | null>(null);
+	const [activeId, setActiveId] = useState<string | null>(defaultValue ?? null);
 	const uniqueId = useId();
 
 	const handleSetActiveId = (id: string | null) => {
 		setActiveId(id);
 
-		if (onValueChange) {
-			onValueChange(id);
+		if (onValueChangeAction) {
+			onValueChangeAction(id);
 		}
 	};
-
-	useEffect(() => {
-		if (defaultValue !== undefined) {
-			setActiveId(defaultValue);
-		}
-	}, [defaultValue]);
 
 	return Children.map(children, (child: any, index) => {
 		const id = child.props["data-id"];
@@ -75,7 +63,7 @@ export function AnimatedBackground({
 				<LazyMotion features={domAnimation}>
 					<AnimatePresence initial={false}>
 						{activeId === id && (
-							<motion.div
+							<m.div
 								layoutId={`background-${uniqueId}`}
 								className={cn("absolute inset-0", className)}
 								transition={transition}

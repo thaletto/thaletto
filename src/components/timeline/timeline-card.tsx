@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import Image from "next/image";
 import { NavLink } from "../nav-link";
 
 interface TimelineCardProps {
@@ -33,13 +34,15 @@ export function TimelineCard({
 }: TimelineCardProps): React.JSX.Element {
 	const cardContent = (
 		<div className="w-full max-w-sm rotate-1 bg-card p-3 text-card-foreground shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
-			<img
-				alt={title}
-				className="h-48 w-full object-cover"
-				height="12rem"
-				src={image}
-				width="100%"
-			/>
+			<div className="relative h-48 w-full">
+				<Image
+					alt={title ?? ""}
+					className="object-cover"
+					fill
+					src={image}
+					sizes="(max-width: 768px) 100vw, 400px"
+				/>
+			</div>
 
 			<div className="mt-3 text-center">
 				{title && (

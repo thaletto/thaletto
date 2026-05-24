@@ -31,44 +31,34 @@ const rotations = [
 export default async function Page() {
 	const projects = await fs.readdir(projectsDirectory);
 
-	const items: {
-		slug: string;
-		title: string;
-		sort: number;
-		tags?: string[];
-		company: string;
-		description?: string;
-		startDate: string;
-		endDate: string;
-		image: string;
-	}[] = [];
+	const projectFiles = projects.filter((f) => f.endsWith(".mdx"));
 
-	for (const project of projects) {
-		if (!project.endsWith(".mdx")) {
-			continue;
-		}
+	const items = (
+		await Promise.all(
+			projectFiles.map(async (project) => {
+				const module = await import(`./_projects/${project}`);
 
-		const module = await import(`./_projects/${project}`);
+				if (!module.metadata) {
+					throw new Error(`Missing \`metadata\` in ${project}`);
+				}
+				if (module.metadata.draft) {
+					return null;
+				}
 
-		if (!module.metadata) {
-			throw new Error(`Missing \`metadata\` in ${project}`);
-		}
-		if (module.metadata.draft) {
-			continue;
-		}
-
-		items.push({
-			slug: project.replace(MDX_REGEX, ""),
-			title: module.metadata.title,
-			sort: Number(module.metadata.sort || 0),
-			tags: module.metadata.tags ?? [],
-			company: module.metadata.company,
-			description: module.metadata.description,
-			startDate: module.metadata.startDate,
-			endDate: module.metadata.endDate,
-			image: module.metadata.image,
-		});
-	}
+				return {
+					slug: project.replace(MDX_REGEX, ""),
+					title: module.metadata.title,
+					sort: Number(module.metadata.sort || 0),
+					tags: module.metadata.tags ?? [],
+					company: module.metadata.company,
+					description: module.metadata.description,
+					startDate: module.metadata.startDate,
+					endDate: module.metadata.endDate,
+					image: module.metadata.image,
+				};
+			})
+		)
+	).filter((item): item is NonNullable<typeof item> => item !== null);
 
 	items.sort((a, b) => b.sort - a.sort);
 

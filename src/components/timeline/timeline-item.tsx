@@ -163,7 +163,7 @@ export function TimelineItem({
 					/>
 				) : (
 					<div className="flex flex-col gap-2">
-						<h3 className="font-bold text-lg leading-tight">{title}</h3>
+						<h3 className="font-semibold text-lg leading-tight">{title}</h3>
 						{description && (
 							<p className="text-base text-muted-foreground">{description}</p>
 						)}

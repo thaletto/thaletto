@@ -37,7 +37,7 @@ export function WritingsList({ items }: { items: WritingItem[] }) {
 						<NavLink
 							key={item.slug}
 							data-id={item.slug}
-							className="-mx-3 flex w-full flex-col gap-2 rounded-xl px-3 py-3"
+							className="-mx-3 flex w-full flex-col gap-2 rounded-xl p-3"
 							href={`/writings/${item.slug}`}
 						>
 							{/* Row 1: title + date */}

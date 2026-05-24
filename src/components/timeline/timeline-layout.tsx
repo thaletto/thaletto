@@ -26,8 +26,7 @@ export const TimelineLayout = ({
 					<motion.div
 						animate={animate ? { opacity: 1, y: 0 } : false}
 						initial={animate ? { opacity: 0, y: 20 } : false}
-						// biome-ignore lint/suspicious/noArrayIndexKey: fine
-						key={index}
+						key={item.slug ?? item.id}
 						transition={{
 							duration: 0.5,
 							delay: index * 0.1,

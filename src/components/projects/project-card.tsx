@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import Image from "next/image";
 import { NavLink } from "../nav-link";
 import { formatDate } from "@/lib/date";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,8 @@ export interface ProjectCardProps {
 	className?: string;
 }
 
+const EMPTY_TAGS: string[] = [];
+
 /**
  * ProjectCard renders a card for a project.
  * It displays an image, a title, dates, tags, and optional details.
@@ -38,7 +41,7 @@ export default function ProjectCard({
 	title,
 	startDate,
 	endDate,
-	tags = [],
+	tags = EMPTY_TAGS,
 	slug,
 	content,
 	className,
@@ -52,13 +55,15 @@ export default function ProjectCard({
 				"w-85 max-w-full rounded-xl border border-border bg-card p-3 text-card-foreground shadow-lg transition-transform duration-300"
 			)} hover:rotate-0 group-hover/item:rotate-0 ${className ?? ""}`}
 		>
-			<img
-				alt={title}
-				className="h-48 w-full object-cover rounded-lg"
-				height="12rem"
-				src={image}
-				width="100%"
-			/>
+			<div className="relative h-48 w-full">
+				<Image
+					alt={title}
+					className="object-cover rounded-lg"
+					fill
+					src={image}
+					sizes="(max-width: 768px) 100vw, 400px"
+				/>
+			</div>
 
 			<div className="mt-3 text-center">
 				<p className="font-bold font-serif text-base text-foreground">
