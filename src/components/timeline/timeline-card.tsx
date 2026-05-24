@@ -4,16 +4,16 @@ import type React from "react";
 import { NavLink } from "../nav-link";
 
 interface TimelineCardProps {
-	/** URL of the image to display in the card. */
-	image: string;
-	/** Optional title of the timeline event. */
-	title?: string;
-	/** Optional short description of the timeline event. */
-	description?: string;
-	/** Optional detailed content or custom nodes to render in the card. */
-	content?: React.ReactNode;
-	/** Optional URL slug for navigating to a detailed timeline page. */
-	slug?: string;
+    /** URL of the image to display in the card. */
+    image: string;
+    /** Optional title of the timeline event. */
+    title?: string;
+    /** Optional short description of the timeline event. */
+    description?: string;
+    /** Optional detailed content or custom nodes to render in the card. */
+    content?: React.ReactNode;
+    /** Optional URL slug for navigating to a detailed timeline page. */
+    slug?: string;
 }
 
 /**
@@ -25,49 +25,51 @@ interface TimelineCardProps {
  * @returns {React.JSX.Element} The rendered timeline card component.
  */
 export function TimelineCard({
-	image,
-	title,
-	description,
-	content,
-	slug,
+    image,
+    title,
+    description,
+    content,
+    slug,
 }: TimelineCardProps): React.JSX.Element {
-	const cardContent = (
-		<div className="w-full max-w-sm rotate-1 bg-card p-3 text-card-foreground shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
-			<img
-				alt={title}
-				className="h-48 w-full object-cover"
-				height="12rem"
-				src={image}
-				width="100%"
-			/>
+    const cardContent = (
+        <div className="w-full max-w-sm rotate-1 bg-card p-3 text-card-foreground shadow-lg transition-transform duration-300 group-hover/item:rotate-0">
+            <img
+                alt={title}
+                className="h-48 w-full object-cover"
+                height="12rem"
+                src={image}
+                width="100%"
+            />
 
-			<div className="mt-3 text-center">
-				{title && (
-					<p className="font-bold font-serif text-base text-foreground">
-						{title}
-					</p>
-				)}
+            <div className="mt-3 text-center">
+                {title && (
+                    <p className="font-bold font-serif text-base text-foreground">
+                        {title}
+                    </p>
+                )}
 
-				{description && (
-					<p className="mt-1 text-muted-foreground text-sm">{description}</p>
-				)}
+                {description && (
+                    <p className="mt-1 text-muted-foreground text-sm">
+                        {description}
+                    </p>
+                )}
 
-				{content && (
-					<div className="mt-2 whitespace-pre-line border-border border-t pt-2 text-muted-foreground text-xs">
-						{content}
-					</div>
-				)}
-			</div>
-		</div>
-	);
+                {content && (
+                    <div className="mt-2 whitespace-pre-line border-border border-t pt-2 text-muted-foreground text-xs">
+                        {content}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 
-	if (!slug) {
-		return cardContent;
-	}
+    if (!slug) {
+        return cardContent;
+    }
 
-	return (
-		<NavLink className="block" href={`/timeline/${slug}`}>
-			{cardContent}
-		</NavLink>
-	);
+    return (
+        <NavLink className="block" href={`/timeline/${slug}`}>
+            {cardContent}
+        </NavLink>
+    );
 }

@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
  * @returns {React.JSX.Element} The circular dot indicator component.
  */
 export function TimelineDot(): React.JSX.Element {
-	return (
-		<span
-			className={cn(
-				"relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-border bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground"
-			)}
-		/>
-	);
+    return (
+        <span
+            className={cn(
+                "relative z-10 flex h-4 w-4 items-center justify-center rounded-full border-2 border-border bg-border transition-colors duration-300 group-hover/item:bg-muted-foreground",
+            )}
+        />
+    );
 }
