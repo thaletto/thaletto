@@ -6,10 +6,6 @@ import type { TimelineElement } from "@/types";
 import { Timeline, TimelineItem } from "./timeline";
 
 interface TimelineLayoutProps {
-	_connectorColor?: "primary" | "secondary" | "muted" | "accent";
-	_customIcon?: React.ReactNode;
-	_iconColor?: "primary" | "secondary" | "muted" | "accent";
-	_size?: "sm" | "md" | "lg";
 	animate?: boolean;
 	className?: string;
 	items: TimelineElement[];
@@ -17,11 +13,7 @@ interface TimelineLayoutProps {
 
 export const TimelineLayout = ({
 	items,
-	_size = "md",
-	_iconColor,
-	_customIcon,
 	animate = true,
-	_connectorColor,
 	className,
 }: TimelineLayoutProps) => {
 	const reversedItems = [...items].reverse();
