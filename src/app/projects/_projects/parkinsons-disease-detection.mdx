@@ -12,6 +12,12 @@ export const metadata = {
   imageLabel: "Not the Neurons in ML models",
   startDate: "2022.10",
   endDate: "2023.01",
+  links: [
+    {
+        label: 'GitHub',
+        url: 'https://github.com/thaletto/Parkinson-Disease-Detection'
+    }
+  ],
   description: `Parkinson's disease leaves a signature in the voice long before it announces itself in more obvious ways. This project asks whether that signature, extracted as biomedical acoustic features from a voice recording, is legible to a machine learning classifier, and then asks the question of nine different classifiers simultaneously to find out which one reads it best.`,
 };
 
@@ -34,10 +40,3 @@ The Support Vector Machine achieved the highest accuracy, exceeding 80%, a resul
 A project that trains a single model and reports its accuracy is not really a machine learning project; it is a demonstration that a library can be imported. The value of training nine models on the same dataset, with the same features and the same evaluation methodology, is that it produces a fair comparison, which in turn produces actual understanding of why some approaches work better than others on this particular class of problem.
 
 The 195-sample dataset is small enough that variance in model performance is meaningful rather than statistical noise, which makes the comparison genuinely informative about the relationship between inductive bias and data structure. An SVM outperforming a neural perceptron on a small, high-dimensional dataset is not a surprise, but observing it directly, with your own training loop, is a different kind of knowledge from reading about it in a textbook.
-
-<br />
-<LinkChip
-  icon="github"
-  label="Source Code"
-  link="https://github.com/thaletto/Parkinson-Disease-Detection"
-/>
