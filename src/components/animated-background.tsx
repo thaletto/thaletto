@@ -1,20 +1,21 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { AnimatePresence, Transition, motion } from "motion/react";
 import {
-	AnimatePresence,
-	Transition,
-	LazyMotion,
-	domAnimation,
-	m,
-} from "motion/react";
-import { Children, cloneElement, ReactElement, useState, useId } from "react";
+	Children,
+	cloneElement,
+	ReactElement,
+	useEffect,
+	useState,
+	useId,
+} from "react";
 
 export type AnimatedBackgroundProps = {
 	children:
 		| ReactElement<{ "data-id": string }>[]
 		| ReactElement<{ "data-id": string }>;
 	defaultValue?: string;
-	onValueChangeAction?: (newActiveId: string | null) => void;
+	onValueChange?: (newActiveId: string | null) => void;
 	className?: string;
 	transition?: Transition;
 	enableHover?: boolean;
@@ -23,21 +24,27 @@ export type AnimatedBackgroundProps = {
 export function AnimatedBackground({
 	children,
 	defaultValue,
-	onValueChangeAction,
+	onValueChange,
 	className,
 	transition,
 	enableHover = false,
 }: AnimatedBackgroundProps) {
-	const [activeId, setActiveId] = useState<string | null>(defaultValue ?? null);
+	const [activeId, setActiveId] = useState<string | null>(null);
 	const uniqueId = useId();
 
 	const handleSetActiveId = (id: string | null) => {
 		setActiveId(id);
 
-		if (onValueChangeAction) {
-			onValueChangeAction(id);
+		if (onValueChange) {
+			onValueChange(id);
 		}
 	};
+
+	useEffect(() => {
+		if (defaultValue !== undefined) {
+			setActiveId(defaultValue);
+		}
+	}, [defaultValue]);
 
 	return Children.map(children, (child: any, index) => {
 		const id = child.props["data-id"];
@@ -60,25 +67,23 @@ export function AnimatedBackground({
 				...interactionProps,
 			},
 			<>
-				<LazyMotion features={domAnimation}>
-					<AnimatePresence initial={false}>
-						{activeId === id && (
-							<m.div
-								layoutId={`background-${uniqueId}`}
-								className={cn("absolute inset-0", className)}
-								transition={transition}
-								initial={{ opacity: defaultValue ? 1 : 0 }}
-								animate={{
-									opacity: 1,
-								}}
-								exit={{
-									opacity: 0,
-								}}
-							/>
-						)}
-					</AnimatePresence>
-					<div className="z-10">{child.props.children}</div>
-				</LazyMotion>
+				<AnimatePresence initial={false}>
+					{activeId === id && (
+						<motion.div
+							layoutId={`background-${uniqueId}`}
+							className={cn("absolute inset-0", className)}
+							transition={transition}
+							initial={{ opacity: defaultValue ? 1 : 0 }}
+							animate={{
+								opacity: 1,
+							}}
+							exit={{
+								opacity: 0,
+							}}
+						/>
+					)}
+				</AnimatePresence>
+				<div className="z-10">{child.props.children}</div>
 			</>
 		);
 	});

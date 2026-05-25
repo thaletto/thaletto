@@ -77,7 +77,7 @@ export default async function Page() {
 								image={item.image}
 								slug={item.slug}
 								tags={item.tags}
-                                title={item.title}
+								title={item.title}
 							/>
 						</div>
 					);
