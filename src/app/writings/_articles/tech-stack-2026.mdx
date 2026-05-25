@@ -1,0 +1,64 @@
+export const metadata = {
+  title: "Tech stack I use in Mid 2026",
+  date: "2026.05.25",
+  description: `An inside look at my production-ready tech stack for Mid 2026—built around modular architectures, scalable TypeScript/Python ecosystems, and intelligent automation.`,
+  authors: { name: "Laxman K R", url: "https://thaletto.vercel.app" },
+};
+
+# Tech Stack I Use in Mid 2026
+
+Building modern, scalable applications requires moving away from heavy, monolithic frameworks toward modular architectures, type-safe data layers, and deterministic agentic systems. This is the breakdown of the production-ready stack I am building with in Mid 2026.
+
+## Frontend: Highly Interactive & Type-Safe
+
+The client layer focuses heavily on strict type safety, zero-boilerplate data fetching, and micro-interactions.
+
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="16" height="16" alt="Next.js"> **Next.js & TanStack Start / Router:** While Next.js remains a staple for standard production features, **TanStack Start** has become my go-to for full-stack React. It provides incredibly well-designed, type-safe isomorphic routing, loaders, and middleware without the magic black box of alternative approaches.
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="16" height="16" alt="React"> **React & TailwindCSS:** The core UI foundation.
+* <img src="https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/www/public/favicon.ico" width="16" height="16" alt="Shadcn"> **Shadcn:** Clean, accessible primitives that don’t lock me into a rigid component library UI.
+* <img src="https://reactbits.dev/favicon.ico" width="16" height="16" alt="ReactBits"> **ReactBits & Paper Shaders:** Used to elevate standard layouts into immersive, visually unique user experiences with high-performance WebGL and canvas-based shaders.
+
+## Backend: Functional, Fast, & Type-Inferred
+
+My backend architecture prioritizes high throughput, minimal overhead, and explicit error handling.
+
+* <img src="https://raw.githubusercontent.com/Effect-TS/website/main/public/favicon.ico" width="16" height="16" alt="Effect"> **Effect:** The crown jewel of the backend. Moving to an ecosystem built on functional programming primitives allows for structured concurrency, built-in tracing, and deterministic error handling. It replaces fragile `try/catch` blocks with explicit, compile-time verified tracking.
+* <img src="https://elysiajs.com/assets/elysia.svg" width="16" height="16" alt="Elysia"> **Elysia:** For ultra-fast HTTP APIs in Bun environments. The type inference from end-to-end (via Eden) makes client-server communication completely seamless.
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" width="16" height="16" alt="FastAPI"> **FastAPI:** Reserved for data science, heavy LLM orchestration, and Python-centric AI pipelines where raw performance meets rapid ecosystem compatibility.
+
+## Databases & Storage: Hybrid & Multi-Model
+
+Data belongs where it runs best. I use a combination of local, managed, and specialized vector databases depending on the workload.
+
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="16" height="16" alt="PostgreSQL"> **Relational:** **PostgreSQL** self-hosted on VMs for raw cost efficiency and control, paired with **Supabase** or **Neon** when serverless branching or rapid prototyping is needed.
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="16" height="16" alt="MongoDB"> **Document & Embedded:** **MongoDB** for flexible schemas; **SQLite** for lightweight relational data storage, edge execution, or local cache layers.
+* <img src="https://qdrant.tech/img/favicon.ico" width="16" height="16" alt="Qdrant"> **Vector (AI Context):** **Qdrant** handles large-scale, production-grade embedding retrieval, complemented by **Zvec VectorDB** for specialized, hyper-efficient vector indexing.
+
+## Cloud & Infrastructure: Serverless Control & Edge
+
+Infrastructure in 2026 is about blending the control of raw virtual instances with the speed of edge routing.
+
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" width="16" height="16" alt="GCP"> **Google Cloud (GCP):** The bedrock for core applications. **Compute Engines** handle predictable, continuous workloads, while **Google Kubernetes Engine (GKE)** orchestrates larger, decoupled services. **Cloud Storage** handles unstructured asset delivery.
+* <img src="https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/57x57.png" width="16" height="16" alt="Vercel"> **Vercel:** Utilized for frontend hosting and advanced edge routing. **Fluid Compute** allows multiple concurrent requests to share the same warm process, mitigating cold starts and driving down compute costs for I/O-heavy streaming. **AI Gateway** sits in front of inference models for caching and telemetry.
+* <img src="https://openrouter.ai/favicon.ico" width="16" height="16" alt="OpenRouter"> **Netlify & OpenRouter:** Netlify provides alternative edge deployment targets, while OpenRouter acts as a unified, resilient interface to access over 300+ LLMs with easy model fallback and token budget controls.
+
+## Agents & Automation
+
+Autonomous execution requires developer-focused toolchains that can parse, generate, and execute code natively.
+
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="16" height="16" alt="Codex"> **Opencode & Codex:** For automated script generation and code analysis.
+* <img src="https://www.gstatic.com/lamda/images/favicon_v1_150160d11ff23155b4e3e.svg" width="16" height="16" alt="Gemini"> **Gemini CLI:** For fast, terminal-driven structural reasoning and utility automation.
+* <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16" height="16" alt="Antigravity"> **Antigravity:** Used to handle system-level automations and execution workflows.
+
+## Agentic Frameworks: The Orchestration Layer
+
+Building reliable agents means moving away from brittle, free-form text prompts and embracing structured, type-safe runtime environments.
+
+* <img src="https://tanstack.com/favicon.ico" width="16" height="16" alt="TanStack"> **TanStack AI & Effect AI:** The newest evolutionary steps in my stack. **TanStack AI** provides brilliant middleware (like `contentGuard` and `toolCache`) with framework-agnostic clients. **Effect AI** brings pure, provider-agnostic abstractions to LLMs, ensuring that streaming chat, tool calling, and retries benefit from Effect's structured concurrency and deep tracing.
+* <img src="https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/57x57.png" width="16" height="16" alt="AI SDK"> **AI SDK:** The reliable gold standard for fast UI stream bindings and robust tool-calling pipelines.
+* <img src="https://raw.githubusercontent.com/microsoft/autogen/main/website/static/img/favicon.ico" width="16" height="16" alt="AutoGen"> **Microsoft AutoGen & Google ADK:** Used for multi-agent conversation patterns, hierarchical routing, and deeply integrated ecosystem automations.
+
+---
+
+### Final Thoughts
+This architecture is entirely optimized for **clarity, type safety, and real-world scalability**. By decoupling the AI orchestration layer with tools like `TanStack AI` and `Effect`, and pairing it with a highly performant compute foundation like `Elysia`, `GCP`, and `Vercel Fluid Compute`, applications stay highly maintainable even as underlying AI models move at breakneck speeds.
