@@ -37,11 +37,11 @@ export function WritingsList({ items }: { items: WritingItem[] }) {
 						<NavLink
 							key={item.slug}
 							data-id={item.slug}
-							className="-mx-3 flex w-full flex-col gap-2 rounded-xl p-3"
+							className="flex w-full flex-col gap-2 rounded-xl p-2"
 							href={`/writings/${item.slug}`}
 						>
 							{/* Row 1: title + date */}
-							<div className="flex w-full flex-row gap-4">
+							<div className="flex w-full flex-row gap-2">
 								<span className="flex-1 min-w-0 font-semibold text-base md:text-xl">
 									{item.title}
 								</span>
