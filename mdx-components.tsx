@@ -129,27 +129,44 @@ export const components: Record<
 	img: async ({ src, alt, title }) => {
 		let img: React.ReactNode;
 
-		if (src.startsWith("https://")) {
-			img = (
-				<Image
-					alt={alt}
-					className="mt-4"
-					draggable={false}
-					placeholder="blur"
-					quality={95}
-					src={src}
-				/>
-			);
+		const isSvg = src.endsWith(".svg");
+		const isRemote = src.startsWith("http");
+		const isAbsolute = src.startsWith("/");
+
+		if (isRemote || isAbsolute) {
+			if (isSvg && !title) {
+				img = (
+					<img
+						alt={alt}
+						className="mr-1.5 inline-block align-middle"
+						draggable={false}
+						src={src}
+						style={{ height: "1.2em", width: "auto" }}
+					/>
+				);
+			} else {
+				img = (
+					<Image
+						alt={alt}
+						className="mt-4 rounded-lg"
+						draggable={false}
+						quality={95}
+						src={src}
+						width={1200}
+						height={675}
+						style={{ width: "100%", height: "auto" }}
+					/>
+				);
+			}
 		} else {
-			const image = await import(src);
+			// Fallback for relative paths to avoid "too dynamic" import error in Turbopack.
+			// Standard img tag handles these safely without needing static analysis.
 			img = (
-				<Image
+				<img
 					alt={alt}
-					className="mt-4"
+					className="mt-4 h-auto w-full rounded-lg"
 					draggable={false}
-					placeholder="blur"
-					quality={95}
-					src={image.default}
+					src={src}
 				/>
 			);
 		}
