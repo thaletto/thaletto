@@ -47,3 +47,4 @@ next-env.d.ts
 
 # Generated OG images
 /public/og
+/src/public/og
