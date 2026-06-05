@@ -1,6 +1,7 @@
 TypeScript
 JavaScript
 Python
+Go
 Next.js
 React
 FastAPI
