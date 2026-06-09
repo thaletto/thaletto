@@ -1,23 +1,47 @@
 export const metadata = {
   title: `E-Commerce Store`,
   sort: 5,
-  tags: ["Next.js", "TypeScript", "Go", "SQLite"],
+  tags: ["Next.js", "TypeScript", "Go", "SQLite", "AWS Lambda", "Cloudflare"],
   image: "/projects/e-commerce.avif",
   imageLabel: "Image: Perplexity Hub",
   startDate: "2024.07",
   endDate: "2026.06",
   links: [
     {
-        label: 'Website',
-        url: 'https://kr-crackers.vercel.app'
+      label: 'Website',
+      url: 'https://kr-crackers.vercel.app'
     }
   ],
-  description: `A modern, responsive e-commerce web application built using Next.js, Tailwind CSS, and Supabase. The project features dynamic product listing, a fully functional shopping cart, and a clean, mobile-friendly interface and a order and inventory management system for the admin to access the store.`,
+  description: `A high-performance, responsive e-commerce platform featuring a Next.js and Tailwind CSS frontend. Built on a decoupled microservices backend written in Go and deployed via AWS Lambda, the system utilizes an event-driven architecture to handle real-time inventory tracking, seamless order management, and secure admin control.`,
 };
 
 <Callout>Built as a freelancer for client</Callout>
 
-**Tech Stack:**
+# Architectural & Tech Stack Overview
 
-- **Frontend:** Next.js, React, Tailwind CSS
-- **Backend & Database:** Go, Cloudflare D1
+## **Frontend Architecture**
+
+### **Next.js & React**
+* **Hybrid Rendering Model:** Utilizes the App Router to mix Server-Side Rendering (SSR) for dynamic, SEO critical product pages and Static Site Generation (SSG) for static assets.
+* **Optimized Performance:** Minimizes client side JavaScript bundles using React Server Components (RSC) to fetch data directly on the server, ensuring excellent Core Web Vitals.
+
+---
+
+## **Backend & Database Architecture**
+
+### **Go (Golang)**
+* **Compiled Efficiency:** Compiles directly to machine code, delivering near native execution speeds and highly predictable performance.
+* **High Concurrency:** Uses lightweight Goroutines to handle massive traffic and concurrent requests with minimal memory overhead.
+
+### **Cloudflare D1**
+* **Edge-Native SQL:** A serverless relational database built on SQLite that runs natively across Cloudflare’s global network.
+* **Ultra-Low Latency:** Positions data physically close to the compute layer, eliminating traditional database connection overhead and complex connection pooling.
+
+---
+
+## **Deployment & Infrastructure**
+
+### **AWS Lambda (ARM Linux)**
+* **AWS Graviton Support:** Built specifically for Linux ARM64 (`GOOS=linux GOARCH=arm64`), leveraging ARM-based architecture to deliver up to 34% better price-performance compared to x86.
+* **Serverless Scale:** Functions scale automatically in response to incoming traffic, ensuring high availability without the overhead of server management.
+* **Sub-Millisecond Cold Starts:** Capitalizes on Go's single-binary compilation and minimal footprint to keep serverless initialization times exceptionally low.
