@@ -6,6 +6,7 @@ Next.js
 React
 FastAPI
 Node.js
+Effect TS
 TailwindCSS
 LangChain
 LangGraph
