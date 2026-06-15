@@ -12,7 +12,7 @@ export default withMDX()({
 		},
 		{
 			source: "/(resume|cv)",
-			destination: "https://thaletto.github.io/resume/cv.pdf",
+			destination: "https://thaletto.github.io/resume/Laxman_KR_Resume.pdf",
 			permanent: true,
 		},
 	],
