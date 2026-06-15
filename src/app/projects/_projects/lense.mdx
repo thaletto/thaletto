@@ -16,21 +16,31 @@ export const metadata = {
       url: 'https://github.com/thaletto/lense'
     }
   ],
-  description: `Lense is an Android application for selling pre-owned products with AI-powered value estimation. It simplifies listing items by automatically generating descriptions and estimating product value using image classification and captioning models.`,
+  description: `An Android app for selling pre-owned products with AI-powered value estimation. Upload a product image and get an AI-generated description along with an estimated price.`,
 };
 
-## Key Features
+## Overview
 
-- Upload a product image and get AI-generated description.
-- Automatic value estimation for pre-owned products.
-- Smooth Android experience using **Jetpack Compose**.
-- Efficient image processing for fast results.
+Lense is an Android application that simplifies selling pre-owned products. Upload a product image and the app classifies the item, generates a description, and estimates its value using on-device machine learning models.
+
+## Problem
+
+Listing a pre-owned product for sale requires writing a description and setting a price, both of which take time and guesswork. Sellers often don't know the fair market value of their items, and writing good descriptions is tedious.
+
+## Approach
+
+Lense uses two on-device AI models to automate this process:
+
+- **EfficientNet (TensorFlow Lite 4)** classifies the product category from the uploaded image.
+- **GPT-2 Image Captioning** generates a descriptive caption for the listing.
+
+Both models run on-device via HuggingFace, handling image processing without requiring a server round-trip.
 
 ## How It Works
 
 1. User uploads a product image.
-2. **EfficientNet (TensorFlow Lite 4)** classifies the product.
-3. **GPT-2 Image Captioning** generates a descriptive caption.
+2. EfficientNet classifies the product.
+3. GPT-2 Image Captioning generates a description.
 4. The app returns the estimated value and a ready-to-post description.
 
 ## Tech Stack
@@ -40,9 +50,3 @@ export const metadata = {
 - **AI Models:**
   - [EfficientNet (TensorFlow Lite 4)](https://www.kaggle.com/models/tensorflow/efficientnet/tfLite) via HuggingFace
   - [GPT-2 Image Captioning](https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning) via HuggingFace
-
-## Challenges & Learnings
-
-- Integrating TensorFlow Lite with Kotlin for on-device inference.
-- Generating meaningful product descriptions with GPT-2.
-- Optimizing image processing for mobile performance.

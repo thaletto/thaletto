@@ -74,9 +74,8 @@ export default async function Layout({
 							<div className="flex flex-wrap gap-2 mt-2">
 								{metadata?.links?.map(
 									(link: { label: string; url: string }) => (
-										<Link href={link.url} target="_blank">
+										<Link key={link.url} href={link.url} target="_blank">
 											<Button
-												key={link.url}
 												variant="default"
 												size="lg"
 												className="cursor-pointer"

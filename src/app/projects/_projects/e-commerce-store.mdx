@@ -12,30 +12,33 @@ export const metadata = {
       url: 'https://kr-crackers.vercel.app'
     }
   ],
-  description: `A high-performance, responsive e-commerce platform featuring a Next.js and Tailwind CSS frontend. Built on a decoupled microservices backend written in Go and deployed via AWS Lambda, the system utilizes an event-driven architecture to handle real-time inventory tracking, seamless order management, and secure admin control.`,
+  description: `A high-performance e-commerce platform with a Next.js frontend and a decoupled Go microservices backend deployed on AWS Lambda, using an event-driven architecture for real-time inventory tracking and order management.`,
 };
 
 <Callout>Built as a freelancer for client</Callout>
 
-## **Frontend Architecture**
+## Overview
 
-### **Next.js & React**
-* **Hybrid Rendering Model:** Utilizes the App Router to mix Server-Side Rendering (SSR) for dynamic, SEO critical product pages and Static Site Generation (SSG) for static assets.
-* **Optimized Performance:** Minimizes client side JavaScript bundles using React Server Components (RSC) to fetch data directly on the server, ensuring excellent Core Web Vitals.
+A responsive e-commerce platform for selling pre-owned products. The frontend is built with Next.js and Tailwind CSS, backed by a decoupled Go microservices architecture deployed on AWS Lambda. An event-driven system handles real-time inventory tracking, order management, and secure admin controls.
 
-## **Backend & Database Architecture**
+## Approach
 
-### **Go (Golang)**
-* **Compiled Efficiency:** Compiles directly to machine code, delivering near native execution speeds and highly predictable performance.
-* **High Concurrency:** Uses lightweight Goroutines to handle massive traffic and concurrent requests with minimal memory overhead.
+The system is split into three layers, each optimized for its specific responsibility.
 
-### **Cloudflare D1**
-* **Edge-Native SQL:** A serverless relational database built on SQLite that runs natively across Cloudflare’s global network.
-* **Ultra-Low Latency:** Positions data physically close to the compute layer, eliminating traditional database connection overhead and complex connection pooling.
+**Frontend** uses Next.js with the App Router to mix Server-Side Rendering (SSR) for dynamic, SEO-critical product pages with Static Site Generation (SSG) for static assets. React Server Components minimize client-side JavaScript bundles, keeping Core Web Vitals performant.
 
-## **Deployment & Infrastructure**
+**Backend** consists of 7 Go microservices (auth, customers, invoices, notifications, orders, products, uploads), each compiling to a single binary for near-native execution speeds. Lightweight goroutines handle concurrent requests with minimal memory overhead, making it well-suited for the high-throughput demands of e-commerce traffic.
 
-### **AWS Lambda (ARM Linux)**
-* **AWS Graviton Support:** Built specifically for Linux ARM64 (`GOOS=linux GOARCH=arm64`), leveraging ARM-based architecture to deliver up to 34% better price-performance compared to x86.
-* **Serverless Scale:** Functions scale automatically in response to incoming traffic, ensuring high availability without the overhead of server management.
-* **Sub-Millisecond Cold Starts:** Capitalizes on Go's single-binary compilation and minimal footprint to keep serverless initialization times exceptionally low.
+**Database** uses Cloudflare D1, a serverless relational database built on SQLite that runs at the edge. Data is positioned physically close to the compute layer, eliminating traditional database connection overhead and complex connection pooling.
+
+## How It Works
+
+- **AWS Lambda (ARM Linux):** Go functions compile to single binaries targeting `GOOS=linux GOARCH=arm64`, leveraging AWS Graviton's ARM-based architecture for up to 34% better price-performance over x86. Functions scale automatically with traffic, and Go's minimal footprint keeps cold starts fast.
+- **Event-driven architecture:** Inventory updates, order events, and admin actions flow through an event system that keeps the frontend in sync without polling.
+
+## Tech Stack
+
+- **Frontend:** Next.js, React 19, TypeScript, Tailwind CSS
+- **Backend:** Go (Golang)
+- **Database:** Cloudflare D1 (SQLite at the edge)
+- **Deployment:** AWS Lambda (ARM64), Cloudflare

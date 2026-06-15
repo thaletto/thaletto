@@ -15,28 +15,28 @@ export const metadata = {
       url: 'https://github.com/thaletto/cortex'
     }
   ],
-  description: `The ORM for vector databases, Built natively for Effect`,
+  description: `An Effect-native abstraction layer for vector databases, bringing ORM-level ergonomics (schemas, typed queries, and composable infrastructure) to AI storage.`,
 };
 
-AI applications have an infrastructure problem. It is not about embeddings or retrieval; it is about abstractions. Most vector database tooling today still operates at a painfully low level. You piece together SDKs, handwritten schemas, validation layers, metadata parsers, retry logic, and storage-specific query APIs until your codebase slowly turns into infrastructure glue. The experience feels strangely familiar, like working with relational databases before ORMs existed. That is why I built Cortex.
+## Overview
 
-[Cortex](https://cortex-vector.vercel.app/) is an Effect-native abstraction layer for vector databases. The goal is simple: bring the ergonomics, safety, and composability modern ORMs brought to SQL databases into the world of AI infrastructure. Instead of thinking in terms of raw SDK calls and untyped payloads, Cortex encourages you to think in terms of schemas, collections, typed queries, and composable infrastructure. Vector systems should feel like application architecture, not experimental plumbing.
+[Cortex](https://cortex-vector.vercel.app/) is an Effect-native abstraction layer for vector databases. It provides schemas, typed collections, and composable infrastructure for vector operations, the same kind of structure ORMs brought to relational databases, applied to AI storage.
 
-## The Problem With Most Vector Tooling
+## Problem
 
-Most RAG systems begin simply enough. You generate embeddings, store them, and query them. But as systems evolve, infrastructure complexity grows rapidly. Metadata becomes inconsistent, filters become fragile, and retrieval logic spreads across the application. Validation becomes manual, and runtime parsing quietly breaks assumptions until everything starts collapsing into `Record<string, unknown>`.
+Most vector database tooling operates at a low level. You piece together SDKs, handwritten schemas, validation layers, metadata parsers, retry logic, and storage-specific query APIs until the codebase becomes infrastructure glue. As RAG systems grow, metadata becomes inconsistent, filters become fragile, and retrieval logic spreads across the application. Runtime parsing breaks assumptions, types collapse into `Record<string, unknown>`, and the compiler stops helping. This is the same problem relational databases had before ORMs existed.
 
-At that point, the compiler stops helping you. Your editor loses context, and runtime errors become normal. Traditional ORMs solved this exact problem years ago for relational databases by introducing structure, safety, and predictable abstractions. Vector databases deserve the same evolution, and that gap is what Cortex attempts to address.
+## Approach
 
-## Built Natively for Effect
+Cortex brings structure and safety to vector database operations through three design decisions.
 
-Cortex is designed around the primitives and philosophy of [Effect](https://effect.website/), not as an adapter layer or an optional integration, but as a native citizen of the ecosystem. This distinction matters because Effect provides a powerful foundation for building reliable systems with typed failures, dependency injection, and structured concurrency.
+**Built natively for Effect.** Cortex is not an adapter or optional integration. It uses Effect's primitives directly. Vector operations become Effect programs, adapters become layers, collections become services, and resource management becomes predictable. Effect provides typed failures, dependency injection, and structured concurrency as the foundation.
 
-Vector operations become regular Effect programs. Adapters become layers, collections become services, and resource management becomes predictable. The result is infrastructure that feels stable instead of fragile, a quality that matters more than most realize for AI systems.
+**Schema-driven infrastructure.** Collections are structured, vectors are validated, and operations are composable. Metadata chaos is addressed by treating vector databases as structured application infrastructure rather than loosely typed storage. The compiler enforces assumptions before runtime can fail, removing a category of bugs common in RAG pipelines.
 
-## Schema-Driven Infrastructure
+**Adapters instead of lock-in.** The vector database ecosystem changes constantly. Cortex uses adapters so application logic stays independent from storage implementations. Your application describes *what* it needs from vector infrastructure, not *how* a vendor implements it.
 
-One of the biggest pain points in vector systems is metadata chaos. Cortex approaches this by treating vector databases as structured application infrastructure rather than loosely typed storage engines. Vector operations become typed, composable, and Effect-native by default.
+## How It Works
 
 ```ts
 import { Effect } from "effect";
@@ -58,24 +58,8 @@ const program = Effect.gen(function* () {
 });
 ```
 
-The goal is simplicity without sacrificing correctness. Collections remain structured, vectors remain validated, and operations remain composable. Because everything lives inside Effect, the compiler enforces assumptions before runtime ever gets the chance to fail, removing a massive category of bugs common in RAG pipelines.
+## Tech Stack
 
-## Adapters Instead of Lock-In
-
-The vector database ecosystem changes constantly. New storage engines appear every few months, APIs evolve, and capabilities shift. Today it might be Zvec or PageIndex (Planned); tomorrow it could be something entirely different.
-
-Cortex is intentionally designed around adapters so application logic remains independent from storage implementations. Your application should describe *what* it wants from vector infrastructure, not become tightly coupled to *how* a particular vendor implements it. This separation between semantics and mechanics is exactly what made ORMs valuable in the relational world.
-
-## AI Infrastructure Still Feels Early
-
-One thing I have noticed while building AI systems is how much of the ecosystem still optimizes for demos instead of architecture. Most tooling makes it easy to get started quickly, but very little helps you build systems that remain maintainable six months later.
-
-Cortex is designed with long-term infrastructure in mind, focusing on actual systems like RAG pipelines, agent memory, and semantic search where reliability and explicit boundaries matter. That is why Effect felt like the right foundation; it already solves many of the hardest problems in backend architecture, and Cortex simply applies those ideas to vector infrastructure.
-
-## The Bigger Vision
-
-I believe vector databases are becoming foundational infrastructure for modern software, not niche AI tooling, but core application components. However, the developer experience still feels years behind the rest of the ecosystem with too much boilerplate and too many implicit contracts.
-
-Cortex is my attempt to push that ecosystem toward stronger abstractions, safer systems, versioned memory, and more composable architecture, the same evolution relational databases went through years ago. AI systems deserve better infrastructure primitives, not just better models.
-
-If you are building retrieval systems, semantic memory, or RAG pipelines, I would love your feedback.
+- **Runtime:** Effect (TypeScript)
+- **Package:** `@thaletto/cortex`
+- **Adapters:** Zvec, PageIndex (planned)
