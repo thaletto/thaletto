@@ -7,6 +7,15 @@ Hey, I’m Laxman, a full-stack developer who enjoys building modern, well-struc
 ## Code Stats
 ![thaletto's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=thaletto&bg_color=293036&color=ffffff&line=9ecbff&point=f97583&area=true&hide_border=true)
 
-<p align="start">
-  <img src="https://skillicons.dev/icons?i=ts,js,py,go,nextjs,react,tailwindcss,vite,fastapi,flask,bun,nodejs,elysia,postgres,mysql,redis,cloudflare,gcp,mongodb,workers,jenkins,docker,kubernetes&perline=4" alt="techstack" />
-</p>
+<table>
+  <tr>
+    <td valign="top" width="50%">
+      <p align="start">
+        <img src="https://skillicons.dev/icons?i=ts,js,py,go,nextjs,react,tailwindcss,vite,fastapi,flask,bun,nodejs,elysia,postgres,mysql,redis,cloudflare,gcp,mongodb,workers,jenkins,docker,kubernetes&perline=4" alt="techstack" />
+      </p>
+    </td>
+    <td valign="top" width="50%">
+      ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=thaletto&hide=javascript,css,scss,html&theme=tokyonight)
+    </td>
+  </tr>
+</table>
