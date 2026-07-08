@@ -1,72 +1,43 @@
 export const metadata = {
   title: "Tech stack I use in Mid 2026",
   date: "2026.05.25",
-  description: 'My mid-2026 production stack for building scalable applications.',
+  description: "My mid-2026 production stack for building scalable applications.",
   authors: { name: "Laxman K R", url: "https://thaletto.vercel.app" },
 };
 
-Building modern, scalable applications requires moving away from heavy, monolithic frameworks toward modular architectures, type-safe data layers, and deterministic agentic systems. This is the breakdown of the production-ready stack I am building with in Mid 2026.
-
-## Frontend: Highly Interactive & Type-Safe
-
-The client layer focuses heavily on strict type safety, zero-boilerplate data fetching, and micro-interactions.
-
-- ![Next.js](/logos/nextjs.svg) **Next.js:** Remains my primary framework foundation for core production routing, server-side rendering, and robust framework feature coverage.
-- ![TanStack](/logos/tanstack.svg) **TanStack Start:** My preferred choice for full-stack React architectures, providing exceptionally well-designed, type-safe isomorphic routing, loaders, and middleware.
-- ![TanStack](/logos/tanstack.svg) **TanStack Router:** Utilized for pure, deterministic client-side routing with complete type safety across parameters and routes.
-- ![React](/logos/react.svg) **React:** The underlying core UI foundation for building dynamic interactive components.
-- ![Shadcn](/logos/shadcn.svg) **Shadcn:** Clean, accessible primitives that don’t lock the interface into a rigid, monolithic component UI.
-- ![ReactBits](/logos/reactbits.svg) **ReactBits:** Integrated for drop-in, creative animated components that bring smooth visual layouts to life.
-- ![Paper Shaders](/logos/paper.svg) **Paper Shaders:** Elevates layouts into immersive, visually unique user experiences using high-performance WebGL and canvas-based shaders.
-
-## Backend: Functional, Fast, & Type-Inferred
-
-My backend architecture prioritizes high throughput, minimal overhead, and explicit error handling.
-
-- ![Bun](/logos/bun.svg) **Bun:** Serves as the high-performance, all-in-one JavaScript/TypeScript runtime engine, drastically reducing cold starts, bundling times, and memory footprints across backend services.
-- ![Effect](/logos/effect.svg) **Effect:** The crown jewel of the backend. Moving to an ecosystem built on functional programming primitives allows for structured concurrency, built-in tracing, and deterministic error handling without fragile try/catch blocks.
-- ![Elysia](/logos/elysiajs.svg) **Elysia:** Built natively on Bun to handle ultra-fast HTTP APIs, using end-to-end type inference via Eden to connect the frontend and backend seamlessly.
-- ![FastAPI](/logos/fastapi.svg) **FastAPI:** Reserved for data science environments, heavy LLM orchestration, and Python-centric AI pipelines where rapid ecosystem compatibility is required.
-
-## Databases & Storage: Hybrid & Multi-Model
-
-Data belongs where it runs best. I use a combination of local, managed, and specialized vector databases depending on the workload.
-
-- ![PostgreSQL](/logos/postgresql.svg) **PostgreSQL:** Self-hosted inside dedicated VMs for raw cost efficiency, deep configuration access, and complete data ownership.
-- ![Supabase](/logos/supabase.svg) **Supabase:** Deployed for rapid prototyping, real-time sync capabilities, and taking advantage of managed serverless Postgres primitives.
-- ![Neon](/logos/neon.svg) **Neon:** Used specifically when serverless database branching and instant scalability are required for dynamic feature preview workflows.
-- ![MongoDB](/logos/mongodb.svg) **MongoDB:** Leveraged as the primary document store for flexible, schema-less application datasets.
-- ![SQLite](/logos/sqlite.svg) **SQLite:** Lightweight relational storage deployed for edge execution, local utility states, or fast local caching layers.
-- ![Zvec VectorDB](/logos/zvec.svg) **Zvec VectorDB:** Integrated for specialized, hyper-efficient vector indexing workflows.
-- ![Qdrant](/logos/qdrant.svg) **Qdrant:** Handles large-scale, production-grade embedding retrieval and high-performance similarity searches.
-
-## Cloud & Infrastructure: Serverless Control & Edge
-
-Infrastructure in 2026 is about blending the control of raw virtual instances with the speed of edge routing.
-
-- ![Google Cloud](/logos/googlecloud.svg) **Google Cloud Compute Engines:** The baseline infrastructure bedrock for hosting predictable, continuous server workloads and databases.
-- ![Google Cloud](/logos/googlecloud.svg) **Google Kubernetes Engine (GKE):** Orchestrates, scales, and manages larger, decoupled containerized microservices.
-- ![Google Cloud](/logos/googlecloud.svg) **Google Cloud Storage:** Provides durable, globally accessible object storage for unstructured assets.
-- ![Vercel](/logos/vercel.svg) **Vercel Fluid Compute:** Used for frontend hosting and advanced edge execution, allowing multiple requests to share warm processes to eliminate cold starts.
-- ![Vercel](/logos/vercel.svg) **Vercel AI Gateway:** Sits in front of inference models to handle intelligent caching, rate-limiting, and deep telemetry.
-- ![Netlify](/logos/netlify.svg) **Netlify:** Utilized as an alternative edge target deployment platform for distributed web applications.
-- ![OpenRouter](/logos/openrouter.svg) **OpenRouter:** Acts as a unified, resilient API interface to access over 300+ LLMs with native fallback rules and token budget controls.
-
-## Agents & Automation
-
-Autonomous execution requires developer-focused toolchains that can parse, generate, and execute code natively.
-
-- ![Opencode](/logos/opencode.svg) **Opencode:** Unmatched excellence in the TUI space.
-- ![Codex](/logos/codex.svg) **Codex:** The gold standard for Agentic Development Environments.
-- ![Gemini](/logos/gemini.svg) **Gemini CLI:** Unbeatable value with complimentary, high-limit access.
-- ![Antigravity](/logos/antigravity.svg) **Antigravity CLI:** Premium testing framework that trades Gemini's free tiers for better performance.
-
-## Agentic Frameworks: The Orchestration Layer
-
-Building reliable agents means moving away from brittle, free-form text prompts and embracing structured, type-safe runtime environments.
-
-- ![Google ADK](/logos/adk.svg) **Google ADK:** Leveraged for deeply integrated Google ecosystem automations and native service-level intelligence.
-- ![Microsoft AutoGen](/logos/autogen.svg) **Microsoft AutoGen:** Handles complex multi-agent conversation patterns and hierarchical task routing.
-- ![AI SDK](/logos/vercel.svg) **AI SDK:** The reliable gold standard for building fast UI stream bindings and robust, structured tool-calling pipelines.
-- ![TanStack](/logos/tanstack.svg) **TanStack AI:** Provides brilliant, framework-agnostic agent clients and middleware utilities like contentGuard and toolCache.
-- ![Effect](/logos/effect.svg) **Effect AI:** Brings provider-agnostic abstractions to LLMs, ensuring that streaming chats, tool calls, and retries benefit from Effect's structured concurrency and deep tracing.
+| Category | Icon |
+| --- | --- |
+| Frontend | ![Next.js](/logos/nextjs.svg) |
+| Frontend | ![TanStack](/logos/tanstack.svg) |
+| Frontend | ![TanStack](/logos/tanstack.svg) |
+| Frontend | ![React](/logos/react.svg) |
+| Frontend | ![Shadcn](/logos/shadcn.svg) |
+| Frontend | ![ReactBits](/logos/reactbits.svg) |
+| Frontend | ![Paper Shaders](/logos/paper.svg) |
+| Backend | ![Bun](/logos/bun.svg) |
+| Backend | ![Effect](/logos/effect.svg) |
+| Backend | ![Elysia](/logos/elysiajs.svg) |
+| Backend | ![FastAPI](/logos/fastapi.svg) |
+| Databases & Storage | ![PostgreSQL](/logos/postgresql.svg) |
+| Databases & Storage | ![Supabase](/logos/supabase.svg) |
+| Databases & Storage | ![Neon](/logos/neon.svg) |
+| Databases & Storage | ![MongoDB](/logos/mongodb.svg) |
+| Databases & Storage | ![SQLite](/logos/sqlite.svg) |
+| Databases & Storage | ![Zvec VectorDB](/logos/zvec.svg) |
+| Databases & Storage | ![Qdrant](/logos/qdrant.svg) |
+| Cloud & Infrastructure | ![Google Cloud](/logos/googlecloud.svg) |
+| Cloud & Infrastructure | ![Google Cloud](/logos/googlecloud.svg) |
+| Cloud & Infrastructure | ![Google Cloud](/logos/googlecloud.svg) |
+| Cloud & Infrastructure | ![Vercel](/logos/vercel.svg) |
+| Cloud & Infrastructure | ![Vercel](/logos/vercel.svg) |
+| Cloud & Infrastructure | ![Netlify](/logos/netlify.svg) |
+| Cloud & Infrastructure | ![OpenRouter](/logos/openrouter.svg) |
+| Agents & Automation | ![Opencode](/logos/opencode.svg) |
+| Agents & Automation | ![Codex](/logos/codex.svg) |
+| Agents & Automation | ![Gemini](/logos/gemini.svg) |
+| Agents & Automation | ![Antigravity](/logos/antigravity.svg) |
+| Agentic Frameworks | ![Google ADK](/logos/adk.svg) |
+| Agentic Frameworks | ![Microsoft AutoGen](/logos/autogen.svg) |
+| Agentic Frameworks | ![AI SDK](/logos/vercel.svg) |
+| Agentic Frameworks | ![TanStack](/logos/tanstack.svg) |
+| Agentic Frameworks | ![Effect](/logos/effect.svg) |
