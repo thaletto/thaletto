@@ -20,8 +20,6 @@ export default withMDX()({
 		mdxRs: {
 			mdxType: "gfm",
 		},
-		turbopackFileSystemCacheForDev: true,
-		turbopackFileSystemCacheForBuild: true,
 	},
 	transpilePackages: ["shiki"],
 	images: {
