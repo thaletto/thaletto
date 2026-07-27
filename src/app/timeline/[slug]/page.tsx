@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
+import { mdxComponents } from "@/components/mdx/mdx-components";
 import { MDX_REGEX } from "@/lib/const";
 
 export default async function Page(props: {
@@ -13,7 +14,7 @@ export default async function Page(props: {
 		`../_timeline/${params.slug}.mdx`
 	);
 
-	return <MDXContent />;
+	return <MDXContent components={mdxComponents(params.slug, "timeline")} />;
 }
 
 export async function generateStaticParams() {

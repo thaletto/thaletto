@@ -1,12 +1,14 @@
-import type { ReactNode } from "react";
-import { Card } from "@/components/common/card";
-import SvgIcon from "@/components/common/logo";
-import { Badge } from "@/components/ui/badge";
-import { formatDate } from "@/lib/date";
-import { getCompanyLogoSrc } from "@/lib/utils";
 import { ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import type { ReactNode } from "react";
+import { ContentRail } from "@/components/content-rail";
+import {
+	CollectionNavigation,
+	ContentCover,
+	MetadataPlate,
+} from "@/components/content-shell";
+import { collectionNeighbors } from "@/lib/collections";
+import { contentHeadings } from "@/lib/content";
+import { formatDate } from "@/lib/date";
 
 export default async function Layout({
 	children,
@@ -17,82 +19,67 @@ export default async function Layout({
 }) {
 	const { slug } = await params;
 	const { metadata } = await import(`../_projects/${slug}.mdx`);
-	const companyIcon = getCompanyLogoSrc(metadata?.company);
-
+	const [headings, neighbors] = await Promise.all([
+		contentHeadings("projects", slug),
+		collectionNeighbors("projects", slug),
+	]);
 	const startDate = formatDate(metadata.startDate, "MMMYYYY");
 	const endDate = metadata.endDate
 		? formatDate(metadata.endDate, "MMMYYYY")
 		: "Present";
 
 	return (
-		<article className="mx-auto max-w-3xl">
-			<header className="mb-8 flex flex-col gap-4">
-				{/* Identity: company + title + date */}
-				<div className="flex flex-col gap-1">
-					<div className="flex items-center gap-2">
-						{companyIcon && (
-							<SvgIcon
-								className="size-8 shrink-0 text-muted-foreground md:size-10"
-								name={metadata?.company ?? ""}
-								src={companyIcon}
-							/>
-						)}
-						<h1 className="text-balance font-semibold text-xl md:text-3xl">
-							{metadata.title}
-						</h1>
-					</div>
-					<p className="font-serif text-sm text-muted-foreground">
-						{startDate} &rarr; {endDate}
-					</p>
-				</div>
-				{/* Description */}
-				{metadata?.description && (
-					<p className="text-muted-foreground leading-relaxed">
-						{metadata.description}
-					</p>
-				)}
-				{/* Hero image */}
-				<Card image={metadata.image} title={metadata?.imageLabel} />
-				{/* Tags + Links */}
-				{(metadata?.tags?.length > 0 || metadata?.links?.length > 0) && (
-					<div className="flex flex-col gap-2">
-						{metadata?.tags?.length > 0 && (
-							<div className="flex flex-wrap gap-1">
-								{metadata?.tags?.map((tag: string) => (
-									<Badge
-										className="rounded-sm px-2 py-1 text-sm"
-										key={tag}
-										variant="secondary"
-									>
-										{tag}
-									</Badge>
-								))}
-							</div>
-						)}
-
-						{metadata?.links?.length > 0 && (
-							<div className="flex flex-wrap gap-2 mt-2">
-								{metadata?.links?.map(
-									(link: { label: string; url: string }) => (
-										<Link key={link.url} href={link.url} target="_blank">
-											<Button
-												variant="default"
-												size="lg"
-												className="cursor-pointer"
-											>
-												<ExternalLink className="size-4" />
-												{link.label}
-											</Button>
-										</Link>
-									)
-								)}
-							</div>
-						)}
-					</div>
-				)}{" "}
-			</header>
-
-			{children}
-		</article>
+		<>
+			<ContentRail headings={headings} />
+			<article className="content-article">
+				<header className="content-header">
+					<p className="content-eyebrow">Project</p>
+					<h1 className="content-title">{metadata.title}</h1>
+					{metadata.description ? (
+						<p className="content-description">{metadata.description}</p>
+					) : null}
+					<MetadataPlate
+						items={[
+							{ label: "Company", value: metadata.company },
+							{ label: "Started", value: startDate },
+							{ label: "Ended", value: endDate },
+							{
+								label: "Stack",
+								value: metadata.tags?.join(" · "),
+							},
+						]}
+					/>
+					{metadata.links?.length ? (
+						<div className="content-actions">
+							{metadata.links.map((link: { label: string; url: string }) => (
+								<a
+									href={link.url}
+									key={link.url}
+									rel="noreferrer"
+									target="_blank"
+								>
+									<ExternalLink aria-hidden />
+									{link.label}
+								</a>
+							))}
+						</div>
+					) : null}
+					<ContentCover
+						alt={metadata.imageLabel ?? metadata.title}
+						caption={metadata.imageLabel}
+						height={metadata.imageHeight}
+						src={metadata.image}
+						width={metadata.imageWidth}
+					/>
+				</header>
+				{children}
+				<CollectionNavigation
+					indexHref="/projects"
+					indexLabel="All projects"
+					next={neighbors.next}
+					previous={neighbors.previous}
+				/>
+			</article>
+		</>
 	);
 }

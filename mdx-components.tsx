@@ -1,7 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 // @ts-expect-error
 import { BlockMath, InlineMath } from "react-katex";
 import { codeToHtml, createCssVariablesTheme } from "shiki";
@@ -14,14 +13,13 @@ import { Callout } from "@/components/common/callout";
 import { Card } from "@/components/common/card";
 import { Code } from "@/components/common/code-block";
 import LinkChip from "@/components/common/link-chip";
+import { HomeDoorways, SectionTag } from "@/components/home-doorways";
+import { CopyCodeButton } from "@/components/mdx/copy-code-button";
 import { Mermaid } from "@/components/mermaid";
 
 const cssVariablesTheme = createCssVariablesTheme({});
 
-export const components: Record<
-	string,
-	(props: any) => ReactNode | Promise<ReactNode>
-> = {
+export const components: MDXComponents = {
 	h1: (props) => (
 		<h1
 			className="mb-8 text-balance font-semibold text-xl md:text-3xl"
@@ -113,12 +111,16 @@ export const components: Record<
 		});
 
 		return (
-			<pre className="mt-4 overflow-x-auto rounded-lg bg-shiki-background p-4 text-shiki-foreground">
-				<code
-					className="shiki css-variables"
-					dangerouslySetInnerHTML={{ __html: html }}
-				/>
-			</pre>
+			<div className="mdx-code-shell">
+				<CopyCodeButton code={String(rawCode)} />
+				<pre className="overflow-x-auto rounded-lg bg-shiki-background p-4 text-shiki-foreground">
+					<code
+						className="shiki css-variables"
+						// biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki generates escaped highlighted HTML from local MDX source
+						dangerouslySetInnerHTML={{ __html: html }}
+					/>
+				</pre>
+			</div>
 		);
 	},
 	code: (props) => (
@@ -126,7 +128,7 @@ export const components: Record<
 			{props.children}
 		</code>
 	),
-	img: async ({ src, alt, title }) => {
+	img: ({ src = "", alt = "", title }) => {
 		let img: React.ReactNode;
 
 		const isSvg = src.endsWith(".svg");
@@ -136,12 +138,15 @@ export const components: Record<
 		if (isRemote || isAbsolute) {
 			if (isSvg && !title) {
 				img = (
+					// biome-ignore lint/performance/noImgElement: tiny technical marks should remain unoptimized and crisp
 					<img
 						alt={alt}
 						className="mr-1.5 inline-block align-middle"
 						draggable={false}
+						height={18}
 						src={src}
 						style={{ height: "1.2em", width: "auto" }}
+						width={18}
 					/>
 				);
 			} else {
@@ -150,11 +155,11 @@ export const components: Record<
 						alt={alt}
 						className="mt-4 rounded-lg"
 						draggable={false}
+						height={675}
 						quality={95}
 						src={src}
-						width={1200}
-						height={675}
 						style={{ width: "100%", height: "auto" }}
+						width={1200}
 					/>
 				);
 			}
@@ -162,11 +167,14 @@ export const components: Record<
 			// Fallback for relative paths to avoid "too dynamic" import error in Turbopack.
 			// Standard img tag handles these safely without needing static analysis.
 			img = (
+				// biome-ignore lint/performance/noImgElement: legacy relative MDX sources cannot be statically resolved by next/image
 				<img
 					alt={alt}
 					className="mt-4 h-auto w-full rounded-lg"
 					draggable={false}
+					height={675}
 					src={src}
+					width={1200}
 				/>
 			);
 		}
@@ -219,11 +227,13 @@ export const components: Record<
 	Hero,
 	About,
 	ThatsWhatSheSaid,
+	HomeDoorways,
+	SectionTag,
 };
 
 export function useMDXComponents(inherited: MDXComponents): MDXComponents {
 	return {
 		...inherited,
-		...(components as any),
+		...components,
 	};
 }

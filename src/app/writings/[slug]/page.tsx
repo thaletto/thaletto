@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
+import { mdxComponents } from "@/components/mdx/mdx-components";
 import { MDX_REGEX } from "@/lib/const";
 
 export default async function Page(props: {
@@ -10,7 +11,7 @@ export default async function Page(props: {
 
 	const { default: MDXContent } = await import(`../_articles/${slug}.mdx`);
 
-	return <MDXContent />;
+	return <MDXContent components={mdxComponents(slug, "writings")} />;
 }
 
 export async function generateStaticParams() {
@@ -21,9 +22,7 @@ export async function generateStaticParams() {
 	return articles
 		.filter((name) => name.endsWith(".mdx"))
 		.map((name) => ({
-			params: {
-				slug: name.replace(MDX_REGEX, ""),
-			},
+			slug: name.replace(MDX_REGEX, ""),
 		}));
 }
 

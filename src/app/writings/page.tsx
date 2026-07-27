@@ -1,57 +1,68 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { MDX_REGEX } from "@/lib/const";
-import { WritingsList } from "./page.client";
 
 export const metadata: Metadata = {
 	title: "Writings",
-	openGraph: {
-		images: ["/og/writings.png"],
-	},
+	openGraph: { images: ["/og/writings.png"] },
 };
 
-const articlesDirectory = path.join(
-	process.cwd(),
-	"src",
-	"app",
-	"writings",
-	"_articles"
-);
-
-export interface WritingItem {
-	date: string;
-	description: string;
-	slug: string;
-	sort: number;
-	title: string;
-}
-
 export default async function Page() {
-	const articles = await fs.readdir(articlesDirectory);
-	const articleFiles = articles.filter((f) => f.endsWith(".mdx"));
-
+	const directory = path.join(
+		process.cwd(),
+		"src",
+		"app",
+		"writings",
+		"_articles"
+	);
+	const files = (await fs.readdir(directory)).filter((file) =>
+		file.endsWith(".mdx")
+	);
 	const items = (
 		await Promise.all(
-			articleFiles.map(async (article) => {
-				const module = await import(`./_articles/${article}`);
-				if (!module.metadata) {
-					throw new Error(`Missing \`metadata\` in ${article}`);
+			files.map(async (file) => {
+				const module = await import(`./_articles/${file}`);
+				if (!module.metadata || module.metadata.draft) {
+					return null;
 				}
-				if (module.metadata.draft) return null;
-
 				return {
-					slug: article.replace(MDX_REGEX, ""),
-					title: module.metadata.title,
-					date: module.metadata.date || "-",
-					sort: Number(module.metadata.date?.replaceAll(".", "") || 0),
-					description: module.metadata?.description,
+					...module.metadata,
+					slug: file.replace(MDX_REGEX, ""),
 				};
 			})
 		)
 	).filter((item): item is NonNullable<typeof item> => item !== null);
+	items.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+	const groups = Map.groupBy(items, (item) => String(item.date).slice(0, 4));
 
-	items.sort((a, b) => b.sort - a.sort);
-
-	return <WritingsList items={items} />;
+	return (
+		<div className="page-column">
+			<header className="collection-header">
+				<p className="content-eyebrow">Notes and essays</p>
+				<h1>Writings</h1>
+			</header>
+			<div className="writing-groups">
+				{[...groups].map(([year, writings]) => (
+					<section aria-labelledby={`year-${year}`} key={year}>
+						<h2 id={`year-${year}`}>{year}</h2>
+						<ul className="writing-list">
+							{writings.map((item) => (
+								<li key={item.slug}>
+									<Link href={`/writings/${item.slug}`}>
+										<span>
+											<strong>{item.title}</strong>
+											<small>{item.description}</small>
+										</span>
+										<time>{String(item.date).slice(5)}</time>
+									</Link>
+								</li>
+							))}
+						</ul>
+					</section>
+				))}
+			</div>
+		</div>
+	);
 }

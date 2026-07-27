@@ -1,4 +1,11 @@
 import type { ReactNode } from "react";
+import { ContentRail } from "@/components/content-rail";
+import {
+	CollectionNavigation,
+	MetadataPlate,
+} from "@/components/content-shell";
+import { collectionNeighbors } from "@/lib/collections";
+import { contentHeadings, contentStats } from "@/lib/content";
 
 export default async function Layout({
 	children,
@@ -8,20 +15,40 @@ export default async function Layout({
 	params: Promise<{ slug: string }>;
 }) {
 	const { slug } = await params;
-
 	const { metadata } = await import(`../_articles/${slug}.mdx`);
+	const [headings, stats, neighbors] = await Promise.all([
+		contentHeadings("writings", slug),
+		contentStats("writings", slug),
+		collectionNeighbors("writings", slug),
+	]);
 
 	return (
-		<article className="mx-auto max-w-3xl">
-			<header className="mb-8 flex flex-col gap-2">
-				<h1 className="text-balance font-semibold text-xl md:text-3xl">
-					{metadata.title}
-				</h1>
-				<p className="font-serif text-sm">
-					{metadata.authors.name} &bull; {metadata.date}
-				</p>
-			</header>
-			{children}
-		</article>
+		<>
+			<ContentRail headings={headings} />
+			<article className="content-article">
+				<header className="content-header">
+					<p className="content-eyebrow">Writing</p>
+					<h1 className="content-title">{metadata.title}</h1>
+					{metadata.description ? (
+						<p className="content-description">{metadata.description}</p>
+					) : null}
+					<MetadataPlate
+						items={[
+							{ label: "Author", value: metadata.authors?.name },
+							{ label: "Published", value: metadata.date },
+							{ label: "Reading", value: `${stats.readingMinutes} min` },
+							{ label: "Words", value: stats.words.toLocaleString("en-US") },
+						]}
+					/>
+				</header>
+				{children}
+				<CollectionNavigation
+					indexHref="/writings"
+					indexLabel="All writings"
+					next={neighbors.next}
+					previous={neighbors.previous}
+				/>
+			</article>
+		</>
 	);
 }

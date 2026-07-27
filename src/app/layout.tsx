@@ -1,7 +1,10 @@
-import { Analytics } from "@vercel/analytics/next";
 import cn from "clsx";
+import { AmbientBackground } from "@/components/ambient-background";
+import { AnalyticsCollector } from "@/components/analytics-collector";
 import KeyboardShortcuts from "@/components/keyboard-shortcuts";
 import Navbar from "@/components/navbar";
+import { PublicOnly } from "@/components/public-only";
+import { SiteFooter } from "@/components/site-footer";
 import "katex/dist/katex.min.css";
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono } from "next/font/google";
@@ -19,6 +22,7 @@ const serif_to_sans = localFont({
 
 const mono = Geist_Mono({
 	preload: true,
+	subsets: ["latin"],
 	variable: "--mono",
 });
 
@@ -65,29 +69,28 @@ export default function RootLayout({
 		>
 			<body
 				className={cn(
-					"w-full p-6 sm:p-10 md:p-12",
+					"w-full",
 					"text-sm leading-6 sm:text-[15px] sm:leading-7 md:text-base md:leading-7",
 					"antialiased"
 				)}
 			>
 				<TooltipProvider>
-					<div className="pointer-events-none fixed top-0 left-0 z-30 h-6 w-full content-fade-out sm:hidden sm:h-10 md:h-14" />
-					<div className="flex mobile:flex-row flex-col">
-						<Navbar />
-						{/* MAX WIDTH 3.25XL (832px) */}
-						<main className="contain-[inline-size] relative max-w-208 flex-1">
-							<div className="absolute mobile:right-auto right-0 mobile:left-0 h-px mobile:h-full mobile:w-px w-full bg-border" />
-							<ViewTransition name="crossfade">
-								<article className="mobile:pt-0 pt-6 mobile:pl-6 pl-0 sm:pl-10 md:pl-14">
-									{children}
-								</article>
-							</ViewTransition>
+					<AmbientBackground />
+					<div className="relative z-10 flex min-h-screen flex-col pb-24">
+						<main className="flex-1 pt-14">
+							<ViewTransition name="crossfade">{children}</ViewTransition>
 						</main>
+						<PublicOnly>
+							<SiteFooter />
+						</PublicOnly>
 					</div>
+					<PublicOnly>
+						<Navbar />
+					</PublicOnly>
 				</TooltipProvider>
 				<NavSoundTrigger />
 				<KeyboardShortcuts />
-				<Analytics />
+				<AnalyticsCollector />
 			</body>
 		</html>
 	);

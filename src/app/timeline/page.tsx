@@ -1,78 +1,67 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
-import { TimelineLayout } from "@/components/timeline/timeline-layout";
+import Image from "next/image";
+import Link from "next/link";
 import { MDX_REGEX } from "@/lib/const";
-import type { TimelineElement } from "@/types";
 
 export const metadata: Metadata = {
 	title: "Timeline",
-	openGraph: {
-		images: ["/og/timeline.png"],
-	},
+	openGraph: { images: ["/og/timeline.png"] },
 };
 
-// Timeline directory
-const timelineDirectory = path.join(
-	process.cwd(),
-	"src",
-	"app",
-	"timeline",
-	"_timeline"
-);
-
-function toSortableDate(value: string) {
-	// Supports: YYYY, YYYY-MM, YYYY.MM
-	const normalized = value.replace(".", "-");
-	const date = new Date(normalized);
-
-	return Number.isNaN(date.getTime()) ? 0 : date.getTime();
-}
-
 export default async function Page() {
-	const timelineFiles = await fs.readdir(timelineDirectory);
-
-	const items: TimelineElement[] = [];
-
-	for (const file of timelineFiles) {
-		if (!file.endsWith(".mdx")) {
-			continue;
-		}
-
-		const module = await import(`./_timeline/${file}`);
-
-		if (!module.metadata) {
-			throw new Error(`Missing \`metadata\` in ${file}`);
-		}
-		if (module.metadata.draft) {
-			continue;
-		}
-
-		const startDate = module.metadata.startDate;
-		const endDate = module.metadata.endDate ?? "Present";
-
-		items.push({
-			id: items.length + 1,
-			startDate,
-			endDate,
-			date: `${startDate} - ${endDate}`,
-			title: module.metadata.title,
-			description: module.metadata.description ?? "",
-			content: module.metadata.content,
-			image: module.metadata.image,
-			slug: file.replace(MDX_REGEX, ""),
-		});
-	}
-
-	items.sort(
-		(a, b) => toSortableDate(a.startDate) - toSortableDate(b.startDate)
+	const directory = path.join(
+		process.cwd(),
+		"src",
+		"app",
+		"timeline",
+		"_timeline"
 	);
+	const files = (await fs.readdir(directory)).filter((file) =>
+		file.endsWith(".mdx")
+	);
+	const items = (
+		await Promise.all(
+			files.map(async (file) => {
+				const module = await import(`./_timeline/${file}`);
+				if (!module.metadata || module.metadata.draft) {
+					return null;
+				}
+				return {
+					...module.metadata,
+					slug: file.replace(MDX_REGEX, ""),
+				};
+			})
+		)
+	).filter((item): item is NonNullable<typeof item> => item !== null);
+	items.sort((a, b) => String(b.startDate).localeCompare(String(a.startDate)));
 
 	return (
-		<TimelineLayout
-			animate={true}
-			className="mx-auto max-w-6xl"
-			items={items}
-		/>
+		<div className="page-column">
+			<header className="collection-header">
+				<p className="content-eyebrow">Experience</p>
+				<h1>Timeline</h1>
+				<p>Work, education, and the milestones between them.</p>
+			</header>
+			<ul className="editorial-list">
+				{items.map((item) => (
+					<li key={item.slug}>
+						<Link className="experience-row" href={`/timeline/${item.slug}`}>
+							<span className="row-icon">
+								<Image alt="" fill sizes="44px" src={item.image} />
+							</span>
+							<span className="row-identity">
+								<strong>{item.title}</strong>
+								<small className="whitespace-pre-line">{item.content}</small>
+							</span>
+							<span className="row-date">
+								{item.startDate}—{item.endDate ?? "now"}
+							</span>
+						</Link>
+					</li>
+				))}
+			</ul>
+		</div>
 	);
 }

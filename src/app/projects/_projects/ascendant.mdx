@@ -2,7 +2,9 @@ export const metadata = {
   title: `Ascendant`,
   sort: 4,
   tags: ["Python SDK", "PyPI"],
-  image: "/projects/ascendant.webp",
+  image: "/content/projects/ascendant/ascendant.webp",
+  imageWidth: 1101,
+  imageHeight: 614,
   startDate: "2025.09",
   endDate: "2026.04",
   links: [
@@ -38,12 +40,12 @@ Ascendant treats all of this as a reproducible computation: provide a birth mome
 
 ## How It Works
 
-<Code language="bash" filename="terminal">
-  {`pip install astro-ascendant`}
-</Code>
+```bash
+pip install astro-ascendant
+```
 
-<Code language="python">
-{`from ascendant import Ascendant
+```python
+from ascendant import Ascendant
 
 astro = Ascendant(
   year=1990, month=1, day=1,
@@ -56,8 +58,8 @@ chart = astro.get_chart(division=1)
 
 yogas = astro.get_yogas()
 
-dasha = astro.get_dasha_timeline()`}
-</Code>
+dasha = astro.get_dasha_timeline()
+```
 
 ## Tech Stack
 

@@ -71,7 +71,12 @@ export default function LinkChip({
 	};
 	const px = variant === "link" ? "px-0" : "px-2";
 	return (
-		<Link href={link} rel="noopener noreferrer" target="_blank">
+		<Link
+			href={link}
+			prefetch={false}
+			rel="noopener noreferrer"
+			target="_blank"
+		>
 			<Badge
 				className={`rounded py-4 text-sm ${px} ${className}`}
 				variant={variant}

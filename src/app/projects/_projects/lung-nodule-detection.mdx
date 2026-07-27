@@ -2,7 +2,9 @@ export const metadata = {
   title: `Complex or Irregular Lung Nodule Detection from CT Scans`,
   sort: 3,
   tags: ["YOLOv5s", "DETR", "V-Net", "Image Classification"],
-  image: "/projects/lungnodule.webp",
+  image: "/content/projects/lung-nodule-detection/lungnodule.webp",
+  imageWidth: 1536,
+  imageHeight: 1024,
   startDate: "2023.09",
   endDate: "2024.05",
   links: [
@@ -42,9 +44,7 @@ V-Net was trained with an encoder-decoder architecture using batch normalization
 
 ## Results
 
-<BlockSideTitle title="Sample detections by YOLOv5s">
-  <img src="/projects/_yolo_prediction.png" />
-</BlockSideTitle>
+![Sample detections by YOLOv5s](./yolo-prediction.png#693x696:crisp "Sample detections by YOLOv5s")
 
 V-Net achieved strong segmentation performance measured by Dice coefficient and Intersection over Union. YOLOv5s demonstrated accurate multi-nodule detection per slice at inference speeds compatible with clinical workflows. DETR's primary contribution was suppressing the false positives that the faster models, optimized for recall, inevitably produce.
 

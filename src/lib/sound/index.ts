@@ -1,3 +1,4 @@
+// biome-ignore lint/performance/noNamespaceImport: Tone exposes its node constructors and transport as one coordinated browser runtime
 import * as Tone from "tone";
 
 const PENTATONIC_SCALE = ["C", "D", "E", "G", "A"] as const;
@@ -61,9 +62,9 @@ class SoundSystem {
 
 	// Initialization
 
-	private async initialize() {
+	private initialize(): Promise<void> {
 		if (this.initialized) {
-			return;
+			return Promise.resolve();
 		}
 		if (this.initializing) {
 			return this.initializing;
@@ -97,6 +98,7 @@ class SoundSystem {
 			}
 			this.initialized = true;
 		})();
+		return this.initializing;
 	}
 
 	// Note Selection
@@ -200,6 +202,28 @@ class SoundSystem {
 		this.muted = muted;
 	}
 
+	isMuted() {
+		return this.muted;
+	}
+
+	async playCue(kind: "close" | "confirm" | "open" | "toggle") {
+		if (!(await this.ready())) {
+			return;
+		}
+		const notes = {
+			close: "D4",
+			confirm: "G5",
+			open: "E5",
+			toggle: "A4",
+		} as const;
+		this.synthExit?.triggerAttackRelease(
+			notes[kind],
+			kind === "confirm" ? "16n" : "32n",
+			undefined,
+			0.3
+		);
+	}
+
 	/**
 	 * Sets the master volume.
 	 *
@@ -223,7 +247,7 @@ class SoundSystem {
 	 * Call this during dev HMR cleanup to prevent orphaning audio nodes.
 	 * Sets `initialized` to false so subsequent calls re-initialize properly.
 	 */
-	async dispose() {
+	dispose() {
 		this.synthEnter?.dispose();
 		this.synthEnter = null;
 		this.synthExit?.dispose();
@@ -259,3 +283,22 @@ class SoundSystem {
  * ```
  */
 export const sounds = new SoundSystem();
+
+const SOUND_STORAGE_KEY = "portfolio-sound";
+
+export function savedSoundEnabled() {
+	if (typeof window === "undefined") {
+		return true;
+	}
+	return window.localStorage.getItem(SOUND_STORAGE_KEY) !== "off";
+}
+
+export function setSoundEnabled(enabled: boolean) {
+	sounds.setMuted(!enabled);
+	if (typeof window !== "undefined") {
+		window.localStorage.setItem(SOUND_STORAGE_KEY, enabled ? "on" : "off");
+		window.dispatchEvent(
+			new CustomEvent("portfolio-sound-change", { detail: enabled })
+		);
+	}
+}

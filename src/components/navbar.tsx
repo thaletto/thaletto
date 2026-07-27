@@ -1,73 +1,68 @@
 "use client";
-import cn from "clsx";
-import type Link from "next/link";
+
+import { BriefcaseBusiness, Clock3, PenLine } from "lucide-react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import profile from "../../public/me.jpg";
 import { NavLink } from "./nav-link";
-import { Kbd } from "./ui/kbd";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { SoundToggle } from "./sound-toggle";
 
-const NAV_ITEMS = [
-	{ href: "/", label: "About", key: "A" },
-	{ href: "/projects", label: "Projects", key: "P" },
-	{ href: "/timeline", label: "Timeline", key: "T" },
-	{ href: "/writings", label: "Writings", key: "W" },
-];
-
-function Item(props: React.ComponentProps<typeof Link>) {
-	const pathname = usePathname();
-	const href = props.href;
-
-	if (typeof href !== "string") {
-		throw new Error("`href` must be a string");
-	}
-
-	const normalizedPathname = pathname ?? "/";
-	let isActive: boolean;
-	if (href === "/") {
-		isActive = normalizedPathname === "/";
-	} else {
-		isActive = normalizedPathname.startsWith(href);
-	}
-	return (
-		<li
-			className={cn(
-				isActive
-					? "text-foreground"
-					: "text-muted-foreground hover:text-foreground",
-				"transition-colors hover:transform-none",
-				"-mx-2",
-				props.className
-			)}
-		>
-			<NavLink
-				{...props}
-				className="inline-block w-full px-2 lowercase focus-visible:rounded-xs focus-visible:outline focus-visible:outline-dotted focus-visible:outline-ring"
-			/>
-		</li>
-	);
-}
+const ITEMS = [
+	{
+		href: "/projects",
+		icon: BriefcaseBusiness,
+		key: "P",
+		label: "Projects",
+	},
+	{ href: "/timeline", icon: Clock3, key: "T", label: "Timeline" },
+	{ href: "/writings", icon: PenLine, key: "W", label: "Writings" },
+] as const;
 
 export default function Navbar() {
+	const pathname = usePathname();
+
 	return (
-		<nav className="mobile:mr-6 mobile:w-16 w-full sm:mr-10 md:mr-14">
-			<ul className="mobile:sticky top-6 mb-6 mobile:mb-0 mobile:block flex justify-end gap-2 text-left sm:top-10 md:top-14">
-				{NAV_ITEMS.map((item) => (
-					<Item href={item.href} key={item.href}>
-						<Tooltip>
-							<TooltipTrigger>
-								<span className="cursor-pointer">{item.label}</span>
-							</TooltipTrigger>
-							<TooltipContent
-								className="hidden items-center gap-2 md:flex"
-								side="right"
-								sideOffset={12}
-							>
-								Press <Kbd>{item.key}</Kbd>
-							</TooltipContent>
-						</Tooltip>
-					</Item>
-				))}
-			</ul>
+		<nav aria-label="Main navigation" className="portfolio-dock">
+			<span aria-hidden className="dock-glass" />
+			<NavLink
+				aria-current={pathname === "/" ? "page" : undefined}
+				aria-label="About, shortcut A"
+				className="dock-item"
+				data-active={pathname === "/" || undefined}
+				href="/"
+			>
+				<Image
+					alt=""
+					className="size-7 rounded-full object-cover"
+					height={28}
+					src={profile}
+					width={28}
+				/>
+				<span className="dock-tooltip">
+					About <kbd>A</kbd>
+				</span>
+			</NavLink>
+			<span aria-hidden className="dock-rule" />
+			{ITEMS.map(({ href, icon: Icon, key, label }) => {
+				const active = pathname.startsWith(href);
+				return (
+					<NavLink
+						aria-current={active ? "page" : undefined}
+						aria-label={`${label}, shortcut ${key}`}
+						className="dock-item"
+						data-active={active || undefined}
+						href={href}
+						key={href}
+					>
+						<Icon aria-hidden className="size-4" />
+						<span className="dock-tooltip">
+							{label} <kbd>{key}</kbd>
+						</span>
+					</NavLink>
+				);
+			})}
+			<span aria-hidden className="dock-rule" />
+			<SoundToggle />
 		</nav>
 	);
 }

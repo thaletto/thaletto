@@ -1,9 +1,12 @@
 "use server";
 import { unstable_cache as cache } from "next/cache";
-import { redis } from "@/lib/redis";
+import { ensureRedis, redis } from "@/lib/redis";
 
 export async function incrementGlobalView(sessionId: string) {
 	if (process.env.NODE_ENV !== "production") {
+		return;
+	}
+	if (!(await ensureRedis())) {
 		return;
 	}
 
@@ -35,8 +38,16 @@ export const getContributionsData = cache(
 			`/v4/${GITHUB_USERNAME}`,
 			"https://github-contributions-api.jogruber.de"
 		);
-		const response = await fetch(url);
-		const data = (await response.json()) as ContributionsResponse;
+		let data: ContributionsResponse;
+		try {
+			const response = await fetch(url, { signal: AbortSignal.timeout(5000) });
+			if (!response.ok) {
+				throw new Error(`GitHub contributions returned ${response.status}`);
+			}
+			data = (await response.json()) as ContributionsResponse;
+		} catch {
+			return { contributions: [], total: {} };
+		}
 		const total = data.total;
 		const [today] = new Date().toISOString().split("T");
 		const [oneYearAgo] = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000)
