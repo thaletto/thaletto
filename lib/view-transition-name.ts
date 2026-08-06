@@ -21,10 +21,8 @@ function postTransitionId(slug: string) {
   switch (slug) {
     case 'how-i-stole-the-design-of-my-portfolio':
       return 'p11'
-    case 'tech-stack-2026':
-      return 'p12'
     case 'the-great-pyramid-of-js':
-      return 'p13'
+      return 'p12'
     default:
       throw new Error('Unknown post view-transition slug')
   }

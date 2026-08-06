@@ -2,7 +2,6 @@
 // proxy, post index, feeds, and sitemap all consume this explicit allowlist.
 export const publishedPostSlugs = [
   'how-i-stole-the-design-of-my-portfolio',
-  'tech-stack-2026',
   'the-great-pyramid-of-js',
 ] as const
 
