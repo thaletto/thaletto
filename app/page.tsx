@@ -17,6 +17,6 @@ export const metadata: Metadata = {
   title: { absolute: seoEn.title },
 }
 
-export default function EnglishHomePage() {
-  return <HomePageView locale="en" />
+export default function Page() {
+  return <HomePageView />
 }
