@@ -64,7 +64,7 @@ export async function SiteDocument({
                     CSS-named list → loading shell → article groups active. */}
                 <RouteViewTransition>{children}</RouteViewTransition>
               </main>
-              <SiteFooter social={social} github={github} locale={locale} />
+              <SiteFooter social={social} github={github} />
             </div>
             <Suspense fallback={<DockFallback locale={locale} />}>
               <Dock />

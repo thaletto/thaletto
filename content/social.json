@@ -3,22 +3,15 @@
     "name": "Laxman",
     "handle": "thaletto",
     "bio": "a full-stack developer who enjoys building modern, well-structured apps.\n\nTypeScript is my go-to language, and Python for AI-driven work.",
+    "bioEn": "a full-stack developer who enjoys building modern, well-structured apps.\n\nTypeScript is my go-to language, and Python for AI-driven work.",
     "followers": "27,419",
     "following": "633",
     "asOf": "2026-07-17"
   },
-  "telegram": {
-    "name": "Cali Castle",
-    "handle": "cali_so",
-    "bio": "找我聊聊产品、设计与开发",
-    "bioEn": "Talk products, design, and code with me"
-  },
-  "youtube": {
-    "name": "Cali Castle",
-    "handle": "calicastle",
-    "bio": "开发与设计的视频内容",
-    "bioEn": "Videos on building and designing",
-    "followers": "1.91K",
-    "asOf": "2026-07"
+  "linkedin": {
+    "name": "Laxman K R",
+    "handle": "laxmanramesh",
+    "bio": "Full-stack developer who enjoys building modern, well-structured apps. TypeScript go-to, Python for AI.",
+    "bioEn": "Full-stack developer who enjoys building modern, well-structured apps. TypeScript go-to, Python for AI."
   }
 }
