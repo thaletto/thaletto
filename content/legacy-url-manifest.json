@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "kind": "page",
+      "source": "/",
+      "probes": ["/"],
+      "status": 200,
+      "contains": "Cali Castle"
+    },
+    {
+      "kind": "page",
+      "source": "/blog",
+      "probes": ["/blog"],
+      "status": 200,
+      "contains": "<main"
+    },
+    {
+      "kind": "page",
+      "source": "/projects",
+      "probes": ["/projects"],
+      "status": 200,
+      "contains": "<main"
+    },
+
+    {
+      "kind": "redirect",
+      "source": "/about",
+      "destination": "/",
+      "probes": ["/about"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/guestbook",
+      "destination": "/",
+      "probes": ["/guestbook"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/blocked",
+      "destination": "/",
+      "probes": ["/blocked"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/studio/:path*",
+      "destination": "/",
+      "probes": ["/studio", "/studio/legacy"],
+      "status": 308
+    },
+
+    {
+      "kind": "redirect",
+      "source": "/twitter",
+      "destination": "https://x.com/calicastle",
+      "probes": ["/twitter"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/x",
+      "destination": "https://x.com/calicastle",
+      "probes": ["/x"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/youtube",
+      "destination": "https://youtube.com/@calicastle",
+      "probes": ["/youtube"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/tg",
+      "destination": "https://t.me/cali_so",
+      "probes": ["/tg"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/linkedin",
+      "destination": "https://www.linkedin.com/in/calicastle/",
+      "probes": ["/linkedin"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/github",
+      "destination": "https://github.com/CaliCastle",
+      "probes": ["/github"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/bilibili",
+      "destination": "https://space.bilibili.com/8350251",
+      "probes": ["/bilibili"],
+      "status": 308
+    }
+  ]
+}

@@ -4,13 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
-.yarn/install-state.gz
 
 # testing
 /coverage
-/temp
-/output
-/.playwright-cli
+/playwright-report/
+/test-results/
 
 # next.js
 /.next/
@@ -27,9 +25,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # local env files
 .env*.local
+.firecrawl/
 .env
 
 # vercel
@@ -39,15 +39,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# v0
-.v0-store
+# vs code
+.vscode
 
-# v0
-.v0
+# turbo
+.turbo
 
-# Opencode
-.opencode
+static/
 
-# Generated OG images
-/public/og
-/src/public/og
+.react-email/
+/.idea
+.env*

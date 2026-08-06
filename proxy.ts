@@ -1,20 +1,35 @@
-import { type NextRequest, NextResponse } from "next/server";
+import type { NextFetchEvent, NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export function proxy(request: NextRequest) {
-	if (request.cookies.has("session_id")) {
-		return NextResponse.next();
-	}
-	const response = NextResponse.next();
-	response.cookies.set("session_id", crypto.randomUUID(), {
-		httpOnly: true,
-		maxAge: 60 * 60 * 24 * 365,
-		path: "/",
-		sameSite: "lax",
-		secure: process.env.NODE_ENV === "production",
-	});
-	return response;
+import { isPublishedPostSlug } from './lib/public-content-routes'
+
+function missingPublicContent(pathname: string) {
+  const postMatch = pathname.match(/^\/(?:en\/)?blog\/([^/]+)\/?$/)
+  if (postMatch) {
+    const slug = postMatch[1]
+    if (/^(?:opengraph-image|twitter-image)-/.test(slug)) return false
+    return !isPublishedPostSlug(slug)
+  }
+
+  return false
+}
+
+export function siteProxy(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  if (missingPublicContent(pathname)) {
+    const notFoundUrl = request.nextUrl.clone()
+    notFoundUrl.pathname = '/_not-found'
+    return NextResponse.rewrite(notFoundUrl, { status: 404 })
+  }
+
+  return NextResponse.next()
+}
+
+export function proxy(request: NextRequest, _event: NextFetchEvent) {
+  return siteProxy(request)
 }
 
 export const config = {
-	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
-};
+  matcher: ['/blog/:slug', '/en/blog/:slug'],
+}

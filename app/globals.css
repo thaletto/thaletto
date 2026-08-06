@@ -1,0 +1,6969 @@
+@import 'tailwindcss';
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    /* Geist for Latin; Frex Sans GB catches CJK glyphs via stack order */
+    --font-sans: var(--font-geist), var(--font-frex-gb, ui-sans-serif), system-ui, sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+  @keyframes spinner-move {
+  to {
+    stroke-dashoffset: -100;
+        }
+    }
+  @keyframes spinner-dash {
+  0%, 100% {
+    stroke-dasharray: 15 85;
+        }
+  50% {
+    stroke-dasharray: 40 60;
+        }
+    }
+  --color-hover: var(--hover);
+  --color-active: var(--active);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+  --color-surface-5: var(--surface-5);
+  --color-surface-6: var(--surface-6);
+  --color-surface-7: var(--surface-7);
+  --color-surface-8: var(--surface-8);
+  --shadow-surface-1: var(--shadow-1);
+  --shadow-surface-2: var(--shadow-2);
+  --shadow-surface-3: var(--shadow-3);
+  --shadow-surface-4: var(--shadow-4);
+  --shadow-surface-5: var(--shadow-5);
+  --shadow-surface-6: var(--shadow-6);
+  --shadow-surface-7: var(--shadow-7);
+  --shadow-surface-8: var(--shadow-8);
+  --color-dm-drop: var(--dm-drop);
+  --color-dm-ring-high: var(--dm-ring-high);
+  --color-dm-ring-mid: var(--dm-ring-mid);
+  --color-dm-ring-base: var(--dm-ring-base);
+  --color-dm-hi-peak: var(--dm-hi-peak);
+  --color-dm-hi-high: var(--dm-hi-high);
+  --color-dm-hi-mid: var(--dm-hi-mid);
+  --color-dm-hi-base: var(--dm-hi-base);
+  --shadow-8: var(--shadow-8);
+  --shadow-7: var(--shadow-7);
+  --shadow-6: var(--shadow-6);
+  --shadow-5: var(--shadow-5);
+  --shadow-4: var(--shadow-4);
+  --shadow-3: var(--shadow-3);
+  --shadow-2: var(--shadow-2);
+  --shadow-1: var(--shadow-1);
+  --color-shadow-color: var(--shadow-color)
+}
+
+:root {
+    --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+    --surface-1: oklch(0.975 0 0);
+    --surface-2: oklch(0.985 0 0);
+    --surface-3: var(--popover);
+    --surface-4: var(--popover);
+    --surface-5: var(--popover);
+    --surface-6: var(--popover);
+    --surface-7: var(--popover);
+    --surface-8: var(--popover);
+    --hover: color-mix(in oklab, var(--foreground) 6%, transparent);
+    --active: color-mix(in oklab, var(--foreground) 10%, transparent);
+    --focus-ring: var(--ring);
+    --shadow-color: rgb(0 0 0 / 0.05);
+    --shadow-1: 0 0 0 1px var(--shadow-color);
+    --shadow-2: 0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color);
+    --shadow-3: 0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(--shadow-color);
+    --shadow-4: 0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color);
+    --shadow-5: 0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color);
+    --shadow-6: 0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(--shadow-color);
+    --shadow-7: 0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(--shadow-color), 0 48px 48px -24px var(--shadow-color);
+    --shadow-8: 0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(--shadow-color), 0 48px 48px -24px var(--shadow-color), 0 96px 96px -48px var(--shadow-color);
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+    --surface-1: oklch(0.17 0 0);
+    --surface-2: oklch(0.19 0 0);
+    --surface-3: var(--popover);
+    --surface-4: oklch(0.23 0 0);
+    --surface-5: oklch(0.25 0 0);
+    --surface-6: oklch(0.27 0 0);
+    --surface-7: oklch(0.29 0 0);
+    --surface-8: oklch(0.31 0 0);
+    --hover: color-mix(in oklab, var(--foreground) 8%, transparent);
+    --active: color-mix(in oklab, var(--foreground) 13%, transparent);
+    --focus-ring: var(--ring);
+    --dm-hi-base: rgba(255,255,255,0.01);
+    --dm-hi-mid: rgba(255,255,255,0.02);
+    --dm-hi-high: rgba(255,255,255,0.04);
+    --dm-hi-peak: rgba(255,255,255,0.06);
+    --dm-ring-base: rgba(255,255,255,0.02);
+    --dm-ring-mid: rgba(255,255,255,0.04);
+    --dm-ring-high: rgba(255,255,255,0.06);
+    --dm-drop: rgba(0,0,0,0.18);
+    --shadow-1: inset 0 0 0 1px var(--dm-ring-base);
+    --shadow-2: inset 0 1px 0 0 var(--dm-hi-base), inset 0 0 0 1px var(--dm-ring-base), 0 1px 1px -0.5px var(--dm-drop);
+    --shadow-3: inset 0 1px 0 0 var(--dm-hi-mid), inset 0 0 0 1px var(--dm-ring-base), 0 0 0 1px rgba(0,0,0,0.12), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop);
+    --shadow-4: inset 0 1px 0 0 var(--dm-hi-mid), inset 0 0 0 1px var(--dm-ring-mid), 0 0 0 1px rgba(0,0,0,0.14), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop);
+    --shadow-5: inset 0 1px 0 0 var(--dm-hi-high), inset 0 0 0 1px var(--dm-ring-mid), 0 0 0 1px rgba(0,0,0,0.16), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop);
+    --shadow-6: inset 0 1px 0 0 var(--dm-hi-high), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(0,0,0,0.18), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop);
+    --shadow-7: inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(0,0,0,0.20), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(--dm-drop);
+    --shadow-8: inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(0,0,0,0.22), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(--dm-drop), 0 96px 96px -48px var(--dm-drop);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+/* ── Design-language tokens (docs/design-language.md) ─────────────── */
+
+:root {
+  --ease-swift: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-route-morph: 320ms;
+  --duration-post-meta: 250ms;
+  --delay-post-body: 520ms;
+
+  --shadow-small: 0 5px 10px rgb(0 0 0 / 0.12);
+  --shadow-medium: 0 8px 30px rgb(0 0 0 / 0.12);
+  --shadow-large: 0 30px 60px rgb(0 0 0 / 0.12);
+  --shadow-tooltip: 0 4px 8px rgb(0 0 0 / 0.04), 0 1px 1px rgb(0 0 0 / 0.02);
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --border-hairline: 1px;
+  --z-nav: 100;
+  --z-card: 200;
+  --z-toast: 300;
+
+  --grain-opacity: 0.3;
+  --guide-opacity: 0.5;
+
+  /* instant-print paper stays paper in any theme */
+  --paper: oklch(0.98 0.004 95);
+  --paper-ink: oklch(0.52 0.012 95);
+}
+
+@media only screen and (min-resolution: 192dpi) {
+  :root {
+    --border-hairline: 0.5px;
+  }
+}
+
+.dark {
+  --grain-opacity: 0.22;
+  --guide-opacity: 0.4;
+}
+
+/* The warm working-paper palette. Public pages and the owner admin share
+   it (maintainer decision, July 2026) — the neutral ramp above remains
+   only as the pre-hydration fallback. */
+.public-site {
+  --gray-1: oklch(0.99 0.001 95);
+  --gray-2: oklch(0.975 0.0015 95);
+  --gray-3: oklch(0.95 0.002 95);
+  --gray-4: oklch(0.91 0.0025 92);
+  --gray-5: oklch(0.85 0.003 88);
+  --gray-6: oklch(0.77 0.0035 84);
+  --gray-7: oklch(0.67 0.004 80);
+  --gray-8: oklch(0.56 0.004 78);
+  --gray-9: oklch(0.47 0.0045 76);
+  --gray-10: oklch(0.39 0.0045 74);
+  --gray-11: oklch(0.31 0.0045 72);
+  --gray-12: oklch(0.23 0.0045 70);
+  --selection-highlight: oklch(0.9 0.17 105 / 0.58);
+
+  /* the signal accent — one mark per view, never a text color */
+  --signal: oklch(0.62 0.17 45);
+  --ghost-ink: color-mix(in oklab, var(--foreground) 5%, transparent);
+
+  --background: var(--gray-1);
+  --foreground: var(--gray-12);
+  --card: var(--gray-2);
+  --card-foreground: var(--gray-12);
+  --popover: var(--gray-2);
+  --popover-foreground: var(--gray-12);
+  --primary: var(--gray-12);
+  --primary-foreground: var(--gray-1);
+  --secondary: var(--gray-3);
+  --secondary-foreground: var(--gray-11);
+  --muted: var(--gray-3);
+  --muted-foreground: var(--gray-8);
+  --accent: var(--gray-3);
+  --accent-foreground: var(--gray-11);
+  --border: var(--gray-4);
+  --input: var(--gray-4);
+  --ring: var(--gray-8);
+  --focus-ring: var(--gray-9);
+
+  /* the surface ladder, warm-tuned: elevated sheets stay on the paper */
+  --surface-1: oklch(0.968 0.0018 95);
+  --surface-2: oklch(0.978 0.0016 95);
+}
+
+.dark.public-site {
+  --gray-1: oklch(0.16 0.006 80);
+  --gray-2: oklch(0.19 0.007 80);
+  --gray-3: oklch(0.22 0.008 80);
+  --gray-4: oklch(0.27 0.009 80);
+  --gray-5: oklch(0.32 0.01 80);
+  --gray-6: oklch(0.4 0.011 80);
+  --gray-7: oklch(0.5 0.011 82);
+  --gray-8: oklch(0.61 0.01 84);
+  --gray-9: oklch(0.7 0.009 86);
+  --gray-10: oklch(0.78 0.008 88);
+  --gray-11: oklch(0.87 0.007 90);
+  --gray-12: oklch(0.94 0.006 92);
+  --selection-highlight: oklch(0.8 0.14 105 / 0.28);
+  --signal: oklch(0.7 0.17 48);
+  --ghost-ink: color-mix(in oklab, var(--foreground) 6.5%, transparent);
+
+  /* warm surface ladder, dark: each step lifts off the sheet */
+  --surface-1: oklch(0.185 0.0065 80);
+  --surface-2: oklch(0.205 0.007 80);
+  --surface-4: oklch(0.235 0.008 80);
+  --surface-5: oklch(0.255 0.0085 80);
+  --surface-6: oklch(0.275 0.009 80);
+  --surface-7: oklch(0.295 0.009 80);
+  --surface-8: oklch(0.315 0.0095 80);
+}
+
+.public-site ::selection {
+  background: var(--selection-highlight);
+}
+
+.hairline-top {
+  border-top: var(--border-hairline) solid var(--border);
+}
+
+/* ── List stages: one dormant shader instrument per index ────────── */
+
+.hidden-list-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.hidden-list-stage-content {
+  position: relative;
+}
+
+.hidden-list-stage-field {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  contain: layout paint;
+  color: var(--foreground);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+}
+
+.projects-hidden-stage .hidden-list-stage-field {
+  transform: scale(0.985);
+  transition:
+    opacity var(--list-stage-exit-ms) var(--ease-swift),
+    transform var(--list-stage-exit-ms) var(--ease-swift);
+}
+
+.writing-hidden-stage .hidden-list-stage-field {
+  transition: opacity var(--list-stage-exit-ms) var(--ease-swift);
+}
+
+.hidden-list-stage[data-active='true'] .hidden-list-stage-field {
+  opacity: 1;
+}
+
+.projects-hidden-stage[data-active='true'] .hidden-list-stage-field {
+  transform: scale(1);
+}
+
+@keyframes projects-blueprint-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+
+@keyframes writing-ink-enter {
+  from {
+    opacity: 0;
+  }
+}
+
+.projects-hidden-stage[data-active='true'][data-motion='true'] .hidden-list-stage-field {
+  animation: projects-blueprint-enter 260ms var(--ease-swift) backwards;
+}
+
+.writing-hidden-stage[data-active='true'][data-motion='true'] .hidden-list-stage-field {
+  animation: writing-ink-enter 180ms var(--ease-swift) backwards;
+}
+
+.hidden-list-stage[data-motion='false'] .hidden-list-stage-field,
+.hidden-list-stage[data-motion='false'] .hidden-list-shader-shell {
+  transition: none;
+}
+
+.hidden-list-stage-shader,
+.hidden-list-shader-shell,
+.hidden-list-shader-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden-list-shader-shell {
+  opacity: 0;
+}
+
+.hidden-list-shader-shell[data-ready='true'] {
+  opacity: 1;
+}
+
+.projects-blueprint-static {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      color-mix(in oklab, currentColor 35%, transparent) var(--border-hairline),
+      transparent var(--border-hairline)
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, currentColor 35%, transparent) var(--border-hairline),
+      transparent var(--border-hairline)
+    );
+  background-size: 24px 24px;
+  opacity: 0.1;
+}
+
+.projects-hidden-stage .hidden-list-stage-shader {
+  opacity: 0.14;
+}
+
+.projects-registration-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 58px;
+  height: 58px;
+  overflow: visible;
+  opacity: 0.26;
+  transform: translate3d(
+      var(--list-stage-target-x),
+      var(--list-stage-target-y),
+      0
+    )
+    translate(-50%, -50%);
+}
+
+.projects-registration-mark circle,
+.projects-registration-mark path {
+  vector-effect: non-scaling-stroke;
+  stroke: currentColor;
+  stroke-width: var(--border-hairline);
+}
+
+.writing-ink-current-target {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: var(--list-stage-target-width);
+  height: var(--list-stage-target-height);
+  overflow: hidden;
+  transform: translate3d(
+    var(--list-stage-target-x),
+    var(--list-stage-target-y),
+    0
+  );
+}
+
+.writing-ink-static {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  opacity: 0.12;
+}
+
+.writing-ink-static path {
+  vector-effect: non-scaling-stroke;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+}
+
+.writing-hidden-stage .hidden-list-stage-shader {
+  opacity: 0.2;
+}
+
+.dark .projects-blueprint-static {
+  opacity: 0.12;
+}
+
+.dark .projects-registration-mark {
+  opacity: 0.3;
+}
+
+.dark .projects-hidden-stage .hidden-list-stage-shader {
+  opacity: 0.12;
+}
+
+.dark .writing-ink-static {
+  opacity: 0.1;
+}
+
+.dark .writing-hidden-stage .hidden-list-stage-shader {
+  opacity: 0.17;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hidden-list-stage-field,
+  .hidden-list-shader-shell {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ── Project index: compact artifacts with drafting crop marks ───── */
+
+.project-row {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 9rem) minmax(0, 1fr);
+  align-items: start;
+  gap: 0.25rem 1rem;
+  min-height: 4.75rem;
+  padding-block: 0.875rem;
+  font-size: 0.875rem;
+}
+
+.page-introduction {
+  color: var(--gray-10, var(--foreground));
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.project-row:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.project-icon-frame {
+  position: relative;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  isolation: isolate;
+}
+
+.project-icon-frame::before {
+  position: absolute;
+  inset: 0;
+  color: var(--foreground);
+  background:
+    linear-gradient(currentColor, currentColor) left top / 7px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) left top / var(--border-hairline) 7px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 7px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) right top / var(--border-hairline) 7px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 7px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / var(--border-hairline) 7px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 7px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / var(--border-hairline) 7px no-repeat;
+  content: '';
+  opacity: 0;
+  transform: scale(0.82);
+  transition:
+    opacity 150ms ease,
+    transform 300ms var(--ease-spring);
+}
+
+.project-icon {
+  position: relative;
+  z-index: 1;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 0 0 var(--border-hairline) color-mix(in oklab, var(--foreground) 10%, transparent);
+  transition: transform 300ms var(--ease-spring);
+}
+
+.project-identity {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  line-height: 1.4;
+}
+
+.project-name {
+  max-width: 100%;
+  color: var(--gray-11, var(--foreground));
+  text-wrap: balance;
+}
+
+.project-domain {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 150ms ease;
+}
+
+.project-description {
+  min-width: 0;
+  color: var(--gray-8, var(--muted-foreground));
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-row:hover .project-icon-frame::before {
+    opacity: 0.34;
+    transform: scale(1);
+  }
+
+  .project-row:hover .project-icon {
+    transform: translateY(-1px);
+  }
+
+  .project-row:hover .project-domain {
+    color: var(--foreground);
+  }
+}
+
+.project-row:focus-visible .external-label .external-mark {
+  opacity: 0.6;
+  transition: none;
+}
+
+@media (max-width: 39.99rem) {
+  .project-row {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    align-items: start;
+    row-gap: 0.375rem;
+    min-height: 0;
+    padding-block: 1rem;
+  }
+
+  .project-icon-frame {
+    grid-row: 1 / span 2;
+  }
+
+  .project-identity,
+  .project-description {
+    grid-column: 2;
+  }
+
+  .project-domain {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-icon-frame::before,
+  .project-icon,
+  .project-domain {
+    transition: none;
+  }
+
+  .project-row:hover .project-icon {
+    transform: none;
+  }
+
+  .project-row:hover .project-icon-frame::before {
+    transform: none;
+  }
+}
+
+/* ── Error proof sheet ───────────────────────────────────────────── */
+
+.error-sheet {
+  min-height: calc(100svh - 3.5rem);
+  display: grid;
+  place-items: center;
+  padding-block: 2rem 4rem;
+}
+
+.error-proof {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 34rem;
+  overflow: hidden;
+  padding: 1.25rem;
+  box-shadow: inset 0 0 0 var(--border-hairline) var(--border);
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--border) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--border) 45%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.error-proof::before,
+.error-proof::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.error-proof::before {
+  inset: 3.5rem 1.25rem auto;
+  height: var(--border-hairline);
+  background: var(--border);
+}
+
+.error-proof::after {
+  inset: auto 1.25rem 3.5rem;
+  height: var(--border-hairline);
+  background: var(--border);
+}
+
+.error-proof-meta,
+.error-proof-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  /* quiet registration marks — 30% ink, matching the plate-label register */
+  color: color-mix(in oklab, var(--foreground) 30%, transparent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.875rem;
+  letter-spacing: -0.011em;
+}
+
+.error-proof-footer {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  left: 1.25rem;
+}
+
+.error-registration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(26rem, 74%);
+  aspect-ratio: 1;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 30%, transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -54%);
+  pointer-events: none;
+}
+
+.error-registration::before,
+.error-registration::after,
+.error-registration span::before,
+.error-registration span::after {
+  content: '';
+  position: absolute;
+  background: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
+}
+
+.error-registration::before {
+  top: 50%;
+  right: -2rem;
+  left: -2rem;
+  height: var(--border-hairline);
+}
+
+.error-registration::after {
+  top: -2rem;
+  bottom: -2rem;
+  left: 50%;
+  width: var(--border-hairline);
+}
+
+.error-registration span::before {
+  inset: 50% auto auto 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 0 0 0 var(--border-hairline) color-mix(in oklab, var(--muted-foreground) 42%, transparent);
+  transform: translate(-50%, -50%);
+}
+
+.error-registration span::after {
+  inset: 50% auto auto 50%;
+  width: 0.3rem;
+  height: 0.3rem;
+  transform: translate(-50%, -50%);
+}
+
+.error-code {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4.8rem;
+  color: var(--muted-foreground);
+  font-size: clamp(7.5rem, 30vw, 13.5rem);
+  font-weight: var(--font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.13em;
+  line-height: 0.72;
+  user-select: none;
+}
+
+.error-code span {
+  display: block;
+  transform-origin: center;
+  transition:
+    transform 350ms var(--ease-spring),
+    text-shadow 350ms var(--ease-swift);
+}
+
+.error-code span:nth-child(1) {
+  transform: translate(-0.03em, -0.04em) rotate(-1.5deg);
+  text-shadow: 0.025em 0 color-mix(in oklab, var(--muted-foreground) 24%, transparent);
+}
+
+.error-code span:nth-child(2) {
+  transform: translateY(0.035em) rotate(1deg);
+  text-shadow: -0.02em 0 color-mix(in oklab, var(--muted-foreground) 24%, transparent);
+}
+
+.error-code span:nth-child(3) {
+  transform: translate(0.02em, -0.015em) rotate(2deg);
+  text-shadow: 0 0.025em color-mix(in oklab, var(--muted-foreground) 24%, transparent);
+}
+
+.error-loose-pixel {
+  position: absolute;
+  z-index: 2;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--foreground);
+  pointer-events: none;
+  animation: error-pixel-wander 2.8s steps(4, end) infinite;
+}
+
+.error-loose-pixel-a {
+  top: 26%;
+  left: 16%;
+}
+
+.error-loose-pixel-b {
+  top: 42%;
+  right: 13%;
+  animation-delay: -0.9s;
+}
+
+.error-loose-pixel-c {
+  top: 18%;
+  right: 28%;
+  width: 0.3rem;
+  height: 0.3rem;
+  animation-delay: -1.8s;
+}
+
+@keyframes error-pixel-wander {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate(0, 0);
+  }
+  25% {
+    opacity: 0.8;
+    transform: translate(7px, -5px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-4px, 7px);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(5px, 4px);
+  }
+}
+
+.error-message {
+  position: relative;
+  z-index: 2;
+  margin-top: 4rem;
+}
+
+.error-actions {
+  position: relative;
+  z-index: 2;
+  margin-top: 1.25rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .error-proof:hover .error-code span {
+    transform: none;
+    text-shadow: 0 0 transparent;
+  }
+}
+
+@media (max-width: 30rem) {
+  .error-sheet {
+    padding-block: 1rem 3rem;
+  }
+
+  .error-proof {
+    min-height: 32rem;
+    padding: 1rem;
+  }
+
+  .error-proof::before {
+    inset-inline: 1rem;
+  }
+
+  .error-code {
+    margin-top: 5.25rem;
+    font-size: clamp(6.75rem, 35vw, 9rem);
+  }
+
+  .error-message {
+    margin-top: 4.5rem;
+  }
+
+  .error-proof-footer {
+    right: 1rem;
+    left: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-code span {
+    transition: none;
+  }
+
+  .error-loose-pixel {
+    animation: none;
+  }
+}
+
+/* ── Ambient background: paper grain + drafting guides ────────────── */
+
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+.column-guides {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--guide-opacity);
+}
+
+/* full-height dashed verticals boxing the column, drafting-sheet style */
+.column-guide-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--muted-foreground) 45%, transparent) 0,
+    color-mix(in oklab, var(--muted-foreground) 45%, transparent) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.column-guide-v:first-of-type {
+  left: max(16px, calc((100% - 37.5rem) / 2));
+}
+
+.column-guide-v:last-of-type {
+  right: max(16px, calc((100% - 37.5rem) / 2));
+}
+
+/* registration cross where the (intentionally absent) top rule would
+   meet each guide — same missability contract as the guides */
+.column-guide-v::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: -4px;
+  width: 9px;
+  height: 9px;
+  color: color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+  background:
+    linear-gradient(currentColor, currentColor) center / 9px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) center / var(--border-hairline) 9px no-repeat;
+}
+
+/* ── Calibration marks: viewfinder corner brackets ────────────────── */
+
+.calibration-corners {
+  --corner-arm: 9px;
+  pointer-events: none;
+  user-select: none;
+  color: var(--foreground);
+  background:
+    linear-gradient(currentColor, currentColor) left top / var(--corner-arm) var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) left top / var(--border-hairline) var(--corner-arm) no-repeat,
+    linear-gradient(currentColor, currentColor) right top / var(--corner-arm) var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) right top / var(--border-hairline) var(--corner-arm) no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / var(--corner-arm) var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / var(--border-hairline) var(--corner-arm) no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / var(--corner-arm) var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / var(--border-hairline) var(--corner-arm) no-repeat;
+}
+
+/* photo tiles: brackets develop only under a fine-pointer attention */
+.photo-frame .calibration-corners {
+  position: absolute;
+  inset: 6px;
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    opacity 150ms ease,
+    transform 300ms var(--ease-swift);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .photo-frame:hover .calibration-corners,
+  .photo-frame:focus-within .calibration-corners {
+    opacity: 0.62;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-frame .calibration-corners {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ── Ghost line art: a schematic at the edge of perception ────────── */
+
+.ghost-schematic {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  color: var(--ghost-ink);
+}
+
+/* ── Selective focus: hovering a row defocuses its siblings ───────── */
+
+@media (hover: hover) and (pointer: fine) {
+  .focus-list > li {
+    transition: opacity 180ms var(--ease-swift);
+  }
+
+  .focus-list:hover > li:not(:hover):not(:focus-within) {
+    opacity: 0.44;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focus-list > li,
+  .focus-list:hover > li:not(:hover):not(:focus-within) {
+    transition: none;
+    opacity: 1;
+  }
+}
+
+/* ── Instant-photo cover ──────────────────────────────────────────── */
+
+.polaroid {
+  background: var(--paper);
+  padding: 2% 2% 0;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.04),
+    0 2px 4px -1px rgb(0 0 0 / 0.18);
+}
+
+/* hairline ring where photo meets frame — sells the print edge */
+.polaroid-photo {
+  position: relative;
+  display: block;
+}
+
+.polaroid-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 2px rgb(0 0 0 / 0.14);
+  pointer-events: none;
+}
+
+.polaroid-caption {
+  display: flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding: 0.2rem 0.125rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--paper-ink);
+  user-select: none;
+}
+
+.polaroid-tilted {
+  transform: rotate(var(--tilt, 0deg));
+}
+
+/* hover = pick-up, not flatten; press squishes the gesture, not the paper */
+@media (hover: hover) and (pointer: fine) {
+  .polaroid-tilted {
+    transition:
+      transform 300ms var(--ease-spring),
+      box-shadow 300ms var(--ease-spring);
+  }
+
+  .group:hover .polaroid-tilted {
+    transform: rotate(calc(var(--tilt, 0deg) + 1.2deg)) scale(1.03);
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.04),
+      var(--shadow-medium);
+  }
+
+  .group:active .polaroid-tilted {
+    transform: rotate(calc(var(--tilt, 0deg) + 1.2deg)) scale(0.94);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-tilted {
+    transition: none;
+  }
+}
+
+/* ── Post prose ───────────────────────────────────────────────────── */
+
+.prose {
+  color: var(--gray-10, var(--foreground));
+  font-size: 0.875rem;
+  line-height: 1.72;
+}
+
+.prose:lang(zh-CN),
+.prose:lang(zh) {
+  line-height: 1.9;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose {
+  counter-reset: prose-section prose-figure;
+}
+
+.prose h2 {
+  margin-top: 2.5em;
+  color: var(--gray-12, var(--foreground));
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  counter-increment: prose-section;
+}
+
+/* prose h2s open with the section tag — a boxed counter ordinal and hatch
+   strip in one pseudo (the .section-tag register, sized for the heading
+   line); the heading text itself keeps its editorial size */
+.prose h2::before {
+  content: counter(prose-section, decimal-leading-zero) / '';
+  display: inline-block;
+  margin-right: 0.625rem;
+  padding: 0.1875rem 1.1875rem 0.1875rem 0.4375rem;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+  background:
+    repeating-linear-gradient(
+        -45deg,
+        color-mix(in oklab, var(--muted-foreground) 55%, transparent) 0,
+        color-mix(in oklab, var(--muted-foreground) 55%, transparent) 1px,
+        transparent 1px,
+        transparent 3.5px
+      )
+      right center / 0.75rem 100% no-repeat,
+    linear-gradient(
+        color-mix(in oklab, var(--muted-foreground) 45%, transparent),
+        color-mix(in oklab, var(--muted-foreground) 45%, transparent)
+      )
+      calc(100% - 0.75rem) 0 / var(--border-hairline) 100% no-repeat;
+  color: var(--muted-foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  vertical-align: 0.125em;
+}
+
+.prose h3 {
+  margin-top: 2em;
+  color: var(--gray-12, var(--foreground));
+  font-size: 1rem;
+  line-height: 1.45;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.prose a {
+  color: var(--gray-10, var(--foreground));
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.16em;
+  text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
+  text-decoration-skip-ink: auto;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .prose a:hover {
+    color: var(--gray-12, var(--foreground));
+    text-decoration-color: currentColor;
+  }
+}
+
+.prose a:focus-visible {
+  color: var(--gray-12, var(--foreground));
+  text-decoration-color: currentColor;
+}
+
+.prose strong {
+  color: var(--gray-12, var(--foreground));
+  font-weight: var(--font-weight-semibold);
+}
+
+.prose .inline-product-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  color: var(--gray-12, var(--foreground));
+  font-weight: var(--font-weight-medium);
+  vertical-align: -0.08em;
+  white-space: nowrap;
+}
+
+.prose .inline-product-logo {
+  width: 0.875em;
+  height: 0.875em;
+  flex: none;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mdx-inline-logo {
+  display: inline-block;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 0.2rem;
+  vertical-align: middle;
+}
+
+.dark .prose .inline-product-logo-ats,
+.dark .prose .inline-product-logo-control,
+.dark .prose .inline-product-logo-dex {
+  filter: brightness(1.45) contrast(0.9);
+}
+
+.dark .prose .inline-product-logo-codex {
+  filter: invert(1);
+}
+
+.post-title-card h1 {
+  color: var(--gray-12, var(--foreground));
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+}
+
+.post-title-meta {
+  color: var(--gray-8, var(--muted-foreground));
+}
+
+/* the post plate breathes under the title (wins over .spec-plate margin: 0) */
+.post-title-card .spec-plate {
+  margin-top: 1.5rem;
+}
+
+/* ── Spec plate: stamped label/value meta (technical print register) ── */
+
+.spec-plate {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem 1rem;
+  margin: 0;
+  padding: 0.625rem 0;
+  border-top: var(--border-hairline) solid var(--border);
+  border-bottom: var(--border-hairline) solid var(--border);
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+@media (min-width: 28rem) {
+  .spec-plate {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.spec-plate dt {
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spec-plate dd {
+  margin: 0.1875rem 0 0;
+  color: var(--gray-9, var(--muted-foreground));
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* the lit cell — the plate carries this page's single signal mark */
+.spec-signal {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 0.375rem;
+  vertical-align: 0.09em;
+  background: var(--signal);
+}
+
+/* flow variant: cells wrap to their content instead of the fixed grid */
+.spec-plate-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+/* ── Nameplate: the boxed data-plate variant ──────────────────────── */
+
+.spec-nameplate {
+  margin: 0;
+  border: var(--border-hairline) solid var(--border);
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.8125rem;
+}
+
+.spec-nameplate > div {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+}
+
+/* Dense booking rows use the same engraved table plate with a narrow label
+   rail, leaving the record itself as the dominant reading surface. */
+.spec-nameplate-compact > div {
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+}
+
+.spec-nameplate-compact dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.booking-owner-time {
+  padding: 0.125rem 0.375rem;
+  background: var(--foreground);
+  box-decoration-break: clone;
+  color: var(--background);
+  line-height: 1.8;
+  -webkit-box-decoration-break: clone;
+}
+
+.spec-nameplate > div + div {
+  border-top: var(--border-hairline) solid var(--border);
+}
+
+.spec-nameplate dt {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-right: var(--border-hairline) solid var(--border);
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spec-nameplate dd {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.spec-nameplate-compact dt,
+.spec-nameplate-compact dd {
+  padding-block: 0.625rem;
+}
+
+/* ── Status ladder: journey steps as state cells ──────────────────── */
+
+/* Decorative reinforcement of state the prose already announces:
+   done = filled ink, current = the lit signal cell, pending = outline. */
+.status-ladder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  user-select: none;
+}
+
+.status-ladder li {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.status-ladder-index {
+  font-variant-numeric: tabular-nums;
+}
+
+.status-ladder-cell {
+  width: 5px;
+  height: 5px;
+  margin-left: auto;
+}
+
+.status-ladder [data-state='done'] .status-ladder-cell {
+  background: color-mix(in oklab, var(--foreground) 62%, transparent);
+}
+
+.status-ladder [data-state='current'] {
+  color: var(--gray-10, var(--foreground));
+}
+
+.status-ladder [data-state='current'] .status-ladder-cell {
+  background: var(--signal);
+}
+
+.status-ladder [data-state='pending'] .status-ladder-cell {
+  box-shadow: inset 0 0 0 var(--border-hairline) color-mix(in oklab, var(--muted-foreground) 55%, transparent);
+}
+
+/* ── Certification stamp ──────────────────────────────────────────── */
+
+.cert-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--foreground) 55%, transparent);
+  color: var(--gray-11, var(--foreground));
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* ── Section tags: index cell + hatch chip + label ────────────────── */
+
+.section-tag {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  color: var(--gray-8, var(--muted-foreground));
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-tag-index {
+  display: flex;
+  align-items: center;
+  padding: 0.0625rem 0.375rem;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* hazard hatch: fine diagonal strokes in a bordered chip */
+.section-tag-hatch {
+  width: 0.75rem;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+  border-left: none;
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 0,
+    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 1px,
+    transparent 1px,
+    transparent 3.5px
+  );
+}
+
+.section-tag-label {
+  align-self: center;
+  padding-left: 0.625rem;
+}
+
+/* Softer hover/selected fills for large choice groups (the AMA booking
+   form's fluid checkbox/radio rows): the merged selection slab reads heavy
+   at the global --hover/--active strengths, so this dials both down. */
+.quiet-selection {
+  --hover: color-mix(in oklab, var(--foreground) 4%, transparent);
+  --active: color-mix(in oklab, var(--foreground) 7%, transparent);
+}
+
+.dark .quiet-selection {
+  --hover: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --active: color-mix(in oklab, var(--foreground) 9%, transparent);
+}
+
+/* boxed ordinal for manual steps (the how-it-works list). The box aligns
+   to the text baseline so the number reads as part of the first line. */
+.step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  padding: 0.125rem 0;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 40%, transparent);
+  color: var(--muted-foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* ── Footer geo stamp ─────────────────────────────────────────────── */
+
+/* mirrors the clock row: a 1.375rem glyph + a two-line mono readout, so the
+   globe and clock face share size and the coords sit on the clock's grid */
+.footer-geo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: color-mix(in oklab, var(--muted-foreground) 88%, transparent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.footer-geo-globe {
+  width: 1.375rem;
+  height: 1.375rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.7;
+  opacity: 0.5;
+}
+
+/* coords share the digital clock text's size and color */
+.footer-geo-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+  color: color-mix(in oklab, var(--muted-foreground) 90%, transparent);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* braille signature: the name echoed in dots along the colophon */
+.footer-braille {
+  margin-top: 0.25rem;
+  color: color-mix(in oklab, var(--muted-foreground) 55%, transparent);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+/* ── Print ephemera: barcode and ghost folio numerals ─────────────── */
+
+.barcode {
+  display: inline-block;
+  color: currentColor;
+  user-select: none;
+}
+
+.barcode svg {
+  display: block;
+  height: 1.5rem;
+}
+
+.barcode-label {
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+}
+
+.error-barcode {
+  position: absolute;
+  bottom: 3.25rem;
+  left: 1.25rem;
+  z-index: 2;
+  color: color-mix(in oklab, var(--foreground) 38%, transparent);
+}
+
+.ghost-folio {
+  position: absolute;
+  top: -0.75rem;
+  right: 0;
+  z-index: -1;
+  color: var(--ghost-ink);
+  font-size: 4.5rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Pixel cluster: dither cells as a site mark, one lit ──────────── */
+
+.pixel-cluster {
+  display: grid;
+  grid-template-columns: 5px 5px;
+  grid-template-rows: 5px 5px;
+  gap: 1px;
+  user-select: none;
+}
+
+.pixel-cluster .pc-cell {
+  display: block;
+}
+
+.pixel-cluster .pc-s {
+  background: var(--signal);
+}
+
+.pixel-cluster .pc-a {
+  background: color-mix(in oklab, var(--foreground) 26%, transparent);
+}
+
+.pixel-cluster .pc-b {
+  background: color-mix(in oklab, var(--foreground) 11%, transparent);
+}
+
+/* ── Page eyebrows: mono section marks with a comment prefix ─────── */
+
+.page-eyebrow {
+  color: var(--gray-8, var(--muted-foreground));
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-eyebrow::before {
+  content: '// ' / '';
+  color: color-mix(in oklab, var(--muted-foreground) 55%, transparent);
+}
+
+/* ── Posts like this: catalog rows at the article foot ────────────── */
+
+.post-related {
+  margin-top: 4rem;
+  padding-top: 1rem;
+}
+
+.post-related-label {
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.prose ul {
+  padding-left: 1.375rem;
+}
+
+.prose ol {
+  padding-left: 1.75rem;
+}
+
+.prose ul > li {
+  list-style: none;
+  position: relative;
+}
+
+/* square markers — a single cell from the dither vocabulary */
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.375rem;
+  top: calc(0.875em - 2.5px);
+  width: 5px;
+  height: 5px;
+  background: var(--muted-foreground);
+}
+
+/* ordered lists share the manual register: boxed two-digit ordinals
+   (the same recipe as .step-index), drawn from a CSS counter */
+.prose ol {
+  list-style: none;
+  counter-reset: prose-step;
+}
+
+.prose ol > li {
+  position: relative;
+  counter-increment: prose-step;
+}
+
+.prose ol > li::before {
+  content: counter(prose-step, decimal-leading-zero);
+  position: absolute;
+  top: 0.1875rem;
+  left: -1.75rem;
+  display: inline-grid;
+  min-width: 1.25rem;
+  padding: 0.125rem 0;
+  place-items: center;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 40%, transparent);
+  color: var(--muted-foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose li > ul,
+.prose li > ol {
+  margin-top: 0.5em;
+}
+
+.prose blockquote {
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--muted-foreground);
+}
+
+/* quotation bar: the hazard hatch set vertically — quoted text is
+   material brought in from elsewhere, so it wears the annotation strip */
+.prose blockquote::before {
+  content: '';
+  position: absolute;
+  top: 0.25em;
+  bottom: 0.25em;
+  left: 0;
+  width: 0.375rem;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 0,
+    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 1px,
+    transparent 1px,
+    transparent 3.5px
+  );
+}
+
+/* post images are figure prints: square-cornered on a hairline ring,
+   resting on the surface ladder (a floor for transparent images and
+   loading frames), keeping their deterministic scatter tilt */
+.prose .zoom-trigger img {
+  border-radius: 2px;
+  background: var(--surface-1);
+  box-shadow: 0 0 0 var(--border-hairline) var(--border);
+}
+
+/* captions are plate annotations: left-set mono with a FIG. number */
+.prose figcaption,
+.prose .post-figcaption {
+  margin-top: 0.625rem;
+  text-align: left;
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.prose .post-figure {
+  counter-increment: prose-figure;
+}
+
+.prose .post-figcaption::before {
+  content: 'FIG. ' counter(prose-figure, decimal-leading-zero) ' — ' / '';
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  letter-spacing: 0.08em;
+}
+
+[data-locale='zh'] .prose .post-figcaption::before {
+  content: '图 ' counter(prose-figure, decimal-leading-zero) ' — ' / '';
+}
+
+/* A contact sheet for lived-in photo sequences: one anchoring scene with
+   smaller observations tucked along its edge. Each print remains independently
+   zoomable, while the group carries one editorial caption. */
+.photo-stack__frames {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(8rem, 1fr);
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 0.375rem 0;
+  align-items: stretch;
+  aspect-ratio: 1.25;
+  isolation: isolate;
+}
+
+.photo-stack__frames > p {
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+}
+
+.photo-stack__frames > p:first-child {
+  grid-row: 1 / 4;
+  padding-block: 0.25rem;
+  padding-inline-end: 0.125rem;
+}
+
+.photo-stack__frames > p:not(:first-child) {
+  margin-inline-start: -0.75rem;
+}
+
+.photo-stack__frames .zoom-trigger {
+  height: 100%;
+}
+
+.prose .photo-stack__frames .zoom-trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 var(--border-hairline) var(--border),
+    0 2px 4px -1px rgb(0 0 0 / 0.18);
+}
+
+.photo-stack__frames > p:nth-child(2) img {
+  object-position: center 42%;
+}
+
+.photo-stack__frames > p:nth-child(3) img {
+  object-position: center 48%;
+}
+
+.photo-stack__frames > p:nth-child(4) img {
+  object-position: center 55%;
+}
+
+@media (max-width: 31.999rem) {
+  .photo-stack__frames {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 0.375rem;
+    aspect-ratio: auto;
+  }
+
+  .photo-stack__frames > p:first-child {
+    grid-row: auto;
+    grid-column: 1 / -1;
+    aspect-ratio: 3 / 4;
+    padding: 0 0.25rem 0.25rem;
+  }
+
+  .photo-stack__frames > p:not(:first-child) {
+    aspect-ratio: 1;
+    margin-block-start: -0.875rem;
+    margin-inline-start: 0;
+  }
+}
+
+.prose code:not(pre code) {
+  background: var(--muted);
+  border-radius: 2px;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.875em;
+}
+
+.newsletter-archive-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-block: 1.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+/* ── Code blocks (rehype-pretty-code + shiki dual themes) ─────────── */
+
+/* the code block is a nameplate: a hairline frame, a ruled filename row
+   with a boxed language tag, and the sheet of code below */
+figure[data-rehype-pretty-code-figure] {
+  border: var(--border-hairline) solid var(--border);
+}
+
+/* the code sheet rests one step up the surface ladder; the fade strips
+   tint with the same surface so continuation reads seamlessly */
+.code-frame {
+  position: relative;
+  background: var(--surface-1);
+  --scroll-fade-surface: var(--surface-1);
+}
+
+.code-frame pre {
+  width: max-content;
+  min-width: 100%;
+  padding: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* ── Fluid horizontal scroll area (components/ui/scroll-area.tsx) ── */
+
+.scroll-area-x {
+  position: relative;
+}
+
+.scroll-area-x-viewport {
+  overflow-x: auto;
+}
+
+.scroll-area-x-viewport::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-area-x-viewport::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--foreground) 20%, transparent);
+  border-radius: 4px;
+}
+
+/* edge fades: visible only while content continues in that direction */
+.scroll-area-x-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2.5rem;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.scroll-area-x-fade-start {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--scroll-fade-surface, var(--background)),
+    transparent
+  );
+}
+
+.scroll-area-x-fade-end {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--scroll-fade-surface, var(--background)),
+    transparent
+  );
+}
+
+.scroll-area-x-fade[data-visible] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-area-x-fade {
+    transition: none;
+  }
+}
+
+/* ── Fluid vertical scroll area (components/ui/scroll-area.tsx) ──── */
+
+/* flex column so a flexed parent (dialog body) sizes the viewport;
+   standalone use still sizes to content */
+.scroll-area-y {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-area-y-viewport {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.scroll-area-y-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-area-y-viewport::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--foreground) 20%, transparent);
+  border-radius: 4px;
+}
+
+/* edge fades: visible only while content continues in that direction */
+.scroll-area-y-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2.5rem;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.scroll-area-y-fade-start {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--scroll-fade-surface, var(--background)),
+    transparent
+  );
+}
+
+.scroll-area-y-fade-end {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    var(--scroll-fade-surface, var(--background)),
+    transparent
+  );
+}
+
+.scroll-area-y-fade[data-visible] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-area-y-fade {
+    transition: none;
+  }
+}
+
+/* ── Editorial data figures ──────────────────────────────────────── */
+
+.time-allocation-chart {
+  padding: clamp(1rem, 4vw, 1.5rem);
+  border: var(--border-hairline) solid var(--border);
+  border-radius: 2px;
+  background: var(--surface-1);
+}
+
+.time-allocation-chart__header {
+  padding-bottom: 1rem;
+  border-bottom: var(--border-hairline) solid
+    color-mix(in oklab, var(--border) 72%, transparent);
+}
+
+.time-allocation-chart__eyebrow {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-family: var(--font-geist-mono), var(--font-frex-gb), ui-monospace,
+    monospace;
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.time-allocation-chart__title {
+  margin: 0.375rem 0 0;
+  color: var(--gray-12, var(--foreground));
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.time-allocation-chart__rows {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.time-allocation-chart__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.375rem;
+  color: var(--gray-11, var(--foreground));
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.time-allocation-chart__value {
+  flex: none;
+  color: var(--gray-12, var(--foreground));
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-allocation-chart__track {
+  height: 0.6875rem;
+  overflow: hidden;
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--muted-foreground) 8%, transparent);
+  box-shadow: inset 0 0 0 var(--border-hairline)
+    color-mix(in oklab, var(--border) 78%, transparent);
+}
+
+.time-allocation-chart__bar {
+  display: block;
+  width: var(--allocation);
+  min-width: var(--border-hairline);
+  height: 100%;
+}
+
+.time-allocation-chart__bar[data-tone='context'] {
+  background: color-mix(in oklab, var(--muted-foreground) 54%, transparent);
+}
+
+.time-allocation-chart__bar[data-tone='primary'] {
+  background: var(--gray-12, var(--foreground));
+}
+
+.time-allocation-chart__bar[data-tone='secondary'] {
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--gray-11, var(--foreground)) 76%, transparent) 0,
+    color-mix(in oklab, var(--gray-11, var(--foreground)) 76%, transparent) 1px,
+    transparent 1px,
+    transparent 3.5px
+  );
+  box-shadow: inset 0 0 0 var(--border-hairline)
+    color-mix(in oklab, var(--gray-11, var(--foreground)) 55%, transparent);
+}
+
+/* ── Mermaid diagrams (beautiful-mermaid, server-rendered svg) ────── */
+
+/* the diagram rests on the same sheet treatment as code: hairline frame,
+   one step up the surface ladder, edge fades tinted to match */
+.mermaid-frame {
+  border: var(--border-hairline) solid var(--border);
+  background: var(--surface-1);
+  --scroll-fade-surface: var(--surface-1);
+}
+
+/* natural svg size, centered when narrower than the column; wider
+   diagrams keep 1:1 scale and scroll instead of shrinking their text */
+.mermaid-sheet {
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  min-width: 100%;
+  padding: 0.5rem;
+}
+
+.mermaid-sheet svg {
+  display: block;
+  /* the svg derives its palette from --bg/--fg with var(--muted, …)-style
+     fallbacks; the page's shadcn tokens (--muted, --accent, --border) would
+     leak in as *background* colors, so reset them to keep the derivation */
+  --line: initial;
+  --accent: initial;
+  --muted: initial;
+  --surface: initial;
+  --border: initial;
+}
+
+/* the library's font imports are stripped server-side; restore the site
+   stacks over the svg's internal rules */
+.mermaid-sheet svg text {
+  font-family: var(--font-sans);
+}
+
+.mermaid-sheet svg .mono {
+  font-family: var(--font-geist-mono), var(--font-frex-gb), ui-monospace, monospace;
+}
+
+figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-bottom: var(--border-hairline) solid var(--border);
+  text-align: left;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: color-mix(in oklab, var(--muted-foreground) 88%, transparent);
+}
+
+/* boxed language tag, from the pretty-code attribute */
+figure[data-rehype-pretty-code-figure]
+  figcaption[data-rehype-pretty-code-title][data-language]::after {
+  content: attr(data-language);
+  margin-left: auto;
+  padding: 0.0625rem 0.375rem;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+code[data-theme] span {
+  color: var(--shiki-light);
+}
+
+.dark code[data-theme] span {
+  color: var(--shiki-dark);
+}
+
+/* the sheet's background comes from the surface ladder, not the theme —
+   shiki keeps the token colors, the paper keeps the elevation */
+pre[data-theme],
+.dark pre[data-theme] {
+  background: transparent;
+}
+
+.code-copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 2px;
+  color: var(--muted-foreground);
+  background: transparent;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.code-copy::after {
+  /* 44px minimum hit area */
+  content: '';
+  position: absolute;
+  inset: -0.5rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .code-copy:hover {
+    color: var(--foreground);
+    background: color-mix(in oklab, var(--foreground) 8%, transparent);
+  }
+}
+
+.code-copy:active {
+  transform: scale(0.97);
+}
+
+.code-copy[data-copied] {
+  color: var(--foreground);
+}
+
+/* ── Tweet cards (static snapshots, no embeds — components/mdx/tweet.tsx) */
+
+/* the archived snapshot as a specimen label: a hairline nameplate frame
+   with ruled head / body / foot rows */
+.tweet-card {
+  display: block;
+  border: var(--border-hairline) solid var(--border);
+  background: var(--surface-1);
+  text-decoration: none !important;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+/* hover lifts the specimen one step up the surface ladder */
+@media (hover: hover) and (pointer: fine) {
+  .tweet-card:hover {
+    border-color: color-mix(in oklab, var(--foreground) 25%, transparent);
+    background: var(--surface-2);
+  }
+}
+
+.tweet-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem;
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+/* the one round exception on the plate: a face is a face */
+.tweet-card-avatar {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: var(--muted);
+  box-shadow: inset 0 0 0 1px var(--border);
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--muted-foreground);
+  user-select: none;
+}
+
+img.tweet-card-avatar {
+  background: none;
+  object-fit: cover;
+}
+
+.tweet-card-names {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.tweet-card-name {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.tweet-card-handle {
+  color: color-mix(in oklab, var(--muted-foreground) 85%, transparent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.tweet-card-x {
+  color: var(--muted-foreground);
+  transition: color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tweet-card:hover .tweet-card-x {
+    color: var(--foreground);
+  }
+}
+
+.tweet-card-body {
+  display: block;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  letter-spacing: -0.011em;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+.tweet-card-body > span + span {
+  margin-top: 0.75em;
+}
+
+/* the foot is a plate row: stamped date, notes, and the northeast mark */
+.tweet-card-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-top: var(--border-hairline) solid var(--border);
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.tweet-card-mark {
+  margin-left: auto;
+  opacity: 0.6;
+  transition:
+    opacity 180ms ease,
+    translate 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tweet-card:hover .tweet-card-mark {
+    opacity: 0.95;
+    translate: 1.5px -1.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tweet-card-mark {
+    transition: none;
+  }
+}
+
+/* ── Theme tri-toggle (footer chrome — components/theme-toggle.tsx) ── */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.theme-toggle button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+/* extend the hit area vertically; horizontal stays button-width so
+   neighbors remain distinguishable */
+.theme-toggle button::after {
+  content: '';
+  position: absolute;
+  inset: -0.625rem 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle button:hover {
+    color: var(--foreground);
+  }
+}
+
+.theme-toggle button:active {
+  transform: scale(0.97);
+}
+
+.theme-toggle button[data-active] {
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--foreground) 8%, transparent);
+}
+
+/* ── Image lightbox (components/zoom-image.tsx) ───────────────────── */
+
+.zoom-trigger {
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+}
+
+.zoom-trigger[data-zoomed] img {
+  /* the photo has been picked up — leave its shadow spot empty */
+  visibility: hidden;
+}
+
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-toast);
+  cursor: zoom-out;
+  outline: none;
+}
+
+.zoom-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--background) 94%, transparent);
+  opacity: 0;
+  transition: opacity 300ms var(--ease-swift);
+}
+
+.zoom-overlay[data-state='open'] .zoom-overlay-backdrop {
+  opacity: 1;
+}
+
+.zoom-overlay img {
+  position: fixed;
+  border-radius: 2px;
+  background: var(--surface-1);
+  will-change: transform;
+  transition: transform 300ms var(--ease-swift), box-shadow 300ms var(--ease-swift);
+}
+
+.zoom-overlay[data-state='open'] img {
+  box-shadow: var(--shadow-large);
+}
+
+/* viewfinder brackets develop just outside the settled photo */
+.zoom-overlay-marks {
+  position: fixed;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.zoom-overlay[data-state='open'] .zoom-overlay-marks {
+  opacity: 0.55;
+  transition: opacity 200ms ease 140ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-overlay-backdrop,
+  .zoom-overlay img,
+  .zoom-overlay-marks {
+    transition: none;
+  }
+}
+
+/* ── Header avatar ────────────────────────────────────────────────── */
+
+.avatar-flip {
+  position: relative;
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--border);
+  user-select: none;
+}
+
+.avatar-flip img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+}
+
+/* ── Motion: entrances, reveals, page transitions ─────────────────── */
+
+/* blur = not yet in focus — entrances sharpen, they don't slide */
+@keyframes enter-develop {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes polaroid-pop {
+  from {
+    opacity: 0;
+    transform: rotate(calc(var(--tilt, 0deg) + 1.5deg)) scale(0.85);
+  }
+}
+
+/* Above-the-fold entrance choreography: rows/blocks rise in with a per-item
+   delay (set --enter-delay inline; keep ordinary entrances under ~500ms).
+   The staged post route is the documented exception after the shared morph. */
+.enter {
+  animation: enter-develop 350ms var(--ease-swift) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+/* Listing polaroids pop like prints dropped on the sheet; skipped after
+   the first visit this session (html[data-visited] set pre-paint) */
+.enter-polaroid .polaroid {
+  animation: polaroid-pop 350ms var(--ease-swift) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+html[data-visited] .enter-polaroid .polaroid {
+  animation: none;
+}
+
+/* Scroll reveal (post prose): hidden state is applied by JS only to
+   below-fold elements, so content without JS is simply there */
+.reveal-pending {
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateY(5px);
+}
+
+@keyframes reveal-develop {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateY(5px);
+  }
+}
+
+.reveal-in {
+  animation: reveal-develop 300ms var(--ease-swift) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* nested choreography: a photo inside a revealing block develops after
+   the block (+250ms), popping from a slightly deeper scatter */
+@keyframes img-develop {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: rotate(calc(var(--img-tilt, 0deg) + 1.2deg)) scale(0.9);
+  }
+}
+
+.reveal-in .zoom-trigger {
+  animation: img-develop 300ms var(--ease-swift) backwards;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 250ms);
+}
+
+/* Route transition: the origin defocuses while the destination rises.
+   Shared covers/titles morph via view-transition-name. */
+.post-loading-cover {
+  view-transition-name: var(--post-cover-transition-name, none);
+}
+
+.post-loading-title {
+  view-transition-name: var(--post-title-transition-name, none);
+}
+
+@keyframes vt-defocus {
+  to {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+@keyframes vt-focus {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+::view-transition-group(root) {
+  animation: none;
+}
+
+::view-transition-old(root) {
+  display: none;
+}
+
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-group(site-dock) {
+  z-index: var(--z-nav);
+  animation: none;
+}
+
+::view-transition-old(site-dock) {
+  display: none;
+}
+
+::view-transition-new(site-dock) {
+  animation: none;
+}
+
+::view-transition-old(.route-content) {
+  animation: vt-defocus 250ms var(--ease-swift) both;
+}
+
+::view-transition-new(.route-content) {
+  animation: vt-focus 300ms var(--ease-swift) both;
+}
+
+::view-transition-group(*) {
+  animation-duration: var(--duration-route-morph);
+  animation-timing-function: var(--ease-swift);
+}
+
+html[data-route-motion='none']::view-transition-group(*),
+html[data-route-motion='none']::view-transition-image-pair(*),
+html[data-route-motion='none']::view-transition-old(*),
+html[data-route-motion='none']::view-transition-new(*) {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+}
+
+/* The shared title owns the morph. Its supporting metadata develops once the
+   320ms morph window closes, then the post body follows as the next register. */
+.post-title-meta {
+  animation: enter-develop var(--duration-post-meta) var(--ease-swift) backwards;
+  animation-delay: var(--duration-route-morph);
+}
+
+.post-body-stage {
+  --enter-delay: var(--delay-post-body);
+}
+
+/* a revealing list hands its animation to the items, staggered */
+.prose ul.reveal-in,
+.prose ol.reveal-in {
+  animation: none;
+}
+
+.prose ul.reveal-in > li,
+.prose ol.reveal-in > li {
+  animation: reveal-develop 300ms var(--ease-swift) backwards;
+  animation-delay: calc(var(--reveal-delay, 0ms) + var(--li, 0) * 45ms);
+}
+
+.prose ul.reveal-in > li:nth-child(2),
+.prose ol.reveal-in > li:nth-child(2) {
+  --li: 1;
+}
+
+.prose ul.reveal-in > li:nth-child(3),
+.prose ol.reveal-in > li:nth-child(3) {
+  --li: 2;
+}
+
+.prose ul.reveal-in > li:nth-child(4),
+.prose ol.reveal-in > li:nth-child(4) {
+  --li: 3;
+}
+
+.prose ul.reveal-in > li:nth-child(5),
+.prose ol.reveal-in > li:nth-child(5) {
+  --li: 4;
+}
+
+.prose ul.reveal-in > li:nth-child(6),
+.prose ol.reveal-in > li:nth-child(6) {
+  --li: 5;
+}
+
+.prose ul.reveal-in > li:nth-child(7),
+.prose ol.reveal-in > li:nth-child(7) {
+  --li: 6;
+}
+
+.prose ul.reveal-in > li:nth-child(8),
+.prose ol.reveal-in > li:nth-child(8) {
+  --li: 7;
+}
+
+.prose ul.reveal-in > li:nth-child(9),
+.prose ol.reveal-in > li:nth-child(9) {
+  --li: 8;
+}
+
+.prose ul.reveal-in > li:nth-child(n + 10),
+.prose ol.reveal-in > li:nth-child(n + 10) {
+  --li: 9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter,
+  .enter-polaroid .polaroid,
+  .post-title-meta,
+  .reveal-in,
+  .prose ul.reveal-in > li,
+  .prose ol.reveal-in > li {
+    animation: none;
+  }
+
+  .reveal-pending {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .reveal-in .zoom-trigger {
+    animation: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* ── External links: inline favicon + preview hover card ──────────── */
+
+.external-label {
+  display: inline;
+}
+
+.external-mark {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-inline-start: 0.08em;
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+  vertical-align: -0.125em;
+}
+
+.external-label-text {
+  min-width: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .external-label .external-mark {
+    transition: opacity 150ms ease, transform 180ms ease;
+  }
+
+  a:hover .external-label .external-mark {
+    opacity: 0.95;
+    transform: translate(1.5px, -1.5px);
+  }
+}
+
+a:focus-visible .external-label .external-mark {
+  opacity: 0.95;
+  transition: none;
+}
+
+/* ── Homepage introduction: small marks, deliberate responses ───── */
+
+.home-introduction p {
+  color: var(--gray-10, var(--muted-foreground));
+  font-size: 0.875rem;
+  line-height: 1.72;
+}
+
+.home-intro-trigger {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.18em;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.home-design-mark,
+.home-details-mark {
+  display: inline-block;
+  align-self: center;
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--foreground);
+  pointer-events: none;
+  user-select: none;
+  vertical-align: -0.25em;
+}
+
+.home-design-laptop,
+.home-design-sparkle,
+.home-zolplay-link .external-link > img {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.home-design-laptop,
+.home-zolplay-link .external-link > img {
+  transition: transform 150ms var(--ease-swift);
+}
+
+.home-detail-units {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.home-detail-words .home-detail-unit + .home-detail-unit {
+  margin-inline-start: 0.22em;
+}
+
+.home-detail-unit {
+  display: inline-block;
+  transform-origin: center bottom;
+}
+
+.home-detail-period {
+  display: inline-block;
+}
+
+.home-design-sparkle {
+  opacity: 0.72;
+}
+
+.home-intro-trigger.home-intro-tap .home-design-laptop {
+  animation: home-intro-laptop-tap 220ms var(--ease-swift);
+}
+
+.home-intro-trigger.home-intro-tap .home-design-sparkle-a {
+  animation: home-intro-twinkle 220ms var(--ease-swift);
+}
+
+.home-intro-trigger.home-intro-tap .home-design-sparkle-b {
+  animation: home-intro-twinkle 220ms 45ms var(--ease-swift);
+}
+
+.home-intro-trigger.home-intro-tap .home-design-sparkle-dot {
+  animation: home-intro-twinkle 180ms 90ms var(--ease-swift);
+}
+
+.home-intro-trigger.home-intro-tap .home-detail-unit {
+  animation: home-detail-hop 1s var(--ease-spring);
+}
+
+.home-intro-trigger.home-intro-tap .home-detail-unit:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.home-intro-trigger.home-intro-tap .home-detail-unit:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.home-zolplay-link {
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.home-zolplay-link .external-link,
+.home-contact-link {
+  color: var(--gray-10, var(--foreground));
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.16em;
+  text-decoration-color: color-mix(in oklab, currentColor 38%, transparent);
+  text-decoration-skip-ink: auto;
+}
+
+.home-zolplay-link .external-link {
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+.home-contact-link {
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+  touch-action: manipulation;
+}
+
+.home-contact-link .external-label {
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-zolplay-link .external-link:hover,
+  .home-contact-link:hover {
+    color: var(--gray-12, var(--foreground));
+    text-decoration-color: currentColor;
+  }
+}
+
+.home-zolplay-link:active .external-link > img {
+  transform: translateY(-1px) rotate(-4deg);
+}
+
+.home-zolplay-link .external-mark {
+  transition: opacity 150ms ease, transform 180ms ease;
+}
+
+.home-zolplay-link:active .external-mark {
+  opacity: 0.95;
+  transform: translate(1.5px, -1.5px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-intro-trigger:hover .home-design-label {
+    color: transparent;
+    background-image: linear-gradient(
+      100deg,
+      color-mix(in oklch, var(--foreground) 35%, #ff5c5c),
+      color-mix(in oklch, var(--foreground) 35%, #f6b73c),
+      color-mix(in oklch, var(--foreground) 35%, #44c77a),
+      color-mix(in oklch, var(--foreground) 35%, #4aa8ff),
+      color-mix(in oklch, var(--foreground) 35%, #b56cff)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .home-intro-trigger:hover .home-detail-unit {
+    animation: home-detail-hop 1s var(--ease-spring);
+  }
+
+  .home-intro-trigger:hover .home-detail-unit:nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .home-intro-trigger:hover .home-detail-unit:nth-child(3) {
+    animation-delay: 160ms;
+  }
+
+  .home-intro-trigger:hover .home-design-laptop {
+    transform: translateY(1.5px);
+  }
+
+  .home-intro-trigger:hover .home-design-sparkle-a {
+    animation: home-intro-twinkle 220ms var(--ease-swift);
+  }
+
+  .home-intro-trigger:hover .home-design-sparkle-b {
+    animation: home-intro-twinkle 220ms 45ms var(--ease-swift);
+  }
+
+  .home-intro-trigger:hover .home-design-sparkle-dot {
+    animation: home-intro-twinkle 180ms 90ms var(--ease-swift);
+  }
+
+  .home-zolplay-link:hover .external-link > img {
+    transform: translateY(-1px) rotate(-4deg);
+  }
+}
+
+@keyframes home-detail-hop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  28% {
+    transform: translateY(-5px) scale(1.03);
+    animation-timing-function: var(--ease-spring);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes home-intro-laptop-tap {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(1.5px);
+  }
+}
+
+@keyframes home-intro-twinkle {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+
+  45% {
+    opacity: 1;
+    transform: scale(1.22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .external-label .external-mark {
+    transition: none;
+  }
+
+  a:hover .external-label .external-mark {
+    transform: none;
+  }
+
+  .home-design-laptop,
+  .home-design-sparkle,
+  .home-detail-unit,
+  .home-zolplay-link .external-link > img {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .home-intro-trigger:is(:hover, :active) .home-design-laptop,
+  .home-intro-trigger:is(:hover, :active) .home-design-sparkle,
+  .home-intro-trigger:is(:hover, :active) .home-detail-unit,
+  .home-intro-trigger.home-intro-tap .home-design-laptop,
+  .home-intro-trigger.home-intro-tap .home-design-sparkle,
+  .home-intro-trigger.home-intro-tap .home-detail-unit,
+  .home-zolplay-link:is(:hover, :active) .external-link > img,
+  .home-zolplay-link:is(:hover, :active) .external-mark {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .home-zolplay-link {
+    transition: none;
+  }
+
+  .home-contact-link {
+    transition: none;
+  }
+}
+
+.external-link img {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 0.3em;
+  vertical-align: -0.125em;
+  user-select: none;
+}
+
+.link-card {
+  /* informational only: never selectable, never a pointer target */
+  pointer-events: none;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 16rem;
+  padding: 0.625rem 0.75rem;
+  /* a printed label: the register's corner, elevation from the ladder */
+  border-radius: 2px;
+  background: var(--surface-3);
+  box-shadow: 0 0 0 1px var(--border), var(--shadow-tooltip), var(--shadow-medium);
+  /* set by the Base UI positioner, inherited by the popup */
+  transform-origin: var(--transform-origin);
+  backface-visibility: hidden;
+  z-index: var(--z-card);
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 200ms var(--ease-swift),
+    transform 200ms var(--ease-swift);
+}
+
+/* Image-enabled preview cards: height comes from the content (the 16:9
+   frame still holds its slot while the image loads). Uniform padding so
+   the frame's corners run concentric with the card's. */
+.link-card-with-image {
+  padding: 0.625rem;
+}
+
+.link-card-image-frame {
+  display: block;
+  flex: none;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 2px;
+  background: color-mix(in oklch, var(--muted) 72%, var(--paper));
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.link-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.external-link img[data-failed],
+.link-card img[data-failed],
+.ama-product-logo[data-failed] {
+  visibility: hidden;
+}
+
+/* Favicon tone treatment (components/favicon-tone.ts): a pale glyph on
+   the light theme — or a dark one in dark mode — would vanish into the
+   page. Grayscale marks simply invert to the theme's ink, like native
+   icons; marks with brand color instead sit on a quiet chip (--primary
+   softened toward the page) since inverting would corrupt the color.
+   Padding + border-box keeps the slot size: no layout shift. Opaque
+   near-white tiles just get an edge on the light page. */
+.external-link img[data-tone='light-mono'],
+.link-card-site img[data-tone='light-mono'],
+.ama-product-logo[data-tone='light-mono'],
+.dark .external-link img[data-tone='dark-mono'],
+.dark .link-card-site img[data-tone='dark-mono'],
+.dark .ama-product-logo[data-tone='dark-mono'] {
+  filter: invert(1);
+}
+
+.dark .external-link img[data-tone='light-mono'],
+.dark .link-card-site img[data-tone='light-mono'],
+.dark .ama-product-logo[data-tone='light-mono'] {
+  filter: none;
+}
+
+.external-link img[data-tone='light'],
+.link-card-site img[data-tone='light'],
+.ama-product-logo[data-tone='light'],
+.dark .external-link img[data-tone='dark'],
+.dark .link-card-site img[data-tone='dark'],
+.dark .ama-product-logo[data-tone='dark'] {
+  box-sizing: border-box;
+  padding: 2px;
+  background: color-mix(in oklab, var(--primary) 88%, var(--background));
+}
+
+.dark .external-link img[data-tone='light'],
+.dark .link-card-site img[data-tone='light'],
+.dark .ama-product-logo[data-tone='light'] {
+  padding: 0;
+  background: none;
+}
+
+.external-link img[data-tone='flat'],
+.link-card-site img[data-tone='flat'],
+.ama-product-logo[data-tone='flat'] {
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.dark .external-link img[data-tone='flat'],
+.dark .link-card-site img[data-tone='flat'],
+.dark .ama-product-logo[data-tone='flat'] {
+  box-shadow: none;
+}
+
+.link-card[data-starting-style] {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.link-card[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97);
+  transition-duration: 130ms;
+}
+
+.link-card.preview-card-instant,
+.link-card.preview-card-instant[data-starting-style],
+.link-card.preview-card-instant[data-ending-style] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* the domain is machine text: mono, one step down */
+.link-card-site {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.link-card-site img {
+  border-radius: 2px;
+}
+
+.link-card-title {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--foreground);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.link-card-description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Halftone portrait (components/halftone-portrait.tsx) ─────────── */
+
+[data-halftone] {
+  display: block;
+  position: relative;
+  aspect-ratio: 1;
+  user-select: none;
+}
+
+.halftone-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--foreground);
+  opacity: 0;
+}
+
+@keyframes halftone-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+[data-halftone][data-ready] .halftone-canvas {
+  animation: halftone-reveal 400ms var(--ease-swift) both;
+}
+
+/* The homepage portrait keeps its halftone print at rest. A bounded
+   topographic field develops behind it only after deliberate attention. */
+[data-portrait-stage] {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  aspect-ratio: 1;
+}
+
+.portrait-hidden-stage-trigger {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: default;
+  touch-action: manipulation;
+  appearance: none;
+}
+
+.portrait-hidden-stage-trigger:focus-visible {
+  outline: 1px solid var(--foreground);
+  outline-offset: 4px;
+}
+
+.portrait-hidden-stage-field {
+  position: absolute;
+  z-index: 0;
+  inset: -28% -36% -28% -20%;
+  contain: layout paint;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: scale(0.94);
+  mask-image: radial-gradient(
+    ellipse at 45% 49%,
+    transparent 0 25%,
+    rgb(0 0 0 / 0.38) 36%,
+    black 48%,
+    rgb(0 0 0 / 0.82) 61%,
+    transparent 78%
+  );
+  transition:
+    opacity 320ms var(--ease-swift),
+    transform 320ms var(--ease-swift);
+}
+
+[data-portrait-stage][data-motion='false'] .portrait-hidden-stage-field,
+[data-portrait-stage][data-motion='false'] .portrait-hidden-stage-shader-shell {
+  transition: none;
+}
+
+[data-portrait-stage][data-active='true'] .portrait-hidden-stage-field {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-portrait-stage][data-motion='true'] .portrait-hidden-stage-field {
+  will-change: transform, opacity;
+}
+
+.portrait-hidden-stage-fallback,
+.portrait-hidden-stage-shader,
+.portrait-hidden-stage-shader-shell,
+.portrait-hidden-stage-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait-hidden-stage-fallback {
+  overflow: visible;
+  color: var(--foreground);
+  opacity: 0.028;
+  transform: rotate(-5deg);
+}
+
+.portrait-hidden-stage-fallback path {
+  vector-effect: non-scaling-stroke;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.portrait-hidden-stage-shader {
+  opacity: 0.1;
+}
+
+.portrait-hidden-stage-shader-shell {
+  opacity: 0;
+  transition: opacity 180ms var(--ease-swift);
+}
+
+.portrait-hidden-stage-shader-shell[data-ready='true'] {
+  opacity: 1;
+}
+
+.dark .portrait-hidden-stage-fallback {
+  opacity: 0.026;
+}
+
+.dark .portrait-hidden-stage-shader {
+  opacity: 0.09;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-halftone][data-ready] .halftone-canvas {
+    animation: none;
+    opacity: 1;
+  }
+
+  .portrait-hidden-stage-field,
+  .portrait-hidden-stage-shader-shell {
+    transition: none;
+  }
+}
+
+/* center-out list reveal with a tiny swing (rotate −2° → 0) */
+@keyframes enter-swing {
+  from {
+    opacity: 0;
+    transform: translateY(12px) rotate(-2deg);
+    filter: blur(2px);
+  }
+}
+
+.enter-swing {
+  animation: enter-swing 400ms var(--ease-swift) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-swing {
+    animation: none;
+  }
+}
+
+/* measuring-tick rulers hugging the horizontal guides — instrument
+   chrome from the technical-print vocabulary, tuned to be missable.
+   They layer above the edge fades so the ticks never wash out. */
+.column-rulers {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--guide-opacity);
+  /* white ticks under difference invert against whatever passes beneath */
+  mix-blend-mode: difference;
+}
+
+/* bent-rule arcs (components/arc-rulers.tsx) — tick inks live there */
+.column-ruler-arc {
+  position: absolute;
+  left: 0;
+}
+
+.column-ruler-arc-top {
+  top: 0;
+}
+
+.column-ruler-arc-bottom {
+  bottom: 0;
+}
+
+/* ── Email envelope: the hover card is a little piece of mail ─────── */
+
+.email-envelope-card {
+  overflow: hidden;
+  padding: 0;
+  border-radius: 5px;
+  background: var(--paper);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--paper-ink) 30%, transparent),
+    var(--shadow-tooltip),
+    var(--shadow-medium);
+}
+
+.email-envelope {
+  --mail-red: oklch(0.58 0.12 25);
+  --mail-blue: oklch(0.53 0.09 245);
+
+  position: relative;
+  display: block;
+  height: 9.25rem;
+  overflow: hidden;
+  color: var(--paper-ink);
+  background:
+    radial-gradient(circle at 18% 24%, color-mix(in oklab, var(--paper-ink) 4%, transparent) 0 0.5px, transparent 0.75px),
+    var(--paper);
+  background-size: 13px 11px, auto;
+}
+
+/* postal edge: quiet red/blue registration ink around the paper */
+.email-envelope::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(135deg, var(--mail-red) 0 7px, transparent 7px 14px, var(--mail-blue) 14px 21px, transparent 21px 28px) top / 100% 3px no-repeat,
+    repeating-linear-gradient(135deg, var(--mail-red) 0 7px, transparent 7px 14px, var(--mail-blue) 14px 21px, transparent 21px 28px) bottom / 100% 3px no-repeat,
+    repeating-linear-gradient(45deg, var(--mail-red) 0 7px, transparent 7px 14px, var(--mail-blue) 14px 21px, transparent 21px 28px) left / 3px 100% no-repeat,
+    repeating-linear-gradient(45deg, var(--mail-red) 0 7px, transparent 7px 14px, var(--mail-blue) 14px 21px, transparent 21px 28px) right / 3px 100% no-repeat;
+  opacity: 0.62;
+}
+
+/* closed front flap: lower seams meet under the recipient address */
+.email-envelope-flap {
+  position: absolute;
+  inset: auto 0 0;
+  height: 66%;
+  clip-path: polygon(0 100%, 0 75%, 50% 25%, 100% 75%, 100% 100%);
+  background: color-mix(in oklab, var(--paper-ink) 3%, var(--paper));
+  filter: drop-shadow(0 -1px 0 color-mix(in oklab, var(--paper-ink) 34%, transparent));
+}
+
+.email-envelope-return {
+  position: absolute;
+  top: 1.05rem;
+  left: 1.05rem;
+  z-index: 1;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 7px;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  color: color-mix(in oklab, var(--paper-ink) 78%, transparent);
+}
+
+.email-envelope-return > span {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 6px;
+  letter-spacing: 0.16em;
+  opacity: 0.72;
+}
+
+.email-envelope-stamps {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.email-envelope-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px dotted var(--paper);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  line-height: 1;
+  color: color-mix(in oklab, var(--paper-ink) 90%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--paper-ink) 36%, transparent);
+}
+
+.email-envelope-stamp-portrait {
+  width: 3rem;
+  height: 3.65rem;
+  rotate: 2deg;
+  background: color-mix(in oklab, var(--mail-red) 11%, var(--paper));
+}
+
+.email-envelope-stamp-portrait img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.08);
+}
+
+.email-envelope-stamp-portrait span,
+.email-envelope-stamp-mark > span:last-child {
+  margin-top: 0.2rem;
+  font-size: 5px;
+  letter-spacing: 0.06em;
+}
+
+.email-envelope-stamp-mark {
+  width: 2.25rem;
+  height: 2.85rem;
+  margin-top: 0.25rem;
+  rotate: -3deg;
+  background: color-mix(in oklab, var(--mail-blue) 10%, var(--paper));
+}
+
+.email-envelope-stamp-star {
+  font-size: 1rem;
+  color: color-mix(in oklab, var(--mail-blue) 66%, var(--paper-ink));
+}
+
+/* cancellation circle and three horizontal ink bars overlap the postage */
+.email-envelope-postmark {
+  position: absolute;
+  top: 1.35rem;
+  right: 4.2rem;
+  z-index: 3;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid color-mix(in oklab, var(--paper-ink) 58%, transparent);
+  border-radius: 999px;
+  rotate: -8deg;
+  opacity: 0.72;
+}
+
+.email-envelope-postmark::before {
+  content: '13 JUL';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 5px;
+  letter-spacing: 0.04em;
+}
+
+.email-envelope-postmark::after {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  left: 1.65rem;
+  width: 2.8rem;
+  height: 1rem;
+  background: repeating-linear-gradient(to bottom, color-mix(in oklab, var(--paper-ink) 58%, transparent) 0 1px, transparent 1px 5px);
+}
+
+.email-envelope-address {
+  position: absolute;
+  top: 5.45rem;
+  left: 3.3rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 13px;
+  line-height: 1.35;
+  letter-spacing: 0.035em;
+  color: color-mix(in oklab, var(--paper-ink) 92%, transparent);
+  white-space: nowrap;
+}
+
+.email-envelope-address > span {
+  margin-bottom: 0.25rem;
+  font-size: 6px;
+  letter-spacing: 0.18em;
+  opacity: 0.68;
+}
+
+/* ── Room shelves: records and books rest on a real wooden plank ──── */
+
+.room-shelf {
+  --room-shelf-shadow-rgb: 27 22 17;
+  --room-shelf-wood-front-bottom: oklch(0.61 0.065 64);
+  --room-shelf-wood-front-top: oklch(0.79 0.05 74);
+  --room-shelf-wood-grain: rgb(71 42 17 / 0.08);
+  --room-shelf-wood-top-back: oklch(0.77 0.045 75);
+  --room-shelf-wood-top-front: oklch(0.84 0.04 78);
+
+  position: relative;
+}
+
+.dark .room-shelf {
+  --room-shelf-shadow-rgb: 0 0 0;
+  --room-shelf-wood-front-bottom: oklch(0.29 0.035 49);
+  --room-shelf-wood-front-top: oklch(0.43 0.04 59);
+  --room-shelf-wood-grain: rgb(0 0 0 / 0.15);
+  --room-shelf-wood-top-back: oklch(0.38 0.035 56);
+  --room-shelf-wood-top-front: oklch(0.47 0.035 62);
+}
+
+.shelf-annotation {
+  position: relative;
+  display: flex;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  height: 1.75rem;
+  margin: 0.375rem auto 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.shelf-annotation::before {
+  content: '';
+  position: absolute;
+  inset: -0.5rem;
+}
+
+.shelf-annotation .external-label {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.shelf-annotation .external-label-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shelf-annotation:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* One wooden material and upper-left light source ground both collections. */
+.room-shelf-plank {
+  display: block;
+  position: relative;
+  z-index: 1;
+  height: 12px;
+  border-radius: 1px 1px 2px 2px;
+  background:
+    radial-gradient(ellipse 22% 38% at 12% 22%, transparent 0 92%, var(--room-shelf-wood-grain) 93% 95%, transparent 96%),
+    radial-gradient(ellipse 32% 42% at 67% 70%, transparent 0 93%, var(--room-shelf-wood-grain) 94% 96%, transparent 97%),
+    linear-gradient(92deg, transparent 0 8%, var(--room-shelf-wood-grain) 14%, transparent 22% 54%, var(--room-shelf-wood-grain) 61%, transparent 72%),
+    linear-gradient(180deg, var(--room-shelf-wood-front-top), var(--room-shelf-wood-front-bottom));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    inset 0 -1px 0 rgb(51 28 10 / 0.2),
+    1px 3px 3px -2px rgb(var(--room-shelf-shadow-rgb) / 0.24),
+    3px 10px 16px -8px rgb(var(--room-shelf-shadow-rgb) / 0.34),
+    6px 24px 34px -18px rgb(var(--room-shelf-shadow-rgb) / 0.28);
+}
+
+.room-shelf-plank::before,
+.room-shelf-plank::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.room-shelf-plank::before {
+  top: -6px;
+  height: 6px;
+  clip-path: polygon(0.8% 0, 99.2% 0, 100% 100%, 0 100%);
+  background:
+    radial-gradient(ellipse 28% 70% at 23% 45%, transparent 0 90%, var(--room-shelf-wood-grain) 91% 93%, transparent 94%),
+    linear-gradient(91deg, transparent 0 16%, var(--room-shelf-wood-grain) 25%, transparent 34% 67%, var(--room-shelf-wood-grain) 75%, transparent 83%),
+    linear-gradient(180deg, var(--room-shelf-wood-top-front), var(--room-shelf-wood-top-back));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.32),
+    inset 0 -1px 0 rgb(52 29 11 / 0.18);
+}
+
+.room-shelf-plank::after {
+  bottom: -2px;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(180deg, rgb(var(--room-shelf-shadow-rgb) / 0.24), rgb(var(--room-shelf-shadow-rgb) / 0.08));
+}
+
+.dark .room-shelf-plank {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    inset 0 -1px 0 rgb(0 0 0 / 0.48),
+    1px 3px 3px -2px rgb(var(--room-shelf-shadow-rgb) / 0.45),
+    3px 10px 16px -8px rgb(var(--room-shelf-shadow-rgb) / 0.62),
+    6px 24px 34px -18px rgb(var(--room-shelf-shadow-rgb) / 0.5);
+}
+
+.dark .room-shelf-plank::before {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    inset 0 -1px 0 rgb(0 0 0 / 0.4);
+}
+
+/* ── Post images: scattered prints that straighten on attention ───── */
+
+.zoom-trigger {
+  transform: rotate(var(--img-tilt, 0deg));
+  transition: transform 300ms var(--ease-swift);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .zoom-trigger:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-trigger {
+    transition: none;
+  }
+}
+
+/* ── Viewport edge fades: subtle progressive blur top & bottom ────── */
+
+.viewport-edge-fade {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 4.5rem;
+  z-index: 90;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viewport-edge-fade-top {
+  top: 0;
+  mask-image: linear-gradient(to bottom, black 15%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 15%, transparent);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--background) 62%, transparent),
+    transparent
+  );
+}
+
+.viewport-edge-fade-bottom {
+  bottom: 0;
+  mask-image: linear-gradient(to top, black 15%, transparent);
+  -webkit-mask-image: linear-gradient(to top, black 15%, transparent);
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--background) 62%, transparent),
+    transparent
+  );
+}
+
+.viewport-edge-fade-bottom::before {
+  mask-image: linear-gradient(to top, black, transparent 45%);
+  -webkit-mask-image: linear-gradient(to top, black, transparent 45%);
+}
+
+/* the print develops into the photo on attention */
+.dither-veil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 300ms var(--ease-swift);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .dither-veil {
+    opacity: 0;
+  }
+}
+
+.group:focus-visible .dither-veil {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dither-veil {
+    transition: none;
+  }
+}
+
+/* ── Vinyl shelf (components/vinyl-shelf.tsx) ─────────────────────── */
+
+.vinyl-room {
+  --vinyl-depth: 3px;
+  --vinyl-motion-duration: 330ms;
+  --vinyl-shadow-rgb: var(--room-shelf-shadow-rgb);
+
+  left: 50%;
+  width: min(37.5rem, calc(100vw - 2rem));
+  isolation: isolate;
+  transform: translateX(-50%);
+}
+
+.vinyl-annotation {
+  z-index: 2;
+}
+
+.vinyl-viewport {
+  position: relative;
+  z-index: 2;
+  overflow: clip;
+  cursor: grab;
+}
+
+.vinyl-room[data-vinyl-interaction='panning'] .vinyl-viewport {
+  cursor: grabbing;
+}
+
+.vinyl-shelf {
+  --vinyl-spread: 48%;
+
+  display: grid;
+  place-items: end center;
+  margin: 0;
+  padding: 2.5rem 0 4px;
+  list-style: none;
+  overflow: visible;
+  isolation: isolate;
+  perspective: 900px;
+  perspective-origin: center bottom;
+}
+
+.vinyl {
+  position: relative;
+  grid-area: 1 / 1;
+  width: clamp(7.25rem, 27vw, 9.5rem);
+  z-index: var(--vinyl-stack-order);
+  pointer-events: none;
+}
+
+.vinyl-trigger {
+  display: block;
+  position: relative;
+  width: 100%;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+  touch-action: manipulation;
+  transform: translateX(calc(var(--vinyl-offset) * var(--vinyl-spread)))
+    translateY(calc(var(--vinyl-rest-offset) * 1px))
+    translateZ(calc(var(--vinyl-forward) * 1px))
+    rotateZ(calc(var(--vinyl-rest-tilt) * 1deg))
+    rotateY(calc(var(--vinyl-direction) * var(--vinyl-inward-angle) * -1deg))
+    scale(var(--vinyl-scale));
+  transform-origin: var(--vinyl-origin-x) bottom;
+  transform-style: preserve-3d;
+  transition: transform var(--vinyl-motion-duration) var(--ease-spring);
+  will-change: transform;
+}
+
+/* Pointer ownership follows the rendered sleeve quadrilateral, not each
+   transformed button's axis-aligned bounding box. The viewport routes hover,
+   drag, wheel, and click through the same selection model. */
+
+.vinyl-hit-corner {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.vinyl-hit-corner[data-corner='top-left'] {
+  top: 0;
+  left: 0;
+}
+
+.vinyl-hit-corner[data-corner='top-right'] {
+  top: 0;
+  right: 0;
+}
+
+.vinyl-hit-corner[data-corner='bottom-right'] {
+  right: 0;
+  bottom: 0;
+}
+
+.vinyl-hit-corner[data-corner='bottom-left'] {
+  bottom: 0;
+  left: 0;
+}
+
+.vinyl-object {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  transform: translate(0, 0);
+  transform-style: preserve-3d;
+  transition: transform var(--vinyl-motion-duration) var(--ease-spring);
+}
+
+.vinyl-contact-shadow {
+  position: absolute;
+  z-index: 0;
+  top: calc(100% - 5px);
+  right: 8%;
+  left: 8%;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgb(var(--vinyl-shadow-rgb) / 0.4) 0%,
+    rgb(var(--vinyl-shadow-rgb) / 0.18) 46%,
+    transparent 84%
+  );
+  opacity: var(--vinyl-contact-opacity);
+  pointer-events: none;
+  transform: translateZ(-1px)
+    rotateY(calc(var(--vinyl-direction) * var(--vinyl-inward-angle) * 1deg))
+    rotateX(62deg)
+    scaleX(var(--vinyl-contact-scale));
+  transform-origin: center;
+  transition:
+    transform var(--vinyl-motion-duration) var(--ease-spring),
+    opacity var(--vinyl-motion-duration) var(--ease-spring);
+}
+
+.vinyl-room[data-vinyl-interaction='panning'] .vinyl-trigger,
+.vinyl-room[data-vinyl-interaction='panning'] .vinyl-object,
+.vinyl-room[data-vinyl-interaction='panning'] .vinyl-contact-shadow,
+.vinyl-room[data-vinyl-interaction='instant'] .vinyl-trigger,
+.vinyl-room[data-vinyl-interaction='instant'] .vinyl-object,
+.vinyl-room[data-vinyl-interaction='instant'] .vinyl-contact-shadow {
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vinyl-trigger:not([data-active])[data-pointer-owned] .vinyl-object {
+    transform: translateX(calc(var(--vinyl-direction) * 2px)) translateY(-4px);
+  }
+
+  .vinyl-trigger:not([data-active])[data-pointer-owned] .vinyl-contact-shadow {
+    opacity: calc(var(--vinyl-contact-opacity) * 0.55);
+    transform: translateZ(-1px)
+      rotateY(calc(var(--vinyl-direction) * var(--vinyl-inward-angle) * 1deg))
+      rotateX(62deg)
+      scaleX(calc(var(--vinyl-contact-scale) * 1.08));
+  }
+}
+
+.vinyl-trigger:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.vinyl-sleeve {
+  position: relative;
+  z-index: 2;
+  display: block;
+  aspect-ratio: 1;
+  background: var(--paper);
+  box-shadow:
+    0 0 0 var(--border-hairline) rgb(0 0 0 / 0.09),
+    1px 2px 3px -1px rgb(var(--vinyl-shadow-rgb) / 0.2),
+    4px 9px 16px -9px rgb(var(--vinyl-shadow-rgb) / 0.3);
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(var(--vinyl-depth));
+}
+
+.vinyl-sleeve::after {
+  content: '';
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  background: linear-gradient(118deg, rgb(255 255 255 / 0.12), transparent 28% 70%, rgb(25 16 9 / 0.11));
+  pointer-events: none;
+}
+
+/* Real 3D side faces: the cover sits forward and these planes bridge
+   the depth. The face revealed by each inward turn becomes the sleeve spine. */
+.vinyl-spine {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--vinyl-depth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--vinyl-spine-ink, oklch(0.28 0.012 95));
+  background: var(--vinyl-spine-color, var(--paper));
+  box-shadow:
+    inset 1px 0 rgb(255 255 255 / 0.16),
+    inset -1px 0 rgb(0 0 0 / 0.18);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.vinyl-spine > span {
+  max-height: calc(100% - 10px);
+  overflow: hidden;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 4px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+}
+
+.vinyl-spine-left {
+  background:
+    linear-gradient(to right, rgb(255 255 255 / 0.16), transparent 45%, rgb(0 0 0 / 0.16)),
+    var(--vinyl-spine-color, var(--paper));
+  transform: rotateY(-90deg);
+  transform-origin: left center;
+}
+
+.vinyl-spine-right {
+  right: 0;
+  left: auto;
+  background:
+    linear-gradient(to right, rgb(0 0 0 / 0.24), transparent 55%, rgb(255 255 255 / 0.08)),
+    var(--vinyl-spine-color, var(--paper));
+  transform: rotateY(90deg);
+  transform-origin: right center;
+}
+
+.vinyl-spine-right > span {
+  transform: rotate(180deg);
+}
+
+.vinyl-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* seeded crease streaks (inline background) + paper grain overlay */
+.vinyl-creases {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background-image: var(--vinyl-crease-image);
+  background-position: var(--vinyl-crease-position);
+  background-repeat: no-repeat;
+  background-size: var(--vinyl-crease-size);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.vinyl-paper {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at var(--vinyl-wear-x) var(--vinyl-wear-y), rgb(70 42 20 / 0.24) 0 0.5px, rgb(70 42 20 / 0.08) 1px 4%, transparent 9%),
+    linear-gradient(118deg, rgb(255 255 255 / 0.15), transparent 24% 72%, rgb(30 18 10 / 0.12)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='108' height='108'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.52 0 0 0 0 0.46 0.06 0.06 0.06 0 -0.03'/%3E%3C/filter%3E%3Crect width='108' height='108' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-position:
+    center,
+    center,
+    var(--vinyl-paper-x) var(--vinyl-paper-y);
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size:
+    100% 100%,
+    100% 100%,
+    var(--vinyl-paper-size) var(--vinyl-paper-size);
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 0.22),
+    inset -1px -1px 0 rgb(45 27 13 / 0.14);
+  mix-blend-mode: soft-light;
+  opacity: var(--vinyl-wear-opacity);
+  pointer-events: none;
+}
+
+.vinyl-sleeve-raster {
+  position: absolute;
+  inset: -4px;
+  font-size: 8px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  word-break: break-all;
+  color: color-mix(in oklab, var(--paper-ink) 42%, transparent);
+  user-select: none;
+}
+
+.vinyl-sleeve-type {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  background: linear-gradient(to top, color-mix(in oklab, var(--paper) 88%, transparent) 45%, transparent);
+}
+
+.vinyl-sleeve-album {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  color: oklch(0.28 0.012 95);
+}
+
+.vinyl-sleeve-artist {
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  color: var(--paper-ink);
+}
+
+@media (max-width: 30rem) {
+  .vinyl-shelf {
+    --vinyl-spread: 40%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vinyl-trigger,
+  .vinyl-sleeve,
+  .vinyl-object,
+  .vinyl-contact-shadow {
+    transition: none;
+  }
+
+  .vinyl-trigger:not([data-active])[data-pointer-owned] .vinyl-object {
+    transform: none;
+  }
+
+  .vinyl-trigger:not([data-active])[data-pointer-owned] .vinyl-contact-shadow {
+    opacity: var(--vinyl-contact-opacity);
+    transform: translateZ(-1px)
+      rotateY(calc(var(--vinyl-direction) * var(--vinyl-inward-angle) * 1deg))
+      rotateX(62deg)
+      scaleX(var(--vinyl-contact-scale));
+  }
+}
+
+/* ── Bookshelf: 3D accordion (components/bookshelf.tsx) ───────────── */
+
+.bookshelf-viewport {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 216px;
+  overflow: clip;
+}
+
+.shelf3 {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  width: var(--bookshelf-layout-width);
+  height: 216px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: scale(var(--bookshelf-scale));
+  transform-origin: left bottom;
+}
+
+.book3-frame {
+  position: relative;
+  height: 210px;
+  flex-shrink: 0;
+}
+
+.book3-contact-shadow {
+  position: absolute;
+  z-index: 0;
+  bottom: -3px;
+  left: 0;
+  width: var(--book-contact-width);
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgb(var(--room-shelf-shadow-rgb) / 0.38) 0%,
+    rgb(var(--room-shelf-shadow-rgb) / 0.16) 48%,
+    transparent 84%
+  );
+  opacity: 0.9;
+  pointer-events: none;
+  transform: scaleX(var(--book-contact-scale));
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.book3 {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-decoration: none;
+  perspective: 1200px;
+  cursor: default;
+  touch-action: manipulation;
+  transition: transform 180ms var(--ease-swift);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .book3[data-hover] {
+    transform: translateY(-5px);
+  }
+}
+
+/* The visual spine stays tightly packed, while its nonvisual hit area meets
+   the 44px touch target. Shelf click capture resolves overlaps by proximity. */
+.book3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: max(100%, calc(44px / var(--bookshelf-scale)));
+  transform: translateX(-50%);
+}
+
+.book3:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.book3-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 148px;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.book3-cover {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 2px 4px 4px 2px;
+  box-shadow:
+    0 0 0 var(--border-hairline) rgb(0 0 0 / 0.09),
+    1px 2px 3px -1px rgb(var(--room-shelf-shadow-rgb) / 0.2),
+    4px 9px 16px -9px rgb(var(--room-shelf-shadow-rgb) / 0.3);
+  user-select: none;
+}
+
+.book3-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.book3-cover-blank {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  background: var(--paper);
+  font-size: 0.75rem;
+  color: var(--paper-ink);
+}
+
+.book3-cover-blank b {
+  font-weight: var(--font-weight-semibold);
+  color: oklch(0.28 0.012 95);
+}
+
+.book3-spine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: rotateY(-90deg);
+  transform-origin: left center;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.625rem 0;
+  color: var(--book-ink, var(--paper-ink));
+  background:
+    linear-gradient(to right, rgb(0 0 0 / 0.12), transparent 35%, rgb(255 255 255 / 0.12) 75%, rgb(0 0 0 / 0.08)),
+    var(--book-spine, var(--paper));
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
+  border-radius: 2px;
+}
+
+.book3-spine-title {
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-medium);
+  color: inherit;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+}
+
+.book3-spine-author {
+  flex: none;
+  font-size: 0.5rem;
+  color: inherit;
+  opacity: 0.72;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book3 {
+    transition: none;
+  }
+
+  .book3[data-hover] {
+    transform: none;
+  }
+}
+
+/* ── Experience rows ──────────────────────────────────────────────── */
+
+.experience-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: start;
+  gap: 1rem;
+  padding: 0.625rem 0;
+}
+
+.experience-details {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+}
+
+.experience-company,
+.experience-role {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.experience-date {
+  white-space: nowrap;
+}
+
+/* ── Per-service hover cards (components/social-cards.tsx) ────────── */
+
+.service-card {
+  gap: 0.5rem;
+}
+
+.service-card[data-starting-style] {
+  transform: scale(0.92) translateY(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-card,
+  .link-card[data-starting-style],
+  .link-card[data-ending-style],
+  .service-card[data-starting-style] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.service-card-glyph {
+  margin-left: auto;
+  align-self: flex-start;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.service-card-stat .service-card-glyph {
+  align-self: center;
+}
+
+.service-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.service-card-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.service-card-names {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.service-card-name {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+/* handles are machine text */
+.service-card-sub {
+  color: var(--muted-foreground);
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.service-card-bio {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--foreground);
+  white-space: pre-line;
+}
+
+/* the stat row is the card's plate foot: ruled, mono, tabular. Units
+   never break internally — long locales wrap at the separators. */
+.service-card-stat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.125rem 0.25rem;
+  margin-top: 0.125rem;
+  padding-top: 0.5rem;
+  border-top: var(--border-hairline) solid var(--border);
+  color: var(--muted-foreground);
+  font-family: var(--font-geist-mono), var(--font-frex-gb, ui-monospace), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.service-card-stat > span {
+  white-space: nowrap;
+}
+
+.service-card-stat b {
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.xiaohongshu-card {
+  box-sizing: border-box;
+  /* fixed card dimensions; sized for the ruled stat foot */
+  height: 10.875rem;
+}
+
+.xiaohongshu-card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.xiaohongshu-card-wordmark {
+  width: 3rem;
+  user-select: none;
+}
+
+.xiaohongshu-card-wordmark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.xiaohongshu-card-bio {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 26-week (~180 day) contribution grid; cells cascade in individually
+   per the hover-card contract */
+.contrib-grid {
+  display: flex;
+  gap: 2px;
+}
+
+.contrib-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+@keyframes contrib-cell-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.92);
+  }
+}
+
+.contrib-grid i {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--foreground) 7%, transparent);
+  animation: contrib-cell-in 480ms var(--ease-swift) backwards;
+  animation-delay: calc(var(--ci, 0) * 2ms);
+}
+
+.link-card.preview-card-instant .contrib-grid i {
+  animation: none;
+}
+
+.contrib-grid i[data-level='1'] {
+  background: color-mix(in oklab, var(--foreground) 30%, transparent);
+}
+
+.contrib-grid i[data-level='2'] {
+  background: color-mix(in oklab, var(--foreground) 52%, transparent);
+}
+
+.contrib-grid i[data-level='3'] {
+  background: color-mix(in oklab, var(--foreground) 74%, transparent);
+}
+
+.contrib-grid i[data-level='4'] {
+  background: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contrib-grid i {
+    animation: none;
+  }
+}
+
+/* ── Blog index rows: print thumb · title ···· date ───────────────── */
+
+.blog-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+}
+
+/* the date is quiet metadata — one step down from the row's title */
+.blog-row-date {
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+}
+
+.print-pile {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: 4rem;
+  height: 2.75rem;
+  flex: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.print-pile-sheet {
+  position: absolute;
+  inset: 1px;
+  border-radius: 3px;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--paper-ink) 22%, transparent);
+}
+
+.print-pile-sheet:first-child {
+  opacity: 0.62;
+  transform: translate(-2px, 1px) rotate(-1.6deg);
+}
+
+.print-pile-sheet:nth-child(2) {
+  opacity: 0.82;
+  transform: translate(2px, -1px) rotate(1.1deg);
+}
+
+.print-thumb {
+  position: relative;
+  display: block;
+  width: 4rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.print-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.print-thumb-empty {
+  background: var(--muted);
+}
+
+.blog-row-title {
+  min-width: 0;
+  color: var(--gray-11, var(--foreground));
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 39.99rem) {
+  .blog-row-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    white-space: normal;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* dotted leader between title and date — the typewriter TOC register */
+.blog-row-leader {
+  flex: 1;
+  min-width: 1.5rem;
+  height: 1px;
+  align-self: center;
+  background: radial-gradient(
+      circle,
+      color-mix(in oklab, var(--muted-foreground) 41%, transparent) 0.5px,
+      transparent 0.5px
+    )
+    0 0 / 6px 1px repeat-x;
+}
+
+/* ── Primary call-to-action: a compact pill ───────────────────────── */
+
+/* Trim visual height with a pill silhouette; a pseudo-element restores the
+   44px hit target (design language: 44px minimum, pseudo if visually smaller). */
+.btn-cta {
+  position: relative;
+  display: inline-flex;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding-inline: 1.125rem;
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  touch-action: manipulation;
+  outline: none;
+  transition:
+    transform 100ms ease,
+    background-color 150ms ease;
+}
+
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 2.75rem;
+  transform: translateY(-50%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-cta:hover {
+    background: color-mix(in oklab, var(--foreground) 90%, var(--background));
+  }
+}
+
+.btn-cta:active {
+  transform: scale(0.97);
+}
+
+.btn-cta:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 3px var(--focus-ring, var(--foreground));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta {
+    transition: none;
+  }
+
+  .btn-cta:active {
+    transform: none;
+  }
+}
+
+/* ── Locale suggestion: an edge-mounted instrument plate ────────── */
+
+.locale-suggestion-positioner {
+  position: fixed;
+  z-index: var(--z-toast);
+  top: env(safe-area-inset-top);
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.locale-suggestion-positioner::before,
+.locale-suggestion-positioner::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  z-index: 1;
+  background: var(--muted-foreground);
+  opacity: 0.52;
+  pointer-events: none;
+}
+
+.locale-suggestion-positioner::before {
+  bottom: -0.3125rem;
+  width: var(--border-hairline);
+  height: 0.625rem;
+}
+
+.locale-suggestion-positioner::after {
+  bottom: -0.0625rem;
+  width: 0.5625rem;
+  height: var(--border-hairline);
+  transform: translateX(-50%);
+}
+
+.locale-suggestion {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  border-bottom: var(--border-hairline) solid var(--border);
+  background: var(--surface-2);
+  pointer-events: auto;
+  animation: locale-suggestion-enter 150ms var(--ease-swift) backwards;
+}
+
+.locale-suggestion-inner {
+  display: grid;
+  grid-template-columns: 0.75rem 3rem minmax(0, 1fr) auto 0.75rem;
+  align-items: center;
+  width: min(37.5rem, calc(100vw - 1rem));
+  min-height: 2.75rem;
+  margin: 0 auto;
+  border-right: var(--border-hairline) solid var(--border);
+  border-left: var(--border-hairline) solid var(--border);
+}
+
+.locale-suggestion-screw {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  justify-self: center;
+  border-radius: 50%;
+  background: var(--surface-1);
+  box-shadow:
+    0 0 0 var(--border-hairline) var(--border),
+    inset 0.0625rem 0.0625rem 0 color-mix(in oklab, white 38%, transparent);
+}
+
+.locale-suggestion-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.3125rem;
+  height: var(--border-hairline);
+  background: var(--muted-foreground);
+  transform: translate(-50%, -50%) rotate(-42deg);
+}
+
+.locale-suggestion-hatch {
+  align-self: stretch;
+  border-right: var(--border-hairline) solid var(--border);
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 0,
+    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 1px,
+    transparent 1px,
+    transparent 3.5px
+  );
+  user-select: none;
+}
+
+.locale-suggestion-copy {
+  min-width: 0;
+  margin: 0;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: -0.011em;
+  text-wrap: balance;
+}
+
+.locale-suggestion-actions {
+  align-self: stretch;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.1875rem;
+  padding: 0.625rem;
+  border-left: var(--border-hairline) solid var(--border);
+}
+
+@keyframes locale-suggestion-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 39.999rem) {
+  .locale-suggestion-inner {
+    grid-template-columns: 0.625rem 2.625rem minmax(0, 1fr) auto 0.625rem;
+  }
+
+  .locale-suggestion-copy {
+    padding-inline: 0.625rem;
+  }
+
+  .locale-suggestion-actions {
+    padding-inline: 0.375rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locale-suggestion,
+  .locale-suggestion :where(a, button, [aria-hidden]) {
+    animation: none;
+    transition: none;
+  }
+
+  .locale-suggestion :is(a, button):active > [aria-hidden] {
+    transform: none;
+  }
+}
+
+/* ── Bilingual chrome (lib/i18n.tsx) — CSS-swapped, no hydration ────
+   Public routes render a single language per segment, so only the inline
+   [data-zh]/[data-en] pair from <T> appears there. The block variant
+   survives solely for admin, which swaps locale in place (no route
+   change) and needs both DOM branches present in scheduling controls. */
+
+[data-en] {
+  display: none;
+}
+
+[data-en-block] {
+  display: none;
+}
+
+html[data-locale='en'] [data-zh] {
+  display: none;
+}
+
+html[data-locale='en'] [data-en] {
+  display: inline;
+}
+
+html[data-locale='en'] [data-zh-block] {
+  display: none;
+}
+
+html[data-locale='en'] [data-en-block] {
+  display: block;
+}
+
+.locale-toggle {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  transition: color 150ms ease;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .locale-toggle:hover {
+    color: var(--foreground);
+  }
+}
+
+.locale-toggle:active {
+  transform: scale(0.97);
+}
+
+/* ── Post document map and clipped mobile reading island ────────── */
+
+.post-minimap-root {
+  --post-minimap-width: 15rem;
+}
+
+.post-minimap-backdrop {
+  display: none;
+}
+
+.post-minimap-island {
+  display: contents;
+}
+
+.post-minimap {
+  position: fixed;
+  top: 8rem;
+  left: 1.5rem;
+  z-index: var(--z-nav);
+  display: flex;
+  width: var(--post-minimap-width);
+  max-height: calc(100dvh - 9.5rem);
+  flex-direction: column;
+  padding: 0 0.5rem 1rem 0;
+  color: var(--muted-foreground);
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 200ms ease;
+}
+
+.post-minimap::-webkit-scrollbar {
+  display: none;
+}
+
+.post-minimap-root[data-open] .post-minimap {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (min-width: 40rem) and (max-width: 63.99rem) {
+  .post-minimap-backdrop {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 90;
+    display: block;
+    width: 19rem;
+    background: radial-gradient(
+      ellipse 115% 80% at 0 50%,
+      color-mix(in oklab, var(--background) 68%, transparent) 0 58%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(ellipse 115% 80% at 0 50%, black 0 58%, transparent 100%);
+    -webkit-mask-image: radial-gradient(
+      ellipse 115% 80% at 0 50%,
+      black 0 58%,
+      transparent 100%
+    );
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 180ms var(--ease-swift),
+      visibility 0s linear 180ms;
+  }
+
+  .post-minimap-root[data-open] .post-minimap-backdrop {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 180ms var(--ease-swift),
+      visibility 0s;
+  }
+}
+
+@media (min-width: 64rem) {
+  .post-minimap {
+    transition:
+      opacity 1ms linear 279ms,
+      visibility 1ms linear 279ms;
+  }
+
+  .post-minimap-root[data-open] .post-minimap {
+    transition: opacity 200ms var(--ease-swift);
+  }
+}
+
+.post-minimap-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.post-minimap-clip {
+  display: contents;
+}
+
+.post-minimap-phone-surface {
+  display: none;
+}
+
+.post-minimap-utilities {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 2.75rem;
+  flex: none;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding-right: 0.5rem;
+}
+
+.post-minimap-utilities-top {
+  margin-bottom: 1.25rem;
+}
+
+.post-minimap-utilities-bottom {
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.post-minimap-utility {
+  position: relative;
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.375rem;
+  color: color-mix(in oklab, var(--muted-foreground) 82%, transparent);
+  font-size: 0.8125rem;
+  line-height: 1;
+  white-space: nowrap;
+  outline: none;
+  touch-action: manipulation;
+  transition: color 150ms ease, opacity 150ms ease;
+}
+
+.post-minimap-utility::after {
+  position: absolute;
+  inset: 0 -0.5rem;
+  border-radius: 0.375rem;
+  content: '';
+}
+
+.post-minimap-utility:focus-visible::after {
+  outline: 1px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+
+.post-minimap-back-to-top {
+  justify-content: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.post-minimap-back-to-top[data-visible] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (min-width: 40rem) {
+  .post-minimap-utilities-bottom,
+  .post-minimap-back-to-top {
+    justify-content: flex-start;
+  }
+}
+
+.post-minimap-node {
+  display: flex;
+  height: 1px;
+  flex: none;
+  align-items: center;
+  opacity: 1;
+  transform: none;
+}
+
+.post-minimap-root:not([data-open]) .post-minimap-node {
+  opacity: 0;
+  transform: translateY(12px) rotate(-2deg);
+}
+
+.post-minimap-node[data-kind='landmark'] {
+  height: 1px;
+  min-height: 0;
+  align-items: center;
+}
+
+.post-minimap-node > a {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 1px;
+  min-height: 0;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  color: color-mix(in oklab, var(--muted-foreground) 76%, transparent);
+  outline: none;
+  transition: color 150ms ease;
+}
+
+.post-minimap-node > a::after {
+  position: absolute;
+  inset: -0.875rem 0;
+  border-radius: 0.375rem;
+  content: '';
+}
+
+.post-minimap-node > a:focus-visible::after {
+  outline: 1px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+
+.post-minimap-tick {
+  display: block;
+  width: 1.25rem;
+  height: 1px;
+  flex: none;
+  background: color-mix(in oklab, var(--muted-foreground) 55%, transparent);
+  transform-origin: left center;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.post-minimap-node > .post-minimap-tick {
+  opacity: 0.55;
+}
+
+.post-minimap-label {
+  position: relative;
+  top: -0.5rem;
+  display: -webkit-box;
+  height: auto;
+  max-height: 2rem;
+  max-width: 11rem;
+  align-self: flex-start;
+  overflow: hidden;
+  line-height: 1rem;
+  white-space: normal;
+  text-overflow: ellipsis;
+  transform: translateX(0);
+  transition: transform 150ms ease;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.post-minimap-node > a[data-variant='title'] {
+  font-weight: var(--font-weight-medium);
+}
+
+.post-minimap-node > a[aria-current='location'] {
+  color: var(--foreground);
+}
+
+.post-minimap-node > a[aria-current='location'] .post-minimap-tick {
+  background: var(--foreground);
+  transform: scaleX(1.6);
+}
+
+.post-minimap-node > a[aria-current='location'] .post-minimap-label,
+.post-minimap-node > a:focus-visible .post-minimap-label {
+  transform: translateX(0.5rem);
+}
+
+.post-minimap-node > a:focus-visible {
+  color: var(--foreground);
+}
+
+.post-minimap-node > a:focus-visible .post-minimap-tick {
+  background: var(--foreground);
+  transform: scaleX(1.6);
+}
+
+.post-minimap-toggle {
+  position: fixed;
+  top: 4.875rem;
+  left: 0.625rem;
+  z-index: var(--z-nav);
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  transition: color 150ms ease;
+}
+
+.post-minimap-toggle-icon {
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.post-minimap-progress,
+.post-minimap-toggle-label,
+.post-minimap-island-chevron {
+  display: none;
+}
+
+.post-minimap-progress {
+  flex: none;
+  overflow: visible;
+  transform: rotate(-90deg);
+}
+
+.post-minimap-progress-track,
+.post-minimap-progress-value {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.post-minimap-progress-track {
+  stroke: color-mix(in oklab, var(--muted-foreground) 40%, transparent);
+}
+
+.post-minimap-progress-value {
+  stroke: currentColor;
+}
+
+@media (min-width: 64rem) {
+  .post-minimap-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+
+  .post-minimap-toggle-icon {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.post-minimap-toggle-panel {
+  transform-origin: 3.75px 6px;
+  transition: opacity 150ms ease, transform 200ms var(--ease-swift);
+}
+
+.post-minimap-toggle-chevron {
+  transform: scaleX(-1);
+  transform-origin: 7.5px 6px;
+  transition: transform 200ms var(--ease-swift);
+}
+
+.post-minimap-root[data-open] .post-minimap-toggle-chevron {
+  transform: scaleX(1);
+}
+
+.post-minimap-root:not([data-open]) .post-minimap-toggle-panel {
+  opacity: 0.55;
+  transform: scaleY(0.72);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .post-minimap-node > a:hover,
+  .post-minimap-toggle:hover,
+  .post-minimap-utility:hover {
+    color: var(--foreground);
+  }
+
+  .post-minimap-node > a:hover .post-minimap-tick {
+    background: var(--foreground);
+    transform: scaleX(1.6);
+  }
+
+  .post-minimap-node > a:hover .post-minimap-label {
+    transform: translateX(0.5rem);
+  }
+}
+
+@media (max-width: 39.99rem) {
+  .post-minimap-island {
+    position: fixed;
+    top: max(1.5rem, env(safe-area-inset-top));
+    left: 50%;
+    z-index: var(--z-nav);
+    display: flex;
+    width: min(18.75rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 7.5rem - env(safe-area-inset-bottom));
+    flex-direction: column;
+    overflow: visible;
+    color: var(--muted-foreground);
+    background: color-mix(in oklab, var(--popover) 88%, transparent);
+    border-radius: 1.375rem;
+    box-shadow:
+      0 0 0 var(--border-hairline) color-mix(in oklab, var(--foreground) 12%, transparent),
+      0 8px 24px -12px rgb(0 0 0 / 0.32);
+    isolation: isolate;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -1rem) scale(0.96);
+  }
+
+  .post-minimap-root[data-island-visible] .post-minimap-island {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) scale(1);
+  }
+
+  .post-minimap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    max-height: calc(100dvh - 10.25rem - env(safe-area-inset-bottom));
+    flex-direction: column;
+    padding: 2.75rem 1rem 0;
+    border-radius: 1rem;
+    box-shadow:
+      0 0 0 var(--border-hairline) color-mix(in oklab, var(--foreground) 14%, transparent),
+      0 16px 40px -18px rgb(0 0 0 / 0.42);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-0.75rem) scale(0.96);
+    transform-origin: top center;
+    transition: visibility 1ms linear 280ms;
+  }
+
+  .post-minimap-root[data-open] .post-minimap {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    transition: visibility 1ms linear;
+  }
+
+  .post-minimap-phone-surface {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    border-radius: 1rem;
+    background: color-mix(in oklab, var(--popover) 94%, transparent);
+    pointer-events: none;
+  }
+
+  .post-minimap-root:not([data-open]) .post-minimap-node {
+    filter: blur(2px);
+  }
+
+  .post-minimap-clip {
+    position: relative;
+    z-index: 1;
+    display: block;
+    min-height: 0;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .post-minimap-root[data-open] .post-minimap-clip {
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-width: none;
+  }
+
+  .post-minimap-clip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .post-minimap-nodes {
+    padding-bottom: 1rem;
+  }
+
+  .post-minimap-utilities {
+    margin: 0;
+    padding-inline: 0.25rem;
+  }
+
+  .post-minimap-utilities-top {
+    display: none;
+  }
+
+  .post-minimap-utilities-bottom {
+    padding-bottom: 0.5rem;
+  }
+
+  .post-minimap-toggle {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 2;
+    width: 100%;
+    height: 2.75rem;
+    flex: none;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+    color: var(--foreground);
+    touch-action: manipulation;
+    transform: none;
+  }
+
+  .post-minimap-toggle-icon {
+    display: none;
+  }
+
+  .post-minimap-progress {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .post-minimap-toggle-label {
+    display: block;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1rem;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .post-minimap-island-chevron {
+    display: block;
+    width: 0.75rem;
+    height: 0.75rem;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-origin: center;
+    transition: transform 260ms var(--ease-swift);
+  }
+
+  .post-minimap-root[data-open] .post-minimap-island-chevron {
+    transform: rotate(180deg);
+    transition-duration: 280ms;
+  }
+}
+
+@media (any-pointer: coarse) {
+  .post-minimap-nodes {
+    gap: 0.625rem;
+    padding-block: 1.34375rem;
+  }
+
+  .post-minimap-node > a {
+    touch-action: manipulation;
+  }
+
+  .post-minimap-node > a::after {
+    inset-block: -1.34375rem;
+  }
+}
+
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap-backdrop,
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap,
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap-toggle-panel,
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap-toggle-chevron,
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap-island-chevron,
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap-node > a,
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap-tick,
+.post-minimap-root[data-toggle-motion='instant'] .post-minimap-label {
+  transition: none;
+}
+
+.post-minimap-root[data-scroll-motion='instant'] .post-minimap-back-to-top {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-minimap-backdrop,
+  .post-minimap,
+  .post-minimap-node > a,
+  .post-minimap-tick,
+  .post-minimap-label,
+  .post-minimap-island,
+  .post-minimap-toggle,
+  .post-minimap-toggle-panel,
+  .post-minimap-toggle-chevron,
+  .post-minimap-island-chevron,
+  .post-minimap-utility {
+    transition: none;
+  }
+}
+
+/* anchored headings clear the viewport edge fade */
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 4.5rem;
+}
+
+/* ── Photo masonry (/photos) — 2 cols, 3 from sm up ───────────────── */
+
+.photo-masonry {
+  columns: 2;
+  column-gap: 0.75rem;
+}
+
+@media (min-width: 40rem) {
+  .photo-masonry {
+    columns: 3;
+  }
+}
+
+.photo-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+
+/* tiles sit on the register's 2px corner, matching the loading shell */
+.photo-frame {
+  border-radius: 2px;
+}
+
+.photo-masonry-placeholder {
+  display: block;
+  width: 100%;
+  min-height: 7rem;
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--foreground) 7%, var(--background));
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.photo-item .zoom-trigger img {
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.zoom-overlay-details {
+  --zoom-details-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  position: fixed;
+  inset-inline: 0;
+  bottom: var(--zoom-details-bottom);
+  pointer-events: none;
+}
+
+.zoom-overlay-details .spec-plate {
+  gap: 0.375rem 0.875rem;
+  padding-block: 0.5rem;
+}
+
+.zoom-overlay-details .spec-plate dt {
+  font-size: 0.625rem;
+}
+
+.zoom-overlay-details .spec-plate dd {
+  margin-top: 0.125rem;
+  font-size: 0.75rem;
+}
+
+/* The caption sheet follows the print: items spring in one by one once the
+   photo is up, and slip away just ahead of its return flight. The base
+   state doubles as the exit — a quick swift drop with a mild stagger that
+   finishes inside the image's 300ms close. */
+.zoom-detail-item {
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  transition:
+    opacity 150ms ease calc(var(--detail-index, 0) * 15ms),
+    transform 150ms var(--ease-swift) calc(var(--detail-index, 0) * 15ms);
+}
+
+.zoom-detail-frame {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.zoom-overlay[data-state='open'] .zoom-detail-item {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 200ms ease calc(120ms + var(--detail-index, 0) * 45ms),
+    transform 350ms var(--ease-spring) calc(120ms + var(--detail-index, 0) * 45ms);
+}
+
+.zoom-overlay[data-state='open'] .zoom-detail-frame {
+  opacity: 1;
+  transition: opacity 200ms ease 120ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-detail-item,
+  .zoom-detail-frame {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Footer: Swiss editorial grid ─────────────────────────────────── */
+
+.footer-tree ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-label {
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.011em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--muted-foreground) 75%, transparent);
+  user-select: none;
+}
+
+/* directory-tree rails: a continuous vertical line with stubs, the
+   last branch closing the rail at its midpoint */
+.footer-tree li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding-left: 1.125rem;
+}
+
+.footer-tree li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in oklab, var(--muted-foreground) 22%, transparent);
+}
+
+.footer-tree li:last-child::before {
+  bottom: auto;
+  height: 50%;
+}
+
+.footer-tree li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.625rem;
+  height: 1px;
+  background: color-mix(in oklab, var(--muted-foreground) 22%, transparent);
+}
+
+.footer-tree li > * {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 39.99rem) {
+  .footer-tree li > * {
+    flex: 0 1 auto;
+  }
+}
+
+.footer-tree-link {
+  transition: color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-tree-link:hover {
+    color: var(--foreground);
+  }
+}
+
+.footer-colophon {
+  /* First desktop cell, but the final row after both trees on mobile. */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 1.5rem;
+  align-self: stretch;
+  text-align: left;
+  font-size: 0.875rem;
+  letter-spacing: -0.011em;
+  color: color-mix(in oklab, var(--muted-foreground) 85%, transparent);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+.footer-colophon .footer-local-time {
+  justify-self: end;
+}
+
+@media (min-width: 40rem) {
+  .footer-colophon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.625rem;
+  }
+
+  .footer-colophon .footer-local-time {
+    justify-self: auto;
+  }
+}
+
+.footer-local-time {
+  display: flex;
+  min-height: 1.375rem;
+  align-items: center;
+  gap: 0.5rem;
+  color: color-mix(in oklab, var(--muted-foreground) 88%, transparent);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.011em;
+  line-height: 1;
+  text-align: left;
+}
+
+.footer-local-clock {
+  width: 1.375rem;
+  height: 1.375rem;
+  flex: none;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+}
+
+.footer-clock-ring,
+.footer-clock-ticks {
+  opacity: 0.28;
+  stroke-width: 1;
+}
+
+.footer-clock-ticks {
+  stroke-linecap: round;
+}
+
+.footer-clock-hour,
+.footer-clock-minute,
+.footer-clock-second {
+  stroke-linecap: round;
+}
+
+.footer-clock-hour {
+  opacity: 0.78;
+  stroke-width: 1.6;
+}
+
+.footer-clock-minute {
+  opacity: 0.72;
+  stroke-width: 1.2;
+}
+
+.footer-clock-second {
+  opacity: 0.42;
+  stroke-width: 0.75;
+}
+
+.footer-clock-pin {
+  fill: currentColor;
+  stroke: none;
+}
+
+.footer-time-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+/* the readout is a small spec plate: stamped label above a mono value */
+.footer-time-readout > span {
+  color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.footer-time-readout time {
+  color: color-mix(in oklab, var(--muted-foreground) 90%, transparent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-time-readout time {
+  display: block;
+  min-width: 8ch;
+  white-space: nowrap;
+}
+
+/* ── Global pill dock (components/dock.tsx) ───────────────────────── */
+
+.dock {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 3.5rem;
+  padding: 0.375rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--background) 68%, transparent);
+  box-shadow: 0 0 0 1px var(--border), var(--shadow-medium);
+}
+
+@media (max-width: 39.99rem) {
+  .dock {
+    bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* the frosted pane — its backdrop-filter is set inline from the
+   component (LightningCSS strips the property from stylesheets) */
+.dock-glass {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  /* specular rim: light catching the top edge of the glass */
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    inset 0 -1px 0 rgb(255 255 255 / 0.06);
+}
+
+.dock-item {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dock-item:hover {
+    color: var(--foreground);
+    background: color-mix(in oklab, var(--foreground) 6%, transparent);
+  }
+}
+
+.dock-item:active {
+  transform: scale(0.97);
+}
+
+.dock-item[data-active] {
+  color: var(--foreground);
+}
+
+.dock-active-indicator {
+  --dock-indicator-x: 0px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 8px;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--foreground);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(calc(var(--dock-indicator-x) - 50%), 0, 0);
+  transition:
+    transform 220ms var(--ease-swift),
+    opacity 120ms ease;
+  will-change: transform;
+}
+
+.dock-active-indicator[data-ready] {
+  opacity: 1;
+}
+
+.dock-active-indicator[data-instant] {
+  transition: none;
+}
+
+.dock-avatar {
+  display: block;
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.dock-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dock-rule {
+  /* positioned so it paints above the glass layer — static children fall
+     in the earlier paint phase and get refracted like the backdrop */
+  position: relative;
+  width: 1px;
+  height: 1.125rem;
+  margin: 0 0.125rem;
+  background: color-mix(in oklab, var(--foreground) 16%, transparent);
+}
+
+/* label above the item, tooltip register */
+.dock-tip {
+  position: absolute;
+  bottom: calc(100% + 0.625rem);
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transform: translateX(-50%) scale(0.95);
+  padding: 0.25rem 0.375rem 0.25rem 0.5rem;
+  border-radius: calc(var(--radius) * 0.6);
+  background: var(--popover);
+  box-shadow: 0 0 0 1px var(--border), var(--shadow-tooltip);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  color: var(--foreground);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms var(--ease-swift), transform 150ms var(--ease-swift);
+}
+
+.dock-tip-label {
+  min-width: 0;
+}
+
+.dock-tip-keys {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1875rem;
+}
+
+.dock-tip-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.25rem;
+  border: 1px solid color-mix(in oklab, var(--foreground) 18%, transparent);
+  border-radius: 0.25rem;
+  background: var(--border);
+  color: var(--muted-foreground);
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dock-item:hover .dock-tip {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.dock-item:focus-visible .dock-tip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-tip,
+  .dock-item,
+  .dock-active-indicator {
+    transition: none;
+  }
+}
+
+/* ── Preferences panel (components/preferences.tsx) ───────────────── */
+
+.prefs-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem;
+}
+
+/* label pinned left, control pinned right — chrome-size type */
+.prefs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.prefs-row-label {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  user-select: none;
+}
+
+/* Preserve the original compact controls, but use full foreground ink for
+   the selected pill so the active value remains obvious in both themes. */
+.prefs-panel [data-tabs-indicator='selected'] {
+  display: none;
+}
+
+/* The shared tab item carries a 44px touch target; inside this pointer
+   chrome that balloons every row, so fine pointers get compact 32px
+   pills. Touch keeps the full target. */
+@media (hover: hover) and (pointer: fine) {
+  .prefs-panel [role='tab'] {
+    height: 2rem;
+    min-width: 2.5rem;
+  }
+}
+
+.prefs-panel [role='tab'][aria-selected='true'] {
+  border-radius: 999px;
+  background: var(--foreground);
+}
+
+.prefs-panel [role='tab'][aria-selected='true'] svg,
+.prefs-panel [role='tab'][aria-selected='true'] [data-tab-label] {
+  color: var(--background) !important;
+}
+
+/* The owner's way in: a quiet link row below a hairline, present only once
+   the owner probe has confirmed the session. Hover deepens the label to
+   full ink; the chord hint reuses the dock tooltip's key chips. */
+.prefs-admin {
+  margin-top: 0.25rem;
+  padding-top: 0.375rem;
+  min-height: 2.75rem;
+  border-top: var(--border-hairline) solid var(--border);
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .prefs-admin {
+    min-height: 2rem;
+  }
+
+  .prefs-admin:hover .prefs-row-label {
+    color: var(--foreground);
+  }
+}
+
+.prefs-admin .prefs-row-label {
+  transition: color 150ms ease;
+}
+
+.prefs-admin:focus-visible .prefs-row-label {
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prefs-admin .prefs-row-label {
+    transition: none;
+  }
+}
+
+/* Sign-out inside the owner dock's panel: the same quiet row, as a button. */
+.prefs-signout {
+  width: 100%;
+  background: none;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  text-align: left;
+}
+
+/* ── Home nav cards: analog vignettes on soft surfaces ────────────── */
+
+.nav-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 3.5rem;
+  /* bleed to the column's outer edges (through the px-6 padding), not
+     the viewport */
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  border-top: var(--border-hairline) solid var(--border);
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.nav-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1.5rem 0.75rem 1.25rem;
+}
+
+.nav-card + .nav-card {
+  border-left: var(--border-hairline) solid var(--border);
+}
+
+.nav-card:active {
+  transform: scale(0.985);
+}
+
+.nc-vignette {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 3.5rem;
+  width: 100%;
+  margin-bottom: 0.375rem;
+}
+
+/* manuscript pages: three ruled sheets, loosely stacked */
+.nc-sheets span {
+  position: absolute;
+  width: 2.375rem;
+  height: 2.875rem;
+  transition: transform 300ms var(--ease-spring);
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 7px,
+      color-mix(in oklab, var(--paper-ink) 35%, transparent) 7px 7.5px
+    )
+    50% 60% / 70% 60% no-repeat,
+    var(--paper);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08), 0 1px 2px rgb(0 0 0 / 0.12);
+}
+
+.nc-sheets span:nth-child(1) {
+  transform: rotate(-7deg) translateX(-9px);
+}
+
+.nc-sheets span:nth-child(2) {
+  transform: rotate(4deg) translateX(9px);
+}
+
+.nc-sheets span:nth-child(3) {
+  transform: rotate(-1deg) translateY(-2px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-card:hover .nc-sheets span:nth-child(1) {
+    transform: rotate(-13deg) translateX(-16px) translateY(-2px);
+  }
+
+  .nav-card:hover .nc-sheets span:nth-child(2) {
+    transform: rotate(9deg) translateX(16px) translateY(-1px);
+  }
+
+  .nav-card:hover .nc-sheets span:nth-child(3) {
+    transform: rotate(-2deg) translateY(-5px);
+  }
+}
+
+/* fanned polaroid minis */
+.nc-polaroid {
+  position: absolute;
+  padding: 3px 3px 8px;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08), 0 1px 3px rgb(0 0 0 / 0.15);
+  transform: rotate(calc(var(--i) * 9deg - 9deg)) translateX(calc(var(--i) * 16px - 16px));
+  transition: transform 300ms var(--ease-spring);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-card:hover .nc-polaroid {
+    transform: rotate(calc(var(--i) * 15deg - 15deg)) translateX(calc(var(--i) * 24px - 24px))
+      translateY(calc((1 - var(--i)) * (1 - var(--i)) * 2px - 3px));
+  }
+}
+
+.nc-polaroid img {
+  display: block;
+  width: 2.25rem;
+  height: 1.875rem;
+  object-fit: cover;
+}
+
+.nc-polaroid-placeholder::before {
+  display: block;
+  width: 2.25rem;
+  height: 1.875rem;
+  background: color-mix(in oklab, var(--foreground) 8%, var(--paper));
+  content: '';
+}
+
+/* standalone construction icon + the crossed project mark */
+.nc-project-icon {
+  position: absolute;
+  isolation: isolate;
+  width: 3.25rem;
+  height: 3.25rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--foreground) 20%, var(--border));
+  border-radius: 0.75rem;
+  background: color-mix(in oklab, var(--foreground) 4%, var(--background));
+  box-shadow: var(--shadow-3);
+  transition: transform 300ms var(--ease-spring);
+}
+
+@media (max-width: 39.99rem) {
+  .nav-card {
+    min-width: 0;
+    gap: 0.125rem;
+    padding: 1.25rem 0.375rem 1rem;
+  }
+
+  .nc-vignette {
+    min-width: 0;
+    max-width: 100%;
+    height: 3.25rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.nc-construction-guides {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.nc-guide-solid {
+  stroke: color-mix(in oklab, var(--foreground) 25%, transparent);
+  stroke-width: 0.65;
+  vector-effect: non-scaling-stroke;
+}
+
+.nc-project-mark {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  color: color-mix(in oklab, var(--foreground) 84%, var(--muted-foreground));
+  overflow: visible;
+  transform: translate(-50%, -50%);
+}
+
+.nc-explode-a,
+.nc-explode-b,
+.nc-explode-c {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 300ms var(--ease-spring);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-card:hover .nc-project-icon {
+    transform: translate(-50%, calc(-50% - 2px));
+  }
+
+  .nav-card:hover .nc-explode-a {
+    transform: translate(1.5px, -1.5px) rotate(3deg);
+  }
+
+  .nav-card:hover .nc-explode-b {
+    transform: translate(-2.5px, -2px) rotate(-6deg);
+  }
+
+  .nav-card:hover .nc-explode-c {
+    transform: translate(2px, 2.5px) rotate(5deg);
+  }
+}
+
+.nc-label {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.nc-sub {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 39.99rem) {
+  .nc-label {
+    font-size: 0.8125rem;
+    line-height: 1.25;
+  }
+
+  .nc-sub {
+    font-size: 0.75rem;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nc-sheets span,
+  .nc-polaroid,
+  .nc-project-icon,
+  .nc-explode-a,
+  .nc-explode-b,
+  .nc-explode-c {
+    transition: none;
+  }
+
+  .nav-card:hover .nc-project-icon {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* The final safety net covers shared component primitives as well as page
+   styles. JS-driven Motion components use MotionConfig in ThemeProvider. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── AMA booking: calm waiting dots (no spinner) ─────────────────── */
+
+.ama-introduction-stage {
+  position: relative;
+  isolation: isolate;
+  margin-inline: -1rem;
+  overflow: visible;
+  padding: 1rem;
+}
+
+.ama-introduction-stage::before,
+.ama-conversation-static,
+.ama-conversation-shader-layer,
+.ama-conversation-shader-shell,
+.ama-conversation-shader-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ama-introduction-stage::before {
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--surface-2) 62%, transparent) 0%,
+    color-mix(in oklab, var(--surface-1) 38%, transparent) 48%,
+    transparent 78%
+  );
+  content: '';
+}
+
+.ama-conversation-static,
+.ama-conversation-shader-layer {
+  mask-image: radial-gradient(ellipse at center, black 42%, transparent 78%);
+  transform: translateY(-5rem);
+}
+
+.ama-conversation-static {
+  color: var(--foreground);
+  opacity: 0.045;
+  transition: opacity 350ms var(--ease-swift);
+}
+
+.ama-conversation-static svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.ama-conversation-shader-layer {
+  opacity: 0;
+  transition: opacity 350ms var(--ease-swift);
+}
+
+.ama-introduction-stage[data-shader-ready='true'] .ama-conversation-static {
+  opacity: 0;
+}
+
+.ama-introduction-stage[data-shader-ready='true']
+  .ama-conversation-shader-layer {
+  opacity: 0.06;
+}
+
+.dark
+  .ama-introduction-stage[data-shader-ready='true']
+  .ama-conversation-shader-layer {
+  opacity: 0.075;
+}
+
+.ama-introduction-content {
+  position: relative;
+}
+
+.ama-product-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  vertical-align: -0.08em;
+  white-space: nowrap;
+}
+
+.ama-product-logo {
+  flex: none;
+  width: 0.875em;
+  height: 0.875em;
+  border-radius: 0.18em;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ama-waiting-dots::after {
+  display: inline-block;
+  min-width: 1.5em;
+  animation: ama-waiting-dots 1.6s steps(1) infinite;
+  content: '…';
+  text-align: left;
+}
+
+body:has(.ama-success-stage) {
+  --background: #08070a;
+  --border: rgb(241 238 229 / 0.16);
+  --foreground: #f1eee5;
+  --muted-foreground: rgb(241 238 229 / 0.68);
+  --muted: rgb(241 238 229 / 0.09);
+  --hover: rgb(241 238 229 / 0.08);
+  --active: rgb(241 238 229 / 0.14);
+  /* A solid stage surface ramp so ladder-riding sheets (dialogs, popovers)
+     stay dark here regardless of the page theme. */
+  --surface-1: #121014;
+  --surface-2: #161418;
+  --surface-3: #1a181d;
+  --surface-4: #1f1d22;
+  --surface-5: #242227;
+  --surface-6: #29272c;
+  --surface-7: #2e2c31;
+  --surface-8: #333136;
+
+  background: #08070a;
+  color: #f1eee5;
+}
+
+body:has(.ama-success-stage) main {
+  isolation: isolate;
+}
+
+.ama-success-stage {
+  position: relative;
+  display: grid;
+  min-height: max(32rem, calc(100svh - 10.5rem));
+  place-items: center;
+  color: #f1eee5;
+}
+
+.ama-success-static-background,
+.ama-success-shader-layer,
+.ama-success-confetti {
+  position: fixed;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ama-success-shader-shell,
+.ama-success-shader-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ama-success-static-background {
+  z-index: -2;
+  background:
+    linear-gradient(164deg, transparent 18%, rgb(118 24 219 / 0.2) 42%, transparent 62%),
+    linear-gradient(150deg, #030304 10%, #18181a 52%, #050407 90%);
+}
+
+.ama-success-shader-layer {
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 350ms var(--ease-swift);
+}
+
+.ama-success-stage[data-shader-ready='true'] .ama-success-shader-layer {
+  opacity: 1;
+}
+
+.ama-success-confetti {
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Ballistic confetti in three layers: the piece drives horizontally with a
+   touch of drag, the fall layer rises and drops with gravity easings that
+   flip at the apex, and the card tumbles in 3D. All transform/opacity,
+   nothing loops. */
+.ama-success-confetti-piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: ama-confetti-drive var(--ama-confetti-duration)
+    cubic-bezier(0.22, 0.52, 0.56, 0.9) var(--ama-confetti-delay) both;
+}
+
+.ama-success-confetti-fall {
+  display: block;
+  animation: ama-confetti-fall var(--ama-confetti-duration) linear
+    var(--ama-confetti-delay) both;
+}
+
+.ama-success-confetti-card {
+  display: block;
+  width: 0.35rem;
+  height: 0.7rem;
+  border-radius: 1px;
+  background: var(--ama-confetti-color);
+  transform-origin: center;
+  animation: ama-confetti-tumble var(--ama-confetti-duration) linear
+    var(--ama-confetti-delay) both;
+}
+
+.ama-success-confetti-piece:nth-child(3n) .ama-success-confetti-card {
+  width: 0.5rem;
+  height: 0.18rem;
+}
+
+.ama-success-confetti-piece:nth-child(4n) .ama-success-confetti-card {
+  border-radius: 50%;
+}
+
+.ama-success-stage-content {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 31rem);
+  padding: 4rem 2rem calc(6rem + env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+.ama-success-stage-content [role='status'] {
+  align-items: center;
+}
+
+/* Form-like stage content (the guest manage page) stays left-aligned. */
+.ama-success-stage-content--start {
+  text-align: left;
+}
+
+.ama-success-stage-content--start [role='status'] {
+  align-items: stretch;
+}
+
+.ama-success-stage .text-muted-foreground {
+  color: rgb(241 238 229 / 0.72);
+}
+
+/* The ladder and cert stamp read in the stage's paper ink on the dark
+   field, independent of the page theme — their default token colors would
+   vanish here in light mode. The lit signal cell stays chromatic. */
+.ama-success-stage .status-ladder {
+  min-width: 10rem;
+  color: rgb(241 238 229 / 0.6);
+}
+
+.ama-success-stage .status-ladder [data-state='current'] {
+  color: rgb(241 238 229 / 0.92);
+}
+
+.ama-success-stage .status-ladder [data-state='done'] .status-ladder-cell {
+  background: rgb(241 238 229 / 0.62);
+}
+
+.ama-success-stage .status-ladder [data-state='pending'] .status-ladder-cell {
+  box-shadow: inset 0 0 0 var(--border-hairline) rgb(241 238 229 / 0.45);
+}
+
+.ama-success-stage .cert-stamp {
+  border-color: rgb(241 238 229 / 0.5);
+  color: rgb(241 238 229 / 0.9);
+}
+
+/* The confirmation's status stamp: the heading-ornament (section-tag)
+   composition — boxed signal cell, hazard-hatch chip, tracked mono label —
+   pressed at a slight angle over the session plate's top rule, like a
+   rubber stamp on the document. Static; a stamp never animates. */
+.ama-plate-stamp {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -0.5625rem;
+  margin-right: 0.75rem;
+  transform: rotate(-3deg);
+  background: rgb(8 7 10 / 0.82);
+  color: rgb(241 238 229 / 0.85);
+}
+
+.ama-plate-stamp .section-tag-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dialog glass: keep the ladder's surface color but drop its alpha so the
+   page reads through the sheet, with a blur so text over it stays legible.
+   color-mix against transparent preserves whatever surface level Elevated
+   assigned (warm paper in the admin, the dark ramp on the AMA stage).
+   backdrop-filter must stay in a stylesheet rule the CSS pipeline keeps —
+   it is a class here, not a raw property on a utility. */
+.dialog-glass {
+  background: color-mix(in oklab, var(--surface-5) 82%, transparent);
+  backdrop-filter: blur(20px) saturate(1.4);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .dialog-glass {
+    background: var(--surface-5);
+  }
+}
+
+/* A standalone hatch chip (no index cell in front) keeps its left rule. */
+.section-tag-hatch:first-child {
+  border-left: var(--border-hairline) solid
+    color-mix(in oklab, var(--muted-foreground) 45%, transparent);
+}
+
+/* The cancel dialog is a hazard-marked sheet: a full-width tape band
+   along its top edge, clipped by the panel's own radius. */
+.ama-cancel-dialog {
+  overflow: hidden;
+}
+
+.ama-cancel-dialog::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 0.5rem;
+  pointer-events: none;
+  border-bottom: var(--border-hairline) solid
+    color-mix(in oklab, var(--destructive) 40%, transparent);
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--destructive) 50%, transparent) 0,
+    color-mix(in oklab, var(--destructive) 50%, transparent) var(--border-hairline),
+    transparent var(--border-hairline),
+    transparent 5px
+  );
+}
+
+/* Hazard tape flanking a destructive doorway: a short bordered strip of
+   fine diagonal strokes in destructive ink at low alpha. */
+.ama-hazard-strip {
+  width: 2.5rem;
+  height: 0.875rem;
+  border: var(--border-hairline) solid
+    color-mix(in oklab, var(--destructive) 45%, transparent);
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--destructive) 55%, transparent) 0,
+    color-mix(in oklab, var(--destructive) 55%, transparent) var(--border-hairline),
+    transparent var(--border-hairline),
+    transparent 5px
+  );
+}
+
+/* The session plate prints in the stage's paper ink, same theme
+   independence as the ladder above. */
+.ama-success-stage .spec-nameplate {
+  border-color: rgb(241 238 229 / 0.3);
+}
+
+.ama-success-stage .spec-nameplate > div + div {
+  border-top-color: rgb(241 238 229 / 0.3);
+}
+
+.ama-success-stage .spec-nameplate dt {
+  border-right-color: rgb(241 238 229 / 0.3);
+  color: rgb(241 238 229 / 0.55);
+}
+
+/* Ornamental proof-sheet foot; the label sets in the plate's faded ink. */
+.ama-success-barcode {
+  align-self: center;
+  margin-top: 1.25rem;
+  width: 8.5rem;
+  color: rgb(241 238 229 / 0.44);
+}
+
+.ama-success-barcode svg {
+  /* The strip fills the container so bars and label share one box and one
+     center; preserveAspectRatio="none" keeps the stretch harmless. */
+  width: 100%;
+}
+
+.ama-success-barcode .barcode-label {
+  text-align: center;
+  letter-spacing: 0.22em;
+}
+
+/* The confirmation seal in the print register: a square hairline plate on
+   the 2px corner with calibration brackets outside it, stamped at the
+   arrive animation's settled -4° — an inspection stamp, not a badge. */
+.ama-success-mark {
+  position: relative;
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1.75rem;
+  place-items: center;
+  border-radius: 2px;
+  border: var(--border-hairline) solid rgb(241 238 229 / 0.55);
+  background: rgb(241 238 229 / 0.05);
+  color: #f1eee5;
+  font-size: 1.375rem;
+  line-height: 1;
+  animation: ama-success-mark-arrive 350ms var(--ease-swift) both;
+}
+
+/* Hazard-hatch bands along the plate's top and bottom edges — the fine
+   diagonal-stroke chip from the section-tag register, behind the check. */
+.ama-success-mark::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+        -45deg,
+        currentColor 0,
+        currentColor var(--border-hairline),
+        transparent var(--border-hairline),
+        transparent 4px
+      )
+      top / 100% 0.4375rem no-repeat,
+    repeating-linear-gradient(
+        -45deg,
+        currentColor 0,
+        currentColor var(--border-hairline),
+        transparent var(--border-hairline),
+        transparent 4px
+      )
+      bottom / 100% 0.4375rem no-repeat;
+  opacity: 0.34;
+}
+
+/* Viewfinder corner brackets, 8px outside the plate (9px arms). */
+.ama-success-mark::before {
+  content: '';
+  position: absolute;
+  inset: -0.5rem;
+  pointer-events: none;
+  opacity: 0.62;
+  background:
+    linear-gradient(currentColor, currentColor) left top / 9px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) left top / var(--border-hairline) 9px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 9px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) right top / var(--border-hairline) 9px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 9px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / var(--border-hairline) 9px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 9px var(--border-hairline) no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / var(--border-hairline) 9px no-repeat;
+}
+
+/* Horizontal drive: launch speed decays to a drift (air drag); the piece
+   fades while still moving, never hanging in place. */
+@keyframes ama-confetti-drive {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--ama-confetti-x-from), 0, 0);
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--ama-confetti-x-to), 0, 0);
+  }
+}
+
+/* Vertical ballistics: decelerate to the apex, then gravity takes over —
+   the easing flips per keyframe so the arc reads as a true parabola. */
+@keyframes ama-confetti-fall {
+  0% {
+    transform: translate3d(0, var(--ama-confetti-y-from), 0);
+    animation-timing-function: cubic-bezier(0.16, 0.8, 0.38, 1);
+  }
+
+  44% {
+    transform: translate3d(0, var(--ama-confetti-y-apex), 0);
+    animation-timing-function: cubic-bezier(0.52, 0.04, 0.86, 0.42);
+  }
+
+  100% {
+    transform: translate3d(0, var(--ama-confetti-y-fall), 0);
+  }
+}
+
+/* Finite 3D tumble — the rotateX flutter shows the paper's thin edge. */
+@keyframes ama-confetti-tumble {
+  0% {
+    transform: rotateZ(var(--ama-confetti-tilt)) rotateX(0deg);
+  }
+
+  100% {
+    transform: rotateZ(calc(var(--ama-confetti-tilt) + var(--ama-confetti-spin-z)))
+      rotateX(var(--ama-confetti-spin-x));
+  }
+}
+
+@keyframes ama-success-mark-arrive {
+  0% {
+    opacity: 0;
+    transform: scale(0.72) rotate(-10deg);
+  }
+
+  58% {
+    opacity: 1;
+    transform: scale(1.08) rotate(-2deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(-4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ama-conversation-static,
+  .ama-conversation-shader-layer {
+    transition: none;
+  }
+
+  .ama-conversation-shader-layer {
+    display: none;
+  }
+
+  .ama-success-shader-layer {
+    display: none;
+    transition: none;
+  }
+
+  .ama-success-confetti {
+    display: none;
+  }
+
+  .ama-success-mark {
+    animation: none;
+  }
+}
+
+@keyframes ama-waiting-dots {
+  0% {
+    content: '·';
+  }
+
+  33% {
+    content: '· ·';
+  }
+
+  66% {
+    content: '· · ·';
+  }
+}

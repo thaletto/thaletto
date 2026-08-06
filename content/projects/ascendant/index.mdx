@@ -1,0 +1,64 @@
+---
+title: "Ascendant"
+description: "A Python library for Vedic astrology calculations: divisional charts, Vimshottari Dasha timelines, and yoga combinations, computed from a birth date, time, and geographic coordinate."
+publishedAt: "2026-04-01T00:00:00.000Z"
+sort: 4
+tags: ["Python SDK", "PyPI"]
+startDate: "2025.09"
+endDate: "2026.04"
+links:
+  - label: "Github"
+    url: "https://github.com/thaletto/ascendant"
+  - label: "PyPI"
+    url: "https://pypi.org/project/astro-ascendant/"
+cover: ./ascendant.webp
+coverWidth: 1101
+coverHeight: 614
+---
+
+## Overview
+
+Ascendant is a Python library that provides programmatic access to the major branches of Vedic astrology (Jyotish) computation. Given a birth date, time, and location, it computes divisional charts, Dasha timelines, and yoga combinations, all the core calculations that would otherwise require manual arithmetic or specialized software.
+
+## Problem
+
+Vedic astrology involves precise and computationally intensive calculations. The Vimshottari Dasha system requires arithmetic based on the Moon's natal nakshatra. The sixteen divisional charts each transform planetary longitudes according to specific ratios. Yoga combinations number in the hundreds across canonical texts. Performing these by hand is error-prone and slow, and existing software often lacks programmatic access.
+
+## Approach
+
+Ascendant treats all of this as a reproducible computation: provide a birth moment and a coordinate, get structured results. The library exposes three domains of calculation:
+
+**Divisional Charts (Varga)** allow a single natal moment to be examined at multiple resolutions. The Rasi chart gives the broadest view, the Navamsha illuminates the inner nature and marriage house, the Dashamsha covers career, and so on through the remaining vargas. Each division is derived by subdividing zodiacal signs according to a varga-specific ratio and reassigning planetary positions.
+
+**The Vimshottari Dasha System** maps planetary periods that govern successive phases of life. Starting from the Moon's position in its birth nakshatra, Ascendant produces the full timeline of mahadashas and antardashas anchored to the actual birth moment.
+
+**Yoga Combinations** are planetary configurations that the classical texts identify as significant: Raj Yogas formed by kendra and trikona lords, Dhana Yogas indicating accumulation, Daridra Yogas their opposite, and many others. The library identifies which yogas are present in a given chart.
+
+## How It Works
+
+```bash
+pip install astro-ascendant
+```
+
+```python
+from ascendant import Ascendant
+
+astro = Ascendant(
+  year=1990, month=1, day=1,
+  hour=12, minute=0, second=0,
+  latitude=28.6139, longitude=77.2090,
+  utc="+5:30"
+)
+
+chart = astro.get_chart(division=1)
+
+yogas = astro.get_yogas()
+
+dasha = astro.get_dasha_timeline()
+```
+
+## Tech Stack
+
+- **Language:** Python
+- **Distribution:** PyPI (`astro-ascendant`)
+- **Documentation:** [Divisional Charts](https://github.com/thaletto/ascendant/blob/main/docs/charts.md) · [Dasha Systems](https://github.com/thaletto/ascendant/blob/main/docs/dasha.md) · [Yoga Combinations](https://github.com/thaletto/ascendant/blob/main/docs/yoga.md)

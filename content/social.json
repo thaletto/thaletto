@@ -1,0 +1,25 @@
+{
+  "x": {
+    "name": "Cali Castle",
+    "handle": "calicastle",
+    "bio": "爸爸、Agent 指挥官、设计工程师、@raycast 大使。\n\n@zolplay 创意总监兼创始人。\n\n热爱打磨细节、品质与匠心。",
+    "bioEn": "a dad. an agent orchestrator. a design engineer. a @raycast ambassador.\n\ncreative director & founder at @zolplay.\n\ni love pushing details, quality & craft.",
+    "followers": "27,419",
+    "following": "633",
+    "asOf": "2026-07-17"
+  },
+  "telegram": {
+    "name": "Cali Castle",
+    "handle": "cali_so",
+    "bio": "找我聊聊产品、设计与开发",
+    "bioEn": "Talk products, design, and code with me"
+  },
+  "youtube": {
+    "name": "Cali Castle",
+    "handle": "calicastle",
+    "bio": "开发与设计的视频内容",
+    "bioEn": "Videos on building and designing",
+    "followers": "1.91K",
+    "asOf": "2026-07"
+  }
+}
