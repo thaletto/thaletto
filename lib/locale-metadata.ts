@@ -12,17 +12,6 @@ interface LocaleMetadataOptions {
   type?: 'article' | 'website'
 }
 
-const SOCIAL_IMAGE_VERSION = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 12)
-const SECTION_IMAGE_PATHS = new Set(['/blog', '/projects'])
-
-export function socialImageUrl(locale: Locale, path: string) {
-  const url = new URL('/og', seo.url)
-  url.searchParams.set('locale', locale)
-  url.searchParams.set('path', path)
-  if (SOCIAL_IMAGE_VERSION) url.searchParams.set('v', SOCIAL_IMAGE_VERSION)
-  return url
-}
-
 export function localeRoutePair(path: string) {
   const href = new URL(localePath('en', path), seo.url)
 
@@ -42,18 +31,6 @@ export function localeMetadata({
   type = 'website',
 }: LocaleMetadataOptions): Metadata {
   const canonical = new URL(localePath(locale, path), seo.url)
-  const image = {
-    url: socialImageUrl('en', path),
-    width: 1200,
-    height: 630,
-    alt:
-      path === '/'
-        ? `${title}. ${description}`
-        : SECTION_IMAGE_PATHS.has(path)
-          ? `${title} · Cali Castle. ${description}`
-          : `${title} · Cali Castle`,
-    type: 'image/png',
-  }
 
   return {
     title,
@@ -69,13 +46,11 @@ export function localeMetadata({
       locale: 'en_US',
       siteName: 'Cali Castle',
       url: canonical,
-      images: [image],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: 'summary',
       title,
       description,
-      images: [image],
     },
   }
 }

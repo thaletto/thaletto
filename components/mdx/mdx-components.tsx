@@ -6,9 +6,7 @@ import { MermaidDiagram } from './mermaid-diagram'
 import { PhotoStack, PhotoStackCaption, PhotoStackFrames } from './photo-stack'
 import { TimeAllocationChart } from './time-allocation-chart'
 import { Tweet } from './tweet'
-import { ExternalLink } from '~/components/external-link'
 import { ZoomImage } from '~/components/zoom-image'
-import { faviconUrl, getLinkPreview } from '~/lib/link-previews'
 import { tiltFromSlug } from '~/lib/polaroid'
 import { localePath, type Locale } from '~/lib/locale-route'
 
@@ -74,19 +72,11 @@ export function mdxComponents(slug: string, locale: Locale = 'en', kind: Content
     ),
     a: (props) => {
       const href = typeof props.href === 'string' ? props.href : ''
-      const favicon = /^https?:/.test(href) ? faviconUrl(href) : null
-      if (!favicon) {
-        const localizedHref = href.startsWith('/') ? localePath(locale, href) : href
-        return (
-          <a {...props} href={localizedHref}>
-            {props.children}
-          </a>
-        )
-      }
+      const localizedHref = href.startsWith('/') ? localePath(locale, href) : href
       return (
-        <ExternalLink href={href} favicon={favicon} preview={getLinkPreview(href)}>
+        <a {...props} href={localizedHref}>
           {props.children}
-        </ExternalLink>
+        </a>
       )
     },
   }

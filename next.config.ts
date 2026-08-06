@@ -21,10 +21,6 @@ const legacyRewrites = legacyUrlManifest.entries.flatMap((entry) =>
     : [],
 )
 
-const ogRuntimeAssets = [
-  './app/_fonts/FrexSansGB-OG-*.ttf',
-]
-
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
@@ -33,14 +29,8 @@ const nextConfig: NextConfig = {
   // slug is dynamic, so output tracing cannot discover these files from the
   // readFile calls on its own when packaging serverless functions.
   outputFileTracingIncludes: {
-    '/og': [
-      ...ogRuntimeAssets,
-      './content/blog/**/*',
-      './content/projects/**/*',
-      './public/images/headshot.jpg',
-    ],
-    '/blog/**': ['./content/blog/**/*', ...ogRuntimeAssets],
-    '/projects/**': ['./content/projects/**/*', ...ogRuntimeAssets],
+    '/blog/**': ['./content/blog/**/*'],
+    '/projects/**': ['./content/projects/**/*'],
     '/content/\\[\\.\\.\\.path\\]': [
       './content/blog/**/*',
       './content/projects/**/*',
@@ -74,19 +64,6 @@ const nextConfig: NextConfig = {
     {
       source: '/:path*',
       headers: [...securityHeaders],
-    },
-    {
-      // Proxied link media (favicons, Open Graph images) are never a
-      // document that may run in this origin. Same-key entries later in
-      // this list override the global policy above, so exactly one
-      // Content-Security-Policy header is sent.
-      source: '/link-media/:path*',
-      headers: [
-        {
-          key: 'Content-Security-Policy',
-          value: "default-src 'none'; sandbox",
-        },
-      ],
     },
   ],
 

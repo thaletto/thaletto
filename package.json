@@ -16,7 +16,6 @@
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/generate-og-runtime-fonts.mjs",
     "audit:prod": "node scripts/audit-production-dependencies.mjs",
     "build": "next build",
     "test:deployment": "node --test scripts/refresh-snapshot-validation.test.mjs",
