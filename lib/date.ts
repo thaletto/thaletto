@@ -1,4 +1,4 @@
-export const SITE_TIME_ZONE = 'Asia/Taipei'
+export const SITE_TIME_ZONE = 'Asia/Kolkata'
 
 const englishFormatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
