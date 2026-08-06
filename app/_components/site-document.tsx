@@ -24,8 +24,8 @@ import { fontVariablesForLocale } from '../fonts'
 export const rootMetadata: Metadata = {
   metadataBase: seo.url,
   title: {
-    default: 'Cali Castle',
-    template: '%s | Cali Castle',
+    default: 'Laxman K R',
+    template: '%s | Laxman K R',
   },
 }
 

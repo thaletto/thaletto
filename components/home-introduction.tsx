@@ -86,14 +86,7 @@ export function HomeIntroduction({ social, github }: { social: SocialSnapshot; g
             <span className="home-detail-unit">right</span>
           </span>
         </DetailsPhrase>
-        —from how the UI looks to how the code is organized under the hood.
-      </p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        I’m drawn to system design, application structure, and different programming paradigms, with TypeScript as my go-to
-        language and Python for AI-driven work.
-      </p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        I prefer exploring new technologies instead of riding the same stack for too long.
+        {" "}from how the UI looks to how the code is organized under the hood.
       </p>
       <HomeContact social={social} github={github} />
     </div>
