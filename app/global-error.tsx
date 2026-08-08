@@ -18,7 +18,7 @@ export default function GlobalError({ retry }: ErrorBoundaryProps) {
       className={cn('font-sans', fontVariables)}
     >
       <head>
-        <title>Something went wrong | Cali Castle</title>
+        <title>Something went wrong | Laxman K R</title>
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
       </head>
       <body className="antialiased">

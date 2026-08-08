@@ -281,24 +281,23 @@ export function EmailCard({
         <span className="email-envelope" aria-hidden>
           <span className="email-envelope-flap" />
           <span className="email-envelope-return">
-            <span>FROM</span>
-            CALI CASTLE
+            <span>TO</span>
+            LAXMAN K R 
             <br />
-            TAIPEI
+            INDIA
           </span>
           <span className="email-envelope-stamps">
             <span className="email-envelope-stamp email-envelope-stamp-portrait">
               <Image src="/images/avatar.png" alt="" width={32} height={32} />
-              <span>CALI · 20</span>
+              <span>LAXMAN · 22</span>
             </span>
             <span className="email-envelope-stamp email-envelope-stamp-mark">
-              <span className="email-envelope-stamp-star">✦</span>
+              <span className="email-envelope-stamp-star">&#10022;</span>
               <span>POST · 26</span>
             </span>
           </span>
           <span className="email-envelope-postmark" />
           <span className="email-envelope-address">
-            <span>TO</span>
             {address}
           </span>
         </span>

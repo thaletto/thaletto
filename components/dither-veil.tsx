@@ -8,7 +8,7 @@ import { playCoverSound } from '~/lib/sound'
 const PIXEL = 2.5 // CSS px per dither cell
 const ASCII_CELL = 7 // CSS px per ascii character cell
 // density ramp signed with the site's own letters: only characters from
-// "cali castle" plus - and + (no @/% blocks), light → dark by ink coverage
+// "thaletto" plus - and + (no @/% blocks), light → dark by ink coverage
 const RAMP = ' -li+tcsea'
 const BAYER_ORDER = [
   [0, 8, 2, 10],

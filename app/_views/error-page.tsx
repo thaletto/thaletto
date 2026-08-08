@@ -64,7 +64,7 @@ export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
           <ErrorHomeAction />
         </nav>
 
-        <Barcode code="ERR-500-CALI-SO" className="error-barcode" />
+        <Barcode code="ERR-500-THALETTO-SO" className="error-barcode" />
 
         <div className="error-proof-footer font-mono" aria-hidden>
           <span>

@@ -3635,8 +3635,8 @@ a:focus-visible .external-label .external-mark {
 
 .email-envelope-address {
   position: absolute;
-  top: 5.45rem;
-  left: 3.3rem;
+  top: 7rem;
+  left: 3rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -3644,6 +3644,7 @@ a:focus-visible .external-label .external-mark {
   font-size: 13px;
   line-height: 1.35;
   letter-spacing: 0.035em;
+  rotate: 2deg;
   color: color-mix(in oklab, var(--paper-ink) 92%, transparent);
   white-space: nowrap;
 }

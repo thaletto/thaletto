@@ -3,7 +3,7 @@ import { publicPageMetadata } from './public-page-metadata'
 function publicSiteUrl() {
   const raw =
     process.env.PUBLIC_SITE_URL ??
-    (process.env.NODE_ENV === 'production' ? 'https://cali.so' : 'http://localhost:3199')
+    (process.env.NODE_ENV === 'production' ? 'https://thaletto.vercel.app' : 'http://localhost:3000')
   let url: URL
   try {
     url = new URL(raw)
