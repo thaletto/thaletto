@@ -63,7 +63,7 @@ export async function HomePageView() {
         <div className="w-[9.35rem] shrink-0 sm:w-60">
           <PortraitHiddenStage label="Laxman's halftone portrait. Reveal the hidden topographic field">
             <HalftonePortrait
-              src="/images/headshot.webp"
+              src="/images/avatar.png"
               alt="Laxman's halftone portrait"
             />
           </PortraitHiddenStage>
