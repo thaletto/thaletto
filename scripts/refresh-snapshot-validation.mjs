@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 
-const githubUser = 'CaliCastle'
+import { GITHUB_USER } from './refresh-config.mjs'
+
 const isoDate = /^\d{4}-\d{2}-\d{2}$/
-const youtubeFollowerCount = /^(?:\d{1,9}|\d{1,3}(?:,\d{3})+)(?:\.\d{1,2})?[KM]?$/
 
 function assertRecord(value, label) {
   assert.ok(
@@ -39,45 +39,13 @@ function contributionLevel(value) {
   }
 }
 
-export function parseYouTubeSnapshot(html, now = new Date()) {
-  assert.equal(typeof html, 'string')
-  assert.ok(html.length <= 5_000_000, 'YouTube response is unexpectedly large')
-
-  const match = html.match(/([\d.,]+[KM]?) subscribers\b/)
-  assert.ok(match, 'subscriber count not found; YouTube markup changed')
-  assert.match(match[1], youtubeFollowerCount, 'subscriber count has an unexpected format')
-  assert.ok(Number.isFinite(now.getTime()), 'snapshot date must be valid')
-
-  return {
-    followers: match[1],
-    asOf: now.toISOString().slice(0, 7),
-  }
-}
-
-export function updateSocialSnapshot(social, youtube) {
-  assertRecord(social, 'social snapshot')
-  assertRecord(social.youtube, 'social snapshot YouTube entry')
-  assertRecord(youtube, 'YouTube refresh')
-  assert.match(youtube.followers, youtubeFollowerCount)
-  assert.match(youtube.asOf, /^\d{4}-\d{2}$/)
-
-  return {
-    ...social,
-    youtube: {
-      ...social.youtube,
-      followers: youtube.followers,
-      asOf: youtube.asOf,
-    },
-  }
-}
-
-export function buildGithubSnapshot(contributionData, userData) {
+export function buildGithubSnapshot(contributionData, userData, { user = GITHUB_USER } = {}) {
   assertRecord(contributionData, 'GitHub contribution response')
   assertRecord(contributionData.total, 'GitHub contribution totals')
   assertRecord(userData, 'GitHub user response')
   assert.equal(
     userData.login,
-    githubUser,
+    user,
     'GitHub response user does not match the requested account',
   )
   assertNonNegativeInteger(userData.followers, 'GitHub follower count')
@@ -103,7 +71,7 @@ export function buildGithubSnapshot(contributionData, userData) {
   }
 
   return {
-    user: githubUser,
+    user,
     followers: userData.followers,
     total: contributionData.total.lastYear,
     from: normalizedDays[0].date,

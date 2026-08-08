@@ -4544,6 +4544,13 @@ a:focus-visible .external-label .external-mark {
   color: var(--foreground);
 }
 
+/* a second stat row sits under the ruled plate without its own divider */
+.service-card-stat-below {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
 /* 26-week (~180 day) contribution grid; cells cascade in individually
    per the hover-card contract */
 .contrib-grid {

@@ -9,11 +9,12 @@ export interface SocialData {
   linkedin: SocialSnapshot
 }
 
-// Live social numbers use Cache Components so counts refresh without a
-// rebuild. The baked content/*.json snapshots stay as fallback seeds —
+// Live GitHub numbers come from Cache Components so they refresh without a
+// rebuild; the baked content/github.json snapshot stays as the fallback seed —
 // builds and outages degrade to the last committed numbers instead of an
-// empty card. X and LinkedIn have no public endpoints; their counts stay
-// manual in content/social.json.
+// empty card. The account is read from the baked snapshot itself so app and
+// refresh scripts share one source of truth. X and LinkedIn have no public
+// endpoint, so their cards are static identity only.
 
 export async function getGitHub(): Promise<GitHubSnapshot> {
   'use cache'
@@ -21,13 +22,14 @@ export async function getGitHub(): Promise<GitHubSnapshot> {
   cacheTag('social-live')
 
   try {
-    const [contrib, user] = await Promise.all([
-      fetch('https://github-contributions-api.jogruber.de/v4/thaletto?y=last').then((r) => {
+    const user = (bakedGithub as GitHubSnapshot).user
+    const [contrib, profile] = await Promise.all([
+      fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`).then((r) => {
         if (!r.ok) throw new Error(`contributions ${r.status}`)
         return r.json()
       }),
-      fetch('https://api.github.com/users/thaletto', {
-        headers: { accept: 'application/vnd.github+json', 'user-agent': 'thaletto' },
+      fetch(`https://api.github.com/users/${user}`, {
+        headers: { accept: 'application/vnd.github+json', 'user-agent': user },
       }).then((r) => {
         if (!r.ok) throw new Error(`user ${r.status}`)
         return r.json()
@@ -35,8 +37,8 @@ export async function getGitHub(): Promise<GitHubSnapshot> {
     ])
     const days: Array<{ date: string; level: number }> = contrib.contributions
     return {
-      user: 'thaletto',
-      followers: user.followers,
+      user,
+      followers: profile.followers,
       total: contrib.total.lastYear,
       to: days[days.length - 1].date,
       levels: days.map((d) => d.level).join(''),
@@ -47,9 +49,5 @@ export async function getGitHub(): Promise<GitHubSnapshot> {
 }
 
 export async function getSocial(): Promise<SocialData> {
-  'use cache'
-  cacheLife({ stale: 43_200, revalidate: 43_200, expire: 604_800 })
-  cacheTag('social-live')
-
   return bakedSocial as SocialData
 }

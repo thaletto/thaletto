@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/refresh-github.mjs --best-effort",
     "build": "next build",
     "start": "next start"
   },

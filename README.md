@@ -14,8 +14,8 @@ general-purpose blog template.
 - MDX posts and colocated media under `content/blog/`
 - Project content under `content/projects/` with per-project pages
 - Static public pages with committed fallback snapshots (`content/social.json`,
-  `content/github.json`, `content/link-previews.json`) refreshed by scripts
-- CSP, same-origin mutation checks, and production dependency auditing
+  `content/github.json`) refreshed by the build's prebuild hook
+- CSP and same-origin mutation checks
 
 ## Local development
 
@@ -33,19 +33,16 @@ bun dev
 
 ## Validation
 
-Run the checks relevant to a change throughout development. Before release,
-the full suite and production build must pass from a clean install.
+Run the TypeScript typecheck and a production build for any change:
 
 ```bash
-bun run typecheck
-bun run test:unit
-bun run test:security
-bun run test:deployment
-bun run audit:prod
+bunx tsc --noEmit
 bun run build
 ```
 
-Browser specs under `tests/browser/` run with `bun run test:browser`.
+`bun run build` first runs the `prebuild` hook, which best-effort refreshes the
+committed GitHub snapshot (`content/github.json`) from live data before the
+build bakes the pages.
 
 ## Documentation
 

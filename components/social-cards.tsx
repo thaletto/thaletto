@@ -9,8 +9,6 @@ export interface SocialSnapshot {
   name: string
   handle: string
   bio?: string
-  followers?: string
-  following?: string
 }
 
 export interface GitHubSnapshot {
@@ -123,30 +121,14 @@ function Identity({
 // as fallbacks; an open card never touches the network. Touch devices just
 // follow the link. Bodies are exported separately so other triggers can serve
 // the same cards.
+// X has no public follower endpoint; the card is static identity only.
 export function XCardBody({ data }: { data: SocialSnapshot }) {
   return (
-    <>
-      <Identity
-        data={data}
-        avatar="/images/headshot.webp"
-        service="x"
-      />
-      {(data.followers || data.following) && (
-        <span className="service-card-stat">
-          {data.following && (
-            <span>
-              <b>{data.following}</b> following
-            </span>
-          )}
-          {data.followers && data.following && <span aria-hidden>·</span>}
-          {data.followers && (
-            <span>
-              <b>{data.followers}</b> followers
-            </span>
-          )}
-        </span>
-      )}
-    </>
+    <Identity
+      data={data}
+      avatar="/images/headshot.webp"
+      service="x"
+    />
   )
 }
 
@@ -181,16 +163,13 @@ export function GitHubCardBody({ data }: { data: GitHubSnapshot }) {
         <span>
           <b>{data.total.toLocaleString()}</b> contributions
         </span>
-        {data.followers != null && (
-          <>
-            <span aria-hidden>·</span>
-            <span>
-              <b>{data.followers}</b> followers
-            </span>
-          </>
-        )}
         <Glyph service="github" />
       </span>
+      {data.followers != null && (
+        <span className="service-card-stat service-card-stat-below">
+          <b>{data.followers}</b> followers
+        </span>
+      )}
     </>
   )
 }
