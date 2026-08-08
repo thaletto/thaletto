@@ -40,6 +40,50 @@ export function projectMetadata(slug: string) {
   })
 }
 
+export function ProjectPostRoute({ params }: { params: Promise<{ slug: string }> }) {
+  return (
+    <Suspense fallback={<ProjectPostLoadingShell />}>
+      <ProjectPostRouteContent params={params} />
+    </Suspense>
+  )
+}
+
+async function ProjectPostRouteContent({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  return <ProjectPostPageView slug={slug} />
+}
+
+function ProjectPostLoadingShell() {
+  const label = 'Loading project'
+
+  return (
+    <article
+      aria-busy="true"
+      data-post-loading-shell
+      className="post-article mx-auto min-h-[calc(100svh-3.5rem)] w-full max-w-[37.5rem] px-6"
+    >
+      <div role="status" aria-label={label}>
+        <span className="sr-only">{label}</span>
+        <div aria-hidden className="polaroid post-loading-cover">
+          <div className="polaroid-photo aspect-video bg-muted/40" />
+          <div className="polaroid-caption">
+            <span className="h-2 w-24 bg-muted/50" />
+          </div>
+        </div>
+        <div aria-hidden className="mt-10 h-24 space-y-3">
+          <div className="post-loading-title h-7 w-4/5 bg-muted/60" />
+          <div className="h-13 w-full bg-muted/45" />
+        </div>
+        <div aria-hidden className="mt-10 space-y-3">
+          <div className="h-3 w-full bg-muted/35" />
+          <div className="h-3 w-11/12 bg-muted/35" />
+          <div className="h-3 w-3/4 bg-muted/35" />
+        </div>
+      </div>
+    </article>
+  )
+}
+
 async function CachedProjectBody({ slug }: { slug: string }) {
   'use cache'
   cacheLife('max')
@@ -99,7 +143,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
             </h1>
             <PixelCluster variant={clusterVariant} className="mt-1.5 shrink-0" />
           </div>
-          <dl className="post-title-meta spec-plate">
+          <dl className="post-title-meta spec-plate spec-plate-flow">
             {project.startDate && (
               <div>
                 <dt>Period</dt>

@@ -1,7 +1,7 @@
 import {
   generateProjectStaticParams,
   projectMetadata,
-  ProjectPostPageView,
+  ProjectPostRoute,
 } from '../../_views/project-post-page'
 
 export const generateStaticParams = generateProjectStaticParams
@@ -10,11 +10,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return projectMetadata((await params).slug)
 }
 
-export default async function EnglishProjectPostPage({
+export default function EnglishProjectPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params
-  return <ProjectPostPageView slug={slug} />
+  return <ProjectPostRoute params={params} />
 }
