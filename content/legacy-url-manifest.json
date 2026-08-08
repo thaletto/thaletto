@@ -6,7 +6,7 @@
       "source": "/",
       "probes": ["/"],
       "status": 200,
-      "contains": "Cali Castle"
+      "contains": "Laxman K R"
     },
     {
       "kind": "page",
@@ -46,59 +46,30 @@
     },
     {
       "kind": "redirect",
-      "source": "/studio/:path*",
-      "destination": "/",
-      "probes": ["/studio", "/studio/legacy"],
-      "status": 308
-    },
-
-    {
-      "kind": "redirect",
       "source": "/twitter",
-      "destination": "https://x.com/calicastle",
+      "destination": "https://x.com/thaletto",
       "probes": ["/twitter"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/x",
-      "destination": "https://x.com/calicastle",
+      "destination": "https://x.com/thaletto",
       "probes": ["/x"],
       "status": 308
     },
     {
       "kind": "redirect",
-      "source": "/youtube",
-      "destination": "https://youtube.com/@calicastle",
-      "probes": ["/youtube"],
-      "status": 308
-    },
-    {
-      "kind": "redirect",
-      "source": "/tg",
-      "destination": "https://t.me/cali_so",
-      "probes": ["/tg"],
-      "status": 308
-    },
-    {
-      "kind": "redirect",
       "source": "/linkedin",
-      "destination": "https://www.linkedin.com/in/calicastle/",
+      "destination": "https://www.linkedin.com/in/laxmanramesh/",
       "probes": ["/linkedin"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/github",
-      "destination": "https://github.com/CaliCastle",
+      "destination": "https://github.com/thaletto",
       "probes": ["/github"],
-      "status": 308
-    },
-    {
-      "kind": "redirect",
-      "source": "/bilibili",
-      "destination": "https://space.bilibili.com/8350251",
-      "probes": ["/bilibili"],
       "status": 308
     }
   ]
