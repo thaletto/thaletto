@@ -1364,6 +1364,12 @@
   gap: 0.5rem 1.5rem;
 }
 
+.spec-plate-flow dd {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 /* ── Nameplate: the boxed data-plate variant ──────────────────────── */
 
 .spec-nameplate {
