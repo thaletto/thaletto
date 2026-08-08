@@ -11,8 +11,7 @@ import { tiltFromSlug } from '~/lib/polaroid'
 
 // Post images arrive as ./file.png#WxH (dimensions encoded by the content
 // pipeline); rewrite to the content route and unpack the dimensions.
-// Stack logos in tech articles arrive as absolute /logos/*.svg paths and
-// render inline without the zoom treatment.
+// Absolute .svg paths render inline without the zoom treatment.
 function PostImage({ slug, src, alt, title, kind }: { slug: string; src: string; alt?: string; title?: string; kind: ContentKind }) {
   if (src.startsWith('/') && src.endsWith('.svg')) {
     return (
