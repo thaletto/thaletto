@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import matter from 'gray-matter'
@@ -73,14 +73,7 @@ export function getAllProjectSlugs() {
   return readdirSync(PROJECTS_DIR, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
-    .filter((slug) => {
-      try {
-        readFileSync(path.join(PROJECTS_DIR, slug, 'index.mdx'))
-        return true
-      } catch {
-        return false
-      }
-    })
+    .filter((slug) => existsSync(path.join(PROJECTS_DIR, slug, 'index.mdx')))
 }
 
 export function getProject(slug: string): Project {
