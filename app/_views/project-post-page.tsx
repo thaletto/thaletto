@@ -188,9 +188,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
         </div>
       </header>
       <RevealScope lang="en" className="post-body-stage prose enter mt-10">
-        <Suspense fallback={null}>
-          <CachedProjectBody slug={project.slug} />
-        </Suspense>
+        <CachedProjectBody slug={project.slug} />
       </RevealScope>
     </article>
   )
