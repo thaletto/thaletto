@@ -621,6 +621,7 @@
 }
 
 .project-domain {
+  max-width: 100%;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -632,7 +633,10 @@
   min-width: 0;
   color: var(--gray-8, var(--muted-foreground));
   line-height: 1.55;
-  text-wrap: balance;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -671,13 +675,6 @@
   .project-identity,
   .project-description {
     grid-column: 2;
-  }
-
-  .project-domain {
-    overflow: visible;
-    text-overflow: clip;
-    white-space: normal;
-    overflow-wrap: anywhere;
   }
 }
 
