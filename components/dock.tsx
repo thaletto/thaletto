@@ -48,7 +48,6 @@ export function DockTip({
       <span className="dock-tip-label">{label}</span>
       {goKey ? (
         <span className="dock-tip-keys">
-          <kbd className="dock-tip-key">G</kbd>
           <kbd className="dock-tip-key">{goKey}</kbd>
         </span>
       ) : null}
@@ -73,7 +72,7 @@ export function DockItem({
   onNavigate?: (href: string, keyboardInitiated: boolean) => void
   children: React.ReactNode
 }) {
-  const ariaLabel = goKey ? `${label}, G then ${goKey}` : label
+  const ariaLabel = goKey ? `${label}, then ${goKey}` : label
 
   return (
     <Link
