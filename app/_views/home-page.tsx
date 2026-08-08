@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GeistPixelSquare } from "geist/font/pixel";
 
 import { ExternalLabel } from "~/components/external-mark";
 import { HalftonePortrait } from "~/components/halftone-portrait";
@@ -51,7 +52,7 @@ export async function HomePageView() {
       <div className="flex flex-col-reverse justify-between gap-10 sm:flex-row sm:items-start">
         <div className="enter max-w-76">
           <div className="flex items-center gap-2">
-            <h1 className="text-base font-semibold tracking-tight text-foreground">
+            <h1 className={`${GeistPixelSquare.className} text-xl uppercase tracking-tight text-foreground`}>
               Laxman K R
             </h1>
             <PixelCluster variant={2} className="shrink-0" />
