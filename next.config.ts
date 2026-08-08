@@ -24,6 +24,7 @@ const legacyRewrites = legacyUrlManifest.entries.flatMap((entry) =>
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  agentRules: false,
 
   // Posts and projects are read from the repository at render time. The
   // slug is dynamic, so output tracing cannot discover these files from the
@@ -41,10 +42,8 @@ const nextConfig: NextConfig = {
   // another checkout, Next's lockfile-based root inference walks too far up.
   turbopack: { root: import.meta.dirname },
 
-  // Shared-element morphs (cover/title) on route navigation; browsers
-  // without the View Transitions API just navigate instantly.
+  // View Transitions are enabled by default in the App Router
   experimental: {
-    viewTransition: true,
     globalNotFound: true,
     useTypeScriptCli: true,
     sri: { algorithm: 'sha256' },
