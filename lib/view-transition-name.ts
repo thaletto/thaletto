@@ -1,45 +1,35 @@
 export type PostTransitionElement = 'cover' | 'title'
 
-function projectTransitionId(slug: string) {
-  const known = [
-    'ams',
-    'ascendant',
-    'cortex',
-    'e-commerce-store',
-    'google-gtm-portal',
-    'kite',
-    'lense',
-    'lung-nodule-detection',
-    'parkinsons-disease-detection',
-  ]
-  const index = known.indexOf(slug)
-  if (index === -1) throw new Error('Unknown project view-transition slug')
-  return `pr${String(index + 1).padStart(2, '0')}`
-}
-
-function postTransitionId(slug: string) {
-  switch (slug) {
-    case 'how-i-stole-the-design-of-my-portfolio':
-      return 'p11'
-    case 'the-great-pyramid-of-js':
-      return 'p12'
-    default:
-      throw new Error('Unknown post view-transition slug')
+/*
+ * FNV-1a 32-bit: fast, deterministic, hex-only output. Slugs are arbitrary
+ * content, so a view-transition-name is never built from them directly —
+ * derive a stable hash and prefix it with a letter to keep the value a valid
+ * CSS identifier. No registration: any slug just works, and the same slug
+ * always maps to the same name so the listing/detail morph keeps matching.
+ */
+function hash32(value: string) {
+  let hash = 0x811c9dc5
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index)
+    hash = Math.imul(hash, 0x01000193)
   }
+  return (hash >>> 0).toString(16)
 }
 
-// View-transition names are CSS identifiers. Keep every stored content key
-// behind an explicit allowlist before it reaches an inline style value.
+/*
+ * Post and project namespaces keep distinct prefixes so a slug that somehow
+ * existed in both lists never shares a view-transition-name.
+ */
 export function postViewTransitionName(
   element: PostTransitionElement,
   slug: string,
 ) {
-  return `${element}-${postTransitionId(slug)}`
+  return `${element}-p${hash32(slug)}`
 }
 
 export function projectViewTransitionName(
   element: PostTransitionElement,
   slug: string,
 ) {
-  return `${element}-${projectTransitionId(slug)}`
+  return `${element}-pr${hash32(slug)}`
 }
