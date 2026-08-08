@@ -1,7 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 
 import { CodeBlockPre } from './code-block'
-import { InlineProductName } from './inline-product-name'
 import { MermaidDiagram } from './mermaid-diagram'
 import { PhotoStack, PhotoStackCaption, PhotoStackFrames } from './photo-stack'
 import { TimeAllocationChart } from './time-allocation-chart'
@@ -56,7 +55,6 @@ export type ContentKind = 'blog' | 'projects'
 export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComponents {
   return {
     pre: (props) => <CodeBlockPre {...props} />,
-    InlineProductName,
     MermaidDiagram: (props: { code: string; caption?: string }) => (
       <MermaidDiagram {...props} />
     ),

@@ -1258,41 +1258,12 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.prose .inline-product-name {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2em;
-  color: var(--gray-12, var(--foreground));
-  font-weight: var(--font-weight-medium);
-  vertical-align: -0.08em;
-  white-space: nowrap;
-}
-
-.prose .inline-product-logo {
-  width: 0.875em;
-  height: 0.875em;
-  flex: none;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-}
-
 .mdx-inline-logo {
   display: inline-block;
   width: 1.1rem;
   height: 1.1rem;
   margin-right: 0.2rem;
   vertical-align: middle;
-}
-
-.dark .prose .inline-product-logo-ats,
-.dark .prose .inline-product-logo-control,
-.dark .prose .inline-product-logo-dex {
-  filter: brightness(1.45) contrast(0.9);
-}
-
-.dark .prose .inline-product-logo-codex {
-  filter: invert(1);
 }
 
 .post-title-card h1 {
