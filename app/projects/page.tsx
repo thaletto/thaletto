@@ -1,15 +1,14 @@
 import { ProjectsPageView } from '../_views/projects-page'
-import { localeMetadata } from '~/lib/locale-metadata'
+import { pageMetadata } from '~/lib/metadata'
 import { publicPageMetadata } from '~/lib/public-page-metadata'
 
-const copy = publicPageMetadata.projects.en
+const copy = publicPageMetadata.projects
 
-export const metadata = localeMetadata({
-  locale: 'en',
+export const metadata = pageMetadata({
   path: '/projects',
   ...copy,
 })
 
-export default function EnglishProjectsPage() {
+export default function ProjectsPage() {
   return <ProjectsPageView />
 }

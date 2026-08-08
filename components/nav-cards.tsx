@@ -1,7 +1,5 @@
 import Link from 'next/link'
 
-import { T } from '~/lib/i18n'
-import { localePath, type Locale } from '~/lib/locale-route'
 
 // The two doorways, greeting visitors who never look at the dock:
 // analog vignettes on soft neumorphic cards — manuscript pages for
@@ -9,16 +7,14 @@ import { localePath, type Locale } from '~/lib/locale-route'
 export function NavCards({
   postCount,
   projectCount,
-  locale = 'en',
 }: {
   postCount: number
   projectCount: number
-  locale?: Locale
 }) {
   return (
     <div className="nav-cards">
       <Link
-        href={localePath(locale, '/blog')}
+        href='/blog'
         className="nav-card enter-swing"
         style={{ '--enter-delay': '140ms' } as React.CSSProperties}
       >
@@ -27,16 +23,12 @@ export function NavCards({
           <span />
           <span />
         </span>
-        <span className="nc-label">
-          <T zh="写作" en="Writing" />
-        </span>
-        <span className="nc-sub">
-          <T zh={`${postCount} 篇文章`} en={`${postCount} posts`} />
-        </span>
+        <span className="nc-label">Writing</span>
+        <span className="nc-sub">{postCount} posts</span>
       </Link>
 
       <Link
-        href={localePath(locale, '/projects')}
+        href='/projects'
         className="nav-card enter-swing"
         style={{ '--enter-delay': '190ms' } as React.CSSProperties}
       >
@@ -75,12 +67,8 @@ export function NavCards({
             </svg>
           </span>
         </span>
-        <span className="nc-label">
-          <T zh="项目" en="Projects" />
-        </span>
-        <span className="nc-sub">
-          <T zh={`${projectCount} 个项目`} en={`${projectCount} projects`} />
-        </span>
+        <span className="nc-label">Projects</span>
+        <span className="nc-sub">{projectCount} projects</span>
       </Link>
     </div>
   )

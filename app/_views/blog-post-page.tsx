@@ -22,10 +22,7 @@ import {
   POST_ARTICLE_START_ID,
 } from '~/lib/content'
 import { SITE_TIME_ZONE } from '~/lib/date'
-import { T } from '~/lib/i18n'
-import { localeMetadata } from '~/lib/locale-metadata'
-import type { Locale } from '~/lib/locale-route'
-import rehypePrefixIds from '~/lib/rehype-prefix-ids'
+import { pageMetadata } from '~/lib/metadata'
 import remarkMermaid from '~/lib/remark-mermaid'
 import { postViewTransitionName } from '~/lib/view-transition-name'
 
@@ -38,41 +35,28 @@ export function requirePostSlug(slug: string) {
   return slug
 }
 
-export function blogPostMetadata(locale: Locale, slug: string) {
+export function blogPostMetadata(slug: string) {
   const post = getPost(requirePostSlug(slug))
 
-  return localeMetadata({
-    locale,
+  return pageMetadata({
     path: `/blog/${post.slug}`,
-    title: post.titleEn,
-    description: post.descriptionEn,
+    title: post.title,
+    description: post.description ?? post.title,
     type: 'article',
   })
 }
 
-export function BlogPostRoute({
-  locale,
-  params,
-}: {
-  locale: Locale
-  params: Promise<{ slug: string }>
-}) {
+export function BlogPostRoute({ params }: { params: Promise<{ slug: string }> }) {
   return (
     <Suspense fallback={<BlogPostLoadingShell />}>
-      <BlogPostRouteContent locale={locale} params={params} />
+      <BlogPostRouteContent params={params} />
     </Suspense>
   )
 }
 
-async function BlogPostRouteContent({
-  locale,
-  params,
-}: {
-  locale: Locale
-  params: Promise<{ slug: string }>
-}) {
+async function BlogPostRouteContent({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  return <BlogPostPageView slug={slug} locale={locale} />
+  return <BlogPostPageView slug={slug} />
 }
 
 function BlogPostLoadingShell() {
@@ -82,7 +66,7 @@ function BlogPostLoadingShell() {
     <article
       aria-busy="true"
       data-post-loading-shell
-      className="post-article mx-auto min-h-[calc(100svh-3.5rem)] w-full max-w-[37.5rem] px-6"
+      className="post-article mx-auto min-h-[calc(100svh-3.5rem)] w-full max-w-150 px-6"
     >
       <div role="status" aria-label={label}>
         <span className="sr-only">{label}</span>
@@ -94,7 +78,7 @@ function BlogPostLoadingShell() {
         </div>
         <div aria-hidden className="mt-10 h-24 space-y-3">
           <div className="post-loading-title h-7 w-4/5 bg-muted/60" />
-          <div className="h-[3.25rem] w-full bg-muted/45" />
+          <div className="h-13 w-full bg-muted/45" />
         </div>
         <div aria-hidden className="mt-10 space-y-3">
           <div className="h-3 w-full bg-muted/35" />
@@ -106,23 +90,13 @@ function BlogPostLoadingShell() {
   )
 }
 
-async function CachedPostBody({
-  locale,
-  slug,
-}: {
-  locale: Locale
-  slug: string
-}) {
+async function CachedPostBody({ slug }: { slug: string }) {
   'use cache'
   cacheLife('max')
 
   const post = getPost(slug)
-  const source = post.bodyEn
+  const source = post.body
 
-  const prefixIdsPlugin: [typeof rehypePrefixIds, { prefix: string }] = [
-    rehypePrefixIds,
-    { prefix: 'en-' },
-  ]
   const prettyCodePlugin: [
     typeof rehypePrettyCode,
     { theme: { light: string; dark: string } },
@@ -134,11 +108,11 @@ async function CachedPostBody({
   return (
     <MDXRemote
       source={source}
-      components={mdxComponents(slug, locale)}
+      components={mdxComponents(slug)}
       options={{
         mdxOptions: {
           remarkPlugins: [remarkGfm, remarkMermaid],
-          rehypePlugins: [rehypeSlug, prefixIdsPlugin, prettyCodePlugin],
+          rehypePlugins: [rehypeSlug, prettyCodePlugin],
         },
       }}
     />
@@ -153,9 +127,9 @@ const plateDateFormat = new Intl.DateTimeFormat('en-CA', {
   day: '2-digit',
 })
 
-export async function BlogPostPageView({ slug, locale }: { slug: string; locale: Locale }) {
+export async function BlogPostPageView({ slug }: { slug: string }) {
   const post = getPost(requirePostSlug(slug))
-  const railEn = buildPostRail(post.titleEn, post.bodyEn, 'en-')
+  const rail = buildPostRail(post.title, post.body)
 
   // edition number: chronological, so the first post is 001 forever
   const posts = getAllPosts()
@@ -168,8 +142,8 @@ export async function BlogPostPageView({ slug, locale }: { slug: string; locale:
 
   return (
     <>
-      <PostToc nodes={railEn} />
-      <article className="post-article mx-auto w-full max-w-[37.5rem] px-6">
+      <PostToc nodes={rail} />
+      <article className="post-article mx-auto w-full max-w-150 px-6">
         <header>
           {post.cover && (
             <PolaroidCover
@@ -190,55 +164,37 @@ export async function BlogPostPageView({ slug, locale }: { slug: string; locale:
                 className="text-2xl font-semibold tracking-tight text-balance"
                 style={{ viewTransitionName: postViewTransitionName('title', post.slug) } as React.CSSProperties}
               >
-                <T zh={post.title} en={post.titleEn} />
+                {post.title}
               </h1>
               <PixelCluster variant={clusterVariant} className="mt-1.5 shrink-0" />
             </div>
             <dl className="post-title-meta spec-plate">
               <div>
-                <dt>
-                  <T zh="编号" en="No." />
-                </dt>
+                <dt>No.</dt>
                 <dd>
                   <span className="spec-signal" aria-hidden />
                   {edition}
                 </dd>
               </div>
               <div>
-                <dt>
-                  <T zh="日期" en="Date" />
-                </dt>
+                <dt>Date</dt>
                 <dd>
                   <time dateTime={post.publishedAt.toISOString()}>{plateDate}</time>
                 </dd>
               </div>
               <div>
-                <dt>
-                  <T zh="时长" en="Length" />
-                </dt>
-                <dd>
-                  <T
-                    zh={`${post.readingMinutes} 分钟`}
-                    en={`${post.readingMinutesEn} min`}
-                  />
-                </dd>
+                <dt>Length</dt>
+                <dd>{post.readingMinutes} min</dd>
               </div>
               <div>
-                <dt>
-                  <T zh="字数" en="Words" />
-                </dt>
-                <dd>
-                  <T
-                    zh={post.bodyUnits.toLocaleString('en-US')}
-                    en={post.bodyUnitsEn.toLocaleString('en-US')}
-                  />
-                </dd>
+                <dt>Words</dt>
+                <dd>{post.bodyUnits.toLocaleString('en-US')}</dd>
               </div>
             </dl>
           </div>
         </header>
         <RevealScope lang="en" className="post-body-stage prose enter mt-10">
-          <CachedPostBody slug={post.slug} locale={locale} />
+          <CachedPostBody slug={post.slug} />
         </RevealScope>
         {related.length > 0 && (
           <aside
@@ -246,7 +202,7 @@ export async function BlogPostPageView({ slug, locale }: { slug: string; locale:
             aria-labelledby="post-related-heading"
           >
             <h2 id="post-related-heading" className="post-related-label">
-              <T zh="相关阅读" en="Posts like this" />
+              Posts like this
             </h2>
             <ul className="focus-list mt-3 flex flex-col">
               {related.map((entry) => (
@@ -255,7 +211,6 @@ export async function BlogPostPageView({ slug, locale }: { slug: string; locale:
                     post={entry}
                     headingLevel="h3"
                     dateStyle="short"
-                    locale={locale}
                   />
                 </li>
               ))}

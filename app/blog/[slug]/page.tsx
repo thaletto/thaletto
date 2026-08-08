@@ -7,13 +7,13 @@ import {
 export const generateStaticParams = generatePostStaticParams
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  return blogPostMetadata('en', (await params).slug)
+  return blogPostMetadata((await params).slug)
 }
 
-export default function EnglishBlogPostPage({
+export default function Page({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  return <BlogPostRoute params={params} locale="en" />
+  return <BlogPostRoute params={params} />
 }

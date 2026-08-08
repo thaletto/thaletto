@@ -3,9 +3,7 @@
 
 export interface Experience {
   company: string
-  companyEn: string
   role: string
-  roleEn?: string
   from: number
   to?: number
   url?: string
@@ -14,9 +12,7 @@ export interface Experience {
 export const experience: Experience[] = [
   {
     company: 'Tata Consultancy Services',
-    companyEn: 'Tata Consultancy Services',
     role: 'AI Engineer',
-    roleEn: 'AI Engineer',
     from: 2024,
   },
 ]

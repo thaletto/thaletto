@@ -1,15 +1,14 @@
 import { BlogIndexPageView } from '../_views/blog-index-page'
-import { localeMetadata } from '~/lib/locale-metadata'
+import { pageMetadata } from '~/lib/metadata'
 import { publicPageMetadata } from '~/lib/public-page-metadata'
 
-const copy = publicPageMetadata.blog.en
+const copy = publicPageMetadata.blog
 
-export const metadata = localeMetadata({
-  locale: 'en',
+export const metadata = pageMetadata({
   path: '/blog',
   ...copy,
 })
 
-export default function EnglishBlogIndexPage() {
-  return <BlogIndexPageView locale="en" />
+export default function IndexPage() {
+  return <BlogIndexPageView />
 }

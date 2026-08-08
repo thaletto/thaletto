@@ -1,25 +1,17 @@
 export const publicPageMetadata = {
   home: {
-    en: {
-      title: 'Cali Castle',
-      description: 'Design Engineer. Agent Orchestrator. Creative Director.',
-      ogDescription: 'Design Engineer. Agent Orchestrator. Creative Director.',
-    },
+    title: "Laxman K R",
+    description: "AI Engineer",
+    ogDescription: "AI Engineer",
   },
   blog: {
-    en: {
-      title: 'Writing',
-      description:
-        'Essays by Cali about design, engineering, products, and the people and ideas that matter along the way.',
-    },
+    title: "Writing",
+    description: "Notes on engineering, products, tools etc...",
   },
   projects: {
-    en: {
-      title: 'Projects',
-      description:
-        'Products, open-source tools, and small experiments I have made over the years. Some useful, some playful, all made with care.',
-    },
+    title: "Projects",
+    description: "Projects, Libraries, Freelance work, etc...",
   },
-} as const
+} as const;
 
-export type PublicSection = Exclude<keyof typeof publicPageMetadata, 'home'>
+export type PublicSection = Exclude<keyof typeof publicPageMetadata, "home">;

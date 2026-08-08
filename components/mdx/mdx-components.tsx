@@ -8,7 +8,6 @@ import { TimeAllocationChart } from './time-allocation-chart'
 import { Tweet } from './tweet'
 import { ZoomImage } from '~/components/zoom-image'
 import { tiltFromSlug } from '~/lib/polaroid'
-import { localePath, type Locale } from '~/lib/locale-route'
 
 // Post images arrive as ./file.png#WxH (dimensions encoded by the content
 // pipeline); rewrite to the content route and unpack the dimensions.
@@ -55,29 +54,20 @@ function PostImage({ slug, src, alt, title, kind }: { slug: string; src: string;
 
 export type ContentKind = 'blog' | 'projects'
 
-export function mdxComponents(slug: string, locale: Locale = 'en', kind: ContentKind = 'blog'): MDXComponents {
+export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComponents {
   return {
     pre: (props) => <CodeBlockPre {...props} />,
     InlineProductName,
     MermaidDiagram: (props: { code: string; caption?: string }) => (
-      <MermaidDiagram {...props} locale={locale} />
+      <MermaidDiagram {...props} />
     ),
     PhotoStack,
     PhotoStackCaption,
     PhotoStackFrames,
-    TimeAllocationChart: () => <TimeAllocationChart locale={locale} />,
+    TimeAllocationChart: () => <TimeAllocationChart />,
     Tweet: ({ id }: { id: string }) => <Tweet slug={slug} id={id} />,
     img: (props) => (
       <PostImage slug={slug} kind={kind} src={props.src as string} alt={props.alt} title={props.title} />
     ),
-    a: (props) => {
-      const href = typeof props.href === 'string' ? props.href : ''
-      const localizedHref = href.startsWith('/') ? localePath(locale, href) : href
-      return (
-        <a {...props} href={localizedHref}>
-          {props.children}
-        </a>
-      )
-    },
   }
 }

@@ -6,7 +6,6 @@ import { GeistPixelCircle, GeistPixelSquare } from 'geist/font/pixel'
 import { Barcode } from '~/components/barcode'
 import { ErrorHomeAction } from '~/components/error-home-action'
 import { Button } from '~/components/ui/button'
-import { T } from '~/lib/i18n'
 
 export interface ErrorBoundaryProps {
   error: Error & { digest?: string }
@@ -19,13 +18,13 @@ export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
       <section className="error-proof" aria-labelledby="error-title">
         <div className="error-proof-meta" aria-hidden>
           <span>
-            <T zh="错误 / 500" en="ERR / 500" />
+            ERR / 500
           </span>
           <span>
-            <T zh="油墨 / 失准" en="INK / MISREG" />
+            INK / MISREG
           </span>
           <span>
-            <T zh="位置 / 未知" en="POS / ??" />
+            POS / ??
           </span>
         </div>
 
@@ -45,13 +44,10 @@ export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
 
         <div className="error-message">
           <h1 id="error-title" className="text-sm font-semibold">
-            <T zh="这页没有印好。" en="This page did not print correctly." />
+            This page did not print correctly.
           </h1>
           <p className="mt-2 max-w-[23rem] text-sm leading-relaxed text-muted-foreground">
-            <T
-              zh="没有任何私人细节被显示。你可以重试，或安全返回首页。"
-              en="No private details are shown. Try again, or return home safely."
-            />
+            No private details are shown. Try again, or return home safely.
           </p>
         </div>
 
@@ -60,10 +56,10 @@ export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
           aria-labelledby="error-recovery-label"
         >
           <span id="error-recovery-label" className="sr-only">
-            <T zh="错误恢复" en="Error recovery" />
+            Error recovery
           </span>
           <Button size="md" leadingIcon={RefreshCw} onClick={retry}>
-            <T zh="重试" en="Try again" />
+            Try again
           </Button>
           <ErrorHomeAction />
         </nav>
@@ -72,13 +68,13 @@ export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
 
         <div className="error-proof-footer font-mono" aria-hidden>
           <span>
-            <T zh="来源" en="ORIGIN" />
+            ORIGIN
           </span>
           <span>
-            <T zh="等待重印" en="AWAITING REPRINT" />
+            AWAITING REPRINT
           </span>
           <span>
-            <T zh="边缘" en="EDGE" />
+            EDGE
           </span>
         </div>
       </section>

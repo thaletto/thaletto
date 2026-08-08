@@ -4,13 +4,11 @@ import Image from 'next/image'
 
 import { ExternalLabel } from '~/components/external-mark'
 import { SitePreviewCard } from '~/components/preview-card-timing'
-import { T } from '~/lib/i18n'
 
 export interface SocialSnapshot {
   name: string
   handle: string
-  bio: string
-  bioEn: string
+  bio?: string
   followers?: string
   following?: string
 }
@@ -113,10 +111,8 @@ function Identity({
         </span>
         <Glyph service={service} />
       </span>
-      {withBio && (
-        <span className="service-card-bio">
-          <T zh={data.bio} en={data.bioEn} />
-        </span>
+      {withBio && data.bio && (
+        <span className="service-card-bio">{data.bio}</span>
       )}
     </>
   )
@@ -139,13 +135,13 @@ export function XCardBody({ data }: { data: SocialSnapshot }) {
         <span className="service-card-stat">
           {data.following && (
             <span>
-              <b>{data.following}</b> <T zh="正在关注" en="following" />
+              <b>{data.following}</b> following
             </span>
           )}
           {data.followers && data.following && <span aria-hidden>·</span>}
           {data.followers && (
             <span>
-              <b>{data.followers}</b> <T zh="关注者" en="followers" />
+              <b>{data.followers}</b> followers
             </span>
           )}
         </span>
@@ -154,47 +150,9 @@ export function XCardBody({ data }: { data: SocialSnapshot }) {
   )
 }
 
-export function XiaohongshuCardBody() {
-  return (
-    <span className="xiaohongshu-card-content" data-profile-id="5cbba503000000001101b6a2">
-      <span className="service-card-head">
-        <Image
-          src="/images/headshot.jpg"
-          alt=""
-          width={40}
-          height={40}
-          className="service-card-avatar"
-        />
-        <span className="service-card-names">
-          <span className="service-card-name">Cali Castle</span>
-          <span className="service-card-sub">小红书号 calicastle</span>
-        </span>
-        <span className="service-card-glyph xiaohongshu-card-wordmark" aria-hidden>
-          <Image
-            src="/images/xiaohongshu-wordmark.svg"
-            alt=""
-            width={48}
-            height={23}
-          />
-        </span>
-      </span>
-      <span className="service-card-bio xiaohongshu-card-bio">
-        <span>设计工程师，Cali 宝宝助手 app 开发者设计师</span>
-        <span>@佐玩 Zolplay 创始人 CEO</span>
-      </span>
-      <span className="service-card-stat">
-        <span>
-          <b>10+</b> 粉丝
-        </span>
-        <span aria-hidden>·</span>
-        <span>
-          <b>1千+</b> 获赞与收藏
-        </span>
-      </span>
-    </span>
-  )
-}
-
+// Email's card is the front of a mailed envelope: stamps, cancellation
+// marks, sender, recipient, and folded seams. Purely visual; the trigger
+// itself opens mailto:.
 export function LinkedInCardBody({ data }: { data: SocialSnapshot }) {
   return <Identity data={data} avatar="/images/headshot.webp" service="linkedin" />
 }
@@ -221,13 +179,13 @@ export function GitHubCardBody({ data }: { data: GitHubSnapshot }) {
       </span>
       <span className="service-card-stat">
         <span>
-          <b>{data.total.toLocaleString()}</b> <T zh="次贡献" en="contributions" />
+          <b>{data.total.toLocaleString()}</b> contributions
         </span>
         {data.followers != null && (
           <>
             <span aria-hidden>·</span>
             <span>
-              <b>{data.followers}</b> <T zh="关注者" en="followers" />
+              <b>{data.followers}</b> followers
             </span>
           </>
         )}
@@ -300,25 +258,6 @@ export function GitHubCard({
   )
 }
 
-export function XiaohongshuCard({
-  trigger = '小红书',
-  triggerClassName,
-}: {
-  trigger?: React.ReactNode
-  triggerClassName?: string
-}) {
-  return (
-    <Card
-      trigger={trigger}
-      href="https://xhslink.com/m/7vluP5ANiNE"
-      className="link-card service-card xiaohongshu-card"
-      triggerClassName={triggerClassName}
-    >
-      <XiaohongshuCardBody />
-    </Card>
-  )
-}
-
 // Email's card is the front of a mailed envelope: stamps, cancellation
 // marks, sender, recipient, and folded seams. Purely visual; the trigger
 // itself opens mailto:.
@@ -359,7 +298,7 @@ export function EmailCard({
           </span>
           <span className="email-envelope-postmark" />
           <span className="email-envelope-address">
-            <span><T zh="收" en="TO" /></span>
+            <span>TO</span>
             {address}
           </span>
         </span>

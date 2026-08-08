@@ -9,7 +9,7 @@ import {
 } from '~/lib/non-public-metadata'
 import { cn } from '~/lib/utils'
 
-import { fontVariablesForLocale } from './fonts'
+import { fontVariables } from './fonts'
 import { NotFoundPageView } from './_views/not-found-page'
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function GlobalNotFound() {
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn('font-sans', fontVariablesForLocale('en'))}
+      className={cn('font-sans', fontVariables)}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />

@@ -2,8 +2,7 @@ import { DitheredImage } from '~/components/dither-veil'
 import { PostTransitionLink } from '~/components/post-transition-link'
 import type { Post } from '~/lib/content'
 import { formatMonthDay, formatShortDate } from '~/lib/date'
-import { LocalDate, T } from '~/lib/i18n'
-import { localePath, type Locale } from '~/lib/locale-route'
+import { LocalDate } from '~/lib/i18n'
 import { postViewTransitionName } from '~/lib/view-transition-name'
 
 // The compact post row: dithered print thumb · title · dotted leader · date.
@@ -12,13 +11,11 @@ export function PostRow({
   post,
   headingLevel = 'h2',
   dateStyle = 'full',
-  locale = 'en',
   listStageId,
 }: {
   post: Post
   headingLevel?: 'h2' | 'h3'
   dateStyle?: 'full' | 'month-day' | 'short'
-  locale?: Locale
   listStageId?: string
 }) {
   const Heading = headingLevel
@@ -27,7 +24,7 @@ export function PostRow({
   const titleTransitionName = postViewTransitionName('title', post.slug)
   return (
     <PostTransitionLink
-      href={localePath(locale, `/blog/${safeSlug}`)}
+      href={`/blog/${safeSlug}`}
       coverTransitionName={coverTransitionName}
       titleTransitionName={titleTransitionName}
       className="group blog-row hairline-top"
@@ -58,7 +55,7 @@ export function PostRow({
         className="blog-row-title"
         style={{ viewTransitionName: titleTransitionName } as React.CSSProperties}
       >
-        <T zh={post.title} en={post.titleEn} />
+        {post.title}
       </Heading>
       <span
         className="blog-row-leader"

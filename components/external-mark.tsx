@@ -1,5 +1,3 @@
-import { T } from '~/lib/i18n'
-
 export function ExternalMark() {
   return (
     <svg
@@ -28,9 +26,7 @@ export function ExternalLabel({ children }: { children: React.ReactNode }) {
     <span className="external-label">
       <span className="external-label-text">{children}</span>
       <ExternalMark />
-      <span className="sr-only">
-        <T zh="（在新标签页中打开）" en=" (opens in a new tab)" />
-      </span>
+      <span className="sr-only">(opens in a new tab)</span>
     </span>
   )
 }

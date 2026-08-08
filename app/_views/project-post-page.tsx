@@ -11,9 +11,7 @@ import { mdxComponents } from '~/components/mdx/mdx-components'
 import { PixelCluster } from '~/components/pixel-cluster'
 import { PolaroidCover } from '~/components/polaroid-cover'
 import { RevealScope } from '~/components/reveal-scope'
-import { localeMetadata } from '~/lib/locale-metadata'
-import type { Locale } from '~/lib/locale-route'
-import rehypePrefixIds from '~/lib/rehype-prefix-ids'
+import { pageMetadata } from '~/lib/metadata'
 import remarkMermaid from '~/lib/remark-mermaid'
 import { projectViewTransitionName } from '~/lib/view-transition-name'
 import {
@@ -31,11 +29,10 @@ export function requireProjectSlug(slug: string) {
   return slug
 }
 
-export function projectMetadata(locale: Locale, slug: string) {
+export function projectMetadata(slug: string) {
   const project = getProject(requireProjectSlug(slug))
 
-  return localeMetadata({
-    locale,
+  return pageMetadata({
     path: `/projects/${project.slug}`,
     title: project.title,
     description: project.description,
@@ -48,10 +45,6 @@ async function CachedProjectBody({ slug }: { slug: string }) {
   cacheLife('max')
 
   const project = getProject(slug)
-  const prefixIdsPlugin: [typeof rehypePrefixIds, { prefix: string }] = [
-    rehypePrefixIds,
-    { prefix: 'en-' },
-  ]
   const prettyCodePlugin: [
     typeof rehypePrettyCode,
     { theme: { light: string; dark: string } },
@@ -63,24 +56,18 @@ async function CachedProjectBody({ slug }: { slug: string }) {
   return (
     <MDXRemote
       source={project.body}
-      components={mdxComponents(slug, 'en', 'projects')}
+      components={mdxComponents(slug, 'projects')}
       options={{
         mdxOptions: {
           remarkPlugins: [remarkGfm, remarkMermaid],
-          rehypePlugins: [rehypeSlug, prefixIdsPlugin, prettyCodePlugin],
+          rehypePlugins: [rehypeSlug, prettyCodePlugin],
         },
       }}
     />
   )
 }
 
-export async function ProjectPostPageView({
-  slug,
-  locale,
-}: {
-  slug: string
-  locale: Locale
-}) {
+export async function ProjectPostPageView({ slug }: { slug: string }) {
   const project = getProject(requireProjectSlug(slug))
   const clusterVariant = [...project.slug].reduce(
     (sum, ch) => sum + ch.charCodeAt(0),

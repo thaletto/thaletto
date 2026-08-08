@@ -16,10 +16,9 @@ import { ThemeProvider } from '~/components/theme-provider'
 import { getGitHub, getSocial } from '~/lib/social-live'
 import { PREPAINT_SCRIPT } from '~/lib/security/inline-scripts'
 import { seo } from '~/lib/seo'
-import type { Locale } from '~/lib/locale-route'
 import { cn } from '~/lib/utils'
 
-import { fontVariablesForLocale } from '../fonts'
+import { fontVariables } from '../fonts'
 
 export const rootMetadata: Metadata = {
   metadataBase: seo.url,
@@ -31,13 +30,9 @@ export const rootMetadata: Metadata = {
 
 export async function SiteDocument({
   children,
-  locale,
 }: Readonly<{
   children: React.ReactNode
-  locale: Locale
 }>) {
-  const fontVariables = fontVariablesForLocale(locale)
-
   // Live-but-cached social numbers (ISR via the fetch data cache) keep the
   // shared public chrome fresh without making any page request-bound.
   const [social, github] = await Promise.all([getSocial(), getGitHub()])
@@ -45,7 +40,6 @@ export async function SiteDocument({
   return (
     <html
       lang="en"
-      data-locale="en"
       data-route-motion="none"
       suppressHydrationWarning
       className={cn('font-sans', fontVariables, 'public-site')}
@@ -66,7 +60,7 @@ export async function SiteDocument({
               </main>
               <SiteFooter social={social} github={github} />
             </div>
-            <Suspense fallback={<DockFallback locale={locale} />}>
+            <Suspense fallback={<DockFallback />}>
               <Dock />
             </Suspense>
           </PreviewCardTimingProvider>

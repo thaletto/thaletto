@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import GithubSlugger from 'github-slugger'
@@ -22,11 +22,6 @@ const frontmatterSchema = z.object({
   coverCaption: z.string().optional(),
 })
 
-const translatedFrontmatterSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-})
-
 export interface PostCover {
   src: string
   width: number
@@ -37,17 +32,12 @@ export interface PostCover {
 export interface Post {
   slug: string
   title: string
-  titleEn: string
   description?: string
-  descriptionEn: string
   publishedAt: Date
   cover?: PostCover
   readingMinutes: number
-  readingMinutesEn: number
   bodyUnits: number
-  bodyUnitsEn: number
   body: string
-  bodyEn: string
 }
 
 export const POST_ARTICLE_START_ID = 'post-article-start'
@@ -132,15 +122,13 @@ export function buildPostRail(title: string, body: string, idPrefix = ''): PostR
   return nodes
 }
 
-// CJK prose reads ~300 chars/min, Latin ~200 words/min; units are the
-// countable prose atoms (CJK characters + Latin words) the spec plate reports
+// Words are the countable prose atoms the spec plate reports
 function bodyStats(body: string) {
   const text = body.replace(/```[\s\S]*?```/g, '')
-  const cjk = (text.match(/[一-鿿぀-ヿ]/g) ?? []).length
-  const words = (text.replace(/[一-鿿぀-ヿ]/g, ' ').match(/[A-Za-z0-9]+/g) ?? []).length
+  const words = (text.match(/[A-Za-z0-9]+/g) ?? []).length
   return {
-    units: cjk + words,
-    minutes: Math.max(1, Math.round(cjk / 300 + words / 200)),
+    units: words,
+    minutes: Math.max(1, Math.round(words / 200)),
   }
 }
 
@@ -149,24 +137,7 @@ export function getPost(slug: string): Post {
   const { data, content } = matter(raw)
   const fm = frontmatterSchema.parse(data)
 
-  // Posts are English-first in this fork. A single index.mdx carries the
-  // English copy; legacy bilingual posts may still ship an index.en.mdx
-  // sidecar, and when present it takes precedence for the En fields.
-  let titleEn = fm.title
-  let descriptionEn = fm.description ?? fm.title
-  let bodyEn = content
-  const enPath = path.join(POSTS_DIR, slug, 'index.en.mdx')
-  if (existsSync(enPath)) {
-    const translatedRaw = readFileSync(enPath, 'utf8')
-    const { data: translatedData, content: translatedContent } = matter(translatedRaw)
-    const translatedFm = translatedFrontmatterSchema.parse(translatedData)
-    titleEn = translatedFm.title
-    descriptionEn = translatedFm.description
-    bodyEn = translatedContent
-  }
-
   const stats = bodyStats(content)
-  const statsEn = bodyStats(bodyEn)
 
   let cover: PostCover | undefined
   if (fm.cover) {
@@ -183,17 +154,12 @@ export function getPost(slug: string): Post {
   return {
     slug,
     title: fm.title,
-    titleEn,
     description: fm.description,
-    descriptionEn,
     publishedAt: fm.publishedAt,
     cover,
     readingMinutes: stats.minutes,
-    readingMinutesEn: statsEn.minutes,
     bodyUnits: stats.units,
-    bodyUnitsEn: statsEn.units,
     body: content,
-    bodyEn,
   }
 }
 
@@ -202,10 +168,9 @@ export function isPostSlug(slug: string) {
 }
 
 // ── "Posts like this" ─────────────────────────────────────────────────
-// Lexical similarity computed at build time — no tags to maintain. CJK
-// text reads as character bigrams and Latin as lowercased words (stop
-// words dropped); title terms weigh triple. Cosine over term frequencies,
-// with recency breaking ties.
+// Lexical similarity computed at build time — no tags to maintain. Terms
+// are lowercased words (stop words dropped); title terms weigh triple.
+// Cosine over term frequencies, with recency breaking ties.
 
 const STOP_WORDS = new Set([
   'the', 'and', 'for', 'you', 'are', 'but', 'not', 'with', 'this', 'that',
@@ -220,10 +185,6 @@ function addTerms(vector: Map<string, number>, text: string, weight: number) {
     vector.set(term, (vector.get(term) ?? 0) + weight)
   const clean = text.replace(/```[\s\S]*?```/g, ' ').toLowerCase()
 
-  for (const run of clean.match(/[一-鿿぀-ヿ]+/g) ?? []) {
-    if (run.length === 1) bump(run)
-    for (let i = 0; i < run.length - 1; i += 1) bump(run.slice(i, i + 2))
-  }
   for (const word of clean.match(/[a-z0-9]{3,}/g) ?? []) {
     if (!STOP_WORDS.has(word)) bump(word)
   }
@@ -245,12 +206,12 @@ function similarity(a: Map<string, number>, b: Map<string, number>) {
 const postVectors = new Map<string, Map<string, number>>()
 
 function postVector(post: Post) {
-  const key = `${post.slug}:${post.body.length}:${post.bodyEn.length}`
+  const key = `${post.slug}:${post.title.length}:${post.body.length}`
   const cached = postVectors.get(key)
   if (cached) return cached
   const vector = new Map<string, number>()
-  addTerms(vector, `${post.title} ${post.titleEn}`, 3)
-  addTerms(vector, `${post.body} ${post.bodyEn}`, 1)
+  addTerms(vector, post.title, 3)
+  addTerms(vector, post.body, 1)
   postVectors.set(key, vector)
   return vector
 }

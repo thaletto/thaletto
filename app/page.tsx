@@ -1,20 +1,19 @@
 import type { Metadata } from 'next'
 
 import { HomePageView } from './_views/home-page'
-import { localeMetadata } from '~/lib/locale-metadata'
-import { seoEn } from '~/lib/seo'
+import { pageMetadata } from '~/lib/metadata'
+import { seo } from '~/lib/seo'
 
 // The homepage shell prefetches and streams live content.
 export const instant = true
 
 export const metadata: Metadata = {
-  ...localeMetadata({
-    locale: 'en',
+  ...pageMetadata({
     path: '/',
-    title: seoEn.title,
-    description: seoEn.description,
+    title: seo.title,
+    description: seo.description,
   }),
-  title: { absolute: seoEn.title },
+  title: { absolute: seo.title },
 }
 
 export default function Page() {

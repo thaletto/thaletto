@@ -94,15 +94,15 @@ export async function HomePageView() {
                       rel="noreferrer"
                       className="experience-company font-medium transition-colors duration-150 ease-[ease] hover:text-foreground"
                     >
-                      <ExternalLabel>{job.companyEn}</ExternalLabel>
+                      <ExternalLabel>{job.company}</ExternalLabel>
                     </a>
                   ) : (
                     <span className="experience-company font-medium">
-                      {job.companyEn}
+                      {job.company}
                     </span>
                   )}
                   <span className="experience-role text-muted-foreground">
-                    {job.roleEn ?? job.role}
+                    {job.role}
                   </span>
                 </div>
                 <span className="experience-date text-muted-foreground tabular-nums">

@@ -5,10 +5,8 @@ import { PixelCluster } from '~/components/pixel-cluster'
 import { PostRow } from '~/components/post-row'
 import { RevealScope } from '~/components/reveal-scope'
 import { getAllPosts } from '~/lib/content'
-import { T } from '~/lib/i18n'
-import type { Locale } from '~/lib/locale-route'
 
-export function BlogIndexPageView({ locale }: { locale: Locale }) {
+export function BlogIndexPageView() {
   const posts = getAllPosts()
   const postsByYear = new Map<number, typeof posts>()
 
@@ -21,10 +19,10 @@ export function BlogIndexPageView({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-[37.5rem] px-6">
+    <div className="mx-auto w-full max-w-150 px-6">
       <header className="enter flex items-center justify-between">
         <h1 className="page-eyebrow">
-          <T zh="写作" en="Writing" />
+          Writing
         </h1>
         <PixelCluster variant={1} />
       </header>
@@ -59,7 +57,6 @@ export function BlogIndexPageView({ locale }: { locale: Locale }) {
                       post={post}
                       headingLevel="h3"
                       dateStyle="month-day"
-                      locale={locale}
                       listStageId={post.slug}
                     />
                   </li>

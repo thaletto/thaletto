@@ -3,19 +3,18 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
-import { localePath, type Locale } from '~/lib/locale-route'
 import { playDockSound } from '~/lib/sound'
 
 export const GO_TIMEOUT_MS = 1000
 
-/** G then <key> → unlocalized dock route (GitHub-style). */
+/** G then <key> → dock route (GitHub-style). */
 export const DOCK_GO_SHORTCUTS: Record<string, string> = {
   h: '/',
   w: '/blog',
   j: '/projects',
 }
 
-/** Uppercase second key for an unlocalized dock href, e.g. `/blog` → `"W"`. */
+/** Uppercase second key for a dock href, e.g. `/blog` → `"W"`. */
 export function dockGoKeyFor(href: string): string | undefined {
   const entry = Object.entries(DOCK_GO_SHORTCUTS).find(([, path]) => path === href)
   return entry?.[0]?.toUpperCase()
@@ -32,7 +31,7 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
-type GoTarget = { href: string; localize: boolean }
+type GoTarget = { href: string }
 
 /**
  * The chord machine both docks share: press G, then a second key within the
@@ -40,12 +39,10 @@ type GoTarget = { href: string; localize: boolean }
  * or the timeout cancels; typing contexts and modified keys never chord.
  */
 function useGoChords({
-  locale,
   activeHref,
   onNavigate,
   resolve,
 }: {
-  locale: Locale
   activeHref: string | undefined
   onNavigate?: (href: string, keyboardInitiated: boolean) => void
   resolve: (key: string) => GoTarget | undefined
@@ -53,12 +50,10 @@ function useGoChords({
   const router = useRouter()
   const pendingGoRef = useRef(false)
   const timeoutRef = useRef<number | null>(null)
-  const localeRef = useRef(locale)
   const activeHrefRef = useRef(activeHref)
   const onNavigateRef = useRef(onNavigate)
   const resolveRef = useRef(resolve)
 
-  localeRef.current = locale
   activeHrefRef.current = activeHref
   onNavigateRef.current = onNavigate
   resolveRef.current = resolve
@@ -79,13 +74,10 @@ function useGoChords({
     }
 
     function goTo(target: GoTarget) {
-      const destination = target.localize
-        ? localePath(localeRef.current, target.href)
-        : target.href
       const isActive = activeHrefRef.current === target.href
       onNavigateRef.current?.(target.href, true)
       if (!isActive) playDockSound()
-      router.push(destination)
+      router.push(target.href)
     }
 
     function onKeyDown(event: KeyboardEvent) {
@@ -142,21 +134,18 @@ function useGoChords({
  * a short window to jump Home / Writing / Projects.
  */
 export function useDockGoShortcuts({
-  locale,
   activeHref,
   onNavigate,
 }: {
-  locale: Locale
   activeHref: string | undefined
   onNavigate?: (href: string, keyboardInitiated: boolean) => void
 }) {
   useGoChords({
-    locale,
     activeHref,
     onNavigate,
     resolve(key) {
       const href = DOCK_GO_SHORTCUTS[key]
-      return href ? { href, localize: true } : undefined
+      return href ? { href } : undefined
     },
   })
 }

@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { GhostSchematic } from '~/components/ghost-schematic'
 import { ProjectsBlueprintStage } from '~/components/hidden-list-stage'
 import { PixelCluster } from '~/components/pixel-cluster'
-import { T } from '~/lib/i18n'
 import { publicPageMetadata } from '~/lib/public-page-metadata'
 import { getProjectRows } from '~/lib/projects-content'
 
@@ -18,13 +17,13 @@ export function ProjectsPageView() {
       <div className="flex items-start justify-between gap-4">
         <header className="max-w-[34rem]">
           <h1 className="page-eyebrow enter">
-            <T zh="项目" en="Projects" />
+            Projects
           </h1>
           <p
             className="page-introduction enter mt-4 text-balance"
             style={{ '--enter-delay': '70ms' } as React.CSSProperties}
           >
-            <T en={publicPageMetadata.projects.en.description} />
+            {publicPageMetadata.projects.description}
           </p>
         </header>
         <PixelCluster variant={3} className="enter shrink-0" />

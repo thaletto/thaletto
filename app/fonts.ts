@@ -12,8 +12,4 @@ const geistMono = Geist_Mono({
   display: 'swap',
 })
 
-const latinFontVariables = [geist.variable, geistMono.variable].join(' ')
-
-export function fontVariablesForLocale(_locale: string) {
-  return latinFontVariables
-}
+export const fontVariables = [geist.variable, geistMono.variable].join(' ')

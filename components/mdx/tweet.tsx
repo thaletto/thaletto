@@ -5,7 +5,6 @@ import path from 'node:path'
 import Image from 'next/image'
 
 import { SITE_TIME_ZONE } from '~/lib/date'
-import { T } from '~/lib/i18n'
 
 // Plate values are stamped, not written: locale-neutral tabular digits
 const stampDateFormat = new Intl.DateTimeFormat('en-CA', {
@@ -136,10 +135,10 @@ export async function Tweet({ slug, id }: { slug: string; id: string }) {
         </time>
         {likes !== null && (
           <span>
-            · {likes.toLocaleString('en-US')} <T zh="喜欢" en="Likes" />
+            · {likes.toLocaleString('en-US')} Likes
           </span>
         )}
-        {tweet.media === 'video' && <span><T zh="· 含视频" en="· Contains video" /></span>}
+        {tweet.media === 'video' && <span>· Contains video</span>}
         <span className="tweet-card-mark" aria-hidden>
           ↗
         </span>

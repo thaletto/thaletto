@@ -4,7 +4,6 @@ import Image, { type ImageLoader } from 'next/image'
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
 
-import { localize, useLocale } from '~/lib/locale-client'
 
 const VIEWPORT_PAD = 32
 const DEFAULT_ROOT_FONT_SIZE = 16
@@ -76,7 +75,6 @@ export function ZoomImage({
   renditions,
   expandedContent,
 }: ZoomImageProps) {
-  const locale = useLocale()
   const triggerRef = useRef<HTMLButtonElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const preloadedSrcRef = useRef<string | null>(null)
@@ -249,8 +247,8 @@ export function ZoomImage({
         style={style}
         aria-label={
           alt
-            ? localize(locale, `放大图片：${alt}`, `Zoom image: ${alt}`)
-            : localize(locale, '放大图片', 'Zoom image')
+            ? `Zoom image: ${alt}`
+            : 'Zoom image'
         }
         data-zoomed={zoom ? '' : undefined}
         onPointerEnter={preloadExpanded}
@@ -276,7 +274,7 @@ export function ZoomImage({
             data-state={floating ? 'open' : state}
             role="dialog"
             aria-modal="true"
-            aria-label={alt || localize(locale, '图片', 'Image')}
+            aria-label={alt || 'Image'}
             onClick={() => close('overlay')}
           >
             <div className="zoom-overlay-backdrop" />
