@@ -11,10 +11,10 @@ general-purpose blog template.
 
 - Next.js 16 preview, React 19, TypeScript, and Tailwind CSS v4
 - shadcn/ui (`@fluid` registry) primitives with Base UI
-- MDX posts and colocated media under `content/blog/`
-- Project content under `content/projects/` with per-project pages
-- Static public pages with committed fallback snapshots (`content/social.json`,
-  `content/github.json`) refreshed by the build's prebuild hook
+- MDX posts and colocated media under `src/content/blog/`
+- Project content under `src/content/projects/` with per-project pages
+- Static public pages with committed fallback snapshots (`src/content/social.json`,
+  `src/content/github.json`) refreshed by the build's prebuild hook
 - CSP and same-origin mutation checks
 
 ## Local development
@@ -33,21 +33,24 @@ bun dev
 
 ## Validation
 
-Run the TypeScript typecheck and a production build for any change:
+Run the formatter, linter, TypeScript typecheck, and a production build for
+any change:
 
 ```bash
+bun run format   # biome format --write
+bun run lint     # biome lint (reports; design-coded rules are documented in biome.jsonc)
 bunx tsc --noEmit
 bun run build
 ```
 
 `bun run build` first runs the `prebuild` hook, which best-effort refreshes the
-committed GitHub snapshot (`content/github.json`) from live data before the
+committed GitHub snapshot (`src/content/github.json`) from live data before the
 build bakes the pages.
 
 ## Documentation
 
-See `scripts/` for the content refresh utilities and `app/` for the route
-tree. `lib/` holds the content loaders, security headers, SEO metadata, and
+See `src/scripts/` for the content refresh utilities and `src/app/` for the route
+tree. `src/lib/` holds the content loaders, security headers, SEO metadata, and
 site data. Commit messages and PR descriptions document release history.
 
 ## Release history
@@ -64,7 +67,7 @@ The MIT grant does not cover Cali's personal writing, photographs, artwork,
 identity, likeness, logos, branding, personal data, or third-party assets.
 Those materials remain subject to their respective rights and may not be
 reused except with separate permission or as allowed by law. Examples include
-authored work under `content/blog/`, project materials under `content/projects/`,
+authored work under `src/content/blog/`, project materials under `src/content/projects/`,
 personal media under `public/images/`, and biographical and taste data. A fork
 must replace or omit these materials and supply its own identity, analytics
 identifiers, credentials, and deployment settings.

@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next'
 
-import legacyUrlManifest from './content/legacy-url-manifest.json'
-import { securityHeaders } from './lib/security/headers'
+import legacyUrlManifest from './src/content/legacy-url-manifest.json'
+import { securityHeaders } from './src/lib/security/headers'
 
 const legacyRedirects = legacyUrlManifest.entries.flatMap((entry) =>
   entry.kind === 'redirect' && typeof entry.destination === 'string'
@@ -30,12 +30,9 @@ const nextConfig: NextConfig = {
   // slug is dynamic, so output tracing cannot discover these files from the
   // readFile calls on its own when packaging serverless functions.
   outputFileTracingIncludes: {
-    '/blog/**': ['./content/blog/**/*'],
-    '/projects/**': ['./content/projects/**/*'],
-    '/content/\\[\\.\\.\\.path\\]': [
-      './content/blog/**/*',
-      './content/projects/**/*',
-    ],
+    '/blog/**': ['./src/content/blog/**/*'],
+    '/projects/**': ['./src/content/projects/**/*'],
+    '/content/\\[\\.\\.\\.path\\]': ['./src/content/blog/**/*', './src/content/projects/**/*'],
   },
 
   // Pin the project root: when developing from a git worktree nested inside

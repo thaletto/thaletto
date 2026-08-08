@@ -1,0 +1,82 @@
+{
+  // `biome.jsonc` configures code hygiene for cali.so.
+  // Every deliberate deviation from the recommended preset is documented
+  // inline so the rationale survives future maintenance.
+  "$schema": "https://biomejs.dev/schemas/2.5.7/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": [
+      // The whole src tree is formatted and linted. MDX content is authored
+      // data, not code, so it stays byte-for-byte as written.
+      "src/**/*.{ts,tsx,js,mjs,css,json}",
+      "!src/content",
+      "next.config.ts",
+      "components.json",
+      "biome.jsonc"
+    ],
+    "maxSize": 1048576
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      // Matches the repository's existing convention: no semicolons, single
+      // quotes for strings, double quotes inside JSX attributes.
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "semicolons": "asNeeded",
+      "trailingCommas": "all"
+    }
+  },
+  "css": {
+    "parser": {
+      // globals.css is a Tailwind v4 stylesheet; its @apply/@theme directives
+      // need explicit opt-in so the formatter can parse it.
+      "tailwindDirectives": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      // a11y: legacy hand-drawn decorative icons and the vendored shadcn
+      // primitives carry pre-existing a11y notes. Downgraded to warnings so
+      // they stay visible (and trackable) without failing the build; a dedicated
+      // a11y remediation pass is out of scope for the source-layout refactor.
+      "a11y": "warn",
+      "correctness": {
+        // View-transition hooks and the shadcn primitives intentionally keep
+        // deliberately minimal dependency arrays (early-closure values whose
+        // auto-fix changes animation behaviour). Reviewed before downgrading;
+        // regressions still surface as warnings.
+        "useExhaustiveDependencies": "warn"
+      },
+      "complexity": {
+        // `!important` is used deliberately to override Tailwind utility
+        // layers within the design system's overrides.
+        "noImportantStyles": "off"
+      },
+      "style": {
+        // globals.css is a hand-authored multi-thousand-line cascade; source
+        // order and specificity are the mechanism, not an accident.
+        "noDescendingSpecificity": "off"
+      }
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}

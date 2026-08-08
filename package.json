@@ -9,9 +9,12 @@
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/refresh-github.mjs --best-effort",
+    "prebuild": "node src/scripts/refresh-github.mjs --best-effort",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "fix": "biome check --write ."
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -41,6 +44,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.7",
     "@next/playwright": "16.3.0",
     "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
