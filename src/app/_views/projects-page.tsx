@@ -26,7 +26,7 @@ export function ProjectsPageView() {
             {publicPageMetadata.projects.description}
           </p>
         </header>
-        <PixelCluster variant={3} className="enter shrink-0" />
+        <PixelCluster className="enter shrink-0" />
       </div>
 
       <ProjectsBlueprintStage className="mt-10">

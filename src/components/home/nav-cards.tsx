@@ -1,9 +1,17 @@
 import Link from 'next/link'
 
-// The two doorways, greeting visitors who never look at the dock:
+// The three doorways, greeting visitors who never look at the dock:
 // analog vignettes on soft neumorphic cards — manuscript pages for
-// writing, blueprint paper for projects.
-export function NavCards({ postCount, projectCount }: { postCount: number; projectCount: number }) {
+// writing, blueprint paper for projects, conversation for the timeline.
+export function NavCards({
+  postCount,
+  projectCount,
+  milestoneCount,
+}: {
+  postCount: number
+  projectCount: number
+  milestoneCount: number
+}) {
   return (
     <div className="nav-cards">
       <Link
@@ -72,6 +80,56 @@ export function NavCards({ postCount, projectCount }: { postCount: number; proje
         </span>
         <span className="nc-label">Projects</span>
         <span className="nc-sub">{projectCount} projects</span>
+      </Link>
+
+      <Link
+        href="/timeline"
+        className="nav-card enter-swing"
+        style={{ '--enter-delay': '240ms' } as React.CSSProperties}
+      >
+        <span className="nc-vignette" aria-hidden>
+          <span className="nc-timeline-icon">
+            <svg
+              className="nc-construction-guides"
+              viewBox="0 0 52 52"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <g className="nc-guide-solid" fill="none">
+                <path d="M26 0V52M0 26H52M0 0L52 52M52 0L0 52" />
+                <circle cx="26" cy="26" r="21" />
+              </g>
+            </svg>
+            {/* chat bubble with a reply, nudged on hover — a message sent */}
+            <svg className="nc-timeline-mark" viewBox="0 0 18 18" width="30" height="30">
+              <g
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  className="nc-chat-bubble"
+                  d="M11.25 1.5H6.75C5.34 1.5 4.63 1.5 4.19 1.94C3.75 2.38 3.75 3.09 3.75 4.5V6.75C3.75 8.16 3.75 8.88 4.19 9.31C4.63 9.75 5.34 9.75 6.75 9.75H7.88L9 11.25L10.13 9.75H11.25C12.66 9.75 13.37 9.75 13.81 9.31C14.25 8.88 14.25 8.16 14.25 6.75V4.5C14.25 3.09 14.25 2.38 13.81 1.94C13.37 1.5 12.66 1.5 11.25 1.5Z"
+                />
+                <path className="nc-chat-line" d="M6.75 4.5H9" />
+                <path className="nc-chat-line" d="M6.75 6.75H11.25" />
+                <circle
+                  cx="9"
+                  cy="15"
+                  r="1.5"
+                  fill="currentColor"
+                  fillOpacity="0.3"
+                  stroke="none"
+                />
+                <circle className="nc-chat-orb" cx="9" cy="15" r="1.5" />
+                <path className="nc-chat-reply" d="M10.5 15H15.75M7.5 15H2.25" />
+              </g>
+            </svg>
+          </span>
+        </span>
+        <span className="nc-label">Timeline</span>
+        <span className="nc-sub">{milestoneCount} milestones</span>
       </Link>
     </div>
   )

@@ -13,6 +13,7 @@ import { PortraitHiddenStage } from '~/components/visual/portrait-hidden-stage'
 import { experience } from '~/lib/content/personal'
 import { getAllPosts } from '~/lib/content/posts'
 import { getAllProjects } from '~/lib/content/projects'
+import { careerLifeline } from '~/lib/content/lifeline'
 import { getGitHub, getSocial } from '~/lib/content/social-live'
 
 function SectionTitle({
@@ -72,7 +73,11 @@ export async function HomePageView() {
         </div>
       </div>
 
-      <NavCards postCount={posts.length} projectCount={projects.length} />
+      <NavCards
+        postCount={posts.length}
+        projectCount={projects.length}
+        milestoneCount={careerLifeline.markers.length}
+      />
 
       <section className="mt-16">
         <SectionTitle index={nextSectionIndex()} delay={120}>

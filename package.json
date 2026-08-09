@@ -1,8 +1,8 @@
 {
-  "name": "cali.so",
+  "name": "thaletto",
   "version": "3.0.0",
   "private": true,
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "packageManager": "bun@1.3.14",
   "engines": {
     "node": ">=22"

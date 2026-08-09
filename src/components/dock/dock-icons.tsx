@@ -56,6 +56,19 @@ export function ProjectsIcon() {
 
 // Owner-dock icons, drawn in the same duotone grammar as the set above.
 
+export function TimelineIcon() {
+  return (
+    <Base>
+      <path d="M11.25 1.5H6.75C5.34 1.5 4.63 1.5 4.19 1.94C3.75 2.38 3.75 3.09 3.75 4.5V6.75C3.75 8.16 3.75 8.88 4.19 9.31C4.63 9.75 5.34 9.75 6.75 9.75H7.88L9 11.25L10.13 9.75H11.25C12.66 9.75 13.37 9.75 13.81 9.31C14.25 8.88 14.25 8.16 14.25 6.75V4.5C14.25 3.09 14.25 2.38 13.81 1.94C13.37 1.5 12.66 1.5 11.25 1.5Z" />
+      <path d="M6.75 4.5H9" />
+      <path d="M6.75 6.75H11.25" />
+      <circle cx="9" cy="15" r="1.5" fill="currentColor" fillOpacity="0.3" stroke="none" />
+      <circle cx="9" cy="15" r="1.5" />
+      <path d="M10.5 15H15.75M7.5 15H2.25" />
+    </Base>
+  )
+}
+
 export function PreferencesIcon() {
   return (
     <Base>

@@ -4,7 +4,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { PreferencesIcon, ProjectsIcon, WritingIcon } from '~/components/dock/dock-icons'
+import {
+  PreferencesIcon,
+  ProjectsIcon,
+  TimelineIcon,
+  WritingIcon,
+} from '~/components/dock/dock-icons'
 import { Preferences } from '~/components/dock/preferences'
 import { useDockActiveIndicator } from '~/hooks/use-dock-active-indicator'
 import { dockGoKeyFor, useDockGoShortcuts } from '~/hooks/use-dock-go-shortcuts'
@@ -13,6 +18,7 @@ import { playDockSound } from '~/lib/platform/sound'
 const ITEMS = [
   { href: '/blog', label: 'Writing', icon: WritingIcon },
   { href: '/projects', label: 'Projects', icon: ProjectsIcon },
+  { href: '/timeline', label: 'Timeline', icon: TimelineIcon },
 ] as const
 
 const DOCK_VIEW_TRANSITION_STYLE = {

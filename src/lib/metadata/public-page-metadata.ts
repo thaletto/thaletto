@@ -12,6 +12,10 @@ export const publicPageMetadata = {
     title: 'Projects',
     description: 'Projects, Libraries, Freelance work, etc...',
   },
+  timeline: {
+    title: 'Time Variance Authority',
+    description: 'Life Events, Projects and Work Experience',
+  },
 } as const
 
 export type PublicSection = Exclude<keyof typeof publicPageMetadata, 'home'>

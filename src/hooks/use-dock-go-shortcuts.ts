@@ -10,6 +10,7 @@ export const DOCK_GO_SHORTCUTS: Record<string, string> = {
   h: '/',
   w: '/blog',
   p: '/projects',
+  t: '/timeline',
 }
 
 /** Uppercase shortcut key for a dock href, e.g. `/blog` → `"W"`. */

@@ -68,13 +68,18 @@ export function SiteFooter({
             </Link>
           </li>
           <li>
+            <Link href="/blog" className="footer-tree-link">
+              Writing
+            </Link>
+          </li>
+          <li>
             <Link href="/projects" className="footer-tree-link">
               Projects
             </Link>
           </li>
           <li>
-            <Link href="/blog" className="footer-tree-link">
-              Writing
+            <Link href="/timeline" className="footer-tree-link">
+              Timeline
             </Link>
           </li>
           <li>

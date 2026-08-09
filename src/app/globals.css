@@ -703,6 +703,7 @@
   color: var(--gray-8, var(--muted-foreground));
   line-height: 1.55;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -3087,6 +3088,7 @@ a:focus-visible .external-label .external-mark {
   line-height: 1.4;
   color: var(--foreground);
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -3097,6 +3099,7 @@ a:focus-visible .external-label .external-mark {
   line-height: 1.5;
   color: var(--muted-foreground);
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -4958,6 +4961,7 @@ a:focus-visible .external-label .external-mark {
   transform: translateX(0);
   transition: transform 150ms ease;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
 }
 
@@ -6004,8 +6008,10 @@ a:focus-visible .external-label .external-mark {
   content: "";
 }
 
-/* standalone construction icon + the crossed project mark */
-.nc-project-icon {
+/* standalone construction icon + the crossed project mark, and the chat
+   bubble + reply that open the timeline */
+.nc-project-icon,
+.nc-timeline-icon {
   position: absolute;
   isolation: isolate;
   width: 3.25rem;
@@ -6052,7 +6058,8 @@ a:focus-visible .external-label .external-mark {
   vector-effect: non-scaling-stroke;
 }
 
-.nc-project-mark {
+.nc-project-mark,
+.nc-timeline-mark {
   position: absolute;
   z-index: 2;
   top: 50%;
@@ -6090,6 +6097,47 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
+/* the timeline chat glyph: a bubble with text lines that type out and a
+   reply orb that pops when the message leaves the box */
+.nc-chat-bubble,
+.nc-chat-line,
+.nc-chat-orb,
+.nc-chat-reply {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 300ms var(--ease-spring);
+}
+
+.nc-chat-line {
+  transform-origin: left;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-card:hover .nc-timeline-icon {
+    transform: translate(-50%, calc(-50% - 2px));
+  }
+
+  .nav-card:hover .nc-chat-bubble {
+    transform: translateY(-1.5px);
+  }
+
+  .nav-card:hover .nc-chat-line {
+    transform: translateY(-1.5px) scaleX(1.12);
+  }
+
+  .nav-card:hover .nc-chat-line + .nc-chat-line {
+    transition-delay: 45ms;
+  }
+
+  .nav-card:hover .nc-chat-orb {
+    transform: scale(1.3);
+  }
+
+  .nav-card:hover .nc-chat-reply {
+    transform: scaleX(1.08);
+  }
+}
+
 .nc-label {
   font-size: 0.875rem;
   font-weight: var(--font-weight-medium);
@@ -6119,13 +6167,19 @@ a:focus-visible .external-label .external-mark {
   .nc-sheets span,
   .nc-polaroid,
   .nc-project-icon,
+  .nc-timeline-icon,
   .nc-explode-a,
   .nc-explode-b,
-  .nc-explode-c {
+  .nc-explode-c,
+  .nc-chat-bubble,
+  .nc-chat-line,
+  .nc-chat-orb,
+  .nc-chat-reply {
     transition: none;
   }
 
-  .nav-card:hover .nc-project-icon {
+  .nav-card:hover .nc-project-icon,
+  .nav-card:hover .nc-timeline-icon {
     transform: translate(-50%, -50%);
   }
 }
@@ -6695,4 +6749,70 @@ body:has(.ama-success-stage) main {
   66% {
     content: "· · ·";
   }
+}
+
+/* Lifeline (evilrabbit registry) — intro choreography and typesetting.
+   Installed with the component system; owns only its own class names. */
+@keyframes lifeline-rail-draw {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes lifeline-marker-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lifeline-labels-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.lifeline-rail-intro {
+  transform: scaleX(var(--lifeline-intro-progress, 0));
+  transform-origin: left center;
+}
+
+.lifeline-rail-intro-vertical {
+  transform: scaleY(var(--lifeline-intro-progress, 0));
+  transform-origin: top center;
+}
+
+.lifeline-marker-intro {
+  opacity: 0;
+  animation: lifeline-marker-in var(--lifeline-marker-fade-ms, 420ms) cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.lifeline-labels-intro {
+  opacity: 0;
+  animation: lifeline-labels-in var(--lifeline-labels-ms, 600ms) cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+.lifeline-labels.is-pinned {
+  z-index: 20;
+}
+
+.lifeline-typeset {
+  /* Match the site's Geist stack instead of the registry's own fallback. */
+  --lifeline-font: var(--font-geist), system-ui, sans-serif;
+  font-family: var(--lifeline-font);
 }
