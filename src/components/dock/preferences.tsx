@@ -48,7 +48,7 @@ export function Preferences() {
           side="top"
           sideOffset={14}
           positionMethod="fixed"
-          className="z-[var(--z-card)] outline-none"
+          className="z-(--z-card) outline-none"
         >
           <Popover.Popup
             aria-label="Preferences"

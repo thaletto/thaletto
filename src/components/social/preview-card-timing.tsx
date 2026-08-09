@@ -51,7 +51,7 @@ function PreviewSurface({ payload }: { payload: PreviewCardPayload }) {
         side={payload.side}
         sideOffset={8}
         collisionPadding={16}
-        className="pointer-events-none z-[var(--z-card)]"
+        className="pointer-events-none z-(--z-card)"
       >
         <PreviewCard.Popup
           className={(state) =>
