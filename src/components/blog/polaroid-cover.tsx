@@ -55,7 +55,7 @@ export function PolaroidCover({
             alt={alt ?? ''}
             width={cover.width}
             height={cover.height}
-            priority={priority}
+            preload={priority}
             sizes={sizes}
             className="w-full"
             ditherMode={print === 'collage' ? 'collage' : 'dither'}
