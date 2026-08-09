@@ -1,12 +1,17 @@
 import { cacheLife, cacheTag } from 'next/cache'
 
-import type { GitHubSnapshot, SocialSnapshot } from '~/components/social/social-cards'
+import type {
+  GitHubSnapshot,
+  NotionSnapshot,
+  SocialSnapshot,
+} from '~/components/social/social-cards'
 import bakedGithub from '~/content/github.json'
 import bakedSocial from '~/content/social.json'
 
 export interface SocialData {
   x: SocialSnapshot
   linkedin: SocialSnapshot
+  notion: NotionSnapshot
 }
 
 // Live GitHub numbers come from Cache Components so they refresh without a

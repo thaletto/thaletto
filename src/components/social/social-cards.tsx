@@ -19,6 +19,12 @@ export interface GitHubSnapshot {
   levels: string
 }
 
+export interface NotionSnapshot {
+  name: string
+  url: string
+  bio?: string
+}
+
 // heatmap shows the recent ~180 days (26 weeks); the stat below still
 // counts the full past year
 const WEEKS = 26
@@ -53,6 +59,28 @@ function Glyph({ service }: { service: keyof typeof GLYPHS }) {
   )
 }
 
+// Notion's mark is a two-part cutout, so it lives as its own svg rather than
+// a single 24×24 path in GLYPHS. The white backing plate is dropped: on the
+// service card the letterform renders in currentColor alone.
+function NotionMark({
+  className,
+  width = 16,
+  height = 16,
+}: {
+  className?: string
+  width?: number
+  height?: number
+}) {
+  return (
+    <svg viewBox="0 0 256 268" width={width} height={height} aria-hidden className={className}>
+      <path
+        fill="currentColor"
+        d="M164.09.608 16.092 11.538C4.155 12.573 0 20.374 0 29.726v162.245c0 7.284 2.585 13.516 8.826 21.843l34.789 45.237c5.715 7.284 10.912 8.844 21.825 8.327l171.864-10.404c14.532-1.035 18.696-7.801 18.696-19.24V55.207c0-5.911-2.336-7.614-9.21-12.66l-1.185-.856L198.37 8.409C186.94.1 182.27-.952 164.09.608ZM69.327 52.22c-14.033.945-17.216 1.159-25.186-5.323L23.876 30.778c-2.06-2.086-1.026-4.69 4.163-5.207l142.274-10.395c11.947-1.043 18.17 3.12 22.842 6.758l24.401 17.68c1.043.525 3.638 3.637.517 3.637L71.146 52.095l-1.819.125Zm-16.36 183.954V81.222c0-6.767 2.077-9.887 8.3-10.413L230.02 60.93c5.724-.517 8.31 3.12 8.31 9.879v153.917c0 6.767-1.044 12.49-10.387 13.008l-161.487 9.361c-9.343.517-13.489-2.594-13.489-10.921ZM212.377 89.53c1.034 4.681 0 9.362-4.681 9.897l-7.783 1.542v114.404c-6.758 3.637-12.981 5.715-18.18 5.715-8.308 0-10.386-2.604-16.609-10.396l-50.898-80.079v77.476l16.1 3.646s0 9.362-12.989 9.362l-35.814 2.077c-1.043-2.086 0-7.284 3.63-8.318l9.351-2.595V109.823l-12.98-1.052c-1.044-4.68 1.55-11.439 8.826-11.965l38.426-2.585 52.958 81.113v-71.76l-13.498-1.552c-1.043-5.733 3.111-9.896 8.3-10.404l35.84-2.087Z"
+      />
+    </svg>
+  )
+}
+
 function Card({
   trigger,
   href,
@@ -82,28 +110,35 @@ function Card({
   )
 }
 
+// One shared plate for every social card: a lead slot (photo avatar for
+// profile services, a monogram tile for mark-only services like Notion),
+// name + sub-line, the trailing service glyph, and an optional bio.
+// Callers own the lead element so nothing here branches on service.
+// The trailing glyph is optional: mark-led leads already carry the mark.
 function Identity({
-  data,
-  avatar,
+  name,
+  sub,
+  bio,
+  lead,
   service,
-  withBio = true,
 }: {
-  data: SocialSnapshot
-  avatar: string
-  service: keyof typeof GLYPHS
-  withBio?: boolean
+  name: string
+  sub: string
+  bio?: string
+  lead: React.ReactNode
+  service?: keyof typeof GLYPHS
 }) {
   return (
     <>
       <span className="service-card-head">
-        <Image src={avatar} alt="" width={40} height={40} className="service-card-avatar" />
+        {lead}
         <span className="service-card-names">
-          <span className="service-card-name">{data.name}</span>
-          <span className="service-card-sub">@{data.handle}</span>
+          <span className="service-card-name">{name}</span>
+          <span className="service-card-sub">{sub}</span>
         </span>
-        <Glyph service={service} />
+        {service && <Glyph service={service} />}
       </span>
-      {withBio && data.bio && <span className="service-card-bio">{data.bio}</span>}
+      {bio && <span className="service-card-bio">{bio}</span>}
     </>
   )
 }
@@ -115,14 +150,61 @@ function Identity({
 // the same cards.
 // X has no public follower endpoint; the card is static identity only.
 export function XCardBody({ data }: { data: SocialSnapshot }) {
-  return <Identity data={data} avatar="/images/headshot.webp" service="x" />
+  return (
+    <Identity
+      name={data.name}
+      sub={`@${data.handle}`}
+      bio={data.bio}
+      lead={
+        <Image
+          src="/images/headshot.webp"
+          alt=""
+          width={40}
+          height={40}
+          className="service-card-avatar"
+        />
+      }
+      service="x"
+    />
+  )
 }
 
-// Email's card is the front of a mailed envelope: stamps, cancellation
-// marks, sender, recipient, and folded seams. Purely visual; the trigger
-// itself opens mailto:.
 export function LinkedInCardBody({ data }: { data: SocialSnapshot }) {
-  return <Identity data={data} avatar="/images/headshot.webp" service="linkedin" />
+  return (
+    <Identity
+      name={data.name}
+      sub={`@${data.handle}`}
+      bio={data.bio}
+      lead={
+        <Image
+          src="/images/headshot.webp"
+          alt=""
+          width={40}
+          height={40}
+          className="service-card-avatar"
+        />
+      }
+      service="linkedin"
+    />
+  )
+}
+
+// Notion has no account to photograph: the cutout mark itself sits in the
+// lead slot, and the sub-line carries the workspace domain instead of a
+// handle. Same plate as the profile cards — only the lead and sub differ.
+export function NotionCardBody({ data }: { data: NotionSnapshot }) {
+  return (
+    <Identity
+      name={data.name}
+      sub="laxmankr.notion.site"
+      bio={data.bio}
+      lead={
+        <span className="service-card-logo" aria-hidden>
+          <NotionMark width={20} height={20} />
+        </span>
+      }
+    />
+  )
 }
 
 export function GitHubCardBody({ data }: { data: GitHubSnapshot }) {
@@ -200,6 +282,27 @@ export function LinkedInCard({
       triggerClassName={triggerClassName}
     >
       <LinkedInCardBody data={data} />
+    </Card>
+  )
+}
+
+export function NotionCard({
+  data,
+  trigger = 'Notion',
+  triggerClassName,
+}: {
+  data: NotionSnapshot
+  trigger?: React.ReactNode
+  triggerClassName?: string
+}) {
+  return (
+    <Card
+      trigger={trigger}
+      href={data.url}
+      className="link-card service-card"
+      triggerClassName={triggerClassName}
+    >
+      <NotionCardBody data={data} />
     </Card>
   )
 }

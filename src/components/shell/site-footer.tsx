@@ -7,6 +7,8 @@ import {
   GitHubCard,
   type GitHubSnapshot,
   LinkedInCard,
+  NotionCard,
+  type NotionSnapshot,
   type SocialSnapshot,
   XCard,
 } from '~/components/social/social-cards'
@@ -35,7 +37,7 @@ export function SiteFooter({
   social,
   github,
 }: {
-  social: { x: SocialSnapshot; linkedin: SocialSnapshot }
+  social: { x: SocialSnapshot; linkedin: SocialSnapshot; notion: NotionSnapshot }
   github: GitHubSnapshot
 }) {
   return (
@@ -47,6 +49,9 @@ export function SiteFooter({
           </li>
           <li>
             <LinkedInCard data={social.linkedin} />
+          </li>
+          <li>
+            <NotionCard data={social.notion} />
           </li>
           <li>
             <GitHubCard data={github} />

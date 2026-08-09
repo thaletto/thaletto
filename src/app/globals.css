@@ -4415,6 +4415,21 @@ a:focus-visible .external-label .external-mark {
   box-shadow: inset 0 0 0 1px var(--border);
 }
 
+/* Notion's card leads with a monogram tile instead of a photo: the cutout
+   mark sits in the avatar slot on the same plate surface. */
+.service-card-logo {
+  --tile: calc(2.5rem + 2px);
+  display: grid;
+  place-items: center;
+  width: var(--tile);
+  height: var(--tile);
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 var(--border-hairline) var(--border);
+  color: var(--foreground);
+}
+
 .service-card-names {
   display: flex;
   flex-direction: column;
