@@ -155,7 +155,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
                   <dd>
                     <span className="spec-signal" aria-hidden />
                     {project.startDate}
-                    {project.endDate ? ` — ${project.endDate}` : ' — now'}
+                    {project.endDate ? ` — ${project.endDate}` : ' — Present'}
                   </dd>
                 </div>
               )}

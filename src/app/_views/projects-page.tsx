@@ -52,8 +52,8 @@ export function ProjectsPageView() {
                     <Image
                       src={project.cover.src}
                       alt=""
-                      width={36}
-                      height={36}
+                      width={project.cover.width}
+                      height={project.cover.height}
                       className="project-icon"
                     />
                   ) : (

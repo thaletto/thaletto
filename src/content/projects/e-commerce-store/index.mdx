@@ -5,35 +5,34 @@ publishedAt: "2026-06-01T00:00:00.000Z"
 sort: 5
 tags: ["Next.js", "TypeScript", "Go", "SQLite", "AWS Lambda", "Cloudflare"]
 startDate: "2024.07"
-endDate: "2026.06"
 links:
   - label: "Website"
     url: "https://kr-crackers.vercel.app"
-cover: ./e-commerce.avif
-coverWidth: 1024
-coverHeight: 574
+cover: ./e-commerce.webp
+coverWidth: 1280
+coverHeight: 720
 ---
 
-> Built as a freelancer for client
+> A freelancer built this platform for a client.
 
 ## Overview
 
-A responsive e-commerce platform for selling pre-owned products. The frontend is built with Next.js and Tailwind CSS, backed by a decoupled Go microservices architecture deployed on AWS Lambda. An event-driven system handles real-time inventory tracking, order management, and secure admin controls.
+This is a responsive e-commerce platform for selling pre-owned products. The frontend uses Next.js and Tailwind CSS. A decoupled Go microservices architecture supports it. You deploy the architecture on AWS Lambda. An event-driven system handles real-time inventory tracking, order management, and secure admin controls.
 
 ## Approach
 
-The system is split into three layers, each optimized for its specific responsibility.
+The system is split into three layers. Each layer is optimized for its specific responsibility.
 
-**Frontend** uses Next.js with the App Router to mix Server-Side Rendering (SSR) for dynamic, SEO-critical product pages with Static Site Generation (SSG) for static assets. React Server Components minimize client-side JavaScript bundles, keeping Core Web Vitals performant.
+**Frontend** uses Next.js with the App Router. It mixes Server-Side Rendering (SSR) with Static Site Generation (SSG). It uses SSR for dynamic, SEO-critical product pages. It uses SSG for static assets. React Server Components minimize client-side JavaScript bundles. This keeps Core Web Vitals performant.
 
-**Backend** consists of 7 Go microservices (auth, customers, invoices, notifications, orders, products, uploads), each compiling to a single binary for near-native execution speeds. Lightweight goroutines handle concurrent requests with minimal memory overhead, making it well-suited for the high-throughput demands of e-commerce traffic.
+**Backend** consists of 7 Go microservices. These are auth, customers, invoices, notifications, orders, products, and uploads. Each microservice compiles to a single binary. This gives near-native execution speeds. Lightweight goroutines handle concurrent requests. They use minimal memory overhead. This makes the backend well-suited for the high-throughput demands of e-commerce traffic.
 
-**Database** uses Cloudflare D1, a serverless relational database built on SQLite that runs at the edge. Data is positioned physically close to the compute layer, eliminating traditional database connection overhead and complex connection pooling.
+**Database** uses Cloudflare D1. Cloudflare D1 is a serverless relational database. It is built on SQLite and runs at the edge. Data is physically close to the compute layer. This eliminates traditional database connection overhead. It also eliminates complex connection pooling.
 
 ## How It Works
 
-- **AWS Lambda (ARM Linux):** Go functions compile to single binaries targeting `GOOS=linux GOARCH=arm64`, leveraging AWS Graviton's ARM-based architecture for up to 34% better price-performance over x86. Functions scale automatically with traffic, and Go's minimal footprint keeps cold starts fast.
-- **Event-driven architecture:** Inventory updates, order events, and admin actions flow through an event system that keeps the frontend in sync without polling.
+- **AWS Lambda (ARM Linux):** Go functions compile to single binaries. They target `GOOS=linux GOARCH=arm64`. They leverage AWS Graviton's ARM-based architecture. This gives up to 34% better price-performance over x86. Functions scale automatically with traffic. Go's minimal footprint keeps cold starts fast.
+- **Event-driven architecture:** Inventory updates, order events, and admin actions flow through an event system. The system keeps the frontend in sync without polling.
 
 ## Tech Stack
 

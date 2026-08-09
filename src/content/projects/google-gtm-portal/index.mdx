@@ -8,25 +8,25 @@ company: "TCS"
 startDate: "2026.02"
 endDate: "2026.04"
 cover: ./google-cloud-next.webp
-coverWidth: 2436
-coverHeight: 1200
+coverWidth: 1280
+coverHeight: 720
 ---
 
 ## Overview
 
-A unified catalog platform where visitors can browse, filter, and request demos of AI offerings built by TCS on Google Cloud. Built for Google Cloud Next 2026, it needed to be ready for a live event where first impressions matter and attention is short.
+This is a unified catalog platform. Visitors use it to browse, filter, and request demos of AI offerings built by TCS on Google Cloud. The platform was built for Google Cloud Next 2026. It had to be ready for a live event, where first impressions matter and attention is short.
 
 ## Problem
 
-TCS had accumulated a large number of AI solutions built on Google Cloud, distributed across teams, verticals, and internal repositories. Each solution was useful in isolation but collectively impossible to find or navigate. A visitor arriving at the event with a problem rather than a specific product name had no way to discover relevant offerings.
+TCS had accumulated a large number of AI solutions built on Google Cloud. These solutions were distributed across teams, verticals, and internal repositories. Each solution was useful in isolation, but collectively they were impossible to find or navigate. A visitor arrived at the event with a problem rather than a specific product name. That visitor had no way to discover relevant offerings.
 
 ## Approach
 
-The first challenge was schema. Offerings from different teams arrived with different shapes: different levels of documentation, different definitions of "use case," different assumptions about what a customer needs to know. The FastAPI backend normalizes these into a consistent catalog interface without flattening the distinctions that make each offering legible.
+The first challenge was schema. Offerings from different teams arrived with different shapes. They had different levels of documentation, different definitions of "use case," and different assumptions about what a customer needs to know. The FastAPI backend normalizes these offerings into a consistent catalog interface. It does not flatten the distinctions that make each offering legible.
 
-The second challenge was discoverability. The platform supports search and filtering by use case and industry, so visitors with a vague problem can navigate toward something relevant, which is how most people at conferences actually arrive.
+The second challenge was discoverability. The platform supports search and filtering by use case and industry. Visitors with a vague problem can navigate toward something relevant. This is how most people at conferences actually arrive.
 
-The frontend is built in Next.js, designed for an environment where the interface needs to feel considered rather than assembled, because at a live event that credibility is a precondition for engagement, not a vanity.
+The frontend is built in Next.js. It is designed for an environment where the interface needs to feel considered rather than assembled. At a live event that credibility is a precondition for engagement, not a vanity.
 
 ## How It Works
 
