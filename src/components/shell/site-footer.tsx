@@ -2,6 +2,7 @@ import { cacheLife } from 'next/cache'
 import Link from 'next/link'
 
 import { FooterClock } from '~/components/dock/footer-clock'
+import { ExternalLabel } from '~/components/social/external-mark'
 import {
   EmailCard,
   GitHubCard,
@@ -74,6 +75,11 @@ export function SiteFooter({
           <li>
             <Link href="/blog" className="footer-tree-link">
               Writing
+            </Link>
+          </li>
+          <li>
+            <Link href="/cv" className="footer-tree-link" target="_blank" rel="noreferrer">
+              <ExternalLabel>Resume</ExternalLabel>
             </Link>
           </li>
         </Tree>
