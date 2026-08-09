@@ -4,8 +4,6 @@ import { tiltFromSlug } from '~/lib/motion/polaroid'
 import { CodeBlockPre } from './code-block'
 import { MermaidDiagram } from './mermaid-diagram'
 import { PhotoStack, PhotoStackCaption, PhotoStackFrames } from './photo-stack'
-import { TimeAllocationChart } from './time-allocation-chart'
-import { Tweet } from './tweet'
 
 // Post images arrive as ./file.png#WxH (dimensions encoded by the content
 // pipeline); rewrite to the content route and unpack the dimensions.
@@ -64,8 +62,6 @@ export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComp
     PhotoStack,
     PhotoStackCaption,
     PhotoStackFrames,
-    TimeAllocationChart: () => <TimeAllocationChart />,
-    Tweet: ({ id }: { id: string }) => <Tweet slug={slug} id={id} />,
     img: (props) => (
       <PostImage
         slug={slug}
