@@ -13,7 +13,7 @@ export interface ErrorBoundaryProps {
 
 export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
   return (
-    <div className="error-sheet mx-auto w-full max-w-[37.5rem] px-6">
+    <div className="error-sheet mx-auto w-full max-w-150 px-6">
       <section className="error-proof" aria-labelledby="error-title">
         <div className="error-proof-meta" aria-hidden>
           <span>ERR / 500</span>
@@ -39,7 +39,7 @@ export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
           <h1 id="error-title" className="text-sm font-semibold">
             This page did not print correctly.
           </h1>
-          <p className="mt-2 max-w-[23rem] text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-2 max-w-92 text-sm leading-relaxed text-muted-foreground">
             No private details are shown. Try again, or return home safely.
           </p>
         </div>

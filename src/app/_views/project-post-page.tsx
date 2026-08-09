@@ -60,7 +60,7 @@ function ProjectPostLoadingShell() {
     <article
       aria-busy="true"
       data-post-loading-shell
-      className="post-article mx-auto min-h-[calc(100svh-3.5rem)] w-full max-w-[37.5rem] px-6"
+      className="post-article mx-auto min-h-[calc(100svh-3.5rem)] w-full max-w-150 px-6"
     >
       <div role="status" aria-label={label}>
         <span className="sr-only">{label}</span>
@@ -119,7 +119,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
         nodes={rail}
         backTo={{ href: '/projects', label: 'Projects', ariaLabel: 'Back to projects' }}
       />
-      <article className="post-article mx-auto w-full max-w-[37.5rem] px-6">
+      <article className="post-article mx-auto w-full max-w-150 px-6">
         <header>
           {project.cover && (
             <PolaroidCover
