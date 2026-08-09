@@ -588,10 +588,10 @@ export function PostToc({
       onFocusCapture={settleKeyboardFocus}
       onPointerMove={() => rootRef.current?.removeAttribute('data-toggle-motion')}
     >
-      <div className="post-minimap-backdrop backdrop-blur-[8px]" aria-hidden />
+      <div className="post-minimap-backdrop backdrop-blur-sm" aria-hidden />
       <div
         ref={islandRef}
-        className="post-minimap-island backdrop-blur-[12px]"
+        className="post-minimap-island backdrop-blur-md"
         aria-hidden={islandConcealed || undefined}
         inert={islandConcealed ? true : undefined}
       >
@@ -666,7 +666,7 @@ export function PostToc({
           aria-hidden={!open}
           inert={open ? undefined : true}
         >
-          <div className="post-minimap-phone-surface backdrop-blur-[12px]" aria-hidden />
+          <div className="post-minimap-phone-surface backdrop-blur-md" aria-hidden />
           <div className="post-minimap-utilities post-minimap-utilities-top">
             <Link
               href={backTo?.href ?? '/blog'}
