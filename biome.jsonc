@@ -1,7 +1,4 @@
 {
-  // `biome.jsonc` configures code hygiene for cali.so.
-  // Every deliberate deviation from the recommended preset is documented
-  // inline so the rationale survives future maintenance.
   "$schema": "https://biomejs.dev/schemas/2.5.7/schema.json",
   "vcs": {
     "enabled": true,
