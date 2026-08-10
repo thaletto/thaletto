@@ -36,7 +36,7 @@ import { HalftonePortrait } from '~/components/visual/halftone-portrait'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { PortraitHiddenStage } from '~/components/visual/portrait-hidden-stage'
 import { careerLifeline } from '~/lib/content/lifeline'
-import { experience, experienceYearRange, siteIdentity } from '~/lib/content/personal'
+import { siteExperience, siteIdentity } from '~/lib/content/personal'
 import { getAllPosts } from '~/lib/content/posts'
 import { getAllProjects } from '~/lib/content/projects'
 import { getGitHub, getSocial } from '~/lib/content/social-live'
@@ -111,7 +111,7 @@ export async function HomePageView() {
           Experience
         </SectionTitle>
         <ul className="mt-4 flex flex-col">
-          {experience.map((job, i) => (
+          {siteExperience.map((job, i) => (
             <li
               key={job.company}
               className="enter-swing hairline-top"
@@ -134,7 +134,7 @@ export async function HomePageView() {
                   <span className="experience-role text-muted-foreground">{job.role}</span>
                 </div>
                 <span className="experience-date text-muted-foreground tabular-nums">
-                  {experienceYearRange(job)}
+                  {job.yearRange}
                 </span>
               </div>
             </li>

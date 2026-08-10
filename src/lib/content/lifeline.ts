@@ -7,7 +7,7 @@
 // `label` ("Mar 2018") and an `age` so the rail reads month-precise.
 
 import type { LifelineMarker, LifelinePhoto } from '~/components/lifeline/types'
-import { experience, siteIdentity } from '~/lib/content/personal'
+import { siteExperience, siteIdentity } from '~/lib/content/personal'
 import { getAllProjects, type Project } from '~/lib/content/projects'
 import type { LifelineRecord } from '~/lib/lifeline-data'
 
@@ -107,19 +107,15 @@ function projectMarkers(): LifelineMarker[] {
 }
 
 function experienceMarkers(): LifelineMarker[] {
-  return experience.map((job) => {
-    const [year, month] = job.startDate.split('.').map(Number)
+  return siteExperience.map((job) => {
     const roleArticle = /^[aeiou]/i.test(job.role) ? 'an' : 'a'
-    return at(
-      { year, month },
-      {
-        events: [
-          { text: `Joined ${job.company} as ${roleArticle} ${job.role}`, effect: 'fireworks' },
-        ],
-        companies: [{ id: job.id, name: job.company }],
-        photos: job.timelinePhoto ? [job.timelinePhoto] : undefined,
-      },
-    )
+    return at(job.start, {
+      events: [
+        { text: `Joined ${job.company} as ${roleArticle} ${job.role}`, effect: 'fireworks' },
+      ],
+      companies: [{ id: job.id, name: job.company }],
+      photos: job.timelinePhoto ? [job.timelinePhoto] : undefined,
+    })
   })
 }
 

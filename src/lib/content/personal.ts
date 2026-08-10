@@ -16,12 +16,14 @@ const identitySchema = z.object({
   }),
 })
 
-const experienceSchema = z.object({
+const yearMonthSchema = z.string().regex(/^\d{4}\.(0[1-9]|1[0-2])$/, 'must use YYYY.MM')
+
+const authoredExperienceSchema = z.object({
   id: z.string().min(1),
   company: z.string().min(1),
   role: z.string().min(1),
-  startDate: z.string().min(1),
-  endDate: z.string().min(1).optional(),
+  startDate: yearMonthSchema,
+  endDate: yearMonthSchema.optional(),
   url: z.url().optional(),
   timelinePhoto: z
     .object({
@@ -40,10 +42,29 @@ const siteProfileSchema = z.object({
     github: z.object({ user: z.string().min(1) }),
   }),
   resumes: z.object({ primary: z.url(), alternate: z.url() }),
-  experience: z.array(experienceSchema),
+  experience: z.array(authoredExperienceSchema),
 })
 
-export type Experience = z.infer<typeof experienceSchema>
+export interface SiteMonth {
+  year: number
+  month: number
+}
+
+export interface SiteExperience {
+  id: string
+  company: string
+  role: string
+  start: SiteMonth
+  end?: SiteMonth
+  yearRange: string
+  url?: string
+  timelinePhoto?: { src: string; alt: string }
+}
+
+function parseSiteMonth(value: string): SiteMonth {
+  const [year, month] = value.split('.').map(Number)
+  return { year, month }
+}
 
 export function parseSiteProfile(input: unknown) {
   const result = siteProfileSchema.safeParse(input)
@@ -54,7 +75,21 @@ export function parseSiteProfile(input: unknown) {
     throw new Error(`Invalid Site Profile — ${details}`)
   }
 
-  const { identity, social, resumes, experience } = result.data
+  const { identity, social, resumes } = result.data
+  const experience: SiteExperience[] = result.data.experience.map((job) => {
+    const start = parseSiteMonth(job.startDate)
+    const end = job.endDate ? parseSiteMonth(job.endDate) : undefined
+    return {
+      id: job.id,
+      company: job.company,
+      role: job.role,
+      start,
+      end,
+      yearRange: `${start.year}—${end?.year ?? 'now'}`,
+      url: job.url,
+      timelinePhoto: job.timelinePhoto,
+    }
+  })
   return {
     identity,
     social,
@@ -76,16 +111,7 @@ export const siteIdentity = profile.identity
 export const siteSocial = profile.social
 export const siteResumes = profile.resumes
 export const siteDestinations = profile.destinations
-
-// Temporary compatibility surface. A-274 moves experience date meaning behind
-// Site Profile and removes the remaining callers' authored-shape knowledge.
-export const experience: Experience[] = profile.experience
-
-export function experienceYearRange(job: Experience) {
-  const from = job.startDate.slice(0, 4)
-  const to = job.endDate?.slice(0, 4) ?? 'now'
-  return `${from}—${to}`
-}
+export const siteExperience = profile.experience
 
 export function resolveProfileDestination(destination: string) {
   if (!destination.startsWith('profile:')) return destination
