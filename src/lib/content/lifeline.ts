@@ -111,30 +111,47 @@ function projectMarkers(): LifelineMarker[] {
 }
 
 const personalMarkers: LifelineMarker[] = [
-  at({ year: 2003, month: 8 }, { events: ['I was born in Chennai, Tamil Nadu, India'] }),
+  at(
+    { year: 2003, month: 8 },
+    {
+      events: ['I was born in Chennai, Tamil Nadu, India'],
+      companies: [{ id: 'baby', name: 'Birth' }],
+    },
+  ),
   at(
     { year: 2018, month: 3 },
     {
       events: ['Completed CBSE Class X at Maharishi International Residential School'],
+      companies: [{ id: 'school', name: 'School' }],
       photos: [schoolPhoto],
     },
   ),
   at(
     { year: 2020, month: 3 },
-    { events: ['Completed CBSE Class XII at Maharishi International Residential School'] },
+    {
+      events: ['Completed CBSE Class XII at Maharishi International Residential School'],
+      companies: [{ id: 'school', name: 'School' }],
+    },
   ),
   at(
     { year: 2020, month: 9 },
     {
       events: ['Started B.Tech at Amrita Vishwa Vidyapeetham, Coimbatore'],
+      companies: [{ id: 'university', name: 'University' }],
       photos: [universityPhoto],
     },
   ),
-  at({ year: 2024, month: 5 }, { events: ['Graduated with a B.Tech'] }),
+  at(
+    { year: 2024, month: 5 },
+    {
+      events: ['Graduated with a B.Tech'],
+      companies: [{ id: 'university', name: 'University' }],
+    },
+  ),
   at(
     { year: 2024, month: 11 },
     {
-      events: ['Joined TCS as an AI Engineer'],
+      events: [{ text: 'Joined TCS as an AI Engineer', effect: 'fireworks' }],
       companies: [{ id: 'tcs', name: 'Tata Consultancy Services' }],
       photos: [tcsPhoto],
     },
@@ -146,12 +163,7 @@ const nowMarkers: LifelineMarker[] = [
     { year: 2026, month: 8 },
     {
       label: 'Now',
-      events: [
-        {
-          text: 'Building, learning, shipping. The next milestone is yours.',
-          effect: 'fireworks',
-        },
-      ],
+      events: ['Building, learning, shipping. The next milestone is yours.'],
     },
   ),
 ]
