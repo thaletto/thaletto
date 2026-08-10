@@ -4,41 +4,17 @@ import { type CSSProperties, type PointerEvent, useRef, useState } from 'react'
 import { cn } from '~/lib/platform/utils'
 import { LifelineEventMedia } from './lifeline-event'
 import { LifelineLightbox, type LifelineLightboxStart } from './lifeline-lightbox'
-import type { LifelineMarker, LifelinePhoto } from './types'
+import type { LifelinePhoto } from './types'
 
-/** Tweak these */
-const CARD_WIDTH = 180
-/** Matches the events column's pt-6 — cards align with the first event's text. */
-const EVENT_TOP = 24
-const MAX_TILT_DEG = 6
-/**
- * How far along a card the next one in the stack starts — 0.6 leaves
- * a solid margin of every card visible under its neighbor.
- */
-const STACK_OVERLAP = 0.6
-/**
- * Stacks cascade diagonally: the last card sits level with the event
- * text and each one before it hangs this much lower, so neighbors
- * overlap corner-to-corner instead of side-by-side.
- */
-const CASCADE_Y = 170
-/** Event text column: max-w-[18rem] plus breathing room. */
-const TEXT_ZONE = 288 + 24
 /** Pointer travel below this is a click (opens the lightbox), not a drag. */
 const CLICK_SLOP = 4
 /** Fingers wobble more than mice — touch presses get extra tap room. */
 const TOUCH_CLICK_SLOP = 10
 
-/** A fresh tilt on every visit — rolled once per card mount. */
-function randomTilt() {
-  return 2 + Math.random() * (MAX_TILT_DEG - 2)
-}
-
 /**
  * The interactive photo card, positioning-agnostic: drag moves it for
  * the session, a press without travel expands it into the lightbox.
- * Desktop floats it over the track (absolute + left/top); the vertical
- * layout drops it into normal flow.
+ * The vertical layout drops it into normal flow.
  */
 export function LifelinePhotoCard({
   photo,
@@ -75,7 +51,7 @@ export function LifelinePhotoCard({
   })
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    // The desktop track scrubs on drag — a card drag must not reach it.
+    // A card drag must not reach the surrounding timeline.
     event.stopPropagation()
     event.preventDefault()
     event.currentTarget.setPointerCapture(event.pointerId)
@@ -195,147 +171,5 @@ export function LifelinePhotoCard({
         />
       )}
     </>
-  )
-}
-
-function FloatingCard({
-  photo,
-  stackIndex,
-  stackCount,
-  x,
-  defaultY,
-  width,
-  animateIntro,
-  introDelay,
-  introDuration,
-}: {
-  photo: LifelinePhoto
-  stackIndex: number
-  stackCount: number
-  /** Resolved left position within the track. */
-  x: number
-  /** Cascade position when the photo has no explicit y. */
-  defaultY: number
-  width: number
-  animateIntro: boolean
-  introDelay: number
-  introDuration: number
-}) {
-  const y = photo.y ?? defaultY
-  // Rolled once per mount: solo cards flip a coin for direction;
-  // neighbors in a stack lean away from each other so the pile reads
-  // as scattered.
-  const [mountTilt] = useState(() => {
-    const sign = stackCount > 1 ? (stackIndex % 2 === 0 ? -1 : 1) : Math.random() > 0.5 ? 1 : -1
-    return sign * randomTilt()
-  })
-
-  return (
-    <LifelinePhotoCard
-      photo={photo}
-      rotate={photo.rotate ?? mountTilt}
-      width={width}
-      className="absolute"
-      style={{ left: x, top: `calc(var(--lifeline-rail) + ${y}px)` }}
-      animateIntro={animateIntro}
-      introDelay={introDelay}
-      introDuration={introDuration}
-    />
-  )
-}
-
-/**
- * Always-visible media scattered over the timeline — anchored to their
- * marker's slot, tilted and overlapping like photos in a notebook.
- * Rendered inside the transformed track, so they ride the scroll;
- * dragging repositions a card for the session.
- */
-export function LifelineFloatingPhotos({
-  markers,
-  offsets,
-  widths,
-  animateIntro = false,
-  getIntroDelay,
-  getIntroDuration,
-}: {
-  markers: LifelineMarker[]
-  offsets: number[]
-  widths: number[]
-  animateIntro?: boolean
-  getIntroDelay?: (markerIndex: number) => number
-  getIntroDuration?: (markerIndex: number) => number
-}) {
-  const trackEnd = offsets.length > 0 ? offsets[offsets.length - 1] + widths[widths.length - 1] : 0
-
-  // Intro sync: a card fades in when the rail tip reaches it, i.e. on
-  // the schedule of the marker whose slot its center sits over — which
-  // is usually days past its anchor.
-  const markerIndexAt = (x: number) => {
-    for (let index = offsets.length - 1; index >= 0; index--) {
-      if (offsets[index] <= x) return index
-    }
-    return 0
-  }
-
-  return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-      {markers.map((marker, index) => {
-        if (!marker.photos?.length) return null
-
-        // The card's free run: after this day's own text column, up to
-        // the start of the next day that has text of its own.
-        const zoneStart = offsets[index] + (marker.events.length > 0 ? TEXT_ZONE : 0)
-        const nextTextIndex = markers.findIndex(
-          (candidate, candidateIndex) => candidateIndex > index && candidate.events.length > 0,
-        )
-        const zoneEnd = nextTextIndex === -1 ? trackEnd : offsets[nextTextIndex]
-
-        // Stacks center as a group so a lone card sits in the middle
-        // of the gap and a pile spreads evenly around it. Each card
-        // starts STACK_OVERLAP of the way along the one beneath it.
-        const steps: number[] = []
-        let fan = 0
-        for (const stacked of marker.photos) {
-          steps.push(fan)
-          fan += (stacked.width ?? CARD_WIDTH) * STACK_OVERLAP
-        }
-        const photoCount = marker.photos.length
-        const lastPhoto = marker.photos[photoCount - 1]
-        const groupWidth = steps[steps.length - 1] + (lastPhoto.width ?? CARD_WIDTH)
-
-        return marker.photos.map((photo, photoIndex) => {
-          const width = photo.width ?? CARD_WIDTH
-          // Default home: centered in the text-free run between this
-          // day's events and the next day that has text — comfortably
-          // away from both columns.
-          const x =
-            photo.x !== undefined
-              ? offsets[index] + photo.x * widths[index]
-              : Math.max(
-                  zoneStart,
-                  zoneStart + (zoneEnd - zoneStart - groupWidth) / 2 + steps[photoIndex],
-                )
-          const introIndex = markerIndexAt(x + width / 2)
-          // The last card of a stack sits level with the event text;
-          // earlier cards hang progressively lower — the diagonal.
-          const defaultY = EVENT_TOP + (photoCount - 1 - photoIndex) * CASCADE_Y
-
-          return (
-            <FloatingCard
-              key={`${marker.id}-${photo.src}`}
-              photo={photo}
-              stackIndex={photoIndex}
-              stackCount={photoCount}
-              x={x}
-              defaultY={defaultY}
-              width={width}
-              animateIntro={animateIntro}
-              introDelay={getIntroDelay?.(introIndex) ?? 0}
-              introDuration={getIntroDuration?.(introIndex) ?? 420}
-            />
-          )
-        })
-      })}
-    </div>
   )
 }

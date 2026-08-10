@@ -1,10 +1,6 @@
 'use client'
 
 import { cn } from '~/lib/platform/utils'
-// Side effect: map the lifeline's company ids to their icon components in
-// the same client module graph that renders them, so CompanyIcon's registry
-// lookup always finds the registration.
-import './career-icons'
 import { LifelineFireworksProvider } from './lifeline-fireworks'
 import { LifelineVertical } from './lifeline-vertical'
 import type { LifelineProps } from './types'

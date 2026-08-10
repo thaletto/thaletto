@@ -276,7 +276,7 @@ export function LifelineVertical({
   markers,
   birthYear,
   title = 'Lifeline',
-  mode = 'auto',
+  mode = 'page',
 }: LifelineProps) {
   const controller = useLifelineVerticalController({ markers, mode })
 

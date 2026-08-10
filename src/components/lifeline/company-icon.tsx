@@ -1,4 +1,6 @@
+import { Baby, School, University } from 'lucide-react'
 import type { ComponentType } from 'react'
+import { TcsLogo } from '~/components/brand/tcs-logo'
 import { cn } from '~/lib/platform/utils'
 
 export type CompanyIconId = string
@@ -9,22 +11,11 @@ export interface CompanyIconEntry {
   sizeClassName?: string
 }
 
-/** Lookup table populated by `registerCompanyIcons` at module scope. */
-const registry: Record<string, CompanyIconEntry> = {}
-
-/**
- * Map your organization ids to icon components. Call once at module
- * scope, from a module that loads before the timeline renders:
- *
- *   registerCompanyIcons({
- *     acme: { icon: AcmeIcon, sizeClassName: "h-4 w-4" },
- *   })
- *
- * Unregistered ids fall back to the name's initial in a small ring,
- * so a timeline reads cleanly before you've drawn a single logo.
- */
-export function registerCompanyIcons(entries: Record<string, CompanyIconEntry>) {
-  Object.assign(registry, entries)
+const companyIcons: Record<string, CompanyIconEntry> = {
+  tcs: { icon: TcsLogo, sizeClassName: 'h-4 w-[25px]' },
+  baby: { icon: Baby, sizeClassName: 'h-5 w-5' },
+  school: { icon: School, sizeClassName: 'h-5 w-5' },
+  university: { icon: University, sizeClassName: 'h-5 w-5' },
 }
 
 /** Renders the registered mark for `id`, or a fallback initial ring. */
@@ -37,12 +28,13 @@ export function CompanyIcon({
   label: string
   className?: string
 }) {
-  const entry = registry[id]
+  const entry = companyIcons[id]
 
   if (entry) {
     const Icon = entry.icon
     return (
       <span
+        role="img"
         className={cn(
           'inline-flex shrink-0 items-center justify-center text-black transition-colors duration-300 dark:text-white',
           entry.sizeClassName ?? 'h-4 w-4',
@@ -58,6 +50,7 @@ export function CompanyIcon({
 
   return (
     <span
+      role="img"
       title={label}
       aria-label={label}
       className={cn(

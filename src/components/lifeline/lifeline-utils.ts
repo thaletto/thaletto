@@ -44,20 +44,3 @@ export function getMarkerHeight(marker: LifelineMarker, nextYear?: number) {
 
   return Math.min(520, Math.max(peopleOnly ? 148 : 188, height))
 }
-
-/** Reserve the horizontal space a marker's slot needs on the desktop rail. */
-export function getMarkerWidth(marker: LifelineMarker, nextYear?: number) {
-  const hasContent = hasMarkerContent(marker)
-  const hasPeople = hasMarkerPeople(marker)
-
-  if (!nextYear) return hasContent ? 360 : 80
-  if (!hasContent) return 80
-
-  const peopleOnly =
-    hasPeople && marker.events.length === 0 && (marker.companies?.length ?? 0) === 0
-
-  if (peopleOnly) return 220
-
-  const gap = Math.max(1, nextYear - marker.year)
-  return Math.min(420, Math.max(290, gap * 36))
-}
