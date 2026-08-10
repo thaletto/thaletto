@@ -1,10 +1,10 @@
-import { siteProfile } from '~/lib/content/personal'
+import { siteIdentity } from '~/lib/content/personal'
 
 export const publicPageMetadata = {
   home: {
-    title: siteProfile.identity.name,
-    description: siteProfile.identity.role,
-    ogDescription: siteProfile.identity.role,
+    title: siteIdentity.name,
+    description: siteIdentity.role,
+    ogDescription: siteIdentity.role,
   },
   blog: {
     title: 'Writing',

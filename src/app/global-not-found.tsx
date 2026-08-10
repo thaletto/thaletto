@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import './globals.css'
 import { AmbientBackground } from '~/components/shell/ambient-background'
-import { siteProfile } from '~/lib/content/personal'
+import { siteIdentity } from '~/lib/content/personal'
 import { nonPublicDescriptions, nonPublicRobots } from '~/lib/metadata/non-public-metadata'
 import { cn } from '~/lib/platform/utils'
 import { PREPAINT_SCRIPT } from '~/lib/security/inline-scripts'
@@ -10,7 +10,7 @@ import { NotFoundPageView } from './_views/not-found-page'
 import { fontVariables } from './fonts'
 
 export const metadata: Metadata = {
-  title: `404 | ${siteProfile.identity.name}`,
+  title: `404 | ${siteIdentity.name}`,
   description: nonPublicDescriptions.notFound,
   robots: nonPublicRobots,
 }

@@ -1,30 +1,15 @@
 import type { NextConfig } from 'next'
 
 import legacyUrlManifest from './src/content/legacy-url-manifest.json'
-import site from './src/content/site.json'
+import { resolveProfileDestination } from './src/lib/content/personal'
 import { securityHeaders } from './src/lib/security/headers'
-
-const profileDestinations: Record<string, string> = {
-  x: `https://x.com/${site.social.x.handle}`,
-  linkedin: `https://www.linkedin.com/in/${site.social.linkedin.handle}/`,
-  github: `https://github.com/${site.social.github.user}`,
-  resume: site.resumes.primary,
-  alternateResume: site.resumes.alternate,
-}
-
-function resolveLegacyDestination(destination: string) {
-  if (!destination.startsWith('profile:')) return destination
-  const resolved = profileDestinations[destination.slice('profile:'.length)]
-  if (!resolved) throw new Error(`Unknown profile destination: ${destination}`)
-  return resolved
-}
 
 const legacyRedirects = legacyUrlManifest.entries.flatMap((entry) =>
   entry.kind === 'redirect' && typeof entry.destination === 'string'
     ? [
         {
           source: entry.source,
-          destination: resolveLegacyDestination(entry.destination),
+          destination: resolveProfileDestination(entry.destination),
           permanent: true,
         },
       ]

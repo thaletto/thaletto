@@ -13,7 +13,7 @@ import {
   type SocialSnapshot,
   XCard,
 } from '~/components/social/social-cards'
-import { siteProfile } from '~/lib/content/personal'
+import { siteIdentity } from '~/lib/content/personal'
 import { brailleText } from '~/lib/design/braille'
 
 function Tree({ label, children }: { label: string; children: React.ReactNode }) {
@@ -59,7 +59,7 @@ export function SiteFooter({
             <GitHubCard data={github} />
           </li>
           <li>
-            <EmailCard identity={siteProfile.identity} />
+            <EmailCard identity={siteIdentity} />
           </li>
         </Tree>
         <Tree label="index">
@@ -92,11 +92,11 @@ export function SiteFooter({
         <div className="footer-colophon col-span-2 sm:order-first sm:col-span-1">
           <div>
             <p>
-              © <CopyrightYear /> {siteProfile.identity.name}
+              © <CopyrightYear /> {siteIdentity.name}
             </p>
             {/* the name echoed in braille — a printer's mark on the sheet */}
             <p className="footer-braille" aria-hidden>
-              {brailleText(siteProfile.identity.name.toLowerCase())}
+              {brailleText(siteIdentity.name.toLowerCase())}
             </p>
           </div>
           <div className="flex flex-col gap-2.5">
@@ -109,8 +109,8 @@ export function SiteFooter({
                 <path d="M1 10h18M1.9 6h16.2M1.9 14h16.2" />
               </svg>
               <span className="footer-geo-lines">
-                <span>{siteProfile.identity.location.latitude}</span>
-                <span>{siteProfile.identity.location.longitude}</span>
+                <span>{siteIdentity.location.latitude}</span>
+                <span>{siteIdentity.location.longitude}</span>
               </span>
             </div>
           </div>

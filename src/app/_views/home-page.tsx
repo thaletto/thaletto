@@ -36,7 +36,7 @@ import { HalftonePortrait } from '~/components/visual/halftone-portrait'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { PortraitHiddenStage } from '~/components/visual/portrait-hidden-stage'
 import { careerLifeline } from '~/lib/content/lifeline'
-import { experience, experienceYearRange, siteProfile } from '~/lib/content/personal'
+import { experience, experienceYearRange, siteIdentity } from '~/lib/content/personal'
 import { getAllPosts } from '~/lib/content/posts'
 import { getAllProjects } from '~/lib/content/projects'
 import { getGitHub, getSocial } from '~/lib/content/social-live'
@@ -83,7 +83,7 @@ export async function HomePageView() {
             <h1
               className={`${GeistPixelSquare.className} text-xl uppercase tracking-tight text-foreground`}
             >
-              {siteProfile.identity.name}
+              {siteIdentity.name}
             </h1>
             <PixelCluster variant={2} className="shrink-0" />
           </div>
@@ -93,9 +93,9 @@ export async function HomePageView() {
         </div>
         <div className="w-[9.35rem] shrink-0 sm:w-60">
           <PortraitHiddenStage
-            label={`${siteProfile.identity.portraitAlt}. Reveal the hidden topographic field`}
+            label={`${siteIdentity.portraitAlt}. Reveal the hidden topographic field`}
           >
-            <HalftonePortrait src="/images/avatar.png" alt={siteProfile.identity.portraitAlt} />
+            <HalftonePortrait src="/images/avatar.png" alt={siteIdentity.portraitAlt} />
           </PortraitHiddenStage>
         </div>
       </div>

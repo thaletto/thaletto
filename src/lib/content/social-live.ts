@@ -6,7 +6,7 @@ import type {
   SocialSnapshot,
 } from '~/components/social/social-cards'
 import bakedGithub from '~/content/github.json'
-import { siteProfile } from '~/lib/content/personal'
+import { siteIdentity, siteSocial } from '~/lib/content/personal'
 
 export interface SocialData {
   x: SocialSnapshot
@@ -26,7 +26,7 @@ export async function getGitHub(): Promise<GitHubSnapshot> {
   cacheTag('social-live')
 
   try {
-    const user = siteProfile.social.github.user
+    const user = siteSocial.github.user
     const [contrib, profile] = await Promise.all([
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`).then((r) => {
         if (!r.ok) throw new Error(`contributions ${r.status}`)
@@ -48,14 +48,14 @@ export async function getGitHub(): Promise<GitHubSnapshot> {
       levels: days.map((d) => d.level).join(''),
     }
   } catch {
-    return { user: siteProfile.social.github.user, ...bakedGithub } as GitHubSnapshot
+    return { user: siteSocial.github.user, ...bakedGithub } as GitHubSnapshot
   }
 }
 
 export async function getSocial(): Promise<SocialData> {
   return {
-    x: siteProfile.social.x,
-    linkedin: { name: siteProfile.identity.name, ...siteProfile.social.linkedin },
-    notion: siteProfile.social.notion,
+    x: siteSocial.x,
+    linkedin: { name: siteIdentity.name, ...siteSocial.linkedin },
+    notion: siteSocial.notion,
   }
 }

@@ -6,7 +6,7 @@ import {
   type SocialSnapshot,
   XCard,
 } from '~/components/social/social-cards'
-import { siteProfile } from '~/lib/content/personal'
+import { siteIdentity, siteSocial } from '~/lib/content/personal'
 
 function DetailsMark() {
   return (
@@ -72,19 +72,19 @@ function HomeContact({ social, github }: { social: SocialSnapshot; github: GitHu
       Find me at{' '}
       <XCard
         data={social}
-        trigger={`@${siteProfile.social.x.handle}`}
+        trigger={`@${siteSocial.x.handle}`}
         triggerClassName="home-contact-link"
       />
       , on GitHub as{' '}
       <GitHubCard
         data={github}
-        trigger={siteProfile.social.github.user}
+        trigger={siteSocial.github.user}
         triggerClassName="home-contact-link"
       />
       , or email me at{' '}
       <EmailCard
-        identity={siteProfile.identity}
-        trigger={siteProfile.identity.email}
+        identity={siteIdentity}
+        trigger={siteIdentity.email}
         triggerClassName="home-contact-link"
       />
     </p>
@@ -101,8 +101,8 @@ export function HomeIntroduction({
   return (
     <div className="home-introduction">
       <p className="text-sm leading-relaxed text-muted-foreground">
-        I’m {siteProfile.identity.firstName}, an {siteProfile.identity.role} who enjoys building
-        modern, well-structured apps where things{' '}
+        I’m {siteIdentity.firstName}, an {siteIdentity.role} who enjoys building modern,
+        well-structured apps where things{' '}
         <DetailsPhrase>
           <span className="home-detail-units home-detail-words">
             <span className="home-detail-unit">just</span>{' '}

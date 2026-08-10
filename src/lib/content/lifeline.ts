@@ -7,7 +7,7 @@
 // `label` ("Mar 2018") and an `age` so the rail reads month-precise.
 
 import type { LifelineMarker, LifelinePhoto } from '~/components/lifeline/types'
-import { experience, siteProfile } from '~/lib/content/personal'
+import { experience, siteIdentity } from '~/lib/content/personal'
 import { getAllProjects, type Project } from '~/lib/content/projects'
 import type { LifelineRecord } from '~/lib/lifeline-data'
 
@@ -127,7 +127,7 @@ const personalMarkers: LifelineMarker[] = [
   at(
     { year: 2003, month: 8 },
     {
-      events: [`I was born in ${siteProfile.identity.homeCity}, Tamil Nadu, India`],
+      events: [`I was born in ${siteIdentity.homeCity}, Tamil Nadu, India`],
       companies: [{ id: 'baby', name: 'Birth' }],
     },
   ),
@@ -180,7 +180,7 @@ const nowMarkers: LifelineMarker[] = [
  */
 export const careerLifeline: LifelineRecord = {
   slug: 'career',
-  name: `${siteProfile.identity.firstName}: from ${siteProfile.identity.homeCity} to building`,
+  name: `${siteIdentity.firstName}: from ${siteIdentity.homeCity} to building`,
   birthYear: BIRTH_YEAR,
   description: 'Life, school, and work, resolved to the month.',
   markers: [...personalMarkers, ...experienceMarkers(), ...projectMarkers(), ...nowMarkers].sort(
