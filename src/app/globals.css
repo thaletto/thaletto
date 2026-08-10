@@ -304,6 +304,7 @@
 
 :root {
   --ease-swift: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-route-morph: 320ms;
   --duration-post-meta: 250ms;
@@ -6080,6 +6081,7 @@ a:focus-visible .external-label .external-mark {
   align-items: center;
   gap: 0.25rem;
   padding: 1.5rem 0.75rem 1.25rem;
+  transition: transform 160ms var(--ease-out);
 }
 
 .nav-card + .nav-card {
@@ -6087,7 +6089,19 @@ a:focus-visible .external-label .external-mark {
 }
 
 .nav-card:active {
-  transform: scale(0.985);
+  transform: scale(0.97);
+}
+
+@keyframes nav-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.nav-card-enter {
+  animation: nav-card-enter 240ms var(--ease-out) backwards;
+  animation-delay: var(--enter-delay, 0ms);
 }
 
 .nc-vignette {
@@ -6194,6 +6208,10 @@ a:focus-visible .external-label .external-mark {
   border-radius: 0.75rem;
   background: color-mix(in oklab, var(--foreground) 4%, var(--background));
   box-shadow: var(--shadow-3);
+}
+
+.nc-project-icon,
+.nc-timeline-icon {
   transition: transform 300ms var(--ease-spring);
 }
 
@@ -6241,6 +6259,14 @@ a:focus-visible .external-label .external-mark {
   transform: translate(-50%, -50%);
 }
 
+.nc-timeline-message,
+.nc-timeline-marker,
+.nc-timeline-rail {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 300ms var(--ease-spring);
+}
+
 .nc-explode-a,
 .nc-explode-b,
 .nc-explode-c {
@@ -6254,6 +6280,26 @@ a:focus-visible .external-label .external-mark {
     transform: translate(-50%, calc(-50% - 2px));
   }
 
+  .nav-card:hover .nc-timeline-icon {
+    transform: translate(-50%, calc(-50% - 2px));
+  }
+
+  .nav-card:hover .nc-timeline-message {
+    transform: translate(-1.5px, -1.5px) rotate(-3deg);
+  }
+
+  .nav-card:hover .nc-timeline-marker {
+    transform: translate(1.5px, 1.5px) rotate(3deg);
+  }
+
+  .nav-card:hover .nc-timeline-rail-start {
+    transform: translate(-2px, 1.5px) rotate(-3deg);
+  }
+
+  .nav-card:hover .nc-timeline-rail-end {
+    transform: translate(2px, 1.5px) rotate(3deg);
+  }
+
   .nav-card:hover .nc-explode-a {
     transform: translate(1.5px, -1.5px) rotate(3deg);
   }
@@ -6264,47 +6310,6 @@ a:focus-visible .external-label .external-mark {
 
   .nav-card:hover .nc-explode-c {
     transform: translate(2px, 2.5px) rotate(5deg);
-  }
-}
-
-/* the timeline chat glyph: a bubble with text lines that type out and a
-   reply orb that pops when the message leaves the box */
-.nc-chat-bubble,
-.nc-chat-line,
-.nc-chat-orb,
-.nc-chat-reply {
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform 300ms var(--ease-spring);
-}
-
-.nc-chat-line {
-  transform-origin: left;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .nav-card:hover .nc-timeline-icon {
-    transform: translate(-50%, calc(-50% - 2px));
-  }
-
-  .nav-card:hover .nc-chat-bubble {
-    transform: translateY(-1.5px);
-  }
-
-  .nav-card:hover .nc-chat-line {
-    transform: translateY(-1.5px) scaleX(1.12);
-  }
-
-  .nav-card:hover .nc-chat-line + .nc-chat-line {
-    transition-delay: 45ms;
-  }
-
-  .nav-card:hover .nc-chat-orb {
-    transform: scale(1.3);
-  }
-
-  .nav-card:hover .nc-chat-reply {
-    transform: scaleX(1.08);
   }
 }
 
@@ -6334,23 +6339,32 @@ a:focus-visible .external-label .external-mark {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .nav-card-enter {
+    animation: none;
+  }
+
   .nc-sheets span,
   .nc-polaroid,
   .nc-project-icon,
   .nc-timeline-icon,
+  .nc-timeline-message,
+  .nc-timeline-marker,
+  .nc-timeline-rail,
   .nc-explode-a,
   .nc-explode-b,
-  .nc-explode-c,
-  .nc-chat-bubble,
-  .nc-chat-line,
-  .nc-chat-orb,
-  .nc-chat-reply {
+  .nc-explode-c {
     transition: none;
   }
 
   .nav-card:hover .nc-project-icon,
   .nav-card:hover .nc-timeline-icon {
     transform: translate(-50%, -50%);
+  }
+
+  .nav-card:hover .nc-timeline-message,
+  .nav-card:hover .nc-timeline-marker,
+  .nav-card:hover .nc-timeline-rail {
+    transform: none;
   }
 }
 

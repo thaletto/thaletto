@@ -16,7 +16,7 @@ export function NavCards({
     <div className="nav-cards">
       <Link
         href="/blog"
-        className="nav-card enter-swing"
+        className="nav-card nav-card-enter"
         style={{ '--enter-delay': '140ms' } as React.CSSProperties}
       >
         <span className="nc-vignette nc-sheets" aria-hidden>
@@ -30,7 +30,7 @@ export function NavCards({
 
       <Link
         href="/projects"
-        className="nav-card enter-swing"
+        className="nav-card nav-card-enter"
         style={{ '--enter-delay': '190ms' } as React.CSSProperties}
       >
         <span className="nc-vignette" aria-hidden>
@@ -84,8 +84,8 @@ export function NavCards({
 
       <Link
         href="/timeline"
-        className="nav-card enter-swing"
-        style={{ '--enter-delay': '240ms' } as React.CSSProperties}
+        className="nav-card nav-card-enter"
+        style={{ '--enter-delay': '190ms' } as React.CSSProperties}
       >
         <span className="nc-vignette" aria-hidden>
           <span className="nc-timeline-icon">
@@ -99,7 +99,7 @@ export function NavCards({
                 <circle cx="26" cy="26" r="21" />
               </g>
             </svg>
-            {/* chat bubble with a reply, nudged on hover — a message sent */}
+            {/* conversation mark for the timeline doorway */}
             <svg className="nc-timeline-mark" viewBox="0 0 18 18" width="30" height="30">
               <g
                 fill="none"
@@ -108,22 +108,24 @@ export function NavCards({
                 strokeWidth="1.5"
                 stroke="currentColor"
               >
-                <path
-                  className="nc-chat-bubble"
-                  d="M11.25 1.5H6.75C5.34 1.5 4.63 1.5 4.19 1.94C3.75 2.38 3.75 3.09 3.75 4.5V6.75C3.75 8.16 3.75 8.88 4.19 9.31C4.63 9.75 5.34 9.75 6.75 9.75H7.88L9 11.25L10.13 9.75H11.25C12.66 9.75 13.37 9.75 13.81 9.31C14.25 8.88 14.25 8.16 14.25 6.75V4.5C14.25 3.09 14.25 2.38 13.81 1.94C13.37 1.5 12.66 1.5 11.25 1.5Z"
-                />
-                <path className="nc-chat-line" d="M6.75 4.5H9" />
-                <path className="nc-chat-line" d="M6.75 6.75H11.25" />
-                <circle
-                  cx="9"
-                  cy="15"
-                  r="1.5"
-                  fill="currentColor"
-                  fillOpacity="0.3"
-                  stroke="none"
-                />
-                <circle className="nc-chat-orb" cx="9" cy="15" r="1.5" />
-                <path className="nc-chat-reply" d="M10.5 15H15.75M7.5 15H2.25" />
+                <g className="nc-timeline-message">
+                  <path d="M11.25 1.5H6.75C5.34 1.5 4.63 1.5 4.19 1.94C3.75 2.38 3.75 3.09 3.75 4.5V6.75C3.75 8.16 3.75 8.88 4.19 9.31C4.63 9.75 5.34 9.75 6.75 9.75H7.88L9 11.25L10.13 9.75H11.25C12.66 9.75 13.37 9.75 13.81 9.31C14.25 8.88 14.25 8.16 14.25 6.75V4.5C14.25 3.09 14.25 2.38 13.81 1.94C13.37 1.5 12.66 1.5 11.25 1.5Z" />
+                  <path d="M6.75 4.5H9" />
+                  <path d="M6.75 6.75H11.25" />
+                </g>
+                <g className="nc-timeline-marker">
+                  <circle
+                    cx="9"
+                    cy="15"
+                    r="1.5"
+                    fill="currentColor"
+                    fillOpacity="0.3"
+                    stroke="none"
+                  />
+                  <circle cx="9" cy="15" r="1.5" />
+                </g>
+                <path className="nc-timeline-rail nc-timeline-rail-start" d="M7.5 15H2.25" />
+                <path className="nc-timeline-rail nc-timeline-rail-end" d="M10.5 15H15.75" />
               </g>
             </svg>
           </span>
