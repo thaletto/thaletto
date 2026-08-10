@@ -7,6 +7,7 @@
 // `label` ("Mar 2018") and an `age` so the rail reads month-precise.
 
 import type { LifelineMarker, LifelinePhoto } from '~/components/lifeline/types'
+import { experience, siteProfile } from '~/lib/content/personal'
 import { getAllProjects, type Project } from '~/lib/content/projects'
 import type { LifelineRecord } from '~/lib/lifeline-data'
 
@@ -62,11 +63,6 @@ const universityPhoto: LifelinePhoto = {
   src: '/timeline/amrita.png',
   alt: 'Amrita Vishwa Vidyapeetham, Coimbatore',
 }
-const tcsPhoto: LifelinePhoto = {
-  src: '/timeline/tcs.jpg',
-  alt: 'Tata Consultancy Services',
-}
-
 function at(
   point: MonthPoint,
   fields: Omit<LifelineMarker, 'id' | 'year' | 'age'>,
@@ -110,11 +106,28 @@ function projectMarkers(): LifelineMarker[] {
   return markers.sort((a, b) => a.year - b.year)
 }
 
+function experienceMarkers(): LifelineMarker[] {
+  return experience.map((job) => {
+    const [year, month] = job.startDate.split('.').map(Number)
+    const roleArticle = /^[aeiou]/i.test(job.role) ? 'an' : 'a'
+    return at(
+      { year, month },
+      {
+        events: [
+          { text: `Joined ${job.company} as ${roleArticle} ${job.role}`, effect: 'fireworks' },
+        ],
+        companies: [{ id: job.id, name: job.company }],
+        photos: job.timelinePhoto ? [job.timelinePhoto] : undefined,
+      },
+    )
+  })
+}
+
 const personalMarkers: LifelineMarker[] = [
   at(
     { year: 2003, month: 8 },
     {
-      events: ['I was born in Chennai, Tamil Nadu, India'],
+      events: [`I was born in ${siteProfile.identity.homeCity}, Tamil Nadu, India`],
       companies: [{ id: 'baby', name: 'Birth' }],
     },
   ),
@@ -148,14 +161,6 @@ const personalMarkers: LifelineMarker[] = [
       companies: [{ id: 'university', name: 'University' }],
     },
   ),
-  at(
-    { year: 2024, month: 11 },
-    {
-      events: [{ text: 'Joined TCS as an AI Engineer', effect: 'fireworks' }],
-      companies: [{ id: 'tcs', name: 'Tata Consultancy Services' }],
-      photos: [tcsPhoto],
-    },
-  ),
 ]
 
 const nowMarkers: LifelineMarker[] = [
@@ -175,8 +180,10 @@ const nowMarkers: LifelineMarker[] = [
  */
 export const careerLifeline: LifelineRecord = {
   slug: 'career',
-  name: 'Laxman: from Bhopal to building',
+  name: `${siteProfile.identity.firstName}: from ${siteProfile.identity.homeCity} to building`,
   birthYear: BIRTH_YEAR,
   description: 'Life, school, and work, resolved to the month.',
-  markers: [...personalMarkers, ...projectMarkers(), ...nowMarkers].sort((a, b) => a.year - b.year),
+  markers: [...personalMarkers, ...experienceMarkers(), ...projectMarkers(), ...nowMarkers].sort(
+    (a, b) => a.year - b.year,
+  ),
 }

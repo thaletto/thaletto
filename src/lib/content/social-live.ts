@@ -6,7 +6,7 @@ import type {
   SocialSnapshot,
 } from '~/components/social/social-cards'
 import bakedGithub from '~/content/github.json'
-import bakedSocial from '~/content/social.json'
+import { siteProfile } from '~/lib/content/personal'
 
 export interface SocialData {
   x: SocialSnapshot
@@ -17,9 +17,8 @@ export interface SocialData {
 // Live GitHub numbers come from Cache Components so they refresh without a
 // rebuild; the baked src/content/github.json snapshot stays as the fallback seed —
 // builds and outages degrade to the last committed numbers instead of an
-// empty card. The account is read from the baked snapshot itself so app and
-// refresh scripts share one source of truth. X and LinkedIn have no public
-// endpoint, so their cards are static identity only.
+// empty card. The account identity comes from src/content/site.json. X and
+// LinkedIn have no public endpoint, so their cards are static identity only.
 
 export async function getGitHub(): Promise<GitHubSnapshot> {
   'use cache'
@@ -27,7 +26,7 @@ export async function getGitHub(): Promise<GitHubSnapshot> {
   cacheTag('social-live')
 
   try {
-    const user = (bakedGithub as GitHubSnapshot).user
+    const user = siteProfile.social.github.user
     const [contrib, profile] = await Promise.all([
       fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`).then((r) => {
         if (!r.ok) throw new Error(`contributions ${r.status}`)
@@ -49,10 +48,14 @@ export async function getGitHub(): Promise<GitHubSnapshot> {
       levels: days.map((d) => d.level).join(''),
     }
   } catch {
-    return bakedGithub as GitHubSnapshot
+    return { user: siteProfile.social.github.user, ...bakedGithub } as GitHubSnapshot
   }
 }
 
 export async function getSocial(): Promise<SocialData> {
-  return bakedSocial as SocialData
+  return {
+    x: siteProfile.social.x,
+    linkedin: { name: siteProfile.identity.name, ...siteProfile.social.linkedin },
+    notion: siteProfile.social.notion,
+  }
 }

@@ -1,4 +1,4 @@
-// Refreshes src/content/github.json (contribution levels for the hover card).
+// Refreshes src/content/github.json (numeric contribution data for the hover card).
 // Hooks into the build via package.json "prebuild" so the committed baked
 // fallback is refreshed from the account's real data on every deploy.
 // Run with --best-effort to fail softly: a transient GitHub outage must never

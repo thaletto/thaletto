@@ -4,6 +4,7 @@ import './globals.css'
 
 import { AmbientBackground } from '~/components/shell/ambient-background'
 import { ThemeProvider } from '~/components/shell/theme-provider'
+import { siteProfile } from '~/lib/content/personal'
 import { cn } from '~/lib/platform/utils'
 import { PREPAINT_SCRIPT } from '~/lib/security/inline-scripts'
 import { type ErrorBoundaryProps, ErrorPageView } from './_views/error-page'
@@ -13,7 +14,7 @@ export default function GlobalError({ retry }: ErrorBoundaryProps) {
   return (
     <html lang="en" suppressHydrationWarning className={cn('font-sans', fontVariables)}>
       <head>
-        <title>Something went wrong | Laxman K R</title>
+        <title>{`Something went wrong | ${siteProfile.identity.name}`}</title>
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: authored bootstrap script, no runtime input */}
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
       </head>

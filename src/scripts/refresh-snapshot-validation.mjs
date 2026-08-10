@@ -67,7 +67,6 @@ export function buildGithubSnapshot(contributionData, userData, { user = GITHUB_
   }
 
   return {
-    user,
     followers: userData.followers,
     total: contributionData.total.lastYear,
     from: normalizedDays[0].date,

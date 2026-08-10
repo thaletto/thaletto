@@ -12,6 +12,7 @@ import { AmbientBackground } from '~/components/shell/ambient-background'
 import { SiteFooter } from '~/components/shell/site-footer'
 import { ThemeProvider } from '~/components/shell/theme-provider'
 import { PreviewCardTimingProvider } from '~/components/social/preview-card-timing'
+import { siteProfile } from '~/lib/content/personal'
 import { getGitHub, getSocial } from '~/lib/content/social-live'
 import { seo } from '~/lib/metadata/seo'
 import { cn } from '~/lib/platform/utils'
@@ -22,8 +23,8 @@ import { fontVariables } from '../fonts'
 export const rootMetadata: Metadata = {
   metadataBase: seo.url,
   title: {
-    default: 'Laxman K R',
-    template: '%s | Laxman K R',
+    default: siteProfile.identity.name,
+    template: `%s | ${siteProfile.identity.name}`,
   },
 }
 

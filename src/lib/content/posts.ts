@@ -1,19 +1,17 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import GithubSlugger from 'github-slugger'
 import matter from 'gray-matter'
 import { z } from 'zod'
 
-import { isPublishedPostSlug, publishedPostSlugs } from './public-content-routes'
-
 /**
  * Blog post content loader.
  *
  * Posts are committed as MDX directories under `/src/content/blog/<slug>/`;
  * frontmatter is validated against a zod schema and the body is compiled for
- * `next-mdx-remote`. Only allowlisted slugs (see `public-content-routes`) are
- * ever exposed as published routes — everything else 404s upstream.
+ * `next-mdx-remote`. Every directory containing an `index.mdx` is published;
+ * adding the content directory is the only publishing step.
  */
 const POSTS_DIR = path.join(process.cwd(), 'src/content/blog')
 
@@ -46,6 +44,13 @@ export interface Post {
 }
 
 export const POST_ARTICLE_START_ID = 'post-article-start'
+
+export function getAllPostSlugs() {
+  return readdirSync(POSTS_DIR, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((slug) => existsSync(path.join(POSTS_DIR, slug, 'index.mdx')))
+}
 
 export type PostRailNode =
   | { key: string; kind: 'tick' }
@@ -169,7 +174,7 @@ export function getPost(slug: string): Post {
 }
 
 export function isPostSlug(slug: string) {
-  return isPublishedPostSlug(slug)
+  return getAllPostSlugs().includes(slug)
 }
 
 // ── "Posts like this" ─────────────────────────────────────────────────
@@ -272,7 +277,7 @@ export function getRelatedPosts(slug: string, limit = 3): Post[] {
 }
 
 export function getAllPosts(): Post[] {
-  return publishedPostSlugs
+  return getAllPostSlugs()
     .map((slug) => getPost(slug))
     .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
 }

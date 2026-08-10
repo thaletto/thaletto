@@ -25,6 +25,12 @@ export interface NotionSnapshot {
   bio?: string
 }
 
+export interface EmailIdentity {
+  name: string
+  email: string
+  country: string
+}
+
 // heatmap shows the recent ~180 days (26 weeks); the stat below still
 // counts the full past year
 const WEEKS = 26
@@ -144,8 +150,8 @@ function Identity({
 }
 
 // Per-service hover cards for the chrome's social links. Server rendering
-// supplies ISR-backed values with src/content/social.json and src/content/github.json
-// as fallbacks; an open card never touches the network. Touch devices just
+// supplies ISR-backed values with src/content/site.json and src/content/github.json
+// as sources; an open card never touches the network. Touch devices just
 // follow the link. Bodies are exported separately so other triggers can serve
 // the same cards.
 // X has no public follower endpoint; the card is static identity only.
@@ -196,7 +202,7 @@ export function NotionCardBody({ data }: { data: NotionSnapshot }) {
   return (
     <Identity
       name={data.name}
-      sub="laxmankr.notion.site"
+      sub={new URL(data.url).hostname}
       bio={data.bio}
       lead={
         <span className="service-card-logo" aria-hidden>
@@ -332,17 +338,17 @@ export function GitHubCard({
 // marks, sender, recipient, and folded seams. Purely visual; the trigger
 // itself opens mailto:.
 export function EmailCard({
-  address,
+  identity,
   trigger = 'Email',
   triggerClassName = 'footer-tree-link',
 }: {
-  address: string
+  identity: EmailIdentity
   trigger?: React.ReactNode
   triggerClassName?: string
 }) {
   return (
     <SitePreviewCard
-      href={`mailto:${address}`}
+      href={`mailto:${identity.email}`}
       triggerClassName={triggerClassName}
       closeDelay={120}
       popupClassName="link-card email-envelope-card"
@@ -352,14 +358,14 @@ export function EmailCard({
           <span className="email-envelope-flap" />
           <span className="email-envelope-return">
             <span>TO</span>
-            LAXMAN K R
+            {identity.name.toUpperCase()}
             <br />
-            INDIA
+            {identity.country.toUpperCase()}
           </span>
           <span className="email-envelope-stamps">
             <span className="email-envelope-stamp email-envelope-stamp-portrait">
               <Image src="/images/avatar.png" alt="" width={32} height={32} />
-              <span>LAXMAN · 22</span>
+              <span>{identity.name.split(' ')[0].toUpperCase()}</span>
             </span>
             <span className="email-envelope-stamp email-envelope-stamp-mark">
               <span className="email-envelope-stamp-star">&#10022;</span>
@@ -367,7 +373,7 @@ export function EmailCard({
             </span>
           </span>
           <span className="email-envelope-postmark" />
-          <span className="email-envelope-address">{address}</span>
+          <span className="email-envelope-address">{identity.email}</span>
         </span>
       }
     >

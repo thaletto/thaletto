@@ -6,6 +6,7 @@ import {
   type SocialSnapshot,
   XCard,
 } from '~/components/social/social-cards'
+import { siteProfile } from '~/lib/content/personal'
 
 function DetailsMark() {
   return (
@@ -68,13 +69,22 @@ function DetailsPhrase({ children }: { children: React.ReactNode }) {
 function HomeContact({ social, github }: { social: SocialSnapshot; github: GitHubSnapshot }) {
   return (
     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-      Find me at <XCard data={social} trigger="@thaletto" triggerClassName="home-contact-link" />,
-      on GitHub as{' '}
-      <GitHubCard data={github} trigger="thaletto" triggerClassName="home-contact-link" />, or email
-      me at{' '}
+      Find me at{' '}
+      <XCard
+        data={social}
+        trigger={`@${siteProfile.social.x.handle}`}
+        triggerClassName="home-contact-link"
+      />
+      , on GitHub as{' '}
+      <GitHubCard
+        data={github}
+        trigger={siteProfile.social.github.user}
+        triggerClassName="home-contact-link"
+      />
+      , or email me at{' '}
       <EmailCard
-        address="krlaxman03@gmail.com"
-        trigger="krlaxman03@gmail.com"
+        identity={siteProfile.identity}
+        trigger={siteProfile.identity.email}
         triggerClassName="home-contact-link"
       />
     </p>
@@ -91,8 +101,8 @@ export function HomeIntroduction({
   return (
     <div className="home-introduction">
       <p className="text-sm leading-relaxed text-muted-foreground">
-        I’m Laxman, a full-stack developer who enjoys building modern, well-structured apps where
-        things{' '}
+        I’m {siteProfile.identity.firstName}, an {siteProfile.identity.role} who enjoys building
+        modern, well-structured apps where things{' '}
         <DetailsPhrase>
           <span className="home-detail-units home-detail-words">
             <span className="home-detail-unit">just</span>{' '}

@@ -7,6 +7,8 @@
  */
 import type { Metadata } from 'next'
 
+import { siteProfile } from '~/lib/content/personal'
+
 import { seo } from './seo'
 
 interface MetadataOptions {
@@ -38,7 +40,7 @@ export function pageMetadata({
       description,
       type,
       locale: 'en_US',
-      siteName: 'Laxman K R',
+      siteName: siteProfile.identity.name,
       url: canonical,
     },
     twitter: {

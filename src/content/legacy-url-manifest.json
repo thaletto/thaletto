@@ -6,7 +6,7 @@
       "source": "/",
       "probes": ["/"],
       "status": 200,
-      "contains": "Laxman K R"
+      "contains": "<main"
     },
     {
       "kind": "page",
@@ -47,56 +47,56 @@
     {
       "kind": "redirect",
       "source": "/twitter",
-      "destination": "https://x.com/thaletto",
+      "destination": "profile:x",
       "probes": ["/twitter"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/x",
-      "destination": "https://x.com/thaletto",
+      "destination": "profile:x",
       "probes": ["/x"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/linkedin",
-      "destination": "https://www.linkedin.com/in/laxmanramesh/",
+      "destination": "profile:linkedin",
       "probes": ["/linkedin"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/github",
-      "destination": "https://github.com/thaletto",
+      "destination": "profile:github",
       "probes": ["/github"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/cv",
-      "destination": "https://thaletto.github.io/resume/Laxman_KR_Resume.pdf",
+      "destination": "profile:resume",
       "probes": ["/cv"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/resume",
-      "destination": "https://thaletto.github.io/resume/Laxman_KR_Resume.pdf",
+      "destination": "profile:resume",
       "probes": ["/resume"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/cv2",
-      "destination": "https://thaletto.github.io/resume/Laxman_KR_Job_Resume_LWD.pdf",
+      "destination": "profile:alternateResume",
       "probes": ["/cv2"],
       "status": 308
     },
     {
       "kind": "redirect",
       "source": "/resume2",
-      "destination": "https://thaletto.github.io/resume/Laxman_KR_Job_Resume_LWD.pdf",
+      "destination": "profile:alternateResume",
       "probes": ["/resume2"],
       "status": 308
     }

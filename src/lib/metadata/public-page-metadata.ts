@@ -1,8 +1,10 @@
+import { siteProfile } from '~/lib/content/personal'
+
 export const publicPageMetadata = {
   home: {
-    title: 'Laxman K R',
-    description: 'AI Engineer',
-    ogDescription: 'AI Engineer',
+    title: siteProfile.identity.name,
+    description: siteProfile.identity.role,
+    ogDescription: siteProfile.identity.role,
   },
   blog: {
     title: 'Writing',
