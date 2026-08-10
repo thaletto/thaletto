@@ -255,7 +255,16 @@ export function HalftonePortrait({
     <span ref={wrapperRef} className={className} data-halftone>
       {/* Preload the single colour source without showing the raw image. */}
       {/* biome-ignore lint/performance/noImgElement: hidden <img> prefetches the colour source for canvas reprocessing; next/image cannot drive 2D canvas reads */}
-      <img src={src} alt="" width={1000} height={1000} crossOrigin="anonymous" hidden aria-hidden />
+      <img
+        src={src}
+        alt=""
+        width={1000}
+        height={1000}
+        loading="eager"
+        crossOrigin="anonymous"
+        hidden
+        aria-hidden
+      />
       <canvas ref={canvasRef} role="img" aria-label={alt} className="halftone-canvas" />
     </span>
   )
