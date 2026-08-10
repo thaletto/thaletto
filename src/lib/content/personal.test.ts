@@ -1,7 +1,13 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
 
-import { parseSiteProfile } from './personal'
+import {
+  parseSiteProfile,
+  siteDestinations,
+  siteExperience,
+  siteIdentity,
+  siteSocial,
+} from './personal'
 
 const validProfile = {
   identity: {
@@ -50,6 +56,72 @@ describe('Site Profile', () => {
         }),
       /identity\.email/,
     )
+  })
+
+  test('rejects missing required values and invalid destinations', () => {
+    const { role: _role, ...identityWithoutRole } = validProfile.identity
+    assert.throws(
+      () => parseSiteProfile({ ...validProfile, identity: identityWithoutRole }),
+      /identity\.role/,
+    )
+    assert.throws(
+      () =>
+        parseSiteProfile({
+          ...validProfile,
+          resumes: { ...validProfile.resumes, primary: 'not-a-url' },
+        }),
+      /resumes\.primary/,
+    )
+    assert.throws(
+      () =>
+        parseSiteProfile({
+          ...validProfile,
+          social: {
+            ...validProfile.social,
+            notion: { ...validProfile.social.notion, url: 'not-a-url' },
+          },
+        }),
+      /social\.notion\.url/,
+    )
+  })
+
+  test('accepts omitted optional profile fields', () => {
+    const profile = parseSiteProfile({
+      ...validProfile,
+      social: {
+        x: { name: 'Ada', handle: 'ada' },
+        linkedin: { handle: 'ada-lovelace' },
+        notion: { name: 'Notes', url: 'https://example.com/notes' },
+        github: { user: 'ada' },
+      },
+      experience: [
+        {
+          id: 'analytical-engine',
+          company: 'Analytical Engine',
+          role: 'Programmer',
+          startDate: '1842.01',
+        },
+      ],
+    })
+
+    assert.equal(profile.social.x.bio, undefined)
+    assert.deepEqual(profile.experience[0], {
+      id: 'analytical-engine',
+      company: 'Analytical Engine',
+      role: 'Programmer',
+      start: { year: 1842, month: 1 },
+      end: undefined,
+      yearRange: '1842—now',
+      url: undefined,
+      timelinePhoto: undefined,
+    })
+  })
+
+  test('publishes the real authored record through the Site Profile interface', () => {
+    assert.ok(siteIdentity.name.length > 0)
+    assert.ok(siteSocial.github.user.length > 0)
+    assert.match(siteDestinations.resume, /^https:\/\//)
+    assert.ok(siteExperience.length > 0)
   })
 
   test('normalizes current and completed experience for callers', () => {
