@@ -85,6 +85,20 @@
       "destination": "https://thaletto.github.io/resume/Laxman_KR_Resume.pdf",
       "probes": ["/resume"],
       "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/cv2",
+      "destination": "https://thaletto.github.io/resume/Laxman_KR_Job_Resume_LWD.pdf",
+      "probes": ["/cv2"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/resume2",
+      "destination": "https://thaletto.github.io/resume/Laxman_KR_Job_Resume_LWD.pdf",
+      "probes": ["/resume2"],
+      "status": 308
     }
   ]
 }
