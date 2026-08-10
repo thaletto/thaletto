@@ -1,8 +1,11 @@
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
-import matter from 'gray-matter'
 import { z } from 'zod'
+import {
+  discoverPublishedSlugs,
+  publishedFrontmatterSchema,
+  readPublishedDocument,
+} from './published-document'
 
 /**
  * Project content loader.
@@ -18,7 +21,7 @@ const projectLinkSchema = z.object({
   url: z.string().min(1),
 })
 
-const projectFrontmatterSchema = z.object({
+const projectFrontmatterSchema = publishedFrontmatterSchema.extend({
   title: z.string().min(1),
   description: z.string().min(1),
   publishedAt: z.coerce.date(),
@@ -28,9 +31,6 @@ const projectFrontmatterSchema = z.object({
   endDate: z.string().optional(),
   tags: z.array(z.string()).default([]),
   links: z.array(projectLinkSchema).default([]),
-  cover: z.string().startsWith('./').optional(),
-  coverWidth: z.number().int().positive().optional(),
-  coverHeight: z.number().int().positive().optional(),
 })
 
 export interface ProjectLink {
@@ -66,44 +66,26 @@ export interface ProjectRow
   cover?: ProjectCover
 }
 
-const projectsBySlug = new Map<string, Project>()
-
-function bodyStats(body: string) {
-  const text = body.replace(/```[\s\S]*?```/g, '')
-  const words = (text.match(/[A-Za-z0-9]+/g) ?? []).length
-  return {
-    units: words,
-    minutes: Math.max(1, Math.round(words / 200)),
-  }
-}
-
 export function getAllProjectSlugs() {
-  return readdirSync(PROJECTS_DIR, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .filter((slug) => existsSync(path.join(PROJECTS_DIR, slug, 'index.mdx')))
+  return discoverPublishedSlugs(PROJECTS_DIR)
 }
 
 export function getProject(slug: string): Project {
-  const cached = projectsBySlug.get(slug)
-  if (cached) return cached
-
-  const raw = readFileSync(path.join(PROJECTS_DIR, slug, 'index.mdx'), 'utf8')
-  const { data, content } = matter(raw)
-  const fm = projectFrontmatterSchema.parse(data)
-
-  const stats = bodyStats(content)
-
-  let cover: ProjectCover | undefined
-  if (fm.cover) {
-    if (!fm.coverWidth || !fm.coverHeight)
-      throw new Error(`${slug}: cover requires coverWidth and coverHeight`)
-    cover = {
-      src: `/content/projects/${slug}/${fm.cover.slice(2)}`,
-      width: fm.coverWidth,
-      height: fm.coverHeight,
-    }
-  }
+  const {
+    frontmatter: fm,
+    body,
+    stats,
+    cover: publishedCover,
+  } = readPublishedDocument({
+    collection: 'Projects',
+    directory: PROJECTS_DIR,
+    slug,
+    schema: projectFrontmatterSchema,
+    coverRoot: '/content/projects',
+  })
+  const cover: ProjectCover | undefined = publishedCover
+    ? { src: publishedCover.src, width: publishedCover.width, height: publishedCover.height }
+    : undefined
 
   const project: Project = {
     slug,
@@ -117,11 +99,10 @@ export function getProject(slug: string): Project {
     tags: fm.tags,
     links: fm.links,
     cover,
-    body: content,
+    body,
     bodyUnits: stats.units,
     readingMinutes: stats.minutes,
   }
-  projectsBySlug.set(slug, project)
   return project
 }
 

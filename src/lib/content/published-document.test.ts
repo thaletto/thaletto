@@ -5,6 +5,7 @@ import path from 'node:path'
 import { after, describe, test } from 'node:test'
 import { z } from 'zod'
 import { getPost } from './posts'
+import { getAllProjects, getProject } from './projects'
 import {
   discoverPublishedSlugs,
   publishedFrontmatterSchema,
@@ -32,6 +33,22 @@ describe('Published Document', () => {
     assert.equal(post.slug, 'the-great-pyramid-of-js')
     assert.ok(post.bodyUnits > 0)
     assert.ok(post.readingMinutes > 0)
+  })
+
+  test('publishes existing Projects through their stable interface and ordering', () => {
+    const project = getProject('ams')
+    const projects = getAllProjects()
+
+    assert.equal(project.slug, 'ams')
+    assert.ok(project.bodyUnits > 0)
+    assert.ok(Array.isArray(project.tags))
+    assert.ok(Array.isArray(project.links))
+    assert.ok(
+      projects.every(
+        (entry, index) =>
+          index === 0 || Number(projects[index - 1].sort ?? 0) >= Number(entry.sort ?? 0),
+      ),
+    )
   })
 
   test('discovers only directories with an index document', () => {

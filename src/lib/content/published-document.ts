@@ -67,7 +67,7 @@ export function readPublishedDocument<T extends z.ZodType>({
         src: `${coverRoot}/${slug}/${frontmatter.cover.slice(2)}`,
         width: frontmatter.coverWidth,
         height: frontmatter.coverHeight,
-        caption: frontmatter.coverCaption,
+        ...(frontmatter.coverCaption ? { caption: frontmatter.coverCaption } : {}),
       }
     }
 
