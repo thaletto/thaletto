@@ -4371,6 +4371,177 @@ a:focus-visible .external-label .external-mark {
   white-space: nowrap;
 }
 
+/* ── Tech stack: reusable card + MDX grid ────────────────────────── */
+
+.tech-stack {
+  overflow: hidden;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 32%, transparent);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+}
+
+.tech-stack[data-variant="card"] {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.tech-stack[data-variant="embedded"] {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.tech-stack-header {
+  display: flex;
+  min-height: 4.5rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: var(--border-hairline) solid
+    color-mix(in oklab, var(--muted-foreground) 24%, transparent);
+}
+
+.tech-stack[data-variant="card"] .tech-stack-header {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tech-stack[data-variant="card"] .tech-stack-grid {
+  gap: 0;
+  margin-top: 1rem;
+  background: transparent;
+}
+
+.tech-stack[data-variant="card"] .tech-stack-item,
+.tech-stack[data-variant="card"] .tech-stack-filler {
+  background: transparent;
+}
+
+.tech-stack[data-variant="embedded"] .tech-stack-grid {
+  gap: 0;
+  background: transparent;
+}
+
+.tech-stack[data-variant="embedded"] .tech-stack-item,
+.tech-stack[data-variant="embedded"] .tech-stack-filler {
+  background: transparent;
+}
+
+.tech-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--border-hairline);
+  margin: 0;
+  padding: 0;
+  background: color-mix(in oklab, var(--muted-foreground) 24%, transparent);
+}
+
+.tech-stack-item,
+.tech-stack-filler {
+  min-width: 0;
+  min-height: 5.5rem;
+  background: var(--background);
+}
+
+.tech-stack-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 0.875rem 0.625rem;
+  text-align: center;
+}
+
+.tech-stack-icon {
+  display: grid;
+  width: 1.625rem;
+  height: 1.625rem;
+  place-items: center;
+  color: var(--foreground);
+}
+
+.tech-stack-icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tech-stack-icon-theme-dark {
+  display: none;
+}
+
+.dark .tech-stack-icon-theme-light {
+  display: none;
+}
+
+.dark .tech-stack-icon-theme-dark {
+  display: block;
+}
+
+.dark .tech-stack-icon-needs-invert {
+  filter: invert(1);
+}
+
+.tech-stack-label {
+  max-width: 100%;
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.tech-stack-filler {
+  display: none;
+}
+
+.tech-stack-filler-mobile {
+  display: block;
+}
+
+.tech-stack-empty {
+  min-height: 15rem;
+  border-radius: 0;
+}
+
+.tech-stack-empty-media {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.25rem;
+  color: var(--muted-foreground);
+}
+
+.tech-stack-empty-media > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.prose .tech-stack-grid {
+  padding-left: 0;
+}
+
+.prose .tech-stack-grid > li {
+  margin: 0;
+  list-style: none;
+}
+
+.prose .tech-stack-grid > li::before {
+  content: none;
+}
+
+@media (min-width: 36rem) {
+  .tech-stack-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tech-stack-filler {
+    display: block;
+  }
+}
+
 /* ── Per-service hover cards (components/social-cards.tsx) ────────── */
 
 .service-card {

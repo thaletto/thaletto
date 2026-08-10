@@ -76,10 +76,12 @@ The UI is defined entirely in JSON. The AI outputs both text and a component tre
 
 ## Tech Stack
 
-- **Framework:** TanStack Start (file-based routing, server functions)
-- **UI:** React 19 + shadcn/ui + TailwindCSS 4
-- **AI:** AI SDK with ToolLoopAgent + @ai-sdk/gateway
-- **Rendering:** [json-render](https://json-render.dev/)
-- **Charts:** Recharts + React Three Fiber (3D)
-- **Rate Limiting:** @upstash/redis
-- **Deployment:** Netlify
+<TechStack variant="embedded">
+  <TechStackItem label="TanStack Start"><Tanstack className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="React 19"><ReactLight /></TechStackItem>
+  <TechStackItem label="shadcn/ui"><ShadcnUi className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="Tailwind CSS 4"><Tailwindcss /></TechStackItem>
+  <TechStackItem label="Upstash Redis"><Upstash /></TechStackItem>
+  <TechStackItem label="Netlify"><Netlify /></TechStackItem>
+  <TechStackItem label="AI SDK"><Vercel className="tech-stack-icon-theme-light" /><VercelDark className="tech-stack-icon-theme-dark" /></TechStackItem>
+</TechStack>

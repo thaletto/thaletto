@@ -7,6 +7,31 @@ import { PostRow } from '~/components/blog/post-row'
 import { HomeIntroduction } from '~/components/home/home-introduction'
 import { NavCards } from '~/components/home/nav-cards'
 import { ExternalLabel } from '~/components/social/external-mark'
+import { TechStack, TechStackItem } from '~/components/tech-stack'
+import { Bun } from '~/components/ui/svgs/bun'
+import { Cloudflare } from '~/components/ui/svgs/cloudflare'
+import { Docker } from '~/components/ui/svgs/docker'
+import { EffectDark } from '~/components/ui/svgs/effectDark'
+import { EffectLight } from '~/components/ui/svgs/effectLight'
+import { Fastapi } from '~/components/ui/svgs/fastapi'
+import { Git } from '~/components/ui/svgs/git'
+import { Golang } from '~/components/ui/svgs/golang'
+import { GolangDark } from '~/components/ui/svgs/golangDark'
+import { Google } from '~/components/ui/svgs/google'
+import { GoogleCloud } from '~/components/ui/svgs/googleCloud'
+import { LangchainLogo } from '~/components/ui/svgs/langchainLogo'
+import { Microsoft } from '~/components/ui/svgs/microsoft'
+import { NextjsIconDark } from '~/components/ui/svgs/nextjsIconDark'
+import { Postgresql } from '~/components/ui/svgs/postgresql'
+import { Python } from '~/components/ui/svgs/python'
+import { QdrantIconDark } from '~/components/ui/svgs/qdrantIconDark'
+import { QdrantIconLight } from '~/components/ui/svgs/qdrantIconLight'
+import { ReactLight } from '~/components/ui/svgs/reactLight'
+import { Redis } from '~/components/ui/svgs/redis'
+import { Tanstack } from '~/components/ui/svgs/tanstack'
+import { Typescript } from '~/components/ui/svgs/typescript'
+import { Vercel } from '~/components/ui/svgs/vercel'
+import { VercelDark } from '~/components/ui/svgs/vercelDark'
 import { HalftonePortrait } from '~/components/visual/halftone-portrait'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { PortraitHiddenStage } from '~/components/visual/portrait-hidden-stage'
@@ -114,6 +139,73 @@ export async function HomePageView() {
           ))}
         </ul>
       </section>
+
+      <TechStack className="enter mt-16" index={nextSectionIndex()} title="Skills">
+        <TechStackItem label="Python">
+          <Python />
+        </TechStackItem>
+        <TechStackItem label="TypeScript">
+          <Typescript />
+        </TechStackItem>
+        <TechStackItem label="Go">
+          <Golang className="tech-stack-icon-theme-light" />
+          <GolangDark className="tech-stack-icon-theme-dark" />
+        </TechStackItem>
+        <TechStackItem label="Bun">
+          <Bun />
+        </TechStackItem>
+        <TechStackItem label="React">
+          <ReactLight />
+        </TechStackItem>
+        <TechStackItem label="Next.js">
+          <NextjsIconDark className="tech-stack-icon-needs-invert" />
+        </TechStackItem>
+        <TechStackItem label="TanStack Start">
+          <Tanstack className="tech-stack-icon-needs-invert" />
+        </TechStackItem>
+        <TechStackItem label="Effect">
+          <EffectLight className="tech-stack-icon-theme-light" />
+          <EffectDark className="tech-stack-icon-theme-dark" />
+        </TechStackItem>
+        <TechStackItem label="FastAPI">
+          <Fastapi />
+        </TechStackItem>
+        <TechStackItem label="Git">
+          <Git />
+        </TechStackItem>
+        <TechStackItem label="Docker">
+          <Docker />
+        </TechStackItem>
+        <TechStackItem label="PostgreSQL">
+          <Postgresql />
+        </TechStackItem>
+        <TechStackItem label="Microsoft Autogen">
+          <Microsoft />
+        </TechStackItem>
+        <TechStackItem label="Google ADK">
+          <Google />
+        </TechStackItem>
+        <TechStackItem label="LangChain">
+          <LangchainLogo />
+        </TechStackItem>
+        <TechStackItem label="AI SDK">
+          <Vercel className="tech-stack-icon-theme-light" />
+          <VercelDark className="tech-stack-icon-theme-dark" />
+        </TechStackItem>
+        <TechStackItem label="Redis">
+          <Redis />
+        </TechStackItem>
+        <TechStackItem label="Qdrant">
+          <QdrantIconLight className="tech-stack-icon-theme-light" />
+          <QdrantIconDark className="tech-stack-icon-theme-dark" />
+        </TechStackItem>
+        <TechStackItem label="Cloudflare D1">
+          <Cloudflare />
+        </TechStackItem>
+        <TechStackItem label="Google Cloud">
+          <GoogleCloud />
+        </TechStackItem>
+      </TechStack>
 
       <section className="mt-16">
         <div className="flex items-center justify-between gap-4">

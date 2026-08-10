@@ -22,6 +22,7 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
-    "@fluid": "https://www.fluidfunctionalism.com/r/base/{name}.json"
+    "@fluid": "https://www.fluidfunctionalism.com/r/base/{name}.json",
+    "@svgl": "https://svgl.app/r/{name}.json"
   }
 }
