@@ -1,15 +1,7 @@
 'use client'
 
 import { Film, Image as ImageIcon } from 'lucide-react'
-import {
-  type CSSProperties,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { type CSSProperties, forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '~/lib/platform/utils'
 import { CompanyIcon } from './company-icon'
 import {
@@ -22,22 +14,12 @@ import { useLifelineFireworks } from './lifeline-fireworks'
 import { LifelineLightbox, type LifelineLightboxStart } from './lifeline-lightbox'
 import { aggregateLifelinePeople, LifelinePeople } from './lifeline-people'
 import { LifelinePhotoCard } from './lifeline-photos'
-import { getMarkerHeight, hasMarkerContent } from './lifeline-utils'
+import { hasMarkerContent } from './lifeline-utils'
 import type { LifelineEvent, LifelineMarker, LifelineProps } from './types'
-import { useLifelineIntro } from './use-lifeline-intro'
-import { useLifelineVerticalScroll } from './use-lifeline-vertical-scroll'
+import { useLifelineVerticalController } from './use-lifeline-vertical-controller'
 
 const GRID_CLASS = 'grid grid-cols-[2.5rem_1rem_1fr] gap-x-3'
 const RAIL_LEFT = 'calc(2.5rem + 0.75rem + 0.5rem)'
-
-/**
- * Above this many entries the delay-armed intro fades would promote
- * every entry to a compositor layer at once and crash mobile Safari's
- * compositor. Long timelines fade entries in as they enter the
- * viewport during the auto-scroll instead. Same look, but only a
- * handful of live animations at any moment.
- */
-const MAX_ARMED_ENTRIES = 80
 
 function RailTick() {
   return (
@@ -296,18 +278,7 @@ export function LifelineVertical({
   title = 'Lifeline',
   mode = 'auto',
 }: LifelineProps) {
-  // Only an explicit `mode` embeds the vertical layout. `"auto"` measures
-  // scrollability on desktop, but the mobile layout *is* a vertical
-  // scroller inside a scrolling stage, so that test would read every
-  // full-page timeline as embedded and drop its intro.
-  const isEmbed = mode === 'embed'
-  const heights = useMemo(
-    () => markers.map((marker, index) => getMarkerHeight(marker, markers[index + 1]?.year)),
-    [markers],
-  )
-
-  const intro = useLifelineIntro(heights)
-  const isIntroAnimating = intro.shouldPlay && intro.isPlaying
+  const controller = useLifelineVerticalController({ markers, mode })
 
   // Warm the event media posters during idle. The tap-to-open
   // lightbox measures its frame from these, and a cold fetch at tap
@@ -337,31 +308,14 @@ export function LifelineVertical({
     return () => window.clearTimeout(timeout)
   }, [markers])
 
-  const { sectionRef, setEntryRef, isLayoutReady } = useLifelineVerticalScroll(markers.length, {
-    isEmbed,
-    introLocked: isIntroAnimating,
-    introAnimating: isIntroAnimating,
-    // Embedded, the sweep would play out unseen below the fold, and
-    // lock the module's own scroller while doing it.
-    introSkipped: !intro.shouldPlay || isEmbed,
-    introRailMs: intro.railDuration,
-    introGetTrackProgress: intro.getTrackProgressAtTime,
-    onIntroScrollStart: intro.startIntroTimer,
-    onIntroSettleComplete: intro.completeIntro,
-  })
-
-  const showIntro = isIntroAnimating && isLayoutReady && !isEmbed
-  const revealOnScroll = markers.length > MAX_ARMED_ENTRIES
-  const animateEntries = showIntro && !revealOnScroll
-
   // Rail-synced fades for long timelines. Entries render hidden and
   // each one fades in the moment the rail tip (--lifeline-intro-progress,
   // written every frame by the intro scroll) crosses its position. This is
   // desktop's choreography, but each entry drops its animation (and
   // compositor layer) as soon as its fade finishes.
   useEffect(() => {
-    if (!showIntro || !revealOnScroll) return
-    const section = sectionRef.current
+    if (!controller.showIntro || !controller.revealOnScroll) return
+    const section = controller.sectionRef.current
     const ol = section?.querySelector('ol')
     if (!section || !ol) return
 
@@ -404,40 +358,24 @@ export function LifelineVertical({
         el?.classList.remove('opacity-0', 'lifeline-marker-intro')
       })
     }
-  }, [showIntro, revealOnScroll, sectionRef])
-
-  const introStyle = {
-    '--lifeline-labels-ms': `${intro.labelsDuration}ms`,
-    '--lifeline-rail-ms': `${intro.railDuration}ms`,
-  } as CSSProperties
-
-  // Embedded, the module opens at the start and the intro is skipped, so
-  // once the entries are laid out, carry the reader to the present. The
-  // intro would have settled the page-mode rail there instead.
-  const scrolledToPresent = useRef(false)
-  useEffect(() => {
-    if (!isLayoutReady || scrolledToPresent.current) return
-    if (mode !== 'embed') return
-    scrolledToPresent.current = true
-
-    const last = sectionRef.current?.querySelector('li:last-child')
-    if (!last) return
-
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    last.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'center' })
-  }, [isLayoutReady, mode, sectionRef])
+  }, [controller.showIntro, controller.revealOnScroll, controller.sectionRef])
 
   return (
     <article
-      ref={sectionRef}
+      ref={controller.sectionRef}
       aria-label={title}
       className={cn(
         'relative select-none px-6 pb-10 pt-4 [&_a]:cursor-pointer',
-        !isLayoutReady && 'invisible',
+        !controller.isLayoutReady && 'invisible',
       )}
-      style={showIntro ? introStyle : undefined}
+      style={controller.showIntro ? controller.introStyle : undefined}
     >
-      <div className={cn(`${GRID_CLASS} mb-6 items-end`, showIntro && 'lifeline-labels-intro')}>
+      <div
+        className={cn(
+          `${GRID_CLASS} mb-6 items-end`,
+          controller.showIntro && 'lifeline-labels-intro',
+        )}
+      >
         <p className="text-right text-[11px] font-medium uppercase leading-4 tracking-[0.08em] text-zinc-500 transition-colors duration-300 dark:text-zinc-600">
           Age
         </p>
@@ -456,7 +394,7 @@ export function LifelineVertical({
           <div
             className={cn(
               'h-full w-px border-l border-dashed border-zinc-300 transition-colors duration-300 dark:border-zinc-800',
-              showIntro && 'lifeline-rail-intro-vertical',
+              controller.showIntro && 'lifeline-rail-intro-vertical',
             )}
           />
         </div>
@@ -465,14 +403,11 @@ export function LifelineVertical({
           {markers.map((marker, index) => (
             <LifelineVerticalEntry
               key={marker.id}
-              ref={(node) => setEntryRef(index, node)}
+              ref={(node) => controller.setEntryRef(index, node)}
               marker={marker}
               birthYear={birthYear}
               enterDelay={120 + Math.abs(index - (markers.length - 1) / 2) * 50}
-              animateIntro={animateEntries}
-              revealPending={showIntro && revealOnScroll}
-              introDelay={intro.getMarkerDelay(index)}
-              introDuration={intro.getMarkerFadeDuration(index)}
+              {...controller.entryAnimation(index)}
             />
           ))}
         </ol>

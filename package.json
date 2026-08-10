@@ -13,6 +13,7 @@
     "build": "next build",
     "start": "next start",
     "test": "bun test",
+    "test:e2e": "playwright test",
     "format": "biome format --write .",
     "lint": "biome lint .",
     "fix": "biome check --write ."
