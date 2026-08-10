@@ -1,9 +1,13 @@
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import GithubSlugger from 'github-slugger'
-import matter from 'gray-matter'
 import { z } from 'zod'
+import {
+  discoverPublishedSlugs,
+  type PublishedCover,
+  publishedFrontmatterSchema,
+  readPublishedDocument,
+} from './published-document'
 
 /**
  * Blog post content loader.
@@ -15,22 +19,13 @@ import { z } from 'zod'
  */
 const POSTS_DIR = path.join(process.cwd(), 'src/content/blog')
 
-const frontmatterSchema = z.object({
+const frontmatterSchema = publishedFrontmatterSchema.extend({
   title: z.string().min(1),
   description: z.string().optional(),
   publishedAt: z.coerce.date(),
-  cover: z.string().startsWith('./').optional(),
-  coverWidth: z.number().int().positive().optional(),
-  coverHeight: z.number().int().positive().optional(),
-  coverCaption: z.string().optional(),
 })
 
-export interface PostCover {
-  src: string
-  width: number
-  height: number
-  caption?: string
-}
+export type PostCover = PublishedCover
 
 export interface Post {
   slug: string
@@ -46,10 +41,7 @@ export interface Post {
 export const POST_ARTICLE_START_ID = 'post-article-start'
 
 export function getAllPostSlugs() {
-  return readdirSync(POSTS_DIR, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .filter((slug) => existsSync(path.join(POSTS_DIR, slug, 'index.mdx')))
+  return discoverPublishedSlugs(POSTS_DIR)
 }
 
 export type PostRailNode =
@@ -132,34 +124,19 @@ export function buildPostRail(title: string, body: string, idPrefix = ''): PostR
   return nodes
 }
 
-// Words are the countable prose atoms the spec plate reports
-function bodyStats(body: string) {
-  const text = body.replace(/```[\s\S]*?```/g, '')
-  const words = (text.match(/[A-Za-z0-9]+/g) ?? []).length
-  return {
-    units: words,
-    minutes: Math.max(1, Math.round(words / 200)),
-  }
-}
-
 export function getPost(slug: string): Post {
-  const raw = readFileSync(path.join(POSTS_DIR, slug, 'index.mdx'), 'utf8')
-  const { data, content } = matter(raw)
-  const fm = frontmatterSchema.parse(data)
-
-  const stats = bodyStats(content)
-
-  let cover: PostCover | undefined
-  if (fm.cover) {
-    if (!fm.coverWidth || !fm.coverHeight)
-      throw new Error(`${slug}: cover requires coverWidth and coverHeight`)
-    cover = {
-      src: `/content/blog/${slug}/${fm.cover.slice(2)}`,
-      width: fm.coverWidth,
-      height: fm.coverHeight,
-      caption: fm.coverCaption,
-    }
-  }
+  const {
+    frontmatter: fm,
+    body,
+    stats,
+    cover,
+  } = readPublishedDocument({
+    collection: 'Writing',
+    directory: POSTS_DIR,
+    slug,
+    schema: frontmatterSchema,
+    coverRoot: '/content/blog',
+  })
 
   return {
     slug,
@@ -169,7 +146,7 @@ export function getPost(slug: string): Post {
     cover,
     readingMinutes: stats.minutes,
     bodyUnits: stats.units,
-    body: content,
+    body,
   }
 }
 
