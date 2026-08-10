@@ -13,6 +13,7 @@ type FetchResponse = Pick<Response, 'ok' | 'status' | 'json'>
 export type GitHubFetcher = (input: string, init?: RequestInit) => Promise<FetchResponse>
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/
+const millisecondsPerDay = 24 * 60 * 60 * 1000
 const contributionSchema = z.object({
   total: z.object({ lastYear: z.number().int().nonnegative() }),
   contributions: z
@@ -24,6 +25,14 @@ const userSchema = z.object({ login: z.string().min(1), followers: z.number().in
 
 function formatIssues(error: z.ZodError) {
   return error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')
+}
+
+function parseIsoDate(value: string, context: string) {
+  const timestamp = Date.parse(`${value}T00:00:00.000Z`)
+  if (!Number.isFinite(timestamp) || new Date(timestamp).toISOString().slice(0, 10) !== value) {
+    throw new Error(`Invalid ${context} date: ${value}`)
+  }
+  return timestamp
 }
 
 export function normalizeGitHubActivity(
@@ -46,9 +55,7 @@ export function normalizeGitHubActivity(
   const days = contributionResult.data.contributions
   for (let index = 0; index < days.length; index += 1) {
     const day = days[index]
-    if (new Date(`${day.date}T00:00:00.000Z`).toISOString().slice(0, 10) !== day.date) {
-      throw new Error(`Invalid GitHub contribution date at index ${index}`)
-    }
+    parseIsoDate(day.date, `GitHub contribution at index ${index}`)
     if (index > 0 && days[index - 1].date >= day.date) {
       throw new Error('GitHub contribution dates must be strictly increasing')
     }
@@ -76,6 +83,15 @@ export function normalizeBakedGitHubActivity(input: unknown, user: string): GitH
   const result = bakedActivitySchema.safeParse(input)
   if (!result.success)
     throw new Error(`Invalid baked GitHub Activity — ${formatIssues(result.error)}`)
+  const from = parseIsoDate(result.data.from, 'baked GitHub Activity start')
+  const to = parseIsoDate(result.data.to, 'baked GitHub Activity end')
+  if (from > to) throw new Error('Invalid baked GitHub Activity range: from must precede to')
+  const rangeLength = Math.round((to - from) / millisecondsPerDay) + 1
+  if (result.data.levels.length !== rangeLength) {
+    throw new Error(
+      `Invalid baked GitHub Activity levels: expected ${rangeLength}, received ${result.data.levels.length}`,
+    )
+  }
   return { user, ...result.data }
 }
 

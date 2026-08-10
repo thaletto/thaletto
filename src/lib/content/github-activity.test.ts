@@ -1,7 +1,12 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
 
-import { type GitHubActivity, loadGitHubActivity, normalizeGitHubActivity } from './github-activity'
+import {
+  type GitHubActivity,
+  loadGitHubActivity,
+  normalizeBakedGitHubActivity,
+  normalizeGitHubActivity,
+} from './github-activity'
 
 const contributionData = {
   total: { lastYear: 3 },
@@ -68,5 +73,25 @@ describe('GitHub Activity', () => {
     })
 
     assert.deepEqual(activity, fallback)
+  })
+
+  test('rejects semantically invalid baked ranges', () => {
+    const valid = {
+      followers: 40,
+      total: 2,
+      from: '2026-08-08',
+      to: '2026-08-09',
+      levels: '11',
+    }
+
+    assert.throws(
+      () => normalizeBakedGitHubActivity({ ...valid, from: '2026-02-30' }, 'ada'),
+      /date/,
+    )
+    assert.throws(
+      () => normalizeBakedGitHubActivity({ ...valid, from: '2026-08-10', to: '2026-08-09' }, 'ada'),
+      /range/,
+    )
+    assert.throws(() => normalizeBakedGitHubActivity({ ...valid, levels: '1' }, 'ada'), /levels/)
   })
 })

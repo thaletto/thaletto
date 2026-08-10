@@ -13,7 +13,9 @@ test.describe('Lifeline', () => {
 
     const photo = lifeline.locator('[data-lifeline-interactive]').first()
     await expect(photo).toBeVisible()
-    await photo.click({ position: { x: 12, y: 12 } })
+    await photo.focus()
+    await expect(photo).toBeFocused()
+    await page.keyboard.press('Enter')
     await expect(page.getByRole('dialog')).toBeVisible()
     await page.keyboard.press('Escape')
     await expect(page.getByRole('dialog')).toBeHidden()

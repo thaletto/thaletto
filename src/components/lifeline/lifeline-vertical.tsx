@@ -39,7 +39,7 @@ function LifelineVerticalEvent({ event }: { event: LifelineEvent }) {
   const fireworks = useLifelineFireworks()
   const image = getLifelineEventImage(event)
   const effect = getLifelineEventEffect(event)
-  const textRef = useRef<HTMLParagraphElement>(null)
+  const textRef = useRef<HTMLParagraphElement | HTMLButtonElement>(null)
   const aspectRef = useRef(3 / 4)
   const [lightboxStart, setLightboxStart] = useState<LifelineLightboxStart | null>(null)
 
@@ -78,40 +78,66 @@ function LifelineVerticalEvent({ event }: { event: LifelineEvent }) {
     }
   }
 
+  const activate = image
+    ? openMedia
+    : effect && fireworks
+      ? () => fireworks.launch(effect)
+      : undefined
+
+  const content = (
+    <>
+      <LifelineEventText event={event} />
+      {image && (
+        // Glued to the last word with a no-break space so the icon
+        // can never wrap onto a line of its own.
+        <span className="whitespace-nowrap">
+          {' '}
+          {image.video ? (
+            <Film
+              className="ml-0.5 inline-block h-3 w-3 -translate-y-px text-zinc-400 transition-colors duration-300 dark:text-zinc-600"
+              strokeWidth={1.75}
+              aria-hidden="true"
+            />
+          ) : (
+            <ImageIcon
+              className="ml-0.5 inline-block h-3 w-3 -translate-y-px text-zinc-400 transition-colors duration-300 dark:text-zinc-600"
+              strokeWidth={1.75}
+              aria-hidden="true"
+            />
+          )}
+        </span>
+      )}
+    </>
+  )
+
+  const eventClassName = cn(
+    'text-left text-[14px] leading-[1.55] tracking-[-0.01em]',
+    activate && 'cursor-pointer',
+  )
+
   return (
     <>
-      <p
-        ref={textRef}
-        className={cn(
-          'text-left text-[14px] leading-[1.55] tracking-[-0.01em]',
-          (image || effect) && 'cursor-pointer',
-        )}
-        onClick={
-          image ? openMedia : effect && fireworks ? () => fireworks.launch(effect) : undefined
-        }
-      >
-        <LifelineEventText event={event} />
-        {image && (
-          // Glued to the last word with a no-break space so the icon
-          // can never wrap onto a line of its own.
-          <span className="whitespace-nowrap">
-            {' '}
-            {image.video ? (
-              <Film
-                className="ml-0.5 inline-block h-3 w-3 -translate-y-px text-zinc-400 transition-colors duration-300 dark:text-zinc-600"
-                strokeWidth={1.75}
-                aria-hidden="true"
-              />
-            ) : (
-              <ImageIcon
-                className="ml-0.5 inline-block h-3 w-3 -translate-y-px text-zinc-400 transition-colors duration-300 dark:text-zinc-600"
-                strokeWidth={1.75}
-                aria-hidden="true"
-              />
-            )}
-          </span>
-        )}
-      </p>
+      {activate ? (
+        <button
+          ref={(node) => {
+            textRef.current = node
+          }}
+          type="button"
+          className={cn(eventClassName, 'border-0 bg-transparent p-0 text-inherit')}
+          onClick={activate}
+        >
+          {content}
+        </button>
+      ) : (
+        <p
+          ref={(node) => {
+            textRef.current = node
+          }}
+          className={eventClassName}
+        >
+          {content}
+        </p>
+      )}
       {lightboxStart && image && (
         <LifelineLightbox
           photo={image}

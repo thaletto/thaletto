@@ -101,6 +101,29 @@ describe('Published Document', () => {
     )
   })
 
+  test('rejects orphaned cover metadata', () => {
+    for (const [slug, metadata] of [
+      ['width-only', 'coverWidth: 1200'],
+      ['height-only', 'coverHeight: 800'],
+      ['dimensions-only', 'coverWidth: 1200\ncoverHeight: 800'],
+      ['caption-only', 'coverCaption: A cover'],
+    ]) {
+      writeEntry(slug, `---\ntitle: Broken\npublishedAt: 2026-08-10\n${metadata}\n---\nBody`)
+
+      assert.throws(
+        () =>
+          readPublishedDocument({
+            collection: 'Writing',
+            directory: root,
+            slug,
+            schema: writingSchema,
+            coverRoot: '/content/blog',
+          }),
+        new RegExp(`Writing ${slug}.*cover`),
+      )
+    }
+  })
+
   test('reads the latest authored content instead of retaining stale process data', () => {
     writeEntry('fresh', '---\ntitle: First\npublishedAt: 2026-08-10\n---\nBody')
     const options = {

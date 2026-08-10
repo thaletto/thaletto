@@ -30,7 +30,6 @@ export function discoverPublishedSlugs(directory: string) {
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
     .filter((slug) => existsSync(path.join(directory, slug, 'index.mdx')))
-    .sort()
 }
 
 function bodyStats(body: string) {
@@ -58,15 +57,23 @@ export function readPublishedDocument<T extends z.ZodType>({
     const frontmatter = schema.parse(data) as z.output<T> &
       z.infer<typeof publishedFrontmatterSchema>
 
+    const hasCover = frontmatter.cover !== undefined
+    const hasCoverWidth = frontmatter.coverWidth !== undefined
+    const hasCoverHeight = frontmatter.coverHeight !== undefined
+    const hasCoverCaption = frontmatter.coverCaption !== undefined
+    if (
+      (hasCover || hasCoverWidth || hasCoverHeight || hasCoverCaption) &&
+      !(hasCover && hasCoverWidth && hasCoverHeight)
+    ) {
+      throw new Error('cover, coverWidth, and coverHeight must be provided together')
+    }
+
     let cover: PublishedCover | undefined
     if (frontmatter.cover) {
-      if (!frontmatter.coverWidth || !frontmatter.coverHeight) {
-        throw new Error('cover requires coverWidth and coverHeight')
-      }
       cover = {
         src: `${coverRoot}/${slug}/${frontmatter.cover.slice(2)}`,
-        width: frontmatter.coverWidth,
-        height: frontmatter.coverHeight,
+        width: frontmatter.coverWidth as number,
+        height: frontmatter.coverHeight as number,
         ...(frontmatter.coverCaption ? { caption: frontmatter.coverCaption } : {}),
       }
     }
