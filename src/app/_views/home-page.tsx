@@ -179,7 +179,7 @@ export async function HomePageView() {
         <TechStackItem label="PostgreSQL">
           <Postgresql />
         </TechStackItem>
-        <TechStackItem label="Microsoft Autogen">
+        <TechStackItem label="Autogen">
           <Microsoft />
         </TechStackItem>
         <TechStackItem label="Google ADK">
