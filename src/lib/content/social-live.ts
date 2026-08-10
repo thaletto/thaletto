@@ -1,11 +1,8 @@
 import { cacheLife, cacheTag } from 'next/cache'
 
-import type {
-  GitHubSnapshot,
-  NotionSnapshot,
-  SocialSnapshot,
-} from '~/components/social/social-cards'
+import type { NotionSnapshot, SocialSnapshot } from '~/components/social/social-cards'
 import bakedGithub from '~/content/github.json'
+import { type GitHubActivity, loadGitHubActivity } from '~/lib/content/github-activity'
 import { siteIdentity, siteSocial } from '~/lib/content/personal'
 
 export interface SocialData {
@@ -20,36 +17,16 @@ export interface SocialData {
 // empty card. The account identity comes from src/content/site.json. X and
 // LinkedIn have no public endpoint, so their cards are static identity only.
 
-export async function getGitHub(): Promise<GitHubSnapshot> {
+export async function getGitHub(): Promise<GitHubActivity> {
   'use cache'
   cacheLife({ stale: 21_600, revalidate: 21_600, expire: 604_800 })
   cacheTag('social-live')
 
-  try {
-    const user = siteSocial.github.user
-    const [contrib, profile] = await Promise.all([
-      fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`).then((r) => {
-        if (!r.ok) throw new Error(`contributions ${r.status}`)
-        return r.json()
-      }),
-      fetch(`https://api.github.com/users/${user}`, {
-        headers: { accept: 'application/vnd.github+json', 'user-agent': user },
-      }).then((r) => {
-        if (!r.ok) throw new Error(`user ${r.status}`)
-        return r.json()
-      }),
-    ])
-    const days: Array<{ date: string; level: number }> = contrib.contributions
-    return {
-      user,
-      followers: profile.followers,
-      total: contrib.total.lastYear,
-      to: days[days.length - 1].date,
-      levels: days.map((d) => d.level).join(''),
-    }
-  } catch {
-    return { user: siteSocial.github.user, ...bakedGithub } as GitHubSnapshot
-  }
+  return loadGitHubActivity({
+    user: siteSocial.github.user,
+    fetcher: fetch,
+    fallback: bakedGithub,
+  })
 }
 
 export async function getSocial(): Promise<SocialData> {

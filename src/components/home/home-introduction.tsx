@@ -1,11 +1,6 @@
 import { HomeIntroReplay } from '~/components/home/home-intro-replay'
-import {
-  EmailCard,
-  GitHubCard,
-  type GitHubSnapshot,
-  type SocialSnapshot,
-  XCard,
-} from '~/components/social/social-cards'
+import { EmailCard, GitHubCard, type SocialSnapshot, XCard } from '~/components/social/social-cards'
+import type { GitHubActivity } from '~/lib/content/github-activity'
 import { siteIdentity, siteSocial } from '~/lib/content/personal'
 
 function DetailsMark() {
@@ -66,7 +61,7 @@ function DetailsPhrase({ children }: { children: React.ReactNode }) {
   )
 }
 
-function HomeContact({ social, github }: { social: SocialSnapshot; github: GitHubSnapshot }) {
+function HomeContact({ social, github }: { social: SocialSnapshot; github: GitHubActivity }) {
   return (
     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
       Find me at{' '}
@@ -96,7 +91,7 @@ export function HomeIntroduction({
   github,
 }: {
   social: SocialSnapshot
-  github: GitHubSnapshot
+  github: GitHubActivity
 }) {
   return (
     <div className="home-introduction">

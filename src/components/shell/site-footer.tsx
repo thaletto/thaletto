@@ -6,13 +6,13 @@ import { ExternalLabel } from '~/components/social/external-mark'
 import {
   EmailCard,
   GitHubCard,
-  type GitHubSnapshot,
   LinkedInCard,
   NotionCard,
   type NotionSnapshot,
   type SocialSnapshot,
   XCard,
 } from '~/components/social/social-cards'
+import type { GitHubActivity } from '~/lib/content/github-activity'
 import { siteIdentity } from '~/lib/content/personal'
 import { brailleText } from '~/lib/design/braille'
 
@@ -40,7 +40,7 @@ export function SiteFooter({
   github,
 }: {
   social: { x: SocialSnapshot; linkedin: SocialSnapshot; notion: NotionSnapshot }
-  github: GitHubSnapshot
+  github: GitHubActivity
 }) {
   return (
     <footer className="mx-auto mt-24 w-full max-w-150 px-6 pb-24 text-sm text-muted-foreground sm:pb-12">

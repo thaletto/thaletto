@@ -4,19 +4,12 @@ import Image from 'next/image'
 
 import { ExternalLabel } from '~/components/social/external-mark'
 import { SitePreviewCard } from '~/components/social/preview-card-timing'
+import type { GitHubActivity } from '~/lib/content/github-activity'
 
 export interface SocialSnapshot {
   name: string
   handle: string
   bio?: string
-}
-
-export interface GitHubSnapshot {
-  user: string
-  followers?: number
-  total: number
-  to: string
-  levels: string
 }
 
 export interface NotionSnapshot {
@@ -213,7 +206,7 @@ export function NotionCardBody({ data }: { data: NotionSnapshot }) {
   )
 }
 
-export function GitHubCardBody({ data }: { data: GitHubSnapshot }) {
+export function GitHubCardBody({ data }: { data: GitHubActivity }) {
   const levels = data.levels.slice(-WEEKS * DAYS)
   return (
     <>
@@ -318,7 +311,7 @@ export function GitHubCard({
   trigger = 'GitHub',
   triggerClassName,
 }: {
-  data: GitHubSnapshot
+  data: GitHubActivity
   trigger?: React.ReactNode
   triggerClassName?: string
 }) {
