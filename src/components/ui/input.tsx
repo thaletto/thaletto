@@ -1,20 +1,86 @@
-import { Input as InputPrimitive } from "@base-ui/react/input";
-import type * as React from "react";
+'use client'
 
-import { cn } from "@/lib/utils";
+import { forwardRef, type InputHTMLAttributes, type ReactNode, useId } from 'react'
+import { cn } from '~/lib/platform/utils'
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
-	return (
-		<InputPrimitive
-			className={cn(
-				"h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-2.5 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:font-medium file:text-foreground file:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
-				className
-			)}
-			data-slot="input"
-			type={type}
-			{...props}
-		/>
-	);
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  /** Renders a wrapping label above the control (14px muted). */
+  label?: ReactNode
+  /** 14px destructive text below the control, wired via aria-describedby. */
+  error?: ReactNode
+  /** Destructive border treatment without an error message. Implied when
+   *  `error` is set. */
+  destructive?: boolean
 }
 
-export { Input };
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      label,
+      error,
+      destructive = false,
+      className,
+      id,
+      'aria-describedby': ariaDescribedBy,
+      ...props
+    },
+    ref,
+  ) => {
+    const autoId = useId()
+    const errorId = `${id ?? autoId}-error`
+    const isDestructive = destructive || !!error
+
+    const control = (
+      <input
+        ref={ref}
+        id={id}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={
+          error ? [ariaDescribedBy, errorId].filter(Boolean).join(' ') : ariaDescribedBy
+        }
+        className={cn(
+          // text-base (16px) keeps iOS Safari from zooming on focus; h-8 is
+          // the shared 32px control height (Button lg, subtle tabs, selects).
+          'block h-8 w-full rounded-lg border border-border bg-transparent px-2.5 text-base text-foreground outline-none',
+          'placeholder:text-muted-foreground',
+          'transition-colors duration-150 motion-reduce:transition-none',
+          'focus:border-foreground focus-visible:ring-1 focus-visible:ring-[color:var(--focus-ring)]',
+          'disabled:opacity-50',
+          isDestructive && 'border-destructive focus:border-destructive',
+          className,
+        )}
+        {...props}
+      />
+    )
+
+    if (!label && !error) return control
+
+    const errorText = error ? (
+      <span id={errorId} className="text-sm text-destructive">
+        {error}
+      </span>
+    ) : null
+
+    if (label) {
+      return (
+        <label className="grid gap-1.5 text-sm text-muted-foreground">
+          {label}
+          {control}
+          {errorText}
+        </label>
+      )
+    }
+
+    return (
+      <div className="grid gap-1.5">
+        {control}
+        {errorText}
+      </div>
+    )
+  },
+)
+
+Input.displayName = 'Input'
+
+export type { InputProps }
+export { Input }

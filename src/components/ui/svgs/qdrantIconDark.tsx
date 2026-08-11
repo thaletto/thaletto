@@ -1,0 +1,17 @@
+import type { SVGProps } from 'react'
+
+const QdrantIconDark = (props: SVGProps<SVGSVGElement>) => (
+  <svg {...props} fill="none" viewBox="0 0 57 64">
+    <g fill="#fff" clipPath="url(#qdrant-dark-clip)">
+      <path d="M28.667 0 .953 16v32l27.714 16 10.392-6V46l-10.392 6-17.32-10V22l17.32-10 17.32 10v40l10.393-6V16z" />
+      <path d="M18.275 26v12l10.392 6 10.392-6V26l-10.392-6z" />
+    </g>
+    <defs>
+      <clipPath id="qdrant-dark-clip">
+        <path fill="#fff" d="M.664 0h56v64h-56z" />
+      </clipPath>
+    </defs>
+  </svg>
+)
+
+export { QdrantIconDark }

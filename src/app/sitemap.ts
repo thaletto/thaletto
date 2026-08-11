@@ -1,30 +1,31 @@
-import type { MetadataRoute } from "next";
+// Sitemap built from the content loaders: every published post and project,
+// plus the section roots. lastModified ties each entry to its own published
+// date (or the latest post for the static shells).
+import type { MetadataRoute } from 'next'
+
+import { getAllPosts } from '~/lib/content/posts'
+import { getAllProjects } from '~/lib/content/projects'
+import { pageUrl } from '~/lib/metadata/page'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	return [
-		{
-			url: "https://thaletto.vercel.app",
-			lastModified: new Date(),
-			changeFrequency: "monthly",
-			priority: 1,
-		},
-		{
-			url: "https://thaletto.vercel.app/projects",
-			lastModified: new Date(),
-			changeFrequency: "weekly",
-			priority: 0.9,
-		},
-		{
-			url: "https://thaletto.vercel.app/writings",
-			lastModified: new Date(),
-			changeFrequency: "weekly",
-			priority: 0.7,
-		},
-		{
-			url: "https://thaletto.vercel.app/llms.txt",
-			lastModified: new Date(),
-			changeFrequency: "weekly",
-			priority: 1,
-		},
-	];
+  const posts = getAllPosts()
+  const projects = getAllProjects()
+  // newest first per getAllPosts — the site "changed" when the latest post landed
+  const latest = posts[0]?.publishedAt
+
+  const entry = (path: string, lastModified?: Date): MetadataRoute.Sitemap => [
+    { url: pageUrl(path).href, lastModified },
+  ]
+
+  return [
+    ...entry('/', latest),
+    ...entry('/blog', latest),
+    ...entry('/projects', latest),
+    ...entry('/timeline', latest),
+    ...posts.flatMap((post) => entry(`/blog/${post.slug}`, post.publishedAt)),
+    ...projects.map((project) => ({
+      url: pageUrl(`/projects/${project.slug}`).href,
+      lastModified: project.publishedAt,
+    })),
+  ]
 }

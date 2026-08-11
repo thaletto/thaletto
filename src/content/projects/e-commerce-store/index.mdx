@@ -1,0 +1,47 @@
+---
+title: "E-Commerce Store"
+description: "Event-driven e-commerce platform built with Next.js, Go microservices, and AWS Lambda."
+publishedAt: "2026-06-01T00:00:00.000Z"
+sort: 5
+company: "Freelance"
+tags: ["Next.js", "TypeScript", "Go", "SQLite", "AWS Lambda", "Cloudflare"]
+startDate: "2024.07"
+links:
+  - label: "Website"
+    url: "https://kr-crackers.vercel.app"
+cover: ./e-commerce.webp
+coverWidth: 1280
+coverHeight: 720
+---
+
+## Overview
+
+This is a responsive e-commerce platform for selling pre-owned products. The frontend uses Next.js and Tailwind CSS. A decoupled Go microservices architecture supports it. You deploy the architecture on AWS Lambda. An event-driven system handles real-time inventory tracking, order management, and secure admin controls.
+
+## Approach
+
+The system is split into three layers. Each layer is optimized for its specific responsibility.
+
+**Frontend** uses Next.js with the App Router. It mixes Server-Side Rendering (SSR) with Static Site Generation (SSG). It uses SSR for dynamic, SEO-critical product pages. It uses SSG for static assets. React Server Components minimize client-side JavaScript bundles. This keeps Core Web Vitals performant.
+
+**Backend** consists of 7 Go microservices. These are auth, customers, invoices, notifications, orders, products, and uploads. Each microservice compiles to a single binary. This gives near-native execution speeds. Lightweight goroutines handle concurrent requests. They use minimal memory overhead. This makes the backend well-suited for the high-throughput demands of e-commerce traffic.
+
+**Database** uses Cloudflare D1. Cloudflare D1 is a serverless relational database. It is built on SQLite and runs at the edge. Data is physically close to the compute layer. This eliminates traditional database connection overhead. It also eliminates complex connection pooling.
+
+## How It Works
+
+- **AWS Lambda (ARM Linux):** Go functions compile to single binaries. They target `GOOS=linux GOARCH=arm64`. They leverage AWS Graviton's ARM-based architecture. This gives up to 34% better price-performance over x86. Functions scale automatically with traffic. Go's minimal footprint keeps cold starts fast.
+- **Event-driven architecture:** Inventory updates, order events, and admin actions flow through an event system. The system keeps the frontend in sync without polling.
+
+## Tech Stack
+
+<TechStack variant="embedded">
+  <TechStackItem label="Next.js"><NextjsIconDark className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="React 19"><ReactLight /></TechStackItem>
+  <TechStackItem label="TypeScript"><Typescript /></TechStackItem>
+  <TechStackItem label="Tailwind CSS"><Tailwindcss /></TechStackItem>
+  <TechStackItem label="Go"><Golang className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="SQLite"><Sqlite /></TechStackItem>
+  <TechStackItem label="AWS Lambda"><AwsLight className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="Cloudflare"><Cloudflare /></TechStackItem>
+</TechStack>

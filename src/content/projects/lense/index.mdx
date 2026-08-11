@@ -1,0 +1,47 @@
+---
+title: "Lense"
+description: "Android marketplace for pre-owned products with AI-powered pricing and descriptions."
+publishedAt: "2023-12-01T00:00:00.000Z"
+sort: 2
+tags: ["Kotlin", "Android Application", "Jetpack Compose", "Image Classification"]
+startDate: "2023.09"
+endDate: "2023.12"
+links:
+  - label: "GitHub"
+    url: "https://github.com/thaletto/lense"
+cover: ./lense.webp
+coverWidth: 1280
+coverHeight: 720
+---
+
+## Overview
+
+Lense is an Android application for selling pre-owned products. You upload a product image. The app classifies the item. The app generates a description. The app estimates the value of the item. The app uses on-device machine learning models.
+
+## Problem
+
+To list a pre-owned product for sale, you must write a description and set a price. These tasks take time and involve guesswork. Sellers often do not know the fair market value of their items. Writing good descriptions is tedious.
+
+## Approach
+
+Lense uses two on-device AI models to automate this process:
+
+- **EfficientNet (TensorFlow Lite 4)** classifies the product category from the uploaded image.
+- **GPT-2 Image Captioning** generates a descriptive caption for the listing.
+
+Both models run on-device via HuggingFace. They handle image processing without a server round-trip.
+
+## How It Works
+
+1. You upload a product image.
+2. EfficientNet classifies the product.
+3. GPT-2 Image Captioning generates a description.
+4. The app returns the estimated value and a description that is ready to post.
+
+## Tech Stack
+
+<TechStack variant="embedded">
+  <TechStackItem label="Kotlin"><Kotlin /></TechStackItem>
+  <TechStackItem label="TensorFlow Lite"><TensorflowIconDark className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="Hugging Face"><HuggingFace /></TechStackItem>
+</TechStack>

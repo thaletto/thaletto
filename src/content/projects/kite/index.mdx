@@ -1,0 +1,87 @@
+---
+title: "Kite"
+description: "AI data exploration assistant with AG-UI dashboards generated from live data."
+publishedAt: "2026-03-01T00:00:00.000Z"
+sort: 4
+tags: ["AG-UI", "Tanstack Start", "Vite", "TypeScript"]
+startDate: "2026.03"
+endDate: "2026.03"
+links:
+  - label: "Website"
+    url: "https://kite-agui.netlify.app"
+  - label: "GitHub"
+    url: "https://github.com/thaletto/kite"
+cover: ./kite.webp
+coverWidth: 1280
+coverHeight: 720
+---
+
+## Overview
+
+Kite is an AI-powered data exploration assistant. You ask questions about weather, crypto prices, GitHub repositories, or news. Kite fetches real-time data and builds interactive dashboards. The dashboards render entirely from JSON UI specifications. Kite serves as a reference implementation of the AG-UI protocol.
+
+## Approach
+
+Kite separates concerns across four layers:
+
+- **Client:** React 19 UI with streaming chat. It renders AI responses as JSON-defined UI components with `@json-render/react`.
+- **Server:** TanStack Start server functions handle requests and rate limiting. They proxy requests to the AI layer.
+- **AI:** ToolLoopAgent orchestrates tool calls. It formats responses as text and JSON UI specs.
+- **Tools:** Server-side functions fetch real data from external APIs (weather, GitHub, crypto, web search).
+
+```mermaid
+flowchart TB
+    subgraph Client["Client (React 19)"]
+        UI[Chat UI]
+        Renderer[JSON Renderer]
+    end
+
+    subgraph Server["Server (TanStack Start)"]
+        API[API Handler]
+        RateLimit[Rate Limiter]
+        Tools[Tool Functions]
+    end
+
+    subgraph AI["AI Layer"]
+        Agent[ToolLoopAgent]
+        Gateway[AI Gateway]
+    end
+
+    subgraph External["External APIs"]
+        Weather[WeatherAPI]
+        GitHub[GitHub]
+        HN[Hacker News]
+    end
+
+    UI -->|messages| API
+    API --> RateLimit
+    RateLimit --> Agent
+    Agent --> Gateway
+    Gateway -->|tool calls| Agent
+    Agent -->|calls| Tools
+    Tools -->|fetch| External
+    Agent -->|JSON spec| Renderer
+    Renderer --> UI
+```
+
+## How It Works
+
+1. **You send a message** asking about any topic (weather, crypto, GitHub, etc.)
+2. **The agent calls tools** to fetch real, up-to-date data from external APIs
+3. **The agent responds** with a conversational summary and a JSON UI specification
+4. **The UI renderer** transforms the JSON spec into interactive React components
+5. **You see a dashboard** with charts, tables, metrics, and rich content
+
+The UI is defined entirely in JSON. The AI outputs both text and a component tree. `@json-render/react` renders the component tree.
+
+## Tech Stack
+
+<TechStack variant="embedded">
+  <TechStackItem label="TanStack Start"><Tanstack className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="React 19"><ReactLight /></TechStackItem>
+  <TechStackItem label="shadcn/ui"><ShadcnUi className="tech-stack-icon-needs-invert" /></TechStackItem>
+  <TechStackItem label="Tailwind CSS 4"><Tailwindcss /></TechStackItem>
+  <TechStackItem label="Upstash Redis"><Upstash /></TechStackItem>
+  <TechStackItem label="Netlify"><Netlify /></TechStackItem>
+  <TechStackItem label="AI SDK"><Vercel className="tech-stack-icon-theme-light" /><VercelDark className="tech-stack-icon-theme-dark" /></TechStackItem>
+</TechStack>

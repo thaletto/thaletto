@@ -1,114 +1,132 @@
-import type { MDXComponents } from "mdx/types";
-import { DitheredImage } from "@/components/dithered-image";
-import { components as baseComponents } from "../../../mdx-components";
+import type { MDXComponents } from 'mdx/types'
+import { ZoomImage } from '~/components/blog/zoom-image'
+import { TechStack, TechStackItem } from '~/components/tech-stack'
+import { AwsLight } from '~/components/ui/svgs/awsLight'
+import { ClaudeAiIcon } from '~/components/ui/svgs/claudeAiIcon'
+import { Cloudflare } from '~/components/ui/svgs/cloudflare'
+import { CodexDark } from '~/components/ui/svgs/codexDark'
+import { CodexLight } from '~/components/ui/svgs/codexLight'
+import { EffectLight } from '~/components/ui/svgs/effectLight'
+import { Fastapi } from '~/components/ui/svgs/fastapi'
+import { Golang } from '~/components/ui/svgs/golang'
+import { GoogleCloud } from '~/components/ui/svgs/googleCloud'
+import { Grafana } from '~/components/ui/svgs/grafana'
+import { HuggingFace } from '~/components/ui/svgs/huggingFace'
+import { Kotlin } from '~/components/ui/svgs/kotlin'
+import { Netlify } from '~/components/ui/svgs/netlify'
+import { Npm } from '~/components/ui/svgs/npm'
+import { NextjsIconDark } from '~/components/ui/svgs/nextjsIconDark'
+import { Python } from '~/components/ui/svgs/python'
+import { QdrantIconLight } from '~/components/ui/svgs/qdrantIconLight'
+import { ReactLight } from '~/components/ui/svgs/reactLight'
+import { ShadcnUi } from '~/components/ui/svgs/shadcnUi'
+import { Sqlite } from '~/components/ui/svgs/sqlite'
+import { Tailwindcss } from '~/components/ui/svgs/tailwindcss'
+import { Tanstack } from '~/components/ui/svgs/tanstack'
+import { TensorflowIconDark } from '~/components/ui/svgs/tensorflowIconDark'
+import { Typescript } from '~/components/ui/svgs/typescript'
+import { Upstash } from '~/components/ui/svgs/upstash'
+import { Vercel } from '~/components/ui/svgs/vercel'
+import { VercelDark } from '~/components/ui/svgs/vercelDark'
+import { tiltFromSlug } from '~/lib/motion/polaroid'
+import { CodeBlockPre } from './code-block'
+import { MermaidDiagram } from './mermaid-diagram'
+import { PhotoStack, PhotoStackCaption, PhotoStackFrames } from './photo-stack'
 
-export type ContentKind = "projects" | "timeline" | "writings";
-
-const EXTERNAL_LINK = /^https?:/;
-const IMAGE_CONTRACT =
-	/^\.\/([A-Za-z0-9_.-]+)#(\d+)x(\d+)(?::(crisp|dither))?$/;
-const HEADING_SEPARATOR = /[^a-z0-9]+/g;
-const EDGE_HYPHENS = /(^-|-$)/g;
-
-function headingId(children: React.ReactNode) {
-	const text = Array.isArray(children) ? children.join(" ") : String(children);
-	return text
-		.toLowerCase()
-		.replace(HEADING_SEPARATOR, "-")
-		.replace(EDGE_HYPHENS, "");
-}
-
+// Post images arrive as ./file.png#WxH (dimensions encoded by the content
+// pipeline); rewrite to the content route and unpack the dimensions.
+// Absolute .svg paths render inline without the zoom treatment.
 function PostImage({
-	alt,
-	kind,
-	slug,
-	src,
-	title,
+  slug,
+  src,
+  alt,
+  title,
+  kind,
 }: {
-	alt?: string;
-	kind: ContentKind;
-	slug: string;
-	src: string;
-	title?: string;
+  slug: string
+  src: string
+  alt?: string
+  title?: string
+  kind: ContentKind
 }) {
-	if (src.startsWith("/") && src.endsWith(".svg")) {
-		return (
-			// biome-ignore lint/performance/noImgElement: small technical marks remain native and crisp
-			<img
-				alt={alt ?? ""}
-				className="mdx-inline-logo"
-				height={18}
-				src={src}
-				width={18}
-			/>
-		);
-	}
-	const match = src.match(IMAGE_CONTRACT);
-	if (!match) {
-		throw new Error(`MDX image must use ./file#WIDTHxHEIGHT, received ${src}`);
-	}
-	const [, file, width, height, treatment] = match;
-	const imageSrc = `/content/${kind}/${slug}/${file}`;
-	if (treatment === "crisp") {
-		return (
-			<span className="mdx-crisp-figure">
-				{/* biome-ignore lint/performance/noImgElement: dimensioned technical diagrams must remain unprocessed and crisp */}
-				<img
-					alt={alt ?? ""}
-					height={Number(height)}
-					src={imageSrc}
-					width={Number(width)}
-				/>
-			</span>
-		);
-	}
-	return (
-		<DitheredImage
-			alt={alt ?? ""}
-			caption={title}
-			height={Number(height)}
-			src={imageSrc}
-			width={Number(width)}
-		/>
-	);
+  if (src.startsWith('/') && src.endsWith('.svg')) {
+    return (
+      // biome-ignore lint/performance/noImgElement: small technical marks remain native and crisp
+      <img alt={alt ?? ''} className="mdx-inline-logo" height={18} src={src} width={18} />
+    )
+  }
+  const match = src.match(/^\.\/([A-Za-z0-9_.-]+)#(\d+)x(\d+)$/)
+  if (!match) throw new Error(`post image needs ./file#WxH format, got: ${src}`)
+  const [, file, width, height] = match
+  // deterministic scatter in [-1°, +1°] per file; hover straightens
+  const tilt = tiltFromSlug(file) / 2
+  const img = (
+    <ZoomImage
+      src={`/content/${kind}/${slug}/${file}`}
+      alt={alt ?? ''}
+      width={+width}
+      height={+height}
+      sizes="(max-width: 704px) 100vw, 656px"
+      style={{ '--img-tilt': `${tilt.toFixed(2)}deg` } as React.CSSProperties}
+    />
+  )
+  if (!title) return img
+  // Markdown images render inside <p>, where <figure> is invalid HTML —
+  // block-level spans carry the same styling.
+  return (
+    <span className="post-figure block">
+      {img}
+      <span className="post-figcaption block">{title}</span>
+    </span>
+  )
 }
 
-export function mdxComponents(slug: string, kind: ContentKind): MDXComponents {
-	return {
-		...(baseComponents as MDXComponents),
-		a: ({ href = "", ...props }) => {
-			const external = EXTERNAL_LINK.test(href);
-			return (
-				<a
-					{...props}
-					className="mdx-link"
-					href={href}
-					rel={external ? "noreferrer" : undefined}
-					target={external ? "_blank" : undefined}
-				>
-					{props.children}
-					{external ? <span aria-hidden> ↗</span> : null}
-				</a>
-			);
-		},
-		h2: ({ children, ...props }) => (
-			<h2 id={headingId(children)} {...props}>
-				{children}
-			</h2>
-		),
-		h3: ({ children, ...props }) => (
-			<h3 id={headingId(children)} {...props}>
-				{children}
-			</h3>
-		),
-		img: ({ alt, src, title }) => (
-			<PostImage
-				alt={alt}
-				kind={kind}
-				slug={slug}
-				src={String(src)}
-				title={title}
-			/>
-		),
-	};
+export type ContentKind = 'blog' | 'projects'
+
+export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComponents {
+  return {
+    pre: (props) => <CodeBlockPre {...props} />,
+    MermaidDiagram: (props: { code: string; caption?: string }) => <MermaidDiagram {...props} />,
+    PhotoStack,
+    PhotoStackCaption,
+    PhotoStackFrames,
+    TechStack,
+    TechStackItem,
+    AwsLight,
+    ClaudeAiIcon,
+    Cloudflare,
+    CodexDark,
+    CodexLight,
+    EffectLight,
+    Fastapi,
+    Golang,
+    GoogleCloud,
+    Grafana,
+    HuggingFace,
+    Kotlin,
+    Netlify,
+    Npm,
+    NextjsIconDark,
+    Python,
+    QdrantIconLight,
+    ReactLight,
+    ShadcnUi,
+    Sqlite,
+    Tailwindcss,
+    Tanstack,
+    TensorflowIconDark,
+    Typescript,
+    Upstash,
+    Vercel,
+    VercelDark,
+    img: (props) => (
+      <PostImage
+        slug={slug}
+        kind={kind}
+        src={props.src as string}
+        alt={props.alt}
+        title={props.title}
+      />
+    ),
+  }
 }

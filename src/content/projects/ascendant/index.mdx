@@ -1,0 +1,88 @@
+---
+title: "Ascendant"
+description: "Local Vedic astrology tools and agent skills with auditable chart readings."
+publishedAt: "2026-04-01T00:00:00.000Z"
+sort: 7
+tags: ["Agent Skills", "Python SDK", "PyPI"]
+startDate: "2025.09"
+links:
+  - label: "Docs"
+    url: "https://ascendant-docs.vercel.app"
+  - label: "Github"
+    url: "https://github.com/thaletto/ascendant"
+  - label: "PyPI"
+    url: "https://pypi.org/project/astro-ascendant/"
+cover: ./ascendant.webp
+coverWidth: 1280
+coverHeight: 720
+---
+
+## Overview
+
+Ascendant is a pack of agent skills and tools for AI coding agents. It makes Vedic astrology workflows reliable and fully local. An agent installs the pack, saves a person's birth record, and calculates charts, Dasha periods, yoga combinations, Ashtakavarga scores, and transits. All calculations run on the agent's machine, without a hosted API. The pack includes the Python library that does the math. The skills tell the agent what evidence to inspect and how to answer responsibly.
+
+## Problem
+
+AI agents hallucinate astrology values when they reason from memory. Interpretations also hide inside model prompts, where nobody can audit them. The calculations themselves are precise and demanding. The Vimshottari Dasha system requires arithmetic based on the Moon's natal nakshatra. The sixteen divisional charts transform planetary longitudes according to specific ratios. Yoga combinations number in the hundreds across canonical texts. Ashtakavarga adds a scoring matrix of 360 cells. Existing software rarely exposes these as programmatic, agent-ready tools.
+
+## Approach
+
+Ascendant provides an end-to-end agent workflow. A bundled script saves birth records with full provenance. Domain skills read the records and answer questions with cited evidence. The calculation library produces every number locally.
+
+**Skills and tools.** The pack contains eleven skills. `init-person` saves a birth record. `get-transit` and `daily-transit` handle transits. Seven domain skills guide readings: career, finance, health, education, family, marriage, and relationship compatibility. `property` covers real estate topics. You install the whole pack with `npx skills add thaletto/ascendant`. It is also available as a Codex plugin marketplace.
+
+**Saved birth records.** The `init-person` skill runs a bundled Python script. The script stores the record under `persons/<name>/` with the divisional charts, `dasha.json`, `yogas.json`, and `sav.json`. It reuses an existing record when the birth details match. It backfills missing data in older records and upgrades provenance v1 records to v2 without rewriting the artifacts.
+
+**Guided readings.** The interpretation skills use the versioned Parashari–Raman workflow named `parashari_raman_v2`. A reading starts from the D1 natal chart. It adds the relevant divisional chart when the topic requires one. It checks the active Mahadasha and Antardasha. It then uses dated transits and Sarvashtakavarga as corroborating evidence. The agent must read the stored artifacts before answering. It cites each conclusion with its artifact pointer and the governing source. Topic rubrics and safety boundaries keep the advice within scope. Output is structured, with explicit exit codes and strict error handling.
+
+**Local calculation library.** The Python package `astro-ascendant` computes everything locally. It provides divisional charts, the full Vimshottari Dasha timeline, current Dasha lookups, yoga results, and the complete Ashtakavarga result. Charts use the sidereal zodiac, with the Lahiri ayanamsa and Whole Sign houses as defaults. You can override the ayanamsa and the house system for one instance, or set typed, immutable application defaults.
+
+**Learning guide.** The documentation includes a guide that explains the astrology behind the workflow: the tropical and sidereal zodiacs, houses and divisional charts, timing and dashas, and the Parashari, Jaimini, and Krishnamurti traditions.
+
+## How It Works
+
+```text
+/init-person Priya, 11 Aug 1998, 12:00 PM, Chennai  # Claude/Codex/OpenCode
+```
+
+The agent runs the bundled script. It saves the birth record under `persons/Priya/` with the calculated charts. For follow-up questions, you invoke the matching domain skill, such as `/career` or `/finance`. The agent reads the stored artifacts and answers with cited chart factors.
+
+## astro-ascendant
+
+The core Python package powers all of this. You install it with `pip install astro-ascendant`. It computes Vedic astrology data entirely on your machine, with no hosted API. You provide complete birth details: year, month, day, hour, minute, second, latitude, longitude, and the UTC offset. The results are ordinary Python dictionaries and typed structures. You can inspect, validate, store, or cite them in a response.
+
+```python
+from ascendant import Ascendant
+
+astro = Ascendant(
+    year=1990, month=1, day=1,
+    hour=12, minute=0, second=0,
+    latitude=28.6139, longitude=77.2090,
+    utc="+5:30"
+)
+
+chart = astro.get_chart(division=1)
+dasha = astro.get_dasha_timeline()
+current = astro.get_current_dasha()
+yogas = astro.get_yogas()
+sav = astro.get_sav()
+```
+
+The package exposes five calculation domains:
+
+- `get_chart(division)` returns a twelve-house divisional chart.
+- `get_dasha_timeline()` returns the full Vimshottari Mahadasha and Antardasha sequence.
+- `get_current_dasha(date=None)` returns the period that is active on a date.
+- `get_yogas()` returns yoga presence, strength, type, and details.
+- `get_sav()` returns Bhinna scores, Sarvashtakavarga totals, reductions, and Shodhya Pinda.
+
+Calculation settings follow an explicit precedence. An argument that you pass to the constructor wins. Otherwise, the current application configuration applies. Otherwise, the built-in defaults apply. The built-in defaults use the Lahiri ayanamsa and Whole Sign houses. The configuration is a frozen `AscendantConfig` object. `configure()` replaces the whole value; `get_config()` reads it; `reset_config()` restores the defaults. The ayanamsa and house system fields accept enum members, not arbitrary strings. Supported ayanamsas include Lahiri, Raman, and Krishnamurti. Supported house systems include Whole Sign, Placidus, Equal, and Porphyry. The package maps these values to Swiss Ephemeris modes when it calculates cusps and angles. For reproducibility, store the resolved enums together with the timezone, coordinates, and software version.
+
+## Tech Stack
+
+<TechStack variant="embedded">
+  <TechStackItem label="Python"><Python /></TechStackItem>
+  <TechStackItem label="skills.sh"><Vercel className="tech-stack-icon-theme-light" /><VercelDark className="tech-stack-icon-theme-dark" /></TechStackItem>
+  <TechStackItem label="Codex"><CodexLight className="tech-stack-icon-theme-light" /><CodexDark className="tech-stack-icon-theme-dark" /></TechStackItem>
+  <TechStackItem label="Claude"><ClaudeAiIcon /></TechStackItem>
+</TechStack>

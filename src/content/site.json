@@ -1,0 +1,50 @@
+{
+  "identity": {
+    "name": "Laxman K R",
+    "firstName": "Laxman",
+    "role": "AI Engineer",
+    "email": "krlaxman03@gmail.com",
+    "country": "India",
+    "homeCity": "Chennai",
+    "portraitAlt": "Laxman's halftone portrait",
+    "location": {
+      "latitude": "13.0827° N",
+      "longitude": "80.2707° E"
+    }
+  },
+  "social": {
+    "x": {
+      "name": "Thaletto",
+      "handle": "thaletto",
+      "bio": "AI Engineer, TypeScript, Python"
+    },
+    "linkedin": {
+      "handle": "laxmanramesh",
+      "bio": "I'm an AI Engineer passionate about building intelligent, scalable, and thoughtfully designed software solutions. My work spans across Artificial Intelligence, Generative AI, full-stack development, and system architecture, where I enjoy transforming complex ideas into practical products that deliver real impact."
+    },
+    "notion": {
+      "name": "Study Notes",
+      "url": "https://laxmankr.notion.site/54f72abb3cf348a7902c48a41fe0d48a?v=3b6f3dd03157801f86b1000c39e424e4",
+      "bio": "Notes related to various CS topics and investments"
+    },
+    "github": {
+      "user": "thaletto"
+    }
+  },
+  "resumes": {
+    "primary": "https://thaletto.github.io/resume/Laxman_KR_Resume.pdf",
+    "alternate": "https://thaletto.github.io/resume/Laxman_KR_Job_Resume_LWD.pdf"
+  },
+  "experience": [
+    {
+      "id": "tcs",
+      "company": "Tata Consultancy Services",
+      "role": "AI Engineer",
+      "startDate": "2024.11",
+      "timelinePhoto": {
+        "src": "/timeline/tcs.jpg",
+        "alt": "Tata Consultancy Services"
+      }
+    }
+  ]
+}

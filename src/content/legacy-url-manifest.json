@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "kind": "page",
+      "source": "/",
+      "probes": ["/"],
+      "status": 200,
+      "contains": "<main"
+    },
+    {
+      "kind": "page",
+      "source": "/blog",
+      "probes": ["/blog"],
+      "status": 200,
+      "contains": "<main"
+    },
+    {
+      "kind": "page",
+      "source": "/projects",
+      "probes": ["/projects"],
+      "status": 200,
+      "contains": "<main"
+    },
+
+    {
+      "kind": "redirect",
+      "source": "/about",
+      "destination": "/",
+      "probes": ["/about"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/guestbook",
+      "destination": "/",
+      "probes": ["/guestbook"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/blocked",
+      "destination": "/",
+      "probes": ["/blocked"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/twitter",
+      "destination": "profile:x",
+      "probes": ["/twitter"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/x",
+      "destination": "profile:x",
+      "probes": ["/x"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/linkedin",
+      "destination": "profile:linkedin",
+      "probes": ["/linkedin"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/github",
+      "destination": "profile:github",
+      "probes": ["/github"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/cv",
+      "destination": "profile:resume",
+      "probes": ["/cv"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/resume",
+      "destination": "profile:resume",
+      "probes": ["/resume"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/cv2",
+      "destination": "profile:alternateResume",
+      "probes": ["/cv2"],
+      "status": 308
+    },
+    {
+      "kind": "redirect",
+      "source": "/resume2",
+      "destination": "profile:alternateResume",
+      "probes": ["/resume2"],
+      "status": 308
+    }
+  ]
+}
