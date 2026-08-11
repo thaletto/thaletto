@@ -4489,7 +4489,7 @@ a:focus-visible .external-label .external-mark {
 .tech-stack-label {
   max-width: 100%;
   color: var(--foreground);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-medium);
   line-height: 1.25;
   overflow-wrap: anywhere;
@@ -4527,6 +4527,12 @@ a:focus-visible .external-label .external-mark {
 
 .prose .tech-stack-grid > li::before {
   content: none;
+}
+
+@media (min-width: 36rem) {
+  .tech-stack-label {
+    font-size: 0.8125rem;
+  }
 }
 
 /* ── Per-service hover cards (components/social-cards.tsx) ────────── */
