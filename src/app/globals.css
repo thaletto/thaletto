@@ -4433,7 +4433,7 @@ a:focus-visible .external-label .external-mark {
 
 .tech-stack-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--border-hairline);
   margin: 0;
   padding: 0;
@@ -4496,10 +4496,6 @@ a:focus-visible .external-label .external-mark {
 }
 
 .tech-stack-filler {
-  display: none;
-}
-
-.tech-stack-filler-mobile {
   display: block;
 }
 
@@ -4531,16 +4527,6 @@ a:focus-visible .external-label .external-mark {
 
 .prose .tech-stack-grid > li::before {
   content: none;
-}
-
-@media (min-width: 36rem) {
-  .tech-stack-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .tech-stack-filler {
-    display: block;
-  }
 }
 
 /* ── Per-service hover cards (components/social-cards.tsx) ────────── */

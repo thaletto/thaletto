@@ -1,11 +1,10 @@
-import { Children, type ReactNode } from 'react'
 import { Grid2X2 } from 'lucide-react'
+import { Children, type ReactNode } from 'react'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '~/components/ui/empty'
 import { cn } from '~/lib/platform/utils'
 
-/** The desktop grid is four columns; narrow layouts collapse to two. */
-const DESKTOP_COLUMN_COUNT = 4
-const MOBILE_COLUMN_COUNT = 2
+/** The grid stays four columns at every viewport size. */
+const COLUMN_COUNT = 4
 const FILLER_KEYS = ['filler-a', 'filler-b', 'filler-c'] as const
 
 /** Props for one visible technology in a {@link TechStack}. */
@@ -51,7 +50,7 @@ export interface TechStackProps {
   variant?: 'card' | 'embedded'
 }
 
-/** Returns filler cells needed to finish a row at the given breakpoint. */
+/** Returns filler cells needed to finish a row. */
 function getFillerCount(itemCount: number, columnCount: number) {
   return itemCount === 0 ? 0 : (columnCount - (itemCount % columnCount)) % columnCount
 }
@@ -60,8 +59,7 @@ function getFillerCount(itemCount: number, columnCount: number) {
  * A semantic technology grid for the homepage and project MDX.
  *
  * Empty cells are decorative and explicitly hidden from assistive technology.
- * They preserve a stable four-column desktop grid while the mobile grid uses
- * only the filler required to complete its two-column final row.
+ * They preserve a stable four-column grid at every viewport size.
  */
 export function TechStack({
   children,
@@ -73,8 +71,7 @@ export function TechStack({
   variant = 'card',
 }: TechStackProps) {
   const itemCount = Children.count(children)
-  const fillerCount = getFillerCount(itemCount, DESKTOP_COLUMN_COUNT)
-  const mobileFillerCount = getFillerCount(itemCount, MOBILE_COLUMN_COUNT)
+  const fillerCount = getFillerCount(itemCount, COLUMN_COUNT)
   const Root = variant === 'card' ? 'section' : 'div'
 
   return (
@@ -108,15 +105,8 @@ export function TechStack({
       ) : (
         <ul className="tech-stack-grid" aria-label={title}>
           {children}
-          {FILLER_KEYS.slice(0, fillerCount).map((key, index) => (
-            <li
-              key={key}
-              className={cn(
-                'tech-stack-filler',
-                index < mobileFillerCount && 'tech-stack-filler-mobile',
-              )}
-              aria-hidden="true"
-            />
+          {FILLER_KEYS.slice(0, fillerCount).map((key) => (
+            <li key={key} className="tech-stack-filler" aria-hidden="true" />
           ))}
         </ul>
       )}
