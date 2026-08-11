@@ -2,6 +2,7 @@
 // the nav cards, assembled from the same content loaders the inner pages use;
 // `app/page.tsx` supplies the metadata and streaming shell.
 import { GeistPixelSquare } from 'geist/font/pixel'
+import Image from 'next/image'
 import Link from 'next/link'
 import { PostRow } from '~/components/blog/post-row'
 import { HomeIntroduction } from '~/components/home/home-introduction'
@@ -32,7 +33,6 @@ import { Tanstack } from '~/components/ui/svgs/tanstack'
 import { Typescript } from '~/components/ui/svgs/typescript'
 import { Vercel } from '~/components/ui/svgs/vercel'
 import { VercelDark } from '~/components/ui/svgs/vercelDark'
-import { HalftonePortrait } from '~/components/visual/halftone-portrait'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { PortraitHiddenStage } from '~/components/visual/portrait-hidden-stage'
 import { careerLifeline } from '~/lib/content/lifeline'
@@ -95,7 +95,16 @@ export async function HomePageView() {
           <PortraitHiddenStage
             label={`${siteIdentity.portraitAlt}. Reveal the hidden topographic field`}
           >
-            <HalftonePortrait src="/images/avatar.png" alt={siteIdentity.portraitAlt} />
+            <span className="hero-portrait-soft-fade">
+              <Image
+                src="/images/avatar.png"
+                alt={siteIdentity.portraitAlt}
+                fill
+                priority
+                sizes="(min-width: 640px) 240px, 150px"
+                className="hero-portrait-soft-fade-image"
+              />
+            </span>
           </PortraitHiddenStage>
         </div>
       </div>

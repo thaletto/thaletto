@@ -3138,7 +3138,39 @@ a:focus-visible .external-label .external-mark {
   animation: halftone-reveal 400ms var(--ease-swift) both;
 }
 
-/* The homepage portrait keeps its halftone print at rest. A bounded
+.hero-portrait-soft-fade {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  opacity: 0.82;
+  mask-image: radial-gradient(
+    ellipse at 50% 51%,
+    black 0 48%,
+    rgb(0 0 0 / 0.78) 61%,
+    transparent 78%
+  );
+  animation: hero-portrait-soft-fade-enter 220ms var(--ease-swift) both;
+}
+
+.hero-portrait-soft-fade-image {
+  object-fit: contain;
+  filter: contrast(0.88);
+  user-select: none;
+}
+
+.dark .hero-portrait-soft-fade-image {
+  filter: invert(1) contrast(0.88);
+}
+
+@keyframes hero-portrait-soft-fade-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+/* The homepage portrait keeps its softened illustration at rest. A bounded
    topographic field develops behind it only after deliberate attention. */
 [data-portrait-stage] {
   position: relative;
@@ -3256,6 +3288,10 @@ a:focus-visible .external-label .external-mark {
   [data-halftone][data-ready] .halftone-canvas {
     animation: none;
     opacity: 1;
+  }
+
+  .hero-portrait-soft-fade {
+    animation: none;
   }
 
   .portrait-hidden-stage-field,
@@ -5875,6 +5911,10 @@ a:focus-visible .external-label .external-mark {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.dark .dock-avatar img {
+  filter: invert(1);
 }
 
 .dock-rule {
