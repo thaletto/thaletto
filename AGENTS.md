@@ -1,13 +1,5 @@
-## Agent skills
+## Context pointers
 
-### Issue tracker
-
-Issues are tracked in the Linear project “Portfolio” through the Linear CLI. See `docs/agents/issue-tracker.md`.
-
-### Triage labels
-
-The repository uses the five default triage labels. See `docs/agents/triage-labels.md`.
-
-### Domain docs
-
-This is a single-context repository. See `docs/agents/domain.md`.
+- **Issues:** For issue or specification work, read `docs/agents/issue-tracker.md`.
+- **Triage:** Before applying or interpreting triage labels, read `docs/agents/triage-labels.md`.
+- **Domain:** Before exploring the repository, read `docs/agents/domain.md`.
