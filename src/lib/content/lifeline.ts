@@ -1,14 +1,11 @@
 // The life-and-work timeline for `/timeline`, resolved to the month.
 //
-// Personal milestones (school, university, TCS) are authored here; project
-// markers are derived from the project registry (`src/content/projects/*`)
-// so their months always agree with the project pages. The axis unit is
-// months since birth (`Aug 2003` is index 0), and every marker carries a
-// `label` ("Mar 2018") and an `age` so the rail reads month-precise.
+// Personal milestones (school, university, TCS) are authored here. The axis
+// unit is months since birth (`Aug 2003` is index 0), and every marker carries
+// a `label` ("Mar 2018") and an `age` so the rail reads month-precise.
 
 import type { LifelineMarker, LifelinePhoto } from '~/components/lifeline/types'
 import { siteExperience, siteIdentity } from '~/lib/content/personal'
-import { getAllProjects, type Project } from '~/lib/content/projects'
 import type { LifelineRecord } from '~/lib/lifeline-data'
 
 // Birth month anchors the axis: August 2003.
@@ -77,35 +74,6 @@ function at(
   }
 }
 
-/** Rail event line composed from the registry's own title + description. */
-function projectEventText(project: Project): string {
-  const description = project.description.charAt(0).toLowerCase() + project.description.slice(1)
-  return `${project.title}: ${description}`
-}
-
-/** One marker per project, placed at its end month. */
-function projectMarkers(): LifelineMarker[] {
-  const markers: LifelineMarker[] = []
-
-  for (const project of getAllProjects()) {
-    const when = project.endDate ?? project.startDate
-    if (!when) continue
-
-    const [year, month] = when.split('.').map(Number)
-    const index = monthIndex({ year, month })
-
-    markers.push({
-      id: project.slug,
-      year: index,
-      label: monthLabel(index),
-      age: ageAt(index),
-      events: [projectEventText(project)],
-    })
-  }
-
-  return markers.sort((a, b) => a.year - b.year)
-}
-
 function experienceMarkers(): LifelineMarker[] {
   return siteExperience.map((job) => {
     const roleArticle = /^[aeiou]/i.test(job.role) ? 'an' : 'a'
@@ -170,16 +138,15 @@ const nowMarkers: LifelineMarker[] = [
 ]
 
 /**
- * The site's own life-and-work timeline: personal milestones authored
- * here, project markers derived from `src/content/projects/*`, resolved
- * to the month and sorted along the rail.
+ * The site's own life-and-work timeline, resolved to the month and sorted
+ * along the rail.
  */
 export const careerLifeline: LifelineRecord = {
   slug: 'career',
   name: `${siteIdentity.firstName}: from ${siteIdentity.homeCity} to building`,
   birthYear: BIRTH_YEAR,
   description: 'Life, school, and work, resolved to the month.',
-  markers: [...personalMarkers, ...experienceMarkers(), ...projectMarkers(), ...nowMarkers].sort(
+  markers: [...personalMarkers, ...experienceMarkers(), ...nowMarkers].sort(
     (a, b) => a.year - b.year,
   ),
 }
