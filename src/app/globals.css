@@ -740,6 +740,7 @@
 
   .project-icon-frame {
     grid-row: 1 / span 2;
+    width: 4.5rem;
   }
 
   .project-identity,
