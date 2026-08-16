@@ -16,7 +16,7 @@ export const publicPageMetadata = {
   },
   timeline: {
     title: 'Time Variance Authority',
-    description: 'Life Events, Projects and Work Experience',
+    description: 'Life Events and Work Experience',
   },
 } as const
 

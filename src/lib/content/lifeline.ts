@@ -121,7 +121,7 @@ const personalMarkers: LifelineMarker[] = [
   at(
     { year: 2024, month: 5 },
     {
-      events: ['Graduated with a B.Tech'],
+      events: ['Graduated with a B.Tech Computer Science and Engineering'],
       companies: [{ id: 'university', name: 'University' }],
     },
   ),
