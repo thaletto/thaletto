@@ -81,7 +81,7 @@ function PostImage({
   )
 }
 
-export type ContentKind = 'blog' | 'projects'
+type ContentKind = 'blog' | 'projects'
 
 export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComponents {
   return {

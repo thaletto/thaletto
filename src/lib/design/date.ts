@@ -1,12 +1,5 @@
 export const SITE_TIME_ZONE = 'Asia/Kolkata'
 
-const englishFormatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: SITE_TIME_ZONE,
-})
-
 const monthDayFormatter = new Intl.DateTimeFormat('en-US', {
   month: '2-digit',
   day: '2-digit',
@@ -26,10 +19,6 @@ const localDateFormatter = new Intl.DateTimeFormat('en-US', {
   day: 'numeric',
   timeZone: SITE_TIME_ZONE,
 })
-
-export function formatDate(date: Date): string {
-  return englishFormatter.format(date)
-}
 
 export function formatMonthDay(date: Date): string {
   return monthDayFormatter.format(date)

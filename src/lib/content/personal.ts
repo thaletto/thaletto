@@ -121,7 +121,6 @@ const profile = parseSiteProfile(authoredSite)
 
 export const siteIdentity = profile.identity
 export const siteSocial = profile.social
-export const siteResumes = profile.resumes
 export const siteDestinations = profile.destinations
 export const siteExperience = profile.experience
 
