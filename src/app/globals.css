@@ -905,7 +905,7 @@
 
 .prose {
   color: var(--gray-10, var(--foreground));
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.72;
 }
 
@@ -995,6 +995,7 @@
   font-size: clamp(1.75rem, 4vw, 2rem);
   line-height: 1.18;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .post-title-meta {
