@@ -1,7 +1,5 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
-// Experimental React channel export — available because next.config.ts sets
-// experimental.viewTransition (see docs/design-language.md, page transitions)
 import { Suspense } from 'react'
 import { Dock, DockFallback } from '~/components/dock/dock'
 import {
@@ -45,7 +43,6 @@ export async function SiteDocument({
       className={cn('font-sans', fontVariables, 'public-site')}
     >
       <head>
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: authored inline bootstrap script, no runtime input */}
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
       </head>
       <body className="antialiased">

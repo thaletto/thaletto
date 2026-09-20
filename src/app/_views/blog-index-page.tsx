@@ -20,7 +20,7 @@ export function BlogIndexPageView() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-150 px-6">
+    <div className="mx-auto w-full max-w-168 px-6">
       <header className="enter flex items-center justify-between">
         <h1 className="page-eyebrow">Writing</h1>
         <PixelCluster variant={1} />

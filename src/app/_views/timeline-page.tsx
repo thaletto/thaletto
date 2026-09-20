@@ -10,7 +10,7 @@ import { publicPageMetadata } from '~/lib/metadata/public-page-metadata'
 
 export function TimelinePageView() {
   return (
-    <div className="relative mx-auto w-full max-w-150 px-6">
+    <div className="relative mx-auto w-full max-w-168 px-6">
       <GhostSchematic className="top-4 right-6 hidden w-56 sm:block" />
       <div className="flex items-start justify-between gap-4">
         <header className="max-w-136">

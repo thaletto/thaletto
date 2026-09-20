@@ -13,7 +13,7 @@ export interface ErrorBoundaryProps {
 
 export function ErrorPageView({ retry }: Pick<ErrorBoundaryProps, 'retry'>) {
   return (
-    <div className="error-sheet mx-auto w-full max-w-150 px-6">
+    <div className="error-sheet mx-auto w-full max-w-168 px-6">
       <section className="error-proof" aria-labelledby="error-title">
         <div className="error-proof-meta" aria-hidden>
           <span>ERR / 500</span>

@@ -1037,7 +1037,7 @@
   }
 }
 
-/* ── Ambient background: paper grain + drafting guides ────────────── */
+/* ── Ambient background: paper grain ─────────────────────────────── */
 
 .paper-grain {
   position: fixed;
@@ -1049,53 +1049,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
-}
-
-.column-guides {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  user-select: none;
-  opacity: var(--guide-opacity);
-}
-
-/* full-height dashed verticals boxing the column, drafting-sheet style */
-.column-guide-v {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: repeating-linear-gradient(
-    to bottom,
-    color-mix(in oklab, var(--muted-foreground) 45%, transparent) 0,
-    color-mix(in oklab, var(--muted-foreground) 45%, transparent) 2px,
-    transparent 2px,
-    transparent 4px
-  );
-}
-
-.column-guide-v:first-of-type {
-  left: max(16px, calc((100% - 37.5rem) / 2));
-}
-
-.column-guide-v:last-of-type {
-  right: max(16px, calc((100% - 37.5rem) / 2));
-}
-
-/* registration cross where the (intentionally absent) top rule would
-   meet each guide — same missability contract as the guides */
-.column-guide-v::after {
-  content: "";
-  position: absolute;
-  top: 14px;
-  left: -4px;
-  width: 9px;
-  height: 9px;
-  color: color-mix(in oklab, var(--muted-foreground) 45%, transparent);
-  background:
-    linear-gradient(currentColor, currentColor) center / 9px var(--border-hairline) no-repeat,
-    linear-gradient(currentColor, currentColor) center / var(--border-hairline) 9px no-repeat;
 }
 
 /* ── Calibration marks: viewfinder corner brackets ────────────────── */
@@ -3824,7 +3777,7 @@ a:focus-visible .external-label .external-mark {
   --vinyl-shadow-rgb: var(--room-shelf-shadow-rgb);
 
   left: 50%;
-  width: min(37.5rem, calc(100vw - 2rem));
+  width: min(42rem, calc(100vw - 2rem));
   isolation: isolate;
   transform: translateX(-50%);
 }

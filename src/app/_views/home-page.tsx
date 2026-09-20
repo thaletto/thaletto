@@ -38,7 +38,7 @@ export async function HomePageView() {
   const nextSectionIndex = () => String(++sectionCount).padStart(2, '0')
 
   return (
-    <div className="mx-auto w-full max-w-150 px-6">
+    <div className="mx-auto w-full max-w-168 px-6">
       <div className="flex flex-col-reverse justify-between gap-10 sm:flex-row sm:items-start">
         <div className="enter">
           <div className="flex items-center gap-2">
