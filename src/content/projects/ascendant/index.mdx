@@ -3,15 +3,17 @@ title: 'Ascendant'
 description: 'Modern developer ecosystem for Astrology'
 publishedAt: '2026-04-01T00:00:00.000Z'
 sort: 7
-tags: ['Agent Skills', 'Python SDK', 'PyPI']
+tags: ['Agent Skills', 'TypeScript SDK', 'Effect', 'Python']
 startDate: '2025.09'
 links:
   - label: 'Docs'
     url: 'https://ascendant-docs.vercel.app'
-  - label: 'Github'
-    url: 'https://github.com/thaletto/ascendant'
+  - label: 'npm'
+    url: 'https://www.npmjs.com/package/astro-ascendant'
   - label: 'PyPI'
     url: 'https://pypi.org/project/astro-ascendant/'
+  - label: 'Github'
+    url: 'https://github.com/thaletto/ascendant-ts'
 cover: ./ascendant.webp
 coverWidth: 1280
 coverHeight: 720
@@ -19,7 +21,12 @@ coverHeight: 720
 
 ## Overview
 
-Ascendant is a pack of agent skills and tools for AI coding agents. It makes Vedic astrology workflows reliable and fully local. An agent installs the pack, saves a person's birth record, and calculates charts, Dasha periods, yoga combinations, Ashtakavarga scores, and transits. All calculations run on the agent's machine, without a hosted API. The pack includes the Python library that does the math. The skills tell the agent what evidence to inspect and how to answer responsibly.
+Ascendant is a developer ecosystem for sidereal astrology.
+An Effect-first TypeScript library computes charts, dashas, yogas, Ashtakavarga scores, and transits.
+A Python library provides the same math where Python runs. 
+An agent skill turns a saved birth record into evidence-backed Vedic readings. 
+A Birth Chart Calculator on the docs site runs Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga in the browser. 
+Everything calculates locally, without a hosted API.
 
 ## Problem
 
@@ -27,60 +34,64 @@ AI agents hallucinate astrology values when they reason from memory. Interpretat
 
 ## Approach
 
-Ascendant provides an end-to-end agent workflow. A bundled script saves birth records with full provenance. Domain skills read the records and answer questions with cited evidence. The calculation library produces every number locally.
+Ascendant provides an end-to-end workflow across four surfaces. The TypeScript library does the math with Effect services. The Python package mirrors it for Python runtimes. The skill saves birth records and answers readings with cited evidence. The calculator demonstrates the whole pipeline interactively.
 
-**Skills and tools.** The pack contains eleven skills. `init-person` saves a birth record. `get-transit` and `daily-transit` handle transits. Seven domain skills guide readings: career, finance, health, education, family, marriage, and relationship compatibility. `property` covers real estate topics. You install the whole pack with `npx skills add thaletto/ascendant`. It is also available as a Codex plugin marketplace.
+### TypeScript library
 
-**Saved birth records.** The `init-person` skill runs a bundled Python script. The script stores the record under `persons/<name>/` with the divisional charts, `dasha.json`, `yogas.json`, and `sav.json`. It reuses an existing record when the birth details match. It backfills missing data in older records and upgrades provenance v1 records to v2 without rewriting the artifacts.
+The `astro-ascendant` package computes everything through composable Effect services. You provide a UTC moment, latitude, longitude, and optional birth sex. `Chart.generate` returns shared placements plus cusp-aware charts, starting with D1 and adding divisions like D9 on request. The Dasha, Ashtakavarga, and Jaimini modules reuse those placements. Ayanamsa and house system are typed parameters with immutable defaults: Krishnamurti and Placidus in the quickstart, Lahiri and Whole Sign available. Install it with `bun add astro-ascendant effect@rc`.
 
-**Guided readings.** The interpretation skills use the versioned Parashari–Raman workflow named `parashari_raman_v2`. A reading starts from the D1 natal chart. It adds the relevant divisional chart when the topic requires one. It checks the active Mahadasha and Antardasha. It then uses dated transits and Sarvashtakavarga as corroborating evidence. The agent must read the stored artifacts before answering. It cites each conclusion with its artifact pointer and the governing source. Topic rubrics and safety boundaries keep the advice within scope. Output is structured, with explicit exit codes and strict error handling.
+### Python library 
 
-**Local calculation library.** The Python package `astro-ascendant` computes everything locally. It provides divisional charts, the full Vimshottari Dasha timeline, current Dasha lookups, yoga results, and the complete Ashtakavarga result. Charts use the sidereal zodiac, with the Lahiri ayanamsa and Whole Sign houses as defaults. You can override the ayanamsa and the house system for one instance, or set typed, immutable application defaults.
+The `astro-ascendant` package on PyPI computes the same domains locally: divisional charts, the full Vimshottari Dasha timeline, current Dasha lookups, yoga results, and the complete Ashtakavarga result. Charts use the sidereal zodiac, with the Lahiri ayanamsa and Whole Sign houses as defaults. A frozen configuration object holds the resolved enums, timezone, coordinates, and software version for reproducibility. Install it with `pip install astro-ascendant`.
 
-**Learning guide.** The documentation includes a guide that explains the astrology behind the workflow: the tropical and sidereal zodiacs, houses and divisional charts, timing and dashas, and the Parashari, Jaimini, and Krishnamurti traditions.
+### Agent skill
+
+The skill lives in `thaletto/ascendant-agents` and installs into Claude, Codex, Cursor, Gemini, OpenCode, and more. It takes three arguments. `init` creates or refreshes a reusable `persons/<name>/` record from exact birth data. `setup` installs calculation dependencies once per working directory. `analysis` answers a reading or timing question from the saved record, grounding claims in stored charts and method references: KP for timing and yes-no questions, Parashari for promise, quality, and synthesis. Person memory accumulates only confirmed events, so readings stay consistent across sessions.
+
+### Birth Chart Calculator
+
+The docs site runs the TypeScript library end to end: Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga from a birth moment and location, with a learning guide covering zodiacs, houses, dashas, and the Parashari, Jaimini, and Krishnamurti traditions.
 
 ## How It Works
 
-```text
-/init-person Priya, 11 Aug 1998, 12:00 PM, Chennai  # Claude/Codex/OpenCode
+```typescript
+import { BunRuntime, BunServices } from "@effect/platform-bun";
+import { AstroParams, Chart, Swisseph } from "astro-ascendant";
+import { Effect } from "effect";
+
+const runtimeLayer = Layer.mergeAll(
+  BunServices.layer,
+  Swisseph.SwissephLayer,
+  AstroParams.DefaultAstroParams,
+);
+
+const input = Chart.ChartParams.make({
+  moment: Chart.Moment.make({
+    date: DateTime.makeUnsafe("2000-01-01T12:00:00.000Z"),
+  }),
+  latitude: 12.9716,
+  longitude: 77.5946,
+  sex: "Male",
+});
+
+const program = Chart.generate(input, [9]).pipe(Effect.provide(runtimeLayer));
+BunRuntime.runMain(program);
 ```
 
-The agent runs the bundled script. It saves the birth record under `persons/Priya/` with the calculated charts. For follow-up questions, you invoke the matching domain skill, such as `/career` or `/finance`. The agent reads the stored artifacts and answers with cited chart factors.
-
-## astro-ascendant
-
-The core Python package powers all of this. You install it with `pip install astro-ascendant`. It computes Vedic astrology data entirely on your machine, with no hosted API. You provide complete birth details: year, month, day, hour, minute, second, latitude, longitude, and the UTC offset. The results are ordinary Python dictionaries and typed structures. You can inspect, validate, store, or cite them in a response.
-
-```python
-from ascendant import Ascendant
-
-astro = Ascendant(
-    year=1990, month=1, day=1,
-    hour=12, minute=0, second=0,
-    latitude=28.6139, longitude=77.2090,
-    utc="+5:30"
-)
-
-chart = astro.get_chart(division=1)
-dasha = astro.get_dasha_timeline()
-current = astro.get_current_dasha()
-yogas = astro.get_yogas()
-sav = astro.get_sav()
-```
-
-The package exposes five calculation domains:
-
-- `get_chart(division)` returns a twelve-house divisional chart.
-- `get_dasha_timeline()` returns the full Vimshottari Mahadasha and Antardasha sequence.
-- `get_current_dasha(date=None)` returns the period that is active on a date.
-- `get_yogas()` returns yoga presence, strength, type, and details.
-- `get_sav()` returns Bhinna scores, Sarvashtakavarga totals, reductions, and Shodhya Pinda.
-
-Calculation settings follow an explicit precedence. An argument that you pass to the constructor wins. Otherwise, the current application configuration applies. Otherwise, the built-in defaults apply. The built-in defaults use the Lahiri ayanamsa and Whole Sign houses. The configuration is a frozen `AscendantConfig` object. `configure()` replaces the whole value; `get_config()` reads it; `reset_config()` restores the defaults. The ayanamsa and house system fields accept enum members, not arbitrary strings. Supported ayanamsas include Lahiri, Raman, and Krishnamurti. Supported house systems include Whole Sign, Placidus, Equal, and Porphyry. The package maps these values to Swiss Ephemeris modes when it calculates cusps and angles. For reproducibility, store the resolved enums together with the timezone, coordinates, and software version.
+The program returns shared placements plus D1 and D9 charts. For agent-driven readings, install the skill with `npx skills add thaletto/ascendant-agents`, save a record with `/ascendant init`, and ask with `/ascendant analysis`.
 
 ## Tech Stack
 
 <TechStack variant="embedded">
+  <TechStackItem label="TypeScript">
+    <Typescript />
+  </TechStackItem>
+  <TechStackItem label="Effect">
+    <Effect />
+  </TechStackItem>
+  <TechStackItem label="Bun">
+    <Bun />
+  </TechStackItem>
   <TechStackItem label="Python">
     <Python />
   </TechStackItem>
@@ -94,5 +105,8 @@ Calculation settings follow an explicit precedence. An argument that you pass to
   </TechStackItem>
   <TechStackItem label="Claude">
     <ClaudeAiIcon />
+  </TechStackItem>
+  <TechStackItem label="Supermemory">
+    <Supermemory />
   </TechStackItem>
 </TechStack>
