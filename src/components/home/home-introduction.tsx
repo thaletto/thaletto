@@ -101,7 +101,7 @@ export function HomeIntroduction({
   return (
     <div className="home-introduction">
       <p className="text-sm leading-relaxed text-muted-foreground">
-        I’m {siteIdentity.firstName}, an {siteIdentity.role} who enjoys building modern,
+        I{`\u2019`}m {siteIdentity.firstName}, an {siteIdentity.role} who enjoys building modern,
         well-structured apps where things{' '}
         <DetailsPhrase>
           <span className="home-detail-units home-detail-words">
@@ -110,7 +110,8 @@ export function HomeIntroduction({
             <span className="home-detail-unit">right</span>
           </span>
         </DetailsPhrase>{' '}
-        from how the UI looks to how the code is organized under the hood.
+        from how the <span className="font-serif italic">UI</span> looks to how the{' '}
+        <span className="font-mono">code</span> is organized under the hood.
       </p>
       <HomeContact social={social} github={github} />
     </div>
