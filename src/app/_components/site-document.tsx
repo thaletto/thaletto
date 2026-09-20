@@ -1,7 +1,5 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import { Dock, DockFallback } from '~/components/dock/dock'
 import {
   RouteMotionController,
   RouteViewTransition,
@@ -51,9 +49,6 @@ export async function SiteDocument({
                 <RouteViewTransition>{children}</RouteViewTransition>
               </main>
             </div>
-            <Suspense fallback={<DockFallback />}>
-              <Dock />
-            </Suspense>
           </PreviewCardTimingProvider>
         </ThemeProvider>
         <Analytics />
