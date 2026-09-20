@@ -117,7 +117,6 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
     <>
       <PostToc
         nodes={rail}
-        backTo={{ href: '/projects', label: 'Projects', ariaLabel: 'Back to projects' }}
       />
       <article className="post-article mx-auto w-full max-w-168 px-6">
         <header>

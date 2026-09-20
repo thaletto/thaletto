@@ -68,10 +68,8 @@ function WayfindingArrow({ direction }: { direction: 'back' | 'top' }) {
 
 export function PostToc({
   nodes,
-  backTo,
 }: {
   nodes: PostRailNode[]
-  backTo?: { href: string; label: string; ariaLabel: string }
 }) {
   const landmarks = useMemo(
     () =>
@@ -669,12 +667,12 @@ export function PostToc({
           <div className="post-minimap-phone-surface backdrop-blur-md" aria-hidden />
           <div className="post-minimap-utilities post-minimap-utilities-top">
             <Link
-              href={backTo?.href ?? '/blog'}
+              href='/'
               className="post-minimap-utility"
-              aria-label={backTo?.ariaLabel ?? 'Back to writing'}
+              aria-label={'Back to home'}
             >
               <WayfindingArrow direction="back" />
-              <span>{backTo?.label ?? 'Writing'}</span>
+              <span>Home</span>
             </Link>
           </div>
           <div className="post-minimap-clip">
