@@ -13,7 +13,6 @@
     "build": "next build",
     "start": "next start",
     "test": "bun test src",
-    "test:e2e": "playwright test",
     "format": "biome format --write .",
     "lint": "biome lint .",
     "fix": "biome check --write ."
@@ -46,8 +45,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.7",
-    "@next/playwright": "16.3.0",
-    "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/mdx": "^2.0.14",
     "@types/node": "^26.2.0",
