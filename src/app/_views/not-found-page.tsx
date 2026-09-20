@@ -4,7 +4,7 @@ import { Barcode } from '~/components/visual/barcode'
 
 export function NotFoundPageView() {
   return (
-    <div className="error-sheet mx-auto w-full max-w-168 px-6">
+    <div className="error-sheet mx-auto w-full max-w-173 px-4">
       <section className="error-proof" aria-labelledby="not-found-title">
         <div className="error-proof-meta" aria-hidden>
           <span>ERR / 404</span>

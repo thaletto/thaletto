@@ -328,22 +328,22 @@
   --grain-opacity: 0.22;
 }
 
-/* The warm working-paper palette. Public pages and the owner admin share
-   it (maintainer decision, July 2026) — the neutral ramp above remains
-   only as the pre-hydration fallback. */
+/* The neutral gray ramp (jakub.kr): cool, near-zero-chroma steps. Public
+   pages share it — the neutral ramp above remains only as the
+   pre-hydration fallback. */
 .public-site {
-  --gray-1: oklch(0.99 0.001 95);
-  --gray-2: oklch(0.975 0.0015 95);
-  --gray-3: oklch(0.95 0.002 95);
-  --gray-4: oklch(0.91 0.0025 92);
-  --gray-5: oklch(0.85 0.003 88);
-  --gray-6: oklch(0.77 0.0035 84);
-  --gray-7: oklch(0.67 0.004 80);
-  --gray-8: oklch(0.56 0.004 78);
-  --gray-9: oklch(0.47 0.0045 76);
-  --gray-10: oklch(0.39 0.0045 74);
-  --gray-11: oklch(0.31 0.0045 72);
-  --gray-12: oklch(0.23 0.0045 70);
+  --gray-1: oklch(0.991 0 95);
+  --gray-2: oklch(0.973 0 95);
+  --gray-3: oklch(0.955 0 95);
+  --gray-4: oklch(0.931 0 95);
+  --gray-5: oklch(0.907 0 95);
+  --gray-6: oklch(0.885 0 95);
+  --gray-7: oklch(0.851 0 95);
+  --gray-8: oklch(0.542 0 95);
+  --gray-9: oklch(0.439 0 95);
+  --gray-10: oklch(0.379 0 95);
+  --gray-11: oklch(0.269 0 95);
+  --gray-12: oklch(0.244 0 95);
   --selection-highlight: oklch(0.9 0.17 105 / 0.58);
 
   /* the signal accent — one mark per view, never a text color */
@@ -369,36 +369,36 @@
   --ring: var(--gray-8);
   --focus-ring: var(--gray-9);
 
-  /* the surface ladder, warm-tuned: elevated sheets stay on the paper */
-  --surface-1: oklch(0.968 0.0018 95);
-  --surface-2: oklch(0.978 0.0016 95);
+  /* the surface ladder, neutral: elevated sheets lift off the page */
+  --surface-1: oklch(1 0 95);
+  --surface-2: oklch(1 0 95);
 }
 
 .dark.public-site {
-  --gray-1: oklch(0.16 0.006 80);
-  --gray-2: oklch(0.19 0.007 80);
-  --gray-3: oklch(0.22 0.008 80);
-  --gray-4: oklch(0.27 0.009 80);
-  --gray-5: oklch(0.32 0.01 80);
-  --gray-6: oklch(0.4 0.011 80);
-  --gray-7: oklch(0.5 0.011 82);
-  --gray-8: oklch(0.61 0.01 84);
-  --gray-9: oklch(0.7 0.009 86);
-  --gray-10: oklch(0.78 0.008 88);
-  --gray-11: oklch(0.87 0.007 90);
-  --gray-12: oklch(0.94 0.006 92);
+  --gray-1: oklch(0.173 0 95);
+  --gray-2: oklch(0.213 0 95);
+  --gray-3: oklch(0.252 0 95);
+  --gray-4: oklch(0.264 0 95);
+  --gray-5: oklch(0.313 0 95);
+  --gray-6: oklch(0.348 0 95);
+  --gray-7: oklch(0.402 0 95);
+  --gray-8: oklch(0.583 0 95);
+  --gray-9: oklch(0.686 0 95);
+  --gray-10: oklch(0.773 0 95);
+  --gray-11: oklch(0.891 0 95);
+  --gray-12: oklch(0.949 0 95);
   --selection-highlight: oklch(0.8 0.14 105 / 0.28);
   --signal: oklch(0.7 0.17 48);
   --ghost-ink: color-mix(in oklab, var(--foreground) 6.5%, transparent);
 
-  /* warm surface ladder, dark: each step lifts off the sheet */
-  --surface-1: oklch(0.185 0.0065 80);
-  --surface-2: oklch(0.205 0.007 80);
-  --surface-4: oklch(0.235 0.008 80);
-  --surface-5: oklch(0.255 0.0085 80);
-  --surface-6: oklch(0.275 0.009 80);
-  --surface-7: oklch(0.295 0.009 80);
-  --surface-8: oklch(0.315 0.0095 80);
+  /* neutral surface ladder, dark: each step lifts off the sheet */
+  --surface-1: oklch(0.213 0 95);
+  --surface-2: oklch(0.239 0 95);
+  --surface-4: oklch(0.264 0 95);
+  --surface-5: oklch(0.313 0 95);
+  --surface-6: oklch(0.348 0 95);
+  --surface-7: oklch(0.402 0 95);
+  --surface-8: oklch(0.489 0 95);
 }
 
 .public-site ::selection {
@@ -3446,9 +3446,7 @@ a:focus-visible .external-label .external-mark {
   grid-template-columns: minmax(0, 1fr) max-content;
   align-items: start;
   gap: 1rem;
-  color: var(--foreground);
-  font-size: 0.875rem;
-  padding: 0.625rem 0;
+  padding: 0.875rem 0;
 }
 
 .experience-details {
@@ -3783,10 +3781,10 @@ a:focus-visible .external-label .external-mark {
 
 .blog-row {
   display: flex;
-  align-items: start;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-  font-size: 0.875rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  font-size: 1rem;
 }
 
 /* the date is quiet metadata — one step down from the row's title */

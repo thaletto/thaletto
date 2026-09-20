@@ -27,7 +27,7 @@ export async function HomePageView() {
   const projects = getProjectRows()
 
   return (
-    <div className="mx-auto w-full max-w-168 px-6">
+    <div className="mx-auto w-full max-w-173 px-4">
       <div className="flex flex-col-reverse justify-between gap-10 sm:flex-row sm:items-start">
         <div>
           <div className="flex items-center gap-2">
@@ -42,9 +42,9 @@ export async function HomePageView() {
         </div>
       </div>
 
-      <section className="mt-16">
+      <section className="mt-16 sm:mt-24">
         <SectionTitle>Experience</SectionTitle>
-        <ul className="mt-4 flex flex-col">
+        <ul className="mt-2 flex flex-col">
           {siteExperience.map((job) => (
             <li key={job.company}>
               <div className="experience-row text-sm">
@@ -72,9 +72,9 @@ export async function HomePageView() {
         </ul>
       </section>
 
-      <section className="mt-16">
+      <section className="mt-16 sm:mt-24">
         <SectionTitle>Projects</SectionTitle>
-        <ul className="mt-4 flex flex-col">
+        <ul className="mt-2 flex flex-col">
           {projects.map((project) => (
             <li key={project.slug}>
               <ProjectRow project={project} headingLevel="h3" />
@@ -83,9 +83,9 @@ export async function HomePageView() {
         </ul>
       </section>
 
-      <section className="mt-16">
+      <section className="mt-16 sm:mt-24">
         <SectionTitle>Writing</SectionTitle>
-        <ul className="mt-4 flex flex-col">
+        <ul className="mt-2 flex flex-col">
           {latest.map((post) => (
             <li key={post.slug}>
               <PostRow post={post} headingLevel="h3" dateStyle="full" />
