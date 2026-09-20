@@ -95,7 +95,7 @@ export function HomeIntroduction({
   return (
     <div className="home-introduction">
       <p className="text-sm leading-relaxed text-muted-foreground">
-        I’m {siteIdentity.firstName}, an {siteIdentity.role} who enjoys building modern,
+        I'm {siteIdentity.firstName}, an {siteIdentity.role} who enjoys building modern,
         well-structured apps where things{' '}
         <DetailsPhrase>
           <span className="home-detail-units home-detail-words">
