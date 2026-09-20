@@ -878,6 +878,14 @@
   margin-top: 1.25em;
 }
 
+/* article measure: long-form text stays near 68ch inside the wider column */
+.prose > p,
+.prose > ul,
+.prose > ol,
+.prose > blockquote {
+  max-width: 68ch;
+}
+
 .prose {
   counter-reset: prose-section prose-figure;
 }
@@ -917,6 +925,7 @@
 
 .prose a {
   color: var(--gray-10, var(--foreground));
+  overflow-wrap: anywhere;
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-thickness: 0.1em;
@@ -1670,6 +1679,7 @@ html[data-route-motion='none']::view-transition-new(*) {
   border-radius: 2px;
   padding: 0.125rem 0.375rem;
   font-size: 0.875em;
+  overflow-wrap: anywhere;
 }
 
 .newsletter-archive-image {
