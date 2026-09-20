@@ -22,7 +22,7 @@ function SectionTitle({
       className="section-tag section-tag-ruled enter"
       style={{ '--enter-delay': `${delay}ms` } as React.CSSProperties}
     >
-      <span className="section-tag-label">{children}</span>
+      <span className="align-center">{children}</span>
       <span className="section-tag-rule" aria-hidden />
     </h2>
   )
@@ -74,7 +74,7 @@ export async function HomePageView() {
                       href={job.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="experience-company font-medium transition-colors duration-150 ease-[ease] hover:text-foreground"
+                      className="experience-company transition-colors duration-150 ease-[ease]"
                     >
                       <ExternalLabel>{job.company}</ExternalLabel>
                     </a>
@@ -83,7 +83,7 @@ export async function HomePageView() {
                   )}
                   <span className="experience-role text-muted-foreground">{job.role}</span>
                 </div>
-                <span className="experience-date text-muted-foreground tabular-nums">
+                <span className="experience-date shrink-0 text-muted-foreground tabular-nums">
                   {job.yearRange}
                 </span>
               </div>

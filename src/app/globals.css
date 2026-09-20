@@ -1545,10 +1545,6 @@
   );
 }
 
-.section-tag-label {
-  align-self: center;
-}
-
 /* homepage section titles: the label is followed by a hairline rule that
    takes up the rest of the row */
 .section-tag-ruled {
@@ -4327,6 +4323,8 @@ a:focus-visible .external-label .external-mark {
   grid-template-columns: minmax(0, 1fr) max-content;
   align-items: start;
   gap: 1rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
   padding: 0.625rem 0;
 }
 
@@ -4343,10 +4341,7 @@ a:focus-visible .external-label .external-mark {
   min-width: 0;
   max-width: 100%;
   overflow-wrap: anywhere;
-}
-
-.experience-date {
-  white-space: nowrap;
+  font-weight: var(--font-weight-medium);
 }
 
 /* ── Tech stack: reusable card + MDX grid ────────────────────────── */
@@ -4695,10 +4690,11 @@ a:focus-visible .external-label .external-mark {
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
 }
 
 /* the date is quiet metadata — one step down from the row's title */
+.experience-date,
 .blog-row-date {
   font-size: 0.8125rem;
   letter-spacing: 0.01em;
@@ -4706,8 +4702,8 @@ a:focus-visible .external-label .external-mark {
 
 .blog-row-title {
   min-width: 0;
-  color: var(--gray-11, var(--foreground));
   font-weight: var(--font-weight-medium);
+  color: var(--gray-11, var(--foreground));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

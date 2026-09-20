@@ -44,7 +44,8 @@
       "timelinePhoto": {
         "src": "/timeline/tcs.jpg",
         "alt": "Tata Consultancy Services"
-      }
+      },
+      "url": "https://tcs.com"
     }
   ]
 }
