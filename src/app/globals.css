@@ -1550,15 +1550,8 @@ html[data-route-motion='none']::view-transition-new(*) {
   top: 0.25em;
   bottom: 0.25em;
   left: 0;
-  width: 0.375rem;
-  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
-  background: repeating-linear-gradient(
-    -45deg,
-    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 0,
-    color-mix(in oklab, var(--muted-foreground) 55%, transparent) 1px,
-    transparent 1px,
-    transparent 3.5px
-  );
+  width: 0.1875rem;
+  background: var(--muted-foreground);
 }
 
 /* post images are figure prints: square-cornered on a hairline ring,
