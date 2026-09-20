@@ -11,11 +11,9 @@ import { getAllPosts } from '~/lib/content/posts'
 import { getGitHub, getSocial } from '~/lib/content/social-live'
 
 function SectionTitle({
-  index,
   children,
   delay,
 }: {
-  index: string
   children: React.ReactNode
   delay: number
 }) {
@@ -24,10 +22,6 @@ function SectionTitle({
       className="section-tag enter"
       style={{ '--enter-delay': `${delay}ms` } as React.CSSProperties}
     >
-      <span className="section-tag-index" aria-hidden>
-        {index}
-      </span>
-      <span className="section-tag-hatch" aria-hidden />
       <span className="section-tag-label">{children}</span>
     </h2>
   )
@@ -62,7 +56,7 @@ export async function HomePageView() {
       </div>
 
       <section className="mt-16">
-        <SectionTitle index={nextSectionIndex()} delay={120}>
+        <SectionTitle delay={120}>
           Experience
         </SectionTitle>
         <ul className="mt-4 flex flex-col">
@@ -99,7 +93,7 @@ export async function HomePageView() {
 
       <section className="mt-16">
         <div className="flex items-center justify-between gap-4">
-          <SectionTitle index={nextSectionIndex()} delay={200}>
+          <SectionTitle delay={200}>
             Writing
           </SectionTitle>
           <Link
