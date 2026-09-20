@@ -1,3 +1,4 @@
+import { HomeIntroReplay } from '~/components/home/home-intro-replay'
 import { EmailCard, GitHubCard, type SocialSnapshot, XCard } from '~/components/social/social-cards'
 import type { GitHubActivity } from '~/lib/content/github-activity'
 import { siteIdentity, siteSocial } from '~/lib/content/personal'
@@ -53,10 +54,10 @@ function DetailsMark() {
 
 function DetailsPhrase({ children }: { children: React.ReactNode }) {
   return (
-    <span className="home-intro-trigger">
+    <HomeIntroReplay>
       <DetailsMark />
       {children}
-    </span>
+    </HomeIntroReplay>
   )
 }
 
