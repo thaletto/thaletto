@@ -3,8 +3,8 @@ import type { ProjectRow as ProjectRowData } from '~/lib/content/projects'
 import { projectViewTransitionName } from '~/lib/motion/view-transition-name'
 
 // The compact project row: the same register as the writing rows — title
-// followed by a gray single-line description with a `/` prefix. Mobile
-// titles may use two lines.
+// followed by a gray single-line description (`/` prefix on desktop, own
+// line on mobile). Mobile titles may use two lines.
 export function ProjectRow({
   project,
   headingLevel = 'h2',
@@ -21,7 +21,7 @@ export function ProjectRow({
       href={`/projects/${safeSlug}`}
       coverTransitionName={coverTransitionName}
       titleTransitionName={titleTransitionName}
-      className="group blog-row"
+      className="group blog-row flex-wrap"
     >
       <Heading
         className="blog-row-title"
@@ -29,8 +29,11 @@ export function ProjectRow({
       >
         {project.title}
       </Heading>
-      <span className="min-w-0 flex-1 truncate text-sm text-muted-foreground">
-        / {project.description}
+      <span aria-hidden className="hidden shrink-0 text-sm text-muted-foreground sm:inline">
+        /
+      </span>
+      <span className="min-w-0 basis-full truncate text-sm text-muted-foreground sm:basis-auto sm:flex-1">
+        {project.description}
       </span>
     </PostTransitionLink>
   )

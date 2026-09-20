@@ -34,7 +34,7 @@ export async function HomePageView() {
       <div className="flex flex-col-reverse justify-between gap-10 sm:flex-row sm:items-start">
         <div className="land-enter">
           <div className="flex items-center gap-2">
-            <h1 className="font-sans text-xl font-medium tracking-tight text-foreground">
+            <h1 className="font-sans text-lg font-medium tracking-tight text-foreground sm:text-xl">
               {siteIdentity.name}
             </h1>
             <PixelCluster variant={2} className="shrink-0" />
@@ -71,7 +71,8 @@ export async function HomePageView() {
                   <span className="experience-role text-muted-foreground">{job.role}</span>
                 </div>
                 <span className="experience-date shrink-0 text-muted-foreground tabular-nums">
-                  {job.yearRange}
+                  <span className="sm:hidden">{job.yearRangeShort}</span>
+                  <span className="hidden sm:inline">{job.yearRange}</span>
                 </span>
               </div>
             </li>
