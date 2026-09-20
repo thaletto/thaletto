@@ -1,5 +1,5 @@
 ---
-title: 'The great pyramid of JavaScript'
+title: 'The great pyramid of JS'
 description: 'The journey of JavaScript before it is executed.'
 publishedAt: '2026-03-17T00:00:00.000Z'
 cover: ./pyramid-js.webp
@@ -25,7 +25,7 @@ getUser()
 
 Now the post shows what each layer does to it.
 
-## The Editor and the Linter
+## Editor and Linter
 
 Before the engine reads the code, a linter reads it. You can use [ESLint](https://eslint.org/), [Biome](https://biomejs.dev/), or [OXC (Oxlint)](https://oxc.rs/). The linter checks the code before the engine executes it. It does not execute the code. It checks the source for problems. For example, it identifies a `console.log` statement that remains in code intended for production.
 
@@ -35,7 +35,7 @@ The **formatter** follows the linter. You can use [Prettier](https://prettier.io
 
 Neither of these tools executes your code. They work in the pre-execution layer, before the code runs.
 
-## The Bundler
+## Bundler
 
 You have written `getUser` in one file. In another file, you have written the UI that calls it. In other files, you have written a utility function, a type definition, and a third-party library from npm. In development, these files are separate. A browser needs a single address for the code.
 
@@ -63,7 +63,7 @@ Vite does this work in a specific way. In development, Vite skips bundling almos
 
 The output of the bundler is a JavaScript file. It is one file, or a small set of files, ready to be handed to a runtime.
 
-## The Runtime: Node, Bun, or the Browser
+## Runtime
 
 Your bundled `bundle.js` now needs a runtime. If this is a server, that runtime is **Node.js** or **Bun**. If it is a browser, that runtime is Chrome, Firefox, or Safari. The distinction matters.
 
@@ -73,11 +73,11 @@ Node.js is a thin shell around **V8**, Google's JavaScript engine, combined with
 
 The runtime provides the environment for the code. The engine executes the code. You cannot have one without the other.
 
-## The Engine: V8, JavaScriptCore
+## Engine
 
 Now the post arrives at the engine. V8 powers Node, Chrome, and Deno. JavaScriptCore powers Bun and Safari. The engines differ in implementation but have the same contract: they take JavaScript source and they execute it.
 
-### The Tokenizer
+### Tokenizer
 
 The engine reads the source file character by character. It chops the source into **tokens**. A token is the smallest unit of meaning that the language recognizes.
 
@@ -90,7 +90,7 @@ IDENT(fetch)  PUNCT(()  STRING("https://api.example.com/user/1")  PUNCT())
 
 The tokenizer does not know that `fetch` is a function. It does not know that `await` implies a suspension point. It only knows that these sequences of characters mean something to the grammar above it. Its job ends there, and it hands off.
 
-### The Parser and the AST
+### Parser and AST
 
 A list of tokens is not a program. The **parser** folds the tokens into an **Abstract Syntax Tree** (AST). The AST is a nested structure. It captures what the tokens are. It also captures how they relate.
 
@@ -123,7 +123,7 @@ A list of tokens is not a program. The **parser** folds the tokens into an **Abs
 
 The AST shows that `fetch(...)` lives inside an `AwaitExpression`. The `AwaitExpression` lives inside a `VariableDeclaration`. The `VariableDeclaration` lives inside an `async FunctionDeclaration`. The relationship between the parts matters.
 
-### The Bytecode
+### Bytecode
 
 The AST cannot be handed directly to a CPU. It must be translated into **bytecode**. Bytecode is a compact, portable instruction set. V8's **Ignition** interpreter executes it. JSC's **LLInt** is the equivalent interpreter.
 
@@ -139,7 +139,7 @@ StoreAccumulatorInRegister [res]
 
 The interpreter does not explain the purpose of each instruction. It executes each instruction one at a time. Bytecode is still somewhat legible. It is not machine code yet.
 
-### The JIT Compilation
+### JIT Compilation
 
 If `getUser` were called once, Ignition would interpret the bytecode line by line. This is adequate, but not fast. Both V8 and JSC watch the code. They instrument the code. They identify hot paths, which are functions called repeatedly. They promote hot paths to an optimizing compiler.
 
@@ -156,7 +156,7 @@ jz   handle_rejection
 
 The CPU has no concept of `async`. It has no concept of `fetch`. It has no concept of JavaScript. It knows registers, memory addresses, and conditional jumps. Every layer above this one is an abstraction from the CPU's perspective.
 
-## The Event Loop
+## Event Loop
 
 JavaScript is single-threaded. It has one worker and one call stack. It handles a network request without freezing. This is not magic. It is the event loop. It is worth understanding it precisely.
 
@@ -184,15 +184,15 @@ The **Event Loop** manages the queues. The call stack never idles waiting for th
 
 `await` is not sleep. `await` suspends a function and hands control back. The function resumes when the data arrives. No work stops. Other work proceeds. This is why Node can serve thousands of concurrent requests on a single thread: not because it parallelizes, but because it never waits.
 
-## The Complete Process
+## Complete Process
 
 ```mermaid
 flowchart TD
     A["JS"]
     B["Linter / Formatter"]
     C["Bundler"]
-    D["Runtime — Node / Bun"]
-    E["Engine — V8 / JSC"]
+    D["Runtime: Node / Bun"]
+    E["Engine: V8 / JSC"]
     F["Tokenizer"]
     G["Parser / AST"]
     H["Bytecode"]
