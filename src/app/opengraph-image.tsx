@@ -5,7 +5,7 @@ import { ImageResponse } from 'next/og'
 
 import { siteIdentity, siteSocial } from '~/lib/content/personal'
 
-export const alt = `${siteIdentity.name} — ${siteIdentity.role}`
+export const alt = `${siteIdentity.name}, ${siteIdentity.role}`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
