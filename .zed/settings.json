@@ -1,0 +1,19 @@
+{
+  "file_scan_exclusions": [
+    "**/.DS_Store",
+    "**/.next",
+    "**/node_modules",
+    ".github",
+    ".gitignore",
+    ".vscode",
+    ".zed",
+    ".oxfmtrc.json",
+    ".oxlintrc.json",
+    "bun.lock",
+    "components.json",
+    "next-env.d.ts",
+    "postcss.config.mjs",
+    "tsconfig.json",
+    "tsconfig.tsbuildinfo"
+  ]
+}

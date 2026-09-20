@@ -1,0 +1,19 @@
+{
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.next": true,
+    "**/node_modules": true,
+    ".github": true,
+    ".gitignore": true,
+    ".vscode": true,
+    ".zed": true,
+    ".oxfmtrc.json": true,
+    ".oxlintrc.json": true,
+    "bun.lock": true,
+    "components.json": true,
+    "next-env.d.ts": true,
+    "postcss.config.mjs": true,
+    "tsconfig.json": true,
+    "tsconfig.tsbuildinfo": true
+  }
+}
