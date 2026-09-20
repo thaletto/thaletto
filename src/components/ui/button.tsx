@@ -190,6 +190,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       }),
       destructive && destructiveRootVariants[variant ?? 'primary'],
       expandHitArea && expandHitAreaClasses,
+      LeadingIcon && !isIconOnly && 'ps-1.5',
+      TrailingIcon && !isIconOnly && 'pe-1.5',
       className,
     )
 
