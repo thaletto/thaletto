@@ -2,11 +2,12 @@ import type { MDXComponents } from 'mdx/types'
 import { ZoomImage } from '~/components/blog/zoom-image'
 import { TechStack, TechStackItem } from '~/components/tech-stack'
 import { AwsLight } from '~/components/ui/svgs/awsLight'
+import { Bun } from '~/components/ui/svgs/bun';
 import { ClaudeAiIcon } from '~/components/ui/svgs/claudeAiIcon'
 import { Cloudflare } from '~/components/ui/svgs/cloudflare'
 import { CodexDark } from '~/components/ui/svgs/codexDark'
 import { CodexLight } from '~/components/ui/svgs/codexLight'
-import { EffectLight } from '~/components/ui/svgs/effectLight'
+import { Effect } from '~/components/ui/svgs/effect'
 import { Fastapi } from '~/components/ui/svgs/fastapi'
 import { Golang } from '~/components/ui/svgs/golang'
 import { GoogleCloud } from '~/components/ui/svgs/googleCloud'
@@ -21,6 +22,7 @@ import { QdrantIconLight } from '~/components/ui/svgs/qdrantIconLight'
 import { ReactLight } from '~/components/ui/svgs/reactLight'
 import { ShadcnUi } from '~/components/ui/svgs/shadcnUi'
 import { Sqlite } from '~/components/ui/svgs/sqlite'
+import { Supermemory } from '~/components/ui/svgs/supermemory'
 import { Tailwindcss } from '~/components/ui/svgs/tailwindcss'
 import { Tanstack } from '~/components/ui/svgs/tanstack'
 import { TensorflowIconDark } from '~/components/ui/svgs/tensorflowIconDark'
@@ -88,6 +90,7 @@ export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComp
     pre: (props) => <CodeBlockPre {...props} />,
     MermaidDiagram: (props: { code: string; caption?: string }) => <MermaidDiagram {...props} />,
     PhotoStack,
+    Bun,
     PhotoStackCaption,
     PhotoStackFrames,
     TechStack,
@@ -97,7 +100,7 @@ export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComp
     Cloudflare,
     CodexDark,
     CodexLight,
-    EffectLight,
+    Effect,
     Fastapi,
     Golang,
     GoogleCloud,
@@ -112,6 +115,7 @@ export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComp
     ReactLight,
     ShadcnUi,
     Sqlite,
+    Supermemory,
     Tailwindcss,
     Tanstack,
     TensorflowIconDark,
