@@ -38,12 +38,18 @@ export async function SiteDocument({
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
       </head>
       <body className="antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-sm focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:text-foreground"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
           <PreviewCardTimingProvider>
             <RouteMotionController />
             <AmbientBackground />
             <div className="flex min-h-screen flex-col pb-20">
-              <main className="flex-1 pt-14">
+              <main id="main" className="flex-1 pt-14">
                 {/* The non-none default isolates route content while keeping the
                     CSS-named list → loading shell → article groups active. */}
                 <RouteViewTransition>{children}</RouteViewTransition>
