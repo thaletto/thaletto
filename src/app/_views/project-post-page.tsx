@@ -5,11 +5,13 @@ import { cacheLife } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Suspense } from 'react'
+import { ViewTransition } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import { PolaroidCover } from '~/components/blog/polaroid-cover'
 import { PostToc } from '~/components/blog/post-toc'
+import { projectViewTransitionName } from '~/lib/motion/view-transition-name'
 import { mdxComponents } from '~/components/mdx/mdx-components'
 import { ExternalLabel } from '~/components/social/external-mark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
@@ -40,8 +42,16 @@ export function projectMetadata(slug: string) {
 
 export function ProjectPostRoute({ params }: { params: Promise<{ slug: string }> }) {
   return (
-    <Suspense fallback={<ProjectPostLoadingShell />}>
-      <ProjectPostRouteContent params={params} />
+    <Suspense
+      fallback={
+        <ViewTransition exit="auto">
+          <ProjectPostLoadingShell />
+        </ViewTransition>
+      }
+    >
+      <ViewTransition enter="auto" default="none">
+        <ProjectPostRouteContent params={params} />
+      </ViewTransition>
     </Suspense>
   )
 }
@@ -132,6 +142,11 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
               <h1
                 id={POST_ARTICLE_START_ID}
                 className="text-2xl font-semibold tracking-tight text-balance"
+                style={
+                  {
+                    viewTransitionName: projectViewTransitionName('title', project.slug),
+                  } as React.CSSProperties
+                }
               >
                 {project.title}
               </h1>

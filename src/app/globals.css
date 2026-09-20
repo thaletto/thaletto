@@ -1002,6 +1002,77 @@
   color: var(--gray-8, var(--muted-foreground));
 }
 
+/* Route transition (driven by the controller + boundary at the layout
+   shell): the origin defocuses while the destination rises, like main.
+   Shared covers/titles morph via view-transition-name. */
+@keyframes vt-defocus {
+  to {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+@keyframes vt-focus {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+::view-transition-group(root) {
+  animation: none;
+}
+
+::view-transition-old(root) {
+  display: none;
+}
+
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(.route-content) {
+  animation: vt-defocus 250ms var(--ease-swift) both;
+}
+
+::view-transition-new(.route-content) {
+  animation: vt-focus 300ms var(--ease-swift) both;
+}
+
+/* Crossfade the loading shell's cover and title into the article. */
+.post-loading-cover {
+  view-transition-name: var(--post-cover-transition-name, none);
+}
+
+.post-loading-title {
+  view-transition-name: var(--post-title-transition-name, none);
+}
+
+/* Shared title morphs travel the viewport, so they get a longer window
+   than the 300ms UI budget — the distance is the justification. */
+::view-transition-group(*) {
+  animation-duration: 320ms;
+  animation-timing-function: var(--ease-swift);
+}
+
+html[data-route-motion="none"]::view-transition-group(*),
+html[data-route-motion="none"]::view-transition-image-pair(*),
+html[data-route-motion="none"]::view-transition-old(*),
+html[data-route-motion="none"]::view-transition-new(*) {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
 /* the post plate breathes under the title (wins over .spec-plate margin: 0) */
 .post-title-card .spec-plate {
   margin-top: 1.5rem;

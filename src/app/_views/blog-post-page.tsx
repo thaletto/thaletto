@@ -5,6 +5,7 @@ import { cacheLife } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Suspense } from 'react'
+import { ViewTransition } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
@@ -14,6 +15,7 @@ import { PolaroidCover } from '~/components/blog/polaroid-cover'
 import { PostRow } from '~/components/blog/post-row'
 import { PostToc } from '~/components/blog/post-toc'
 import { mdxComponents } from '~/components/mdx/mdx-components'
+import { postViewTransitionName } from '~/lib/motion/view-transition-name'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import {
   buildPostRail,
@@ -49,8 +51,16 @@ export function blogPostMetadata(slug: string) {
 
 export function BlogPostRoute({ params }: { params: Promise<{ slug: string }> }) {
   return (
-    <Suspense fallback={<BlogPostLoadingShell />}>
-      <BlogPostRouteContent params={params} />
+    <Suspense
+      fallback={
+        <ViewTransition exit="auto">
+          <BlogPostLoadingShell />
+        </ViewTransition>
+      }
+    >
+      <ViewTransition enter="auto" default="none">
+        <BlogPostRouteContent params={params} />
+      </ViewTransition>
     </Suspense>
   )
 }
@@ -158,6 +168,11 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
               <h1
                 id={POST_ARTICLE_START_ID}
                 className="text-2xl font-semibold tracking-tight text-balance"
+                style={
+                  {
+                    viewTransitionName: postViewTransitionName('title', post.slug),
+                  } as React.CSSProperties
+                }
               >
                 {post.title}
               </h1>

@@ -1,7 +1,8 @@
-import Link from 'next/link'
+import { PostTransitionLink } from '~/components/motion/post-transition-link'
 import type { Post } from '~/lib/content/posts'
 import { formatMonthDay, formatShortDate } from '~/lib/design/date'
 import { LocalDate } from '~/lib/design/i18n'
+import { postViewTransitionName } from '~/lib/motion/view-transition-name'
 
 // The compact post row: title · dotted leader · date.
 // Mobile titles may use two lines.
@@ -16,9 +17,21 @@ export function PostRow({
 }) {
   const Heading = headingLevel
   const safeSlug = encodeURIComponent(post.slug)
+  const coverTransitionName = postViewTransitionName('cover', post.slug)
+  const titleTransitionName = postViewTransitionName('title', post.slug)
   return (
-    <Link href={`/blog/${safeSlug}`} className="group blog-row">
-      <Heading className="blog-row-title">{post.title}</Heading>
+    <PostTransitionLink
+      href={`/blog/${safeSlug}`}
+      coverTransitionName={coverTransitionName}
+      titleTransitionName={titleTransitionName}
+      className="group blog-row"
+    >
+      <Heading
+        className="blog-row-title"
+        style={{ viewTransitionName: titleTransitionName } as React.CSSProperties}
+      >
+        {post.title}
+      </Heading>
       <span className="blog-row-leader" aria-hidden />
       <time
         dateTime={post.publishedAt.toISOString()}
@@ -28,6 +41,6 @@ export function PostRow({
         {dateStyle === 'short' && formatShortDate(post.publishedAt)}
         {dateStyle === 'full' && <LocalDate date={post.publishedAt} />}
       </time>
-    </Link>
+    </PostTransitionLink>
   )
 }
