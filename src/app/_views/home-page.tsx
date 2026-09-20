@@ -1,11 +1,9 @@
 // `/` view — portrait + introduction, live social numbers, latest posts, and
 // the nav cards, assembled from the same content loaders the inner pages use;
 // `app/page.tsx` supplies the metadata and streaming shell.
-import Image from 'next/image'
 import Link from 'next/link'
 import { PostRow } from '~/components/blog/post-row'
 import { HomeIntroduction } from '~/components/home/home-introduction'
-import { NavCards } from '~/components/home/nav-cards'
 import { ExternalLabel } from '~/components/social/external-mark'
 import { TechStack, TechStackItem } from '~/components/tech-stack'
 import { Bun } from '~/components/ui/svgs/bun'
@@ -33,7 +31,6 @@ import { Typescript } from '~/components/ui/svgs/typescript'
 import { Vercel } from '~/components/ui/svgs/vercel'
 import { VercelDark } from '~/components/ui/svgs/vercelDark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
-import { careerLifeline } from '~/lib/content/lifeline'
 import { siteExperience, siteIdentity } from '~/lib/content/personal'
 import { getAllPosts } from '~/lib/content/posts'
 import { getAllProjects } from '~/lib/content/projects'
@@ -90,12 +87,6 @@ export async function HomePageView() {
           </div>
         </div>
       </div>
-
-      <NavCards
-        postCount={posts.length}
-        projectCount={projects.length}
-        milestoneCount={careerLifeline.markers.length}
-      />
 
       <section className="mt-16">
         <SectionTitle index={nextSectionIndex()} delay={120}>
