@@ -107,7 +107,7 @@ export async function HomePageView() {
                 } as React.CSSProperties
               }
             >
-              <PostRow post={post} headingLevel="h3" dateStyle="short" />
+              <PostRow post={post} headingLevel="h3" dateStyle="full" />
             </li>
           ))}
         </ul>
