@@ -7,11 +7,9 @@ import {
   RouteViewTransition,
 } from '~/components/motion/route-motion-controller'
 import { AmbientBackground } from '~/components/shell/ambient-background'
-import { SiteFooter } from '~/components/shell/site-footer'
 import { ThemeProvider } from '~/components/shell/theme-provider'
 import { PreviewCardTimingProvider } from '~/components/social/preview-card-timing'
 import { siteIdentity } from '~/lib/content/personal'
-import { getGitHub, getSocial } from '~/lib/content/social-live'
 import { seo } from '~/lib/metadata/seo'
 import { cn } from '~/lib/platform/utils'
 import { PREPAINT_SCRIPT } from '~/lib/security/inline-scripts'
@@ -31,10 +29,6 @@ export async function SiteDocument({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  // Live-but-cached social numbers (ISR via the fetch data cache) keep the
-  // shared public chrome fresh without making any page request-bound.
-  const [social, github] = await Promise.all([getSocial(), getGitHub()])
-
   return (
     <html
       lang="en"
@@ -56,7 +50,6 @@ export async function SiteDocument({
                     CSS-named list → loading shell → article groups active. */}
                 <RouteViewTransition>{children}</RouteViewTransition>
               </main>
-              <SiteFooter social={social} github={github} />
             </div>
             <Suspense fallback={<DockFallback />}>
               <Dock />

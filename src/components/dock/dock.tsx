@@ -6,20 +6,11 @@ import { usePathname } from 'next/navigation'
 
 import {
   PreferencesIcon,
-  ProjectsIcon,
-  TimelineIcon,
-  WritingIcon,
 } from '~/components/dock/dock-icons'
 import { Preferences } from '~/components/dock/preferences'
 import { useDockActiveIndicator } from '~/hooks/use-dock-active-indicator'
 import { dockGoKeyFor, useDockGoShortcuts } from '~/hooks/use-dock-go-shortcuts'
 import { playDockSound } from '~/lib/platform/sound'
-
-const ITEMS = [
-  { href: '/blog', label: 'Writing', icon: WritingIcon },
-  { href: '/projects', label: 'Projects', icon: ProjectsIcon },
-  { href: '/timeline', label: 'Timeline', icon: TimelineIcon },
-] as const
 
 const DOCK_VIEW_TRANSITION_STYLE = {
   viewTransitionName: 'site-dock',
@@ -110,12 +101,6 @@ export function DockFallback() {
         </span>
       </DockItem>
       <span className="dock-rule" aria-hidden />
-      {ITEMS.map(({ href, label, icon: Icon }) => (
-        <DockItem key={href} href={href} label={label} goKey={dockGoKeyFor(href)}>
-          <Icon />
-        </DockItem>
-      ))}
-      <span className="dock-rule" aria-hidden />
       <button type="button" className="dock-item" aria-label="Loading preferences" disabled>
         <PreferencesIcon />
         <DockTip label="Preferences" />
@@ -124,13 +109,11 @@ export function DockFallback() {
   )
 }
 
-// The global pill dock, bottom center — the avatar is home, everything
-// else an icon. Circles inside a pill keep the radii concentric by
-// construction.
+// The global pill dock, bottom center — the avatar is home, with preferences
+// alongside. Circles inside a pill keep the radii concentric by construction.
 export function Dock() {
   const pathname = usePathname()
-  const activeHref =
-    pathname === '/' ? '/' : ITEMS.find(({ href }) => pathname.startsWith(href))?.href
+  const activeHref = pathname === '/' ? '/' : undefined
   const { dockRef, indicatorRef, registerItem, handleNavigate } = useDockActiveIndicator(activeHref)
 
   useDockGoShortcuts({
@@ -159,20 +142,6 @@ export function Dock() {
           <Image src="/images/avatar.png" alt="" width={26} height={26} />
         </span>
       </DockItem>
-      <span className="dock-rule" aria-hidden />
-      {ITEMS.map(({ href, label, icon: Icon }) => (
-        <DockItem
-          key={href}
-          href={href}
-          label={label}
-          goKey={dockGoKeyFor(href)}
-          active={pathname.startsWith(href)}
-          itemRef={(element) => registerItem(href, element)}
-          onNavigate={handleNavigate}
-        >
-          <Icon />
-        </DockItem>
-      ))}
       <span className="dock-rule" aria-hidden />
       <Preferences />
     </nav>

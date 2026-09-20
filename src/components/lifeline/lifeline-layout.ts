@@ -1,1 +1,0 @@
-export const LIFELINE_MOBILE_BREAKPOINT = 768

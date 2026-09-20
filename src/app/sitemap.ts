@@ -19,9 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...entry('/', latest),
-    ...entry('/blog', latest),
-    ...entry('/projects', latest),
-    ...entry('/timeline', latest),
     ...posts.flatMap((post) => entry(`/blog/${post.slug}`, post.publishedAt)),
     ...projects.map((project) => ({
       url: pageUrl(`/projects/${project.slug}`).href,

@@ -8,9 +8,6 @@ import { playDockSound } from '~/lib/platform/sound'
 /** Single key → dock route (GitHub-style, without the G prefix). */
 export const DOCK_GO_SHORTCUTS: Record<string, string> = {
   h: '/',
-  w: '/blog',
-  p: '/projects',
-  t: '/timeline',
 }
 
 /** Uppercase shortcut key for a dock href, e.g. `/blog` → `"W"`. */
@@ -79,8 +76,7 @@ function useGoShortcuts({
 }
 
 /**
- * Global shortcut keys for the public dock: press H / W / P to jump
- * Home / Writing / Projects.
+ * Global shortcut keys for the public dock: press H to jump Home.
  */
 export function useDockGoShortcuts({
   activeHref,
