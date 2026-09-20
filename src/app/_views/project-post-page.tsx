@@ -17,7 +17,7 @@ import { ExternalLabel } from '~/components/social/external-mark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { buildPostRail, POST_ARTICLE_START_ID } from '~/lib/content/posts'
 import { getAllProjects, getProject, isProjectSlug } from '~/lib/content/projects'
-import { pageMetadata } from '~/lib/metadata/page'
+import { pageMetadata, pageUrl } from '~/lib/metadata/page'
 import remarkMermaid from '~/lib/platform/remark-mermaid'
 
 export function generateProjectStaticParams() {
@@ -37,6 +37,14 @@ export function projectMetadata(slug: string) {
     title: project.title,
     description: project.description,
     type: 'website',
+    image: project.cover
+      ? {
+          url: pageUrl(project.cover.src),
+          width: project.cover.width,
+          height: project.cover.height,
+          alt: project.title,
+        }
+      : undefined,
   })
 }
 

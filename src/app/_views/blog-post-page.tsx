@@ -26,7 +26,7 @@ import {
   POST_ARTICLE_START_ID,
 } from '~/lib/content/posts'
 import { SITE_TIME_ZONE } from '~/lib/design/date'
-import { pageMetadata } from '~/lib/metadata/page'
+import { pageMetadata, pageUrl } from '~/lib/metadata/page'
 import remarkMermaid from '~/lib/platform/remark-mermaid'
 
 export function generatePostStaticParams() {
@@ -46,6 +46,14 @@ export function blogPostMetadata(slug: string) {
     title: post.title,
     description: post.description ?? post.title,
     type: 'article',
+    image: post.cover
+      ? {
+          url: pageUrl(post.cover.src),
+          width: post.cover.width,
+          height: post.cover.height,
+          alt: post.title,
+        }
+      : undefined,
   })
 }
 
