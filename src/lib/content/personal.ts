@@ -97,7 +97,7 @@ export function parseSiteProfile(input: unknown) {
       role: job.role,
       start,
       end,
-      yearRange: `${formatLocalDate(siteMonthToDate(start))} - ${end ? formatLocalDate(siteMonthToDate(end)) : 'Present'}`,
+      yearRange: `${formatLocalDate(siteMonthToDate(start))} – ${end ? formatLocalDate(siteMonthToDate(end)) : 'Present'}`,
       url: job.url,
       timelinePhoto: job.timelinePhoto,
     }
