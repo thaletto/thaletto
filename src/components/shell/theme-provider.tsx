@@ -1,11 +1,9 @@
 'use client'
 
-import { MotionConfig } from 'framer-motion'
 import { useEffect } from 'react'
 
 // The theme is fixed to the system preference: no stored override, no UI.
-// Applies the resolved theme and follows OS changes; MotionConfig keeps the
-// reduced-motion contract for JS-driven Motion components.
+// Applies the resolved theme and follows OS changes.
 function applySystemTheme() {
   const resolved = window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
@@ -24,5 +22,5 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return () => media.removeEventListener('change', applySystemTheme)
   }, [])
 
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>
+  return <>{children}</>
 }

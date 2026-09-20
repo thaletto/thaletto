@@ -13,10 +13,6 @@ const MOBILE_BREAKPOINT_REM = 40
 type ZoomImageRendition = { src: string; width: number }
 type CloseReason = 'escape' | 'overlay' | 'viewport'
 
-function prefersReducedMotion() {
-  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
-}
-
 function rootFontSizePixels() {
   const rootFontSize = Number.parseFloat(window.getComputedStyle(document.documentElement).fontSize)
   return Number.isFinite(rootFontSize) ? rootFontSize : DEFAULT_ROOT_FONT_SIZE
@@ -51,9 +47,8 @@ function renditionForWidth(renditions: ZoomImageProps['renditions'], requestedWi
   )
 }
 
-// Click-to-zoom for post images: the photo is picked up off the page and
-// floats over a dimmed sheet (FLIP, transform-only, interruptible).
-// Esc / click / scroll put it back down. Reduced motion swaps instantly.
+// Click-to-zoom for post images: the photo appears over a dimmed sheet.
+// Esc / click / scroll puts it back down.
 export function ZoomImage({
   src,
   alt,
@@ -71,13 +66,7 @@ export function ZoomImage({
   const [zoom, setZoom] = useState<{
     expandedSrc: string
     target: { left: number; top: number; width: number; height: number }
-    from: string
   } | null>(null)
-  const [state, setState] = useState<'opening' | 'open' | 'closing'>('opening')
-  const stateRef = useRef(state)
-  useEffect(() => {
-    stateRef.current = state
-  }, [state])
 
   const expandedSrc = largestRendition(renditions)?.src ?? src
   // Next Image owns responsive selection and layout, while Bunny remains the
@@ -97,12 +86,14 @@ export function ZoomImage({
     preloadedSrcRef.current = expandedSrc
   }, [expandedSrc, src])
 
+  const unmount = useCallback(() => {
+    setZoom(null)
+    triggerRef.current?.focus({ preventScroll: true })
+  }, [])
+
   const open = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      const img = triggerRef.current?.querySelector('img')
-      if (!img) return
-      const rect = img.getBoundingClientRect()
-
+      event.preventDefault()
       // Fit within the viewport but never beyond the intrinsic size —
       // zoom means "actual size", not "stretch".
       const maxW = Math.min(window.innerWidth - VIEWPORT_PAD * 2, width)
@@ -119,77 +110,30 @@ export function ZoomImage({
       const scale = Math.min(maxW / width, maxH / height)
       const w = Math.round(width * scale)
       const h = Math.round(height * scale)
-      const target = {
-        left: Math.round((window.innerWidth - w) / 2),
-        top: Math.round((window.innerHeight - detailSpace - h) / 2),
-        width: w,
-        height: h,
-      }
-
-      // Transform that maps the floating image back onto its inline spot
-      const s = rect.width / w
-      const tx = rect.left + rect.width / 2 - (target.left + w / 2)
-      const ty = rect.top + rect.height / 2 - (target.top + h / 2)
       setZoom({
         expandedSrc,
-        target,
-        from: `translate(${tx}px, ${ty}px) scale(${s})`,
+        target: {
+          left: Math.round((window.innerWidth - w) / 2),
+          top: Math.round((window.innerHeight - detailSpace - h) / 2),
+          width: w,
+          height: h,
+        },
       })
-      const reduced = prefersReducedMotion()
-      setState(event.detail === 0 || reduced ? 'open' : 'opening')
     },
     [expandedSrc, width, height, expandedContent],
   )
 
-  const unmount = useCallback(() => {
-    setZoom(null)
-    setState('opening')
-    triggerRef.current?.focus({ preventScroll: true })
-  }, [])
-
   const close = useCallback(
-    (reason: CloseReason) => {
-      // Nothing to reverse if the enter transition never started, and
-      // reduced motion never fires transitionend — unmount directly.
-      const reduced = prefersReducedMotion()
-      if (reason === 'escape' || reduced || stateRef.current === 'opening') {
-        unmount()
-        return
-      }
-      if (stateRef.current !== 'open') return
-      // The page may have moved since open (keyboard scroll, scrollbar drag):
-      // re-measure the inline spot so the return flight lands where it now is.
-      const img = triggerRef.current?.querySelector('img')
-      if (img) {
-        const rect = img.getBoundingClientRect()
-        setZoom((prev) => {
-          if (!prev) return prev
-          const s = rect.width / prev.target.width
-          const tx = rect.left + rect.width / 2 - (prev.target.left + prev.target.width / 2)
-          const ty = rect.top + rect.height / 2 - (prev.target.top + prev.target.height / 2)
-          return { ...prev, from: `translate(${tx}px, ${ty}px) scale(${s})` }
-        })
-      }
-      setState('closing')
+    (_reason: CloseReason) => {
+      unmount()
     },
     [unmount],
   )
 
-  // Promote opening -> open one frame later so the transform transition runs
   useEffect(() => {
-    if (!zoom || state !== 'opening') return
-    const raf = requestAnimationFrame(() => requestAnimationFrame(() => setState('open')))
-    return () => cancelAnimationFrame(raf)
-  }, [zoom, state])
-
-  // Focus the dialog while open; belt-and-braces unmount if the close
-  // transition's end event is ever missed.
-  useEffect(() => {
-    if (zoom && state === 'open') overlayRef.current?.focus({ preventScroll: true })
-    if (state !== 'closing') return
-    const t = setTimeout(unmount, 450)
-    return () => clearTimeout(t)
-  }, [zoom, state, unmount])
+    if (!zoom) return
+    overlayRef.current?.focus({ preventScroll: true })
+  }, [zoom])
 
   useEffect(() => {
     if (!zoom) return
@@ -202,14 +146,12 @@ export function ZoomImage({
       if (e.key === 'Tab') e.preventDefault()
     }
     // A scroll gesture still dismisses the print, but never moves the page:
-    // the sheet stays frozen while the photo is up (and through its return
-    // flight), so the FLIP landing spot stays honest.
+    // the sheet stays frozen while the photo is up.
     const onGesture = (e: Event) => {
       e.preventDefault()
       close('viewport')
     }
-    // Scrolls that bypass wheel/touch (keyboard, scrollbar drag) still close;
-    // close() re-measures the landing spot, so the flight stays correct.
+    // Scrolls that bypass wheel/touch (keyboard, scrollbar drag) still close.
     const onViewportChange = () => close('viewport')
     window.addEventListener('keydown', onKey)
     window.addEventListener('wheel', onGesture, { passive: false })
@@ -224,12 +166,6 @@ export function ZoomImage({
       window.removeEventListener('resize', onViewportChange)
     }
   }, [zoom, close])
-
-  const settle = () => {
-    if (stateRef.current === 'closing') unmount()
-  }
-
-  const floating = state === 'open'
 
   return (
     <>
@@ -260,7 +196,6 @@ export function ZoomImage({
             ref={overlayRef}
             tabIndex={-1}
             className="zoom-overlay"
-            data-state={floating ? 'open' : state}
             role="dialog"
             aria-modal="true"
             aria-label={alt || 'Image'}
@@ -280,9 +215,7 @@ export function ZoomImage({
                 top: zoom.target.top,
                 width: zoom.target.width,
                 height: zoom.target.height,
-                transform: floating ? 'none' : zoom.from,
               }}
-              onTransitionEnd={settle}
             />
             <div
               aria-hidden

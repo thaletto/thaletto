@@ -1,9 +1,5 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
-import {
-  RouteMotionController,
-  RouteViewTransition,
-} from '~/components/motion/route-motion-controller'
 import { AmbientBackground } from '~/components/shell/ambient-background'
 import { ThemeProvider } from '~/components/shell/theme-provider'
 import { PreviewCardTimingProvider } from '~/components/social/preview-card-timing'
@@ -30,7 +26,6 @@ export async function SiteDocument({
   return (
     <html
       lang="en"
-      data-route-motion="none"
       suppressHydrationWarning
       className={cn('font-sans', fontVariables, 'public-site')}
     >
@@ -40,14 +35,9 @@ export async function SiteDocument({
       <body className="antialiased">
         <ThemeProvider>
           <PreviewCardTimingProvider>
-            <RouteMotionController />
             <AmbientBackground />
             <div className="flex min-h-screen flex-col pb-20">
-              <main className="flex-1 pt-14">
-                {/* The non-none default isolates route content while keeping the
-                    CSS-named list → loading shell → article groups active. */}
-                <RouteViewTransition>{children}</RouteViewTransition>
-              </main>
+              <main className="flex-1 pt-14">{children}</main>
             </div>
           </PreviewCardTimingProvider>
         </ThemeProvider>

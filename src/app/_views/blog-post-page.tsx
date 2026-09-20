@@ -14,7 +14,6 @@ import { PolaroidCover } from '~/components/blog/polaroid-cover'
 import { PostRow } from '~/components/blog/post-row'
 import { PostToc } from '~/components/blog/post-toc'
 import { mdxComponents } from '~/components/mdx/mdx-components'
-import { RevealScope } from '~/components/motion/reveal-scope'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import {
   buildPostRail,
@@ -26,7 +25,6 @@ import {
 } from '~/lib/content/posts'
 import { SITE_TIME_ZONE } from '~/lib/design/date'
 import { pageMetadata } from '~/lib/metadata/page'
-import { postViewTransitionName } from '~/lib/motion/view-transition-name'
 import remarkMermaid from '~/lib/platform/remark-mermaid'
 
 export function generatePostStaticParams() {
@@ -152,7 +150,6 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
               caption={post.cover.caption ?? <BrailleDate date={post.publishedAt} />}
               alt=""
               priority
-              morph
               sizes="(max-width: 704px) 100vw, 656px"
             />
           )}
@@ -161,11 +158,6 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
               <h1
                 id={POST_ARTICLE_START_ID}
                 className="text-2xl font-semibold tracking-tight text-balance"
-                style={
-                  {
-                    viewTransitionName: postViewTransitionName('title', post.slug),
-                  } as React.CSSProperties
-                }
               >
                 {post.title}
               </h1>
@@ -196,15 +188,15 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
             </dl>
           </div>
         </header>
-        <RevealScope lang="en" className="post-body-stage prose enter mt-10">
+        <div lang="en" className="post-body-stage prose mt-10">
           <CachedPostBody slug={post.slug} />
-        </RevealScope>
+        </div>
         {related.length > 0 && (
           <aside className="post-related hairline-top" aria-labelledby="post-related-heading">
             <h2 id="post-related-heading" className="post-related-label">
               Posts like this
             </h2>
-            <ul className="focus-list mt-3 flex flex-col">
+            <ul className="mt-3 flex flex-col">
               {related.map((entry) => (
                 <li key={entry.slug}>
                   <PostRow post={entry} headingLevel="h3" dateStyle="short" />

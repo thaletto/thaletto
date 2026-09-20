@@ -11,13 +11,11 @@ import remarkGfm from 'remark-gfm'
 import { PolaroidCover } from '~/components/blog/polaroid-cover'
 import { PostToc } from '~/components/blog/post-toc'
 import { mdxComponents } from '~/components/mdx/mdx-components'
-import { RevealScope } from '~/components/motion/reveal-scope'
 import { ExternalLabel } from '~/components/social/external-mark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { buildPostRail, POST_ARTICLE_START_ID } from '~/lib/content/posts'
 import { getAllProjects, getProject, isProjectSlug } from '~/lib/content/projects'
 import { pageMetadata } from '~/lib/metadata/page'
-import { projectViewTransitionName } from '~/lib/motion/view-transition-name'
 import remarkMermaid from '~/lib/platform/remark-mermaid'
 
 export function generateProjectStaticParams() {
@@ -126,9 +124,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
               cover={project.cover}
               alt={project.title}
               priority
-              morph
               sizes="(max-width: 704px) 100vw, 656px"
-              transitionName={projectViewTransitionName('cover', project.slug)}
             />
           )}
           <div className="post-title-card">
@@ -136,11 +132,6 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
               <h1
                 id={POST_ARTICLE_START_ID}
                 className="text-2xl font-semibold tracking-tight text-balance"
-                style={
-                  {
-                    viewTransitionName: projectViewTransitionName('title', project.slug),
-                  } as React.CSSProperties
-                }
               >
                 {project.title}
               </h1>
@@ -190,9 +181,9 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
             </dl>
           </div>
         </header>
-        <RevealScope lang="en" className="post-body-stage prose enter mt-10">
+        <div lang="en" className="post-body-stage prose mt-10">
           <CachedProjectBody slug={project.slug} />
-        </RevealScope>
+        </div>
       </article>
     </>
   )

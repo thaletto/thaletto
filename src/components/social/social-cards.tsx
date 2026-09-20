@@ -161,7 +161,6 @@ export function GitHubCardBody({ data }: { data: GitHubActivity }) {
                   // biome-ignore lint/suspicious/noArrayIndexKey: fixed 7-day layout, index is the render slot
                   key={d}
                   data-level={levels[i] ?? '0'}
-                  style={{ '--ci': i } as React.CSSProperties}
                 />
               )
             })}

@@ -1,45 +1,25 @@
-import { PostTransitionLink } from '~/components/motion/post-transition-link'
+import Link from 'next/link'
 import type { Post } from '~/lib/content/posts'
 import { formatMonthDay, formatShortDate } from '~/lib/design/date'
 import { LocalDate } from '~/lib/design/i18n'
-import { postViewTransitionName } from '~/lib/motion/view-transition-name'
 
 // The compact post row: title · dotted leader · date.
-// Mobile titles may use two lines; the title stays a shared morph element.
+// Mobile titles may use two lines.
 export function PostRow({
   post,
   headingLevel = 'h2',
   dateStyle = 'full',
-  listStageId,
 }: {
   post: Post
   headingLevel?: 'h2' | 'h3'
   dateStyle?: 'full' | 'month-day' | 'short'
-  listStageId?: string
 }) {
   const Heading = headingLevel
   const safeSlug = encodeURIComponent(post.slug)
-  const coverTransitionName = postViewTransitionName('cover', post.slug)
-  const titleTransitionName = postViewTransitionName('title', post.slug)
   return (
-    <PostTransitionLink
-      href={`/blog/${safeSlug}`}
-      coverTransitionName={coverTransitionName}
-      titleTransitionName={titleTransitionName}
-      className="group blog-row"
-      listStageId={listStageId}
-    >
-      <Heading
-        className="blog-row-title"
-        style={{ viewTransitionName: titleTransitionName } as React.CSSProperties}
-      >
-        {post.title}
-      </Heading>
-      <span
-        className="blog-row-leader"
-        aria-hidden
-        data-list-stage-target={listStageId ? '' : undefined}
-      />
+    <Link href={`/blog/${safeSlug}`} className="group blog-row">
+      <Heading className="blog-row-title">{post.title}</Heading>
+      <span className="blog-row-leader" aria-hidden />
       <time
         dateTime={post.publishedAt.toISOString()}
         className="blog-row-date shrink-0 text-muted-foreground tabular-nums"
@@ -48,6 +28,6 @@ export function PostRow({
         {dateStyle === 'short' && formatShortDate(post.publishedAt)}
         {dateStyle === 'full' && <LocalDate date={post.publishedAt} />}
       </time>
-    </PostTransitionLink>
+    </Link>
   )
 }
