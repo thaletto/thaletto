@@ -5,8 +5,10 @@
 
 @theme inline {
   --font-heading: var(--font-sans);
-  /* Geist family from next/font/google */
-  --font-sans: var(--font-geist), system-ui, sans-serif;
+  /* Inter / JetBrains Mono / Libre Baskerville from next/font/google */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-serif: var(--font-libre-baskerville), Georgia, serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -98,7 +100,7 @@
 
 :root {
   --font-mono:
-    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -824,7 +826,7 @@
   gap: 1rem;
   /* quiet registration marks — 30% ink, matching the plate-label register */
   color: color-mix(in oklab, var(--foreground) 30%, transparent);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
   letter-spacing: -0.011em;
 }
@@ -1299,7 +1301,7 @@
     )
     calc(100% - 0.75rem) 0 / var(--border-hairline) 100% no-repeat;
   color: var(--muted-foreground);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   font-weight: var(--font-weight-normal);
   letter-spacing: 0.08em;
@@ -1382,7 +1384,7 @@
   padding: 0.625rem 0;
   border-top: var(--border-hairline) solid var(--border);
   border-bottom: var(--border-hairline) solid var(--border);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
   user-select: none;
 }
@@ -1436,7 +1438,7 @@
 .spec-nameplate {
   margin: 0;
   border: var(--border-hairline) solid var(--border);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.8125rem;
 }
 
@@ -1499,7 +1501,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1549,7 +1551,7 @@
   padding: 0.375rem 0.75rem;
   border: var(--border-hairline) solid color-mix(in oklab, var(--foreground) 55%, transparent);
   color: var(--gray-11, var(--foreground));
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1563,7 +1565,7 @@
   align-items: stretch;
   gap: 0;
   color: var(--gray-8, var(--muted-foreground));
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   font-weight: var(--font-weight-normal);
   letter-spacing: 0.08em;
@@ -1621,7 +1623,7 @@
   padding: 0.125rem 0;
   border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 40%, transparent);
   color: var(--muted-foreground);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   font-variant-numeric: tabular-nums;
   line-height: 1;
@@ -1636,7 +1638,7 @@
   align-items: center;
   gap: 0.5rem;
   color: color-mix(in oklab, var(--muted-foreground) 88%, transparent);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   letter-spacing: 0.02em;
   user-select: none;
 }
@@ -1686,7 +1688,7 @@
 .barcode-label {
   display: block;
   margin-top: 0.25rem;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.625rem;
   letter-spacing: 0.14em;
 }
@@ -1742,7 +1744,7 @@
 
 .page-eyebrow {
   color: var(--gray-8, var(--muted-foreground));
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   font-weight: var(--font-weight-normal);
   letter-spacing: 0.08em;
@@ -1763,7 +1765,7 @@
 
 .post-related-label {
   color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   font-weight: var(--font-weight-normal);
   letter-spacing: 0.08em;
@@ -1818,7 +1820,7 @@
   place-items: center;
   border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 40%, transparent);
   color: var(--muted-foreground);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   font-variant-numeric: tabular-nums;
   line-height: 1;
@@ -1872,7 +1874,7 @@
 .prose .post-figcaption {
   margin-top: 0.625rem;
   text-align: left;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
   line-height: 1.5;
@@ -2156,7 +2158,7 @@ figure[data-rehype-pretty-code-figure] {
 }
 
 .mermaid-sheet svg .mono {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
 }
 
 figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] {
@@ -3074,7 +3076,7 @@ a:focus-visible .external-label .external-mark {
   align-items: center;
   gap: 0.375rem;
   color: var(--muted-foreground);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
 }
@@ -4039,7 +4041,7 @@ a:focus-visible .external-label .external-mark {
 .vinyl-spine > span {
   max-height: calc(100% - 10px);
   overflow: hidden;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 4px;
   line-height: 1;
   letter-spacing: 0.04em;
@@ -4648,7 +4650,7 @@ a:focus-visible .external-label .external-mark {
 /* handles are machine text */
 .service-card-sub {
   color: var(--muted-foreground);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
 }
@@ -4671,7 +4673,7 @@ a:focus-visible .external-label .external-mark {
   padding-top: 0.5rem;
   border-top: var(--border-hairline) solid var(--border);
   color: var(--muted-foreground);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
@@ -5785,14 +5787,14 @@ a:focus-visible .external-label .external-mark {
 /* the readout is a small spec plate: stamped label above a mono value */
 .footer-time-readout > span {
   color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
 }
 
 .footer-time-readout time {
   color: color-mix(in oklab, var(--muted-foreground) 90%, transparent);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
 }
@@ -7029,7 +7031,7 @@ body:has(.ama-success-stage) main {
 }
 
 .lifeline-typeset {
-  /* Match the site's Geist stack instead of the registry's own fallback. */
-  --lifeline-font: var(--font-geist), system-ui, sans-serif;
+  /* Match the site's Inter stack instead of the registry's own fallback. */
+  --lifeline-font: var(--font-sans), system-ui, sans-serif;
   font-family: var(--lifeline-font);
 }

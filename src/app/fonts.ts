@@ -1,15 +1,23 @@
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Libre_Baskerville } from 'next/font/google'
 
-const geist = Geist({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist',
+  variable: '--font-inter',
   display: 'swap',
 })
 
-const geistMono = Geist_Mono({
+const jetBrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-jetbrains-mono',
   display: 'swap',
 })
 
-export const fontVariables = [geist.variable, geistMono.variable].join(' ')
+const libreBaskerville = Libre_Baskerville({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-libre-baskerville',
+  display: 'swap',
+})
+
+export const fontVariables = [inter.variable, jetBrainsMono.variable, libreBaskerville.variable].join(' ')

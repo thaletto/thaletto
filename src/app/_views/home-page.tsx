@@ -1,7 +1,6 @@
 // `/` view — portrait + introduction, live social numbers, latest posts, and
 // the nav cards, assembled from the same content loaders the inner pages use;
 // `app/page.tsx` supplies the metadata and streaming shell.
-import { GeistPixelSquare } from 'geist/font/pixel'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PostRow } from '~/components/blog/post-row'
@@ -81,7 +80,7 @@ export async function HomePageView() {
         <div className="enter max-w-76">
           <div className="flex items-center gap-2">
             <h1
-              className={`${GeistPixelSquare.className} text-xl uppercase tracking-tight text-foreground`}
+              className="font-sans text-xl font-semibold uppercase tracking-tight text-foreground"
             >
               {siteIdentity.name}
             </h1>
