@@ -4,10 +4,12 @@
 import Link from 'next/link'
 import { PostRow } from '~/components/blog/post-row'
 import { HomeIntroduction } from '~/components/home/home-introduction'
+import { ProjectRow } from '~/components/projects/project-row'
 import { ExternalLabel } from '~/components/social/external-mark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { siteExperience, siteIdentity } from '~/lib/content/personal'
 import { getAllPosts } from '~/lib/content/posts'
+import { getProjectRows } from '~/lib/content/projects'
 import { getGitHub, getSocial } from '~/lib/content/social-live'
 
 function SectionTitle({
@@ -33,6 +35,8 @@ export async function HomePageView() {
   const posts = getAllPosts()
   const latest = posts.slice(0, 5)
   const center = (latest.length - 1) / 2
+  const projects = getProjectRows()
+  const projectCenter = (projects.length - 1) / 2
 
   // section tags number in render order; conditional shelves never leave gaps
   let sectionCount = 0
@@ -94,6 +98,27 @@ export async function HomePageView() {
 
       <section className="mt-16">
         <SectionTitle delay={200}>
+          Projects
+        </SectionTitle>
+        <ul className="mt-4 flex flex-col">
+          {projects.map((project, index) => (
+            <li
+              key={project.slug}
+              className="enter-swing"
+              style={
+                {
+                  '--enter-delay': `${240 + Math.abs(index - projectCenter) * 50}ms`,
+                } as React.CSSProperties
+              }
+            >
+              <ProjectRow project={project} headingLevel="h3" />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-16">
+        <SectionTitle delay={280}>
           Writing
         </SectionTitle>
         <ul className="mt-4 flex flex-col">
@@ -103,7 +128,7 @@ export async function HomePageView() {
               className="enter-swing"
               style={
                 {
-                  '--enter-delay': `${240 + Math.abs(index - center) * 50}ms`,
+                  '--enter-delay': `${320 + Math.abs(index - center) * 50}ms`,
                 } as React.CSSProperties
               }
             >
