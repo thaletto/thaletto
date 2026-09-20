@@ -27,7 +27,7 @@ export function PostRow({
       href={`/blog/${safeSlug}`}
       coverTransitionName={coverTransitionName}
       titleTransitionName={titleTransitionName}
-      className="group blog-row hairline-top"
+      className="group blog-row"
       listStageId={listStageId}
     >
       <span className="print-pile" aria-hidden>
