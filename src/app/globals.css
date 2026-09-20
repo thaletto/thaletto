@@ -3893,12 +3893,24 @@ a:focus-visible .external-label .external-mark {
   gap: 2px;
 }
 
+@keyframes contrib-cell-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.92);
+  }
+}
 
 .contrib-grid i {
   width: 7px;
   height: 7px;
   border-radius: 2px;
   background: color-mix(in oklab, var(--foreground) 7%, transparent);
+  animation: contrib-cell-in 480ms var(--ease-swift) backwards;
+  animation-delay: calc(var(--ci, 0) * 2ms);
+}
+
+.link-card.preview-card-instant .contrib-grid i {
+  animation: none;
 }
 
 .contrib-grid i[data-level="1"] {
@@ -3917,6 +3929,12 @@ a:focus-visible .external-label .external-mark {
   background: var(--foreground);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .contrib-grid i {
+    animation: none;
+  }
+}
+
 
 /* ── Blog index rows: print thumb · title ···· date ───────────────── */
 
@@ -3931,7 +3949,7 @@ a:focus-visible .external-label .external-mark {
 /* the date is quiet metadata — one step down from the row's title */
 .experience-date,
 .blog-row-date {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   letter-spacing: 0.01em;
 }
 

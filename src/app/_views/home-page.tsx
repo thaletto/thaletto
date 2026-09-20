@@ -47,7 +47,7 @@ export async function HomePageView() {
         <ul className="mt-2 flex flex-col">
           {siteExperience.map((job) => (
             <li key={job.company}>
-              <div className="experience-row text-sm">
+              <div className="experience-row">
                 <div className="experience-details">
                   {job.url ? (
                     <a
