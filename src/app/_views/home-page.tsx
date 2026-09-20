@@ -93,19 +93,10 @@ export async function HomePageView() {
       </section>
 
       <section className="mt-16">
-        <div className="flex items-center justify-between gap-4">
-          <SectionTitle delay={200}>
-            Writing
-          </SectionTitle>
-          <Link
-            href="/blog"
-            className="enter relative shrink-0 text-sm text-muted-foreground transition-colors duration-150 ease-[ease] after:absolute after:-inset-x-2 after:-inset-y-3 after:content-[''] hover:text-foreground focus-visible:rounded-sm focus-visible:outline focus-visible:outline-offset-4"
-            style={{ '--enter-delay': '200ms' } as React.CSSProperties}
-          >
-            View all
-          </Link>
-        </div>
-        <ul className="focus-list mt-4 flex flex-col">
+        <SectionTitle delay={200}>
+          Writing
+        </SectionTitle>
+        <ul className="mt-4 flex flex-col">
           {latest.map((post, index) => (
             <li
               key={post.slug}
