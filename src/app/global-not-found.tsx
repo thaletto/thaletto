@@ -19,7 +19,7 @@ export default function GlobalNotFound() {
   return (
     <html lang="en" suppressHydrationWarning className={cn('font-sans', fontVariables)}>
       <head>
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: authored bootstrap script, no runtime input */}
+        {/* authored bootstrap script, no runtime input */}
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
       </head>
       <body className="antialiased">

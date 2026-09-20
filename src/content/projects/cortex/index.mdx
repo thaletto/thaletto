@@ -1,16 +1,16 @@
 ---
-title: "Cortex"
-description: "Effect-native vector database layer with typed queries and composable infrastructure."
-publishedAt: "2026-05-01T00:00:00.000Z"
+title: 'Cortex'
+description: 'Vector search with typed, composable queries'
+publishedAt: '2026-05-01T00:00:00.000Z'
 sort: 6
-tags: ["Vector DB", "RAG", "Effect", "TypeScript"]
-startDate: "2026.04"
-endDate: "2026.05"
+tags: ['Vector DB', 'RAG', 'Effect', 'TypeScript']
+startDate: '2026.04'
+endDate: '2026.05'
 links:
-  - label: "Docs"
-    url: "https://cortex-vector.vercel.app"
-  - label: "GitHub"
-    url: "https://github.com/thaletto/cortex"
+  - label: 'Docs'
+    url: 'https://cortex-vector.vercel.app'
+  - label: 'GitHub'
+    url: 'https://github.com/thaletto/cortex'
 cover: ./cortex.webp
 coverWidth: 1280
 coverHeight: 720
@@ -32,34 +32,40 @@ Cortex brings structure and safety to vector database operations. It does this t
 
 **Schema-driven infrastructure.** Collections are structured. Vectors are validated. Operations are composable. Cortex treats vector databases as structured application infrastructure, not loosely typed storage. This addresses metadata chaos. The compiler enforces assumptions before runtime can fail. This removes a category of bugs common in RAG pipelines.
 
-**Adapters instead of lock-in.** The vector database ecosystem changes constantly. Cortex uses adapters. Application logic stays independent from storage implementations. Your application describes *what* it needs from vector infrastructure, not *how* a vendor implements it.
+**Adapters instead of lock-in.** The vector database ecosystem changes constantly. Cortex uses adapters. Application logic stays independent from storage implementations. Your application describes _what_ it needs from vector infrastructure, not _how_ a vendor implements it.
 
 ## How It Works
 
 ```ts
-import { Effect } from "effect";
-import { VectorDB, DocumentId, Vector } from "@thaletto/cortex";
+import { Effect } from 'effect'
+import { VectorDB, DocumentId, Vector } from '@thaletto/cortex'
 
 const program = Effect.gen(function* () {
-  const db = yield* VectorDB;
-  const id = DocumentId.make("user-1-preference");
-  
+  const db = yield* VectorDB
+  const id = DocumentId.make('user-1-preference')
+
   yield* db.upsert({
     id,
-    content: "User prefers TypeScript over JavaScript",
-    category: "preferences",
-    tags: "typescript",
-    metadata_json: JSON.stringify({ source: "onboarding" }),
+    content: 'User prefers TypeScript over JavaScript',
+    category: 'preferences',
+    tags: 'typescript',
+    metadata_json: JSON.stringify({ source: 'onboarding' }),
     vector: Vector.make(new Array(384).fill(0)),
-    expires_at: new Date("2026-12-31"),
-  });
-});
+    expires_at: new Date('2026-12-31'),
+  })
+})
 ```
 
 ## Tech Stack
 
 <TechStack variant="embedded">
-  <TechStackItem label="Effect"><EffectLight className="tech-stack-icon-needs-invert" /></TechStackItem>
-  <TechStackItem label="TypeScript"><Typescript /></TechStackItem>
-  <TechStackItem label="npm"><Npm /></TechStackItem>
+  <TechStackItem label="Effect">
+    <EffectLight className="tech-stack-icon-needs-invert" />
+  </TechStackItem>
+  <TechStackItem label="TypeScript">
+    <Typescript />
+  </TechStackItem>
+  <TechStackItem label="npm">
+    <Npm />
+  </TechStackItem>
 </TechStack>

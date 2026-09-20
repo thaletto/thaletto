@@ -5,19 +5,19 @@ import { cacheLife } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { Suspense } from 'react'
+import { ViewTransition } from 'react'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import { PolaroidCover } from '~/components/blog/polaroid-cover'
 import { PostToc } from '~/components/blog/post-toc'
+import { projectViewTransitionName } from '~/lib/motion/view-transition-name'
 import { mdxComponents } from '~/components/mdx/mdx-components'
-import { RevealScope } from '~/components/motion/reveal-scope'
 import { ExternalLabel } from '~/components/social/external-mark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
 import { buildPostRail, POST_ARTICLE_START_ID } from '~/lib/content/posts'
 import { getAllProjects, getProject, isProjectSlug } from '~/lib/content/projects'
 import { pageMetadata } from '~/lib/metadata/page'
-import { projectViewTransitionName } from '~/lib/motion/view-transition-name'
 import remarkMermaid from '~/lib/platform/remark-mermaid'
 
 export function generateProjectStaticParams() {
@@ -42,8 +42,16 @@ export function projectMetadata(slug: string) {
 
 export function ProjectPostRoute({ params }: { params: Promise<{ slug: string }> }) {
   return (
-    <Suspense fallback={<ProjectPostLoadingShell />}>
-      <ProjectPostRouteContent params={params} />
+    <Suspense
+      fallback={
+        <ViewTransition exit="auto">
+          <ProjectPostLoadingShell />
+        </ViewTransition>
+      }
+    >
+      <ViewTransition enter="auto" default="none">
+        <ProjectPostRouteContent params={params} />
+      </ViewTransition>
     </Suspense>
   )
 }
@@ -60,7 +68,7 @@ function ProjectPostLoadingShell() {
     <article
       aria-busy="true"
       data-post-loading-shell
-      className="post-article mx-auto min-h-[calc(100svh-3.5rem)] w-full max-w-150 px-6"
+      className="post-article mx-auto min-h-[calc(100svh-3.5rem)] w-full max-w-173 px-4"
     >
       <div role="status" aria-label={label}>
         <span className="sr-only">{label}</span>
@@ -115,11 +123,8 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
 
   return (
     <>
-      <PostToc
-        nodes={rail}
-        backTo={{ href: '/projects', label: 'Projects', ariaLabel: 'Back to projects' }}
-      />
-      <article className="post-article mx-auto w-full max-w-150 px-6">
+      <PostToc nodes={rail} />
+      <article className="post-article mx-auto w-full max-w-173 px-4">
         <header>
           {project.cover && (
             <PolaroidCover
@@ -127,10 +132,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
               cover={project.cover}
               alt={project.title}
               priority
-              morph
-              print="collage"
               sizes="(max-width: 704px) 100vw, 656px"
-              transitionName={projectViewTransitionName('cover', project.slug)}
             />
           )}
           <div className="post-title-card">
@@ -192,9 +194,9 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
             </dl>
           </div>
         </header>
-        <RevealScope lang="en" className="post-body-stage prose enter mt-10">
+        <div lang="en" className="post-body-stage prose mt-10">
           <CachedProjectBody slug={project.slug} />
-        </RevealScope>
+        </div>
       </article>
     </>
   )

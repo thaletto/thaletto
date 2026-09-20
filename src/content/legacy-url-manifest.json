@@ -9,21 +9,6 @@
       "contains": "<main"
     },
     {
-      "kind": "page",
-      "source": "/blog",
-      "probes": ["/blog"],
-      "status": 200,
-      "contains": "<main"
-    },
-    {
-      "kind": "page",
-      "source": "/projects",
-      "probes": ["/projects"],
-      "status": 200,
-      "contains": "<main"
-    },
-
-    {
       "kind": "redirect",
       "source": "/about",
       "destination": "/",

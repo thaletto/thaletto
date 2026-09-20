@@ -5,7 +5,7 @@ import bakedGithub from '~/content/github.json'
 import { type GitHubActivity, loadGitHubActivity } from '~/lib/content/github-activity'
 import { siteIdentity, siteSocial } from '~/lib/content/personal'
 
-export interface SocialData {
+interface SocialData {
   x: SocialSnapshot
   linkedin: SocialSnapshot
   notion: NotionSnapshot

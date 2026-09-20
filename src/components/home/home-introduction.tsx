@@ -1,7 +1,8 @@
 import { HomeIntroReplay } from '~/components/home/home-intro-replay'
 import { EmailCard, GitHubCard, type SocialSnapshot, XCard } from '~/components/social/social-cards'
+import { ExternalLabel } from '~/components/social/external-mark'
 import type { GitHubActivity } from '~/lib/content/github-activity'
-import { siteIdentity, siteSocial } from '~/lib/content/personal'
+import { siteDestinations, siteIdentity, siteSocial } from '~/lib/content/personal'
 
 function DetailsMark() {
   return (
@@ -70,18 +71,22 @@ function HomeContact({ social, github }: { social: SocialSnapshot; github: GitHu
         trigger={`@${siteSocial.x.handle}`}
         triggerClassName="home-contact-link"
       />
-      , on GitHub as{' '}
-      <GitHubCard
-        data={github}
-        trigger={siteSocial.github.user}
-        triggerClassName="home-contact-link"
-      />
-      , or email me at{' '}
+      , on <GitHubCard data={github} trigger="GitHub" triggerClassName="home-contact-link" />, or
+      email me at{' '}
       <EmailCard
         identity={siteIdentity}
         trigger={siteIdentity.email}
         triggerClassName="home-contact-link"
       />
+      , or grab my{' '}
+      <a
+        href={siteDestinations.resume}
+        target="_blank"
+        rel="noreferrer"
+        className="home-contact-link"
+      >
+        <ExternalLabel>Resume</ExternalLabel>
+      </a>
     </p>
   )
 }

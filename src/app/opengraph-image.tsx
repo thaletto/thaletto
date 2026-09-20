@@ -142,7 +142,7 @@ export default async function OpenGraphImage() {
         }}
       >
         {/* Satori needs an embedded URL for local files. The source remains the checked-in portrait. */}
-        {/* biome-ignore lint/performance/noImgElement: Satori ImageResponse requires a plain embedded image */}
+        {/* Satori ImageResponse requires a plain embedded image */}
         <img
           src={portraitDataUri}
           alt=""

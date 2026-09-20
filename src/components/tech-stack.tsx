@@ -87,7 +87,7 @@ export function TechStack({
                 <span className="section-tag-hatch" aria-hidden="true" />
               </>
             )}
-            <span className="section-tag-label">{title}</span>
+            <span className="align-center">{title}</span>
           </h2>
         </header>
       )}

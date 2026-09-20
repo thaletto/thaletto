@@ -38,7 +38,7 @@ export function MermaidDiagram({ code, caption }: { code: string; caption?: stri
           // trusted-input boundary: diagram source is repo-committed MDX
           // rendered at build time, never user-supplied — revisit with a
           // sanitizer before ever feeding this component runtime input
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: build-time mermaid output, see above
+          // build-time mermaid output, see above
           dangerouslySetInnerHTML={{ __html: svg.replace(FONT_IMPORTS, '') }}
         />
       </ScrollAreaX>

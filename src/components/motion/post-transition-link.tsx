@@ -9,14 +9,12 @@ export function PostTransitionLink({
   titleTransitionName,
   className,
   children,
-  listStageId,
 }: {
   href: string
   coverTransitionName: string
   titleTransitionName: string
   className?: string
   children: ReactNode
-  listStageId?: string
 }) {
   function preparePointerMorph(event: MouseEvent<HTMLAnchorElement>) {
     if (
@@ -44,14 +42,7 @@ export function PostTransitionLink({
   }
 
   return (
-    <Link
-      href={href}
-      className={className}
-      data-post-transition-link
-      data-list-stage-row={listStageId ? '' : undefined}
-      data-list-stage-id={listStageId}
-      onClick={preparePointerMorph}
-    >
+    <Link href={href} className={className} data-post-transition-link onClick={preparePointerMorph}>
       {children}
     </Link>
   )

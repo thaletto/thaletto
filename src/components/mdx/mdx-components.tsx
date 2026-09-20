@@ -51,7 +51,7 @@ function PostImage({
 }) {
   if (src.startsWith('/') && src.endsWith('.svg')) {
     return (
-      // biome-ignore lint/performance/noImgElement: small technical marks remain native and crisp
+      // small technical marks remain native and crisp
       <img alt={alt ?? ''} className="mdx-inline-logo" height={18} src={src} width={18} />
     )
   }
@@ -81,7 +81,7 @@ function PostImage({
   )
 }
 
-export type ContentKind = 'blog' | 'projects'
+type ContentKind = 'blog' | 'projects'
 
 export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComponents {
   return {
