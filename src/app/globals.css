@@ -1850,6 +1850,31 @@ pre[data-theme],
   inset: -0.5rem;
 }
 
+/* icon swap: incoming scales 0.25 → 1 with opacity 0 → 1 and blur
+   4px → 0; the outgoing reverses the same curve */
+.code-copy-icon {
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0.25);
+  filter: blur(4px);
+  transition:
+    opacity 180ms cubic-bezier(0.2, 0, 0, 1),
+    transform 180ms cubic-bezier(0.2, 0, 0, 1),
+    filter 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.code-copy-icon-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.code-copy-icon[data-active] {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .code-copy:hover {
     color: var(--foreground);

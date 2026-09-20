@@ -29,8 +29,14 @@ export function CodeBlockPre(props: React.HTMLAttributes<HTMLPreElement>) {
         className="code-copy"
         data-copied={copied || undefined}
       >
-        {/* fixed slot: both icons same size, no layout shift on swap */}
-        {copied ? <Check size={14} aria-hidden /> : <Copy size={14} aria-hidden />}
+        {/* both icons stay mounted: the incoming one fades/scales in while
+            the outgoing reverses — no layout shift, no remount flash */}
+        <span className="code-copy-icon" data-active={!copied || undefined} aria-hidden>
+          <Copy size={14} />
+        </span>
+        <span className="code-copy-icon code-copy-icon-overlay" data-active={copied || undefined} aria-hidden>
+          <Check size={14} />
+        </span>
       </button>
     </div>
   )
