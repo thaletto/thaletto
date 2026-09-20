@@ -327,7 +327,6 @@
   --z-toast: 300;
 
   --grain-opacity: 0.3;
-  --guide-opacity: 0.5;
 
   /* instant-print paper stays paper in any theme */
   --paper: oklch(0.98 0.004 95);
@@ -342,7 +341,6 @@
 
 .dark {
   --grain-opacity: 0.22;
-  --guide-opacity: 0.4;
 }
 
 /* The warm working-paper palette. Public pages and the owner admin share
@@ -3271,34 +3269,6 @@ a:focus-visible .external-label .external-mark {
   .enter-swing {
     animation: none;
   }
-}
-
-/* measuring-tick rulers hugging the horizontal guides — instrument
-   chrome from the technical-print vocabulary, tuned to be missable.
-   They layer above the edge fades so the ticks never wash out. */
-.column-rulers {
-  position: fixed;
-  inset: 0;
-  z-index: 95;
-  pointer-events: none;
-  user-select: none;
-  opacity: var(--guide-opacity);
-  /* white ticks under difference invert against whatever passes beneath */
-  mix-blend-mode: difference;
-}
-
-/* bent-rule arcs (components/arc-rulers.tsx) — tick inks live there */
-.column-ruler-arc {
-  position: absolute;
-  left: 0;
-}
-
-.column-ruler-arc-top {
-  top: 0;
-}
-
-.column-ruler-arc-bottom {
-  bottom: 0;
 }
 
 /* ── Email envelope: the hover card is a little piece of mail ─────── */
