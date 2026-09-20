@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import authoredSite from '../../content/site.json'
-import { formatLocalDate } from '../design/i18n'
+import { formatLocalDate } from '../design/date'
 
 const identitySchema = z.object({
   name: z.string().min(1),
