@@ -127,7 +127,6 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
               alt={project.title}
               priority
               morph
-              print="collage"
               sizes="(max-width: 704px) 100vw, 656px"
               transitionName={projectViewTransitionName('cover', project.slug)}
             />

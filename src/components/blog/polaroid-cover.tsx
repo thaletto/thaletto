@@ -1,6 +1,5 @@
 import Image from 'next/image'
 
-import { DitheredImage } from '~/components/visual/dither-veil'
 import type { PostCover } from '~/lib/content/posts'
 import { tiltFromSlug } from '~/lib/motion/polaroid'
 import { postViewTransitionName } from '~/lib/motion/view-transition-name'
@@ -14,7 +13,6 @@ export function PolaroidCover({
   tilted = false,
   priority = false,
   morph = false,
-  print = false,
   sizes,
   className,
   transitionName,
@@ -28,9 +26,6 @@ export function PolaroidCover({
   priority?: boolean
   /** shared-element morph across index ⇄ post navigation */
   morph?: boolean
-  /** rest as an ink print (dither, or a dither/ascii/photo collage);
-   * hover/focus develops the photo */
-  print?: boolean | 'collage'
   sizes?: string
   className?: string
   /** explicit shared-element name; defaults to the post-slug naming */
@@ -49,28 +44,15 @@ export function PolaroidCover({
       }
     >
       <span className="polaroid-photo">
-        {print ? (
-          <DitheredImage
-            src={cover.src}
-            alt={alt ?? ''}
-            width={cover.width}
-            height={cover.height}
-            preload={priority}
-            sizes={sizes}
-            className="w-full"
-            ditherMode={print === 'collage' ? 'collage' : 'dither'}
-          />
-        ) : (
-          <Image
-            src={cover.src}
-            alt={alt ?? ''}
-            width={cover.width}
-            height={cover.height}
-            priority={priority}
-            sizes={sizes}
-            className="w-full"
-          />
-        )}
+        <Image
+          src={cover.src}
+          alt={alt ?? ''}
+          width={cover.width}
+          height={cover.height}
+          priority={priority}
+          sizes={sizes}
+          className="w-full"
+        />
       </span>
       <figcaption className="polaroid-caption">{caption ?? cover.caption ?? ' '}</figcaption>
     </figure>

@@ -153,7 +153,6 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
               alt=""
               priority
               morph
-              print="collage"
               sizes="(max-width: 704px) 100vw, 656px"
             />
           )}
