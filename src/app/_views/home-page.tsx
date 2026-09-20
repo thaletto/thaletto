@@ -80,7 +80,7 @@ export async function HomePageView() {
         <div className="enter max-w-76">
           <div className="flex items-center gap-2">
             <h1
-              className="font-sans text-xl font-semibold uppercase tracking-tight text-foreground"
+              className="font-sans text-xl font-medium tracking-tight text-foreground"
             >
               {siteIdentity.name}
             </h1>
