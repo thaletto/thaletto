@@ -923,6 +923,9 @@
 }
 
 .prose h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   margin-top: 2.5em;
   color: var(--gray-12, var(--foreground));
   font-size: 1.125rem;
@@ -933,37 +936,13 @@
   counter-increment: prose-section;
 }
 
-/* prose h2s open with the section tag — a boxed counter ordinal and hatch
-   strip in one pseudo (the .section-tag register, sized for the heading
-   line); the heading text itself keeps its editorial size */
-.prose h2::before {
-  content: counter(prose-section, decimal-leading-zero) / "";
-  display: inline-block;
-  margin-right: 0.625rem;
-  padding: 0.1875rem 1.1875rem 0.1875rem 0.4375rem;
-  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      color-mix(in oklab, var(--muted-foreground) 55%, transparent) 0,
-      color-mix(in oklab, var(--muted-foreground) 55%, transparent) 1px,
-      transparent 1px,
-      transparent 3.5px
-    )
-    right center / 0.75rem 100% no-repeat,
-    linear-gradient(
-      color-mix(in oklab, var(--muted-foreground) 45%, transparent),
-      color-mix(in oklab, var(--muted-foreground) 45%, transparent)
-    )
-    calc(100% - 0.75rem) 0 / var(--border-hairline) 100% no-repeat;
-  color: var(--muted-foreground);
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.6875rem;
-  font-weight: var(--font-weight-normal);
-  letter-spacing: 0.08em;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  vertical-align: 0.125em;
+/* the section rule follows the heading, like the homepage section titles */
+.prose h2::after {
+  content: "";
+  flex: 1;
+  min-width: 0;
+  height: var(--border-hairline);
+  background: var(--border);
 }
 
 .prose h3 {
@@ -1461,8 +1440,7 @@
   background: var(--muted-foreground);
 }
 
-/* ordered lists share the manual register: boxed two-digit ordinals
-   (the same recipe as .step-index), drawn from a CSS counter */
+/* ordered lists open with plain two-digit ordinals in the gutter */
 .prose ol {
   list-style: none;
   counter-reset: prose-step;
@@ -1476,18 +1454,12 @@
 .prose ol > li::before {
   content: counter(prose-step, decimal-leading-zero);
   position: absolute;
-  top: 0.1875rem;
+  top: 0.125rem;
   left: -1.75rem;
-  display: inline-grid;
-  min-width: 1.25rem;
-  padding: 0.125rem 0;
-  place-items: center;
-  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 40%, transparent);
   color: var(--muted-foreground);
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-sans);
   font-size: 0.6875rem;
   font-variant-numeric: tabular-nums;
-  line-height: 1;
 }
 
 .prose li + li {
