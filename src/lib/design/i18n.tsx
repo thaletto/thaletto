@@ -9,6 +9,10 @@ const enFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: SITE_TIME_ZONE,
 })
 
+export function formatLocalDate(date: Date): string {
+  return enFormatter.format(date)
+}
+
 export function LocalDate({ date }: { date: Date }) {
-  return <>{enFormatter.format(date)}</>
+  return <>{formatLocalDate(date)}</>
 }
