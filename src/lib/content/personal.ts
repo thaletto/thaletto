@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import authoredSite from '../../content/site.json'
-import { formatLocalDate } from '../design/date'
+import { formatDayMonthYear, formatLocalDate } from '../design/date'
 
 const identitySchema = z.object({
   name: z.string().min(1),
@@ -61,6 +61,7 @@ export interface SiteExperience {
   start: SiteMonth
   end?: SiteMonth
   yearRange: string
+  yearRangeShort: string
   url?: string
   timelinePhoto?: { src: string; alt: string }
 }
@@ -98,6 +99,7 @@ export function parseSiteProfile(input: unknown) {
       start,
       end,
       yearRange: `${formatLocalDate(siteMonthToDate(start))} – ${end ? formatLocalDate(siteMonthToDate(end)) : 'Present'}`,
+      yearRangeShort: `${formatDayMonthYear(siteMonthToDate(start))} – ${end ? formatDayMonthYear(siteMonthToDate(end)) : 'Present'}`,
       url: job.url,
       timelinePhoto: job.timelinePhoto,
     }

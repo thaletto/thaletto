@@ -112,6 +112,7 @@ describe('Site Profile', () => {
       start: { year: 1842, month: 1 },
       end: undefined,
       yearRange: 'Jan 1, 1842 – Present',
+      yearRangeShort: '01/01/42 – Present',
       url: undefined,
       timelinePhoto: undefined,
     })
@@ -152,10 +153,12 @@ describe('Site Profile', () => {
       start: { year: 1842, month: 1 },
       end: undefined,
       yearRange: 'Jan 1, 1842 – Present',
+      yearRangeShort: '01/01/42 – Present',
       url: undefined,
       timelinePhoto: { src: '/timeline/engine.jpg', alt: 'Analytical Engine' },
     })
     assert.equal(profile.experience[1].yearRange, 'Feb 1, 1842 – Aug 1, 1843')
+    assert.equal(profile.experience[1].yearRangeShort, '01/02/42 – 01/08/43')
     assert.deepEqual(profile.experience[1].end, { year: 1843, month: 8 })
   })
 
@@ -176,6 +179,7 @@ describe('Site Profile', () => {
     assert.deepEqual(profile.experience[0].start, { year: 1842, month: 1, day: 15 })
     assert.deepEqual(profile.experience[0].end, { year: 1843, month: 8, day: 2 })
     assert.equal(profile.experience[0].yearRange, 'Jan 15, 1842 – Aug 2, 1843')
+    assert.equal(profile.experience[0].yearRangeShort, '15/01/42 – 02/08/43')
   })
 
   test('rejects malformed and impossible experience dates', () => {

@@ -38,3 +38,14 @@ export function formatShortDate(date: Date): string {
 export function formatLocalDate(date: Date): string {
   return localDateFormatter.format(date)
 }
+
+export function formatDayMonthYear(date: Date): string {
+  const parts = Object.fromEntries(
+    shortDateFormatter
+      .formatToParts(date)
+      .filter(({ type }) => type !== 'literal')
+      .map(({ type, value }) => [type, value]),
+  )
+
+  return `${parts.day}/${parts.month}/${parts.year}`
+}
