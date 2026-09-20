@@ -33,7 +33,6 @@ import { Typescript } from '~/components/ui/svgs/typescript'
 import { Vercel } from '~/components/ui/svgs/vercel'
 import { VercelDark } from '~/components/ui/svgs/vercelDark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
-import { PortraitHiddenStage } from '~/components/visual/portrait-hidden-stage'
 import { careerLifeline } from '~/lib/content/lifeline'
 import { siteExperience, siteIdentity } from '~/lib/content/personal'
 import { getAllPosts } from '~/lib/content/posts'
@@ -77,7 +76,7 @@ export async function HomePageView() {
   return (
     <div className="mx-auto w-full max-w-150 px-6">
       <div className="flex flex-col-reverse justify-between gap-10 sm:flex-row sm:items-start">
-        <div className="enter max-w-76">
+        <div className="enter">
           <div className="flex items-center gap-2">
             <h1
               className="font-sans text-xl font-medium tracking-tight text-foreground"
@@ -89,22 +88,6 @@ export async function HomePageView() {
           <div className="mt-4">
             <HomeIntroduction social={social.x} github={github} />
           </div>
-        </div>
-        <div className="w-[9.35rem] shrink-0 sm:w-60">
-          <PortraitHiddenStage
-            label={`${siteIdentity.portraitAlt}. Reveal the hidden topographic field`}
-          >
-            <span className="hero-portrait-soft-fade">
-              <Image
-                src="/images/avatar.png"
-                alt={siteIdentity.portraitAlt}
-                fill
-                priority
-                sizes="(min-width: 640px) 240px, 150px"
-                className="hero-portrait-soft-fade-image"
-              />
-            </span>
-          </PortraitHiddenStage>
         </div>
       </div>
 
