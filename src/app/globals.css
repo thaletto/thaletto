@@ -321,7 +321,7 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
 
-  --border-hairline: 1px;
+  --border-hairline: 2px;
   --z-nav: 100;
   --z-card: 200;
   --z-toast: 300;
@@ -1547,6 +1547,23 @@
 
 .section-tag-label {
   align-self: center;
+}
+
+/* homepage section titles: the label is followed by a hairline rule that
+   takes up the rest of the row */
+.section-tag-ruled {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-tag-rule {
+  flex: 1;
+  min-width: 0;
+  height: var(--border-hairline);
+  background: var(--border);
 }
 
 /* Softer hover/selected fills for large choice groups (the AMA booking

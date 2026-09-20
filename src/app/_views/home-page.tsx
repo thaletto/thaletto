@@ -19,10 +19,11 @@ function SectionTitle({
 }) {
   return (
     <h2
-      className="section-tag enter"
+      className="section-tag section-tag-ruled enter"
       style={{ '--enter-delay': `${delay}ms` } as React.CSSProperties}
     >
       <span className="section-tag-label">{children}</span>
+      <span className="section-tag-rule" aria-hidden />
     </h2>
   )
 }
@@ -63,7 +64,7 @@ export async function HomePageView() {
           {siteExperience.map((job, i) => (
             <li
               key={job.company}
-              className="enter-swing hairline-top"
+              className="enter-swing"
               style={{ '--enter-delay': `${150 + i * 40}ms` } as React.CSSProperties}
             >
               <div className="experience-row text-sm">
