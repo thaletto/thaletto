@@ -61,8 +61,10 @@ export interface Project {
   readingMinutes: number
 }
 
-export interface ProjectRow
-  extends Omit<Project, 'body' | 'bodyUnits' | 'readingMinutes' | 'cover'> {
+export interface ProjectRow extends Omit<
+  Project,
+  'body' | 'bodyUnits' | 'readingMinutes' | 'cover'
+> {
   cover?: ProjectCover
 }
 

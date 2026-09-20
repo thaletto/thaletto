@@ -25,7 +25,7 @@ export function PixelCluster({ className, variant = 0 }: { className?: string; v
   return (
     <span className={className ? `pixel-cluster ${className}` : 'pixel-cluster'} aria-hidden="true">
       {cells.map((cell, index) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: static const grid, never reordered
+        // static const grid, never reordered
         <span key={index} className={cell ? `pc-cell pc-${cell}` : 'pc-cell'} />
       ))}
     </span>

@@ -43,11 +43,7 @@ function WayfindingArrow({ direction }: { direction: 'back' | 'top' }) {
   )
 }
 
-export function PostToc({
-  nodes,
-}: {
-  nodes: PostRailNode[]
-}) {
+export function PostToc({ nodes }: { nodes: PostRailNode[] }) {
   const landmarks = useMemo(
     () =>
       nodes.filter(
@@ -218,7 +214,8 @@ export function PostToc({
       phoneIslandVisibleRef.current = nextPhoneIslandVisible
       setBackToTopVisible(nextBackToTopVisible)
       setPhoneIslandVisible(nextPhoneIslandVisible)
-      if (phoneQueryRef.current && islandVisibilityChanged) settlePhoneIsland(nextPhoneIslandVisible)
+      if (phoneQueryRef.current && islandVisibilityChanged)
+        settlePhoneIsland(nextPhoneIslandVisible)
       pendingInstantMeasurementRef.current = false
 
       let current = targets[0].id
@@ -332,7 +329,7 @@ export function PostToc({
           aria-label={open ? 'Close article map' : 'Open article map'}
           aria-expanded={open}
           aria-controls={RAIL_ID}
-          onClick={(event) => setOpenState(!open)}
+          onClick={() => setOpenState(!open)}
         >
           <svg
             className="post-minimap-progress"
@@ -398,11 +395,7 @@ export function PostToc({
         >
           <div className="post-minimap-phone-surface backdrop-blur-md" aria-hidden />
           <div className="post-minimap-utilities post-minimap-utilities-top">
-            <Link
-              href='/'
-              className="post-minimap-utility"
-              aria-label={'Back to home'}
-            >
+            <Link href="/" className="post-minimap-utility" aria-label={'Back to home'}>
               <WayfindingArrow direction="back" />
               <span>Home</span>
             </Link>

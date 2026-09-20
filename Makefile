@@ -20,7 +20,7 @@ build:
 start:
 	$(BUN) run start
 
-## Auto-format all source files with Biome
+## Auto-format all source files with oxfmt
 format:
 	$(BUN) run format
 
@@ -34,7 +34,7 @@ fix:
 
 ## Check formatting + lint without writing
 formatcheck:
-	$(BUN) exec biome check .
+	$(BUN) x oxfmt --check . && $(BUN) run lint
 
 ## Full TypeScript typecheck (no emit)
 typecheck:

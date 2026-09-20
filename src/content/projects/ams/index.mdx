@@ -1,18 +1,18 @@
 ---
-title: "Agentic AMS Platform"
-description: "Agentic framework for incident resolution"
-publishedAt: "2026-01-01T00:00:00.000Z"
+title: 'Agentic AMS Platform'
+description: 'Agentic framework for incident resolution'
+publishedAt: '2026-01-01T00:00:00.000Z'
 sort: 9
-tags: ["Microsoft Autogen", "FastAPI", "MCP", "RAG"]
-company: "TCS"
-startDate: "2025.02"
-endDate: "2026.01"
+tags: ['Microsoft Autogen', 'FastAPI', 'MCP', 'RAG']
+company: 'TCS'
+startDate: '2025.02'
+endDate: '2026.01'
 cover: ./ams.webp
 coverWidth: 1280
 coverHeight: 720
 ---
 
-![AMS Architecture](./ams_architecture.webp#1229x819 "AMS Architecture")
+![AMS Architecture](./ams_architecture.webp#1229x819 'AMS Architecture')
 
 ## Overview
 
@@ -37,6 +37,7 @@ An agent that detects problems but cannot fix them is only a notifier. The RAG p
 ### Planning and execution
 
 Three agents handle remediation:
+
 - The **Planning Agent** receives the incident description and the SOP that was retrieved. It produces an ordered remediation plan. It does not execute anything.
 - A **Human-in-the-Loop checkpoint** then presents the proposed plan to a human operator. The operator approves or rejects the plan. This checkpoint is not ceremonial. It is the mechanism that earns the system the right to be trusted with real infrastructure.
 - Upon approval, the **Executor Agent** works through the plan step by step. It calls tools. The tools are HttpRequest for API interactions, JenkinsRollback for deployment reversions, and ReadPodStatus for Kubernetes pod queries. After each step, the **Validator Agent** independently verifies whether the step had its intended effect. If validation fails, the Executor retries. If it succeeds, the pipeline advances.
@@ -59,8 +60,16 @@ When all steps pass validation, the ServiceNow ticket is closed. The system then
 ## Tech Stack
 
 <TechStack variant="embedded">
-  <TechStackItem label="Qdrant"><QdrantIconLight /></TechStackItem>
-  <TechStackItem label="Grafana"><Grafana /></TechStackItem>
-  <TechStackItem label="FastAPI"><Fastapi /></TechStackItem>
-  <TechStackItem label="Python"><Python /></TechStackItem>
+  <TechStackItem label="Qdrant">
+    <QdrantIconLight />
+  </TechStackItem>
+  <TechStackItem label="Grafana">
+    <Grafana />
+  </TechStackItem>
+  <TechStackItem label="FastAPI">
+    <Fastapi />
+  </TechStackItem>
+  <TechStackItem label="Python">
+    <Python />
+  </TechStackItem>
 </TechStack>

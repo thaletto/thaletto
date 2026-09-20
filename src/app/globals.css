@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -6,7 +6,8 @@
   --font-heading: var(--font-sans);
   /* Inter / JetBrains Mono / Libre Baskerville from next/font/google */
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-serif: var(--font-libre-baskerville), Georgia, serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -46,7 +47,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-      --color-hover: var(--hover);
+  --color-hover: var(--hover);
   --color-active: var(--active);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
@@ -136,31 +137,26 @@
     0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color),
     0 3px 3px -1.5px var(--shadow-color);
   --shadow-4:
-    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(
-      --shadow-color
-    ), 0 6px 6px -3px var(--shadow-color);
+    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color),
+    0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color);
   --shadow-5:
-    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(
-      --shadow-color
-    ), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color);
+    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color),
+    0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color),
+    0 12px 12px -6px var(--shadow-color);
   --shadow-6:
-    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(
-      --shadow-color
-    ), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(
-      --shadow-color
-    );
+    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color),
+    0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color),
+    0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(--shadow-color);
   --shadow-7:
-    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(
-      --shadow-color
-    ), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(
-      --shadow-color
-    ), 0 48px 48px -24px var(--shadow-color);
+    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color),
+    0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color),
+    0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(--shadow-color),
+    0 48px 48px -24px var(--shadow-color);
   --shadow-8:
-    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color), 0 3px 3px -1.5px var(
-      --shadow-color
-    ), 0 6px 6px -3px var(--shadow-color), 0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(
-      --shadow-color
-    ), 0 48px 48px -24px var(--shadow-color), 0 96px 96px -48px var(--shadow-color);
+    0 0 0 1px var(--shadow-color), 0 1px 1px -0.5px var(--shadow-color),
+    0 3px 3px -1.5px var(--shadow-color), 0 6px 6px -3px var(--shadow-color),
+    0 12px 12px -6px var(--shadow-color), 0 24px 24px -12px var(--shadow-color),
+    0 48px 48px -24px var(--shadow-color), 0 96px 96px -48px var(--shadow-color);
 }
 
 .dark {
@@ -219,61 +215,31 @@
     inset 0 1px 0 0 var(--dm-hi-base), inset 0 0 0 1px var(--dm-ring-base),
     0 1px 1px -0.5px var(--dm-drop);
   --shadow-3:
-    inset 0 1px 0 0 var(--dm-hi-mid), inset 0 0 0 1px var(--dm-ring-base), 0 0 0 1px rgba(
-      0,
-      0,
-      0,
-      0.12
-    ), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop);
+    inset 0 1px 0 0 var(--dm-hi-mid), inset 0 0 0 1px var(--dm-ring-base),
+    0 0 0 1px rgba(0, 0, 0, 0.12), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop);
   --shadow-4:
-    inset 0 1px 0 0 var(--dm-hi-mid), inset 0 0 0 1px var(--dm-ring-mid), 0 0 0 1px rgba(
-      0,
-      0,
-      0,
-      0.14
-    ), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(
-      --dm-drop
-    );
+    inset 0 1px 0 0 var(--dm-hi-mid), inset 0 0 0 1px var(--dm-ring-mid),
+    0 0 0 1px rgba(0, 0, 0, 0.14), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop),
+    0 6px 6px -3px var(--dm-drop);
   --shadow-5:
-    inset 0 1px 0 0 var(--dm-hi-high), inset 0 0 0 1px var(--dm-ring-mid), 0 0 0 1px rgba(
-      0,
-      0,
-      0,
-      0.16
-    ), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(
-      --dm-drop
-    ), 0 12px 12px -6px var(--dm-drop);
+    inset 0 1px 0 0 var(--dm-hi-high), inset 0 0 0 1px var(--dm-ring-mid),
+    0 0 0 1px rgba(0, 0, 0, 0.16), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop),
+    0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop);
   --shadow-6:
-    inset 0 1px 0 0 var(--dm-hi-high), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(
-      0,
-      0,
-      0,
-      0.18
-    ), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(
-      --dm-drop
-    ), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop);
+    inset 0 1px 0 0 var(--dm-hi-high), inset 0 0 0 1px var(--dm-ring-high),
+    0 0 0 1px rgba(0, 0, 0, 0.18), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop),
+    0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop);
   --shadow-7:
-    inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(
-      0,
-      0,
-      0,
-      0.2
-    ), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(
-      --dm-drop
-    ), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(
-      --dm-drop
-    );
+    inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high),
+    0 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop),
+    0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop),
+    0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(--dm-drop);
   --shadow-8:
-    inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high), 0 0 0 1px rgba(
-      0,
-      0,
-      0,
-      0.22
-    ), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop), 0 6px 6px -3px var(
-      --dm-drop
-    ), 0 12px 12px -6px var(--dm-drop), 0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(
-      --dm-drop
-    ), 0 96px 96px -48px var(--dm-drop);
+    inset 0 1px 0 0 var(--dm-hi-peak), inset 0 0 0 1px var(--dm-ring-high),
+    0 0 0 1px rgba(0, 0, 0, 0.22), 0 1px 1px -0.5px var(--dm-drop), 0 3px 3px -1.5px var(--dm-drop),
+    0 6px 6px -3px var(--dm-drop), 0 12px 12px -6px var(--dm-drop),
+    0 24px 24px -12px var(--dm-drop), 0 48px 48px -24px var(--dm-drop),
+    0 96px 96px -48px var(--dm-drop);
 }
 
 @layer base {
@@ -455,7 +421,7 @@
     linear-gradient(currentColor, currentColor) left bottom / var(--border-hairline) 7px no-repeat,
     linear-gradient(currentColor, currentColor) right bottom / 7px var(--border-hairline) no-repeat,
     linear-gradient(currentColor, currentColor) right bottom / var(--border-hairline) 7px no-repeat;
-  content: "";
+  content: '';
   opacity: 0;
   transform: scale(0.82);
 }
@@ -542,7 +508,6 @@
   }
 }
 
-
 /* ── Error proof sheet ───────────────────────────────────────────── */
 
 .error-sheet {
@@ -576,7 +541,7 @@
 
 .error-proof::before,
 .error-proof::after {
-  content: "";
+  content: '';
   position: absolute;
   pointer-events: none;
 }
@@ -630,7 +595,7 @@
 .error-registration::after,
 .error-registration span::before,
 .error-registration span::after {
-  content: "";
+  content: '';
   position: absolute;
   background: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
 }
@@ -729,7 +694,6 @@
   height: 0.3rem;
 }
 
-
 .error-message {
   position: relative;
   z-index: 2;
@@ -778,7 +742,6 @@
   }
 }
 
-
 /* ── Ambient background: paper grain ─────────────────────────────── */
 
 .paper-grain {
@@ -802,21 +765,21 @@
   color: var(--foreground);
   background:
     linear-gradient(currentColor, currentColor) left top / var(--corner-arm) var(--border-hairline)
-    no-repeat,
+      no-repeat,
     linear-gradient(currentColor, currentColor) left top / var(--border-hairline) var(--corner-arm)
-    no-repeat,
+      no-repeat,
     linear-gradient(currentColor, currentColor) right top / var(--corner-arm) var(--border-hairline)
-    no-repeat,
+      no-repeat,
     linear-gradient(currentColor, currentColor) right top / var(--border-hairline) var(--corner-arm)
-    no-repeat,
+      no-repeat,
     linear-gradient(currentColor, currentColor) left bottom / var(--corner-arm)
-    var(--border-hairline) no-repeat,
+      var(--border-hairline) no-repeat,
     linear-gradient(currentColor, currentColor) left bottom / var(--border-hairline)
-    var(--corner-arm) no-repeat,
+      var(--corner-arm) no-repeat,
     linear-gradient(currentColor, currentColor) right bottom / var(--corner-arm)
-    var(--border-hairline) no-repeat,
+      var(--border-hairline) no-repeat,
     linear-gradient(currentColor, currentColor) right bottom / var(--border-hairline)
-    var(--corner-arm) no-repeat;
+      var(--corner-arm) no-repeat;
 }
 
 /* photo tiles: brackets develop only under a fine-pointer attention */
@@ -834,7 +797,6 @@
     transform: none;
   }
 }
-
 
 /* ── Ghost line art: a schematic at the edge of perception ────────── */
 
@@ -863,7 +825,7 @@
 }
 
 .polaroid-photo::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   box-shadow: inset 0 0 2px rgb(0 0 0 / 0.14);
@@ -887,7 +849,6 @@
 
 /* hover = pick-up, not flatten; press squishes the gesture, not the paper */
 @media (hover: hover) and (pointer: fine) {
-
   .group:hover .polaroid-tilted {
     transform: rotate(calc(var(--tilt, 0deg) + 1.2deg)) scale(1.03);
     box-shadow:
@@ -899,7 +860,6 @@
     transform: rotate(calc(var(--tilt, 0deg) + 1.2deg)) scale(0.94);
   }
 }
-
 
 /* ── Post prose ───────────────────────────────────────────────────── */
 
@@ -938,7 +898,7 @@
 
 /* the section rule follows the heading, like the homepage section titles */
 .prose h2::after {
-  content: "";
+  content: '';
   flex: 1;
   min-width: 0;
   height: var(--border-hairline);
@@ -1055,10 +1015,10 @@
   animation-timing-function: var(--ease-swift);
 }
 
-html[data-route-motion="none"]::view-transition-group(*),
-html[data-route-motion="none"]::view-transition-image-pair(*),
-html[data-route-motion="none"]::view-transition-old(*),
-html[data-route-motion="none"]::view-transition-new(*) {
+html[data-route-motion='none']::view-transition-group(*),
+html[data-route-motion='none']::view-transition-image-pair(*),
+html[data-route-motion='none']::view-transition-old(*),
+html[data-route-motion='none']::view-transition-new(*) {
   animation-duration: 0s !important;
   animation-delay: 0s !important;
 }
@@ -1229,19 +1189,19 @@ html[data-route-motion="none"]::view-transition-new(*) {
   margin-left: auto;
 }
 
-.status-ladder [data-state="done"] .status-ladder-cell {
+.status-ladder [data-state='done'] .status-ladder-cell {
   background: color-mix(in oklab, var(--foreground) 62%, transparent);
 }
 
-.status-ladder [data-state="current"] {
+.status-ladder [data-state='current'] {
   color: var(--gray-10, var(--foreground));
 }
 
-.status-ladder [data-state="current"] .status-ladder-cell {
+.status-ladder [data-state='current'] .status-ladder-cell {
   background: var(--signal);
 }
 
-.status-ladder [data-state="pending"] .status-ladder-cell {
+.status-ladder [data-state='pending'] .status-ladder-cell {
   box-shadow: inset 0 0 0 var(--border-hairline)
     color-mix(in oklab, var(--muted-foreground) 55%, transparent);
 }
@@ -1494,7 +1454,7 @@ html[data-route-motion="none"]::view-transition-new(*) {
 }
 
 .page-eyebrow::before {
-  content: "// " / "";
+  content: '// ' / '';
   color: color-mix(in oklab, var(--muted-foreground) 55%, transparent);
 }
 
@@ -1530,7 +1490,7 @@ html[data-route-motion="none"]::view-transition-new(*) {
 
 /* square markers — a single cell from the dither vocabulary */
 .prose ul > li::before {
-  content: "";
+  content: '';
   position: absolute;
   left: -1.375rem;
   top: calc(0.875em - 2.5px);
@@ -1579,7 +1539,7 @@ html[data-route-motion="none"]::view-transition-new(*) {
 /* quotation bar: the hazard hatch set vertically — quoted text is
    material brought in from elsewhere, so it wears the annotation strip */
 .prose blockquote::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0.25em;
   bottom: 0.25em;
@@ -1625,7 +1585,7 @@ html[data-route-motion="none"]::view-transition-new(*) {
 }
 
 .prose .post-figcaption::before {
-  content: "FIG. " counter(prose-figure, decimal-leading-zero) " — " / "";
+  content: 'FIG. ' counter(prose-figure, decimal-leading-zero) ' — ' / '';
   color: color-mix(in oklab, var(--muted-foreground) 72%, transparent);
   letter-spacing: 0.08em;
 }
@@ -1790,7 +1750,6 @@ figure[data-rehype-pretty-code-figure] {
   opacity: 1;
 }
 
-
 /* ── Fluid vertical scroll area (components/ui/scroll-area.tsx) ──── */
 
 /* flex column so a flexed parent (dialog body) sizes the viewport;
@@ -1844,7 +1803,6 @@ figure[data-rehype-pretty-code-figure] {
 .scroll-area-y-fade[data-visible] {
   opacity: 1;
 }
-
 
 /* ── Mermaid diagrams (beautiful-mermaid, server-rendered svg) ────── */
 
@@ -1905,7 +1863,7 @@ figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title]
 
 /* boxed language tag, from the pretty-code attribute */
 figure[data-rehype-pretty-code-figure]
-figcaption[data-rehype-pretty-code-title][data-language]::after {
+  figcaption[data-rehype-pretty-code-title][data-language]::after {
   content: attr(data-language);
   margin-left: auto;
   padding: 0.0625rem 0.375rem;
@@ -1947,7 +1905,7 @@ pre[data-theme],
 
 .code-copy::after {
   /* 44px minimum hit area */
-  content: "";
+  content: '';
   position: absolute;
   inset: -0.5rem;
 }
@@ -2016,7 +1974,7 @@ pre[data-theme],
 /* extend the hit area vertically; horizontal stays button-width so
    neighbors remain distinguishable */
 .theme-toggle button::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: -0.625rem 0;
 }
@@ -2064,7 +2022,7 @@ pre[data-theme],
   opacity: 0;
 }
 
-.zoom-overlay[data-state="open"] .zoom-overlay-backdrop {
+.zoom-overlay[data-state='open'] .zoom-overlay-backdrop {
   opacity: 1;
 }
 
@@ -2075,7 +2033,7 @@ pre[data-theme],
   will-change: transform;
 }
 
-.zoom-overlay[data-state="open"] img {
+.zoom-overlay[data-state='open'] img {
   box-shadow: var(--shadow-large);
 }
 
@@ -2085,10 +2043,9 @@ pre[data-theme],
   opacity: 0;
 }
 
-.zoom-overlay[data-state="open"] .zoom-overlay-marks {
+.zoom-overlay[data-state='open'] .zoom-overlay-marks {
   opacity: 0.55;
 }
-
 
 /* ── Header avatar ────────────────────────────────────────────────── */
 
@@ -2132,7 +2089,6 @@ pre[data-theme],
 }
 
 @media (hover: hover) and (pointer: fine) {
-
   a:hover .external-label .external-mark {
     opacity: 0.95;
     transform: translate(1.5px, -1.5px);
@@ -2255,7 +2211,8 @@ a:focus-visible .external-label .external-mark {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .home-intro-trigger:hover .home-design-label {    color: transparent;
+  .home-intro-trigger:hover .home-design-label {
+    color: transparent;
     background-image: linear-gradient(
       100deg,
       color-mix(in oklch, var(--foreground) 35%, #ff5c5c),
@@ -2311,7 +2268,6 @@ a:focus-visible .external-label .external-mark {
     animation: none;
   }
 }
-
 
 .external-link img {
   display: inline-block;
@@ -2385,48 +2341,48 @@ a:focus-visible .external-label .external-mark {
    softened toward the page) since inverting would corrupt the color.
    Padding + border-box keeps the slot size: no layout shift. Opaque
    near-white tiles just get an edge on the light page. */
-.external-link img[data-tone="light-mono"],
-.link-card-site img[data-tone="light-mono"],
-.ama-product-logo[data-tone="light-mono"],
-.dark .external-link img[data-tone="dark-mono"],
-.dark .link-card-site img[data-tone="dark-mono"],
-.dark .ama-product-logo[data-tone="dark-mono"] {
+.external-link img[data-tone='light-mono'],
+.link-card-site img[data-tone='light-mono'],
+.ama-product-logo[data-tone='light-mono'],
+.dark .external-link img[data-tone='dark-mono'],
+.dark .link-card-site img[data-tone='dark-mono'],
+.dark .ama-product-logo[data-tone='dark-mono'] {
   filter: invert(1);
 }
 
-.dark .external-link img[data-tone="light-mono"],
-.dark .link-card-site img[data-tone="light-mono"],
-.dark .ama-product-logo[data-tone="light-mono"] {
+.dark .external-link img[data-tone='light-mono'],
+.dark .link-card-site img[data-tone='light-mono'],
+.dark .ama-product-logo[data-tone='light-mono'] {
   filter: none;
 }
 
-.external-link img[data-tone="light"],
-.link-card-site img[data-tone="light"],
-.ama-product-logo[data-tone="light"],
-.dark .external-link img[data-tone="dark"],
-.dark .link-card-site img[data-tone="dark"],
-.dark .ama-product-logo[data-tone="dark"] {
+.external-link img[data-tone='light'],
+.link-card-site img[data-tone='light'],
+.ama-product-logo[data-tone='light'],
+.dark .external-link img[data-tone='dark'],
+.dark .link-card-site img[data-tone='dark'],
+.dark .ama-product-logo[data-tone='dark'] {
   box-sizing: border-box;
   padding: 2px;
   background: color-mix(in oklab, var(--primary) 88%, var(--background));
 }
 
-.dark .external-link img[data-tone="light"],
-.dark .link-card-site img[data-tone="light"],
-.dark .ama-product-logo[data-tone="light"] {
+.dark .external-link img[data-tone='light'],
+.dark .link-card-site img[data-tone='light'],
+.dark .ama-product-logo[data-tone='light'] {
   padding: 0;
   background: none;
 }
 
-.external-link img[data-tone="flat"],
-.link-card-site img[data-tone="flat"],
-.ama-product-logo[data-tone="flat"] {
+.external-link img[data-tone='flat'],
+.link-card-site img[data-tone='flat'],
+.ama-product-logo[data-tone='flat'] {
   box-shadow: inset 0 0 0 1px var(--border);
 }
 
-.dark .external-link img[data-tone="flat"],
-.dark .link-card-site img[data-tone="flat"],
-.dark .ama-product-logo[data-tone="flat"] {
+.dark .external-link img[data-tone='flat'],
+.dark .link-card-site img[data-tone='flat'],
+.dark .ama-product-logo[data-tone='flat'] {
   box-shadow: none;
 }
 
@@ -2527,7 +2483,6 @@ a:focus-visible .external-label .external-mark {
   filter: invert(1) contrast(0.88);
 }
 
-
 /* The homepage portrait keeps its softened illustration at rest. A bounded
    topographic field develops behind it only after deliberate attention. */
 [data-portrait-stage] {
@@ -2579,12 +2534,12 @@ a:focus-visible .external-label .external-mark {
   );
 }
 
-[data-portrait-stage][data-active="true"] .portrait-hidden-stage-field {
+[data-portrait-stage][data-active='true'] .portrait-hidden-stage-field {
   opacity: 1;
   transform: scale(1);
 }
 
-[data-portrait-stage][data-motion="true"] .portrait-hidden-stage-field {
+[data-portrait-stage][data-motion='true'] .portrait-hidden-stage-field {
   will-change: transform, opacity;
 }
 
@@ -2621,7 +2576,7 @@ a:focus-visible .external-label .external-mark {
   opacity: 0;
 }
 
-.portrait-hidden-stage-shader-shell[data-ready="true"] {
+.portrait-hidden-stage-shader-shell[data-ready='true'] {
   opacity: 1;
 }
 
@@ -2632,7 +2587,6 @@ a:focus-visible .external-label .external-mark {
 .dark .portrait-hidden-stage-shader {
   opacity: 0.09;
 }
-
 
 /* ── Email envelope: the hover card is a little piece of mail ─────── */
 
@@ -2670,44 +2624,44 @@ a:focus-visible .external-label .external-mark {
 
 /* postal edge: quiet red/blue registration ink around the paper */
 .email-envelope::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   z-index: 4;
   pointer-events: none;
   background:
     repeating-linear-gradient(
-      135deg,
-      var(--mail-red) 0 7px,
-      transparent 7px 14px,
-      var(--mail-blue) 14px 21px,
-      transparent 21px 28px
-    )
-    top / 100% 3px no-repeat,
+        135deg,
+        var(--mail-red) 0 7px,
+        transparent 7px 14px,
+        var(--mail-blue) 14px 21px,
+        transparent 21px 28px
+      )
+      top / 100% 3px no-repeat,
     repeating-linear-gradient(
-      135deg,
-      var(--mail-red) 0 7px,
-      transparent 7px 14px,
-      var(--mail-blue) 14px 21px,
-      transparent 21px 28px
-    )
-    bottom / 100% 3px no-repeat,
+        135deg,
+        var(--mail-red) 0 7px,
+        transparent 7px 14px,
+        var(--mail-blue) 14px 21px,
+        transparent 21px 28px
+      )
+      bottom / 100% 3px no-repeat,
     repeating-linear-gradient(
-      45deg,
-      var(--mail-red) 0 7px,
-      transparent 7px 14px,
-      var(--mail-blue) 14px 21px,
-      transparent 21px 28px
-    )
-    left / 3px 100% no-repeat,
+        45deg,
+        var(--mail-red) 0 7px,
+        transparent 7px 14px,
+        var(--mail-blue) 14px 21px,
+        transparent 21px 28px
+      )
+      left / 3px 100% no-repeat,
     repeating-linear-gradient(
-      45deg,
-      var(--mail-red) 0 7px,
-      transparent 7px 14px,
-      var(--mail-blue) 14px 21px,
-      transparent 21px 28px
-    )
-    right / 3px 100% no-repeat;
+        45deg,
+        var(--mail-red) 0 7px,
+        transparent 7px 14px,
+        var(--mail-blue) 14px 21px,
+        transparent 21px 28px
+      )
+      right / 3px 100% no-repeat;
   opacity: 0.62;
 }
 
@@ -2813,7 +2767,7 @@ a:focus-visible .external-label .external-mark {
 }
 
 .email-envelope-postmark::before {
-  content: "13 JUL";
+  content: '13 JUL';
   position: absolute;
   inset: 0;
   display: grid;
@@ -2824,7 +2778,7 @@ a:focus-visible .external-label .external-mark {
 }
 
 .email-envelope-postmark::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0.5rem;
   left: 1.65rem;
@@ -2898,7 +2852,7 @@ a:focus-visible .external-label .external-mark {
 }
 
 .shelf-annotation::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: -0.5rem;
 }
@@ -2960,7 +2914,7 @@ a:focus-visible .external-label .external-mark {
 
 .room-shelf-plank::before,
 .room-shelf-plank::after {
-  content: "";
+  content: '';
   position: absolute;
   right: 0;
   left: 0;
@@ -3030,7 +2984,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-
 /* ── Viewport edge fades: subtle progressive blur top & bottom ────── */
 
 .viewport-edge-fade {
@@ -3089,7 +3042,6 @@ a:focus-visible .external-label .external-mark {
   opacity: 0;
 }
 
-
 /* ── Vinyl shelf (components/vinyl-shelf.tsx) ─────────────────────── */
 
 .vinyl-room {
@@ -3114,7 +3066,7 @@ a:focus-visible .external-label .external-mark {
   cursor: grab;
 }
 
-.vinyl-room[data-vinyl-interaction="panning"] .vinyl-viewport {
+.vinyl-room[data-vinyl-interaction='panning'] .vinyl-viewport {
   cursor: grabbing;
 }
 
@@ -3175,22 +3127,22 @@ a:focus-visible .external-label .external-mark {
   pointer-events: none;
 }
 
-.vinyl-hit-corner[data-corner="top-left"] {
+.vinyl-hit-corner[data-corner='top-left'] {
   top: 0;
   left: 0;
 }
 
-.vinyl-hit-corner[data-corner="top-right"] {
+.vinyl-hit-corner[data-corner='top-right'] {
   top: 0;
   right: 0;
 }
 
-.vinyl-hit-corner[data-corner="bottom-right"] {
+.vinyl-hit-corner[data-corner='bottom-right'] {
   right: 0;
   bottom: 0;
 }
 
-.vinyl-hit-corner[data-corner="bottom-left"] {
+.vinyl-hit-corner[data-corner='bottom-left'] {
   bottom: 0;
   left: 0;
 }
@@ -3261,7 +3213,7 @@ a:focus-visible .external-label .external-mark {
 }
 
 .vinyl-sleeve::after {
-  content: "";
+  content: '';
   position: absolute;
   z-index: 4;
   inset: 0;
@@ -3424,7 +3376,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-
 /* ── Bookshelf: 3D accordion (components/bookshelf.tsx) ───────────── */
 
 .bookshelf-viewport {
@@ -3500,7 +3451,7 @@ a:focus-visible .external-label .external-mark {
 /* The visual spine stays tightly packed, while its nonvisual hit area meets
    the 44px touch target. Shelf click capture resolves overlaps by proximity. */
 .book3::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
@@ -3610,7 +3561,6 @@ a:focus-visible .external-label .external-mark {
   writing-mode: vertical-rl;
 }
 
-
 /* ── Experience rows ──────────────────────────────────────────────── */
 
 .experience-row {
@@ -3646,14 +3596,14 @@ a:focus-visible .external-label .external-mark {
   background: var(--background);
 }
 
-.tech-stack[data-variant="card"] {
+.tech-stack[data-variant='card'] {
   overflow: visible;
   border: 0;
   border-radius: 0;
   background: transparent;
 }
 
-.tech-stack[data-variant="embedded"] {
+.tech-stack[data-variant='embedded'] {
   overflow: visible;
   border: 0;
   border-radius: 0;
@@ -3669,30 +3619,30 @@ a:focus-visible .external-label .external-mark {
     color-mix(in oklab, var(--muted-foreground) 24%, transparent);
 }
 
-.tech-stack[data-variant="card"] .tech-stack-header {
+.tech-stack[data-variant='card'] .tech-stack-header {
   min-height: 0;
   padding: 0;
   border: 0;
 }
 
-.tech-stack[data-variant="card"] .tech-stack-grid {
+.tech-stack[data-variant='card'] .tech-stack-grid {
   gap: 0;
   margin-top: 1rem;
   background: transparent;
 }
 
-.tech-stack[data-variant="card"] .tech-stack-item,
-.tech-stack[data-variant="card"] .tech-stack-filler {
+.tech-stack[data-variant='card'] .tech-stack-item,
+.tech-stack[data-variant='card'] .tech-stack-filler {
   background: transparent;
 }
 
-.tech-stack[data-variant="embedded"] .tech-stack-grid {
+.tech-stack[data-variant='embedded'] .tech-stack-grid {
   gap: 0;
   background: transparent;
 }
 
-.tech-stack[data-variant="embedded"] .tech-stack-item,
-.tech-stack[data-variant="embedded"] .tech-stack-filler {
+.tech-stack[data-variant='embedded'] .tech-stack-item,
+.tech-stack[data-variant='embedded'] .tech-stack-filler {
   background: transparent;
 }
 
@@ -3809,7 +3759,6 @@ a:focus-visible .external-label .external-mark {
 .service-card[data-starting-style] {
   transform: scale(0.92) translateY(4px);
 }
-
 
 .service-card-glyph {
   margin-left: auto;
@@ -3944,19 +3893,19 @@ a:focus-visible .external-label .external-mark {
   animation: none;
 }
 
-.contrib-grid i[data-level="1"] {
+.contrib-grid i[data-level='1'] {
   background: color-mix(in oklab, var(--foreground) 30%, transparent);
 }
 
-.contrib-grid i[data-level="2"] {
+.contrib-grid i[data-level='2'] {
   background: color-mix(in oklab, var(--foreground) 52%, transparent);
 }
 
-.contrib-grid i[data-level="3"] {
+.contrib-grid i[data-level='3'] {
   background: color-mix(in oklab, var(--foreground) 74%, transparent);
 }
 
-.contrib-grid i[data-level="4"] {
+.contrib-grid i[data-level='4'] {
   background: var(--foreground);
 }
 
@@ -3965,7 +3914,6 @@ a:focus-visible .external-label .external-mark {
     animation: none;
   }
 }
-
 
 /* ── Blog index rows: print thumb · title ···· date ───────────────── */
 
@@ -4033,7 +3981,7 @@ a:focus-visible .external-label .external-mark {
 }
 
 .btn-cta::before {
-  content: "";
+  content: '';
   position: absolute;
   inset-inline: 0;
   top: 50%;
@@ -4056,7 +4004,6 @@ a:focus-visible .external-label .external-mark {
     0 0 0 2px var(--background),
     0 0 0 3px var(--focus-ring, var(--foreground));
 }
-
 
 /* ── Post document map and clipped mobile reading island ────────── */
 
@@ -4182,7 +4129,7 @@ a:focus-visible .external-label .external-mark {
   position: absolute;
   inset: 0 -0.5rem;
   border-radius: 0.375rem;
-  content: "";
+  content: '';
 }
 
 .post-minimap-utility:focus-visible::after {
@@ -4224,7 +4171,7 @@ a:focus-visible .external-label .external-mark {
   transform: translateY(12px) rotate(-2deg);
 }
 
-.post-minimap-node[data-kind="landmark"] {
+.post-minimap-node[data-kind='landmark'] {
   height: 1px;
   min-height: 0;
   align-items: center;
@@ -4249,7 +4196,7 @@ a:focus-visible .external-label .external-mark {
   position: absolute;
   inset: -0.875rem 0;
   border-radius: 0.375rem;
-  content: "";
+  content: '';
 }
 
 .post-minimap-node > a:focus-visible::after {
@@ -4288,20 +4235,20 @@ a:focus-visible .external-label .external-mark {
   -webkit-line-clamp: 2;
 }
 
-.post-minimap-node > a[data-variant="title"] {
+.post-minimap-node > a[data-variant='title'] {
   font-weight: var(--font-weight-medium);
 }
 
-.post-minimap-node > a[aria-current="location"] {
+.post-minimap-node > a[aria-current='location'] {
   color: var(--foreground);
 }
 
-.post-minimap-node > a[aria-current="location"] .post-minimap-tick {
+.post-minimap-node > a[aria-current='location'] .post-minimap-tick {
   background: var(--foreground);
   transform: scaleX(1.6);
 }
 
-.post-minimap-node > a[aria-current="location"] .post-minimap-label,
+.post-minimap-node > a[aria-current='location'] .post-minimap-label,
 .post-minimap-node > a:focus-visible .post-minimap-label {
   transform: translateX(0.5rem);
 }
@@ -4593,7 +4540,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-
 /* anchored headings clear the viewport edge fade */
 .prose h2,
 .prose h3 {
@@ -4671,15 +4617,14 @@ a:focus-visible .external-label .external-mark {
   opacity: 0;
 }
 
-.zoom-overlay[data-state="open"] .zoom-detail-item {
+.zoom-overlay[data-state='open'] .zoom-detail-item {
   opacity: 1;
   transform: none;
 }
 
-.zoom-overlay[data-state="open"] .zoom-detail-frame {
+.zoom-overlay[data-state='open'] .zoom-detail-frame {
   opacity: 1;
 }
-
 
 /* ── Footer: Swiss editorial grid ─────────────────────────────────── */
 
@@ -4709,7 +4654,7 @@ a:focus-visible .external-label .external-mark {
 }
 
 .footer-tree li::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 0;
@@ -4724,7 +4669,7 @@ a:focus-visible .external-label .external-mark {
 }
 
 .footer-tree li::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 50%;
@@ -5044,7 +4989,6 @@ a:focus-visible .external-label .external-mark {
   transform: translateX(-50%) scale(1);
 }
 
-
 /* ── Preferences panel (components/preferences.tsx) ───────────────── */
 
 .prefs-panel {
@@ -5070,7 +5014,7 @@ a:focus-visible .external-label .external-mark {
 
 /* Preserve the original compact controls, but use full foreground ink for
    the selected pill so the active value remains obvious in both themes. */
-.prefs-panel [data-tabs-indicator="selected"] {
+.prefs-panel [data-tabs-indicator='selected'] {
   display: none;
 }
 
@@ -5078,19 +5022,19 @@ a:focus-visible .external-label .external-mark {
    chrome that balloons every row, so fine pointers get compact 32px
    pills. Touch keeps the full target. */
 @media (hover: hover) and (pointer: fine) {
-  .prefs-panel [role="tab"] {
+  .prefs-panel [role='tab'] {
     height: 2rem;
     min-width: 2.5rem;
   }
 }
 
-.prefs-panel [role="tab"][aria-selected="true"] {
+.prefs-panel [role='tab'][aria-selected='true'] {
   border-radius: 999px;
   background: var(--foreground);
 }
 
-.prefs-panel [role="tab"][aria-selected="true"] svg,
-.prefs-panel [role="tab"][aria-selected="true"] [data-tab-label] {
+.prefs-panel [role='tab'][aria-selected='true'] svg,
+.prefs-panel [role='tab'][aria-selected='true'] [data-tab-label] {
   color: var(--background) !important;
 }
 
@@ -5118,7 +5062,6 @@ a:focus-visible .external-label .external-mark {
 .prefs-admin:focus-visible .prefs-row-label {
   color: var(--foreground);
 }
-
 
 /* Sign-out inside the owner dock's panel: the same quiet row, as a button. */
 .prefs-signout {
@@ -5176,11 +5119,11 @@ a:focus-visible .external-label .external-mark {
   height: 2.875rem;
   background:
     repeating-linear-gradient(
-      to bottom,
-      transparent 0 7px,
-      color-mix(in oklab, var(--paper-ink) 35%, transparent) 7px 7.5px
-    )
-    50% 60% / 70% 60% no-repeat,
+        to bottom,
+        transparent 0 7px,
+        color-mix(in oklab, var(--paper-ink) 35%, transparent) 7px 7.5px
+      )
+      50% 60% / 70% 60% no-repeat,
     var(--paper);
   box-shadow:
     0 0 0 1px rgb(0 0 0 / 0.08),
@@ -5243,7 +5186,7 @@ a:focus-visible .external-label .external-mark {
   width: 2.25rem;
   height: 1.875rem;
   background: color-mix(in oklab, var(--foreground) 8%, var(--paper));
-  content: "";
+  content: '';
 }
 
 /* standalone construction icon + the crossed project mark, and the chat
@@ -5385,7 +5328,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-
 /* The final safety net covers shared component primitives as well as page
    styles. JS-driven Motion components use MotionConfig in ThemeProvider. */
 
@@ -5420,7 +5362,7 @@ a:focus-visible .external-label .external-mark {
     color-mix(in oklab, var(--surface-1) 38%, transparent) 48%,
     transparent 78%
   );
-  content: "";
+  content: '';
 }
 
 .ama-conversation-static,
@@ -5448,15 +5390,15 @@ a:focus-visible .external-label .external-mark {
   opacity: 0;
 }
 
-.ama-introduction-stage[data-shader-ready="true"] .ama-conversation-static {
+.ama-introduction-stage[data-shader-ready='true'] .ama-conversation-static {
   opacity: 0;
 }
 
-.ama-introduction-stage[data-shader-ready="true"] .ama-conversation-shader-layer {
+.ama-introduction-stage[data-shader-ready='true'] .ama-conversation-shader-layer {
   opacity: 0.06;
 }
 
-.dark .ama-introduction-stage[data-shader-ready="true"] .ama-conversation-shader-layer {
+.dark .ama-introduction-stage[data-shader-ready='true'] .ama-conversation-shader-layer {
   opacity: 0.075;
 }
 
@@ -5485,7 +5427,7 @@ a:focus-visible .external-label .external-mark {
 .ama-waiting-dots::after {
   display: inline-block;
   min-width: 1.5em;
-  content: "…";
+  content: '…';
   text-align: left;
 }
 
@@ -5557,7 +5499,7 @@ body:has(.ama-success-stage) main {
   opacity: 0;
 }
 
-.ama-success-stage[data-shader-ready="true"] .ama-success-shader-layer {
+.ama-success-stage[data-shader-ready='true'] .ama-success-shader-layer {
   opacity: 1;
 }
 
@@ -5608,7 +5550,7 @@ body:has(.ama-success-stage) main {
   text-align: center;
 }
 
-.ama-success-stage-content [role="status"] {
+.ama-success-stage-content [role='status'] {
   align-items: center;
 }
 
@@ -5617,7 +5559,7 @@ body:has(.ama-success-stage) main {
   text-align: left;
 }
 
-.ama-success-stage-content--start [role="status"] {
+.ama-success-stage-content--start [role='status'] {
   align-items: stretch;
 }
 
@@ -5633,15 +5575,15 @@ body:has(.ama-success-stage) main {
   color: rgb(241 238 229 / 0.6);
 }
 
-.ama-success-stage .status-ladder [data-state="current"] {
+.ama-success-stage .status-ladder [data-state='current'] {
   color: rgb(241 238 229 / 0.92);
 }
 
-.ama-success-stage .status-ladder [data-state="done"] .status-ladder-cell {
+.ama-success-stage .status-ladder [data-state='done'] .status-ladder-cell {
   background: rgb(241 238 229 / 0.62);
 }
 
-.ama-success-stage .status-ladder [data-state="pending"] .status-ladder-cell {
+.ama-success-stage .status-ladder [data-state='pending'] .status-ladder-cell {
   box-shadow: inset 0 0 0 var(--border-hairline) rgb(241 238 229 / 0.45);
 }
 
@@ -5700,7 +5642,7 @@ body:has(.ama-success-stage) main {
 }
 
 .ama-cancel-dialog::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0 0 auto 0;
   height: 0.5rem;
@@ -5786,34 +5728,34 @@ body:has(.ama-success-stage) main {
 /* Hazard-hatch bands along the plate's top and bottom edges — the fine
    diagonal-stroke chip from the section-tag register, behind the check. */
 .ama-success-mark::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 3px;
   z-index: -1;
   pointer-events: none;
   background:
     repeating-linear-gradient(
-      -45deg,
-      currentColor 0,
-      currentColor var(--border-hairline),
-      transparent var(--border-hairline),
-      transparent 4px
-    )
-    top / 100% 0.4375rem no-repeat,
+        -45deg,
+        currentColor 0,
+        currentColor var(--border-hairline),
+        transparent var(--border-hairline),
+        transparent 4px
+      )
+      top / 100% 0.4375rem no-repeat,
     repeating-linear-gradient(
-      -45deg,
-      currentColor 0,
-      currentColor var(--border-hairline),
-      transparent var(--border-hairline),
-      transparent 4px
-    )
-    bottom / 100% 0.4375rem no-repeat;
+        -45deg,
+        currentColor 0,
+        currentColor var(--border-hairline),
+        transparent var(--border-hairline),
+        transparent 4px
+      )
+      bottom / 100% 0.4375rem no-repeat;
   opacity: 0.34;
 }
 
 /* Viewfinder corner brackets, 8px outside the plate (9px arms). */
 .ama-success-mark::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: -0.5rem;
   pointer-events: none;
@@ -5837,10 +5779,8 @@ body:has(.ama-success-stage) main {
 
 /* Finite 3D tumble — the rotateX flutter shows the paper's thin edge. */
 
-
 /* Lifeline (evilrabbit registry) — intro choreography and typesetting.
    Installed with the component system; owns only its own class names. */
-
 
 .lifeline-rail-intro {
   transform: scaleX(var(--lifeline-intro-progress, 0));

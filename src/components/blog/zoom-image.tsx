@@ -11,8 +11,6 @@ const MOBILE_DETAIL_SPACE_REM = 7
 const MOBILE_BREAKPOINT_REM = 40
 
 type ZoomImageRendition = { src: string; width: number }
-type CloseReason = 'escape' | 'overlay' | 'viewport'
-
 function rootFontSizePixels() {
   const rootFontSize = Number.parseFloat(window.getComputedStyle(document.documentElement).fontSize)
   return Number.isFinite(rootFontSize) ? rootFontSize : DEFAULT_ROOT_FONT_SIZE
@@ -123,12 +121,9 @@ export function ZoomImage({
     [expandedSrc, width, height, expandedContent],
   )
 
-  const close = useCallback(
-    (_reason: CloseReason) => {
-      unmount()
-    },
-    [unmount],
-  )
+  const close = useCallback(() => {
+    unmount()
+  }, [unmount])
 
   useEffect(() => {
     if (!zoom) return
@@ -140,7 +135,7 @@ export function ZoomImage({
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault()
-        close('escape')
+        close()
       }
       // image-only dialog: the overlay is the sole focusable — keep Tab inside
       if (e.key === 'Tab') e.preventDefault()
@@ -149,10 +144,10 @@ export function ZoomImage({
     // the sheet stays frozen while the photo is up.
     const onGesture = (e: Event) => {
       e.preventDefault()
-      close('viewport')
+      close()
     }
     // Scrolls that bypass wheel/touch (keyboard, scrollbar drag) still close.
-    const onViewportChange = () => close('viewport')
+    const onViewportChange = () => close()
     window.addEventListener('keydown', onKey)
     window.addEventListener('wheel', onGesture, { passive: false })
     window.addEventListener('touchmove', onGesture, { passive: false })
@@ -199,7 +194,7 @@ export function ZoomImage({
             role="dialog"
             aria-modal="true"
             aria-label={alt || 'Image'}
-            onClick={() => close('overlay')}
+            onClick={() => close()}
           >
             <div className="zoom-overlay-backdrop" />
             <Image

@@ -123,9 +123,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
 
   return (
     <>
-      <PostToc
-        nodes={rail}
-      />
+      <PostToc nodes={rail} />
       <article className="post-article mx-auto w-full max-w-173 px-4">
         <header>
           {project.cover && (

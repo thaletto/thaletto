@@ -34,7 +34,11 @@ export function CodeBlockPre(props: React.HTMLAttributes<HTMLPreElement>) {
         <span className="code-copy-icon" data-active={!copied || undefined} aria-hidden>
           <Copy size={14} />
         </span>
-        <span className="code-copy-icon code-copy-icon-overlay" data-active={copied || undefined} aria-hidden>
+        <span
+          className="code-copy-icon code-copy-icon-overlay"
+          data-active={copied || undefined}
+          aria-hidden
+        >
           <Check size={14} />
         </span>
       </button>

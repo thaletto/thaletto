@@ -53,8 +53,7 @@ const buttonVariants = cva(
 )
 
 interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   /** When true, the given single React-element child becomes the rendered element (slot-style). */
   asChild?: boolean
   loading?: boolean
@@ -161,10 +160,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const internals = (
       <>
-        <span
-          aria-hidden
-          className={cn('absolute inset-0 rounded-[inherit]', bgClass)}
-        />
+        <span aria-hidden className={cn('absolute inset-0 rounded-[inherit]', bgClass)} />
         <span className="relative inline-flex items-center justify-center gap-[inherit]">
           {isIconOnly ? (
             <span className="[&_svg]:stroke-[1.5]">{label}</span>

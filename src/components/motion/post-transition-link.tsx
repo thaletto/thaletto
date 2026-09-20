@@ -42,12 +42,7 @@ export function PostTransitionLink({
   }
 
   return (
-    <Link
-      href={href}
-      className={className}
-      data-post-transition-link
-      onClick={preparePointerMorph}
-    >
+    <Link href={href} className={className} data-post-transition-link onClick={preparePointerMorph}>
       {children}
     </Link>
   )

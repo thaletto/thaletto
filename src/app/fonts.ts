@@ -20,4 +20,8 @@ const libreBaskerville = Libre_Baskerville({
   display: 'swap',
 })
 
-export const fontVariables = [inter.variable, jetBrainsMono.variable, libreBaskerville.variable].join(' ')
+export const fontVariables = [
+  inter.variable,
+  jetBrainsMono.variable,
+  libreBaskerville.variable,
+].join(' ')

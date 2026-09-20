@@ -152,13 +152,13 @@ export function GitHubCardBody({ data }: { data: GitHubActivity }) {
     <>
       <span className="contrib-grid" aria-hidden>
         {Array.from({ length: WEEKS }, (_, w) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: deterministic week grid, static size
+          // deterministic week grid, static size
           <span key={w} className="contrib-col">
             {Array.from({ length: DAYS }, (_, d) => {
               const i = w * DAYS + d
               return (
                 <i
-                  // biome-ignore lint/suspicious/noArrayIndexKey: fixed 7-day layout, index is the render slot
+                  // fixed 7-day layout, index is the render slot
                   key={d}
                   data-level={levels[i] ?? '0'}
                   style={{ '--ci': i } as React.CSSProperties}
