@@ -1315,6 +1315,33 @@ html[data-route-motion="none"]::view-transition-new(*) {
   background: var(--border);
 }
 
+/* Landing entrance: one staged pass over the hierarchy — blocks rise in
+   transform/opacity order with a short stagger, never all at once. */
+@keyframes landing-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.land-enter {
+  animation: landing-rise 250ms var(--ease-out) backwards;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+@keyframes landing-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .land-enter {
+    animation: landing-fade 200ms ease backwards;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+}
+
 /* Softer hover/selected fills for large choice groups (the AMA booking
    form's fluid checkbox/radio rows): the merged selection slab reads heavy
    at the global --hover/--active strengths, so this dials both down. */
@@ -1574,7 +1601,11 @@ html[data-route-motion="none"]::view-transition-new(*) {
 .prose .zoom-trigger img {
   border-radius: 2px;
   background: var(--surface-1);
-  box-shadow: 0 0 0 var(--border-hairline) var(--border);
+  box-shadow: 0 0 0 1px oklch(0 0 95 / 0.08);
+}
+
+.dark .prose .zoom-trigger img {
+  box-shadow: 0 0 0 1px oklch(1 0 95 / 0.08);
 }
 
 /* captions are plate annotations: left-set mono with a FIG. number */
