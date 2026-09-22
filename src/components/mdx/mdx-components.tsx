@@ -2,7 +2,7 @@ import type { MDXComponents } from 'mdx/types'
 import { ZoomImage } from '~/components/blog/zoom-image'
 import { TechStack, TechStackItem } from '~/components/tech-stack'
 import { AwsLight } from '~/components/ui/svgs/awsLight'
-import { Bun } from '~/components/ui/svgs/bun';
+import { Bun } from '~/components/ui/svgs/bun'
 import { ClaudeAiIcon } from '~/components/ui/svgs/claudeAiIcon'
 import { Cloudflare } from '~/components/ui/svgs/cloudflare'
 import { CodexDark } from '~/components/ui/svgs/codexDark'
