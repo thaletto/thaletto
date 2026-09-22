@@ -93,9 +93,9 @@ export function TechStack({
       )}
 
       {itemCount === 0 ? (
-        <Empty className="tech-stack-empty">
+        <Empty className="min-h-60 rounded-none">
           <EmptyHeader>
-            <EmptyMedia className="tech-stack-empty-media">
+            <EmptyMedia className="mb-1 size-10 text-muted-foreground [&_svg]:size-full">
               <Grid2X2 aria-hidden="true" strokeDasharray="3 3" />
             </EmptyMedia>
             <EmptyTitle>{emptyTitle}</EmptyTitle>
