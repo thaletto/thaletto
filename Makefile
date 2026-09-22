@@ -33,11 +33,11 @@ fix:
 	$(BUN) run fix
 
 ## Check formatting + lint without writing
-formatcheck:
+format:check:
 	$(BUN) x oxfmt --check . && $(BUN) run lint
 
 ## Full TypeScript typecheck (no emit)
-typecheck:
+type:check:
 	$(BUN) exec tsc --noEmit
 
 ## Delete the .next build output
