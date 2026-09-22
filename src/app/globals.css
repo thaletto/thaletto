@@ -3730,23 +3730,6 @@ a:focus-visible .external-label .external-mark {
   display: block;
 }
 
-.tech-stack-empty {
-  min-height: 15rem;
-  border-radius: 0;
-}
-
-.tech-stack-empty-media {
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-bottom: 0.25rem;
-  color: var(--muted-foreground);
-}
-
-.tech-stack-empty-media > svg {
-  width: 100%;
-  height: 100%;
-}
-
 .prose .tech-stack-grid {
   padding-left: 0;
 }
