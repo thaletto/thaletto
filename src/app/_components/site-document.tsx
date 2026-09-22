@@ -32,7 +32,7 @@ export async function SiteDocument({
       lang="en"
       data-route-motion="none"
       suppressHydrationWarning
-      className={cn('font-sans', fontVariables, 'public-site')}
+      className={cn('font-sans', fontVariables, 'public-site bg-background')}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
