@@ -36,7 +36,13 @@ export function defaultMetadataImage(title: string): MetadataImage {
 }
 
 /** Build server-rendered metadata for an English-only route. */
-export function pageMetadata({ path, title, description, type = 'website', image }: MetadataOptions): Metadata {
+export function pageMetadata({
+  path,
+  title,
+  description,
+  type = 'website',
+  image,
+}: MetadataOptions): Metadata {
   const canonical = pageUrl(path)
   const artwork = image ?? defaultMetadataImage(title)
 
