@@ -71,8 +71,8 @@ function HomeContact({ social, github }: { social: SocialSnapshot; github: GitHu
         trigger={`@${siteSocial.x.handle}`}
         triggerClassName="home-contact-link"
       />
-      , or on <GitHubCard data={github} trigger="GitHub" triggerClassName="home-contact-link" />. Email
-      me at{' '}
+      , or on <GitHubCard data={github} trigger="GitHub" triggerClassName="home-contact-link" />.
+      Email me at{' '}
       <EmailCard
         identity={siteIdentity}
         trigger={siteIdentity.email}
