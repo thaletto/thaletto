@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "unicorn", "oxc"],
+  "jsPlugins": ["@shadcn/lint"],
   "categories": {
     "correctness": "error"
   },
@@ -9,6 +10,16 @@
       "error",
       {
         "ignoreRestSiblings": true
+      }
+    ],
+    "shadcn/no-restyle": [
+      "error",
+      {
+        "allow": ["layout"],
+        "contracts": [
+          { "pattern": "^Empty$", "allow": ["layout", "shape"] },
+          { "pattern": "^EmptyMedia$", "allow": ["layout", "color"] }
+        ]
       }
     ]
   },
