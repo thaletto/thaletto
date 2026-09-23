@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { WayfindingArrow } from '~/components/blog/post-toc'
+
 // Floating back button for mobile MDX pages (`/blog/[slug]`,
 // `/projects/[slug]`). Mobile-only: the desktop rail already carries a Home
 // utility, and the phone island hides it (`utilities-top: display none`).
@@ -22,23 +24,9 @@ export function FloatingBackButton({
   return (
     <Link href={href} className="floating-back" aria-label={label}>
       <span className="floating-back-glass" aria-hidden style={BACK_GLASS_STYLE} />
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        aria-hidden="true"
-        className="floating-back-icon"
-      >
-        <g
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M11.25 3.75 6.75 9l4.5 5.25" />
-        </g>
-      </svg>
+      <span className="floating-back-icon" aria-hidden>
+        <WayfindingArrow direction="back" />
+      </span>
     </Link>
   )
 }
