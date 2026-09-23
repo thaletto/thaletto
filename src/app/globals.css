@@ -3006,6 +3006,10 @@ a:focus-visible .external-label .external-mark {
   display: block;
 }
 
+.floating-back-icon svg {
+  display: block;
+}
+
 @media (max-width: 39.99rem) {
   .floating-back {
     display: grid;
