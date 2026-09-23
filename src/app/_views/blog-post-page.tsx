@@ -10,7 +10,6 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 
-import { BrailleDate } from '~/components/blog/braille-date'
 import { FloatingBackButton } from '~/components/blog/floating-back-button'
 import { PolaroidCover } from '~/components/blog/polaroid-cover'
 import { PostRow } from '~/components/blog/post-row'
@@ -167,7 +166,6 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
             <PolaroidCover
               slug={post.slug}
               cover={post.cover}
-              caption={post.cover.caption ?? <BrailleDate date={post.publishedAt} />}
               alt=""
               priority
               sizes="(max-width: 704px) 100vw, 656px"
