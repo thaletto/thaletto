@@ -21,43 +21,73 @@ coverHeight: 720
 
 ## Overview
 
-Ascendant is a developer ecosystem for sidereal astrology.
-An Effect-first TypeScript library computes charts, dashas, yogas, Ashtakavarga scores, and transits.
-A Python library provides the same math where Python runs.
-An agent skill turns a saved birth record into evidence-backed Vedic readings.
-A Birth Chart Calculator on the docs site runs Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga in the browser.
-Everything calculates locally, without a hosted API.
+**Ascendant** is a developer ecosystem for sidereal astrology. Every calculation runs locally, with no hosted API and no external calls.
+ 
+- **TypeScript library:** An Effect-first library that computes charts, dashas, Ashtakavarga scores, and transits.
+- **Python library:** The same math, for environments where Python runs.
+- **Agent skill:** Turns a saved birth record into a source of truth and pairs it with a deterministic KP algorithm, so the AI works from computed positions instead of guessing them.
+- **Birth Chart Calculator:** A browser-based tool on the docs site covering Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga.
 
 ## Problem
 
-AI agents hallucinate astrology values when they reason from memory. Interpretations also hide inside model prompts, where nobody can audit them. The calculations themselves are precise and demanding. The Vimshottari Dasha system requires arithmetic based on the Moon's natal nakshatra. The sixteen divisional charts transform planetary longitudes according to specific ratios. Yoga combinations number in the hundreds across canonical texts. Ashtakavarga adds a scoring matrix of 360 cells. Existing software rarely exposes these as programmatic, agent-ready tools.
+AI agents hallucinate astrology values when they reason from memory, and interpretations buried in model prompts can't be audited. Meanwhile, the underlying calculations are precise and demanding:
+
+- **Vimshottari Dasha** requires arithmetic anchored to the Moon's natal nakshatra.
+- **Divisional charts** (sixteen in all) transform planetary longitudes by specific ratios.
+- **Yogas** number in the hundreds across canonical texts.
+- **Ashtakavarga** adds a scoring matrix of 360 cells.
+
+Existing software rarely exposes any of this as programmatic, agent-ready tooling.
 
 ## Approach
 
-Ascendant provides an end-to-end workflow across four surfaces. The TypeScript library does the math with Effect services. The Python package mirrors it for Python runtimes. The skill saves birth records and answers readings with cited evidence. The calculator demonstrates the whole pipeline interactively.
+Ascendant is an end-to-end workflow across four surfaces:
+
+- The **TypeScript library** does the math with Effect services.
+- The **Python package** mirrors it for Python runtimes.
+- The **agent skill** saves birth records and answers readings with cited evidence.
+- The **calculator** demonstrates the whole pipeline interactively.
 
 ### TypeScript library
 
-The `astro-ascendant` package computes everything through composable Effect services. You provide a UTC moment, latitude, longitude, and optional birth sex. `Chart.generate` returns shared placements plus cusp-aware charts, starting with D1 and adding divisions like D9 on request. The Dasha, Ashtakavarga, and Jaimini modules reuse those placements. Ayanamsa and house system are typed parameters with immutable defaults: Krishnamurti and Placidus in the quickstart, Lahiri and Whole Sign available. Install it with `bun add astro-ascendant effect@rc`.
+The `astro-ascendant` package computes everything through composable Effect services. Provide a UTC moment, latitude, longitude, and optional birth sex, and `Chart.generate` returns shared placements plus cusp-aware charts: D1 by default, with divisions like D9 on request. The Dasha, Ashtakavarga, and Jaimini modules reuse those placements.
+
+Ayanamsa and house system are typed parameters with immutable defaults. The quickstart uses Krishnamurti and Placidus, and Lahiri and Whole Sign are also available.
+
+```sh
+bun add astro-ascendant effect@rc
+```
 
 ### Python library
 
-The `astro-ascendant` package on PyPI computes the same domains locally: divisional charts, the full Vimshottari Dasha timeline, current Dasha lookups, yoga results, and the complete Ashtakavarga result. Charts use the sidereal zodiac, with the Lahiri ayanamsa and Whole Sign houses as defaults. A frozen configuration object holds the resolved enums, timezone, coordinates, and software version for reproducibility. Install it with `pip install astro-ascendant`.
+The `astro-ascendant` package on PyPI computes the same domains locally: divisional charts, the full Vimshottari Dasha timeline, current Dasha lookups, yoga results, and the complete Ashtakavarga result. Charts use the sidereal zodiac, with Lahiri ayanamsa and Whole Sign houses as defaults.
+
+A frozen configuration object holds the resolved enums, timezone, coordinates, and software version, so results are reproducible.
+
+```sh
+pip install astro-ascendant
+```
 
 ### Agent skill
 
-The skill lives in `thaletto/ascendant-agents` and installs into Claude, Codex, Cursor, Gemini, OpenCode, and more. It takes three arguments. `init` creates or refreshes a reusable `persons/<name>/` record from exact birth data. `setup` installs calculation dependencies once per working directory. `analysis` answers a reading or timing question from the saved record, grounding claims in stored charts and method references: KP for timing and yes-no questions, Parashari for promise, quality, and synthesis. Person memory accumulates only confirmed events, so readings stay consistent across sessions.
+The skill lives in `thaletto/ascendant-agents` and installs into Claude, Codex, Cursor, Gemini, OpenCode, and more. It takes three arguments:
+
+- `init` creates or refreshes a reusable `persons/<name>/` record from exact birth data.
+- `setup` installs calculation dependencies once per working directory.
+- `analysis` answers a reading or timing question from the saved record, grounding claims in stored charts and method references. KP handles timing and yes/no questions; Parashari handles promise, quality, and synthesis.
+
+Person memory accumulates only confirmed events, so readings stay consistent across sessions.
 
 ### Birth Chart Calculator
 
-The docs site runs the TypeScript library end to end: Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga from a birth moment and location, with a learning guide covering zodiacs, houses, dashas, and the Parashari, Jaimini, and Krishnamurti traditions.
+The docs site runs the TypeScript library end to end: Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga from a birth moment and location. A learning guide covers zodiacs, houses, dashas, and the Parashari, Jaimini, and Krishnamurti traditions.
 
 ## How It Works
 
 ```typescript
 import { BunRuntime, BunServices } from '@effect/platform-bun'
 import { AstroParams, Chart, Swisseph } from 'astro-ascendant'
-import { Effect } from 'effect'
+import { DateTime, Effect, Layer } from 'effect'
 
 const runtimeLayer = Layer.mergeAll(
   BunServices.layer,
@@ -78,7 +108,15 @@ const program = Chart.generate(input, [9]).pipe(Effect.provide(runtimeLayer))
 BunRuntime.runMain(program)
 ```
 
-The program returns shared placements plus D1 and D9 charts. For agent-driven readings, install the skill with `npx skills add thaletto/ascendant-agents`, save a record with `/ascendant init`, and ask with `/ascendant analysis`.
+The program returns shared placements plus the D1 and D9 charts.
+
+For agent-driven readings, install the skill, save a record, and ask a question:
+
+```sh
+npx skills add thaletto/ascendant-agents
+/ascendant init
+/ascendant analysis
+```
 
 ## Tech Stack
 
