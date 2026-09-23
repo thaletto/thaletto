@@ -2966,6 +2966,74 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
+/* ── Floating back button: mobile MDX pages ──────────────────────── */
+/* Mobile-only escape hatch — the desktop rail already carries Home, and
+   the phone island hides its utilities-top row. Frosted-circle treatment
+   mirrors the removed pill dock: 68% background with the backdrop-filter
+   set inline from the component (LightningCSS strips it here). Bottom-left
+   keeps it clear of the top-center reading island. */
+
+.floating-back {
+  position: fixed;
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  left: 1rem;
+  z-index: var(--z-nav);
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--background) 68%, transparent);
+  box-shadow:
+    0 0 0 1px var(--border),
+    var(--shadow-medium);
+  color: var(--muted-foreground);
+  touch-action: manipulation;
+}
+
+.floating-back-glass {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    inset 0 -1px 0 rgb(255 255 255 / 0.06);
+}
+
+.floating-back-icon {
+  position: relative;
+  display: block;
+}
+
+@media (max-width: 39.99rem) {
+  .floating-back {
+    display: grid;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .floating-back:hover {
+    color: var(--foreground);
+  }
+}
+
+.floating-back:active {
+  transform: scale(0.97);
+}
+
+.floating-back:focus-visible {
+  outline: 1px solid var(--focus-ring);
+  outline-offset: 2px;
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-back {
+    transition: none;
+  }
+}
+
 /* anchored headings clear the viewport edge fade */
 .prose h2,
 .prose h3 {

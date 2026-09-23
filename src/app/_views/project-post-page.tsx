@@ -10,6 +10,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import { PolaroidCover } from '~/components/blog/polaroid-cover'
+import { FloatingBackButton } from '~/components/blog/floating-back-button'
 import { PostToc } from '~/components/blog/post-toc'
 import { projectViewTransitionName } from '~/lib/motion/view-transition-name'
 import { mdxComponents } from '~/components/mdx/mdx-components'
@@ -132,6 +133,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
   return (
     <>
       <PostToc nodes={rail} />
+      <FloatingBackButton />
       <article className="post-article mx-auto w-full max-w-173 px-4">
         <header>
           {project.cover && (

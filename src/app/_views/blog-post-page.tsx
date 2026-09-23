@@ -11,6 +11,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 
 import { BrailleDate } from '~/components/blog/braille-date'
+import { FloatingBackButton } from '~/components/blog/floating-back-button'
 import { PolaroidCover } from '~/components/blog/polaroid-cover'
 import { PostRow } from '~/components/blog/post-row'
 import { PostToc } from '~/components/blog/post-toc'
@@ -159,6 +160,7 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
   return (
     <>
       <PostToc nodes={rail} />
+      <FloatingBackButton />
       <article className="post-article mx-auto w-full max-w-173 px-4">
         <header>
           {post.cover && (
