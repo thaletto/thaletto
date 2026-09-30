@@ -2193,10 +2193,12 @@ a:focus-visible .external-label .external-mark {
 .tech-stack-label {
   max-width: 100%;
   color: var(--foreground);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: var(--font-weight-medium);
   line-height: 1.25;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tech-stack-filler {
@@ -2218,7 +2220,7 @@ a:focus-visible .external-label .external-mark {
 
 @media (min-width: 36rem) {
   .tech-stack-label {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
   }
 }
 
