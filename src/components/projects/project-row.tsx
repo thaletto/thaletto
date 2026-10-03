@@ -32,7 +32,7 @@ export function ProjectRow({
       <span aria-hidden className="hidden shrink-0 text-sm text-muted-foreground sm:inline">
         /
       </span>
-      <span className="min-w-0 basis-full truncate text-sm text-muted-foreground sm:basis-auto sm:flex-1">
+      <span className="min-w-0 basis-full truncate text-sm text-muted-foreground transition-colors group-hover:text-foreground group-focus-visible:text-foreground sm:basis-auto sm:flex-1">
         {project.description}
       </span>
     </PostTransitionLink>
