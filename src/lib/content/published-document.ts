@@ -9,6 +9,7 @@ export const publishedFrontmatterSchema = z.object({
   coverWidth: z.number().int().positive().optional(),
   coverHeight: z.number().int().positive().optional(),
   coverCaption: z.string().optional(),
+  coverVideo: z.string().startsWith('./').optional(),
 })
 
 export interface PublishedCover {
@@ -16,6 +17,7 @@ export interface PublishedCover {
   width: number
   height: number
   caption?: string
+  videoSrc?: string
 }
 
 export interface PublishedDocument<T> {
@@ -75,6 +77,9 @@ export function readPublishedDocument<T extends z.ZodType>({
         width: frontmatter.coverWidth as number,
         height: frontmatter.coverHeight as number,
         ...(frontmatter.coverCaption ? { caption: frontmatter.coverCaption } : {}),
+        ...(frontmatter.coverVideo
+          ? { videoSrc: `${coverRoot}/${slug}/${frontmatter.coverVideo.slice(2)}` }
+          : {}),
       }
     }
 

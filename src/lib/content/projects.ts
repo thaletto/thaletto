@@ -42,6 +42,8 @@ export interface ProjectCover {
   src: string
   width: number
   height: number
+  caption?: string
+  videoSrc?: string
 }
 
 export interface Project {
@@ -86,7 +88,13 @@ export function getProject(slug: string): Project {
     coverRoot: '/content/projects',
   })
   const cover: ProjectCover | undefined = publishedCover
-    ? { src: publishedCover.src, width: publishedCover.width, height: publishedCover.height }
+    ? {
+        src: publishedCover.src,
+        width: publishedCover.width,
+        height: publishedCover.height,
+        ...(publishedCover.caption ? { caption: publishedCover.caption } : {}),
+        ...(publishedCover.videoSrc ? { videoSrc: publishedCover.videoSrc } : {}),
+      }
     : undefined
 
   const project: Project = {
