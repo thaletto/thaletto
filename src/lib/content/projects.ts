@@ -31,6 +31,7 @@ const projectFrontmatterSchema = publishedFrontmatterSchema.extend({
   endDate: z.string().optional(),
   tags: z.array(z.string()).default([]),
   links: z.array(projectLinkSchema).default([]),
+  hideCover: z.boolean().optional(),
 })
 
 export interface ProjectLink {
@@ -58,6 +59,7 @@ export interface Project {
   tags: string[]
   links: ProjectLink[]
   cover?: ProjectCover
+  hideCover: boolean
   body: string
   bodyUnits: number
   readingMinutes: number
@@ -109,6 +111,7 @@ export function getProject(slug: string): Project {
     tags: fm.tags,
     links: fm.links,
     cover,
+    hideCover: fm.hideCover ?? false,
     body,
     bodyUnits: stats.units,
     readingMinutes: stats.minutes,

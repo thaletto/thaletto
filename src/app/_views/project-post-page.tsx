@@ -136,7 +136,7 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
       <FloatingBackButton />
       <article className="post-article mx-auto w-full max-w-173 px-4">
         <header>
-          {project.cover && (
+          {project.cover && !project.hideCover && (
             <PolaroidCover
               slug={project.slug}
               cover={project.cover}
