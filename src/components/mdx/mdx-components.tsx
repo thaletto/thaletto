@@ -83,6 +83,47 @@ function PostImage({
   )
 }
 
+// Post videos arrive as ./file.mp4#WxH; silent autoplay inline, no chrome
+// by default (muted, no controls, no loop).
+function PostVideo({
+  slug,
+  src,
+  title,
+  kind,
+  controls = false,
+  loop = true,
+}: {
+  slug: string
+  src: string
+  title?: string
+  kind: ContentKind
+  controls?: boolean
+  loop?: boolean
+}) {
+  const match = src.match(/^\.\/([A-Za-z0-9_.-]+)#(\d+)x(\d+)$/)
+  if (!match) throw new Error(`post video needs ./file#WxH format, got: ${src}`)
+  const [, file, width, height] = match
+  const poster = `/content/${kind}/${slug}/${file.replace(/\.[a-z0-9]+$/i, '-poster.jpg')}`
+  return (
+    <span className="post-figure block">
+      <video
+        autoPlay
+        className="h-auto w-full rounded-xl"
+        controls={controls}
+        height={+height}
+        loop={loop}
+        muted
+        playsInline
+        poster={poster}
+        preload="metadata"
+        src={`/content/${kind}/${slug}/${file}`}
+        width={+width}
+      />
+      {title ? <span className="post-figcaption block">{title}</span> : null}
+    </span>
+  )
+}
+
 type ContentKind = 'blog' | 'projects'
 
 export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComponents {
@@ -90,6 +131,16 @@ export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComp
     pre: (props) => <CodeBlockPre {...props} />,
     MermaidDiagram: (props: { code: string; caption?: string }) => <MermaidDiagram {...props} />,
     PhotoStack,
+    Video: (props: { src: string; title?: string; controls?: boolean; loop?: boolean }) => (
+      <PostVideo
+        slug={slug}
+        kind={kind}
+        src={props.src}
+        title={props.title}
+        controls={props.controls}
+        loop={props.loop}
+      />
+    ),
     Bun,
     PhotoStackCaption,
     PhotoStackFrames,
