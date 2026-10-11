@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types'
+import { PostVideo } from './post-video'
 import { ZoomImage } from '~/components/blog/zoom-image'
 import { TechStack, TechStackItem } from '~/components/tech-stack'
 import { AwsLight } from '~/components/ui/svgs/awsLight'
@@ -79,47 +80,6 @@ function PostImage({
     <span className="post-figure block">
       {img}
       <span className="post-figcaption block">{title}</span>
-    </span>
-  )
-}
-
-// Post videos arrive as ./file.mp4#WxH; silent autoplay inline, no chrome
-// by default (muted, no controls, no loop).
-function PostVideo({
-  slug,
-  src,
-  title,
-  kind,
-  controls = false,
-  loop = true,
-}: {
-  slug: string
-  src: string
-  title?: string
-  kind: ContentKind
-  controls?: boolean
-  loop?: boolean
-}) {
-  const match = src.match(/^\.\/([A-Za-z0-9_.-]+)#(\d+)x(\d+)$/)
-  if (!match) throw new Error(`post video needs ./file#WxH format, got: ${src}`)
-  const [, file, width, height] = match
-  const poster = `/content/${kind}/${slug}/${file.replace(/\.[a-z0-9]+$/i, '-poster.jpg')}`
-  return (
-    <span className="post-figure block">
-      <video
-        autoPlay
-        className="h-auto w-full rounded-xl"
-        controls={controls}
-        height={+height}
-        loop={loop}
-        muted
-        playsInline
-        poster={poster}
-        preload="metadata"
-        src={`/content/${kind}/${slug}/${file}`}
-        width={+width}
-      />
-      {title ? <span className="post-figcaption block">{title}</span> : null}
     </span>
   )
 }
