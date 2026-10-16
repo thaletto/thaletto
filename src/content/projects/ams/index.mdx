@@ -18,45 +18,45 @@ hideCover: true
 
 ## Overview
 
-The Agentic AMS Framework is a multi-agent system. It detects production anomalies. It retrieves relevant remediation procedures from an organizational knowledge base. It executes a remediation plan through real infrastructure tooling. It validates the result. A human approval gate is between planning and execution. No irreversible action happens without operator consent.
+The Agentic AMS Framework is a multi-agent system for production incidents. It detects anomalies, retrieves remediation procedures from the knowledge base, and runs remediation through infrastructure tools. It validates each result, with a human approval gate between planning and execution. No irreversible action runs without operator approval.
 
 ## Problem
 
-Grafana alerts wake on-call engineers at 3 AM. The engineers then spend significant time tracing causation through logs across distributed services. The alert indicates that something is wrong. It does not explain what is wrong, why it is wrong, or how to fix it. The system automates the detection-to-resolution pipeline. It keeps a human in the loop for the decisions that matter.
+Grafana alerts wake on-call engineers at 3 AM, forcing them to trace causation through logs across distributed services. The alert shows that something is wrong, but not what is wrong, why it is wrong, or how to fix it. The system automates the detection-to-resolution pipeline, keeping a human in the loop for decisions that matter.
 
 ## Approach
 
-The system is organized into four layers. Each layer has a distinct responsibility.
+The system has four layers, each with a distinct responsibility.
 
 ### Observability
 
-Application logs flow into Grafana Loki. Grafana Loki triggers keyword-based alerting rules. An Observability Agent connects to the dashboard over a persistent WebSocket. It reads alerts as they arrive. It checks ServiceNow for existing tickets. If no ticket exists, it creates one. If a ticket already exists, it skips duplicate creation. This deduplication logic prevents downstream agents from processing the same alert repeatedly during flapping events.
+Application logs flow into Grafana Loki, triggering keyword-based alert rules. An Observability Agent connects to the dashboard over a persistent WebSocket, reading alerts as they arrive. It checks ServiceNow for existing tickets, creating one only when no ticket exists. This check stops downstream agents from processing the same alert repeatedly during flapping events.
 
 ### Knowledge retrieval
 
-An agent that detects problems but cannot fix them is only a notifier. The RAG pipeline uses Qdrant. Qdrant is a vector database. It holds the organization's Standard Operating Procedures sourced from Confluence via batch ingestion. When the Agent Orchestrator receives an incident, it fetches the most semantically relevant SOP. The agents then reason with institutional knowledge rather than from scratch.
+An agent that detects problems but cannot fix them is only a notifier. The RAG pipeline uses Qdrant, a vector database holding Standard Operating Procedures from Confluence. Batch ingestion loads the procedures in advance. When the Agent Orchestrator receives an incident, it fetches the most relevant SOP, letting agents reason with institutional knowledge.
 
 ### Planning and execution
 
 Three agents handle remediation:
 
-- The **Planning Agent** receives the incident description and the SOP that was retrieved. It produces an ordered remediation plan. It does not execute anything.
-- A **Human-in-the-Loop checkpoint** then presents the proposed plan to a human operator. The operator approves or rejects the plan. This checkpoint is not ceremonial. It is the mechanism that earns the system the right to be trusted with real infrastructure.
-- Upon approval, the **Executor Agent** works through the plan step by step. It calls tools. The tools are HttpRequest for API interactions, JenkinsRollback for deployment reversions, and ReadPodStatus for Kubernetes pod queries. After each step, the **Validator Agent** independently verifies whether the step had its intended effect. If validation fails, the Executor retries. If it succeeds, the pipeline advances.
+- The **Planning Agent** receives the incident description and the retrieved SOP, producing an ordered remediation plan without running any action.
+- A **Human-in-the-Loop checkpoint** then shows the proposed plan to a human operator for approval or rejection. This checkpoint is not ceremonial, giving the system approval to use real infrastructure.
+- Upon approval, the **Executor Agent** runs the plan step by step, calling HttpRequest for APIs, JenkinsRollback for reversions, and ReadPodStatus for pod queries. After each step, the **Validator Agent** verifies the effect, retrying on failure and continuing on success.
 
 ### Resolution
 
-When all steps pass validation, the ServiceNow ticket is closed. The system then notifies the on-call engineer.
+When all steps pass validation, the system closes the ServiceNow ticket and notifies the on-call engineer.
 
 ## How It Works
 
 1. Grafana alerts trigger on anomalous log patterns.
-2. The Observability Agent reads the alert. It checks ServiceNow for an existing ticket. If needed, it creates one.
+2. The Observability Agent reads the alert and checks ServiceNow, creating a ticket only when needed.
 3. The Agent Orchestrator fetches the most relevant SOP from Qdrant.
-4. The Planning Agent produces an ordered remediation plan based on the incident and the SOP.
-5. A human operator reviews and approves (or rejects) the plan.
-6. The Executor Agent runs each plan step using infrastructure tools.
-7. The Validator Agent verifies each step's outcome.
+4. The Planning Agent produces an ordered remediation plan from the incident and the SOP.
+5. A human operator reviews the plan and approves or rejects it.
+6. The Executor Agent runs each plan step with infrastructure tools.
+7. The Validator Agent verifies each step outcome, triggering retries on failure.
 8. On full resolution, the system closes the ServiceNow ticket.
 
 ## Tech Stack
