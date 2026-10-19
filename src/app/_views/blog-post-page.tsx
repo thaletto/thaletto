@@ -179,7 +179,19 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
                   } as React.CSSProperties
                 }
               >
-                {post.title}
+                {/* the typeset form: *emphasis* in frontmatter sets a word in
+                    the site serif against the sans heading, no italic */}
+                {post.titleSegments
+                  ? post.titleSegments.map((segment) =>
+                      segment.emphasis ? (
+                        <span className="font-serif" key={segment.text}>
+                          {segment.text}
+                        </span>
+                      ) : (
+                        segment.text
+                      ),
+                    )
+                  : post.title}
               </h1>
               <PixelCluster variant={clusterVariant} className="mt-1.5 shrink-0" />
             </div>

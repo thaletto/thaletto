@@ -27,9 +27,34 @@ const frontmatterSchema = publishedFrontmatterSchema.extend({
 
 export type PostCover = PublishedCover
 
+// A title may italicize a word with *emphasis* markers. `title` carries the
+// plain, spoken form — for the <title> tag, lists, and link labels — while
+// `titleSegments` carries the typeset form for the places that render the
+// full heading.
+export interface TitleSegment {
+  text: string
+  emphasis: boolean
+}
+
+export function parseEmphaticTitle(raw: string): {
+  title: string
+  titleSegments: TitleSegment[] | null
+} {
+  if (!raw.includes('*')) return { title: raw, titleSegments: null }
+  const parts = raw.split(/(\*[^*]+\*)/g).filter(Boolean)
+  const titleSegments = parts.map((part) => {
+    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) {
+      return { text: part.slice(1, -1), emphasis: true }
+    }
+    return { text: part, emphasis: false }
+  })
+  return { title: titleSegments.map((segment) => segment.text).join(''), titleSegments }
+}
+
 export interface Post {
   slug: string
   title: string
+  titleSegments?: TitleSegment[] | null
   description?: string
   publishedAt: Date
   cover?: PostCover
@@ -140,7 +165,7 @@ export function getPost(slug: string): Post {
 
   return {
     slug,
-    title: fm.title,
+    ...parseEmphaticTitle(fm.title),
     description: fm.description,
     publishedAt: fm.publishedAt,
     cover,
