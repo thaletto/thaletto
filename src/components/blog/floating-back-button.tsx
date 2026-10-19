@@ -6,9 +6,9 @@ import { WayfindingArrow } from '~/components/blog/post-toc'
 // `/projects/[slug]`). Mobile-only: the desktop rail already carries a Home
 // utility, and the phone island hides it (`utilities-top: display none`).
 //
-// Styling follows the removed pill dock (`23a5e3c^:dock.tsx`): a frosted
-// circular button over a 68% background. The backdrop-filter stays inline —
-// LightningCSS strips raw backdrop-filter declarations from stylesheets.
+// A frosted circular button over a 68% background. The backdrop-filter
+// stays inline — LightningCSS strips raw backdrop-filter declarations
+// from stylesheets.
 const BACK_GLASS_STYLE = {
   backdropFilter: 'blur(12px) saturate(1.25)',
   WebkitBackdropFilter: 'blur(12px) saturate(1.25)',
