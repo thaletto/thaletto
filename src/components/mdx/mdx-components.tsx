@@ -18,8 +18,11 @@ import { Kotlin } from '~/components/ui/svgs/kotlin'
 import { Netlify } from '~/components/ui/svgs/netlify'
 import { Npm } from '~/components/ui/svgs/npm'
 import { NextjsIconDark } from '~/components/ui/svgs/nextjsIconDark'
+import { Opencode } from '~/components/ui/svgs/opencode'
+import { OpencodeDark } from '~/components/ui/svgs/opencodeDark'
 import { Python } from '~/components/ui/svgs/python'
 import { QdrantIconLight } from '~/components/ui/svgs/qdrantIconLight'
+import { QdrantIconDark } from '~/components/ui/svgs/qdrantIconDark'
 import { ReactLight } from '~/components/ui/svgs/reactLight'
 import { ShadcnUi } from '~/components/ui/svgs/shadcnUi'
 import { Sqlite } from '~/components/ui/svgs/sqlite'
@@ -121,8 +124,11 @@ export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComp
     Netlify,
     Npm,
     NextjsIconDark,
+    Opencode,
+    OpencodeDark,
     Python,
     QdrantIconLight,
+    QdrantIconDark,
     ReactLight,
     ShadcnUi,
     Sqlite,
