@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react'
 
 const Opencode = (props: SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 512 512" fill="none">
@@ -11,6 +11,6 @@ const Opencode = (props: SVGProps<SVGSVGElement>) => (
       fill="#17181C"
     />
   </svg>
-);
+)
 
-export { Opencode };
+export { Opencode }

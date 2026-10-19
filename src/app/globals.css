@@ -1668,7 +1668,6 @@ a:focus-visible .external-label .external-mark {
 }
 
 @media (hover: hover) and (pointer: fine) {
-
   .home-intro-trigger:hover .home-detail-unit {
     animation: home-detail-hop 1s var(--ease-spring);
   }
@@ -1727,7 +1726,7 @@ a:focus-visible .external-label .external-mark {
   opacity: 1;
   transform: scale(1);
 }
-.link-card img[data-failed]{
+.link-card img[data-failed] {
   visibility: hidden;
 }
 
