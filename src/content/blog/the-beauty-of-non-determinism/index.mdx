@@ -1,0 +1,45 @@
+---
+title: 'The Beauty of *Non-Determinism*'
+description: 'A mind experiment game.'
+publishedAt: '2026-10-20'
+cover: ./collatz-conjecture.jpg
+coverWidth: 1280
+coverHeight: 720
+coverCaption: 'Collatz Conjecture, the visual representation of non-determinism'
+---
+
+## Let’s play a game
+
+Before anything is explained, you run one small experiment on your own mind. It takes eight seconds, and the only instrument is your attention.
+
+<ThoughtExperiment>
+
+## The instinct to control
+
+I asked you not to think about a horse, and you probably thought of one anyway. Maybe it was galloping through a field, or standing still, or grazing. The instruction was the same for everyone, but what you imagined was entirely your own. Your mind explored possibilities without needing a predefined path.
+
+As developers, we train ourselves to think the other way: define the steps, anticipate the outcomes, and remove the uncertainty before it arrives. That discipline is what makes traditional software dependable. Applied to large language models (LLMs), it hardens into control: we want the model to walk our path, so we trim away everything it might notice along the way.
+
+It’s like putting <Term definition="Blinkers, also known as blinders, blinds and winkers, are a part of horse harness and tack which limits a horse’s field of vision: blocking vision to the sides, the rear, or both.">blinkers</Term> on a horse so it can only see the path ahead. The question is whether we need to control the path at all, or whether we only need to define how far the horse is allowed to wander.
+
+## Determinism
+
+Traditional software is built on the expectation that the same input, under the same conditions, produces the same output. We rely on that predictability to debug failures, to test behaviour, and to build systems we can trust.
+
+When a function returns an unexpected result, we want to know why. When a workflow runs, we want to know what happens next. Determinism gives us that confidence.
+
+Over the years, uncertainty becomes something to eliminate: we define rules, validate inputs, handle edge cases, and make decisions explicit. These practices are essential when software handles money, modifies data, or triggers actions in the real world.
+
+With LLMs, the outputs we most want to trust are the ones we cannot predict. Determinism still applies, but one level higher: not to the path the model takes, but to the ground it may cover.
+
+## Why the fence matters
+
+LLMs are valuable because they explore possibilities we never programmed. Given the same prompt twice, they may take different paths and arrive at different answers, and more than one can be right. That variability is not a flaw to squeeze out; it is the whole point. A model that returned only the answers we had already imagined would be traditional software with extra steps.
+
+Instead of forcing the model down one path, let it explore and hold the boundaries steady: what it may touch, what it may not, and what to do when it reaches the edge. Like a horse in a fenced field, the model is free to move in any direction and will never wander past the fence. The fence does not shrink the field. The fence is what makes the field safe to run in.
+
+A minute ago, you proved this on your own mind: given open ground, it fills the gap with a horse. A model does the same. Two runs across the same field will never look identical, and that is the point: the fence makes the wandering safe, and the wandering is where the answers come from. That is the beauty of non-determinism.
+
+Now the rule is lifted for you alone: think about horses as freely as you like. Go on, [check this out](https://tenor.com/search/horse-gifs).
+
+</ThoughtExperiment>
