@@ -1289,6 +1289,272 @@ html[data-route-motion='none']::view-transition-new(*) {
   }
 }
 
+/* ── Thought experiment: the eight-second mind trap (MDX island) ───── */
+
+/* the instruction is the interface — set to the section-heading voice */
+.thought-prompt {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--gray-12, var(--foreground));
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  transition: opacity 480ms var(--ease-swift);
+}
+
+/* while the confession is on the table, the instruction steps back */
+.thought-experiment[data-phase='complete'] .thought-prompt {
+  opacity: 0.45;
+}
+
+/* the live datum sits inline in the sentence: mono, tabular, one decimal */
+.thought-readout {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  letter-spacing: -0.02em;
+  color: var(--gray-9, var(--muted-foreground));
+  transition: color 320ms var(--ease-swift);
+}
+
+/* the last second sharpens its ink — pressure, rendered as emphasis */
+.thought-experiment[data-final] .thought-readout {
+  color: var(--gray-12, var(--foreground));
+}
+
+/* settled at zero, the datum dims with its sentence */
+.thought-experiment[data-phase='complete'] .thought-readout {
+  color: var(--gray-8, var(--muted-foreground));
+}
+
+/* the forbidden gallery: each crossing prints its association as a quiet
+   mono remark under the sentence, arriving with a small settle */
+/* the forbidden gallery: each association prints as a quiet sans remark
+   under the sentence, arriving with a small settle */
+.thought-association {
+  margin: 0;
+  margin-block-start: 1rem;
+  color: var(--gray-9, var(--muted-foreground));
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  animation: thought-association-arrive 260ms var(--ease-swift) both;
+}
+
+@keyframes thought-association-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* progress is a single hairline under the sentence, draining toward zero */
+.thought-rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-block-start: 1.5rem;
+  background: color-mix(in oklab, var(--foreground) 18%, transparent);
+  transform-origin: left center;
+}
+
+.thought-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.875rem;
+  margin-block-start: 1.75rem;
+}
+
+.thought-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.75rem;
+  padding-inline: 1.125rem;
+  border: var(--border-hairline) solid color-mix(in oklab, var(--foreground) 16%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gray-11, var(--foreground));
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  transition:
+    background-color 200ms var(--ease-swift),
+    border-color 200ms var(--ease-swift),
+    transform 200ms var(--ease-swift);
+}
+
+.thought-button:hover {
+  background: var(--hover, transparent);
+  border-color: color-mix(in oklab, var(--foreground) 30%, transparent);
+}
+
+.thought-button:active {
+  transform: scale(0.97);
+}
+
+.thought-button:focus-visible {
+  outline: 1px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.thought-button-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* the reveal waits collapsed under the prompt, then unfolds as the
+   instruction dims — the confession reads as its consequence */
+.thought-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 560ms var(--ease-swift),
+    opacity 480ms var(--ease-swift);
+}
+
+.thought-experiment[data-phase='complete'] .thought-reveal {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.thought-reveal-clip {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* "Now be honest." steps back a grade; the question keeps full ink */
+.thought-reveal-kicker {
+  color: var(--gray-8, var(--muted-foreground));
+}
+
+.thought-reveal-line {
+  margin: 0;
+  max-width: 34ch;
+  padding-block-start: 1.75rem;
+  color: var(--gray-12, var(--foreground));
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* essay content nested inside the component only exists once the run is
+   over — collapsed in the experiment's shadow, unfolding a beat after the
+   confession */
+.thought-continuation {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 560ms var(--ease-swift),
+    opacity 480ms var(--ease-swift);
+}
+
+.thought-continuation[data-shown] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.thought-continuation-clip {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* the continuation arrives one beat at a time — the first handful of
+   paragraphs settle in sequence while the page unfolds; the deeper ones
+   sit below the fold where entrance motion can't be seen anyway */
+.thought-continuation-clip > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 420ms var(--ease-swift),
+    transform 420ms var(--ease-swift);
+  /* exits don't wait their turn — the collapse needs a clean sweep */
+  transition-delay: 0ms;
+}
+
+.thought-continuation-clip > :nth-child(1) {
+  --stagger-i: 0;
+}
+.thought-continuation-clip > :nth-child(2) {
+  --stagger-i: 1;
+}
+.thought-continuation-clip > :nth-child(3) {
+  --stagger-i: 2;
+}
+.thought-continuation-clip > :nth-child(4) {
+  --stagger-i: 3;
+}
+.thought-continuation-clip > :nth-child(5) {
+  --stagger-i: 4;
+}
+.thought-continuation-clip > :nth-child(6) {
+  --stagger-i: 5;
+}
+.thought-continuation-clip > :nth-child(n + 7) {
+  --stagger-i: 6;
+}
+
+.thought-continuation[data-shown] .thought-continuation-clip > * {
+  opacity: 1;
+  transform: none;
+  /* staggered 70ms apart, starting while the unfold is still settling */
+  transition-delay: calc(120ms + var(--stagger-i) * 70ms);
+}
+
+/* prose rhythm doesn't reach inside the island — restore it by hand */
+.thought-continuation-clip > :first-child {
+  margin-block: 0;
+  padding-block-start: 2.5rem;
+}
+
+.thought-continuation-clip > * + * {
+  margin-block-start: 1.25em;
+}
+
+.thought-continuation-clip > :last-child {
+  margin-block-end: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thought-prompt,
+  .thought-readout,
+  .thought-reveal,
+  .thought-continuation,
+  .thought-button {
+    transition: none;
+  }
+
+  .thought-button:active {
+    transform: none;
+  }
+
+  .thought-association {
+    animation: none;
+  }
+
+  .thought-continuation-clip > * {
+    transform: none;
+    transition: opacity 240ms var(--ease-swift);
+  }
+
+  .thought-continuation[data-shown] .thought-continuation-clip > * {
+    transition-delay: 60ms;
+  }
+}
+
 .prose code:not(pre code) {
   background: var(--muted);
   border-radius: 2px;
@@ -1738,6 +2004,57 @@ a:focus-visible .external-label .external-mark {
 .link-card[data-ending-style] {
   opacity: 0;
   transform: scale(0.97);
+}
+
+/* ── Term gloss (components/mdx/term-popover.tsx) ─────────────────── */
+
+/* the gloss trigger: a dotted word in prose — the underline is the only
+   signal mark; hover deepens ink, which is a color change and safe
+   everywhere. Focus rides the ring the component owns. */
+.prose [data-slot='hover-card-trigger'] {
+  cursor: help;
+  transition: color 160ms var(--ease-swift);
+  text-decoration: underline dotted var(--gray-7, var(--border)) 1px;
+  text-underline-offset: 3px;
+}
+
+.prose [data-slot='hover-card-trigger']:hover {
+  text-decoration-color: var(--gray-11, var(--foreground));
+}
+
+/* the gloss card: shadcn hover-card surface, retuned to the site's print
+   register — press radius, tight padding — and the site's own transitions
+   for arrival; base classes carry the surface colors. Keyed by data-slot
+   because the card mounts in a portal, outside any prose scope. */
+[data-slot='hover-card-content'] {
+  padding: 0.5625rem 0.75rem;
+  border-radius: 2px;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 160ms var(--ease-swift),
+    transform 160ms var(--ease-swift);
+}
+
+[data-slot='hover-card-content'][data-starting-style] {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+[data-slot='hover-card-content'][data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot='hover-card-content'] {
+    transition: opacity 120ms var(--ease-swift);
+  }
+
+  [data-slot='hover-card-content'][data-starting-style],
+  [data-slot='hover-card-content'][data-ending-style] {
+    transform: none;
+  }
 }
 
 .link-card.preview-card-instant,

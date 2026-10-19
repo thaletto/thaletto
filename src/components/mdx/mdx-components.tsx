@@ -38,6 +38,8 @@ import { tiltFromSlug } from '~/lib/motion/polaroid'
 import { CodeBlockPre } from './code-block'
 import { MermaidDiagram } from './mermaid-diagram'
 import { PhotoStack, PhotoStackCaption, PhotoStackFrames } from './photo-stack'
+import { Term } from './term-popover'
+import { ThoughtExperiment } from './thought-experiment'
 
 // Post images arrive as ./file.png#WxH (dimensions encoded by the content
 // pipeline); rewrite to the content route and unpack the dimensions.
@@ -94,6 +96,8 @@ export function mdxComponents(slug: string, kind: ContentKind = 'blog'): MDXComp
     pre: (props) => <CodeBlockPre {...props} />,
     MermaidDiagram: (props: { code: string; caption?: string }) => <MermaidDiagram {...props} />,
     PhotoStack,
+    Term,
+    ThoughtExperiment,
     Video: (props: { src: string; title?: string; controls?: boolean; loop?: boolean }) => (
       <PostVideo
         slug={slug}
