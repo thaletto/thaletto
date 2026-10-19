@@ -22,13 +22,11 @@ Most vector database tools work at a low level, combining SDKs, handwritten sche
 
 ## Approach
 
-Cortex adds structure and safety to vector database operations, using three design decisions.
+Cortex adds structure and safety to vector database operations, using three design decisions:
 
-**Built natively for Effect.** Cortex is not an adapter. It uses Effect primitives directly, so vector operations become Effect programs. Adapters become layers and collections become services. Effect provides typed failures, dependency injection, and structured concurrency as the foundation.
-
-**Schema-driven infrastructure.** Collections have structure and Cortex validates vectors, so operations combine cleanly. Cortex treats vector databases as structured infrastructure, not as loosely typed storage. The compiler checks assumptions before runtime, removing a class of bugs in RAG pipelines.
-
-**Adapters instead of lock-in.** The vector database ecosystem changes often. Cortex uses adapters, keeping application logic independent from storage code. The application describes what it needs from vector infrastructure, not how a vendor implements it.
+- **Built natively for Effect**: Cortex is not an adapter. It uses Effect primitives directly, so vector operations become Effect programs. Adapters become layers, and collections become services. Effect provides typed failures, dependency injection, and structured concurrency as the foundation.
+- **Schema-driven infrastructure**: Collections have structure, and Cortex validates vectors, so operations combine cleanly. Cortex treats vector databases as structured infrastructure, not as loosely typed storage. The compiler checks assumptions before runtime, removing a class of bugs in RAG pipelines.
+- **Adapters instead of lock-in**: The vector database ecosystem changes often. Cortex uses adapters, keeping application logic independent from storage code. The application describes what it needs from vector infrastructure, not how a vendor implements it.
 
 ## How It Works
 

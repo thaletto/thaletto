@@ -48,7 +48,7 @@ Three agents handle remediation:
 
 When all steps pass validation, the system closes the ServiceNow ticket and notifies the on-call engineer.
 
-## How It Works
+## How it works
 
 1. Grafana alerts trigger on anomalous log patterns.
 2. The Observability Agent reads the alert and checks ServiceNow, creating a ticket only when needed.
@@ -59,7 +59,7 @@ When all steps pass validation, the system closes the ServiceNow ticket and noti
 7. The Validator Agent verifies each step outcome, triggering retries on failure.
 8. On full resolution, the system closes the ServiceNow ticket.
 
-## Tech Stack
+## Tech stack
 
 <TechStack variant="embedded">
   <TechStackItem label="Qdrant">

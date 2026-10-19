@@ -25,16 +25,16 @@ coverHeight: 720
 
 **Ascendant** is a developer ecosystem for sidereal astrology. Every calculation runs locally, with no hosted API and no external calls.
 
-- **TypeScript library:** An Effect-first library that computes charts, dashas, Ashtakavarga scores, and transits.
-- **Python library:** Python SDK of Ascendant.
-- **Agent skill:** Turns a saved birth record into a source of truth and pairs it with a deterministic KP algorithm, so the AI works from computed positions instead of guessing them.
-- **Birth Chart Calculator:** A browser-based tool on the docs site covering Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga.
+- **TypeScript library**: an Effect-first library that computes charts, dashas, Ashtakavarga scores, and transits
+- **Python library**: Python SDK of Ascendant
+- **Agent skill**: turns a saved birth record into a source of truth and pairs it with a deterministic KP algorithm, so the AI works from computed positions instead of guessing them
+- **Birth Chart Calculator**: a browser-based tool on the docs site covering Navamsha, Dasha, Jaimini, KP, and Sarvashtakavarga
 
 ## Problem
 
-AI agents hallucinate astrology values when they reason from memory, and interpretations buried in model prompts can't be audited. Meanwhile, the underlying calculations are precise and demanding:
+AI agents hallucinate astrology values when they reason from memory, and interpretations buried in model prompts can’t be audited. Meanwhile, the underlying calculations are precise and demanding:
 
-- **Vimshottari Dasha** requires arithmetic anchored to the Moon's natal nakshatra.
+- **Vimshottari Dasha** requires arithmetic anchored to the Moon’s natal nakshatra.
 - **Divisional charts** (sixteen in all) transform planetary longitudes by specific ratios.
 - **Yogas** number in the hundreds across canonical texts.
 - **Ashtakavarga** adds a scoring matrix of 360 cells.
@@ -52,7 +52,7 @@ Ascendant is an end-to-end workflow across four surfaces:
 
 ### TypeScript library
 
-The `astro-ascendant` package computes everything through composable Effect services. Provide a UTC moment, latitude, longitude, and optional birth sex, and `Chart.generate` returns shared placements plus cusp-aware charts: D1 by default, with divisions like D9 on request. The Dasha, Ashtakavarga, and Jaimini modules reuse those placements.
+The `astro-ascendant` package computes everything through composable Effect services. Provide a UTC moment, latitude, longitude, and optional birth sex. `Chart.generate` returns shared placements plus cusp-aware charts: D1 by default, with divisions like D9 on request. The Dasha, Ashtakavarga, and Jaimini modules reuse those placements.
 
 Ayanamsa and house system are typed parameters with immutable defaults. The quickstart uses Krishnamurti and Placidus, and Lahiri and Whole Sign are also available.
 
@@ -62,7 +62,7 @@ bun add astro-ascendant effect
 
 ### Python library
 
-The `astro-ascendant` package on PyPI computes the same domains locally: divisional charts, the full Vimshottari Dasha timeline, current Dasha lookups, yoga results, and the complete Ashtakavarga result. Charts use the sidereal zodiac, with Lahiri ayanamsa and Whole Sign houses as defaults.
+The `astro-ascendant` package on PyPI computes the same domains locally. It covers divisional charts, the full Vimshottari Dasha timeline, current Dasha lookups, yoga results, and the complete Ashtakavarga result. Charts use the sidereal zodiac, with Lahiri ayanamsa and Whole Sign houses as defaults.
 
 A frozen configuration object holds the resolved enums, timezone, coordinates, and software version, so results are reproducible.
 

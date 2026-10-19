@@ -17,20 +17,20 @@ This is a responsive e-commerce platform for crackers and fireworks. The fronten
 
 ## Approach
 
-The system has three layers. Each layer has a specific responsibility.
+The system has three layers, each with a specific responsibility.
 
 **Frontend** uses Next.js with the App Router. Server-Side Rendering generates the dynamic product pages, and Static Site Generation generates the static content. React Server Components reduce the client-side JavaScript and keep the Core Web Vitals fast.
 
 **Backend** has 7 Go microservices for auth, customers, invoices, notifications, orders, products, and uploads. Each microservice compiles to one binary for fast execution. Goroutines handle concurrent requests with a small quantity of memory, and thus the backend can process high volumes of traffic.
 
-**Database** uses Cloudflare D1, a serverless relational database on the edge with SQLite as the base. The data stays close to the compute layer. This removes database connection pooling and its overhead.
+**Database** uses Cloudflare D1, a serverless relational database built on SQLite and running at the edge. The data stays close to the compute layer, so D1 removes database connection pooling and its overhead.
 
-## How It Works
+## How it works
 
 - **AWS Lambda:** The Go functions compile to one binary with `GOOS=linux GOARCH=arm64`, and AWS runs them on Graviton ARM architecture. This gives up to 34% better price-performance than x86. The service scales automatically with traffic and keeps cold starts fast.
 - **Event-driven architecture:** Inventory updates, order events, and admin actions flow through an event system. The frontend stays in sync without polling.
 
-## Tech Stack
+## Tech stack
 
 <TechStack variant="embedded">
   <TechStackItem label="Next.js">

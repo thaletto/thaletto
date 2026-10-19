@@ -1,6 +1,6 @@
 ---
 title: 'Kite'
-description: 'Ask questions, get AI generated UI'
+description: 'Ask questions, get AI-generated UI'
 publishedAt: '2026-03-01T00:00:00.000Z'
 sort: 5
 tags: ['AG-UI', 'Tanstack Start', 'Vite', 'TypeScript']
@@ -20,10 +20,10 @@ Kite is an AI-powered data exploration assistant for weather, crypto prices, Git
 
 Kite separates concerns across four layers:
 
-- **Client:** React 19 UI with streaming chat, rendering AI responses as JSON-defined components with `@json-render/react`.
-- **Server:** TanStack Start server functions handle requests and rate limiting, sending requests to the AI layer.
-- **AI:** ToolLoopAgent manages tool calls, formatting responses as text and JSON UI specs.
-- **Tools:** Server-side functions fetch real data from external APIs, covering weather, GitHub, crypto, and web search.
+- **Client**: React 19 UI with streaming chat, rendering AI responses as JSON-defined components with `@json-render/react`
+- **Server**: TanStack Start server functions handle requests and rate limiting, forwarding traffic to the AI layer
+- **AI**: ToolLoopAgent manages tool calls, formatting responses as text and JSON UI specs
+- **Tools**: Server-side functions fetch real data from external APIs, covering weather, GitHub, crypto, and web search
 
 ```mermaid
 flowchart TB
@@ -60,17 +60,17 @@ flowchart TB
     Renderer --> UI
 ```
 
-## How It Works
+## How it works
 
-1. Send a message about a topic such as weather, crypto, or GitHub.
-2. The agent calls tools to fetch real, up-to-date data from external APIs.
-3. The agent responds with a summary and a JSON UI specification, optimized for interactive display.
-4. The UI renderer transforms the JSON spec into interactive React components.
-5. View the dashboard with charts, tables, metrics, and rich content.
+1. A message about a topic such as weather, crypto, or GitHub starts the flow.
+2. The agent calls tools to fetch up-to-date data from external APIs.
+3. The agent responds with a summary and a JSON UI specification.
+4. The UI renderer renders the JSON spec as interactive React components.
+5. The dashboard shows charts, tables, metrics, and rich content.
 
-The UI is defined entirely in JSON. The AI outputs text and a component tree, rendered by `@json-render/react`.
+The UI is defined entirely in JSON, and `@json-render/react` renders it from the component tree the AI outputs.
 
-## Tech Stack
+## Tech stack
 
 <TechStack variant="embedded">
   <TechStackItem label="TanStack Start">
