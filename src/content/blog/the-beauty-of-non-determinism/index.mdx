@@ -18,7 +18,9 @@ Before anything is explained, you run one small experiment on your own mind. It 
 
 I asked you not to think about a horse, and you probably thought of one anyway. Maybe it was galloping through a field, or standing still, or grazing. The instruction was the same for everyone, but what you imagined was entirely your own. Your mind explored possibilities without needing a predefined path.
 
-As developers, we train ourselves to think the other way. We define the steps, anticipate the outcomes, and remove the uncertainty before it arrives. That discipline is what makes traditional software dependable. Applied to large language models (LLMs), it hardens into control. We want the model to walk our path, so we trim away everything it might notice along the way.
+Psychologists call this ironic process theory. A ban cannot be checked without first picturing the thing it bans, so the ban rehearses the very thought it tried to remove. Wegner proved it with white bears. People told not to think of one thought of little else. Prompts are no different. Tell a model not to mention something and you have made the mention likelier, not less. A negated instruction does not control a mind. Keep that result, because it is about to decide how the fence gets built.
+
+As developers, we train ourselves to think the other way. We define the steps, anticipate the outcomes, and remove the uncertainty before it arrives. That discipline is what makes traditional software dependable. Applied to large language models (LLMs), it hardens into control. We want the model to walk our path, so we write ever longer prompts, clamp the decoding, and trim away everything it might notice along the way.
 
 It’s like putting <Term definition="Blinkers, also known as blinders, blinds and winkers, are a part of horse harness and tack which limits a horse’s field of vision, blocking vision to the sides, the rear, or both.">blinkers</Term> on a horse so it can only see the path ahead. The question is whether we need to control the path at all, or whether we only need to define how far the horse is allowed to wander.
 
@@ -28,17 +30,19 @@ Traditional software is built on the expectation that the same input, under the 
 
 When a function returns an unexpected result, we want to know why. When a workflow runs, we want to know what happens next. Determinism gives us that confidence.
 
+Even here, determinism is managed more than given. Threads race, hash orders shift, and networks deliver out of order, and we hold the line with invariants rather than with certainty.
+
 Over the years, uncertainty becomes something to eliminate. We define rules, validate inputs, handle edge cases, and make decisions explicit. These practices are essential when software handles money, modifies data, or triggers actions in the real world.
 
-With LLMs, the outputs we most want to trust are the ones we cannot predict. Determinism still applies, but one level higher. It governs not the path the model takes, but the ground it may cover.
+With LLMs, the outputs we most want are the ones we could not have written ourselves. Determinism still applies, but one level higher. It governs not the path the model takes, but the ground it may cover.
 
 ## Why the fence matters
 
-LLMs are valuable because they explore possibilities we never programmed. Given the same prompt twice, they may take different paths and arrive at different answers, and more than one can be right. That variability is not a flaw to squeeze out. It is the whole point. A model that returned only the answers we had already imagined would be traditional software with extra steps.
+LLMs are valuable because they explore possibilities we never programmed. Given the same prompt twice, they may take different paths and arrive at different answers, and more than one can be right. The variety comes from sampling. The network itself is a fixed function, and at the coldest setting the dice are loaded and land the same face every time. The spread is there because we chose it. That variability is not a flaw to squeeze out. It is the whole point. A model that returned only the answers we had already imagined would be traditional software with extra steps.
 
-Instead of forcing the model down one path, let it explore and hold the boundaries steady on what it may touch, what it may not, and what to do when it reaches the edge. Like a horse in a fenced field, the model is free to move in any direction and will never wander past the fence. The fence does not shrink the field. The fence is what makes the field safe to run in.
+Instead of forcing the model down one path, let it explore and hold the boundaries steady on what it may touch, what it may not, and what to do when it reaches the edge. Like a horse in a fenced field, the model is free to move in any direction. One thing must change, though. The fence cannot be made of words. Your eight seconds just proved that instructions do not bind a mind, and a prompt is an instruction. The fence must be deterministic code around the model. Schemas, allowlists, a sandbox, checks that run on whatever came out, no matter how it was asked to behave. Dijkstra made the same move in language design with guarded commands, a spec that says what must hold and leaves how open. The fence does not shrink the field. The fence is what makes the field safe to run in.
 
-A minute ago, you proved this on your own mind. Given open ground, it fills the gap with a horse. A model does the same. Two runs across the same field will never look identical, and that is the point. The fence makes the wandering safe, and the wandering is where the answers come from. That is the beauty of non-determinism.
+A minute ago, you proved this on your own mind. Given open ground, you filled the gap with a horse. A model given the same open ground fills it the same way. Two runs across the same field will rarely look identical, and that is the point. The fence makes the wandering safe, and the wandering is where the answers come from. That is the beauty of non-determinism.
 
 Now the rule is lifted for you alone. Think about horses as freely as you like. Go on, [check this out](https://tenor.com/search/horse-gifs).
 
