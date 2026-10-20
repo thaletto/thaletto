@@ -16,9 +16,9 @@ Before anything is explained, you run one small experiment on your own mind. It 
 
 ## You thought of one anyway
 
-I asked you not to think about a horse, and you probably thought of one anyway. Maybe it was galloping through a field, or standing still, or grazing. The instruction was the same for everyone, but what you imagined was entirely your own. Your mind explored possibilities without needing a predefined path.
+I asked you not to think about a horse, and you probably thought of one anyway. Maybe it was galloping through a field, or standing still, or grazing. The instruction fixed what you pictured for everyone. The details were yours, a particular gait, a particular field. That is what a conditional distribution feels like from the inside.
 
-Psychologists call this ironic process theory. A ban cannot be checked without first picturing the thing it bans, so the ban rehearses the very thought it tried to remove. Wegner proved it with white bears. People told not to think of one thought of little else. Prompts are no different. Tell a model not to mention something and you have made the mention likelier, not less. A negated instruction does not control a mind.
+Psychologists call this ironic process theory. A ban cannot be checked without first picturing the thing it bans, so the ban rehearses the very thought it tried to remove. Daniel Wegner's 1987 white-bear studies found the rebound in the lab. People told not to think of a white bear thought about little else. Prompts can behave the same way. Telling a model not to mention something can make the mention likelier, not less. A negated instruction is not a control.
 
 As developers, we train ourselves to think the other way. We define the steps, anticipate the outcomes, and remove the uncertainty before it arrives. That discipline is what makes traditional software dependable. Applied to large language models (LLMs), it hardens into control. We want the model to walk our path, so we write ever longer prompts, clamp the decoding, and trim away everything it might notice along the way.
 
@@ -34,17 +34,23 @@ Even here, determinism is managed more than given. Threads race, hash orders shi
 
 Over the years, uncertainty becomes something to eliminate. We define rules, validate inputs, handle edge cases, and make decisions explicit. These practices are essential when software handles money, modifies data, or triggers actions in the real world.
 
-With LLMs, the outputs we most want are the ones we could not have written ourselves. Determinism still applies, but one level higher. It governs not the path the model takes, but the ground it may cover.
+With LLMs, the outputs we most want are the ones we could not have written ourselves. Determinism still applies, but one level higher. The code that enforces the bounds is deterministic. The path is not.
 
 ## Why the fence matters
 
-LLMs are valuable because they explore possibilities we never programmed. Given the same prompt twice, they may take different paths and arrive at different answers, and more than one can be right. The variety comes from sampling. The network itself is a fixed function, and at the coldest setting the dice are loaded and land the same face every time. The spread is there because we chose it. That variability is not a flaw to squeeze out. It is the whole point. A model that returned only the answers we had already imagined would be traditional software with extra steps.
+LLMs are valuable because they explore possibilities we never programmed. Given the same prompt twice, they may take different paths and arrive at different answers, and more than one can be right. The variety comes from sampling. The network itself is a fixed function, and at the coldest setting the dice are gone, because decoding simply takes the most likely token. The last bits can still wobble across a batch, the way threads and hash orders wobble in ordinary software. Apart from that, the spread is a design choice. For open-ended work, that variability is not a flaw to squeeze out. It is the whole point. A model that returned only the answers we had already imagined would be traditional software with extra steps.
 
-Instead of forcing the model down one path, let it explore and hold the boundaries steady on what it may touch, what it may not, and what to do when it reaches the edge. Like a horse in a fenced field, the model is free to move in any direction. One thing must change, though. The fence cannot be made of words. Your eight seconds just proved that instructions do not bind a mind, and a prompt is an instruction. The fence must be deterministic code around the model. Schemas, allowlists, a sandbox, checks that run on whatever came out, no matter how it was asked to behave. Dijkstra made the same move in language design with guarded commands, a spec that says what must hold and leaves how open. The fence does not shrink the field. The fence is what makes the field safe to run in.
+Instead of forcing the model down one path, let it explore, and hold the boundaries steady around what it may touch, what it may not, and what to do when it reaches the edge. Like a horse in a fenced field, the model is free to move in any direction.
 
-A minute ago, you proved this on your own mind. Given open ground, you filled the gap with a horse. A model given the same open ground fills it the same way. Two runs across the same field will rarely look identical, and that is the point. The fence makes the wandering safe, and the wandering is where the answers come from. That is the beauty of non-determinism.
+One caveat. The fence cannot be made of words. Your eight seconds suggested why, but the mechanism is narrower than the analogy. A prompt shares its channel with untrusted data, so anyone who can write into the context can write instructions too. Compliance is probabilistic, not structural. And unless something outside the model masks the next token, every token keeps some probability, including the one you asked it to avoid. That is why constrained decoding is a fence and *please output JSON* is a wish.
 
-Now the rule is lifted for you alone. Think about horses as freely as you like. Go on, [check this out](https://tenor.com/search/horse-gifs).
+So the fence must be deterministic code around the model. Schemas, allowlists, a sandbox, checks that run before any side effect lands. Dijkstra made the same argument in 1975, in a paper on guarded commands and nondeterminacy. A guarded command may pick any enabled branch, so a proof has to hold for every branch, not just the likely one. That is the claim the fence makes about every outcome in the distribution.
+
+Even then, the fence buys safety, not correctness. A valid answer can still be wrong, and evals are how that gets caught. The fence does not shrink the field. The fence is what makes the field safe to run in.
+
+A minute ago, you ran the same experiment on your own mind. Given open ground, you filled it with a horse, and with details of your choosing. A model given the same open ground does the same, with details of its own. Two runs across the same field will rarely look identical, and that is the point. The fence makes the wandering safe, and the wandering is where the answers come from. That is the beauty of non-determinism.
+
+Now the rule is lifted. Think about horses as freely as you like. Go on, [check this out](https://tenor.com/search/horse-gifs).
 
 If you want to keep digging, I keep an [AI Engineering](https://laxmankr.notion.site/AI-Engineering-331f3dd03157804d9ff5f3945a9c5621?pvs=74) notebook on Notion.
 
