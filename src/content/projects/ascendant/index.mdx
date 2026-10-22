@@ -13,9 +13,9 @@ links:
   - label: 'PyPI'
     url: 'https://pypi.org/project/astro-ascendant/'
   - label: 'Skills'
-    url: 'https://www.skills.sh/thaletto/ascendant-agents/ascendant'
+    url: 'https://github.com/astro-ascendant/skills'
   - label: 'Github'
-    url: 'https://github.com/thaletto/ascendant-ts'
+    url: 'https://github.com/astro-ascendant'
 cover: ./ascendant.webp
 coverWidth: 1280
 coverHeight: 720
@@ -72,7 +72,7 @@ pip install astro-ascendant
 
 ### Agent skill
 
-The skill lives in `thaletto/ascendant-agents` and installs into Claude, Codex, Cursor, Gemini, OpenCode, and more. It takes three arguments:
+The skill lives in `astro-ascendant/skills` and installs into Claude, Codex, Cursor, Gemini, OpenCode, and more. It takes three arguments:
 
 - `init` creates or refreshes a reusable `persons/<name>/` record from exact birth data.
 - `setup` installs calculation dependencies once per working directory.
@@ -115,7 +115,7 @@ The program returns shared placements plus the D1 and D9 charts.
 For agent-driven readings, install the skill, save a record, and ask a question:
 
 ```sh
-npx skills add thaletto/ascendant-agents
+npx skills add astro-ascendant/skills
 /ascendant init
 /ascendant analysis
 ```
