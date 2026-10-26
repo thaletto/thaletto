@@ -12,24 +12,16 @@ export interface SocialSnapshot {
   bio?: string
 }
 
-export interface NotionSnapshot {
-  name: string
-  url: string
-  bio?: string
-}
-
-export interface EmailIdentity {
+interface EmailIdentity {
   name: string
   email: string
   country: string
 }
 
-// heatmap shows the recent ~180 days (26 weeks); the stat below still
-// counts the full past year
 const WEEKS = 26
 const DAYS = 7
 
-export const GLYPHS: Record<string, { path: string; color?: string }> = {
+const GLYPHS: Record<string, { path: string; color?: string }> = {
   x: {
     path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
   },
@@ -87,11 +79,6 @@ function Card({
   )
 }
 
-// One shared plate for every social card: a lead slot (photo avatar for
-// profile services, a monogram tile for mark-only services like Notion),
-// name + sub-line, the trailing service glyph, and an optional bio.
-// Callers own the lead element so nothing here branches on service.
-// The trailing glyph is optional: mark-led leads already carry the mark.
 function Identity({
   name,
   sub,
@@ -120,13 +107,8 @@ function Identity({
   )
 }
 
-// Per-service hover cards for the chrome's social links. Server rendering
-// supplies ISR-backed values with src/content/site.json and src/content/github.json
-// as sources; an open card never touches the network. Touch devices just
-// follow the link. Bodies are exported separately so other triggers can serve
-// the same cards.
-// X has no public follower endpoint; the card is static identity only.
-export function XCardBody({ data }: { data: SocialSnapshot }) {
+// X exposes no public follower endpoint, so this card is static identity only.
+function XCardBody({ data }: { data: SocialSnapshot }) {
   return (
     <Identity
       name={data.name}
@@ -146,19 +128,17 @@ export function XCardBody({ data }: { data: SocialSnapshot }) {
   )
 }
 
-export function GitHubCardBody({ data }: { data: GitHubActivity }) {
+function GitHubCardBody({ data }: { data: GitHubActivity }) {
   const levels = data.levels.slice(-WEEKS * DAYS)
   return (
     <>
       <span className="contrib-grid" aria-hidden>
         {Array.from({ length: WEEKS }, (_, w) => (
-          // deterministic week grid, static size
           <span key={w} className="contrib-col">
             {Array.from({ length: DAYS }, (_, d) => {
               const i = w * DAYS + d
               return (
                 <i
-                  // fixed 7-day layout, index is the render slot
                   key={d}
                   data-level={levels[i] ?? '0'}
                   style={{ '--ci': i } as React.CSSProperties}
@@ -225,9 +205,6 @@ export function GitHubCard({
   )
 }
 
-// Email's card is the front of a mailed envelope: stamps, cancellation
-// marks, sender, recipient, and folded seams. Purely visual; the trigger
-// itself opens mailto:.
 export function EmailCard({
   identity,
   trigger = 'Email',

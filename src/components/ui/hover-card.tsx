@@ -8,7 +8,6 @@ function HoverCard({ ...props }: PreviewCardPrimitive.Root.Props) {
 }
 
 function HoverCardTrigger({ className, ...props }: PreviewCardPrimitive.Trigger.Props) {
-  // the site's one focus ring: hairline outline, offset from the word
   return (
     <PreviewCardPrimitive.Trigger
       data-slot="hover-card-trigger"
@@ -42,9 +41,6 @@ function HoverCardContent({
         <PreviewCardPrimitive.Popup
           data-slot="hover-card-content"
           className={cn(
-            // the site carries no tw-animate-css; entrance/exit motion comes
-            // from site CSS transitions keyed to data-starting-style
-            // / data-ending-style instead of these animate utilities
             'z-50 w-72 origin-(--transform-origin) rounded-3xl bg-popover p-4 text-sm text-popover-foreground shadow-lg ring-1 ring-foreground/5 outline-hidden dark:ring-foreground/10',
             className,
           )}

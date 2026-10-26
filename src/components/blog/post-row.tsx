@@ -4,9 +4,6 @@ import { formatMonthDay, formatShortDate } from '~/lib/design/date'
 import { LocalDate } from '~/lib/design/i18n'
 import { postViewTransitionName } from '~/lib/motion/view-transition-name'
 
-// The compact post row: title / tagline ···· date (`/` prefix on desktop, own
-// line on mobile). The tagline stays quiet until the row is hovered.
-// Mobile titles may use two lines.
 export function PostRow({
   post,
   headingLevel = 'h2',

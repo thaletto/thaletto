@@ -123,11 +123,11 @@ function homeDocument() {
 
   return `# ${siteIdentity.name}
 
-> ${siteIdentity.role} in ${siteIdentity.homeCity}, ${siteIdentity.country}. I build intelligent, well-structured products, from the interface people use to the systems that power it.
+> ${siteIdentity.role} in ${siteIdentity.country}. I build intelligent, well-structured products, from the interface people use to the systems that power it.
 
 ## About
 
-${siteSocial.linkedin.bio ?? siteIdentity.role}
+${siteSocial.x.bio ?? siteIdentity.role}
 
 I write about engineering, products, tools, and AI systems. This site is the canonical home for that work.
 
@@ -149,7 +149,6 @@ ${writing}
 - [LinkedIn](${siteDestinations.linkedin})
 - [X](${siteDestinations.x})
 - [Resume](${siteDestinations.resume})
-- [Study notes](${siteSocial.notion.url})
 
 ## Agent resources
 

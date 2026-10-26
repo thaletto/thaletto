@@ -1,34 +1,20 @@
 import Image from 'next/image'
 
 import type { PostCover } from '~/lib/content/posts'
-import { tiltFromSlug } from '~/lib/motion/polaroid'
-import { cn } from '~/lib/platform/utils'
 
 export function PolaroidCover({
-  slug,
   cover,
-  caption,
   alt,
-  tilted = false,
   priority = false,
   sizes,
-  className,
 }: {
-  slug: string
   cover: PostCover
-  caption?: React.ReactNode
-  /** image alt */
   alt?: string
-  tilted?: boolean
   priority?: boolean
   sizes?: string
-  className?: string
 }) {
   return (
-    <figure
-      className={cn('polaroid', tilted && 'polaroid-tilted', className)}
-      style={{ ...(tilted && { '--tilt': `${tiltFromSlug(slug)}deg` }) } as React.CSSProperties}
-    >
+    <figure className="polaroid">
       <span className="polaroid-photo">
         {cover.videoSrc ? (
           <video
@@ -55,7 +41,7 @@ export function PolaroidCover({
           />
         )}
       </span>
-      <figcaption className="polaroid-caption">{caption ?? cover.caption ?? ' '}</figcaption>
+      <figcaption className="polaroid-caption">{cover.caption ?? ' '}</figcaption>
     </figure>
   )
 }

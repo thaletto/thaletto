@@ -1,7 +1,12 @@
 import { z } from 'zod'
 
 import authoredSite from '../../content/site.json'
-import { formatDayMonthYear, formatLocalDate } from '../design/date'
+import {
+  formatDayMonthYear,
+  formatLocalDate,
+  formatMonthYear,
+  formatMonthYearShort,
+} from '../design/date'
 
 const identitySchema = z.object({
   name: z.string().min(1),
@@ -9,12 +14,6 @@ const identitySchema = z.object({
   role: z.string().min(1),
   email: z.email(),
   country: z.string().min(1),
-  homeCity: z.string().min(1),
-  portraitAlt: z.string().min(1),
-  location: z.object({
-    latitude: z.string().min(1),
-    longitude: z.string().min(1),
-  }),
 })
 
 const yearMonthSchema = z
@@ -28,33 +27,26 @@ const authoredExperienceSchema = z.object({
   startDate: yearMonthSchema,
   endDate: yearMonthSchema.optional(),
   url: z.url().optional(),
-  timelinePhoto: z
-    .object({
-      src: z.string().startsWith('/'),
-      alt: z.string().min(1),
-    })
-    .optional(),
 })
 
 const siteProfileSchema = z.object({
   identity: identitySchema,
   social: z.object({
     x: z.object({ name: z.string().min(1), handle: z.string().min(1), bio: z.string().optional() }),
-    linkedin: z.object({ handle: z.string().min(1), bio: z.string().optional() }),
-    notion: z.object({ name: z.string().min(1), url: z.url(), bio: z.string().optional() }),
+    linkedin: z.object({ handle: z.string().min(1) }),
     github: z.object({ user: z.string().min(1) }),
   }),
   resumes: z.object({ primary: z.url(), alternate: z.url() }),
   experience: z.array(authoredExperienceSchema),
 })
 
-export interface SiteMonth {
+interface SiteMonth {
   year: number
   month: number
   day?: number
 }
 
-export interface SiteExperience {
+interface SiteExperience {
   id: string
   company: string
   role: string
@@ -63,7 +55,6 @@ export interface SiteExperience {
   yearRange: string
   yearRangeShort: string
   url?: string
-  timelinePhoto?: { src: string; alt: string }
 }
 
 function parseSiteMonth(value: string): SiteMonth {
@@ -71,12 +62,18 @@ function parseSiteMonth(value: string): SiteMonth {
   return day ? { year, month, day } : { year, month }
 }
 
-// Authored experience dates are month-precision (day-precision when the
-// record carries one); render them through the site's canonical date
-// formatter, defaulting a bare month to its first day (UTC midnight stays
-// the same calendar day in SITE_TIME_ZONE).
 function siteMonthToDate({ year, month, day }: SiteMonth): Date {
   return new Date(Date.UTC(year, month - 1, day ?? 1))
+}
+
+function formatSiteMonth({ year, month, day }: SiteMonth): string {
+  const date = siteMonthToDate({ year, month, day })
+  return day ? formatLocalDate(date) : formatMonthYear(date)
+}
+
+function formatSiteMonthShort({ year, month, day }: SiteMonth): string {
+  const date = siteMonthToDate({ year, month, day })
+  return day ? formatDayMonthYear(date) : formatMonthYearShort(date)
 }
 
 export function parseSiteProfile(input: unknown) {
@@ -98,10 +95,9 @@ export function parseSiteProfile(input: unknown) {
       role: job.role,
       start,
       end,
-      yearRange: `${formatLocalDate(siteMonthToDate(start))} – ${end ? formatLocalDate(siteMonthToDate(end)) : 'Present'}`,
-      yearRangeShort: `${formatDayMonthYear(siteMonthToDate(start))} – ${end ? formatDayMonthYear(siteMonthToDate(end)) : 'Present'}`,
+      yearRange: `${formatSiteMonth(start)} – ${end ? formatSiteMonth(end) : 'Present'}`,
+      yearRangeShort: `${formatSiteMonthShort(start)} – ${end ? formatSiteMonthShort(end) : 'Present'}`,
       url: job.url,
-      timelinePhoto: job.timelinePhoto,
     }
   })
   return {

@@ -1,7 +1,3 @@
-// Security headers applied to every route from `next.config.ts` headers().
-// The CSP is static permissive-tuned for the prerendered shell (inline theme
-// script + inline-first styles), and the remaining headers pin HSTS, framing,
-// sniffing, referrer, and permissions for the whole origin.
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 function contentSecurityPolicy(
@@ -31,7 +27,6 @@ function contentSecurityPolicy(
   ].join('; ')
 }
 
-// Static policies keep the prerendered shell cacheable.
 const publicContentSecurityPolicy = contentSecurityPolicy(
   `'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ''}`,
   "'self' 'unsafe-inline'",

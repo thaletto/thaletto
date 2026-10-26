@@ -2,9 +2,6 @@
 
 import { useRef, useState } from 'react'
 
-// Post videos arrive as ./file.mp4#WxH; autoplay inline with sound, no loop,
-// no control bar. A play button appears whenever playback is paused (autoplay
-// blocked or finished) to start/replay.
 export function PostVideo({
   slug,
   src,

@@ -1,6 +1,3 @@
-// `/blog/[slug]` view — the MDX post renderer. Loads the post through the
-// allowlisted `lib/content`, compiles its body with the shared remark/rehype
-// pipeline, and lays out cover, table of contents, and "keep reading" rail.
 import { cacheLife } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -33,7 +30,7 @@ export function generatePostStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }))
 }
 
-export function requirePostSlug(slug: string) {
+function requirePostSlug(slug: string) {
   if (!isPostSlug(slug)) notFound()
   return slug
 }
@@ -132,7 +129,6 @@ async function CachedPostBody({ slug }: { slug: string }) {
   )
 }
 
-// Plate values are stamped, not written: locale-neutral tabular digits
 const plateDateFormat = new Intl.DateTimeFormat('en-CA', {
   timeZone: SITE_TIME_ZONE,
   year: 'numeric',
@@ -140,17 +136,15 @@ const plateDateFormat = new Intl.DateTimeFormat('en-CA', {
   day: '2-digit',
 })
 
-export async function BlogPostPageView({ slug }: { slug: string }) {
+async function BlogPostPageView({ slug }: { slug: string }) {
   const post = getPost(requirePostSlug(slug))
   const rail = buildPostRail(post.title, post.body)
 
-  // edition number: chronological, so the first post is 001 forever
   const posts = getAllPosts()
   const postIndex = posts.findIndex((entry) => entry.slug === post.slug)
   const edition = String(posts.length - postIndex).padStart(3, '0')
   const plateDate = plateDateFormat.format(post.publishedAt).replaceAll('-', '.')
   const related = getRelatedPosts(post.slug)
-  // stamp variant derives from the slug: stable per post, varied across them
   const clusterVariant = [...post.slug].reduce((sum, ch) => sum + ch.charCodeAt(0), 0)
 
   return (
@@ -161,7 +155,6 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
         <header>
           {post.cover && (
             <PolaroidCover
-              slug={post.slug}
               cover={post.cover}
               alt=""
               priority
@@ -179,8 +172,6 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
                   } as React.CSSProperties
                 }
               >
-                {/* the typeset form: *emphasis* in frontmatter sets a word in
-                    the site serif against the sans heading, no italic */}
                 {post.titleSegments
                   ? post.titleSegments.map((segment) =>
                       segment.emphasis ? (
