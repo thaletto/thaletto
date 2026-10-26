@@ -37,6 +37,13 @@
   },
   "experience": [
     {
+      "id": "ford",
+      "company": "Ford",
+      "role": "Cyber Defense Analyst",
+      "startDate": "2026.10",
+      "url": "https://www.linkedin.com/company/ford-motor-company/"
+    },
+    {
       "id": "tcs",
       "company": "Tata Consultancy Services",
       "role": "AI Engineer",
