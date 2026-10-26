@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next'
 
 import legacyUrlManifest from './src/content/legacy-url-manifest.json'
+import { agentLinkHeader, contentSignal } from './src/lib/agents/discovery'
 import { resolveProfileDestination } from './src/lib/content/personal'
 import { securityHeaders } from './src/lib/security/headers'
 
@@ -34,6 +35,9 @@ const nextConfig: NextConfig = {
     '/blog/**': ['./src/content/blog/**/*'],
     '/projects/**': ['./src/content/projects/**/*'],
     '/content/\\[\\.\\.\\.path\\]': ['./src/content/blog/**/*', './src/content/projects/**/*'],
+    '/api/agent-markdown': ['./src/content/**/*.mdx', './src/content/*.json'],
+    '/llms.txt': ['./src/content/**/*.mdx', './src/content/*.json'],
+    '/llms-full.txt': ['./src/content/**/*.mdx', './src/content/*.json'],
   },
 
   // Pin the project root: when developing from a git worktree nested inside
@@ -60,7 +64,11 @@ const nextConfig: NextConfig = {
   headers: async () => [
     {
       source: '/:path*',
-      headers: [...securityHeaders],
+      headers: [...securityHeaders, { key: 'Content-Signal', value: contentSignal }],
+    },
+    {
+      source: '/:path((?!_next/|content/|api/|\\.well-known/).*)',
+      headers: [{ key: 'Link', value: agentLinkHeader }],
     },
   ],
 
