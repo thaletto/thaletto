@@ -1,4 +1,4 @@
-export type PostTransitionElement = 'cover' | 'title'
+type PostTransitionElement = 'cover' | 'title'
 
 // view-transition-name must be a valid CSS ident, so hash the slug and prefix it.
 function hash32(value: string) {

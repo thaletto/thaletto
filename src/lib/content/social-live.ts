@@ -1,15 +1,8 @@
 import { cacheLife, cacheTag } from 'next/cache'
 
-import type { NotionSnapshot, SocialSnapshot } from '~/components/social/social-cards'
 import bakedGithub from '~/content/github.json'
 import { type GitHubActivity, loadGitHubActivity } from '~/lib/content/github-activity'
-import { siteIdentity, siteSocial } from '~/lib/content/personal'
-
-interface SocialData {
-  x: SocialSnapshot
-  linkedin: SocialSnapshot
-  notion: NotionSnapshot
-}
+import { siteSocial } from '~/lib/content/personal'
 
 // Live counts come from the Next cache; the baked snapshot is the outage fallback.
 export async function getGitHub(): Promise<GitHubActivity> {
@@ -22,13 +15,4 @@ export async function getGitHub(): Promise<GitHubActivity> {
     fetcher: fetch,
     fallback: bakedGithub,
   })
-}
-
-// X and LinkedIn expose no public counts, so those cards stay static identity.
-export async function getSocial(): Promise<SocialData> {
-  return {
-    x: siteSocial.x,
-    linkedin: { name: siteIdentity.name, ...siteSocial.linkedin },
-    notion: siteSocial.notion,
-  }
 }

@@ -19,12 +19,12 @@ const frontmatterSchema = publishedFrontmatterSchema.extend({
 
 export type PostCover = PublishedCover
 
-export interface TitleSegment {
+interface TitleSegment {
   text: string
   emphasis: boolean
 }
 
-export function parseEmphaticTitle(raw: string): {
+function parseEmphaticTitle(raw: string): {
   title: string
   titleSegments: TitleSegment[] | null
 } {
@@ -53,7 +53,7 @@ export interface Post {
 
 export const POST_ARTICLE_START_ID = 'post-article-start'
 
-export function getAllPostSlugs() {
+function getAllPostSlugs() {
   return discoverPublishedSlugs(POSTS_DIR)
 }
 

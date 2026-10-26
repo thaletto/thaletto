@@ -14,12 +14,6 @@ const identitySchema = z.object({
   role: z.string().min(1),
   email: z.email(),
   country: z.string().min(1),
-  homeCity: z.string().min(1),
-  portraitAlt: z.string().min(1),
-  location: z.object({
-    latitude: z.string().min(1),
-    longitude: z.string().min(1),
-  }),
 })
 
 const yearMonthSchema = z
@@ -33,33 +27,26 @@ const authoredExperienceSchema = z.object({
   startDate: yearMonthSchema,
   endDate: yearMonthSchema.optional(),
   url: z.url().optional(),
-  timelinePhoto: z
-    .object({
-      src: z.string().startsWith('/'),
-      alt: z.string().min(1),
-    })
-    .optional(),
 })
 
 const siteProfileSchema = z.object({
   identity: identitySchema,
   social: z.object({
     x: z.object({ name: z.string().min(1), handle: z.string().min(1), bio: z.string().optional() }),
-    linkedin: z.object({ handle: z.string().min(1), bio: z.string().optional() }),
-    notion: z.object({ name: z.string().min(1), url: z.url(), bio: z.string().optional() }),
+    linkedin: z.object({ handle: z.string().min(1) }),
     github: z.object({ user: z.string().min(1) }),
   }),
   resumes: z.object({ primary: z.url(), alternate: z.url() }),
   experience: z.array(authoredExperienceSchema),
 })
 
-export interface SiteMonth {
+interface SiteMonth {
   year: number
   month: number
   day?: number
 }
 
-export interface SiteExperience {
+interface SiteExperience {
   id: string
   company: string
   role: string
@@ -68,7 +55,6 @@ export interface SiteExperience {
   yearRange: string
   yearRangeShort: string
   url?: string
-  timelinePhoto?: { src: string; alt: string }
 }
 
 function parseSiteMonth(value: string): SiteMonth {
@@ -112,7 +98,6 @@ export function parseSiteProfile(input: unknown) {
       yearRange: `${formatSiteMonth(start)} – ${end ? formatSiteMonth(end) : 'Present'}`,
       yearRangeShort: `${formatSiteMonthShort(start)} – ${end ? formatSiteMonthShort(end) : 'Present'}`,
       url: job.url,
-      timelinePhoto: job.timelinePhoto,
     }
   })
   return {

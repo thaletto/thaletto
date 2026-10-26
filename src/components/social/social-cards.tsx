@@ -12,13 +12,7 @@ export interface SocialSnapshot {
   bio?: string
 }
 
-export interface NotionSnapshot {
-  name: string
-  url: string
-  bio?: string
-}
-
-export interface EmailIdentity {
+interface EmailIdentity {
   name: string
   email: string
   country: string
@@ -27,7 +21,7 @@ export interface EmailIdentity {
 const WEEKS = 26
 const DAYS = 7
 
-export const GLYPHS: Record<string, { path: string; color?: string }> = {
+const GLYPHS: Record<string, { path: string; color?: string }> = {
   x: {
     path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
   },
@@ -114,7 +108,7 @@ function Identity({
 }
 
 // X exposes no public follower endpoint, so this card is static identity only.
-export function XCardBody({ data }: { data: SocialSnapshot }) {
+function XCardBody({ data }: { data: SocialSnapshot }) {
   return (
     <Identity
       name={data.name}
@@ -134,7 +128,7 @@ export function XCardBody({ data }: { data: SocialSnapshot }) {
   )
 }
 
-export function GitHubCardBody({ data }: { data: GitHubActivity }) {
+function GitHubCardBody({ data }: { data: GitHubActivity }) {
   const levels = data.levels.slice(-WEEKS * DAYS)
   return (
     <>

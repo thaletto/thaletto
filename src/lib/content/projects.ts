@@ -27,12 +27,12 @@ const projectFrontmatterSchema = publishedFrontmatterSchema.extend({
   hideCover: z.boolean().optional(),
 })
 
-export interface ProjectLink {
+interface ProjectLink {
   label: string
   url: string
 }
 
-export interface ProjectCover {
+interface ProjectCover {
   src: string
   width: number
   height: number
@@ -40,7 +40,7 @@ export interface ProjectCover {
   videoSrc?: string
 }
 
-export interface Project {
+interface Project {
   slug: string
   title: string
   description: string
@@ -65,7 +65,7 @@ export interface ProjectRow extends Omit<
   cover?: ProjectCover
 }
 
-export function getAllProjectSlugs() {
+function getAllProjectSlugs() {
   return discoverPublishedSlugs(PROJECTS_DIR)
 }
 

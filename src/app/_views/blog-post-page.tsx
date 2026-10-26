@@ -30,7 +30,7 @@ export function generatePostStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }))
 }
 
-export function requirePostSlug(slug: string) {
+function requirePostSlug(slug: string) {
   if (!isPostSlug(slug)) notFound()
   return slug
 }
@@ -136,7 +136,7 @@ const plateDateFormat = new Intl.DateTimeFormat('en-CA', {
   day: '2-digit',
 })
 
-export async function BlogPostPageView({ slug }: { slug: string }) {
+async function BlogPostPageView({ slug }: { slug: string }) {
   const post = getPost(requirePostSlug(slug))
   const rail = buildPostRail(post.title, post.body)
 
@@ -155,7 +155,6 @@ export async function BlogPostPageView({ slug }: { slug: string }) {
         <header>
           {post.cover && (
             <PolaroidCover
-              slug={post.slug}
               cover={post.cover}
               alt=""
               priority
