@@ -1,7 +1,12 @@
 import { z } from 'zod'
 
 import authoredSite from '../../content/site.json'
-import { formatDayMonthYear, formatLocalDate } from '../design/date'
+import {
+  formatDayMonthYear,
+  formatLocalDate,
+  formatMonthYear,
+  formatMonthYearShort,
+} from '../design/date'
 
 const identitySchema = z.object({
   name: z.string().min(1),
@@ -71,12 +76,18 @@ function parseSiteMonth(value: string): SiteMonth {
   return day ? { year, month, day } : { year, month }
 }
 
-// Authored experience dates are month-precision (day-precision when the
-// record carries one); render them through the site's canonical date
-// formatter, defaulting a bare month to its first day (UTC midnight stays
-// the same calendar day in SITE_TIME_ZONE).
 function siteMonthToDate({ year, month, day }: SiteMonth): Date {
   return new Date(Date.UTC(year, month - 1, day ?? 1))
+}
+
+function formatSiteMonth({ year, month, day }: SiteMonth): string {
+  const date = siteMonthToDate({ year, month, day })
+  return day ? formatLocalDate(date) : formatMonthYear(date)
+}
+
+function formatSiteMonthShort({ year, month, day }: SiteMonth): string {
+  const date = siteMonthToDate({ year, month, day })
+  return day ? formatDayMonthYear(date) : formatMonthYearShort(date)
 }
 
 export function parseSiteProfile(input: unknown) {
@@ -98,8 +109,8 @@ export function parseSiteProfile(input: unknown) {
       role: job.role,
       start,
       end,
-      yearRange: `${formatLocalDate(siteMonthToDate(start))} – ${end ? formatLocalDate(siteMonthToDate(end)) : 'Present'}`,
-      yearRangeShort: `${formatDayMonthYear(siteMonthToDate(start))} – ${end ? formatDayMonthYear(siteMonthToDate(end)) : 'Present'}`,
+      yearRange: `${formatSiteMonth(start)} – ${end ? formatSiteMonth(end) : 'Present'}`,
+      yearRangeShort: `${formatSiteMonthShort(start)} – ${end ? formatSiteMonthShort(end) : 'Present'}`,
       url: job.url,
       timelinePhoto: job.timelinePhoto,
     }
