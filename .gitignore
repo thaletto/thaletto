@@ -44,6 +44,9 @@ next-env.d.ts
 
 static/
 
+# Web Bot Auth signing material — never commit private keys.
+/secrets/
+
 .react-email/
 /.idea
 .env*
