@@ -1,25 +1,26 @@
-import { renderMermaidSVG } from 'beautiful-mermaid'
+import { PeleError, render } from 'pele'
 
 import { ScrollAreaX } from '~/components/ui/scroll-area'
 
-// beautiful-mermaid inlines Google Fonts @imports; strip them so the site stacks apply.
-const FONT_IMPORTS = /^\s*@import url\('https:\/\/fonts\.googleapis\.com[^']*'\);\n?/gm
+// Article column: max-w-173 (692px) minus px-4, so diagrams lay out against that measure.
+const COLUMN_WIDTH = 660
+
+// Stable per-diagram prefix so ids never collide when two diagrams share node names.
+function diagramId(source: string) {
+  let hash = 0
+  for (let i = 0; i < source.length; i++) hash = (hash * 31 + source.charCodeAt(i)) | 0
+  return `d${(hash >>> 0).toString(36)}`
+}
 
 export function MermaidDiagram({ code, caption }: { code: string; caption?: string }) {
   let svg: string
   try {
-    svg = renderMermaidSVG(code, {
-      bg: 'var(--surface-1)',
-      fg: 'var(--foreground)',
-      muted: 'var(--muted-foreground)',
-      accent: 'var(--gray-9)',
-      transparent: true,
-      padding: 24,
-    })
+    svg = render(code, { padding: 24, maxWidth: COLUMN_WIDTH, idPrefix: diagramId(code) }).svg
   } catch (error) {
-    throw new Error(
-      `mermaid diagram failed to render: ${error instanceof Error ? error.message : String(error)}\n${code}`,
-    )
+    if (!(error instanceof PeleError)) throw error
+
+    const position = error.line ? ` at line ${error.line}, column ${error.column}` : ''
+    throw new Error(`mermaid ${error.code}${position}: ${error.message}\n${error.snippet}\n${code}`)
   }
 
   // Trusted input: repo-committed MDX rendered at build time, never runtime strings.
@@ -30,7 +31,7 @@ export function MermaidDiagram({ code, caption }: { code: string; caption?: stri
           className="mermaid-sheet"
           role="img"
           aria-label={caption ?? 'Diagram'}
-          dangerouslySetInnerHTML={{ __html: svg.replace(FONT_IMPORTS, '') }}
+          dangerouslySetInnerHTML={{ __html: svg }}
         />
       </ScrollAreaX>
     </div>

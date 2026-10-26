@@ -1538,17 +1538,17 @@ figure[data-rehype-pretty-code-figure] {
 
 .mermaid-sheet svg {
   display: block;
-  /* beautiful-mermaid falls back to --muted/--accent/--border; reset them so page tokens never land in the diagram */
-  --line: initial;
-  --accent: initial;
-  --muted: initial;
-  --surface: initial;
-  --border: initial;
-}
-
-.mermaid-sheet svg text {
-  /* the library's Google Fonts imports are stripped server-side */
-  font-family: var(--font-sans);
+  /* pele themes through CSS variables, so diagrams follow the page tokens without re-rendering */
+  --pele-bg: var(--surface-1);
+  --pele-fg: var(--foreground);
+  --pele-muted: var(--muted-foreground);
+  --pele-line: color-mix(in oklab, var(--foreground) 78%, transparent);
+  --pele-surface: color-mix(in oklab, var(--foreground) 4%, var(--surface-1));
+  --pele-surface-alt: color-mix(in oklab, var(--foreground) 9%, var(--surface-1));
+  --pele-border: color-mix(in oklab, var(--foreground) 24%, transparent);
+  --pele-accent: var(--gray-9);
+  --pele-font: var(--font-sans);
+  --pele-font-mono: var(--font-mono);
 }
 
 figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] {
