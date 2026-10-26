@@ -29,8 +29,6 @@ export function CodeBlockPre(props: React.HTMLAttributes<HTMLPreElement>) {
         className="code-copy"
         data-copied={copied || undefined}
       >
-        {/* both icons stay mounted: the incoming one fades/scales in while
-            the outgoing reverses — no layout shift, no remount flash */}
         <span className="code-copy-icon" data-active={!copied || undefined} aria-hidden>
           <Copy size={14} />
         </span>

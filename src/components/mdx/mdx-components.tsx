@@ -41,9 +41,6 @@ import { PhotoStack, PhotoStackCaption, PhotoStackFrames } from './photo-stack'
 import { Term } from './term-popover'
 import { ThoughtExperiment } from './thought-experiment'
 
-// Post images arrive as ./file.png#WxH (dimensions encoded by the content
-// pipeline); rewrite to the content route and unpack the dimensions.
-// Absolute .svg paths render inline without the zoom treatment.
 function PostImage({
   slug,
   src,
@@ -58,15 +55,11 @@ function PostImage({
   kind: ContentKind
 }) {
   if (src.startsWith('/') && src.endsWith('.svg')) {
-    return (
-      // small technical marks remain native and crisp
-      <img alt={alt ?? ''} className="mdx-inline-logo" height={18} src={src} width={18} />
-    )
+    return <img alt={alt ?? ''} className="mdx-inline-logo" height={18} src={src} width={18} />
   }
   const match = src.match(/^\.\/([A-Za-z0-9_.-]+)#(\d+)x(\d+)$/)
   if (!match) throw new Error(`post image needs ./file#WxH format, got: ${src}`)
   const [, file, width, height] = match
-  // deterministic scatter in [-1°, +1°] per file; hover straightens
   const tilt = tiltFromSlug(file) / 2
   const img = (
     <ZoomImage
@@ -79,8 +72,7 @@ function PostImage({
     />
   )
   if (!title) return img
-  // Markdown images render inside <p>, where <figure> is invalid HTML —
-  // block-level spans carry the same styling.
+  // <figure> is invalid inside the <p> Markdown images render into, so use spans.
   return (
     <span className="post-figure block">
       {img}

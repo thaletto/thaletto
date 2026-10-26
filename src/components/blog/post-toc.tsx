@@ -93,9 +93,6 @@ export function PostToc({ nodes }: { nodes: PostRailNode[] }) {
     setActive(first)
   }, [landmarks])
 
-  // State changes apply immediately — no FLIP, no WAAPI, no stagger. Any
-  // leftover inline styles from a previous frame are cleared so the
-  // attribute-driven CSS is the single source of visibility.
   const setOpenState = useCallback((nextOpen: boolean) => {
     const items = rootRef.current?.querySelectorAll<HTMLElement>('.post-minimap-node')
     const panel = panelRef.current

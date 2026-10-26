@@ -1,6 +1,3 @@
-// `/projects/[slug]` — the project (case study) renderer. Same MDX pipeline
-// as the blog post view but with external links and polaroid cover treatment;
-// content comes from `lib/projects-content`.
 import { cacheLife } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -25,7 +22,7 @@ export function generateProjectStaticParams() {
   return getAllProjects().map((project) => ({ slug: project.slug }))
 }
 
-export function requireProjectSlug(slug: string) {
+function requireProjectSlug(slug: string) {
   if (!isProjectSlug(slug)) notFound()
   return slug
 }
@@ -122,7 +119,7 @@ async function CachedProjectBody({ slug }: { slug: string }) {
   )
 }
 
-export async function ProjectPostPageView({ slug }: { slug: string }) {
+async function ProjectPostPageView({ slug }: { slug: string }) {
   const project = getProject(requireProjectSlug(slug))
   const rail = buildPostRail(project.title, project.body)
   const clusterVariant = [...project.slug].reduce((sum, ch) => sum + ch.charCodeAt(0), 0)
@@ -135,7 +132,6 @@ export async function ProjectPostPageView({ slug }: { slug: string }) {
         <header>
           {project.cover && !project.hideCover && (
             <PolaroidCover
-              slug={project.slug}
               cover={project.cover}
               alt={project.title}
               priority

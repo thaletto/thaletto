@@ -9,14 +9,6 @@ import {
   readPublishedDocument,
 } from './published-document'
 
-/**
- * Blog post content loader.
- *
- * Posts are committed as MDX directories under `/src/content/blog/<slug>/`;
- * frontmatter is validated against a zod schema and the body is compiled for
- * `next-mdx-remote`. Every directory containing an `index.mdx` is published;
- * adding the content directory is the only publishing step.
- */
 const POSTS_DIR = path.join(process.cwd(), 'src/content/blog')
 
 const frontmatterSchema = publishedFrontmatterSchema.extend({
@@ -27,16 +19,12 @@ const frontmatterSchema = publishedFrontmatterSchema.extend({
 
 export type PostCover = PublishedCover
 
-// A title may italicize a word with *emphasis* markers. `title` carries the
-// plain, spoken form — for the <title> tag, lists, and link labels — while
-// `titleSegments` carries the typeset form for the places that render the
-// full heading.
-export interface TitleSegment {
+interface TitleSegment {
   text: string
   emphasis: boolean
 }
 
-export function parseEmphaticTitle(raw: string): {
+function parseEmphaticTitle(raw: string): {
   title: string
   titleSegments: TitleSegment[] | null
 } {
@@ -65,7 +53,7 @@ export interface Post {
 
 export const POST_ARTICLE_START_ID = 'post-article-start'
 
-export function getAllPostSlugs() {
+function getAllPostSlugs() {
   return discoverPublishedSlugs(POSTS_DIR)
 }
 
@@ -91,9 +79,6 @@ function cleanHeading(raw: string) {
     .trim()
 }
 
-// Build a deliberately even document minimap. Heading IDs use the same
-// github-slugger algorithm as rehype-slug, while a fixed number of quiet ticks
-// separates every landmark so prose length never changes the rail's rhythm.
 export function buildPostRail(title: string, body: string, idPrefix = ''): PostRailNode[] {
   const slugger = new GithubSlugger()
   const lines = body.split(/\r?\n/)
@@ -179,11 +164,6 @@ export function isPostSlug(slug: string) {
   return getAllPostSlugs().includes(slug)
 }
 
-// ── "Posts like this" ─────────────────────────────────────────────────
-// Lexical similarity computed at build time — no tags to maintain. Terms
-// are lowercased words (stop words dropped); title terms weigh triple.
-// Cosine over term frequencies, with recency breaking ties.
-
 const STOP_WORDS = new Set([
   'the',
   'and',
@@ -248,7 +228,6 @@ function similarity(a: Map<string, number>, b: Map<string, number>) {
   return dot / (norm(a) * norm(b) || 1)
 }
 
-// keyed on body lengths too, so a dev-mode content edit refreshes the vector
 const postVectors = new Map<string, Map<string, number>>()
 
 function postVector(post: Post) {

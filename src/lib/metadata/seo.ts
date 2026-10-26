@@ -1,13 +1,5 @@
 import { publicPageMetadata } from './public-page-metadata'
 
-/**
- * Static SEO constants.
- *
- * The single source of the canonical origin: `PUBLIC_SITE_URL` is validated
- * (must be HTTPS outside local dev) so canonical links, OG metadata, and the
- * sitemap never emit a malformed URL. `seo` is consumed everywhere metadata
- * is assembled.
- */
 function publicSiteUrl() {
   const raw =
     process.env.PUBLIC_SITE_URL ??

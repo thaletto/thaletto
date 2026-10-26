@@ -19,7 +19,7 @@ export default function GlobalNotFound() {
   return (
     <html lang="en" suppressHydrationWarning className={cn('font-sans', fontVariables)}>
       <head>
-        {/* authored bootstrap script, no runtime input */}
+        {/* Authored bootstrap string, never runtime input. */}
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
       </head>
       <body className="antialiased">

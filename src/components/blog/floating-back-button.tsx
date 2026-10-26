@@ -2,13 +2,7 @@ import Link from 'next/link'
 
 import { WayfindingArrow } from '~/components/blog/post-toc'
 
-// Floating back button for mobile MDX pages (`/blog/[slug]`,
-// `/projects/[slug]`). Mobile-only: the desktop rail already carries a Home
-// utility, and the phone island hides it (`utilities-top: display none`).
-//
-// A frosted circular button over a 68% background. The backdrop-filter
-// stays inline — LightningCSS strips raw backdrop-filter declarations
-// from stylesheets.
+// Inline because LightningCSS strips backdrop-filter from stylesheets.
 const BACK_GLASS_STYLE = {
   backdropFilter: 'blur(12px) saturate(1.25)',
   WebkitBackdropFilter: 'blur(12px) saturate(1.25)',

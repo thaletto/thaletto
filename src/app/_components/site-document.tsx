@@ -50,8 +50,6 @@ export async function SiteDocument({
             <AmbientBackground />
             <div className="flex min-h-screen flex-col pb-20">
               <main id="main" className="flex-1 pt-14">
-                {/* The non-none default isolates route content while keeping the
-                    CSS-named list → loading shell → article groups active. */}
                 <RouteViewTransition>{children}</RouteViewTransition>
               </main>
             </div>

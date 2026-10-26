@@ -4,10 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '~/lib/platform/utils'
 
-// Fluid horizontal scroll area: edge fades appear only while content
-// actually continues in that direction — the fade is information, not
-// decoration. State updates on scroll and resize; the fade strips tint
-// with the surface behind them via --scroll-fade-surface.
 export function ScrollAreaX({
   className,
   children,
@@ -36,9 +32,7 @@ export function ScrollAreaX({
     }
     observer.observe(viewport)
     observeChildren()
-    // Children mounted later (a dialog body populating asynchronously)
-    // must re-arm measurement — re-observing an element is a no-op, and
-    // detached nodes drop out of the ResizeObserver on their own.
+    // ResizeObserver drops detached nodes and re-observing is a no-op, so re-arm on mutations.
     const mutations = new MutationObserver(() => {
       observeChildren()
       update()

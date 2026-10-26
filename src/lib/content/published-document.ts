@@ -20,7 +20,7 @@ export interface PublishedCover {
   videoSrc?: string
 }
 
-export interface PublishedDocument<T> {
+interface PublishedDocument<T> {
   frontmatter: T
   body: string
   stats: { units: number; minutes: number }

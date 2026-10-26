@@ -20,6 +20,18 @@ const localDateFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: SITE_TIME_ZONE,
 })
 
+const monthYearFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  timeZone: SITE_TIME_ZONE,
+})
+
+const shortMonthYearFormatter = new Intl.DateTimeFormat('en-US', {
+  year: '2-digit',
+  month: '2-digit',
+  timeZone: SITE_TIME_ZONE,
+})
+
 export function formatMonthDay(date: Date): string {
   return monthDayFormatter.format(date)
 }
@@ -48,4 +60,19 @@ export function formatDayMonthYear(date: Date): string {
   )
 
   return `${parts.day}/${parts.month}/${parts.year}`
+}
+
+export function formatMonthYear(date: Date): string {
+  return monthYearFormatter.format(date)
+}
+
+export function formatMonthYearShort(date: Date): string {
+  const parts = Object.fromEntries(
+    shortMonthYearFormatter
+      .formatToParts(date)
+      .filter(({ type }) => type !== 'literal')
+      .map(({ type, value }) => [type, value]),
+  )
+
+  return `${parts.month}/${parts.year}`
 }

@@ -15,7 +15,7 @@ export default function GlobalError({ retry }: ErrorBoundaryProps) {
     <html lang="en" suppressHydrationWarning className={cn('font-sans', fontVariables)}>
       <head>
         <title>{`Something went wrong | ${siteIdentity.name}`}</title>
-        {/* authored bootstrap script, no runtime input */}
+        {/* Authored bootstrap string, never runtime input. */}
         <script dangerouslySetInnerHTML={{ __html: PREPAINT_SCRIPT }} />
       </head>
       <body className="antialiased">

@@ -4,7 +4,6 @@
 
 @theme inline {
   --font-heading: var(--font-sans);
-  /* Inter / JetBrains Mono / Libre Baskerville from next/font/google */
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-mono:
     var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -253,7 +252,6 @@
     @apply font-sans;
   }
 }
-/* ── Design-language tokens (docs/design-language.md) ─────────────── */
 
 :root {
   --ease-swift: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -279,7 +277,6 @@
 
   --grain-opacity: 0.3;
 
-  /* instant-print paper stays paper in any theme */
   --paper: oklch(0.98 0.004 95);
   --paper-ink: oklch(0.52 0.012 95);
 }
@@ -294,9 +291,6 @@
   --grain-opacity: 0.22;
 }
 
-/* The neutral gray ramp (jakub.kr): cool, near-zero-chroma steps. Public
-   pages share it — the neutral ramp above remains only as the
-   pre-hydration fallback. */
 .public-site {
   --gray-1: oklch(0.991 0 95);
   --gray-2: oklch(0.973 0 95);
@@ -312,7 +306,6 @@
   --gray-12: oklch(0.244 0 95);
   --selection-highlight: oklch(0.9 0.17 105 / 0.58);
 
-  /* the signal accent — one mark per view, never a text color */
   --signal: oklch(0.62 0.17 45);
   --ghost-ink: color-mix(in oklab, var(--foreground) 5%, transparent);
 
@@ -335,7 +328,6 @@
   --ring: var(--gray-8);
   --focus-ring: var(--gray-9);
 
-  /* the surface ladder, neutral: elevated sheets lift off the page */
   --surface-1: oklch(1 0 95);
   --surface-2: oklch(1 0 95);
 }
@@ -357,7 +349,6 @@
   --signal: oklch(0.7 0.17 48);
   --ghost-ink: color-mix(in oklab, var(--foreground) 6.5%, transparent);
 
-  /* neutral surface ladder, dark: each step lifts off the sheet */
   --surface-1: oklch(0.213 0 95);
   --surface-2: oklch(0.239 0 95);
   --surface-4: oklch(0.264 0 95);
@@ -374,8 +365,6 @@
 .hairline-top {
   border-top: var(--border-hairline) solid var(--border);
 }
-
-/* ── Error proof sheet ───────────────────────────────────────────── */
 
 .error-sheet {
   min-height: calc(100svh - 3.5rem);
@@ -432,7 +421,6 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  /* quiet registration marks — 30% ink, matching the plate-label register */
   color: color-mix(in oklab, var(--foreground) 30%, transparent);
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
@@ -609,8 +597,6 @@
   }
 }
 
-/* ── Ambient background: paper grain ─────────────────────────────── */
-
 .paper-grain {
   position: fixed;
   inset: 0;
@@ -622,8 +608,6 @@
   background-repeat: repeat;
   background-size: 128px 128px;
 }
-
-/* ── Calibration marks: viewfinder corner brackets ────────────────── */
 
 .calibration-corners {
   --corner-arm: 9px;
@@ -649,8 +633,6 @@
       var(--corner-arm) no-repeat;
 }
 
-/* ── Instant-photo cover ──────────────────────────────────────────── */
-
 .polaroid {
   background: var(--paper);
   padding: 2% 2% 0;
@@ -659,7 +641,6 @@
     0 2px 4px -1px rgb(0 0 0 / 0.18);
 }
 
-/* hairline ring where photo meets frame — sells the print edge */
 .polaroid-photo {
   position: relative;
   display: block;
@@ -684,26 +665,6 @@
   user-select: none;
 }
 
-.polaroid-tilted {
-  transform: rotate(var(--tilt, 0deg));
-}
-
-/* hover = pick-up, not flatten; press squishes the gesture, not the paper */
-@media (hover: hover) and (pointer: fine) {
-  .group:hover .polaroid-tilted {
-    transform: rotate(calc(var(--tilt, 0deg) + 1.2deg)) scale(1.03);
-    box-shadow:
-      0 0 0 1px rgb(0 0 0 / 0.04),
-      var(--shadow-medium);
-  }
-
-  .group:active .polaroid-tilted {
-    transform: rotate(calc(var(--tilt, 0deg) + 1.2deg)) scale(0.94);
-  }
-}
-
-/* ── Post prose ───────────────────────────────────────────────────── */
-
 .prose {
   color: var(--gray-10, var(--foreground));
   font-size: 1rem;
@@ -719,7 +680,6 @@
   margin-top: 1.25em;
 }
 
-/* article measure: long-form text stays near 68ch inside the wider column */
 .prose > p,
 .prose > ul,
 .prose > ol,
@@ -745,7 +705,6 @@
   counter-increment: prose-section;
 }
 
-/* the section rule follows the heading, like the homepage section titles */
 .prose h2::after {
   content: '';
   flex: 1;
@@ -812,9 +771,6 @@
   color: var(--gray-8, var(--muted-foreground));
 }
 
-/* Route transition (driven by the controller + boundary at the layout
-   shell): the origin defocuses while the destination rises, like main.
-   Shared covers/titles morph via view-transition-name. */
 @keyframes vt-defocus {
   to {
     opacity: 0;
@@ -849,7 +805,6 @@
   animation: vt-focus 300ms var(--ease-swift) both;
 }
 
-/* Crossfade the loading shell's cover and title into the article. */
 .post-loading-cover {
   view-transition-name: var(--post-cover-transition-name, none);
 }
@@ -858,8 +813,6 @@
   view-transition-name: var(--post-title-transition-name, none);
 }
 
-/* Shared title morphs travel the viewport, so they get a longer window
-   than the 300ms UI budget — the distance is the justification. */
 ::view-transition-group(*) {
   animation-duration: 320ms;
   animation-timing-function: var(--ease-swift);
@@ -883,12 +836,9 @@ html[data-route-motion='none']::view-transition-new(*) {
   }
 }
 
-/* the post plate breathes under the title (wins over .spec-plate margin: 0) */
 .post-title-card .spec-plate {
   margin-top: 1.5rem;
 }
-
-/* ── Spec plate: stamped label/value meta (technical print register) ── */
 
 .spec-plate {
   display: grid;
@@ -924,7 +874,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   white-space: nowrap;
 }
 
-/* the lit cell — the plate carries this page's single signal mark */
 .spec-signal {
   display: inline-block;
   width: 5px;
@@ -934,7 +883,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   background: var(--signal);
 }
 
-/* flow variant: cells wrap to their content instead of the fixed grid */
 .spec-plate-flow {
   display: flex;
   flex-wrap: wrap;
@@ -946,8 +894,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   white-space: normal;
   overflow-wrap: anywhere;
 }
-
-/* ── Section tags: index cell + hatch chip + label ────────────────── */
 
 .section-tag {
   display: inline-flex;
@@ -975,7 +921,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   font-variant-numeric: tabular-nums;
 }
 
-/* hazard hatch: fine diagonal strokes in a bordered chip */
 .section-tag-hatch {
   width: 0.75rem;
   border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 45%, transparent);
@@ -989,8 +934,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   );
 }
 
-/* homepage section titles: the label is followed by a hairline rule that
-   takes up the rest of the row */
 .section-tag-ruled {
   display: flex;
   flex: 1;
@@ -1006,8 +949,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   background: var(--border);
 }
 
-/* Landing entrance: one staged pass over the hierarchy — blocks rise in
-   transform/opacity order with a short stagger, never all at once. */
 @keyframes landing-rise {
   from {
     opacity: 0;
@@ -1032,8 +973,6 @@ html[data-route-motion='none']::view-transition-new(*) {
     animation-delay: var(--enter-delay, 0ms);
   }
 }
-
-/* ── Print ephemera: barcode and ghost folio numerals ─────────────── */
 
 .barcode {
   display: inline-block;
@@ -1062,8 +1001,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   color: color-mix(in oklab, var(--foreground) 38%, transparent);
 }
 
-/* ── Pixel cluster: dither cells as a site mark, one lit ──────────── */
-
 .pixel-cluster {
   display: grid;
   grid-template-columns: 5px 5px;
@@ -1087,8 +1024,6 @@ html[data-route-motion='none']::view-transition-new(*) {
 .pixel-cluster .pc-b {
   background: color-mix(in oklab, var(--foreground) 11%, transparent);
 }
-
-/* ── Posts like this: catalog rows at the article foot ────────────── */
 
 .post-related {
   margin-top: 4rem;
@@ -1118,7 +1053,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   position: relative;
 }
 
-/* square markers — a single cell from the dither vocabulary */
 .prose ul > li::before {
   content: '';
   position: absolute;
@@ -1129,7 +1063,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   background: var(--muted-foreground);
 }
 
-/* ordered lists open with plain two-digit ordinals in the gutter */
 .prose ol {
   list-style: none;
   counter-reset: prose-step;
@@ -1166,8 +1099,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   color: var(--muted-foreground);
 }
 
-/* quotation bar: the hazard hatch set vertically — quoted text is
-   material brought in from elsewhere, so it wears the annotation strip */
 .prose blockquote::before {
   content: '';
   position: absolute;
@@ -1178,9 +1109,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   background: var(--muted-foreground);
 }
 
-/* post images are figure prints: square-cornered on a hairline ring,
-   resting on the surface ladder (a floor for transparent images and
-   loading frames), keeping their deterministic scatter tilt */
 .prose .zoom-trigger img {
   border-radius: 2px;
   background: var(--surface-1);
@@ -1191,7 +1119,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   box-shadow: 0 0 0 1px oklch(1 0 95 / 0.08);
 }
 
-/* captions are plate annotations: left-set mono with a FIG. number */
 .prose figcaption,
 .prose .post-figcaption {
   margin-top: 0.625rem;
@@ -1213,9 +1140,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   letter-spacing: 0.08em;
 }
 
-/* A contact sheet for lived-in photo sequences: one anchoring scene with
-   smaller observations tucked along its edge. Each print remains independently
-   zoomable, while the group carries one editorial caption. */
 .photo-stack__frames {
   display: grid;
   grid-template-columns: minmax(0, 1.62fr) minmax(8rem, 1fr);
@@ -1289,9 +1213,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   }
 }
 
-/* ── Thought experiment: the eight-second mind trap (MDX island) ───── */
-
-/* the instruction is the interface — set to the section-heading voice */
 .thought-prompt {
   margin: 0;
   max-width: 34ch;
@@ -1304,12 +1225,10 @@ html[data-route-motion='none']::view-transition-new(*) {
   transition: opacity 480ms var(--ease-swift);
 }
 
-/* while the confession is on the table, the instruction steps back */
 .thought-experiment[data-phase='complete'] .thought-prompt {
   opacity: 0.45;
 }
 
-/* the live datum sits inline in the sentence: mono, tabular, one decimal */
 .thought-readout {
   font-family: var(--font-mono);
   font-size: 0.9em;
@@ -1318,20 +1237,14 @@ html[data-route-motion='none']::view-transition-new(*) {
   transition: color 320ms var(--ease-swift);
 }
 
-/* the last second sharpens its ink — pressure, rendered as emphasis */
 .thought-experiment[data-final] .thought-readout {
   color: var(--gray-12, var(--foreground));
 }
 
-/* settled at zero, the datum dims with its sentence */
 .thought-experiment[data-phase='complete'] .thought-readout {
   color: var(--gray-8, var(--muted-foreground));
 }
 
-/* the forbidden gallery: each crossing prints its association as a quiet
-   mono remark under the sentence, arriving with a small settle */
-/* the forbidden gallery: each association prints as a quiet sans remark
-   under the sentence, arriving with a small settle */
 .thought-association {
   margin: 0;
   margin-block-start: 1rem;
@@ -1355,7 +1268,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   }
 }
 
-/* progress is a single hairline under the sentence, draining toward zero */
 .thought-rule {
   display: block;
   width: 100%;
@@ -1412,8 +1324,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   height: 0.875rem;
 }
 
-/* the reveal waits collapsed under the prompt, then unfolds as the
-   instruction dims — the confession reads as its consequence */
 .thought-reveal {
   display: grid;
   grid-template-rows: 0fr;
@@ -1433,7 +1343,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   min-height: 0;
 }
 
-/* "Now be honest." steps back a grade; the question keeps full ink */
 .thought-reveal-kicker {
   color: var(--gray-8, var(--muted-foreground));
 }
@@ -1450,9 +1359,6 @@ html[data-route-motion='none']::view-transition-new(*) {
   text-wrap: balance;
 }
 
-/* essay content nested inside the component only exists once the run is
-   over — collapsed in the experiment's shadow, unfolding a beat after the
-   confession */
 .thought-continuation {
   display: grid;
   grid-template-rows: 0fr;
@@ -1472,16 +1378,12 @@ html[data-route-motion='none']::view-transition-new(*) {
   min-height: 0;
 }
 
-/* the continuation arrives one beat at a time — the first handful of
-   paragraphs settle in sequence while the page unfolds; the deeper ones
-   sit below the fold where entrance motion can't be seen anyway */
 .thought-continuation-clip > * {
   opacity: 0;
   transform: translateY(8px);
   transition:
     opacity 420ms var(--ease-swift),
     transform 420ms var(--ease-swift);
-  /* exits don't wait their turn — the collapse needs a clean sweep */
   transition-delay: 0ms;
 }
 
@@ -1510,11 +1412,9 @@ html[data-route-motion='none']::view-transition-new(*) {
 .thought-continuation[data-shown] .thought-continuation-clip > * {
   opacity: 1;
   transform: none;
-  /* staggered 70ms apart, starting while the unfold is still settling */
   transition-delay: calc(120ms + var(--stagger-i) * 70ms);
 }
 
-/* prose rhythm doesn't reach inside the island — restore it by hand */
 .thought-continuation-clip > :first-child {
   margin-block: 0;
   padding-block-start: 2.5rem;
@@ -1563,16 +1463,10 @@ html[data-route-motion='none']::view-transition-new(*) {
   overflow-wrap: anywhere;
 }
 
-/* ── Code blocks (rehype-pretty-code + shiki dual themes) ─────────── */
-
-/* the code block is a nameplate: a hairline frame, a ruled filename row
-   with a boxed language tag, and the sheet of code below */
 figure[data-rehype-pretty-code-figure] {
   border: var(--border-hairline) solid var(--border);
 }
 
-/* the code sheet rests one step up the surface ladder; the fade strips
-   tint with the same surface so continuation reads seamlessly */
 .code-frame {
   position: relative;
   background: var(--surface-1);
@@ -1586,8 +1480,6 @@ figure[data-rehype-pretty-code-figure] {
   font-size: 0.8125rem;
   line-height: 1.6;
 }
-
-/* ── Fluid horizontal scroll area (components/ui/scroll-area.tsx) ── */
 
 .scroll-area-x {
   position: relative;
@@ -1606,7 +1498,6 @@ figure[data-rehype-pretty-code-figure] {
   border-radius: 4px;
 }
 
-/* edge fades: visible only while content continues in that direction */
 .scroll-area-x-fade {
   position: absolute;
   top: 0;
@@ -1631,18 +1522,12 @@ figure[data-rehype-pretty-code-figure] {
   opacity: 1;
 }
 
-/* ── Mermaid diagrams (beautiful-mermaid, server-rendered svg) ────── */
-
-/* the diagram rests on the same sheet treatment as code: hairline frame,
-   one step up the surface ladder, edge fades tinted to match */
 .mermaid-frame {
   border: var(--border-hairline) solid var(--border);
   background: var(--surface-1);
   --scroll-fade-surface: var(--surface-1);
 }
 
-/* natural svg size, centered when narrower than the column; wider
-   diagrams keep 1:1 scale and scroll instead of shrinking their text */
 .mermaid-sheet {
   display: flex;
   justify-content: center;
@@ -1653,9 +1538,7 @@ figure[data-rehype-pretty-code-figure] {
 
 .mermaid-sheet svg {
   display: block;
-  /* the svg derives its palette from --bg/--fg with var(--muted, …)-style
-     fallbacks; the page's shadcn tokens (--muted, --accent, --border) would
-     leak in as *background* colors, so reset them to keep the derivation */
+  /* beautiful-mermaid falls back to --muted/--accent/--border; reset them so page tokens never land in the diagram */
   --line: initial;
   --accent: initial;
   --muted: initial;
@@ -1663,9 +1546,8 @@ figure[data-rehype-pretty-code-figure] {
   --border: initial;
 }
 
-/* the library's font imports are stripped server-side; restore the site
-   stacks over the svg's internal rules */
 .mermaid-sheet svg text {
+  /* the library's Google Fonts imports are stripped server-side */
   font-family: var(--font-sans);
 }
 
@@ -1684,7 +1566,6 @@ figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title]
   color: color-mix(in oklab, var(--muted-foreground) 88%, transparent);
 }
 
-/* boxed language tag, from the pretty-code attribute */
 figure[data-rehype-pretty-code-figure]
   figcaption[data-rehype-pretty-code-title][data-language]::after {
   content: attr(data-language);
@@ -1706,8 +1587,6 @@ code[data-theme] span {
   color: var(--shiki-dark);
 }
 
-/* the sheet's background comes from the surface ladder, not the theme —
-   shiki keeps the token colors, the paper keeps the elevation */
 pre[data-theme],
 .dark pre[data-theme] {
   background: transparent;
@@ -1727,14 +1606,11 @@ pre[data-theme],
 }
 
 .code-copy::after {
-  /* 44px minimum hit area */
   content: '';
   position: absolute;
   inset: -0.5rem;
 }
 
-/* icon swap: incoming scales 0.25 → 1 with opacity 0 → 1 and blur
-   4px → 0; the outgoing reverses the same curve */
 .code-copy-icon {
   display: grid;
   place-items: center;
@@ -1773,8 +1649,6 @@ pre[data-theme],
   color: var(--foreground);
 }
 
-/* ── Image lightbox (components/zoom-image.tsx) ───────────────────── */
-
 .zoom-trigger {
   display: block;
   width: 100%;
@@ -1782,7 +1656,6 @@ pre[data-theme],
 }
 
 .zoom-trigger[data-zoomed] img {
-  /* the photo has been picked up — leave its shadow spot empty */
   visibility: hidden;
 }
 
@@ -1816,7 +1689,6 @@ pre[data-theme],
   box-shadow: var(--shadow-large);
 }
 
-/* viewfinder brackets develop just outside the settled photo */
 .zoom-overlay-marks {
   position: fixed;
   opacity: 0;
@@ -1825,8 +1697,6 @@ pre[data-theme],
 .zoom-overlay[data-state='open'] .zoom-overlay-marks {
   opacity: 0.55;
 }
-
-/* ── External links: inline favicon + preview hover card ──────────── */
 
 .external-label {
   display: inline;
@@ -1855,8 +1725,6 @@ pre[data-theme],
 a:focus-visible .external-label .external-mark {
   opacity: 0.95;
 }
-
-/* ── Homepage introduction: small marks, deliberate responses ───── */
 
 .home-introduction p {
   color: var(--gray-10, var(--muted-foreground));
@@ -1970,7 +1838,6 @@ a:focus-visible .external-label .external-mark {
 }
 
 .link-card {
-  /* informational only: never selectable, never a pointer target */
   pointer-events: none;
   user-select: none;
   display: flex;
@@ -1978,7 +1845,6 @@ a:focus-visible .external-label .external-mark {
   gap: 0.375rem;
   width: 16rem;
   padding: 0.625rem 0.75rem;
-  /* a printed label: the register's corner, elevation from the ladder */
   border-radius: 2px;
   background: var(--surface-3);
   box-shadow:
@@ -2006,11 +1872,6 @@ a:focus-visible .external-label .external-mark {
   transform: scale(0.97);
 }
 
-/* ── Term gloss (components/mdx/term-popover.tsx) ─────────────────── */
-
-/* the gloss trigger: a dotted word in prose — the underline is the only
-   signal mark; hover deepens ink, which is a color change and safe
-   everywhere. Focus rides the ring the component owns. */
 .prose [data-slot='hover-card-trigger'] {
   cursor: help;
   transition: color 160ms var(--ease-swift);
@@ -2022,10 +1883,6 @@ a:focus-visible .external-label .external-mark {
   text-decoration-color: var(--gray-11, var(--foreground));
 }
 
-/* the gloss card: shadcn hover-card surface, retuned to the site's print
-   register — press radius, tight padding — and the site's own transitions
-   for arrival; base classes carry the surface colors. Keyed by data-slot
-   because the card mounts in a portal, outside any prose scope. */
 [data-slot='hover-card-content'] {
   padding: 0.5625rem 0.75rem;
   border-radius: 2px;
@@ -2064,8 +1921,6 @@ a:focus-visible .external-label .external-mark {
   transform: none;
 }
 
-/* ── Halftone portrait (components/halftone-portrait.tsx) ─────────── */
-
 [data-halftone] {
   display: block;
   position: relative;
@@ -2073,16 +1928,12 @@ a:focus-visible .external-label .external-mark {
   user-select: none;
 }
 
-/* The homepage portrait keeps its softened illustration at rest. A bounded
-   topographic field develops behind it only after deliberate attention. */
 [data-portrait-stage] {
   position: relative;
   isolation: isolate;
   display: block;
   aspect-ratio: 1;
 }
-
-/* ── Email envelope: the hover card is a little piece of mail ─────── */
 
 .email-envelope-card {
   overflow: hidden;
@@ -2116,7 +1967,6 @@ a:focus-visible .external-label .external-mark {
     auto;
 }
 
-/* postal edge: quiet red/blue registration ink around the paper */
 .email-envelope::before {
   content: '';
   position: absolute;
@@ -2159,7 +2009,6 @@ a:focus-visible .external-label .external-mark {
   opacity: 0.62;
 }
 
-/* closed front flap: lower seams meet under the recipient address */
 .email-envelope-flap {
   position: absolute;
   inset: auto 0 0;
@@ -2246,7 +2095,6 @@ a:focus-visible .external-label .external-mark {
   color: color-mix(in oklab, var(--mail-blue) 66%, var(--paper-ink));
 }
 
-/* cancellation circle and three horizontal ink bars overlap the postage */
 .email-envelope-postmark {
   position: absolute;
   top: 1.35rem;
@@ -2308,8 +2156,6 @@ a:focus-visible .external-label .external-mark {
   opacity: 0.68;
 }
 
-/* ── Post images: scattered prints that straighten on attention ───── */
-
 .zoom-trigger {
   transform: rotate(var(--img-tilt, 0deg));
 }
@@ -2319,8 +2165,6 @@ a:focus-visible .external-label .external-mark {
     transform: rotate(0deg) scale(1.02);
   }
 }
-
-/* ── Viewport edge fades: subtle progressive blur top & bottom ────── */
 
 .viewport-edge-fade {
   position: fixed;
@@ -2359,8 +2203,6 @@ a:focus-visible .external-label .external-mark {
   -webkit-mask-image: linear-gradient(to top, black, transparent 45%);
 }
 
-/* ── Experience rows ──────────────────────────────────────────────── */
-
 .experience-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content;
@@ -2392,79 +2234,20 @@ a:focus-visible .external-label .external-mark {
   font-weight: var(--font-weight-medium);
 }
 
-/* ── Tech stack: reusable card + MDX grid ────────────────────────── */
-
-.tech-stack {
-  overflow: hidden;
-  border: var(--border-hairline) solid color-mix(in oklab, var(--muted-foreground) 32%, transparent);
-  border-radius: var(--radius-sm);
-  background: var(--background);
-}
-
-.tech-stack[data-variant='card'] {
-  overflow: visible;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
-.tech-stack[data-variant='embedded'] {
-  overflow: visible;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
-.tech-stack-header {
-  display: flex;
-  min-height: 4.5rem;
-  align-items: center;
-  padding: 1rem 1.25rem;
-  border-bottom: var(--border-hairline) solid
-    color-mix(in oklab, var(--muted-foreground) 24%, transparent);
-}
-
-.tech-stack[data-variant='card'] .tech-stack-header {
-  min-height: 0;
-  padding: 0;
-  border: 0;
-}
-
-.tech-stack[data-variant='card'] .tech-stack-grid {
-  gap: 0;
-  margin-top: 1rem;
-  background: transparent;
-}
-
-.tech-stack[data-variant='card'] .tech-stack-item,
-.tech-stack[data-variant='card'] .tech-stack-filler {
-  background: transparent;
-}
-
-.tech-stack[data-variant='embedded'] .tech-stack-grid {
-  gap: 0;
-  background: transparent;
-}
-
-.tech-stack[data-variant='embedded'] .tech-stack-item,
-.tech-stack[data-variant='embedded'] .tech-stack-filler {
-  background: transparent;
-}
-
 .tech-stack-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--border-hairline);
+  gap: 0;
   margin: 0;
   padding: 0;
-  background: color-mix(in oklab, var(--muted-foreground) 24%, transparent);
+  background: transparent;
 }
 
 .tech-stack-item,
 .tech-stack-filler {
   min-width: 0;
   min-height: 5.5rem;
-  background: var(--background);
+  background: transparent;
 }
 
 .tech-stack-item {
@@ -2540,8 +2323,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-/* ── Per-service hover cards (components/social-cards.tsx) ────────── */
-
 .service-card {
   gap: 0.5rem;
 }
@@ -2587,7 +2368,6 @@ a:focus-visible .external-label .external-mark {
   color: var(--foreground);
 }
 
-/* handles are machine text */
 .service-card-sub {
   color: var(--muted-foreground);
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -2602,8 +2382,6 @@ a:focus-visible .external-label .external-mark {
   white-space: pre-line;
 }
 
-/* the stat row is the card's plate foot: ruled, mono, tabular. Units
-   never break internally — long locales wrap at the separators. */
 .service-card-stat {
   display: flex;
   flex-wrap: wrap;
@@ -2628,15 +2406,12 @@ a:focus-visible .external-label .external-mark {
   color: var(--foreground);
 }
 
-/* a second stat row sits under the ruled plate without its own divider */
 .service-card-stat-below {
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
 }
 
-/* 26-week (~180 day) contribution grid; cells cascade in individually
-   per the hover-card contract */
 .contrib-grid {
   display: flex;
   gap: 2px;
@@ -2690,8 +2465,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-/* ── Blog index rows: print thumb · title ···· date ───────────────── */
-
 .blog-row {
   display: flex;
   align-items: center;
@@ -2706,7 +2479,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-/* the date is quiet metadata — one step down from the row's title */
 .experience-date,
 .blog-row-date {
   font-size: 0.75rem;
@@ -2742,14 +2514,11 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-/* leader between title and date — the typewriter TOC register */
 .blog-row-leader {
   flex: 1;
   min-width: 1.5rem;
   align-self: center;
 }
-
-/* ── Post document map and clipped mobile reading island ────────── */
 
 .post-minimap-root {
   --post-minimap-width: 15rem;
@@ -3284,13 +3053,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-/* ── Floating back button: mobile MDX pages ──────────────────────── */
-/* Mobile-only escape hatch — the desktop rail already carries Home, and
-   the phone island hides its utilities-top row. Frosted-circle treatment
-   mirrors the removed pill dock: 68% background with the backdrop-filter
-   set inline from the component (LightningCSS strips it here). Bottom-left
-   keeps it clear of the top-center reading island. */
-
 .floating-back {
   position: fixed;
   bottom: max(1rem, env(safe-area-inset-bottom, 0px));
@@ -3356,32 +3118,9 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-/* anchored headings clear the viewport edge fade */
 .prose h2,
 .prose h3 {
   scroll-margin-top: 4.5rem;
-}
-
-.zoom-overlay-details {
-  --zoom-details-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
-  position: fixed;
-  inset-inline: 0;
-  bottom: var(--zoom-details-bottom);
-  pointer-events: none;
-}
-
-.zoom-overlay-details .spec-plate {
-  gap: 0.375rem 0.875rem;
-  padding-block: 0.5rem;
-}
-
-.zoom-overlay-details .spec-plate dt {
-  font-size: 0.625rem;
-}
-
-.zoom-overlay-details .spec-plate dd {
-  margin-top: 0.125rem;
-  font-size: 0.75rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -3390,7 +3129,6 @@ a:focus-visible .external-label .external-mark {
   }
 }
 
-/* A standalone hatch chip (no index cell in front) keeps its left rule. */
 .section-tag-hatch:first-child {
   border-left: var(--border-hairline) solid
     color-mix(in oklab, var(--muted-foreground) 45%, transparent);

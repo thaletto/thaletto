@@ -7,13 +7,6 @@ import {
   readPublishedDocument,
 } from './published-document'
 
-/**
- * Project content loader.
- *
- * Projects are committed as MDX directories under `src/content/projects/`.
- * This module owns directory listing, frontmatter validation, and the
- * colocated cover-art metadata used by listing and detail pages.
- */
 const PROJECTS_DIR = path.join(process.cwd(), 'src/content/projects')
 
 const projectLinkSchema = z.object({
@@ -34,12 +27,12 @@ const projectFrontmatterSchema = publishedFrontmatterSchema.extend({
   hideCover: z.boolean().optional(),
 })
 
-export interface ProjectLink {
+interface ProjectLink {
   label: string
   url: string
 }
 
-export interface ProjectCover {
+interface ProjectCover {
   src: string
   width: number
   height: number
@@ -47,7 +40,7 @@ export interface ProjectCover {
   videoSrc?: string
 }
 
-export interface Project {
+interface Project {
   slug: string
   title: string
   description: string
@@ -72,7 +65,7 @@ export interface ProjectRow extends Omit<
   cover?: ProjectCover
 }
 
-export function getAllProjectSlugs() {
+function getAllProjectSlugs() {
   return discoverPublishedSlugs(PROJECTS_DIR)
 }
 
@@ -129,7 +122,6 @@ export function isProjectSlug(slug: string) {
   return getAllProjectSlugs().includes(slug)
 }
 
-// Compact shape for list rows — no bodies, stats, or reading times.
 export function getProjectRows(): ProjectRow[] {
   return getAllProjects().map(({ body, bodyUnits, readingMinutes, ...row }) => ({
     ...row,

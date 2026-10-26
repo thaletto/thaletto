@@ -6,9 +6,6 @@ interface MdastNode {
   children?: MdastNode[]
 }
 
-// ```mermaid fences become <MermaidDiagram> before rehype-pretty-code can
-// claim them as code blocks. Caption rides on the fence meta:
-// ```mermaid caption="..."
 export default function remarkMermaid() {
   return function transform(tree: MdastNode) {
     function visit(node: MdastNode) {

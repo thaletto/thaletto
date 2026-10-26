@@ -10,7 +10,7 @@ export interface GitHubActivity {
 }
 
 type FetchResponse = Pick<Response, 'ok' | 'status' | 'json'>
-export type GitHubFetcher = (input: string, init?: RequestInit) => Promise<FetchResponse>
+type GitHubFetcher = (input: string, init?: RequestInit) => Promise<FetchResponse>
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/
 const millisecondsPerDay = 24 * 60 * 60 * 1000

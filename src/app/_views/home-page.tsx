@@ -1,15 +1,12 @@
-// `/` view — portrait + introduction, live social numbers, latest posts, and
-// the nav cards, assembled from the same content loaders the inner pages use;
-// `app/page.tsx` supplies the metadata and streaming shell.
 import { PostRow } from '~/components/blog/post-row'
 import { HomeIntroduction } from '~/components/home/home-introduction'
 import { ProjectRow } from '~/components/projects/project-row'
 import { ExternalLabel } from '~/components/social/external-mark'
 import { PixelCluster } from '~/components/visual/pixel-cluster'
-import { siteExperience, siteIdentity } from '~/lib/content/personal'
+import { siteExperience, siteIdentity, siteSocial } from '~/lib/content/personal'
 import { getAllPosts } from '~/lib/content/posts'
 import { getProjectRows } from '~/lib/content/projects'
-import { getGitHub, getSocial } from '~/lib/content/social-live'
+import { getGitHub } from '~/lib/content/social-live'
 
 function SectionTitle({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
@@ -24,7 +21,7 @@ function SectionTitle({ children, delay = 0 }: { children: React.ReactNode; dela
 }
 
 export async function HomePageView() {
-  const [social, github] = await Promise.all([getSocial(), getGitHub()])
+  const github = await getGitHub()
   const posts = getAllPosts()
   const latest = posts.slice(0, 5)
   const projects = getProjectRows()
@@ -40,7 +37,7 @@ export async function HomePageView() {
             <PixelCluster variant={2} className="shrink-0" />
           </div>
           <div className="mt-4">
-            <HomeIntroduction social={social.x} github={github} />
+            <HomeIntroduction social={siteSocial.x} github={github} />
           </div>
         </div>
       </div>

@@ -2,16 +2,12 @@ import { renderMermaidSVG } from 'beautiful-mermaid'
 
 import { ScrollAreaX } from '~/components/ui/scroll-area'
 
-// The library inlines Google Fonts imports for its default typefaces; fonts
-// are self-hosted here, so drop them and let .mermaid-figure css restore the
-// site stacks.
+// beautiful-mermaid inlines Google Fonts @imports; strip them so the site stacks apply.
 const FONT_IMPORTS = /^\s*@import url\('https:\/\/fonts\.googleapis\.com[^']*'\);\n?/gm
 
 export function MermaidDiagram({ code, caption }: { code: string; caption?: string }) {
   let svg: string
   try {
-    // Colors are emitted as CSS variables on the svg element, so light/dark
-    // both resolve at paint time from the same markup — no dual render.
     svg = renderMermaidSVG(code, {
       bg: 'var(--surface-1)',
       fg: 'var(--foreground)',
@@ -26,19 +22,14 @@ export function MermaidDiagram({ code, caption }: { code: string; caption?: stri
     )
   }
 
+  // Trusted input: repo-committed MDX rendered at build time, never runtime strings.
   const sheet = (
     <div className="mermaid-frame">
       <ScrollAreaX>
         <div
           className="mermaid-sheet"
           role="img"
-          // role="img" needs a name even without a caption; the generic
-          // fallback beats AT reading the svg's positioned text fragments
           aria-label={caption ?? 'Diagram'}
-          // trusted-input boundary: diagram source is repo-committed MDX
-          // rendered at build time, never user-supplied — revisit with a
-          // sanitizer before ever feeding this component runtime input
-          // build-time mermaid output, see above
           dangerouslySetInnerHTML={{ __html: svg.replace(FONT_IMPORTS, '') }}
         />
       </ScrollAreaX>

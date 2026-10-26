@@ -141,8 +141,7 @@ export default async function OpenGraphImage() {
           transform: 'rotate(1.5deg)',
         }}
       >
-        {/* Satori needs an embedded URL for local files. The source remains the checked-in portrait. */}
-        {/* Satori ImageResponse requires a plain embedded image */}
+        {/* Satori needs a data URI for local files; the source is the checked-in portrait. */}
         <img
           src={portraitDataUri}
           alt=""
