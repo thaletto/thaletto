@@ -1,4 +1,3 @@
-// Refreshes the baked GitHub Activity adapter used when live retrieval fails.
 import { writeFileSync } from 'node:fs'
 
 import { loadGitHubActivity } from '../lib/content/github-activity'

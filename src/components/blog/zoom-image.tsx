@@ -45,8 +45,6 @@ function renditionForWidth(renditions: ZoomImageProps['renditions'], requestedWi
   )
 }
 
-// Click-to-zoom for post images: the photo appears over a dimmed sheet.
-// Esc / click / scroll puts it back down.
 export function ZoomImage({
   src,
   alt,
@@ -67,9 +65,7 @@ export function ZoomImage({
   } | null>(null)
 
   const expandedSrc = largestRendition(renditions)?.src ?? src
-  // Next Image owns responsive selection and layout, while Bunny remains the
-  // encoder/cache layer. Selecting an immutable Rendition here avoids a second
-  // quality pass through Next's optimizer.
+  // Renditions are pre-encoded by Bunny; a Next quality pass would re-encode them.
   const renditionLoader = useCallback<ImageLoader>(
     ({ width: requestedWidth }) =>
       renditionForWidth(renditions, requestedWidth)?.src ?? expandedSrc,
@@ -92,8 +88,6 @@ export function ZoomImage({
   const open = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
-      // Fit within the viewport but never beyond the intrinsic size —
-      // zoom means "actual size", not "stretch".
       const maxW = Math.min(window.innerWidth - VIEWPORT_PAD * 2, width)
       const rootFontSize = rootFontSizePixels()
       const detailSpace = expandedContent
@@ -137,16 +131,12 @@ export function ZoomImage({
         e.preventDefault()
         close()
       }
-      // image-only dialog: the overlay is the sole focusable — keep Tab inside
       if (e.key === 'Tab') e.preventDefault()
     }
-    // A scroll gesture still dismisses the print, but never moves the page:
-    // the sheet stays frozen while the photo is up.
     const onGesture = (e: Event) => {
       e.preventDefault()
       close()
     }
-    // Scrolls that bypass wheel/touch (keyboard, scrollbar drag) still close.
     const onViewportChange = () => close()
     window.addEventListener('keydown', onKey)
     window.addEventListener('wheel', onGesture, { passive: false })

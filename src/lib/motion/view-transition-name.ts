@@ -1,12 +1,6 @@
 export type PostTransitionElement = 'cover' | 'title'
 
-/*
- * FNV-1a 32-bit: fast, deterministic, hex-only output. Slugs are arbitrary
- * content, so a view-transition-name is never built from them directly —
- * derive a stable hash and prefix it with a letter to keep the value a valid
- * CSS identifier. No registration: any slug just works, and the same slug
- * always maps to the same name so the listing/detail morph keeps matching.
- */
+// view-transition-name must be a valid CSS ident, so hash the slug and prefix it.
 function hash32(value: string) {
   let hash = 0x811c9dc5
   for (let index = 0; index < value.length; index += 1) {
@@ -16,10 +10,6 @@ function hash32(value: string) {
   return (hash >>> 0).toString(16)
 }
 
-/*
- * Post and project namespaces keep distinct prefixes so a slug that somehow
- * existed in both lists never shares a view-transition-name.
- */
 export function postViewTransitionName(element: PostTransitionElement, slug: string) {
   return `${element}-p${hash32(slug)}`
 }

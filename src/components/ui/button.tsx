@@ -36,9 +36,6 @@ const buttonVariants = cva(
       size: {
         sm: 'h-6 px-2 gap-1',
         md: 'h-7 px-2 gap-1.5',
-        // The public CTA register (.btn-cta): 36px pill, 14px medium label,
-        // 18px inline padding. lg is the prominent-action tier everywhere,
-        // so it carries the same metrics.
         lg: 'h-9 px-[1.125rem] gap-2 text-sm font-medium',
         'icon-sm': 'h-6 w-6 [&_svg]:h-3.5 [&_svg]:w-3.5',
         icon: 'h-7 w-7 [&_svg]:h-4 [&_svg]:w-4',
@@ -54,22 +51,12 @@ const buttonVariants = cva(
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-  /** When true, the given single React-element child becomes the rendered element (slot-style). */
   asChild?: boolean
   loading?: boolean
   leadingIcon?: ButtonIcon
   trailingIcon?: ButtonIcon
-  /** Force the visual pressed/held state. Useful when the button drives an
-   *  external open piece of UI (a popover, dropdown, etc.) so it reads as
-   *  engaged while the menu is showing. */
   active?: boolean
-  /** Destructive tone: primary becomes a filled destructive pill; the other
-   *  variants read destructive ink with a destructive-tinted hover. The focus
-   *  ring stays neutral — signal color never marks focus. */
   destructive?: boolean
-  /** Restore the 44px minimum hit target with a pseudo-element when the
-   *  visible pill is shorter (the .btn-cta::before recipe). Only for buttons
-   *  with ≥16px vertical clearance — never in dense stacked rows. */
   expandHitArea?: boolean
 }
 
@@ -87,10 +74,6 @@ const activeBgVariants: Record<string, string> = {
   ghost: 'bg-active',
 }
 
-// Destructive tone. Filled primary mirrors the foreground recipe on
-// bg-destructive (label matches the existing bg-destructive/text-white
-// admin confirms); the quieter variants keep destructive ink over a
-// /10-alpha tinted hover.
 const destructiveRootVariants: Record<string, string> = {
   primary: 'text-white',
   secondary: 'text-destructive',
@@ -112,7 +95,6 @@ const destructiveActiveBgVariants: Record<string, string> = {
   ghost: 'bg-destructive/15',
 }
 
-// Vertical-only hit-target extension to 44px (mirrors .btn-cta::before).
 const expandHitAreaClasses =
   "before:absolute before:inset-x-0 before:top-1/2 before:h-11 before:-translate-y-1/2 before:content-['']"
 
@@ -136,12 +118,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    // asChild: the user's element becomes the root while the button's internal
-    // structure (bg layer, content wrapper, icons) survives as its
-    // children — the element's own children become the label. We clone the
-    // element directly instead of routing through ButtonPrimitive's `render`:
-    // Base UI would bolt button semantics (role="button", Space activation)
-    // onto e.g. a link, diverging from the Radix flavour's plain-link output.
     const asChildElement =
       asChild && isValidElement(children)
         ? (children as ReactElement<{
@@ -167,10 +143,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ) : (
             <>
               {LeadingIcon && <LeadingIcon size={iconSize} strokeWidth={1.5} />}
-              {/* text-box only applies to block containers, so the trim lives
-                  on the label span (a blockified flex item), not the flex root.
-                  Height comes from padding + type; this centers the
-                  cap-to-baseline box optically. */}
               <span className="[text-box:trim-both_cap_alphabetic]">{label}</span>
               {TrailingIcon && <TrailingIcon size={iconSize} strokeWidth={1.5} />}
             </>
@@ -191,6 +163,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
     )
 
+    // Base UI's render prop bolts button semantics onto links; clone the child instead.
     if (asChildElement) {
       const childProps = asChildElement.props
       return cloneElement(
@@ -207,8 +180,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <ButtonPrimitive
-        // Base UI's `ButtonPrimitive` forwards to an HTMLButtonElement;
-        // keep the public ref type narrow so consumers see the right type.
         ref={ref as React.Ref<HTMLButtonElement>}
         className={rootClassName}
         disabled={disabled || loading}

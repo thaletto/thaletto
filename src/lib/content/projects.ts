@@ -7,13 +7,6 @@ import {
   readPublishedDocument,
 } from './published-document'
 
-/**
- * Project content loader.
- *
- * Projects are committed as MDX directories under `src/content/projects/`.
- * This module owns directory listing, frontmatter validation, and the
- * colocated cover-art metadata used by listing and detail pages.
- */
 const PROJECTS_DIR = path.join(process.cwd(), 'src/content/projects')
 
 const projectLinkSchema = z.object({
@@ -129,7 +122,6 @@ export function isProjectSlug(slug: string) {
   return getAllProjectSlugs().includes(slug)
 }
 
-// Compact shape for list rows — no bodies, stats, or reading times.
 export function getProjectRows(): ProjectRow[] {
   return getAllProjects().map(({ body, bodyUnits, readingMinutes, ...row }) => ({
     ...row,

@@ -11,12 +11,7 @@ interface SocialData {
   notion: NotionSnapshot
 }
 
-// Live GitHub numbers come from Cache Components so they refresh without a
-// rebuild; the baked src/content/github.json snapshot stays as the fallback seed —
-// builds and outages degrade to the last committed numbers instead of an
-// empty card. The account identity comes from src/content/site.json. X and
-// LinkedIn have no public endpoint, so their cards are static identity only.
-
+// Live counts come from the Next cache; the baked snapshot is the outage fallback.
 export async function getGitHub(): Promise<GitHubActivity> {
   'use cache'
   cacheLife({ stale: 21_600, revalidate: 21_600, expire: 604_800 })
@@ -29,6 +24,7 @@ export async function getGitHub(): Promise<GitHubActivity> {
   })
 }
 
+// X and LinkedIn expose no public counts, so those cards stay static identity.
 export async function getSocial(): Promise<SocialData> {
   return {
     x: siteSocial.x,

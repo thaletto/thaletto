@@ -24,8 +24,6 @@ export interface EmailIdentity {
   country: string
 }
 
-// heatmap shows the recent ~180 days (26 weeks); the stat below still
-// counts the full past year
 const WEEKS = 26
 const DAYS = 7
 
@@ -87,11 +85,6 @@ function Card({
   )
 }
 
-// One shared plate for every social card: a lead slot (photo avatar for
-// profile services, a monogram tile for mark-only services like Notion),
-// name + sub-line, the trailing service glyph, and an optional bio.
-// Callers own the lead element so nothing here branches on service.
-// The trailing glyph is optional: mark-led leads already carry the mark.
 function Identity({
   name,
   sub,
@@ -120,12 +113,7 @@ function Identity({
   )
 }
 
-// Per-service hover cards for the chrome's social links. Server rendering
-// supplies ISR-backed values with src/content/site.json and src/content/github.json
-// as sources; an open card never touches the network. Touch devices just
-// follow the link. Bodies are exported separately so other triggers can serve
-// the same cards.
-// X has no public follower endpoint; the card is static identity only.
+// X exposes no public follower endpoint, so this card is static identity only.
 export function XCardBody({ data }: { data: SocialSnapshot }) {
   return (
     <Identity
@@ -152,13 +140,11 @@ export function GitHubCardBody({ data }: { data: GitHubActivity }) {
     <>
       <span className="contrib-grid" aria-hidden>
         {Array.from({ length: WEEKS }, (_, w) => (
-          // deterministic week grid, static size
           <span key={w} className="contrib-col">
             {Array.from({ length: DAYS }, (_, d) => {
               const i = w * DAYS + d
               return (
                 <i
-                  // fixed 7-day layout, index is the render slot
                   key={d}
                   data-level={levels[i] ?? '0'}
                   style={{ '--ci': i } as React.CSSProperties}
@@ -225,9 +211,6 @@ export function GitHubCard({
   )
 }
 
-// Email's card is the front of a mailed envelope: stamps, cancellation
-// marks, sender, recipient, and folded seams. Purely visual; the trigger
-// itself opens mailto:.
 export function EmailCard({
   identity,
   trigger = 'Email',

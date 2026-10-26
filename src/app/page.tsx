@@ -3,7 +3,6 @@ import { pageMetadata } from '~/lib/metadata/page'
 import { seo } from '~/lib/metadata/seo'
 import { HomePageView } from './_views/home-page'
 
-// The homepage shell prefetches and streams live content.
 export const instant = true
 
 export const metadata: Metadata = {

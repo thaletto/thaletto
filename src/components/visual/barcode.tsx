@@ -1,7 +1,3 @@
-// Decorative label-graphic barcode: bar widths derive deterministically from
-// the code string, so SSR output is stable. It scans as a barcode, not with
-// one — ornament from the technical print register, kept out of the
-// accessibility tree by the caller's aria-hidden wrapper.
 function bars(code: string) {
   const runs: { x: number; w: number }[] = []
   let x = 0

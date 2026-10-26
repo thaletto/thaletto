@@ -1,6 +1,3 @@
-// `/projects/[slug]` — the project (case study) renderer. Same MDX pipeline
-// as the blog post view but with external links and polaroid cover treatment;
-// content comes from `lib/projects-content`.
 import { cacheLife } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'

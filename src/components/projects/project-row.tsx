@@ -2,9 +2,6 @@ import { PostTransitionLink } from '~/components/motion/post-transition-link'
 import type { ProjectRow as ProjectRowData } from '~/lib/content/projects'
 import { projectViewTransitionName } from '~/lib/motion/view-transition-name'
 
-// The compact project row: the same register as the writing rows — title
-// followed by a gray single-line description (`/` prefix on desktop, own
-// line on mobile). Mobile titles may use two lines.
 export function ProjectRow({
   project,
   headingLevel = 'h2',

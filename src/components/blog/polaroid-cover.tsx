@@ -17,7 +17,6 @@ export function PolaroidCover({
   slug: string
   cover: PostCover
   caption?: React.ReactNode
-  /** image alt */
   alt?: string
   tilted?: boolean
   priority?: boolean

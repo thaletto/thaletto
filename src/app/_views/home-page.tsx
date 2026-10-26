@@ -1,6 +1,3 @@
-// `/` view — portrait + introduction, live social numbers, latest posts, and
-// the nav cards, assembled from the same content loaders the inner pages use;
-// `app/page.tsx` supplies the metadata and streaming shell.
 import { PostRow } from '~/components/blog/post-row'
 import { HomeIntroduction } from '~/components/home/home-introduction'
 import { ProjectRow } from '~/components/projects/project-row'

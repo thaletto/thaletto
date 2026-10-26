@@ -3,24 +3,14 @@ import { Children, type ReactNode } from 'react'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '~/components/ui/empty'
 import { cn } from '~/lib/platform/utils'
 
-/** The grid stays four columns at every viewport size. */
 const COLUMN_COUNT = 4
 const FILLER_KEYS = ['filler-a', 'filler-b', 'filler-c'] as const
 
-/** Props for one visible technology in a {@link TechStack}. */
 export interface TechStackItemProps {
-  /** SVG logo or other decorative visual. It is hidden from assistive technology. */
   children: ReactNode
-  /** Accessible, visible technology name. */
   label: ReactNode
 }
 
-/**
- * Renders one semantic grid item with a decorative logo and its visible label.
- *
- * The label remains outside the `aria-hidden` icon wrapper so technology names
- * are announced even when their logos are not meaningful to a screen reader.
- */
 export function TechStackItem({ children, label }: TechStackItemProps) {
   return (
     <li className="tech-stack-item">
@@ -32,35 +22,20 @@ export function TechStackItem({ children, label }: TechStackItemProps) {
   )
 }
 
-/** Configuration for a reusable skills or project technology grid. */
 export interface TechStackProps {
-  /** One or more {@link TechStackItem} children. */
   children?: ReactNode
-  /** Optional classes applied to the component root. */
   className?: string
-  /** Supporting copy displayed when no items are supplied. */
   emptyDescription?: string
-  /** Heading displayed when no items are supplied. */
   emptyTitle?: string
-  /** Homepage section index, rendered only by the card variant. */
   index?: number | string
-  /** Accessible grid name and card heading. */
   title?: string
-  /** `card` includes the homepage heading; `embedded` is for existing MDX headings. */
   variant?: 'card' | 'embedded'
 }
 
-/** Returns filler cells needed to finish a row. */
 function getFillerCount(itemCount: number, columnCount: number) {
   return itemCount === 0 ? 0 : (columnCount - (itemCount % columnCount)) % columnCount
 }
 
-/**
- * A semantic technology grid for the homepage and project MDX.
- *
- * Empty cells are decorative and explicitly hidden from assistive technology.
- * They preserve a stable four-column grid at every viewport size.
- */
 export function TechStack({
   children,
   className,
