@@ -7,14 +7,7 @@ tags: ['Microsoft Autogen', 'FastAPI', 'MCP', 'RAG']
 company: 'TCS'
 startDate: '2025.02'
 endDate: '2026.09'
-cover: ./ams-cover.jpg
-coverWidth: 1280
-coverHeight: 720
-coverVideo: ./ams-overview.mp4
-hideCover: true
 ---
-
-<Video src="./ams-overview.mp4#1920x1080" title="AMS Architecture" />
 
 ## Overview
 
@@ -27,6 +20,40 @@ Grafana alerts wake on-call engineers at 3 AM, forcing them to trace causation t
 ## Approach
 
 The system has four layers, each with a distinct responsibility.
+
+```mermaid wide
+flowchart TB
+    subgraph Obs["Observability"]
+        direction LR
+        Loki[Grafana Loki] -->|alert| ObsAgent[Observability Agent]
+        ObsAgent <-->|ticket| SNow[ServiceNow]
+    end
+
+    subgraph Know["Knowledge retrieval"]
+        direction LR
+        Confluence[Confluence SOPs] -->|ingest| Qdrant[(Qdrant)]
+    end
+
+    subgraph Exec["Planning and execution"]
+        direction LR
+        Planner[Planner] --> HITL[Human approval]
+        HITL -->|reject| Planner
+        HITL -->|approve| Executor[Executor]
+        Executor --> Validator[Validator]
+        Validator -->|retry| Executor
+    end
+
+    subgraph Res["Resolution"]
+        direction LR
+        Close[Close ticket] --> Notify[Notify on-call]
+    end
+
+    ObsAgent -->|incident| Orchestrator[Agent Orchestrator]
+    Orchestrator <-->|SOP| Qdrant
+    Orchestrator --> Planner
+    Validator -->|passed| Close
+    Close --> SNow
+```
 
 ### Observability
 
