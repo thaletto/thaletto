@@ -14,12 +14,14 @@ export default function remarkMermaid() {
       children.forEach((child, index) => {
         if (child.type === 'code' && child.lang === 'mermaid') {
           const caption = child.meta?.match(/caption="([^"]+)"/)?.[1]
+          const wide = /(^|\s)wide(\s|$)/.test(child.meta ?? '')
           children[index] = {
             type: 'mdxJsxFlowElement',
             name: 'MermaidDiagram',
             attributes: [
               { type: 'mdxJsxAttribute', name: 'code', value: child.value ?? '' },
               ...(caption ? [{ type: 'mdxJsxAttribute', name: 'caption', value: caption }] : []),
+              ...(wide ? [{ type: 'mdxJsxAttribute', name: 'wide', value: null }] : []),
             ],
             children: [],
           } as MdastNode

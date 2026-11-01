@@ -1528,6 +1528,29 @@ figure[data-rehype-pretty-code-figure] {
   --scroll-fade-surface: var(--surface-1);
 }
 
+/* vw includes the scrollbar, so size against the root's own width (cqw) to avoid a sideways scroll. */
+html:has(.mermaid-figure-wide) {
+  container-type: inline-size;
+}
+
+/* Breaks out of the article column to span the full viewport width. */
+.mermaid-figure-wide {
+  position: relative;
+  left: 50%;
+  width: 100cqw;
+  margin-left: -50cqw;
+}
+
+/* Wide diagrams scale down to the viewport instead of scrolling sideways. */
+.mermaid-figure-wide .mermaid-sheet {
+  width: 100%;
+}
+
+.mermaid-figure-wide .mermaid-sheet svg {
+  max-width: 100%;
+  height: auto;
+}
+
 .mermaid-sheet {
   display: flex;
   justify-content: center;
@@ -2560,6 +2583,17 @@ a:focus-visible .external-label .external-mark {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+
+/* Opened by hand over a full-bleed diagram: lift the panel off the content beneath it. */
+.post-minimap-root[data-over-wide][data-open] .post-minimap {
+  padding: 0.5rem 0.75rem 1rem;
+  border: var(--border-hairline) solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface-3);
+  box-shadow:
+    var(--shadow-5),
+    0 0.75rem 1.5rem -0.5rem rgb(0 0 0 / 0.3);
 }
 
 @media (min-width: 40rem) and (max-width: 63.99rem) {

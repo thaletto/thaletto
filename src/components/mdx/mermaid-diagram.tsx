@@ -4,6 +4,8 @@ import { ScrollAreaX } from '~/components/ui/scroll-area'
 
 // Article column: max-w-173 (692px) minus px-4, so diagrams lay out against that measure.
 const COLUMN_WIDTH = 660
+// Wide diagrams break out of the column to the viewport, so they lay out against a larger measure.
+const WIDE_WIDTH = 960
 
 // Stable per-diagram prefix so ids never collide when two diagrams share node names.
 function diagramId(source: string) {
@@ -12,10 +14,22 @@ function diagramId(source: string) {
   return `d${(hash >>> 0).toString(36)}`
 }
 
-export function MermaidDiagram({ code, caption }: { code: string; caption?: string }) {
+export function MermaidDiagram({
+  code,
+  caption,
+  wide,
+}: {
+  code: string
+  caption?: string
+  wide?: boolean
+}) {
   let svg: string
   try {
-    svg = render(code, { padding: 24, maxWidth: COLUMN_WIDTH, idPrefix: diagramId(code) }).svg
+    svg = render(code, {
+      padding: 24,
+      maxWidth: wide ? WIDE_WIDTH : COLUMN_WIDTH,
+      idPrefix: diagramId(code),
+    }).svg
   } catch (error) {
     if (!(error instanceof PeleError)) throw error
 
@@ -36,9 +50,10 @@ export function MermaidDiagram({ code, caption }: { code: string; caption?: stri
       </ScrollAreaX>
     </div>
   )
-  if (!caption) return <figure className="mermaid-figure">{sheet}</figure>
+  const wideClass = wide ? ' mermaid-figure-wide' : ''
+  if (!caption) return <figure className={`mermaid-figure${wideClass}`}>{sheet}</figure>
   return (
-    <figure className="post-figure mermaid-figure">
+    <figure className={`post-figure mermaid-figure${wideClass}`}>
       {sheet}
       <figcaption className="post-figcaption">{caption}</figcaption>
     </figure>

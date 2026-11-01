@@ -58,6 +58,7 @@ export function PostToc({ nodes }: { nodes: PostRailNode[] }) {
     return firstHeading > 0 ? nodes.slice(firstHeading) : nodes
   }, [nodes])
   const [open, setOpen] = useState(false)
+  const [overWide, setOverWide] = useState(false)
   const [desktop, setDesktop] = useState(false)
   const [phone, setPhone] = useState(false)
   const [phoneQueryReady, setPhoneQueryReady] = useState(false)
@@ -129,6 +130,26 @@ export function PostToc({ nodes }: { nodes: PostRailNode[] }) {
       query.removeEventListener('change', sync)
     }
   }, [])
+
+  // Wide diagrams break out to the full viewport and would sit under the rail, so tuck it away.
+  useEffect(() => {
+    const wide = document.querySelectorAll('.mermaid-figure-wide')
+    if (wide.length === 0 || !desktop) return
+    const visible = new Set<Element>()
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target)
+        else visible.delete(entry.target)
+      }
+      setOverWide(visible.size > 0)
+      setOpenState(visible.size === 0)
+    })
+    for (const element of wide) observer.observe(element)
+    return () => {
+      observer.disconnect()
+      setOverWide(false)
+    }
+  }, [desktop, setOpenState, landmarks])
 
   useEffect(() => {
     const query = window.matchMedia(PHONE_QUERY)
@@ -309,6 +330,7 @@ export function PostToc({ nodes }: { nodes: PostRailNode[] }) {
       className="post-minimap-root"
       data-island-visible={phoneIslandVisible || undefined}
       data-open={open || undefined}
+      data-over-wide={overWide || undefined}
       onPointerDownCapture={markPointerFocusPending}
       onFocusCapture={settleKeyboardFocus}
     >
