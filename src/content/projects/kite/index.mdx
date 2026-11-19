@@ -3,11 +3,9 @@ title: 'Kite'
 description: 'Ask questions, get AI-generated UI'
 publishedAt: '2026-03-01T00:00:00.000Z'
 sort: 5
-tags: ['AG-UI', 'Tanstack Start', 'Vite', 'TypeScript']
+tags: ['AG-UI', 'Tanstack Start', 'Vite', 'TypeScript', 'TypeSafe']
 startDate: '2026.03'
 links:
-  - label: 'Website'
-    url: 'https://kite-agui.netlify.app'
   - label: 'GitHub'
     url: 'https://github.com/thaletto/kite'
 ---
@@ -20,10 +18,12 @@ Kite is an AI-powered data exploration assistant for weather, crypto prices, Git
 
 Kite separates concerns across four layers:
 
-- **Client**: React 19 UI with streaming chat, rendering AI responses as JSON-defined components with `@json-render/react`
-- **Server**: TanStack Start server functions handle requests and rate limiting, forwarding traffic to the AI layer
-- **AI**: ToolLoopAgent manages tool calls, formatting responses as text and JSON UI specs
-- **Tools**: Server-side functions fetch real data from external APIs, covering weather, GitHub, crypto, and web search
+- **Client**: React 19 UI with streaming chat, rendering responses as JSON-defined components with `@json-render/react`
+- **Server**: A TanStack Start API route handles rate limiting, then tries the Jev router before handing off to the LLM agent
+- **Jev router**: One TypeSafe Jev request answers which data sources the user wants and which arguments they mean. Code fetches the data and builds the dashboard from fixed templates, with no LLM involved
+- **Agent**: A ToolLoopAgent behind the AI Gateway handles everything the router doesn't cover, calls tools, and writes the JSON UI spec itself
+
+The router and the agent share the same server-side tools, which fetch real data from Open-Meteo, GitHub, CoinGecko, Hacker News, and Perplexity Sonar.
 
 ```mermaid wide
 flowchart TB
@@ -35,25 +35,34 @@ flowchart TB
     subgraph Server["Server (TanStack Start)"]
         API[API Handler]
         RateLimit[Rate Limiter]
+        Router[Jev Router]
+        Templates[Spec Templates]
         Tools[Tool Functions]
     end
 
     subgraph AI["AI Layer"]
+        Jev[TypeSafe Jev]
         Agent[ToolLoopAgent]
         Gateway[AI Gateway]
     end
 
     subgraph External["External APIs"]
-        Weather[WeatherAPI]
+        Weather[Open-Meteo]
         GitHub[GitHub]
+        Crypto[CoinGecko]
         HN[Hacker News]
+        Search[Perplexity Sonar]
     end
 
     UI -->|messages| API
     API --> RateLimit
-    RateLimit --> Agent
-    Agent --> Gateway
-    Gateway -->|tool calls| Agent
+    RateLimit --> Router
+    Router <-->|typed questions| Jev
+    Router -->|plan| Tools
+    Tools --> Templates
+    Templates -->|JSON spec| Renderer
+    Router -->|fallback| Agent
+    Agent <--> Gateway
     Agent -->|calls| Tools
     Tools -->|fetch| External
     Agent -->|JSON spec| Renderer
@@ -63,12 +72,32 @@ flowchart TB
 ## How it works
 
 1. A message about a topic such as weather, crypto, or GitHub starts the flow.
-2. The agent calls tools to fetch up-to-date data from external APIs.
-3. The agent responds with a summary and a JSON UI specification.
-4. The UI renderer renders the JSON spec as interactive React components.
-5. The dashboard shows charts, tables, metrics, and rich content.
+2. The Jev router reads it first, asking yes/no and multiple-choice questions about the message and about the cities, coins, repos, and counts that code pulls out of the text.
+3. When the answers are clear, the router fetches the data and returns a templated dashboard straight away.
+4. Otherwise the request falls back to the LLM agent. This covers other topics, explanations, quizzes, 3D scenes, uncertain answers, and any TypeSafe error. The agent calls tools and streams a summary plus a JSON UI spec.
+5. The UI renderer turns the spec into interactive React components.
 
-The UI is defined entirely in JSON, and `@json-render/react` renders it from the component tree the AI outputs.
+The UI is defined entirely in JSON, and `@json-render/react` renders it from the component tree. Components support data binding with `{ "$state": "/path" }`: fetched data goes into state, and components bind to it.
+
+## Tools and components
+
+| Tool | Data source | Jev router |
+| --- | --- | --- |
+| `getWeather` | Open-Meteo | Yes |
+| `getGitHubRepo` | GitHub API | Yes |
+| `getGitHubPullRequests` | GitHub API | Yes |
+| `getCryptoPrice` | CoinGecko | Yes |
+| `getCryptoPriceHistory` | CoinGecko | Yes |
+| `getHackerNewsTop` | Hacker News API | Yes |
+| `webSearch` | Perplexity Sonar (AI Gateway) | Agent only |
+
+The agent can generate these component groups from JSON specs:
+
+- **Layout**: Stack, Grid, Card, Tabs, TabContent, Accordion, Separator
+- **Content**: Heading, Text, Badge, Callout, Alert, Link, Timeline, Progress, Skeleton
+- **Data**: Metric, Table, BarChart, LineChart, PieChart
+- **Input**: Button, RadioGroup, SelectInput, TextInput
+- **3D**: Scene3D, Group3D, Box, Sphere, Cylinder, Cone, Torus, Plane, Ring, lights, Stars, Label3D
 
 ## Tech stack
 
