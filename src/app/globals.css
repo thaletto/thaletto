@@ -4,7 +4,7 @@
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-allo), system-ui, sans-serif;
   --font-mono:
     var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-serif: var(--font-libre-baskerville), Georgia, serif;

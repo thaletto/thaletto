@@ -1,8 +1,10 @@
-import { Inter, JetBrains_Mono, Libre_Baskerville } from 'next/font/google'
+import { JetBrains_Mono, Libre_Baskerville } from 'next/font/google'
+import localFont from 'next/font/local'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+const allo = localFont({
+  src: './fonts/AlloVariable.woff2',
+  weight: '100 900',
+  variable: '--font-allo',
   display: 'swap',
 })
 
@@ -21,7 +23,7 @@ const libreBaskerville = Libre_Baskerville({
 })
 
 export const fontVariables = [
-  inter.variable,
+  allo.variable,
   jetBrainsMono.variable,
   libreBaskerville.variable,
 ].join(' ')
