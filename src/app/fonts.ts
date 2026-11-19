@@ -3,7 +3,8 @@ import localFont from 'next/font/local'
 
 const allo = localFont({
   src: './fonts/AlloVariable.woff2',
-  weight: '100 900',
+  // Trimmed to the weights the site uses, with ROND pinned to its default.
+  weight: '400 700',
   variable: '--font-allo',
   display: 'swap',
 })

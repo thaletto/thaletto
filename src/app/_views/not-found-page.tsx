@@ -1,4 +1,4 @@
-import { GeistPixelCircle, GeistPixelSquare } from 'geist/font/pixel'
+import { GeistPixelCircle, GeistPixelSquare } from '../pixel-fonts'
 import { ErrorHomeAction } from '~/components/home/error-home-action'
 import { Barcode } from '~/components/visual/barcode'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { GeistPixelCircle, GeistPixelSquare } from 'geist/font/pixel'
+import { GeistPixelCircle, GeistPixelSquare } from '../pixel-fonts'
 import { RefreshCw } from 'lucide-react'
 import { ErrorHomeAction } from '~/components/home/error-home-action'
 import { Button } from '~/components/ui/button'

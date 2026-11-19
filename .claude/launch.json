@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "dev", "--webpack"],
+      "port": 3000
+    },
+    {
+      "name": "prod",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["x", "next", "start", "-p", "3100"],
+      "port": 3100
+    }
+  ]
+}
