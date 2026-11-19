@@ -1109,6 +1109,36 @@ html[data-route-motion='none']::view-transition-new(*) {
   background: var(--muted-foreground);
 }
 
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose th,
+.prose td {
+  padding: 0.5rem 1.5rem 0.5rem 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: var(--border-hairline) solid var(--border);
+}
+
+.prose th:last-child,
+.prose td:last-child {
+  padding-right: 0;
+}
+
+.prose th {
+  color: var(--muted-foreground);
+  font-weight: 500;
+  font-size: 0.875em;
+  white-space: nowrap;
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+
 .prose .zoom-trigger img {
   border-radius: 2px;
   background: var(--surface-1);
